@@ -1,230 +1,373 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dido Game</title>
-
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
-
-body{
-background:#0f0f0f;
+.games-section{
+padding:40px;
+background:#0f172a;
 color:white;
 }
 
-header{
-padding:20px;
-background:#111;
-display:flex;
-justify-content:space-between;
-align-items:center;
-position:sticky;
-top:0;
-z-index:100;
-}
-
-.logo{
-font-size:30px;
-font-weight:bold;
-color:cyan;
-}
-
-nav{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-}
-
-nav button{
-padding:10px 15px;
-border:none;
-border-radius:10px;
-background:#222;
-color:white;
-cursor:pointer;
-}
-
-.hero{
-text-align:center;
-padding:40px 20px;
-}
-
-.hero h1{
+.games-title{
 font-size:40px;
-margin-bottom:15px;
-}
-
-.games{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:20px;
-padding:20px;
-}
-
-.card{
-background:#1b1b1b;
-border-radius:20px;
-overflow:hidden;
-transition:0.3s;
-box-shadow:0 0 10px rgba(0,255,255,0.2);
-}
-
-.card:hover{
-transform:scale(1.05);
-}
-
-.card img{
-width:100%;
-height:140px;
-object-fit:cover;
-}
-
-.card h3{
-padding:10px;
-}
-
-.card button{
-margin:10px;
-padding:10px;
-width:calc(100% - 20px);
-border:none;
-border-radius:10px;
-background:cyan;
-font-size:16px;
-cursor:pointer;
-}
-
-footer{
 text-align:center;
-padding:30px;
-background:#111;
-margin-top:30px;
+margin-bottom:30px;
 }
 
-.game-frame{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
+.games-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:25px;
+}
+
+.game-card{
+background:#1e293b;
+padding:20px;
+border-radius:20px;
+box-shadow:0 4px 15px rgba(0,0,0,0.4);
+text-align:center;
+}
+
+.game-card h2{
+margin-bottom:10px;
+}
+
+canvas{
 background:black;
-display:none;
-z-index:999;
-}
-
-iframe{
+border:3px solid white;
+border-radius:12px;
 width:100%;
-height:100%;
-border:none;
+max-width:500px;
+margin-top:10px;
 }
 
-.close-btn{
-position:absolute;
-top:10px;
-right:10px;
-padding:10px 20px;
-background:red;
-color:white;
+.score{
+margin-top:10px;
+font-size:20px;
+}
+
+.play-btn{
+margin-top:15px;
+padding:12px 20px;
 border:none;
-border-radius:10px;
+border-radius:12px;
+background:#2563eb;
+color:white;
 font-size:18px;
-z-index:1000;
 cursor:pointer;
+}
+
+.play-btn:hover{
+background:#7c3aed;
 }
 </style>
-</head>
 
-<body>
+<section class="games-section">
 
-<header>
-<div class="logo">Dido Game</div>
+<h1 class="games-title">Dido Game Arcade</h1>
 
-<nav>
-<button>🏎️ سباقات</button>
-<button>🧠 ذكاء</button>
-<button>⚔️ مغامرات</button>
-<button>🔫 أكشن</button>
-<button>⚽ رياضة</button>
-</nav>
-</header>
+<div class="games-grid">
 
-<section class="hero">
-<h1>أفضل منصة ألعاب عربية</h1>
-<p>العب ألعاب مجانية مباشرة من هاتفك</p>
-</section>
+<div class="game-card">
+<h2>لعبة جمع العملات</h2>
 
-<section class="games">
+<canvas id="coinGame" width="500" height="500"></canvas>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop">
-<h3>سباق السيارات</h3>
-<button onclick="openGame('https://html5.gamemonetize.com/rcm8g7x5nv3l2br1m8h0yrt2y9v3r7ys/')">
-تشغيل
+<div class="score">
+النقاط:
+<span id="coinScore">0</span>
+</div>
+</div>
+
+<div class="game-card">
+<h2>لعبة السباق</h2>
+
+<canvas id="raceGame" width="500" height="500"></canvas>
+
+<div class="score">
+النقاط:
+<span id="raceScore">0</span>
+</div>
+</div>
+
+<div class="game-card">
+<h2>لعبة الذاكرة</h2>
+
+<h3 id="memoryText">اضغط ابدأ</h3>
+
+<button class="play-btn" onclick="startMemoryGame()">
+ابدأ اللعبة
 </button>
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200&auto=format&fit=crop">
-<h3>مغامرات النينجا</h3>
-<button onclick="openGame('https://html5.gamemonetize.com/cxv4e7ux0m0v6sh4r5r0xv1m5j7d2n6f/')">
-تشغيل
-</button>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop">
-<h3>لعبة الذكاء</h3>
-<button onclick="openGame('https://html5.gamemonetize.com/4m6rkg0j2m8n6k7v9x3y2d5f1s8a0c4/')">
-تشغيل
-</button>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1511882150382-421056c89033?q=80&w=1200&auto=format&fit=crop">
-<h3>كرة القدم</h3>
-<button onclick="openGame('https://html5.gamemonetize.com/v1f5s6d8g7h9j2k4l3q1w0e5r6t8y9u/')">
-تشغيل
-</button>
 </div>
 
 </section>
 
-<div class="game-frame" id="gameFrame">
-
-<button class="close-btn" onclick="closeGame()">
-إغلاق
-</button>
-
-<iframe id="game"></iframe>
-
-</div>
-
-<footer>
-Dido Game 2026 ©
-</footer>
+<audio id="coinSound" src="https://actions.google.com/sounds/v1/cartoon/pop.ogg"></audio>
 
 <script>
+/* ---------------------- */
+/* لعبة العملات */
+/* ---------------------- */
 
-const frame=document.getElementById("gameFrame");
-const game=document.getElementById("game");
+const coinCanvas=document.getElementById("coinGame");
+const cctx=coinCanvas.getContext("2d");
 
-function openGame(url){
-frame.style.display="block";
-game.src=url;
+let player={
+x:220,
+y:430,
+size:50
+};
+
+let coins=[];
+let coinScore=0;
+let level=1;
+let gameOver=false;
+
+function createCoin(){
+coins.push({
+x:Math.random()*470,
+y:-20,
+size:18
+});
 }
 
-function closeGame(){
-frame.style.display="none";
-game.src="";
+setInterval(()=>{
+if(!gameOver){
+createCoin();
+}
+},900);
+
+function drawPlayer(){
+cctx.fillStyle="cyan";
+cctx.fillRect(player.x,player.y,player.size,player.size);
 }
 
+function drawCoins(){
+cctx.fillStyle="gold";
+
+coins.forEach(c=>{
+cctx.beginPath();
+cctx.arc(c.x,c.y,c.size,0,Math.PI*2);
+cctx.fill();
+});
+}
+
+function updateCoins(){
+
+coins.forEach((c,index)=>{
+
+c.y+=4+level;
+
+if(
+c.x>player.x &&
+c.x<player.x+player.size &&
+c.y>player.y &&
+c.y<player.y+player.size
+){
+
+coins.splice(index,1);
+
+coinScore++;
+
+document.getElementById("coinScore").innerText=coinScore;
+
+document.getElementById("coinSound").play();
+
+if(coinScore%10===0){
+level++;
+}
+
+}
+
+if(c.y>500){
+
+gameOver=true;
+
+setTimeout(()=>{
+alert("خسرت لكنك ستعود لنفس المستوى");
+coins=[];
+gameOver=false;
+},100);
+
+}
+
+});
+
+}
+
+function coinLoop(){
+
+cctx.clearRect(0,0,500,500);
+
+drawPlayer();
+
+drawCoins();
+
+updateCoins();
+
+requestAnimationFrame(coinLoop);
+
+}
+
+coinLoop();
+
+window.addEventListener("keydown",e=>{
+
+if(e.key==="ArrowLeft"){
+player.x-=25;
+}
+
+if(e.key==="ArrowRight"){
+player.x+=25;
+}
+
+});
+
+coinCanvas.addEventListener("touchmove",e=>{
+
+let rect=coinCanvas.getBoundingClientRect();
+
+let touch=e.touches[0];
+
+player.x=touch.clientX-rect.left-player.size/2;
+
+});
+
+/* ---------------------- */
+/* لعبة السباق */
+/* ---------------------- */
+
+const raceCanvas=document.getElementById("raceGame");
+const rctx=raceCanvas.getContext("2d");
+
+let car={
+x:220,
+y:390,
+width:60,
+height:90
+};
+
+let enemies=[];
+let raceScore=0;
+
+function createEnemy(){
+
+enemies.push({
+x:Math.random()*430,
+y:-100,
+width:60,
+height:90
+});
+
+}
+
+setInterval(createEnemy,1200);
+
+function raceLoop(){
+
+rctx.clearRect(0,0,500,500);
+
+rctx.fillStyle="red";
+rctx.fillRect(car.x,car.y,car.width,car.height);
+
+rctx.fillStyle="white";
+
+enemies.forEach((e,index)=>{
+
+e.y+=7;
+
+rctx.fillRect(e.x,e.y,e.width,e.height);
+
+if(
+car.x<e.x+e.width &&
+car.x+car.width>e.x &&
+car.y<e.y+e.height &&
+car.y+car.height>e.y
+){
+
+alert("انتهت اللعبة");
+
+enemies=[];
+raceScore=0;
+
+}
+
+if(e.y>500){
+
+enemies.splice(index,1);
+
+raceScore++;
+
+document.getElementById("raceScore").innerText=raceScore;
+
+}
+
+});
+
+requestAnimationFrame(raceLoop);
+
+}
+
+raceLoop();
+
+window.addEventListener("keydown",e=>{
+
+if(e.key==="a"){
+car.x-=25;
+}
+
+if(e.key==="d"){
+car.x+=25;
+}
+
+});
+
+raceCanvas.addEventListener("touchmove",e=>{
+
+let rect=raceCanvas.getBoundingClientRect();
+
+let touch=e.touches[0];
+
+car.x=touch.clientX-rect.left-car.width/2;
+
+});
+
+/* ---------------------- */
+/* لعبة الذاكرة */
+/* ---------------------- */
+
+function startMemoryGame(){
+
+const text=document.getElementById("memoryText");
+
+const words=[
+"تفاحة",
+"سيارة",
+"كتاب",
+"قمر",
+"أسد"
+];
+
+const random=words[
+Math.floor(Math.random()*words.length)
+];
+
+text.innerText="تذكر هذه الكلمة: "+random;
+
+setTimeout(()=>{
+
+let answer=prompt("ما هي الكلمة؟");
+
+if(answer===random){
+
+text.innerText="إجابة صحيحة 🎉";
+
+}else{
+
+text.innerText="إجابة خاطئة ❌";
+
+}
+
+},3000);
+
+}
 </script>
-
-</body>
-</html>
