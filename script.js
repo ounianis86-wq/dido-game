@@ -23,6 +23,50 @@ function startGame() {
                     border-radius:15px;
                 ">
             </canvas>
+
+            <div style="margin-top:20px;">
+                <button onclick="moveLeft()"
+                style="
+                    padding:15px 30px;
+                    font-size:25px;
+                    margin-right:20px;
+                ">
+                    ⬅️
+                </button>
+
+                <button onclick="moveRight()"
+                style="
+                    padding:15px 30px;
+                    font-size:25px;
+                ">
+                    ➡️
+                </button>
+            </div>
+        </div>
+    `;
+
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    setInterval(() => {
+        createCoin();
+        updateGame(ctx);
+    }, 30);
+} {
+    document.body.innerHTML = `
+        <div style="text-align:center;">
+            <h1>Dido Game 🎮</h1>
+            <p id="score">النقاط: 0</p>
+
+            <canvas id="gameCanvas"
+                width="400"
+                height="500"
+                style="
+                    background:#222;
+                    border:4px solid black;
+                    border-radius:15px;
+                ">
+            </canvas>
         </div>
     `;
 
@@ -103,5 +147,20 @@ function updateGame(ctx) {
             document.getElementById("score").innerText =
                 "النقاط: " + score;
         }
+    }
+}
+function moveLeft() {
+    player.x -= 20;
+
+    if(player.x < 0) {
+        player.x = 0;
+    }
+}
+
+function moveRight() {
+    player.x += 20;
+
+    if(player.x > 360) {
+        player.x = 360;
     }
 }
