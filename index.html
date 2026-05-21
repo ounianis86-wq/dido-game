@@ -1,330 +1,172 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Dido Game Hub</title>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
-
+/* ===== خلفية الموقع الكرتونية ===== */
 body{
-background:#0f172a;
-color:white;
-overflow-x:hidden;
+    background:
+        linear-gradient(rgba(255,255,255,0.15), rgba(255,255,255,0.15)),
+        url("https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1600&auto=format&fit=crop");
+        
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    font-family: "Trebuchet MS", sans-serif;
 }
 
-/* HEADER */
+/* ===== بطاقات الألعاب ===== */
+.game-card{
+    position: relative;
+    overflow: hidden;
 
-header{
-background:linear-gradient(135deg,#0f172a,#1e293b,#312e81);
-padding:40px 20px;
-text-align:center;
-perspective:1000px;
-overflow:hidden;
-box-shadow:0 5px 20px rgba(0,0,0,0.5);
+    background: linear-gradient(145deg,#ffffff,#dcecff);
+
+    border: 5px solid #000;
+    border-radius: 25px;
+
+    box-shadow:
+        8px 8px 0 #000,
+        0 0 25px rgba(0,0,0,0.25);
+
+    transition: 0.35s ease;
 }
 
-.subtitle{
-margin-top:20px;
-font-size:22px;
-color:#cbd5e1;
+/* حركة كرتونية */
+.game-card:hover{
+    transform: translateY(-8px) rotate(-1deg) scale(1.02);
 }
 
-/* LOGO 3D */
+/* ===== الصور ===== */
+.game-card img{
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
 
-.logo3d{
-display:flex;
-justify-content:center;
-align-items:center;
-height:150px;
+    border-bottom: 5px solid #000;
+
+    filter:
+        saturate(1.5)
+        contrast(1.25)
+        brightness(1.08);
+
+    transition: 0.4s ease;
 }
 
-.cube{
-position:relative;
-width:100px;
-height:100px;
-transform-style:preserve-3d;
-animation:spin 10s infinite linear;
+/* تأثير أنمي */
+.game-card img:hover{
+    transform: scale(1.08);
+    filter:
+        saturate(1.7)
+        contrast(1.35)
+        brightness(1.1);
 }
 
-.cube div{
-position:absolute;
-width:100px;
-height:100px;
-background:rgba(59,130,246,0.85);
-border:3px solid white;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:40px;
-border-radius:20px;
-box-shadow:0 0 25px rgba(59,130,246,0.8);
+/* ===== عنوان اللعبة ===== */
+.game-card h3{
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+
+    text-shadow:
+        2px 2px 0 #fff,
+        4px 4px 0 rgba(0,0,0,0.2);
+
+    padding: 10px;
 }
 
-.front{ transform:translateZ(50px); }
-.back{ transform:rotateY(180deg) translateZ(50px); }
-.right{ transform:rotateY(90deg) translateZ(50px); }
-.left{ transform:rotateY(-90deg) translateZ(50px); }
-.top{ transform:rotateX(90deg) translateZ(50px); }
-.bottom{ transform:rotateX(-90deg) translateZ(50px); }
-
-@keyframes spin{
-0%{
-transform:rotateX(0deg) rotateY(0deg);
-}
-100%{
-transform:rotateX(360deg) rotateY(360deg);
-}
+/* ===== وصف اللعبة ===== */
+.game-card p{
+    color: #222;
+    font-size: 15px;
+    padding: 0 12px 15px;
 }
 
-/* CATEGORIES */
+/* ===== زر اللعب ===== */
+.play-btn{
+    display: inline-block;
 
-.categories{
-display:flex;
-gap:12px;
-padding:20px;
-overflow:auto;
+    margin: 15px;
+    padding: 12px 24px;
+
+    background: linear-gradient(145deg,#ffcc00,#ff6b00);
+
+    border: 4px solid #000;
+    border-radius: 16px;
+
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+
+    box-shadow: 5px 5px 0 #000;
+
+    transition: 0.25s ease;
 }
 
-.categories button{
-border:none;
-padding:12px 20px;
-border-radius:30px;
-background:#1e293b;
-color:white;
-cursor:pointer;
-transition:0.3s;
-font-size:16px;
-min-width:max-content;
-box-shadow:0 4px 10px rgba(0,0,0,0.4);
+/* حركة الزر */
+.play-btn:hover{
+    transform: scale(1.08) rotate(-2deg);
+    background: linear-gradient(145deg,#ffe566,#ff7b00);
 }
 
-.categories button:hover{
-background:#3b82f6;
-transform:scale(1.05);
+/* ===== فقاعات القصص المصورة ===== */
+.game-card::before{
+    content: "WOW!";
+    
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    background: #ffeb3b;
+    color: #000;
+
+    padding: 8px 14px;
+
+    border: 3px solid #000;
+    border-radius: 50px;
+
+    font-weight: bold;
+    font-size: 14px;
+
+    transform: rotate(12deg);
+
+    box-shadow: 4px 4px 0 #000;
 }
 
-/* GAMES */
+/* ===== تأثير نجوم أنمي ===== */
+body::before{
+    content: "";
 
-.games{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:25px;
-padding:25px;
+    position: fixed;
+    inset: 0;
+
+    background-image:
+        radial-gradient(white 1px, transparent 1px);
+
+    background-size: 35px 35px;
+
+    opacity: 0.15;
+
+    pointer-events: none;
 }
 
-.card{
-background:linear-gradient(145deg,#1e293b,#0f172a);
-border-radius:25px;
-overflow:hidden;
-box-shadow:
-0 10px 30px rgba(0,0,0,0.5),
-inset 0 0 20px rgba(255,255,255,0.05);
-transition:0.4s;
-border:2px solid rgba(255,255,255,0.08);
+/* ===== عنوان الموقع ===== */
+.logo{
+    font-size: 48px;
+    font-weight: 900;
+
+    color: #fff;
+
+    text-shadow:
+        4px 4px 0 #000,
+        8px 8px 15px rgba(0,0,0,0.5);
+
+    letter-spacing: 3px;
 }
 
-.card:hover{
-transform:
-translateY(-10px)
-rotateX(5deg)
-scale(1.02);
+/* ===== أقسام الألعاب ===== */
+.section-title{
+    font-size: 34px;
+    color: #fff;
+
+    text-shadow:
+        3px 3px 0 #000;
+
+    margin: 30px 0 15px;
 }
-
-.card img{
-width:100%;
-height:180px;
-object-fit:cover;
-border-bottom:3px solid #3b82f6;
-filter:saturate(1.2);
-}
-
-.card-content{
-padding:18px;
-}
-
-.card h3{
-font-size:24px;
-margin-bottom:10px;
-color:#60a5fa;
-text-shadow:0 0 10px rgba(96,165,250,0.6);
-}
-
-.card p{
-opacity:0.8;
-margin-bottom:10px;
-}
-
-iframe{
-width:100%;
-height:220px;
-border:none;
-border-radius:18px;
-border:3px solid #334155;
-background:white;
-margin-top:12px;
-}
-
-/* FOOTER */
-
-footer{
-text-align:center;
-padding:30px;
-opacity:0.7;
-font-size:15px;
-}
-
-</style>
-</head>
-
-<body>
-
-<header>
-
-<div class="logo3d">
-<div class="cube">
-<div class="front">🎮</div>
-<div class="back">🔥</div>
-<div class="right">🚀</div>
-<div class="left">⚡</div>
-<div class="top">👾</div>
-<div class="bottom">🏎️</div>
-</div>
-</div>
-
-<h2 class="subtitle">عالم الألعاب والمغامرات</h2>
-
-</header>
-
-<div class="categories">
-<button>🏎️ سباقات</button>
-<button>⚽ رياضة</button>
-<button>🧠 ذكاء</button>
-<button>⚔️ أكشن</button>
-<button>🚀 مغامرات</button>
-<button>👾 أركيد</button>
-</div>
-
-<div class="games">
-
-<!-- CAR GAME -->
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop">
-
-<div class="card-content">
-<h3>سباق السيارات</h3>
-<p>قد بسرعة واربح السباق.</p>
-
-<iframe src="https://funhtml5games.com?embed=car-rush"></iframe>
-</div>
-</div>
-
-<!-- FOOTBALL -->
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1200&auto=format&fit=crop">
-
-<div class="card-content">
-<h3>كرة القدم</h3>
-<p>سجل أهدافاً مذهلة.</p>
-
-<iframe src="https://funhtml5games.com?embed=football"></iframe>
-</div>
-</div>
-
-<!-- 2048 -->
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop">
-
-<div class="card-content">
-<h3>لعبة الذكاء</h3>
-<p>اختبر سرعة تفكيرك.</p>
-
-<iframe src="https://funhtml5games.com?embed=2048"></iframe>
-</div>
-</div>
-
-<!-- NINJA -->
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1200&auto=format&fit=crop">
-
-<div class="card-content">
-<h3>مغامرة النينجا</h3>
-<p>قاتل الأعداء واجمع النقاط.</p>
-
-<iframe src="https://funhtml5games.com?embed=ninja"></iframe>
-</div>
-</div>
-
-<!-- AIRPLANE -->
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1200&auto=format&fit=crop">
-
-<div class="card-content">
-<h3>الطائرات الحربية</h3>
-<p>قد الطائرة وتجنب الاصطدام.</p>
-
-<iframe src="https://funhtml5games.com?embed=airplane"></iframe>
-</div>
-</div>
-
-<!-- MAZE -->
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?q=80&w=1200&auto=format&fit=crop">
-
-<div class="card-content">
-<h3>المتاهة</h3>
-<p>اخرج من المتاهة بأسرع وقت.</p>
-
-<iframe src="https://funhtml5games.com?embed=maze"></iframe>
-</div>
-</div>
-
-<!-- ZOMBIE -->
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop">
-
-<div class="card-content">
-<h3>زومبي أكشن</h3>
-<p>قاتل الزومبي وابق حيًا.</p>
-
-<iframe src="https://funhtml5games.com?embed=zombie"></iframe>
-</div>
-</div>
-
-<!-- BIKE -->
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=1200&auto=format&fit=crop">
-
-<div class="card-content">
-<h3>سباق الدراجات</h3>
-<p>قم بالحركات الخطيرة واربح.</p>
-
-<iframe src="https://funhtml5games.com?embed=biker-street"></iframe>
-</div>
-</div>
-
-</div>
-
-<footer>
-جميع الحقوق محفوظة © Dido Game Hub
-</footer>
-
-</body>
-</html>
