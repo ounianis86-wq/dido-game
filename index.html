@@ -1,26 +1,111 @@
+<section class="arcade-container">
+
+<h1 class="arcade-title">Dido Game</h1>
+
+<div class="arcade-grid">
+
+<div class="arcade-card">
+<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop">
+<h2>Flappy Bird</h2>
+<button onclick="openGame('https://flappybird.io/')">
+تشغيل اللعبة
+</button>
+</div>
+
+<div class="arcade-card">
+<img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200&auto=format&fit=crop">
+<h2>Pacman</h2>
+<button onclick="openGame('https://freepacman.org/')">
+تشغيل اللعبة
+</button>
+</div>
+
+<div class="arcade-card">
+<img src="https://images.unsplash.com/photo-1511882150382-421056c89033?q=80&w=1200&auto=format&fit=crop">
+<h2>Tetris</h2>
+<button onclick="openGame('https://tetris.com/play-tetris')">
+تشغيل اللعبة
+</button>
+</div>
+
+<div class="arcade-card">
+<img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200&auto=format&fit=crop">
+<h2>Snake</h2>
+<button onclick="openGame('https://playsnake.org/')">
+تشغيل اللعبة
+</button>
+</div>
+
+</div>
+
+</section>
+
+<div id="gameModal" class="game-modal">
+
+<div class="game-content">
+
+<button class="close-btn" onclick="closeGame()">
+✖
+</button>
+
+<iframe id="gameFrame" src=""></iframe>
+
+</div>
+
+</div>
+
 <style>
-.games-section{
-padding:40px;
+body{
 background:#0f172a;
-color:white;
+margin:0;
+font-family:Arial;
 }
 
-.games-title{
-font-size:40px;
+.arcade-container{
+padding:40px;
+}
+
+.arcade-title{
 text-align:center;
-margin-bottom:30px;
+font-size:50px;
+color:white;
+margin-bottom:40px;
 }
 
-.games-menu{
-display:flex;
-justify-content:center;
-gap:15px;
-margin-bottom:30px;
-flex-wrap:wrap;
+.arcade-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
 }
 
-.games-menu button{
-padding:12px 20px;
+.arcade-card{
+background:#1e293b;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 5px 20px rgba(0,0,0,0.4);
+transition:0.3s;
+}
+
+.arcade-card:hover{
+transform:translateY(-5px);
+}
+
+.arcade-card img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.arcade-card h2{
+color:white;
+text-align:center;
+margin-top:15px;
+}
+
+.arcade-card button{
+display:block;
+margin:20px auto;
+padding:12px 25px;
 border:none;
 border-radius:12px;
 background:#2563eb;
@@ -29,395 +114,68 @@ font-size:18px;
 cursor:pointer;
 }
 
-.games-menu button:hover{
+.arcade-card button:hover{
 background:#7c3aed;
 }
 
-.game-box{
-display:none;
-background:#1e293b;
-padding:20px;
-border-radius:20px;
-max-width:700px;
-margin:auto;
-text-align:center;
-box-shadow:0 4px 15px rgba(0,0,0,0.4);
-}
-
-.game-box.active{
-display:block;
-}
-
-canvas{
-background:black;
-border:3px solid white;
-border-radius:12px;
+.game-modal{
+position:fixed;
+top:0;
+left:0;
 width:100%;
-max-width:500px;
-margin-top:15px;
+height:100%;
+background:rgba(0,0,0,0.9);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999;
 }
 
-.score{
-margin-top:15px;
-font-size:22px;
+.game-content{
+width:95%;
+height:90%;
+background:#111827;
+border-radius:20px;
+position:relative;
+overflow:hidden;
+}
+
+#gameFrame{
+width:100%;
+height:100%;
+border:none;
+}
+
+.close-btn{
+position:absolute;
+top:15px;
+right:15px;
+width:45px;
+height:45px;
+border:none;
+border-radius:50%;
+background:red;
+color:white;
+font-size:20px;
+cursor:pointer;
+z-index:10;
 }
 </style>
 
-<section class="games-section">
-
-<h1 class="games-title">Dido Game Arcade</h1>
-
-<div class="games-menu">
-<button onclick="openGame('coins')">لعبة العملات</button>
-<button onclick="openGame('race')">لعبة السباق</button>
-<button onclick="openGame('memory')">لعبة الذاكرة</button>
-</div>
-
-<!-- لعبة العملات -->
-<div id="coins" class="game-box active">
-
-<h2>لعبة جمع العملات</h2>
-
-<canvas id="coinCanvas" width="500" height="500"></canvas>
-
-<div class="score">
-النقاط:
-<span id="coinScore">0</span>
-</div>
-
-</div>
-
-<!-- لعبة السباق -->
-<div id="race" class="game-box">
-
-<h2>لعبة السباق</h2>
-
-<canvas id="raceCanvas" width="500" height="500"></canvas>
-
-<div class="score">
-النقاط:
-<span id="raceScore">0</span>
-</div>
-
-</div>
-
-<!-- لعبة الذاكرة -->
-<div id="memory" class="game-box">
-
-<h2>لعبة الذاكرة</h2>
-
-<h3 id="memoryText">اضغط ابدأ</h3>
-
-<button onclick="startMemoryGame()">
-ابدأ اللعبة
-</button>
-
-</div>
-
-</section>
-
-<audio id="coinSound" src="https://actions.google.com/sounds/v1/cartoon/pop.ogg"></audio>
-
 <script>
-/* ========================= */
-/* التنقل بين الألعاب */
-/* ========================= */
+function openGame(url){
 
-let currentGame="coins";
+document.getElementById("gameModal").style.display="flex";
 
-function openGame(id){
-
-document.querySelectorAll(".game-box").forEach(box=>{
-box.classList.remove("active");
-});
-
-document.getElementById(id).classList.add("active");
-
-currentGame=id;
+document.getElementById("gameFrame").src=url;
 
 }
 
-/* ========================= */
-/* لعبة العملات */
-/* ========================= */
+function closeGame(){
 
-const coinCanvas=document.getElementById("coinCanvas");
-const cctx=coinCanvas.getContext("2d");
+document.getElementById("gameModal").style.display="none";
 
-let player={
-x:220,
-y:430,
-size:50
-};
-
-let coins=[];
-let coinScore=0;
-
-function createCoin(){
-
-if(currentGame!=="coins") return;
-
-coins.push({
-x:Math.random()*470,
-y:-20,
-size:18
-});
-
-}
-
-setInterval(createCoin,1000);
-
-function coinLoop(){
-
-if(currentGame==="coins"){
-
-cctx.clearRect(0,0,500,500);
-
-cctx.fillStyle="cyan";
-cctx.fillRect(
-player.x,
-player.y,
-player.size,
-player.size
-);
-
-cctx.fillStyle="gold";
-
-coins.forEach((c,index)=>{
-
-c.y+=5;
-
-cctx.beginPath();
-
-cctx.arc(c.x,c.y,c.size,0,Math.PI*2);
-
-cctx.fill();
-
-if(
-c.x>player.x &&
-c.x<player.x+player.size &&
-c.y>player.y &&
-c.y<player.y+player.size
-){
-
-coins.splice(index,1);
-
-coinScore++;
-
-document.getElementById("coinScore").innerText=coinScore;
-
-document.getElementById("coinSound").play();
-
-}
-
-if(c.y>500){
-
-coins.splice(index,1);
-
-}
-
-});
-
-}
-
-requestAnimationFrame(coinLoop);
-
-}
-
-coinLoop();
-
-coinCanvas.addEventListener("touchmove",e=>{
-
-if(currentGame!=="coins") return;
-
-let rect=coinCanvas.getBoundingClientRect();
-
-let touch=e.touches[0];
-
-player.x=
-touch.clientX-
-rect.left-
-player.size/2;
-
-});
-
-window.addEventListener("keydown",e=>{
-
-if(currentGame!=="coins") return;
-
-if(e.key==="ArrowLeft"){
-player.x-=25;
-}
-
-if(e.key==="ArrowRight"){
-player.x+=25;
-}
-
-});
-
-/* ========================= */
-/* لعبة السباق */
-/* ========================= */
-
-const raceCanvas=document.getElementById("raceCanvas");
-const rctx=raceCanvas.getContext("2d");
-
-let car={
-x:220,
-y:390,
-width:60,
-height:90
-};
-
-let enemies=[];
-let raceScore=0;
-
-function createEnemy(){
-
-if(currentGame!=="race") return;
-
-enemies.push({
-x:Math.random()*430,
-y:-100,
-width:60,
-height:90
-});
-
-}
-
-setInterval(createEnemy,1200);
-
-function raceLoop(){
-
-if(currentGame==="race"){
-
-rctx.clearRect(0,0,500,500);
-
-rctx.fillStyle="red";
-
-rctx.fillRect(
-car.x,
-car.y,
-car.width,
-car.height
-);
-
-rctx.fillStyle="white";
-
-enemies.forEach((e,index)=>{
-
-e.y+=7;
-
-rctx.fillRect(
-e.x,
-e.y,
-e.width,
-e.height
-);
-
-if(
-car.x<e.x+e.width &&
-car.x+car.width>e.x &&
-car.y<e.y+e.height &&
-car.y+car.height>e.y
-){
-
-alert("انتهت اللعبة");
-
-enemies=[];
-raceScore=0;
-
-}
-
-if(e.y>500){
-
-enemies.splice(index,1);
-
-raceScore++;
-
-document.getElementById("raceScore").innerText=raceScore;
-
-}
-
-});
-
-}
-
-requestAnimationFrame(raceLoop);
-
-}
-
-raceLoop();
-
-raceCanvas.addEventListener("touchmove",e=>{
-
-if(currentGame!=="race") return;
-
-let rect=raceCanvas.getBoundingClientRect();
-
-let touch=e.touches[0];
-
-car.x=
-touch.clientX-
-rect.left-
-car.width/2;
-
-});
-
-window.addEventListener("keydown",e=>{
-
-if(currentGame!=="race") return;
-
-if(e.key==="a"){
-car.x-=25;
-}
-
-if(e.key==="d"){
-car.x+=25;
-}
-
-});
-
-/* ========================= */
-/* لعبة الذاكرة */
-/* ========================= */
-
-function startMemoryGame(){
-
-if(currentGame!=="memory") return;
-
-const text=document.getElementById("memoryText");
-
-const words=[
-"تفاحة",
-"قمر",
-"كتاب",
-"سيارة",
-"أسد"
-];
-
-const random=
-words[Math.floor(Math.random()*words.length)];
-
-text.innerText=
-"تذكر هذه الكلمة: "+random;
-
-setTimeout(()=>{
-
-let answer=
-prompt("ما هي الكلمة؟");
-
-if(answer===random){
-
-text.innerText="إجابة صحيحة 🎉";
-
-}else{
-
-text.innerText="إجابة خاطئة ❌";
-
-}
-
-},3000);
+document.getElementById("gameFrame").src="";
 
 }
 </script>
