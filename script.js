@@ -1,11 +1,22 @@
-body{
-  background:#111;
-  color:white;
-  font-family:Arial;
-  text-align:center;
-}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dido Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-h1{
-  color:#00ff88;
-  margin-top:50px;
-}
+<h1>🎮 Dido Game</h1>
+
+<button onclick="startGame()">
+ابدأ اللعب
+</button>
+
+<p id="gameText"></p>
+
+<script src="script.js"></script>
+
+</body>
+</html>
