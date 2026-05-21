@@ -6,78 +6,135 @@
 <title>Dido Game</title>
 
 <style>
-body{
+*{
 margin:0;
-background:#111;
+padding:0;
+box-sizing:border-box;
 font-family:Arial;
-overflow:hidden;
+}
+
+body{
+background:#0f0f0f;
 color:white;
 }
 
-#game{
-position:relative;
-width:100vw;
-height:100vh;
-overflow:hidden;
-background:linear-gradient(#1a1a1a,#000);
-}
-
-#player{
-position:absolute;
-bottom:20px;
-left:50%;
-width:70px;
-height:70px;
-background:cyan;
-border-radius:15px;
-transform:translateX(-50%);
-box-shadow:0 0 20px cyan;
-}
-
-.coin{
-position:absolute;
-width:40px;
-height:40px;
-background:gold;
-border-radius:50%;
-box-shadow:0 0 15px yellow;
-}
-
-.enemy{
-position:absolute;
-width:50px;
-height:50px;
-background:red;
-border-radius:10px;
-box-shadow:0 0 15px red;
-}
-
-#ui{
-position:absolute;
-top:10px;
-left:10px;
+header{
+padding:20px;
+background:#111;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
 z-index:100;
-font-size:22px;
 }
 
-#gameover{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
+.logo{
+font-size:30px;
+font-weight:bold;
+color:cyan;
+}
+
+nav{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+nav button{
+padding:10px 15px;
+border:none;
+border-radius:10px;
 background:#222;
-padding:30px;
-border-radius:20px;
-display:none;
-text-align:center;
+color:white;
+cursor:pointer;
 }
 
-button{
-padding:12px 20px;
-font-size:20px;
+.hero{
+text-align:center;
+padding:40px 20px;
+}
+
+.hero h1{
+font-size:40px;
+margin-bottom:15px;
+}
+
+.games{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.card{
+background:#1b1b1b;
+border-radius:20px;
+overflow:hidden;
+transition:0.3s;
+box-shadow:0 0 10px rgba(0,255,255,0.2);
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+.card img{
+width:100%;
+height:140px;
+object-fit:cover;
+}
+
+.card h3{
+padding:10px;
+}
+
+.card button{
+margin:10px;
+padding:10px;
+width:calc(100% - 20px);
 border:none;
 border-radius:10px;
 background:cyan;
+font-size:16px;
+cursor:pointer;
+}
+
+footer{
+text-align:center;
+padding:30px;
+background:#111;
+margin-top:30px;
+}
+
+.game-frame{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:none;
+z-index:999;
+}
+
+iframe{
+width:100%;
+height:100%;
+border:none;
+}
+
+.close-btn{
+position:absolute;
+top:10px;
+right:10px;
+padding:10px 20px;
+background:red;
+color:white;
+border:none;
+border-radius:10px;
+font-size:18px;
+z-index:1000;
 cursor:pointer;
 }
 </style>
@@ -85,154 +142,88 @@ cursor:pointer;
 
 <body>
 
-<div id="game">
+<header>
+<div class="logo">Dido Game</div>
 
-<div id="ui">
-⭐ <span id="score">0</span><br>
-🏆 Level: <span id="level">1</span>
+<nav>
+<button>🏎️ سباقات</button>
+<button>🧠 ذكاء</button>
+<button>⚔️ مغامرات</button>
+<button>🔫 أكشن</button>
+<button>⚽ رياضة</button>
+</nav>
+</header>
+
+<section class="hero">
+<h1>أفضل منصة ألعاب عربية</h1>
+<p>العب ألعاب مجانية مباشرة من هاتفك</p>
+</section>
+
+<section class="games">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop">
+<h3>سباق السيارات</h3>
+<button onclick="openGame('https://html5.gamemonetize.com/rcm8g7x5nv3l2br1m8h0yrt2y9v3r7ys/')">
+تشغيل
+</button>
 </div>
 
-<div id="player"></div>
-
-<div id="gameover">
-<h1>Game Over</h1>
-<button onclick="restart()">إكمال اللعب</button>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200&auto=format&fit=crop">
+<h3>مغامرات النينجا</h3>
+<button onclick="openGame('https://html5.gamemonetize.com/cxv4e7ux0m0v6sh4r5r0xv1m5j7d2n6f/')">
+تشغيل
+</button>
 </div>
 
+<div class="card">
+<img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop">
+<h3>لعبة الذكاء</h3>
+<button onclick="openGame('https://html5.gamemonetize.com/4m6rkg0j2m8n6k7v9x3y2d5f1s8a0c4/')">
+تشغيل
+</button>
 </div>
 
-<audio id="music" loop autoplay>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=gaming-music-95247.mp3">
-</audio>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1511882150382-421056c89033?q=80&w=1200&auto=format&fit=crop">
+<h3>كرة القدم</h3>
+<button onclick="openGame('https://html5.gamemonetize.com/v1f5s6d8g7h9j2k4l3q1w0e5r6t8y9u/')">
+تشغيل
+</button>
+</div>
+
+</section>
+
+<div class="game-frame" id="gameFrame">
+
+<button class="close-btn" onclick="closeGame()">
+إغلاق
+</button>
+
+<iframe id="game"></iframe>
+
+</div>
+
+<footer>
+Dido Game 2026 ©
+</footer>
 
 <script>
+
+const frame=document.getElementById("gameFrame");
 const game=document.getElementById("game");
-const player=document.getElementById("player");
-const scoreText=document.getElementById("score");
-const levelText=document.getElementById("level");
-const gameover=document.getElementById("gameover");
-const music=document.getElementById("music");
 
-let x=window.innerWidth/2;
-let score=0;
-let level=parseInt(localStorage.getItem("level")) || 1;
-let playing=true;
-
-levelText.innerText=level;
-
-document.body.addEventListener("touchmove",(e)=>{
-x=e.touches[0].clientX;
-player.style.left=x+"px";
-});
-
-document.body.addEventListener("mousemove",(e)=>{
-x=e.clientX;
-player.style.left=x+"px";
-});
-
-function createCoin(){
-if(!playing) return;
-
-const coin=document.createElement("div");
-coin.classList.add("coin");
-
-coin.style.left=Math.random()*
-(window.innerWidth-40)+"px";
-
-coin.style.top="-50px";
-
-game.appendChild(coin);
-
-let speed=3+level;
-
-const fall=setInterval(()=>{
-
-let top=parseInt(coin.style.top);
-coin.style.top=top+speed+"px";
-
-const coinRect=coin.getBoundingClientRect();
-const playerRect=player.getBoundingClientRect();
-
-if(
-coinRect.left<playerRect.right &&
-coinRect.right>playerRect.left &&
-coinRect.top<playerRect.bottom &&
-coinRect.bottom>playerRect.top
-){
-score++;
-scoreText.innerText=score;
-
-coin.remove();
-clearInterval(fall);
-
-if(score%15===0){
-level++;
-localStorage.setItem("level",level);
-levelText.innerText=level;
-}
+function openGame(url){
+frame.style.display="block";
+game.src=url;
 }
 
-if(top>window.innerHeight){
-coin.remove();
-clearInterval(fall);
+function closeGame(){
+frame.style.display="none";
+game.src="";
 }
 
-},20);
-}
-
-function createEnemy(){
-if(!playing) return;
-
-const enemy=document.createElement("div");
-enemy.classList.add("enemy");
-
-enemy.style.left=Math.random()*
-(window.innerWidth-50)+"px";
-
-enemy.style.top="-60px";
-
-game.appendChild(enemy);
-
-let speed=4+level;
-
-const fall=setInterval(()=>{
-
-let top=parseInt(enemy.style.top);
-enemy.style.top=top+speed+"px";
-
-const enemyRect=enemy.getBoundingClientRect();
-const playerRect=player.getBoundingClientRect();
-
-if(
-enemyRect.left<playerRect.right &&
-enemyRect.right>playerRect.left &&
-enemyRect.top<playerRect.bottom &&
-enemyRect.bottom>playerRect.top
-){
-playing=false;
-gameover.style.display="block";
-clearInterval(fall);
-}
-
-if(top>window.innerHeight){
-enemy.remove();
-clearInterval(fall);
-}
-
-},20);
-}
-
-function restart(){
-playing=true;
-gameover.style.display="none";
-}
-
-setInterval(createCoin,900);
-setInterval(createEnemy,1400);
-
-document.body.addEventListener("click",()=>{
-music.play();
-});
 </script>
 
 </body>
