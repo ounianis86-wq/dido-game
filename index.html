@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,222 +9,240 @@
 body{
     margin:0;
     overflow:hidden;
-    background:#111;
+    background:linear-gradient(to bottom,#1e3c72,#2a5298);
     font-family:Arial;
-}
-
-canvas{
-    display:block;
-    background:linear-gradient(#222,#000);
     touch-action:none;
 }
 
-#score{
+#game{
+    width:100vw;
+    height:100vh;
+    position:relative;
+    overflow:hidden;
+}
+
+#player{
+    width:80px;
+    height:80px;
+    background:linear-gradient(45deg,yellow,orange);
+    border-radius:20px;
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    box-shadow:0 0 20px yellow;
+}
+
+.coin{
+    width:40px;
+    height:40px;
+    background:gold;
+    border-radius:50%;
+    position:absolute;
+    top:-50px;
+    box-shadow:0 0 15px gold;
+}
+
+#ui{
     position:absolute;
     top:10px;
     left:10px;
     color:white;
-    font-size:24px;
+    font-size:22px;
+    z-index:100;
+}
+
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    margin-top:10px;
+    margin-right:5px;
+    background:white;
+    cursor:pointer;
+}
+
+#message{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    color:white;
+    font-size:40px;
+    display:none;
+    text-align:center;
 }
 </style>
 </head>
 
 <body>
 
-<div id="score">0</div>
+<div id="game">
 
-<canvas id="game"></canvas>
+<div id="ui">
+<div id="score">Score: 0</div>
+<div id="level">Level: 1</div>
 
-<script>
+<button onclick="pauseGame()">⏸ Pause</button>
+<button onclick="resumeGame()">▶ Play</button>
+</div>
 
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+<div id="player"></div>
+<div class="coin" id="coin"></div>
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+<div id="message"></div>
 
-let score = 0;
-
-const player = {
-    x: canvas.width/2 - 40,
-    y: canvas.height - 100,
-    width: 80,
-    height: 80,
-    color: "cyan"
-};
-
-const coins = [];
-
-function createCoin(){
-    coins.push({
-        x: Math.random() * (canvas.width - 30),
-        y: -30,
-        size: 30,
-        speed: 4
-    });
-}
-
-setInterval(createCoin, 1000);
-
-function drawPlayer(){
-    ctx.fillStyle = player.color;
-    ctx.fillRect(player.x, player.y, player.width, player.height);
-}
-
-function drawCoins(){
-
-    for(let i=0;i<coins.length;i++){
-
-        let c = coins[i];
-
-        c.y += c.speed;
-
-        ctx.fillStyle = "gold";
-        ctx.beginPath();
-        ctx.arc(c.x,c.y,c.size/2,0,Math.PI*2);
-        ctx.fill();
-
-        // collision
-        if(
-            c.x > player.x &&
-            c.x < player.x + player.width &&
-            c.y > player.y &&
-            c.y < player.y + player.height
-        ){
-            coins.splice(i,1);
-            score++;
-            document.getElementById("score").innerText = score;
-        }
-
-        // remove
-        if(c.y > canvas.height){
-            coins.splice(i,1);
-        }
-    }
-}
-
-function gameLoop(){
-
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    drawPlayer();
-    drawCoins();
-
-    requestAnimationFrame(gameLoop);
-}
-
-gameLoop();
-
-
-// TOUCH CONTROL
-
-canvas.addEventListener("touchmove",(e)=>{
-
-    let touch = e.touches[0];
-
-    player.x = touch.clientX - player.width/2;
-
-});
+</div>
 
 <script>
+
 const player = document.getElementById("player");
 const coin = document.getElementById("coin");
 const scoreText = document.getElementById("score");
-
-let score = 0;
-let playerX = window.innerWidth / 2 - 40;
-
-player.style.left = playerX + "px";
+const levelText = document.getElementById("level");
+const message = document.getElementById("message");
 
 
-// ================= الأصوات =================
+// ================== أصوات ==================
 const collectSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-arcade-bonus-229.wav");
+
 const gameOverSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-player-losing-or-failing-2042.wav");
+
 const bgMusic = new Audio("https://assets.mixkit.co/music/preview/mixkit-game-level-music-689.mp3");
 
 bgMusic.loop = true;
 bgMusic.volume = 0.3;
 
+
 // تشغيل الموسيقى عند أول لمس
-,const bgMusic = new Audio("https://assets.mixkit.co/music/preview/mixkit-game-level-music-689.mp3");
-
-bgMusic.loop = true;
-bgMusic.volume = 0.3;
-
-function startMusic() {
-    bgMusic.play()
-    .then(() => {
-        console.log("music started");
-    })
-    .catch(err => {
-        console.log(err);
-    });
+function startMusic(){
+    bgMusic.play();
 
     document.removeEventListener("touchstart", startMusic);
     document.removeEventListener("click", startMusic);
 }
 
 document.addEventListener("touchstart", startMusic);
-document.addEventListener("click", startMusic); () => {
-    bgMusic.play();
-}, { once: true });
+document.addEventListener("click", startMusic);
 
 
-// ================= حركة اللاعب =================
-document.addEventListener("touchmove", (e) => {
+// ================== بيانات اللعبة ==================
+let score = 0;
+let level = 1;
+let speed = 5;
+let isPaused = false;
+
+let playerX = window.innerWidth / 2;
+
+let coinX = Math.random() * (window.innerWidth - 40);
+let coinY = -50;
+
+
+// ================== حركة اللاعب ==================
+document.addEventListener("touchmove",(e)=>{
     playerX = e.touches[0].clientX - 40;
+
+    if(playerX < 0) playerX = 0;
+    if(playerX > window.innerWidth - 80)
+        playerX = window.innerWidth - 80;
+
     player.style.left = playerX + "px";
 });
 
 
-// ================= سقوط العملة =================
-let coinY = 0;
-let coinX = Math.random() * (window.innerWidth - 40);
+// ================== اللعبة ==================
+function gameLoop(){
 
-function updateGame() {
+    if(!isPaused){
 
-    coinY += 5;
+        coinY += speed;
 
-    coin.style.top = coinY + "px";
-    coin.style.left = coinX + "px";
+        coin.style.top = coinY + "px";
+        coin.style.left = coinX + "px";
 
-    // جمع العملة
-    if (
-        coinY > window.innerHeight - 140 &&
-        coinX > playerX - 40 &&
-        coinX < playerX + 80
-    ) {
-        score++;
-        scoreText.innerText = "Score: " + score;
+        // التقاط العملة
+        if(
+            coinY > window.innerHeight - 140 &&
+            coinX > playerX - 40 &&
+            coinX < playerX + 80
+        ){
 
-        collectSound.currentTime = 0;
-        collectSound.play();
+            score++;
+            scoreText.innerHTML = "Score: " + score;
 
-        resetCoin();
+            collectSound.currentTime = 0;
+            collectSound.play();
+
+            // المستويات
+            if(score % 5 === 0){
+
+                level++;
+                speed++;
+
+                levelText.innerHTML = "Level: " + level;
+
+                showMessage("LEVEL " + level);
+            }
+
+            resetCoin();
+        }
+
+        // خسارة
+        if(coinY > window.innerHeight){
+
+            gameOverSound.play();
+
+            showMessage("GAME OVER");
+
+            score = 0;
+            level = 1;
+            speed = 5;
+
+            scoreText.innerHTML = "Score: 0";
+            levelText.innerHTML = "Level: 1";
+
+            resetCoin();
+        }
+
     }
 
-    // خسارة
-    if (coinY > window.innerHeight) {
-
-        gameOverSound.play();
-
-        alert("Game Over! Score: " + score);
-
-        score = 0;
-        scoreText.innerText = "Score: 0";
-
-        resetCoin();
-    }
-
-    requestAnimationFrame(updateGame);
+    requestAnimationFrame(gameLoop);
 }
 
-function resetCoin() {
-    coinY = 0;
+
+// ================== إعادة العملة ==================
+function resetCoin(){
+    coinY = -50;
     coinX = Math.random() * (window.innerWidth - 40);
 }
 
-updateGame();
+
+// ================== رسائل ==================
+function showMessage(text){
+
+    message.innerHTML = text;
+    message.style.display = "block";
+
+    setTimeout(()=>{
+        message.style.display = "none";
+    },1500);
+}
+
+
+// ================== إيقاف وتشغيل ==================
+function pauseGame(){
+    isPaused = true;
+}
+
+function resumeGame(){
+    isPaused = false;
+}
+
+
+// ================== بدء اللعبة ==================
+gameLoop();
+
 </script>
 
 </body>
