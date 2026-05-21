@@ -126,6 +126,86 @@ canvas.addEventListener("touchmove",(e)=>{
 
 });
 
+</script><script>
+const player = document.getElementById("player");
+const coin = document.getElementById("coin");
+const scoreText = document.getElementById("score");
+
+let score = 0;
+let playerX = window.innerWidth / 2 - 40;
+
+player.style.left = playerX + "px";
+
+
+// ================= الأصوات =================
+const collectSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-arcade-bonus-229.wav");
+const gameOverSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-player-losing-or-failing-2042.wav");
+const bgMusic = new Audio("https://assets.mixkit.co/music/preview/mixkit-game-level-music-689.mp3");
+
+bgMusic.loop = true;
+bgMusic.volume = 0.3;
+
+// تشغيل الموسيقى عند أول لمس
+document.body.addEventListener("touchstart", () => {
+    bgMusic.play();
+}, { once: true });
+
+
+// ================= حركة اللاعب =================
+document.addEventListener("touchmove", (e) => {
+    playerX = e.touches[0].clientX - 40;
+    player.style.left = playerX + "px";
+});
+
+
+// ================= سقوط العملة =================
+let coinY = 0;
+let coinX = Math.random() * (window.innerWidth - 40);
+
+function updateGame() {
+
+    coinY += 5;
+
+    coin.style.top = coinY + "px";
+    coin.style.left = coinX + "px";
+
+    // جمع العملة
+    if (
+        coinY > window.innerHeight - 140 &&
+        coinX > playerX - 40 &&
+        coinX < playerX + 80
+    ) {
+        score++;
+        scoreText.innerText = "Score: " + score;
+
+        collectSound.currentTime = 0;
+        collectSound.play();
+
+        resetCoin();
+    }
+
+    // خسارة
+    if (coinY > window.innerHeight) {
+
+        gameOverSound.play();
+
+        alert("Game Over! Score: " + score);
+
+        score = 0;
+        scoreText.innerText = "Score: 0";
+
+        resetCoin();
+    }
+
+    requestAnimationFrame(updateGame);
+}
+
+function resetCoin() {
+    coinY = 0;
+    coinX = Math.random() * (window.innerWidth - 40);
+}
+
+updateGame();
 </script>
 
 </body>
