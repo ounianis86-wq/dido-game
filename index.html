@@ -146,7 +146,26 @@ bgMusic.loop = true;
 bgMusic.volume = 0.3;
 
 // تشغيل الموسيقى عند أول لمس
-document.body.addEventListener("touchstart", () => {
+,const bgMusic = new Audio("https://assets.mixkit.co/music/preview/mixkit-game-level-music-689.mp3");
+
+bgMusic.loop = true;
+bgMusic.volume = 0.3;
+
+function startMusic() {
+    bgMusic.play()
+    .then(() => {
+        console.log("music started");
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
+    document.removeEventListener("touchstart", startMusic);
+    document.removeEventListener("click", startMusic);
+}
+
+document.addEventListener("touchstart", startMusic);
+document.addEventListener("click", startMusic); () => {
     bgMusic.play();
 }, { once: true });
 
