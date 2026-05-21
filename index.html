@@ -11,40 +11,15 @@ text-align:center;
 margin-bottom:30px;
 }
 
-.games-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:25px;
+.games-menu{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-bottom:30px;
+flex-wrap:wrap;
 }
 
-.game-card{
-background:#1e293b;
-padding:20px;
-border-radius:20px;
-box-shadow:0 4px 15px rgba(0,0,0,0.4);
-text-align:center;
-}
-
-.game-card h2{
-margin-bottom:10px;
-}
-
-canvas{
-background:black;
-border:3px solid white;
-border-radius:12px;
-width:100%;
-max-width:500px;
-margin-top:10px;
-}
-
-.score{
-margin-top:10px;
-font-size:20px;
-}
-
-.play-btn{
-margin-top:15px;
+.games-menu button{
 padding:12px 20px;
 border:none;
 border-radius:12px;
@@ -54,8 +29,37 @@ font-size:18px;
 cursor:pointer;
 }
 
-.play-btn:hover{
+.games-menu button:hover{
 background:#7c3aed;
+}
+
+.game-box{
+display:none;
+background:#1e293b;
+padding:20px;
+border-radius:20px;
+max-width:700px;
+margin:auto;
+text-align:center;
+box-shadow:0 4px 15px rgba(0,0,0,0.4);
+}
+
+.game-box.active{
+display:block;
+}
+
+canvas{
+background:black;
+border:3px solid white;
+border-radius:12px;
+width:100%;
+max-width:500px;
+margin-top:15px;
+}
+
+.score{
+margin-top:15px;
+font-size:22px;
 }
 </style>
 
@@ -63,39 +67,50 @@ background:#7c3aed;
 
 <h1 class="games-title">Dido Game Arcade</h1>
 
-<div class="games-grid">
+<div class="games-menu">
+<button onclick="openGame('coins')">لعبة العملات</button>
+<button onclick="openGame('race')">لعبة السباق</button>
+<button onclick="openGame('memory')">لعبة الذاكرة</button>
+</div>
 
-<div class="game-card">
+<!-- لعبة العملات -->
+<div id="coins" class="game-box active">
+
 <h2>لعبة جمع العملات</h2>
 
-<canvas id="coinGame" width="500" height="500"></canvas>
+<canvas id="coinCanvas" width="500" height="500"></canvas>
 
 <div class="score">
 النقاط:
 <span id="coinScore">0</span>
 </div>
+
 </div>
 
-<div class="game-card">
+<!-- لعبة السباق -->
+<div id="race" class="game-box">
+
 <h2>لعبة السباق</h2>
 
-<canvas id="raceGame" width="500" height="500"></canvas>
+<canvas id="raceCanvas" width="500" height="500"></canvas>
 
 <div class="score">
 النقاط:
 <span id="raceScore">0</span>
 </div>
+
 </div>
 
-<div class="game-card">
+<!-- لعبة الذاكرة -->
+<div id="memory" class="game-box">
+
 <h2>لعبة الذاكرة</h2>
 
 <h3 id="memoryText">اضغط ابدأ</h3>
 
-<button class="play-btn" onclick="startMemoryGame()">
+<button onclick="startMemoryGame()">
 ابدأ اللعبة
 </button>
-</div>
 
 </div>
 
@@ -104,11 +119,29 @@ background:#7c3aed;
 <audio id="coinSound" src="https://actions.google.com/sounds/v1/cartoon/pop.ogg"></audio>
 
 <script>
-/* ---------------------- */
-/* لعبة العملات */
-/* ---------------------- */
+/* ========================= */
+/* التنقل بين الألعاب */
+/* ========================= */
 
-const coinCanvas=document.getElementById("coinGame");
+let currentGame="coins";
+
+function openGame(id){
+
+document.querySelectorAll(".game-box").forEach(box=>{
+box.classList.remove("active");
+});
+
+document.getElementById(id).classList.add("active");
+
+currentGame=id;
+
+}
+
+/* ========================= */
+/* لعبة العملات */
+/* ========================= */
+
+const coinCanvas=document.getElementById("coinCanvas");
 const cctx=coinCanvas.getContext("2d");
 
 let player={
@@ -119,43 +152,46 @@ size:50
 
 let coins=[];
 let coinScore=0;
-let level=1;
-let gameOver=false;
 
 function createCoin(){
+
+if(currentGame!=="coins") return;
+
 coins.push({
 x:Math.random()*470,
 y:-20,
 size:18
 });
+
 }
 
-setInterval(()=>{
-if(!gameOver){
-createCoin();
-}
-},900);
+setInterval(createCoin,1000);
 
-function drawPlayer(){
+function coinLoop(){
+
+if(currentGame==="coins"){
+
+cctx.clearRect(0,0,500,500);
+
 cctx.fillStyle="cyan";
-cctx.fillRect(player.x,player.y,player.size,player.size);
-}
+cctx.fillRect(
+player.x,
+player.y,
+player.size,
+player.size
+);
 
-function drawCoins(){
 cctx.fillStyle="gold";
-
-coins.forEach(c=>{
-cctx.beginPath();
-cctx.arc(c.x,c.y,c.size,0,Math.PI*2);
-cctx.fill();
-});
-}
-
-function updateCoins(){
 
 coins.forEach((c,index)=>{
 
-c.y+=4+level;
+c.y+=5;
+
+cctx.beginPath();
+
+cctx.arc(c.x,c.y,c.size,0,Math.PI*2);
+
+cctx.fill();
 
 if(
 c.x>player.x &&
@@ -172,21 +208,11 @@ document.getElementById("coinScore").innerText=coinScore;
 
 document.getElementById("coinSound").play();
 
-if(coinScore%10===0){
-level++;
-}
-
 }
 
 if(c.y>500){
 
-gameOver=true;
-
-setTimeout(()=>{
-alert("خسرت لكنك ستعود لنفس المستوى");
-coins=[];
-gameOver=false;
-},100);
+coins.splice(index,1);
 
 }
 
@@ -194,23 +220,30 @@ gameOver=false;
 
 }
 
-function coinLoop(){
-
-cctx.clearRect(0,0,500,500);
-
-drawPlayer();
-
-drawCoins();
-
-updateCoins();
-
 requestAnimationFrame(coinLoop);
 
 }
 
 coinLoop();
 
+coinCanvas.addEventListener("touchmove",e=>{
+
+if(currentGame!=="coins") return;
+
+let rect=coinCanvas.getBoundingClientRect();
+
+let touch=e.touches[0];
+
+player.x=
+touch.clientX-
+rect.left-
+player.size/2;
+
+});
+
 window.addEventListener("keydown",e=>{
+
+if(currentGame!=="coins") return;
 
 if(e.key==="ArrowLeft"){
 player.x-=25;
@@ -222,21 +255,11 @@ player.x+=25;
 
 });
 
-coinCanvas.addEventListener("touchmove",e=>{
-
-let rect=coinCanvas.getBoundingClientRect();
-
-let touch=e.touches[0];
-
-player.x=touch.clientX-rect.left-player.size/2;
-
-});
-
-/* ---------------------- */
+/* ========================= */
 /* لعبة السباق */
-/* ---------------------- */
+/* ========================= */
 
-const raceCanvas=document.getElementById("raceGame");
+const raceCanvas=document.getElementById("raceCanvas");
 const rctx=raceCanvas.getContext("2d");
 
 let car={
@@ -251,6 +274,8 @@ let raceScore=0;
 
 function createEnemy(){
 
+if(currentGame!=="race") return;
+
 enemies.push({
 x:Math.random()*430,
 y:-100,
@@ -264,10 +289,18 @@ setInterval(createEnemy,1200);
 
 function raceLoop(){
 
+if(currentGame==="race"){
+
 rctx.clearRect(0,0,500,500);
 
 rctx.fillStyle="red";
-rctx.fillRect(car.x,car.y,car.width,car.height);
+
+rctx.fillRect(
+car.x,
+car.y,
+car.width,
+car.height
+);
 
 rctx.fillStyle="white";
 
@@ -275,7 +308,12 @@ enemies.forEach((e,index)=>{
 
 e.y+=7;
 
-rctx.fillRect(e.x,e.y,e.width,e.height);
+rctx.fillRect(
+e.x,
+e.y,
+e.width,
+e.height
+);
 
 if(
 car.x<e.x+e.width &&
@@ -303,13 +341,32 @@ document.getElementById("raceScore").innerText=raceScore;
 
 });
 
+}
+
 requestAnimationFrame(raceLoop);
 
 }
 
 raceLoop();
 
+raceCanvas.addEventListener("touchmove",e=>{
+
+if(currentGame!=="race") return;
+
+let rect=raceCanvas.getBoundingClientRect();
+
+let touch=e.touches[0];
+
+car.x=
+touch.clientX-
+rect.left-
+car.width/2;
+
+});
+
 window.addEventListener("keydown",e=>{
+
+if(currentGame!=="race") return;
 
 if(e.key==="a"){
 car.x-=25;
@@ -321,41 +378,34 @@ car.x+=25;
 
 });
 
-raceCanvas.addEventListener("touchmove",e=>{
-
-let rect=raceCanvas.getBoundingClientRect();
-
-let touch=e.touches[0];
-
-car.x=touch.clientX-rect.left-car.width/2;
-
-});
-
-/* ---------------------- */
+/* ========================= */
 /* لعبة الذاكرة */
-/* ---------------------- */
+/* ========================= */
 
 function startMemoryGame(){
+
+if(currentGame!=="memory") return;
 
 const text=document.getElementById("memoryText");
 
 const words=[
 "تفاحة",
-"سيارة",
-"كتاب",
 "قمر",
+"كتاب",
+"سيارة",
 "أسد"
 ];
 
-const random=words[
-Math.floor(Math.random()*words.length)
-];
+const random=
+words[Math.floor(Math.random()*words.length)];
 
-text.innerText="تذكر هذه الكلمة: "+random;
+text.innerText=
+"تذكر هذه الكلمة: "+random;
 
 setTimeout(()=>{
 
-let answer=prompt("ما هي الكلمة؟");
+let answer=
+prompt("ما هي الكلمة؟");
 
 if(answer===random){
 
