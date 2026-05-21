@@ -1,87 +1,22 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dido Game</title>
-
-<style>
-
-body{
-margin:0;
-font-family:Arial;
-background:#111;
-color:white;
-text-align:center;
-}
-
-header{
-background:#ff6600;
-padding:20px;
-font-size:32px;
-font-weight:bold;
-}
-
-.games{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-padding:20px;
-}
-
-.card{
-background:#222;
-padding:20px;
-border-radius:15px;
-transition:0.3s;
-}
-
-.card:hover{
-transform:scale(1.05);
-}
-
-button{
-background:#ff6600;
-border:none;
-padding:10px 20px;
-border-radius:10px;
-color:white;
-font-size:16px;
-cursor:pointer;
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dido Game</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header>
-🎮 Dido Game
-</header>
+<h1>🎮 Dido Game</h1>
 
-<h2>أفضل الألعاب المجانية</h2>
+<button onclick="startGame()">
+ابدأ اللعب
+</button>
 
-<div class="games">
+<p id="gameText"></p>
 
-<div class="card">
-<h3>سباق السيارات</h3>
-<p>لعبة سباق سريعة وممتعة</p>
-<button>العب الآن</button>
-</div>
-
-<div class="card">
-<h3>كرة القدم</h3>
-<p>تنافس مع أصدقائك</p>
-<button>العب الآن</button>
-</div>
-
-<div class="card">
-<h3>المغامرات</h3>
-<p>اكتشف عوالم جديدة</p>
-<button>العب الآن</button>
-</div>
-
-</div>
+<script src="script.js"></script>
 
 </body>
 </html>
