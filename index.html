@@ -1,38 +1,132 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dido Game</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dido Game</title>
 
-    <style>
-        body{
-            margin:0;
-            background:black;
-            text-align:center;
-            color:white;
-            font-family:Arial;
-        }
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    background:#111;
+    font-family:Arial;
+}
 
-        button{
-            padding:15px 30px;
-            font-size:22px;
-            border:none;
-            border-radius:10px;
-            cursor:pointer;
-        }
-    </style>
+canvas{
+    display:block;
+    background:linear-gradient(#222,#000);
+    touch-action:none;
+}
+
+#score{
+    position:absolute;
+    top:10px;
+    left:10px;
+    color:white;
+    font-size:24px;
+}
+</style>
 </head>
 
 <body>
 
-    <h1>Dido Game 🎮</h1>
+<div id="score">0</div>
 
-    <button onclick="startGame()">
-        ابدأ اللعب
-    </button>
+<canvas id="game"></canvas>
 
-    <script src="script.js"></script>
+<script>
+
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let score = 0;
+
+const player = {
+    x: canvas.width/2 - 40,
+    y: canvas.height - 100,
+    width: 80,
+    height: 80,
+    color: "cyan"
+};
+
+const coins = [];
+
+function createCoin(){
+    coins.push({
+        x: Math.random() * (canvas.width - 30),
+        y: -30,
+        size: 30,
+        speed: 4
+    });
+}
+
+setInterval(createCoin, 1000);
+
+function drawPlayer(){
+    ctx.fillStyle = player.color;
+    ctx.fillRect(player.x, player.y, player.width, player.height);
+}
+
+function drawCoins(){
+
+    for(let i=0;i<coins.length;i++){
+
+        let c = coins[i];
+
+        c.y += c.speed;
+
+        ctx.fillStyle = "gold";
+        ctx.beginPath();
+        ctx.arc(c.x,c.y,c.size/2,0,Math.PI*2);
+        ctx.fill();
+
+        // collision
+        if(
+            c.x > player.x &&
+            c.x < player.x + player.width &&
+            c.y > player.y &&
+            c.y < player.y + player.height
+        ){
+            coins.splice(i,1);
+            score++;
+            document.getElementById("score").innerText = score;
+        }
+
+        // remove
+        if(c.y > canvas.height){
+            coins.splice(i,1);
+        }
+    }
+}
+
+function gameLoop(){
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    drawPlayer();
+    drawCoins();
+
+    requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+
+
+// TOUCH CONTROL
+
+canvas.addEventListener("touchmove",(e)=>{
+
+    let touch = e.touches[0];
+
+    player.x = touch.clientX - player.width/2;
+
+});
+
+</script>
 
 </body>
 </html>
