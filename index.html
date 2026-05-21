@@ -1,441 +1,238 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dido Games</title>
+<title>Dido Game</title>
 
 <style>
-
 body{
-    margin:0;
-    font-family:Arial;
-    background:#0f172a;
-    color:white;
-    overflow:hidden;
+margin:0;
+background:#111;
+font-family:Arial;
+overflow:hidden;
+color:white;
 }
-
-/* ================= واجهة الموقع ================= */
-
-#home{
-    position:absolute;
-    inset:0;
-    background:linear-gradient(to bottom,#111827,#1e293b);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    z-index:1000;
-}
-
-#home h1{
-    font-size:55px;
-    color:gold;
-}
-
-#home p{
-    font-size:22px;
-    opacity:0.8;
-}
-
-.menu-btn{
-    width:250px;
-    padding:18px;
-    margin:10px;
-    border:none;
-    border-radius:15px;
-    font-size:22px;
-    background:gold;
-    color:black;
-    font-weight:bold;
-}
-
-/* ================= اللعبة ================= */
 
 #game{
-    width:100vw;
-    height:100vh;
-    position:relative;
-    display:none;
-    overflow:hidden;
-    background:linear-gradient(to bottom,#1e3c72,#2a5298);
+position:relative;
+width:100vw;
+height:100vh;
+overflow:hidden;
+background:linear-gradient(#1a1a1a,#000);
 }
 
 #player{
-    width:90px;
-    height:90px;
-    border-radius:20px;
-    position:absolute;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    background:linear-gradient(45deg,#ffd700,#ff8c00);
-    box-shadow:0 0 30px gold;
+position:absolute;
+bottom:20px;
+left:50%;
+width:70px;
+height:70px;
+background:cyan;
+border-radius:15px;
+transform:translateX(-50%);
+box-shadow:0 0 20px cyan;
 }
 
 .coin{
-    width:50px;
-    height:50px;
-    border-radius:50%;
-    background:gold;
-    position:absolute;
-    top:-60px;
-    box-shadow:0 0 20px yellow;
+position:absolute;
+width:40px;
+height:40px;
+background:gold;
+border-radius:50%;
+box-shadow:0 0 15px yellow;
+}
+
+.enemy{
+position:absolute;
+width:50px;
+height:50px;
+background:red;
+border-radius:10px;
+box-shadow:0 0 15px red;
 }
 
 #ui{
-    position:absolute;
-    top:10px;
-    left:10px;
-    z-index:100;
-    font-size:24px;
+position:absolute;
+top:10px;
+left:10px;
+z-index:100;
+font-size:22px;
 }
 
-#message{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    font-size:55px;
-    font-weight:bold;
-    display:none;
+#gameover{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#222;
+padding:30px;
+border-radius:20px;
+display:none;
+text-align:center;
 }
 
-.control-btn{
-    padding:10px 15px;
-    border:none;
-    border-radius:10px;
-    margin-top:10px;
-    font-size:18px;
+button{
+padding:12px 20px;
+font-size:20px;
+border:none;
+border-radius:10px;
+background:cyan;
+cursor:pointer;
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- ================= الصفحة الرئيسية ================= -->
-
-<div id="home">
-
-<h1>DIDO GAMES</h1>
-
-<p>Arcade • Action • Fun</p>
-
-<button class="menu-btn" onclick="startGame()">
-🎮 Start Game
-</button>
-
-<button class="menu-btn">
-🏆 Leaderboard
-</button>
-
-<button class="menu-btn">
-⚙ Settings
-</button>
-
-</div>
-
-
-<!-- ================= اللعبة ================= -->
-
 <div id="game">
 
 <div id="ui">
-
-<div id="score">Score: 0</div>
-<div id="level">Level: 1</div>
-
-<button class="control-btn" onclick="pauseGame()">
-⏸ Pause
-</button>
-
-<button class="control-btn" onclick="resumeGame()">
-▶ Resume
-</button>
-
+⭐ <span id="score">0</span><br>
+🏆 Level: <span id="level">1</span>
 </div>
 
 <div id="player"></div>
-<div class="coin" id="coin"></div>
 
-<div id="message"></div>
+<div id="gameover">
+<h1>Game Over</h1>
+<button onclick="restart()">إكمال اللعب</button>
+</div>
 
 </div>
 
+<audio id="music" loop autoplay>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=gaming-music-95247.mp3">
+</audio>
 
 <script>
+const game=document.getElementById("game");
+const player=document.getElementById("player");
+const scoreText=document.getElementById("score");
+const levelText=document.getElementById("level");
+const gameover=document.getElementById("gameover");
+const music=document.getElementById("music");
 
-/* ================= عناصر ================= */
+let x=window.innerWidth/2;
+let score=0;
+let level=parseInt(localStorage.getItem("level")) || 1;
+let playing=true;
 
-const home = document.getElementById("home");
-const game = document.getElementById("game");
+levelText.innerText=level;
 
-const player = document.getElementById("player");
-const coin = document.getElementById("coin");
-
-const scoreText = document.getElementById("score");
-const levelText = document.getElementById("level");
-
-const message = document.getElementById("message");
-
-
-/* ================= أصوات ================= */
-
-/* موسيقى جديدة أقوى */
-
-const bgMusic = new Audio(
-"https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=8-bit-arcade-110958.mp3"
-);
-
-bgMusic.loop = true;
-bgMusic.volume = 0.5;
-
-const collectSound = new Audio(
-"https://assets.mixkit.co/sfx/preview/mixkit-arcade-bonus-229.wav"
-);
-
-const loseSound = new Audio(
-"https://assets.mixkit.co/sfx/preview/mixkit-player-losing-or-failing-2042.wav"
-);
-
-
-/* ================= بيانات اللعبة ================= */
-
-let score = 0;
-
-let level = 1;
-
-let speed = 4;
-
-let isPaused = false;
-
-let gameOver = false;
-
-let savedLevel = 1;
-
-let savedSpeed = 4;
-
-let playerX = window.innerWidth / 2;
-
-let coinX = Math.random() * (window.innerWidth - 50);
-
-let coinY = -60;
-
-
-/* ================= بدء اللعبة ================= */
-
-async function startGame(){
-
-    home.style.display = "none";
-
-    game.style.display = "block";
-
-    try{
-
-        await bgMusic.play();
-
-    }catch(e){
-
-        console.log("music blocked");
-
-    }
-
-}
-
-
-/* ================= لمس ================= */
-
-document.addEventListener("touchmove",(e)=>{
-
-    if(gameOver) return;
-
-    playerX = e.touches[0].clientX - 45;
-
-    if(playerX < 0)
-        playerX = 0;
-
-    if(playerX > window.innerWidth - 90)
-        playerX = window.innerWidth - 90;
-
-    player.style.left = playerX + "px";
-
+document.body.addEventListener("touchmove",(e)=>{
+x=e.touches[0].clientX;
+player.style.left=x+"px";
 });
 
+document.body.addEventListener("mousemove",(e)=>{
+x=e.clientX;
+player.style.left=x+"px";
+});
 
-/* ================= الحلقة ================= */
+function createCoin(){
+if(!playing) return;
 
-function gameLoop(){
+const coin=document.createElement("div");
+coin.classList.add("coin");
 
-    if(!isPaused && !gameOver){
+coin.style.left=Math.random()*
+(window.innerWidth-40)+"px";
 
-        coinY += speed;
+coin.style.top="-50px";
 
-        coin.style.top = coinY + "px";
+game.appendChild(coin);
 
-        coin.style.left = coinX + "px";
+let speed=3+level;
 
+const fall=setInterval(()=>{
 
-        /* جمع العملة */
+let top=parseInt(coin.style.top);
+coin.style.top=top+speed+"px";
 
-        if(
+const coinRect=coin.getBoundingClientRect();
+const playerRect=player.getBoundingClientRect();
 
-            coinY > window.innerHeight - 160 &&
+if(
+coinRect.left<playerRect.right &&
+coinRect.right>playerRect.left &&
+coinRect.top<playerRect.bottom &&
+coinRect.bottom>playerRect.top
+){
+score++;
+scoreText.innerText=score;
 
-            coinX > playerX - 50 &&
+coin.remove();
+clearInterval(fall);
 
-            coinX < playerX + 90
-
-        ){
-
-            score++;
-
-            scoreText.innerHTML =
-            "Score: " + score;
-
-            collectSound.currentTime = 0;
-
-            collectSound.play();
-
-
-            /* مستويات أطول بكثير */
-
-            if(score % 30 === 0){
-
-                level++;
-
-                speed += 0.8;
-
-                savedLevel = level;
-
-                savedSpeed = speed;
-
-                levelText.innerHTML =
-                "Level: " + level;
-
-                showMessage("LEVEL " + level);
-
-            }
-
-            resetCoin();
-
-        }
-
-
-        /* خسارة */
-
-        if(coinY > window.innerHeight){
-
-            gameOver = true;
-
-            loseSound.play();
-
-            bgMusic.pause();
-
-            showMessage("GAME OVER");
-
-            setTimeout(()=>{
-
-                if(confirm(
-                "Continue From Level "
-                + savedLevel + " ?"
-                )){
-
-                    continueGame();
-
-                }
-
-            },1000);
-
-        }
-
-    }
-
-    requestAnimationFrame(gameLoop);
-
+if(score%15===0){
+level++;
+localStorage.setItem("level",level);
+levelText.innerText=level;
+}
 }
 
-
-/* ================= متابعة اللعب ================= */
-
-async function continueGame(){
-
-    gameOver = false;
-
-    level = savedLevel;
-
-    speed = savedSpeed;
-
-    coinY = -60;
-
-    coinX = Math.random()
-    * (window.innerWidth - 50);
-
-    try{
-
-        await bgMusic.play();
-
-    }catch(e){}
-
+if(top>window.innerHeight){
+coin.remove();
+clearInterval(fall);
 }
 
-
-/* ================= إعادة العملة ================= */
-
-function resetCoin(){
-
-    coinY = -60;
-
-    coinX = Math.random()
-    * (window.innerWidth - 50);
-
+},20);
 }
 
+function createEnemy(){
+if(!playing) return;
 
-/* ================= رسائل ================= */
+const enemy=document.createElement("div");
+enemy.classList.add("enemy");
 
-function showMessage(text){
+enemy.style.left=Math.random()*
+(window.innerWidth-50)+"px";
 
-    message.innerHTML = text;
+enemy.style.top="-60px";
 
-    message.style.display = "block";
+game.appendChild(enemy);
 
-    setTimeout(()=>{
+let speed=4+level;
 
-        message.style.display = "none";
+const fall=setInterval(()=>{
 
-    },2000);
+let top=parseInt(enemy.style.top);
+enemy.style.top=top+speed+"px";
 
+const enemyRect=enemy.getBoundingClientRect();
+const playerRect=player.getBoundingClientRect();
+
+if(
+enemyRect.left<playerRect.right &&
+enemyRect.right>playerRect.left &&
+enemyRect.top<playerRect.bottom &&
+enemyRect.bottom>playerRect.top
+){
+playing=false;
+gameover.style.display="block";
+clearInterval(fall);
 }
 
-
-/* ================= تحكم ================= */
-
-function pauseGame(){
-
-    isPaused = true;
-
-    bgMusic.pause();
-
+if(top>window.innerHeight){
+enemy.remove();
+clearInterval(fall);
 }
 
-async function resumeGame(){
-
-    isPaused = false;
-
-    try{
-
-        await bgMusic.play();
-
-    }catch(e){}
-
+},20);
 }
 
+function restart(){
+playing=true;
+gameover.style.display="none";
+}
 
-/* ================= تشغيل ================= */
+setInterval(createCoin,900);
+setInterval(createEnemy,1400);
 
-gameLoop();
-
+document.body.addEventListener("click",()=>{
+music.play();
+});
 </script>
 
 </body>
