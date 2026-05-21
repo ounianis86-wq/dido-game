@@ -3,44 +3,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dido Game Ultimate</title>
+<title>Dido Games</title>
 
 <style>
 
 body{
     margin:0;
-    overflow:hidden;
     font-family:Arial;
-    background:linear-gradient(to bottom,#141e30,#243b55);
-    touch-action:none;
+    background:#0f172a;
+    color:white;
+    overflow:hidden;
 }
+
+/* ================= واجهة الموقع ================= */
+
+#home{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to bottom,#111827,#1e293b);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    z-index:1000;
+}
+
+#home h1{
+    font-size:55px;
+    color:gold;
+}
+
+#home p{
+    font-size:22px;
+    opacity:0.8;
+}
+
+.menu-btn{
+    width:250px;
+    padding:18px;
+    margin:10px;
+    border:none;
+    border-radius:15px;
+    font-size:22px;
+    background:gold;
+    color:black;
+    font-weight:bold;
+}
+
+/* ================= اللعبة ================= */
 
 #game{
     width:100vw;
     height:100vh;
     position:relative;
+    display:none;
     overflow:hidden;
+    background:linear-gradient(to bottom,#1e3c72,#2a5298);
 }
 
 #player{
     width:90px;
     height:90px;
+    border-radius:20px;
     position:absolute;
     bottom:20px;
     left:50%;
     transform:translateX(-50%);
-    border-radius:20px;
-    background:linear-gradient(45deg,#ffcc00,#ff6600);
-    box-shadow:0 0 25px gold;
+    background:linear-gradient(45deg,#ffd700,#ff8c00);
+    box-shadow:0 0 30px gold;
 }
 
-#coin{
-    width:45px;
-    height:45px;
+.coin{
+    width:50px;
+    height:50px;
     border-radius:50%;
-    position:absolute;
-    top:-50px;
     background:gold;
+    position:absolute;
+    top:-60px;
     box-shadow:0 0 20px yellow;
 }
 
@@ -48,19 +87,8 @@ body{
     position:absolute;
     top:10px;
     left:10px;
-    color:white;
     z-index:100;
-    font-size:22px;
-}
-
-button{
-    padding:10px 15px;
-    margin-top:10px;
-    margin-right:5px;
-    border:none;
-    border-radius:10px;
-    font-size:18px;
-    cursor:pointer;
+    font-size:24px;
 }
 
 #message{
@@ -68,29 +96,17 @@ button{
     top:50%;
     left:50%;
     transform:translate(-50%,-50%);
-    color:white;
-    font-size:50px;
+    font-size:55px;
     font-weight:bold;
     display:none;
-    text-shadow:0 0 20px black;
 }
 
-#startScreen{
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.85);
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    z-index:999;
-    color:white;
-}
-
-#startBtn{
-    padding:15px 30px;
-    font-size:25px;
-    background:gold;
+.control-btn{
+    padding:10px 15px;
+    border:none;
+    border-radius:10px;
+    margin-top:10px;
+    font-size:18px;
 }
 
 </style>
@@ -98,84 +114,138 @@ button{
 
 <body>
 
+<!-- ================= الصفحة الرئيسية ================= -->
+
+<div id="home">
+
+<h1>DIDO GAMES</h1>
+
+<p>Arcade • Action • Fun</p>
+
+<button class="menu-btn" onclick="startGame()">
+🎮 Start Game
+</button>
+
+<button class="menu-btn">
+🏆 Leaderboard
+</button>
+
+<button class="menu-btn">
+⚙ Settings
+</button>
+
+</div>
+
+
+<!-- ================= اللعبة ================= -->
+
 <div id="game">
 
 <div id="ui">
+
 <div id="score">Score: 0</div>
 <div id="level">Level: 1</div>
 
-<button onclick="pauseGame()">⏸ Pause</button>
-<button onclick="resumeGame()">▶ Resume</button>
+<button class="control-btn" onclick="pauseGame()">
+⏸ Pause
+</button>
+
+<button class="control-btn" onclick="resumeGame()">
+▶ Resume
+</button>
+
 </div>
 
 <div id="player"></div>
-<div id="coin"></div>
+<div class="coin" id="coin"></div>
 
 <div id="message"></div>
 
-<div id="startScreen">
-<h1>DIDO GAME</h1>
-<p>Collect Coins And Survive</p>
-<button id="startBtn">START GAME</button>
 </div>
 
-</div>
 
 <script>
 
-// ================= عناصر =================
+/* ================= عناصر ================= */
+
+const home = document.getElementById("home");
+const game = document.getElementById("game");
+
 const player = document.getElementById("player");
 const coin = document.getElementById("coin");
+
 const scoreText = document.getElementById("score");
 const levelText = document.getElementById("level");
+
 const message = document.getElementById("message");
-const startScreen = document.getElementById("startScreen");
-const startBtn = document.getElementById("startBtn");
 
 
-// ================= أصوات =================
-const collectSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-arcade-bonus-229.wav");
+/* ================= أصوات ================= */
 
-const gameOverSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-player-losing-or-failing-2042.wav");
+/* موسيقى جديدة أقوى */
 
-const bgMusic = new Audio("https://assets.mixkit.co/music/preview/mixkit-game-level-music-689.mp3");
+const bgMusic = new Audio(
+"https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=8-bit-arcade-110958.mp3"
+);
 
 bgMusic.loop = true;
-bgMusic.volume = 0.4;
+bgMusic.volume = 0.5;
+
+const collectSound = new Audio(
+"https://assets.mixkit.co/sfx/preview/mixkit-arcade-bonus-229.wav"
+);
+
+const loseSound = new Audio(
+"https://assets.mixkit.co/sfx/preview/mixkit-player-losing-or-failing-2042.wav"
+);
 
 
-// ================= بيانات اللعبة =================
+/* ================= بيانات اللعبة ================= */
+
 let score = 0;
+
 let level = 1;
 
 let speed = 4;
 
-let isPaused = true;
+let isPaused = false;
+
 let gameOver = false;
+
+let savedLevel = 1;
+
+let savedSpeed = 4;
 
 let playerX = window.innerWidth / 2;
 
-let coinX = Math.random() * (window.innerWidth - 45);
-let coinY = -50;
+let coinX = Math.random() * (window.innerWidth - 50);
+
+let coinY = -60;
 
 
-// ================= تشغيل اللعبة =================
-startBtn.addEventListener("click", async ()=>{
+/* ================= بدء اللعبة ================= */
 
-    startScreen.style.display = "none";
+async function startGame(){
 
-    isPaused = false;
+    home.style.display = "none";
+
+    game.style.display = "block";
 
     try{
+
         await bgMusic.play();
+
     }catch(e){
-        console.log("Music blocked");
+
+        console.log("music blocked");
+
     }
 
-});
+}
 
 
-// ================= لمس الشاشة =================
+/* ================= لمس ================= */
+
 document.addEventListener("touchmove",(e)=>{
 
     if(gameOver) return;
@@ -193,7 +263,8 @@ document.addEventListener("touchmove",(e)=>{
 });
 
 
-// ================= الحلقة الرئيسية =================
+/* ================= الحلقة ================= */
+
 function gameLoop(){
 
     if(!isPaused && !gameOver){
@@ -201,32 +272,46 @@ function gameLoop(){
         coinY += speed;
 
         coin.style.top = coinY + "px";
+
         coin.style.left = coinX + "px";
 
 
-        // التقاط العملة
+        /* جمع العملة */
+
         if(
-            coinY > window.innerHeight - 150 &&
-            coinX > playerX - 45 &&
+
+            coinY > window.innerHeight - 160 &&
+
+            coinX > playerX - 50 &&
+
             coinX < playerX + 90
+
         ){
 
             score++;
 
-            scoreText.innerHTML = "Score: " + score;
+            scoreText.innerHTML =
+            "Score: " + score;
 
             collectSound.currentTime = 0;
+
             collectSound.play();
 
 
-            // مستويات أطول
-            if(score % 15 === 0){
+            /* مستويات أطول بكثير */
+
+            if(score % 30 === 0){
 
                 level++;
 
-                speed += 1;
+                speed += 0.8;
 
-                levelText.innerHTML = "Level: " + level;
+                savedLevel = level;
+
+                savedSpeed = speed;
+
+                levelText.innerHTML =
+                "Level: " + level;
 
                 showMessage("LEVEL " + level);
 
@@ -237,23 +322,26 @@ function gameLoop(){
         }
 
 
-        // الخسارة
+        /* خسارة */
+
         if(coinY > window.innerHeight){
 
             gameOver = true;
-            isPaused = true;
+
+            loseSound.play();
 
             bgMusic.pause();
-
-            gameOverSound.play();
 
             showMessage("GAME OVER");
 
             setTimeout(()=>{
 
-                if(confirm("Restart Game?")){
+                if(confirm(
+                "Continue From Level "
+                + savedLevel + " ?"
+                )){
 
-                    restartGame();
+                    continueGame();
 
                 }
 
@@ -268,39 +356,44 @@ function gameLoop(){
 }
 
 
-// ================= إعادة اللعبة =================
-function restartGame(){
+/* ================= متابعة اللعب ================= */
 
-    score = 0;
-    level = 1;
-    speed = 4;
+async function continueGame(){
 
     gameOver = false;
-    isPaused = false;
 
-    scoreText.innerHTML = "Score: 0";
-    levelText.innerHTML = "Level: 1";
+    level = savedLevel;
 
-    resetCoin();
+    speed = savedSpeed;
 
-    bgMusic.currentTime = 0;
+    coinY = -60;
 
-    bgMusic.play();
+    coinX = Math.random()
+    * (window.innerWidth - 50);
+
+    try{
+
+        await bgMusic.play();
+
+    }catch(e){}
 
 }
 
 
-// ================= إعادة العملة =================
+/* ================= إعادة العملة ================= */
+
 function resetCoin(){
 
-    coinY = -50;
+    coinY = -60;
 
-    coinX = Math.random() * (window.innerWidth - 45);
+    coinX = Math.random()
+    * (window.innerWidth - 50);
 
 }
 
 
-// ================= رسائل =================
+/* ================= رسائل ================= */
+
 function showMessage(text){
 
     message.innerHTML = text;
@@ -316,7 +409,8 @@ function showMessage(text){
 }
 
 
-// ================= إيقاف واستكمال =================
+/* ================= تحكم ================= */
+
 function pauseGame(){
 
     isPaused = true;
@@ -325,20 +419,21 @@ function pauseGame(){
 
 }
 
-function resumeGame(){
+async function resumeGame(){
 
-    if(!gameOver){
+    isPaused = false;
 
-        isPaused = false;
+    try{
 
-        bgMusic.play();
+        await bgMusic.play();
 
-    }
+    }catch(e){}
 
 }
 
 
-// ================= بدء =================
+/* ================= تشغيل ================= */
+
 gameLoop();
 
 </script>
