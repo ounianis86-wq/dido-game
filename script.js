@@ -1,22 +1,7 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dido Game</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<h1>🎮 Dido Game</h1>
-
-<button onclick="startGame()">
-ابدأ اللعب
-</button>
-
-<p id="gameText"></p>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+function startGame() {
+    document.body.innerHTML = `
+        <h1 style="color:black;text-align:center;margin-top:50px;">
+            اللعبة تعمل بنجاح 🎮
+        </h1>
+    `;
+}
