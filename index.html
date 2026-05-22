@@ -665,7 +665,282 @@ box-shadow:0 0 25px #ff00aa;
 </div>
 
 </nav>
+<!-- =========================
+     موسيقى الخلفية
+========================= -->
 
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=cyberpunk-moonlight-sonata-19396.mp3" type="audio/mpeg">
+</audio>
+
+<!-- =========================
+     نافذة تشغيل الألعاب
+========================= -->
+
+<div id="gameModal" class="game-modal">
+
+  <div class="game-box">
+
+    <div class="game-top">
+
+      <h2 id="gameTitle">🎮 اللعبة</h2>
+
+      <button class="close-game" onclick="closeGame()">
+        ✖
+      </button>
+
+    </div>
+
+    <iframe id="gameFrame" src=""></iframe>
+
+  </div>
+
+</div>
+
+<!-- =========================
+     شاشة التحميل
+========================= -->
+
+<div id="loader">
+
+  <div class="loader-content">
+
+    <h1>Dido Game</h1>
+
+    <div class="loader-bar">
+      <span></span>
+    </div>
+
+    <p>جارِ تحميل عالم الألعاب...</p>
+
+  </div>
+
+</div>
+
+<style>
+
+/* نافذة الألعاب */
+
+.game-modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.9);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+padding:20px;
+}
+
+.game-box{
+width:100%;
+max-width:1100px;
+height:90vh;
+background:#0b1025;
+border-radius:25px;
+overflow:hidden;
+border:2px solid #ff00aa;
+box-shadow:0 0 40px #ff00aa55;
+display:flex;
+flex-direction:column;
+}
+
+.game-top{
+height:70px;
+background:linear-gradient(45deg,#ff00aa,#7b4dff);
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 20px;
+}
+
+.game-top h2{
+font-size:28px;
+}
+
+.close-game{
+width:45px;
+height:45px;
+border:none;
+border-radius:12px;
+background:white;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+}
+
+#gameFrame{
+flex:1;
+width:100%;
+border:none;
+background:black;
+}
+
+/* شاشة التحميل */
+
+#loader{
+position:fixed;
+inset:0;
+background:#050816;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:20000;
+}
+
+.loader-content{
+text-align:center;
+}
+
+.loader-content h1{
+font-size:70px;
+margin-bottom:30px;
+background:linear-gradient(45deg,#ff00aa,#7b4dff,#ffae00);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+font-weight:900;
+}
+
+.loader-bar{
+width:320px;
+height:18px;
+background:#111933;
+border-radius:30px;
+overflow:hidden;
+margin:auto;
+margin-bottom:20px;
+}
+
+.loader-bar span{
+display:block;
+height:100%;
+width:0%;
+background:linear-gradient(45deg,#ff00aa,#7b4dff);
+animation:loading 3s linear forwards;
+}
+
+@keyframes loading{
+100%{
+width:100%;
+}
+}
+
+.loader-content p{
+font-size:22px;
+color:#aaa;
+}
+
+/* تأثيرات الألعاب */
+
+.game{
+transition:0.4s;
+}
+
+.game:hover{
+transform:translateY(-10px) scale(1.03);
+box-shadow:0 0 25px #ff00aa55;
+}
+
+.hero-btn,
+.play,
+.ad button{
+cursor:pointer;
+transition:0.3s;
+}
+
+.hero-btn:hover,
+.play:hover,
+.ad button:hover{
+transform:scale(1.08);
+}
+
+</style>
+
+<script>
+
+/* تشغيل الموسيقى */
+
+window.addEventListener("click", () => {
+
+const music = document.getElementById("bgMusic");
+
+music.volume = 0.3;
+
+music.play();
+
+}, { once:true });
+
+/* شاشة التحميل */
+
+window.onload = () => {
+
+setTimeout(() => {
+
+document.getElementById("loader").style.display = "none";
+
+},3000);
+
+};
+
+/* روابط الألعاب */
+
+const games = [
+
+{
+title:"Anime Fighters",
+url:"https://html5.gamemonetize.com/6xdn6w2aq4t1hn0j6i2t7s3f5q7m/index.html"
+},
+
+{
+title:"Car Racing",
+url:"https://html5.gamemonetize.com/rcf7x8dr0c5g7dy1hvvhvw/index.html"
+},
+
+{
+title:"Zombie Hunter",
+url:"https://html5.gamemonetize.com/8dx6l2b76by9o6f7j3k5/index.html"
+}
+
+];
+
+/* تشغيل الألعاب */
+
+const playButtons = document.querySelectorAll(".play");
+
+playButtons.forEach((btn,index)=>{
+
+btn.addEventListener("click",()=>{
+
+openGame(
+games[index].title,
+games[index].url
+);
+
+});
+
+});
+
+function openGame(title,url){
+
+document.getElementById("gameTitle").innerText = title;
+
+document.getElementById("gameFrame").src = url;
+
+document.getElementById("gameModal").style.display = "flex";
+
+}
+
+/* إغلاق اللعبة */
+
+function closeGame(){
+
+document.getElementById("gameFrame").src = "";
+
+document.getElementById("gameModal").style.display = "none";
+
+}
+
+</script>
 </body>
 
 </html>
