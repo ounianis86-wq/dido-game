@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Dido Game</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -22,179 +25,258 @@ color:white;
 overflow-x:hidden;
 }
 
-.hero{
-min-height:100vh;
-background:url('https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1974&auto=format&fit=crop') center/cover;
-position:relative;
+::-webkit-scrollbar{
+width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+background:#ff00c8;
+border-radius:20px;
+}
+
+header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:15px;
 display:flex;
+justify-content:space-between;
 align-items:center;
-justify-content:center;
-text-align:center;
-padding:40px;
-}
-
-.overlay{
-position:absolute;
-inset:0;
-background:rgba(0,0,0,0.75);
-backdrop-filter:blur(4px);
-}
-
-.hero-content{
-position:relative;
-z-index:2;
-max-width:1200px;
+background:rgba(0,0,0,0.7);
+backdrop-filter:blur(10px);
+z-index:999;
 }
 
 .logo{
-font-size:90px;
+font-size:38px;
 font-weight:900;
-background:linear-gradient(45deg,#00d2ff,#ff00c8,#ffe600);
+background:linear-gradient(45deg,#ff00c8,#ff9f00,#00d2ff);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
+}
+
+.menu-btn{
+font-size:30px;
+cursor:pointer;
+}
+
+.hero{
+margin-top:90px;
+padding:20px;
+}
+
+.banner{
+position:relative;
+height:320px;
+border-radius:30px;
+overflow:hidden;
+background:url('https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1974&auto=format&fit=crop') center/cover;
+display:flex;
+align-items:center;
+padding:30px;
+box-shadow:0 0 40px rgba(255,0,200,0.3);
+}
+
+.banner::before{
+content:'';
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.55);
+}
+
+.banner-content{
+position:relative;
+z-index:2;
+max-width:500px;
+}
+
+.banner h1{
+font-size:55px;
+font-weight:900;
+margin-bottom:10px;
+background:linear-gradient(45deg,#ff00c8,#00d2ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.banner p{
+font-size:20px;
+color:#ddd;
 margin-bottom:20px;
 }
 
-.subtitle{
-font-size:25px;
-color:#ddd;
-margin-bottom:50px;
+.play-now{
+background:linear-gradient(45deg,#ff00c8,#00d2ff);
+border:none;
+padding:14px 30px;
+color:white;
+font-size:18px;
+font-weight:bold;
+border-radius:20px;
+cursor:pointer;
 }
 
 .categories{
+padding:20px;
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-gap:25px;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
 }
 
 .card{
-background:rgba(255,255,255,0.08);
+background:#0d1528;
 border-radius:25px;
 overflow:hidden;
 transition:0.4s;
 cursor:pointer;
+box-shadow:0 0 15px rgba(0,0,0,0.4);
 }
 
 .card:hover{
-transform:translateY(-10px) scale(1.03);
-box-shadow:0 0 25px #00d2ff;
+transform:translateY(-8px);
+box-shadow:0 0 25px #ff00c8;
 }
 
 .card img{
 width:100%;
-height:180px;
+height:150px;
 object-fit:cover;
 }
 
 .card h2{
-padding:18px;
-font-size:24px;
+padding:15px;
+font-size:22px;
 }
 
-.section{
-display:none;
-padding:40px;
-min-height:100vh;
-background:#09111f;
-}
-
-.section.active{
-display:block;
+.games-section{
+padding:20px;
 }
 
 .section-title{
-font-size:50px;
+font-size:32px;
 margin-bottom:20px;
-color:#00d2ff;
+color:#ff00c8;
 }
 
 .games-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+grid-template-columns:1fr;
 gap:25px;
-margin-top:30px;
 }
 
 .game-box{
 background:#111c30;
 border-radius:25px;
 overflow:hidden;
-padding-bottom:20px;
-transition:0.4s;
-}
-
-.game-box:hover{
-transform:scale(1.02);
-box-shadow:0 0 20px #ff00c8;
+padding-bottom:15px;
+box-shadow:0 0 20px rgba(0,0,0,0.5);
 }
 
 .game-box iframe{
 width:100%;
-height:220px;
+height:240px;
 border:none;
+background:black;
 }
 
-.game-box h3{
+.game-info{
 padding:15px;
-font-size:24px;
+}
+
+.game-info h3{
+font-size:25px;
+margin-bottom:10px;
 }
 
 .play-btn{
-margin:0 15px;
 background:linear-gradient(45deg,#00d2ff,#ff00c8);
-color:white;
 border:none;
-padding:12px 18px;
-border-radius:14px;
-cursor:pointer;
+padding:12px 20px;
+border-radius:15px;
+color:white;
 font-size:18px;
 font-weight:bold;
-}
-
-.back-btn{
-background:#ff0055;
-color:white;
-border:none;
-padding:12px 22px;
-border-radius:14px;
 cursor:pointer;
-margin-bottom:30px;
-font-size:18px;
 }
 
 .ad-box{
-background:linear-gradient(45deg,#ff00c8,#00d2ff);
-padding:20px;
-border-radius:20px;
+margin:25px 20px;
+padding:25px;
+border-radius:25px;
+background:linear-gradient(45deg,#ff00c8,#6a00ff,#00d2ff);
 text-align:center;
-margin:30px 0;
 font-size:24px;
 font-weight:bold;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.03);}
+100%{transform:scale(1);}
+}
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#0b1020;
+display:flex;
+justify-content:space-around;
+padding:15px 0;
+border-top:2px solid rgba(255,255,255,0.08);
+z-index:999;
+}
+
+.nav-item{
+text-align:center;
+font-size:14px;
+color:#bbb;
+cursor:pointer;
+}
+
+.nav-item.active{
+color:#ff00c8;
 }
 
 .music-btn{
 position:fixed;
-bottom:20px;
+bottom:90px;
 left:20px;
-background:#00d2ff;
+width:65px;
+height:65px;
 border:none;
-color:white;
-width:60px;
-height:60px;
 border-radius:50%;
-font-size:24px;
+background:linear-gradient(45deg,#ff00c8,#00d2ff);
+color:white;
+font-size:28px;
 cursor:pointer;
 z-index:999;
+box-shadow:0 0 20px #ff00c8;
 }
 
 footer{
+padding:40px 20px 120px;
 text-align:center;
-padding:30px;
-background:#02040c;
-color:#aaa;
+color:#888;
+}
+
+@media(min-width:900px){
+
+.categories{
+grid-template-columns:repeat(4,1fr);
+}
+
+.games-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
 }
 
 </style>
+
 </head>
 
 <body>
@@ -203,164 +285,190 @@ color:#aaa;
 <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8a1a0d5f4.mp3?filename=cyberpunk-moonlight-sonata-ambient-11054.mp3" type="audio/mp3">
 </audio>
 
-<button class="music-btn" onclick="toggleMusic()">🎵</button>
+<header>
 
-<section class="hero" id="home">
+<div class="menu-btn">☰</div>
 
-<div class="overlay"></div>
+<div class="logo">
+Dido Game
+</div>
 
-<div class="hero-content">
+<div>🔔</div>
 
-<h1 class="logo">Dido Game</h1>
+</header>
 
-<p class="subtitle">
-عالم أنمي ضخم يجمع كل الألعاب المجانية
+<section class="hero">
+
+<div class="banner">
+
+<div class="banner-content">
+
+<h1>Dido Game</h1>
+
+<p>
+عالم الأنمي والألعاب المجانية في مكان واحد
 </p>
 
-<div class="categories">
+<button class="play-now">
+ابدأ اللعب الآن
+</button>
 
-<div class="card" onclick="openSection('racing')">
+</div>
+
+</div>
+
+</section>
+
+<section class="categories">
+
+<div class="card">
 <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1883&auto=format&fit=crop">
-<h2>🏎️ ألعاب السباقات</h2>
+<h2>🏎️ السباقات</h2>
 </div>
 
-<div class="card" onclick="openSection('fight')">
+<div class="card">
 <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1931&auto=format&fit=crop">
-<h2>⚔️ ألعاب القتال</h2>
+<h2>⚔️ القتال</h2>
 </div>
 
-<div class="card" onclick="openSection('horror')">
+<div class="card">
 <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop">
-<h2>👻 ألعاب الرعب</h2>
+<h2>👻 الرعب</h2>
 </div>
 
+<div class="card">
+<img src="https://images.unsplash.com/photo-1511882150382-421056c89033?q=80&w=2070&auto=format&fit=crop">
+<h2>🕹️ الأركيد</h2>
 </div>
 
-</div>
 </section>
 
-<section class="section" id="racing">
-
-<button class="back-btn" onclick="goHome()">
-⬅ العودة
-</button>
-
-<h1 class="section-title">
-🏎️ ألعاب السباقات
-</h1>
-
 <div class="ad-box">
-إعلان — أفضل ألعاب السيارات
+🔥 إعلان — أقوى ألعاب الأنمي مجاناً داخل Dido Game
 </div>
+
+<section class="games-section">
+
+<h2 class="section-title">
+🎮 أحدث الألعاب
+</h2>
 
 <div class="games-grid">
 
 <div class="game-box">
+
 <iframe src="https://www.crazygames.com/embed/drift-hunters"></iframe>
+
+<div class="game-info">
+
 <h3>Drift Hunters</h3>
-<button class="play-btn">العب الآن</button>
-</div>
 
-<div class="game-box">
-<iframe src="https://www.crazygames.com/embed/madalin-stunt-cars-2"></iframe>
-<h3>Madalin Cars</h3>
-<button class="play-btn">ابدأ</button>
-</div>
-
-</div>
-</section>
-
-<section class="section" id="fight">
-
-<button class="back-btn" onclick="goHome()">
-⬅ العودة
+<button class="play-btn">
+العب الآن
 </button>
 
-<h1 class="section-title">
-⚔️ ألعاب القتال
-</h1>
-
-<div class="ad-box">
-إعلان — قاتل أبطال الأنمي
 </div>
 
-<div class="games-grid">
+</div>
 
 <div class="game-box">
+
 <iframe src="https://www.crazygames.com/embed/stickman-fighting-3d"></iframe>
+
+<div class="game-info">
+
 <h3>Stickman Fighting</h3>
-<button class="play-btn">قاتل</button>
-</div>
 
-</div>
-</section>
-
-<section class="section" id="horror">
-
-<button class="back-btn" onclick="goHome()">
-⬅ العودة
+<button class="play-btn">
+ابدأ القتال
 </button>
 
-<h1 class="section-title">
-👻 ألعاب الرعب
-</h1>
-
-<div class="ad-box">
-إعلان — عالم الزومبي والرعب
 </div>
 
-<div class="games-grid">
+</div>
 
 <div class="game-box">
+
 <iframe src="https://www.crazygames.com/embed/dead-zed"></iframe>
+
+<div class="game-info">
+
 <h3>Dead Zed</h3>
-<button class="play-btn">ابدأ</button>
+
+<button class="play-btn">
+ابدأ الرعب
+</button>
+
 </div>
 
 </div>
+
+<div class="game-box">
+
+<iframe src="https://www.crazygames.com/embed/soccer-random"></iframe>
+
+<div class="game-info">
+
+<h3>Soccer Random</h3>
+
+<button class="play-btn">
+ابدأ المباراة
+</button>
+
+</div>
+
+</div>
+
+</div>
+
 </section>
+
+<button class="music-btn" onclick="toggleMusic()">
+🎵
+</button>
+
+<div class="bottom-nav">
+
+<div class="nav-item active">
+🏠<br>
+الرئيسية
+</div>
+
+<div class="nav-item">
+🎮<br>
+الألعاب
+</div>
+
+<div class="nav-item">
+❤️<br>
+المفضلة
+</div>
+
+<div class="nav-item">
+👤<br>
+حسابي
+</div>
+
+</div>
 
 <footer>
-جميع الحقوق محفوظة © Dido Game
+جميع الحقوق محفوظة © Dido Game 2026
 </footer>
 
 <script>
-
-function openSection(id){
-
-document.getElementById('home').style.display='none';
-
-document.querySelectorAll('.section').forEach(section=>{
-section.classList.remove('active');
-});
-
-document.getElementById(id).classList.add('active');
-
-window.scrollTo({
-top:0,
-behavior:'smooth'
-});
-
-}
-
-function goHome(){
-
-document.getElementById('home').style.display='flex';
-
-document.querySelectorAll('.section').forEach(section=>{
-section.classList.remove('active');
-});
-
-}
 
 const music=document.getElementById('bgMusic');
 
 function toggleMusic(){
 
 if(music.paused){
+
 music.play();
+
 }else{
+
 music.pause();
+
 }
 
 }
