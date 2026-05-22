@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ultimate Arcade Hub</title>
+
+<title>Comic Game World</title>
 
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -14,269 +16,317 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#0f172a;
+background:#111827;
 color:white;
 overflow-x:hidden;
 }
 
+/* الخلفية */
+
+body::before{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at top,#1e3a8a55,transparent 40%),
+radial-gradient(circle at bottom,#7c3aed44,transparent 40%);
+z-index:-1;
+}
+
+/* الهيدر */
+
 header{
-background:linear-gradient(135deg,#111827,#1e293b);
-padding:20px;
+padding:30px 20px;
 text-align:center;
-box-shadow:0 0 20px rgba(0,0,0,0.5);
+background:linear-gradient(135deg,#0f172a,#1e293b);
+box-shadow:0 0 30px rgba(0,0,0,0.5);
 position:sticky;
 top:0;
 z-index:100;
 }
 
 .logo{
-font-size:38px;
+font-size:42px;
 font-weight:bold;
 color:#38bdf8;
-text-shadow:0 0 15px #38bdf8;
-margin-bottom:10px;
+text-shadow:0 0 20px #38bdf8;
 }
 
 .subtitle{
-color:#cbd5e1;
-font-size:15px;
-}
-
-.category{
-padding:25px 15px;
-}
-
-.category h2{
-margin-bottom:20px;
-color:#38bdf8;
-border-right:5px solid #38bdf8;
-padding-right:10px;
-}
-
-.games-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:18px;
-}
-
-.game-card{
-background:#1e293b;
-border-radius:18px;
-overflow:hidden;
-transition:0.3s;
-cursor:pointer;
-box-shadow:0 0 15px rgba(0,0,0,0.4);
-}
-
-.game-card:hover{
-transform:translateY(-8px) scale(1.03);
-box-shadow:0 0 25px rgba(56,189,248,0.5);
-}
-
-.game-card img{
-width:100%;
-height:150px;
-object-fit:cover;
-}
-
-.game-info{
-padding:12px;
-}
-
-.game-info h3{
-margin-bottom:8px;
-font-size:18px;
-}
-
-.game-info p{
-font-size:13px;
-color:#cbd5e1;
-}
-
-.play-btn{
-width:100%;
 margin-top:10px;
-border:none;
+color:#cbd5e1;
+}
+
+/* فقاعات القصص */
+
+.bubble{
+position:absolute;
+background:white;
+color:black;
+padding:12px 18px;
+border-radius:20px;
+font-weight:bold;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+animation:float 3s infinite ease-in-out;
+}
+
+.bubble::after{
+content:"";
+position:absolute;
+bottom:-10px;
+right:20px;
+border-width:10px;
+border-style:solid;
+border-color:white transparent transparent transparent;
+}
+
+@keyframes float{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-8px);}
+100%{transform:translateY(0px);}
+}
+
+.b1{
+top:160px;
+left:20px;
+}
+
+.b2{
+top:280px;
+right:20px;
+}
+
+/* الأقسام */
+
+.worlds{
+padding:40px 20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+}
+
+/* الكروت */
+
+.world-card{
+position:relative;
+height:300px;
+border-radius:25px;
+overflow:hidden;
+cursor:pointer;
+transition:0.4s;
+border:4px solid rgba(255,255,255,0.1);
+box-shadow:0 10px 25px rgba(0,0,0,0.5);
+}
+
+.world-card:hover{
+transform:translateY(-10px) scale(1.03);
+box-shadow:0 0 30px rgba(56,189,248,0.6);
+}
+
+.world-card img{
+width:100%;
+height:100%;
+object-fit:cover;
+filter:brightness(0.7);
+transition:0.4s;
+}
+
+.world-card:hover img{
+transform:scale(1.1);
+filter:brightness(0.9);
+}
+
+/* النص */
+
+.world-title{
+position:absolute;
+bottom:20px;
+right:20px;
+font-size:28px;
+font-weight:bold;
+text-shadow:0 0 10px black;
+}
+
+/* زر */
+
+.enter-btn{
+position:absolute;
+top:20px;
+left:20px;
 background:#38bdf8;
+border:none;
+padding:10px 18px;
+border-radius:12px;
 color:white;
-padding:10px;
-border-radius:10px;
-font-size:15px;
+font-weight:bold;
 cursor:pointer;
 transition:0.3s;
 }
 
-.play-btn:hover{
+.enter-btn:hover{
 background:#0ea5e9;
+transform:scale(1.1);
 }
 
-.player{
-width:100%;
-height:80vh;
-border:none;
-display:none;
-background:black;
-}
-
-.close-btn{
-display:none;
-width:100%;
-background:crimson;
-color:white;
-border:none;
-padding:14px;
-font-size:18px;
-cursor:pointer;
-}
+/* الفوتر */
 
 footer{
+padding:30px;
 text-align:center;
-padding:25px;
 color:#94a3b8;
 }
 
+/* موبايل */
+
 @media(max-width:700px){
+
 .logo{
-font-size:28px;
+font-size:30px;
 }
 
-.player{
-height:70vh;
+.world-card{
+height:240px;
 }
+
+.world-title{
+font-size:22px;
 }
+
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-<div class="logo">🎮 Ultimate Arcade Hub</div>
-<div class="subtitle">أفضل منصة ألعاب كرتونية ثلاثية الأبعاد</div>
+
+<div class="logo">🎮 COMIC GAME WORLD</div>
+
+<div class="subtitle">
+عالم ألعاب بأسلوب القصص المصورة
+</div>
+
 </header>
 
-<button class="close-btn" id="closeBtn">إغلاق اللعبة</button>
+<!-- فقاعات -->
 
-<iframe class="player" id="gameFrame"></iframe>
+<div class="bubble b1">
+🔥 ألعاب جديدة كل أسبوع
+</div>
 
-<section class="category">
-<h2>🏎 ألعاب السباقات</h2>
+<div class="bubble b2">
+⚡ ادخل عالمك المفضل الآن
+</div>
 
-<div class="games-grid">
+<!-- العوالم -->
 
-<div class="game-card">
-<img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop">
+<section class="worlds">
 
-<div class="game-info">
-<h3>Madalin Cars</h3>
-<p>سباقات وسيارات ثلاثية الأبعاد</p>
+<!-- نينجا -->
 
-<button class="play-btn"
-onclick="playGame('https://www.crazygames.com/embed/madalin-stunt-cars-2')">
-تشغيل
+<div class="world-card">
+
+<img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop">
+
+<button class="enter-btn">
+دخول
 </button>
-</div>
+
+<div class="world-title">
+🥷 عالم القتال
 </div>
 
-<div class="game-card">
+</div>
+
+<!-- سباقات -->
+
+<div class="world-card">
+
 <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop">
 
-<div class="game-info">
-<h3>Drift Hunters</h3>
-<p>تفحيط وسباقات احترافية</p>
-
-<button class="play-btn"
-onclick="playGame('https://www.crazygames.com/embed/drift-hunters')">
-تشغيل
+<button class="enter-btn">
+دخول
 </button>
+
+<div class="world-title">
+🏎 عالم السباقات
 </div>
+
+</div>
+
+<!-- زومبي -->
+
+<div class="world-card">
+
+<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop">
+
+<button class="enter-btn">
+دخول
+</button>
+
+<div class="world-title">
+🧟 عالم الرعب
 </div>
 
 </div>
-</section>
 
-<section class="category">
-<h2>🧠 ألعاب الذكاء</h2>
+<!-- حروب -->
 
-<div class="games-grid">
+<div class="world-card">
 
-<div class="game-card">
+<img src="https://images.unsplash.com/photo-1511882150382-421056c89033?q=80&w=1200&auto=format&fit=crop">
+
+<button class="enter-btn">
+دخول
+</button>
+
+<div class="world-title">
+💣 عالم الحروب
+</div>
+
+</div>
+
+<!-- مغامرات -->
+
+<div class="world-card">
+
+<img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop">
+
+<button class="enter-btn">
+دخول
+</button>
+
+<div class="world-title">
+⛰ عالم المغامرات
+</div>
+
+</div>
+
+<!-- ذكاء -->
+
+<div class="world-card">
+
 <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop">
 
-<div class="game-info">
-<h3>Chess</h3>
-<p>لعبة الشطرنج الكلاسيكية</p>
-
-<button class="play-btn"
-onclick="playGame('https://www.crazygames.com/embed/master-chess')">
-تشغيل
+<button class="enter-btn">
+دخول
 </button>
-</div>
-</div>
 
-<div class="game-card">
-<img src="https://images.unsplash.com/photo-1585504198199-20277593b94f?q=80&w=1200&auto=format&fit=crop">
-
-<div class="game-info">
-<h3>Sudoku</h3>
-<p>ألغاز وتحدي الذكاء</p>
-
-<button class="play-btn"
-onclick="playGame('https://www.crazygames.com/embed/sudoku')">
-تشغيل
-</button>
-</div>
+<div class="world-title">
+🧠 عالم الذكاء
 </div>
 
 </div>
-</section>
 
-<section class="category">
-<h2>⚔ ألعاب الأكشن</h2>
-
-<div class="games-grid">
-
-<div class="game-card">
-<img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200&auto=format&fit=crop">
-
-<div class="game-info">
-<h3>Shell Shockers</h3>
-<p>قتال أونلاين ممتع</p>
-
-<button class="play-btn"
-onclick="playGame('https://www.crazygames.com/embed/shellshockersio')">
-تشغيل
-</button>
-</div>
-</div>
-
-</div>
 </section>
 
 <footer>
-جميع الحقوق محفوظة © 2026
+
+© 2026 Comic Game World
+
 </footer>
-
-<script>
-const frame=document.getElementById('gameFrame');
-const closeBtn=document.getElementById('closeBtn');
-
-function playGame(url){
-frame.style.display='block';
-closeBtn.style.display='block';
-frame.src=url;
-
-window.scrollTo({
-top:0,
-behavior:'smooth'
-});
-}
-
-closeBtn.onclick=()=>{
-frame.src='';
-frame.style.display='none';
-closeBtn.style.display='none';
-}
-</script>
 
 </body>
 </html>
