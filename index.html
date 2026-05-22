@@ -1,51 +1,14 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Dido Game</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
-html{
-scroll-behavior:smooth;
-}
 
-.hero{
-transition:1s;
-}
-
-.category:hover{
-transform:translateY(-8px) scale(1.05);
-border-color:#ff00aa;
-transition:0.4s;
-box-shadow:0 0 25px #ff00aa55;
-}
-
-.bottom-nav .nav{
-transition:0.3s;
-cursor:pointer;
-}
-
-.bottom-nav .nav:hover{
-color:#ff00aa;
-transform:translateY(-5px);
-}
-
-body::-webkit-scrollbar{
-width:10px;
-}
-
-body::-webkit-scrollbar-thumb{
-background:linear-gradient(#ff00aa,#7b4dff);
-border-radius:20px;
-}
-
-body::-webkit-scrollbar-track{
-background:#050816;
-}
 <style>
 
 *{
@@ -56,1028 +19,563 @@ font-family:'Cairo',sans-serif;
 }
 
 body{
-background:#050816;
+background:#07111f;
 color:white;
 overflow-x:hidden;
-padding-bottom:120px;
 }
+
+/* خلفية متحركة */
 
 body::before{
-content:'';
+content:"";
 position:fixed;
-inset:0;
+width:100%;
+height:100%;
 background:
-radial-gradient(circle at top,#25104d 0%,#050816 55%);
+radial-gradient(circle at top,#00c3ff33,transparent 40%),
+radial-gradient(circle at bottom,#ff00ff22,transparent 40%);
 z-index:-2;
+animation:bgMove 8s infinite alternate;
 }
 
-body::after{
-content:'';
-position:fixed;
-inset:0;
-background:url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1931&auto=format&fit=crop');
-background-size:cover;
-opacity:0.08;
-mix-blend-mode:screen;
-z-index:-1;
+@keyframes bgMove{
+0%{transform:scale(1);}
+100%{transform:scale(1.1);}
 }
+
+/* الهيدر */
 
 header{
-padding:18px;
 display:flex;
-align-items:center;
 justify-content:space-between;
-}
-
-.menu{
-font-size:34px;
+align-items:center;
+padding:20px;
+background:#08131f;
+border-bottom:2px solid #00c3ff;
+position:sticky;
+top:0;
+z-index:100;
 }
 
 .logo{
-font-size:42px;
+font-size:30px;
 font-weight:900;
-background:linear-gradient(45deg,#ff008c,#ffb300,#9d4dff);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+color:#00c3ff;
+text-shadow:0 0 15px #00c3ff;
 }
 
-.notify{
-font-size:28px;
-position:relative;
+nav a{
+color:white;
+text-decoration:none;
+margin:0 10px;
+font-weight:700;
+transition:0.3s;
 }
 
-.notify span{
-position:absolute;
-top:-8px;
-left:-8px;
-background:#ff0077;
-width:20px;
-height:20px;
-border-radius:50%;
-font-size:12px;
-display:flex;
-align-items:center;
-justify-content:center;
+nav a:hover{
+color:#00c3ff;
 }
 
-.top-actions{
-padding:0 18px;
-display:flex;
-gap:12px;
-margin-bottom:18px;
-}
-
-.search{
-flex:1;
-background:#0b1025;
-border:2px solid rgba(255,255,255,0.08);
-height:58px;
-border-radius:18px;
-display:flex;
-align-items:center;
-padding:0 18px;
-color:#999;
-font-size:20px;
-}
-
-.vip{
-width:170px;
-background:linear-gradient(45deg,#ffae00,#ff008c);
-border-radius:18px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:bold;
-font-size:22px;
-}
+/* البطل */
 
 .hero{
-margin:0 18px;
-border-radius:30px;
-overflow:hidden;
-height:360px;
-position:relative;
-background:url('https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1974&auto=format&fit=crop') center/cover;
-box-shadow:0 0 35px rgba(255,0,200,0.3);
-}
-
-.hero::before{
-content:'';
-position:absolute;
-inset:0;
-background:linear-gradient(90deg,
-rgba(0,0,0,0.8),
-rgba(0,0,0,0.4));
-}
-
-.hero-content{
-position:absolute;
-inset:0;
-padding:28px;
+height:90vh;
 display:flex;
-flex-direction:column;
 justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+background:
+linear-gradient(to bottom,#07111fbb,#07111fee),
+url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070') center/cover;
 }
 
-.hero h1{
-font-size:72px;
-line-height:0.9;
-font-weight:900;
+.hero-content h1{
+font-size:55px;
 margin-bottom:20px;
-background:linear-gradient(45deg,#ff8800,#ff00aa,#8c52ff);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+color:#00c3ff;
+text-shadow:0 0 20px #00c3ff;
 }
 
-.hero p{
-font-size:24px;
+.hero-content p{
+font-size:20px;
+margin-bottom:30px;
 line-height:1.8;
-color:#ddd;
-max-width:450px;
-margin-bottom:20px;
 }
 
 .hero-btn{
-width:250px;
-height:62px;
+padding:15px 40px;
 border:none;
-border-radius:18px;
-background:linear-gradient(45deg,#7b4dff,#ff00aa);
-color:white;
-font-size:22px;
-font-weight:bold;
-}
-
-.dots{
-position:absolute;
-bottom:18px;
-right:0;
-left:0;
-display:flex;
-justify-content:center;
-gap:10px;
-}
-
-.dot{
-width:12px;
-height:12px;
-border-radius:50%;
-background:#ffffff55;
-}
-
-.dot.active{
-background:#ff4dcb;
-}
-
-.categories{
-display:flex;
-gap:18px;
-overflow-x:auto;
-padding:24px 18px;
-}
-
-.categories::-webkit-scrollbar{
-display:none;
-}
-
-.category{
-min-width:150px;
-height:150px;
-background:#0b1025;
-border:2px solid rgba(255,255,255,0.08);
-border-radius:28px;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-gap:10px;
-box-shadow:0 0 20px rgba(0,0,0,0.3);
-}
-
-.category span{
-font-size:45px;
-}
-
-.category h3{
-font-size:22px;
-}
-
-.category p{
-font-size:16px;
-color:#999;
-}
-
-.players{
-margin:0 18px 20px;
-background:#0b1025;
-border-radius:28px;
-padding:20px;
-border:2px solid rgba(255,255,255,0.08);
-}
-
-.players-header{
-display:flex;
-justify-content:space-between;
-margin-bottom:20px;
-}
-
-.players-header h2{
-font-size:30px;
-color:#c86bff;
-}
-
-.player-list{
-display:flex;
-justify-content:space-between;
-gap:15px;
-}
-
-.player{
-text-align:center;
-}
-
-.player img{
-width:80px;
-height:80px;
-border-radius:50%;
-border:3px solid #ff00aa;
-object-fit:cover;
-margin-bottom:10px;
-}
-
-.player h4{
-font-size:20px;
-}
-
-.player p{
-color:#ffb300;
+border-radius:50px;
+background:#00c3ff;
+color:#000;
 font-size:18px;
-}
-
-.ad{
-margin:0 18px 25px;
-height:140px;
-border-radius:30px;
-overflow:hidden;
-background:linear-gradient(45deg,#ff008c,#6f00ff,#00b7ff);
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:25px;
-box-shadow:0 0 30px rgba(255,0,170,0.3);
-}
-
-.ad h2{
-font-size:38px;
-line-height:1.5;
-}
-
-.ad button{
-width:170px;
-height:58px;
-border:none;
-border-radius:16px;
-background:white;
-font-size:20px;
 font-weight:bold;
-color:#ff008c;
+cursor:pointer;
+transition:0.3s;
 }
 
-.games-section{
-padding:0 18px;
+.hero-btn:hover{
+transform:scale(1.1);
+box-shadow:0 0 25px #00c3ff;
 }
 
-.section-header{
-display:flex;
-justify-content:space-between;
-margin-bottom:20px;
-}
-
-.section-header h2{
-font-size:34px;
-}
-
-.section-header a{
-color:#a76dff;
-text-decoration:none;
-font-size:20px;
-}
+/* قسم الألعاب */
 
 .games{
-display:flex;
-gap:18px;
-overflow-x:auto;
-padding-bottom:15px;
+padding:70px 20px;
 }
 
-.games::-webkit-scrollbar{
-display:none;
+.section-title{
+text-align:center;
+font-size:40px;
+margin-bottom:50px;
+color:#00c3ff;
+text-shadow:0 0 15px #00c3ff;
 }
 
-.game{
-min-width:260px;
-background:#0b1025;
-border-radius:24px;
+.games-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+}
+
+.game-card{
+background:#0d1a2a;
+border-radius:20px;
 overflow:hidden;
-border:2px solid rgba(255,255,255,0.06);
+transition:0.4s;
+border:1px solid #00c3ff44;
+position:relative;
 }
 
-.game img{
+.game-card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 30px #00c3ff55;
+}
+
+.game-card img{
 width:100%;
-height:170px;
+height:220px;
 object-fit:cover;
 }
 
 .game-info{
-padding:15px;
+padding:20px;
 }
 
 .game-info h3{
+margin-bottom:10px;
 font-size:24px;
-margin-bottom:8px;
 }
 
 .game-info p{
-color:#999;
-margin-bottom:12px;
+font-size:15px;
+line-height:1.7;
+color:#ddd;
+margin-bottom:20px;
 }
 
-.rating{
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.play{
-width:48px;
-height:48px;
-border-radius:50%;
-border:none;
-background:linear-gradient(45deg,#8c52ff,#ff00aa);
-color:white;
-font-size:20px;
-}
-
-.bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
+.play-btn{
+display:block;
 width:100%;
-height:95px;
-background:#0b1025;
-display:flex;
-justify-content:space-around;
-align-items:center;
-border-top:2px solid rgba(255,255,255,0.08);
-backdrop-filter:blur(10px);
-}
-
-.nav{
-text-align:center;
+padding:12px;
+border:none;
+border-radius:12px;
+background:#00c3ff;
+color:black;
 font-size:16px;
-color:#999;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
 }
 
-.nav.active{
-color:#ff4dcb;
+.play-btn:hover{
+background:white;
 }
 
-.center-btn{
-width:85px;
-height:85px;
-border-radius:50%;
-background:linear-gradient(45deg,#ff00aa,#8c52ff);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:38px;
-margin-top:-50px;
-box-shadow:0 0 25px #ff00aa;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<header>
-
-<div class="menu">☰</div>
-
-<div class="logo">DidoGame</div>
-
-<div class="notify">
-🔔
-<span>3</span>
-</div>
-
-</header>
-
-<div class="top-actions">
-
-<div class="search">
-🔍 ابحث عن لعبة...
-</div>
-
-<div class="vip">
-👑 حساب مميز
-</div>
-
-</div>
-
-<section class="hero">
-
-<div class="hero-content">
-
-<h1>Dido<br>Game</h1>
-
-<p>
-عالم واحد يجمع كل ألعاب الأنمي المفضلة مجاناً 100%
-</p>
-
-<button class="hero-btn">
-🎮 استكشف الألعاب الآن
-</button>
-
-</div>
-
-<div class="dots">
-<div class="dot active"></div>
-<div class="dot"></div>
-<div class="dot"></div>
-<div class="dot"></div>
-</div>
-
-</section>
-
-<section class="categories">
-
-<div class="category">
-<span>👻</span>
-<h3>الرعب</h3>
-<p>80 لعبة</p>
-</div>
-
-<div class="category">
-<span>⚔️</span>
-<h3>القتال</h3>
-<p>105 لعبة</p>
-</div>
-
-<div class="category">
-<span>⚽</span>
-<h3>الرياضة</h3>
-<p>189 لعبة</p>
-</div>
-
-<div class="category">
-<span>🏎️</span>
-<h3>السباقات</h3>
-<p>142 لعبة</p>
-</div>
-
-<div class="category">
-<span>🧩</span>
-<h3>الألغاز</h3>
-<p>178 لعبة</p>
-</div>
-
-</section>
-
-<section class="players">
-
-<div class="players-header">
-
-<h2>👑 أفضل اللاعبين</h2>
-
-<span>عرض المزيد</span>
-
-</div>
-
-<div class="player-list">
-
-<div class="player">
-<img src="https://i.pravatar.cc/150?img=1">
-<h4>Shadow</h4>
-<p>25,680 🏆</p>
-</div>
-
-<div class="player">
-<img src="https://i.pravatar.cc/150?img=2">
-<h4>HunterX</h4>
-<p>18,420 🏆</p>
-</div>
-
-<div class="player">
-<img src="https://i.pravatar.cc/150?img=3">
-<h4>Nova</h4>
-<p>14,230 🏆</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="ad">
-
-<h2>
-اشترك الآن واحصل على<br>
-مميزات حصرية
-</h2>
-
-<button>
-اشترك الآن
-</button>
-
-</section>
-
-<section class="games-section">
-
-<div class="section-header">
-
-<h2>⚡ أحدث الألعاب</h2>
-
-<a href="#">عرض الكل</a>
-
-</div>
-
-<div class="games">
-
-<div class="game">
-
-<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1931&auto=format&fit=crop">
-
-<div class="game-info">
-
-<h3>Anime Fighters</h3>
-
-<p>قتال</p>
-
-<div class="rating">
-
-<span>⭐ 4.8</span>
-
-<button class="play">▶</button>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="game">
-
-<img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1883&auto=format&fit=crop">
-
-<div class="game-info">
-
-<h3>Car Racing</h3>
-
-<p>سباقات</p>
-
-<div class="rating">
-
-<span>⭐ 4.6</span>
-
-<button class="play">▶</button>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="game">
-
-<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop">
-
-<div class="game-info">
-
-<h3>Zombie Hunter</h3>
-
-<p>رعب</p>
-
-<div class="rating">
-
-<span>⭐ 4.7</span>
-
-<button class="play">▶</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<nav class="bottom-nav">
-
-<div class="nav active">
-🏠<br>
-الرئيسية
-</div>
-
-<div class="nav">
-🎮<br>
-الأقسام
-</div>
-
-<div class="center-btn">
-🎮
-</div>
-
-<div class="nav">
-❤️<br>
-المفضلة
-</div>
-
-<div class="nav">
-👤<br>
-حسابي
-</div>
-
-</nav>
-<!-- =========================
-     موسيقى الخلفية
-========================= -->
-
-<audio id="bgMusic" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=cyberpunk-moonlight-sonata-19396.mp3" type="audio/mpeg">
-</audio>
-
-<!-- =========================
-     نافذة تشغيل الألعاب
-========================= -->
-
-<div id="gameModal" class="game-modal">
-
-  <div class="game-box">
-
-    <div class="game-top">
-
-      <h2 id="gameTitle">🎮 اللعبة</h2>
-
-      <button class="close-game" onclick="closeGame()">
-        ✖
-      </button>
-
-    </div>
-
-    <iframe id="gameFrame" src=""></iframe>
-
-  </div>
-
-</div>
-
-<!-- =========================
-     شاشة التحميل
-========================= -->
-
-<div id="loader">
-
-  <div class="loader-content">
-
-    <h1>Dido Game</h1>
-
-    <div class="loader-bar">
-      <span></span>
-    </div>
-
-    <p>جارِ تحميل عالم الألعاب...</p>
-
-  </div>
-
-</div>
-
-<style>
-
-/* نافذة الألعاب */
+/* نافذة اللعبة */
 
 .game-modal{
 position:fixed;
-inset:0;
-background:rgba(0,0,0,0.9);
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000d;
 display:none;
-align-items:center;
 justify-content:center;
-z-index:9999;
+align-items:center;
+z-index:999;
 padding:20px;
 }
 
 .game-box{
 width:100%;
-max-width:1100px;
-height:90vh;
-background:#0b1025;
-border-radius:25px;
+max-width:900px;
+height:85vh;
+background:#08131f;
+border-radius:20px;
 overflow:hidden;
-border:2px solid #ff00aa;
-box-shadow:0 0 40px #ff00aa55;
+border:2px solid #00c3ff;
 display:flex;
 flex-direction:column;
 }
 
 .game-top{
-height:70px;
-background:linear-gradient(45deg,#ff00aa,#7b4dff);
 display:flex;
-align-items:center;
 justify-content:space-between;
-padding:0 20px;
+align-items:center;
+padding:15px;
+background:#0c1b2d;
 }
 
 .game-top h2{
-font-size:28px;
+color:#00c3ff;
 }
 
 .close-game{
-width:45px;
-height:45px;
+background:red;
+color:white;
 border:none;
-border-radius:12px;
-background:white;
-font-size:20px;
-font-weight:bold;
+padding:10px 18px;
+border-radius:10px;
 cursor:pointer;
+font-weight:bold;
 }
 
-#gameFrame{
+.game-frame{
 flex:1;
 width:100%;
 border:none;
-background:black;
+background:white;
 }
 
-/* شاشة التحميل */
+/* قسم المميزات */
 
-#loader{
-position:fixed;
-inset:0;
-background:#050816;
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:20000;
+.features{
+padding:70px 20px;
+background:#08131f;
 }
 
-.loader-content{
+.features-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.feature{
+background:#0d1a2a;
+padding:30px;
+border-radius:20px;
 text-align:center;
-}
-
-.loader-content h1{
-font-size:70px;
-margin-bottom:30px;
-background:linear-gradient(45deg,#ff00aa,#7b4dff,#ffae00);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-font-weight:900;
-}
-
-.loader-bar{
-width:320px;
-height:18px;
-background:#111933;
-border-radius:30px;
-overflow:hidden;
-margin:auto;
-margin-bottom:20px;
-}
-
-.loader-bar span{
-display:block;
-height:100%;
-width:0%;
-background:linear-gradient(45deg,#ff00aa,#7b4dff);
-animation:loading 3s linear forwards;
-}
-
-@keyframes loading{
-100%{
-width:100%;
-}
-}
-
-.loader-content p{
-font-size:22px;
-color:#aaa;
-}
-
-/* تأثيرات الألعاب */
-
-.game{
-transition:0.4s;
-}
-
-.game:hover{
-transform:translateY(-10px) scale(1.03);
-box-shadow:0 0 25px #ff00aa55;
-}
-
-.hero-btn,
-.play,
-.ad button{
-cursor:pointer;
 transition:0.3s;
 }
 
-.hero-btn:hover,
-.play:hover,
-.ad button:hover{
-transform:scale(1.08);
+.feature:hover{
+transform:translateY(-8px);
+box-shadow:0 0 20px #00c3ff55;
+}
+
+.feature h3{
+margin:15px 0;
+color:#00c3ff;
+}
+
+/* الفوتر */
+
+footer{
+padding:30px;
+text-align:center;
+background:#050c14;
+border-top:1px solid #00c3ff44;
+margin-top:40px;
+}
+
+/* responsive */
+
+@media(max-width:768px){
+
+.hero-content h1{
+font-size:38px;
+}
+
+.hero-content p{
+font-size:17px;
+}
+
+nav{
+display:none;
+}
+
 }
 
 </style>
+</head>
+
+<body>
+
+<!-- موسيقى -->
+
+<audio id="bgMusic" autoplay loop>
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8c8a73467.mp3" type="audio/mpeg">
+</audio>
+
+<!-- الهيدر -->
+
+<header>
+
+<div class="logo">Dido Game</div>
+
+<nav>
+<a href="#">الرئيسية</a>
+<a href="#games">الألعاب</a>
+<a href="#features">المميزات</a>
+</nav>
+
+</header>
+
+<!-- البطل -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>🔥 عالم ألعاب الأنمي 🔥</h1>
+
+<p>
+أفضل موقع ألعاب أنمي مجاني بتصميم احترافي ومؤثرات رهيبة.
+</p>
+
+<button class="hero-btn" onclick="scrollToGames()">
+ابدأ اللعب الآن
+</button>
+
+</div>
+
+</section>
+
+<!-- الألعاب -->
+
+<section class="games" id="games">
+
+<h2 class="section-title">🎮 الألعاب المتوفرة</h2>
+
+<div class="games-grid">
+
+<!-- لعبة 1 -->
+
+<div class="game-card">
+
+<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200">
+
+<div class="game-info">
+
+<h3>Snake Game</h3>
+
+<p>
+لعبة الثعبان الكلاسيكية الممتعة.
+</p>
+
+<button class="play-btn"
+onclick="openGame('Snake Game','https://playsnake.org/')">
+تشغيل اللعبة
+</button>
+
+</div>
+
+</div>
+
+<!-- لعبة 2 -->
+
+<div class="game-card">
+
+<img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?q=80&w=1200">
+
+<div class="game-info">
+
+<h3>Tetris</h3>
+
+<p>
+رتب القطع بسرعة وحقق أعلى النقاط.
+</p>
+
+<button class="play-btn"
+onclick="openGame('Tetris','https://tetris.com/play-tetris')">
+تشغيل اللعبة
+</button>
+
+</div>
+
+</div>
+
+<!-- لعبة 3 -->
+
+<div class="game-card">
+
+<img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200">
+
+<div class="game-info">
+
+<h3>Pacman</h3>
+
+<p>
+اهرب من الوحوش واجمع النقاط.
+</p>
+
+<button class="play-btn"
+onclick="openGame('Pacman','https://freepacman.org/')">
+تشغيل اللعبة
+</button>
+
+</div>
+
+</div>
+
+<!-- لعبة 4 -->
+
+<div class="game-card">
+
+<img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200">
+
+<div class="game-info">
+
+<h3>2048</h3>
+
+<p>
+ادمج الأرقام للوصول إلى 2048.
+</p>
+
+<button class="play-btn"
+onclick="openGame('2048','https://play2048.co/')">
+تشغيل اللعبة
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- المميزات -->
+
+<section class="features" id="features">
+
+<h2 class="section-title">⭐ مميزات الموقع</h2>
+
+<div class="features-grid">
+
+<div class="feature">
+<h3>⚡ سرعة عالية</h3>
+<p>الموقع سريع وخفيف على الهاتف والكمبيوتر.</p>
+</div>
+
+<div class="feature">
+<h3>🎨 تصميم احترافي</h3>
+<p>واجهة أنمي حديثة مع تأثيرات جميلة.</p>
+</div>
+
+<div class="feature">
+<h3>🎮 ألعاب حقيقية</h3>
+<p>ألعاب جاهزة للعمل مباشرة بدون تحميل.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- نافذة اللعبة -->
+
+<div id="gameModal" class="game-modal">
+
+<div class="game-box">
+
+<div class="game-top">
+
+<h2 id="gameTitle">🎮 اللعبة</h2>
+
+<button class="close-game" onclick="closeGame()">
+إغلاق
+</button>
+
+</div>
+
+<iframe id="gameFrame" class="game-frame"></iframe>
+
+</div>
+
+</div>
+
+<!-- الفوتر -->
+
+<footer>
+
+© 2026 Dido Game - جميع الحقوق محفوظة
+
+</footer>
 
 <script>
 
-/* تشغيل الموسيقى */
+/* تمرير */
 
-window.addEventListener("click", () => {
+function scrollToGames(){
 
-const music = document.getElementById("bgMusic");
+document.getElementById("games")
+.scrollIntoView({
+behavior:"smooth"
+});
 
-music.volume = 0.3;
-
-music.play();
-
-}, { once:true });
-
-/* شاشة التحميل */
-
-window.onload = () => {
-
-setTimeout(() => {
-
-document.getElementById("loader").style.display = "none";
-
-},3000);
-
-};
-
-/* روابط الألعاب */
-
-const games = [
-
-{
-title:"Anime Fighters",
-url:"https://html5.gamemonetize.com/6xdn6w2aq4t1hn0j6i2t7s3f5q7m/index.html"
-},
-
-{
-title:"Car Racing",
-url:"https://html5.gamemonetize.com/rcf7x8dr0c5g7dy1hvvhvw/index.html"
-},
-
-{
-title:"Zombie Hunter",
-url:"https://html5.gamemonetize.com/8dx6l2b76by9o6f7j3k5/index.html"
 }
 
-];
-
-/* تشغيل الألعاب */
-
-const playButtons = document.querySelectorAll(".play");
-
-playButtons.forEach((btn,index)=>{
-
-btn.addEventListener("click",()=>{
-
-openGame(
-games[index].title,
-games[index].url
-);
-
-});
-
-});
+/* تشغيل لعبة */
 
 function openGame(title,url){
 
-document.getElementById("gameTitle").innerText = title;
+document.getElementById("gameTitle").innerText=title;
 
-document.getElementById("gameFrame").src = url;
+document.getElementById("gameFrame").src=url;
 
-document.getElementById("gameModal").style.display = "flex";
+document.getElementById("gameModal").style.display="flex";
 
 }
 
-/* إغلاق اللعبة */
+/* إغلاق */
 
 function closeGame(){
 
-document.getElementById("gameFrame").src = "";
+document.getElementById("gameModal").style.display="none";
 
-document.getElementById("gameModal").style.display = "none";
-
-}
-/* =========================
-   سلايدر تلقائي للهيدر
-========================= */
-
-const heroImages = [
-
-"https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1974&auto=format&fit=crop",
-
-"https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1931&auto=format&fit=crop",
-
-"https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?q=80&w=1974&auto=format&fit=crop",
-
-"https://images.unsplash.com/photo-1547394765-185e1e68f34e?q=80&w=1974&auto=format&fit=crop"
-
-];
-
-let currentHero = 0;
-
-setInterval(()=>{
-
-currentHero++;
-
-if(currentHero >= heroImages.length){
-currentHero = 0;
-}
-
-document.querySelector(".hero").style.background =
-`url('${heroImages[currentHero]}') center/cover`;
-
-document.querySelectorAll(".dot").forEach(dot=>{
-dot.classList.remove("active");
-});
-
-document.querySelectorAll(".dot")[currentHero]
-.classList.add("active");
-
-},4000);
-
-/* =========================
-   أصوات الأزرار
-========================= */
-
-const clickSound = new Audio(
-"https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9bce13.mp3?filename=click-124467.mp3"
-);
-
-document.querySelectorAll("button").forEach(btn=>{
-
-btn.addEventListener("click",()=>{
-
-clickSound.currentTime = 0;
-clickSound.volume = 0.5;
-clickSound.play();
-
-});
-
-});
-
-/* =========================
-   تأثير ظهور العناصر
-========================= */
-
-const observer = new IntersectionObserver((entries)=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-
-entry.target.style.opacity = "1";
-entry.target.style.transform = "translateY(0px)";
+document.getElementById("gameFrame").src="";
 
 }
 
-});
+/* غلق عند الضغط بالخارج */
 
-});
+window.onclick=function(e){
 
-document.querySelectorAll(
-".game,.category,.players,.ad"
-).forEach(el=>{
+const modal=document.getElementById("gameModal");
 
-el.style.opacity = "0";
-el.style.transform = "translateY(40px)";
-el.style.transition = "0.8s";
+if(e.target===modal){
 
-observer.observe(el);
+closeGame();
 
-});
+}
 
-/* =========================
-   فتح اللعبة من زر البطل
-========================= */
+}
 
-document.querySelector(".hero-btn")
-.addEventListener("click",()=>{
+/* تشغيل الموسيقى بعد أول ضغطة */
 
-openGame(
-"Anime Fighters",
-"https://html5.gamemonetize.com/6xdn6w2aq4t1hn0j6i2t7s3f5q7m/index.html"
-);
+document.body.addEventListener("click",function(){
 
-});
+const music=document.getElementById("bgMusic");
+
+music.play();
+
+},{once:true});
+
 </script>
-</body>
 
+</body>
 </html>
