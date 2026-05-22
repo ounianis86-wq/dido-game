@@ -939,7 +939,108 @@ document.getElementById("gameFrame").src = "";
 document.getElementById("gameModal").style.display = "none";
 
 }
+/* =========================
+   سلايدر تلقائي للهيدر
+========================= */
 
+const heroImages = [
+
+"https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1974&auto=format&fit=crop",
+
+"https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1931&auto=format&fit=crop",
+
+"https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?q=80&w=1974&auto=format&fit=crop",
+
+"https://images.unsplash.com/photo-1547394765-185e1e68f34e?q=80&w=1974&auto=format&fit=crop"
+
+];
+
+let currentHero = 0;
+
+setInterval(()=>{
+
+currentHero++;
+
+if(currentHero >= heroImages.length){
+currentHero = 0;
+}
+
+document.querySelector(".hero").style.background =
+`url('${heroImages[currentHero]}') center/cover`;
+
+document.querySelectorAll(".dot").forEach(dot=>{
+dot.classList.remove("active");
+});
+
+document.querySelectorAll(".dot")[currentHero]
+.classList.add("active");
+
+},4000);
+
+/* =========================
+   أصوات الأزرار
+========================= */
+
+const clickSound = new Audio(
+"https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9bce13.mp3?filename=click-124467.mp3"
+);
+
+document.querySelectorAll("button").forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+clickSound.currentTime = 0;
+clickSound.volume = 0.5;
+clickSound.play();
+
+});
+
+});
+
+/* =========================
+   تأثير ظهور العناصر
+========================= */
+
+const observer = new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.style.opacity = "1";
+entry.target.style.transform = "translateY(0px)";
+
+}
+
+});
+
+});
+
+document.querySelectorAll(
+".game,.category,.players,.ad"
+).forEach(el=>{
+
+el.style.opacity = "0";
+el.style.transform = "translateY(40px)";
+el.style.transition = "0.8s";
+
+observer.observe(el);
+
+});
+
+/* =========================
+   فتح اللعبة من زر البطل
+========================= */
+
+document.querySelector(".hero-btn")
+.addEventListener("click",()=>{
+
+openGame(
+"Anime Fighters",
+"https://html5.gamemonetize.com/6xdn6w2aq4t1hn0j6i2t7s3f5q7m/index.html"
+);
+
+});
 </script>
 </body>
 
