@@ -575,3 +575,18 @@ height:85vh;
 }
 
 </style>
+/* =========================
+   إيقاف أي لعبة قبل تشغيل أخرى
+========================= */
+
+function openGame(url,title){
+
+closeGame();
+
+document.getElementById("gameModal").style.display="flex";
+
+document.getElementById("gameFrame").src=url;
+
+document.getElementById("gameTitle").innerHTML="🎮 "+title;
+
+}
