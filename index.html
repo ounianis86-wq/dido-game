@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>DidoGame</title>
+<title>Dido Game</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
 
 <style>
 
@@ -20,255 +20,147 @@ font-family:'Cairo',sans-serif;
 }
 
 body{
-background:#060816;
+background:#050816;
+color:white;
 overflow-x:hidden;
+}
+
+a{
+text-decoration:none;
 color:white;
 }
 
-body::before{
-content:'';
-position:fixed;
-inset:0;
-background:
-radial-gradient(circle at top,#7a00ff33 0%,transparent 40%),
-radial-gradient(circle at bottom,#ff00d933 0%,transparent 40%);
-z-index:-1;
-}
-
-/* APP */
-
-.app{
-max-width:430px;
-margin:auto;
-padding:15px;
+.container{
+padding:18px;
 padding-bottom:120px;
 }
 
-/* HEADER */
+/* TOP */
 
-.header{
+.top-bar{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:18px;
+margin-bottom:20px;
 }
 
-.header-btn{
-width:52px;
-height:52px;
-border-radius:18px;
-background:#0d1027;
+.menu-btn,
+.notify-btn{
+width:48px;
+height:48px;
+border-radius:16px;
+background:#10152f;
 display:flex;
 align-items:center;
 justify-content:center;
 font-size:24px;
-border:1px solid rgba(255,255,255,.05);
-
-box-shadow:
-0 0 20px rgba(179,0,255,.15);
+border:1px solid #242b54;
+box-shadow:0 0 20px #5d2eff33;
 }
 
 .logo{
-font-size:43px;
+font-size:42px;
 font-weight:900;
-
-background:linear-gradient(90deg,#ff00d9,#ff7a00,#ffffff);
-
+background:linear-gradient(90deg,#ff4fd8,#ffb347);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
 
 /* SEARCH */
 
-.search-row{
+.search-box{
 display:flex;
 gap:12px;
-margin-bottom:18px;
+margin-bottom:20px;
 }
 
-.search-box{
+.search{
 flex:1;
 height:60px;
-background:#0d1027;
-border-radius:22px;
-padding:0 18px;
+background:#0d1330;
+border:1px solid #2d3568;
+border-radius:20px;
+padding:0 20px;
 display:flex;
 align-items:center;
-color:#9ca3d4;
-font-size:18px;
-border:1px solid rgba(255,255,255,.05);
+font-size:20px;
+color:#888;
 }
 
-.vip-box{
-width:165px;
-height:60px;
-border-radius:22px;
-
-background:
-linear-gradient(135deg,#17142b,#10142d);
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-font-size:23px;
+.premium-btn{
+width:220px;
+background:linear-gradient(90deg,#ffb100,#ff5fd1);
+border:none;
+border-radius:20px;
+font-size:22px;
 font-weight:700;
-color:#ffcc33;
-
-border:1px solid rgba(255,255,255,.05);
+color:white;
+box-shadow:0 0 25px #ff3ef555;
 }
 
 /* HERO */
 
 .hero{
-height:400px;
-border-radius:34px;
-overflow:hidden;
 position:relative;
-margin-bottom:22px;
+height:420px;
+border-radius:30px;
+overflow:hidden;
+margin-bottom:25px;
+border:1px solid #6f36ff55;
+box-shadow:0 0 40px #7d3cff55;
+}
 
-background:
-linear-gradient(to left,
-rgba(0,0,0,.1),
-rgba(0,0,0,.78)),
-url('https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200&auto=format&fit=crop');
+.hero img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
 
-background-size:cover;
-background-position:center;
-
-border:1px solid rgba(255,255,255,.07);
-
-box-shadow:
-0 0 50px rgba(157,0,255,.28),
-inset 0 0 100px rgba(0,0,0,.8);
+.overlay{
+position:absolute;
+inset:0;
+background:linear-gradient(to left,#00000000,#060b20ee);
 }
 
 .hero-content{
 position:absolute;
-right:25px;
 top:50%;
+left:40px;
 transform:translateY(-50%);
-width:50%;
-z-index:2;
+max-width:420px;
 }
 
 .hero-title{
-font-size:72px;
+font-size:78px;
 font-weight:900;
-line-height:.92;
-margin-bottom:16px;
-
-background:
-linear-gradient(90deg,#ff00d9,#ff9100,#ffffff);
-
+line-height:1;
+background:linear-gradient(90deg,#ff9b00,#ff3fe0);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
 
-.hero-text{
-font-size:20px;
-line-height:1.7;
-margin-bottom:18px;
+.hero-sub{
+font-size:26px;
+margin-top:15px;
+color:#ddd;
 }
 
 .hero-btn{
-height:58px;
-padding:0 28px;
-border:none;
+margin-top:25px;
+background:linear-gradient(90deg,#6d5cff,#ba4dff);
+padding:16px 35px;
 border-radius:18px;
-
-background:
-linear-gradient(90deg,#7b5cff,#d04dff);
-
-color:white;
-font-size:20px;
+display:inline-block;
+font-size:22px;
 font-weight:700;
-
-box-shadow:
-0 0 35px rgba(204,0,255,.45);
+box-shadow:0 0 30px #914dff99;
 }
 
-.slider-dots{
-position:absolute;
-bottom:18px;
-left:50%;
-transform:translateX(-50%);
-display:flex;
-gap:10px;
+/* CATEGORIES */
+
+.section{
+margin-top:25px;
 }
-
-.slider-dots span{
-width:12px;
-height:12px;
-border-radius:50%;
-background:#666;
-}
-
-.slider-dots span.active{
-background:#ff4fd8;
-}
-
-/* CATEGORY */
-
-.category-box{
-display:flex;
-overflow:auto;
-gap:18px;
-
-padding:20px;
-
-background:#0d1027;
-
-border-radius:30px;
-
-border:1px solid rgba(255,255,255,.05);
-
-margin-bottom:24px;
-}
-
-.category-box::-webkit-scrollbar{
-display:none;
-}
-
-.category{
-min-width:95px;
-text-align:center;
-}
-
-.category-icon{
-width:80px;
-height:80px;
-border-radius:50%;
-
-margin:auto;
-margin-bottom:12px;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-font-size:35px;
-
-background:
-radial-gradient(circle,#29134d,#0d1027);
-
-border:2px solid rgba(201,84,255,.35);
-
-box-shadow:
-0 0 30px rgba(201,84,255,.35);
-}
-
-.category h4{
-font-size:20px;
-margin-bottom:5px;
-}
-
-.category p{
-color:#9da4d0;
-font-size:15px;
-}
-
-/* SECTION */
 
 .section-title{
 display:flex;
@@ -278,107 +170,68 @@ margin-bottom:18px;
 }
 
 .section-title h2{
-font-size:32px;
-font-weight:800;
+font-size:34px;
+color:#ff66e5;
 }
 
-.section-title span{
+.show-btn{
+background:#131a3d;
+padding:10px 22px;
+border-radius:14px;
 font-size:18px;
-color:#c04dff;
+border:1px solid #3f4c88;
 }
 
-/* PLAYERS */
-
-.players{
+.categories{
 display:flex;
 gap:18px;
-overflow:auto;
-margin-bottom:24px;
+overflow-x:auto;
+padding-bottom:10px;
 }
 
-.players::-webkit-scrollbar{
+.categories::-webkit-scrollbar{
 display:none;
 }
 
-.player-card{
-min-width:128px;
-padding:15px;
-background:#0d1027;
-border-radius:24px;
+.cat{
+min-width:150px;
+background:#0e1433;
+border:1px solid #2d3568;
+border-radius:28px;
+padding:20px;
 text-align:center;
-border:1px solid rgba(255,255,255,.05);
+box-shadow:0 0 20px #6b33ff33;
 }
 
-.player-card img{
-width:78px;
-height:78px;
+.cat-icon{
+width:85px;
+height:85px;
 border-radius:50%;
-border:3px solid #d04dff;
+background:linear-gradient(180deg,#ff47d5,#6d4cff);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:42px;
+margin:auto;
 margin-bottom:12px;
+box-shadow:0 0 25px #ff47d577;
 }
 
-.player-card h3{
-font-size:20px;
-margin-bottom:5px;
+.cat h3{
+font-size:22px;
+margin-bottom:4px;
 }
 
-.player-card p{
-font-size:17px;
-color:#ffc933;
+.cat p{
+color:#999;
 }
 
-/* BANNER */
-
-.subscribe{
-height:135px;
-border-radius:30px;
-overflow:hidden;
-position:relative;
-margin-bottom:26px;
-
-background:
-linear-gradient(90deg,
-rgba(183,0,255,.68),
-rgba(0,0,0,.35)),
-url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop');
-
-background-size:cover;
-background-position:center;
-
-border:1px solid rgba(255,255,255,.05);
-}
-
-.subscribe-content{
-position:absolute;
-right:20px;
-top:50%;
-transform:translateY(-50%);
-}
-
-.subscribe-content h2{
-font-size:34px;
-margin-bottom:10px;
-}
-
-.subscribe-content button{
-height:50px;
-padding:0 22px;
-border:none;
-border-radius:16px;
-
-background:#ff4fd8;
-color:white;
-
-font-size:18px;
-font-weight:700;
-}
-
-/* GAMES */
+/* GAME CARDS */
 
 .games{
 display:flex;
-gap:16px;
-overflow:auto;
+gap:18px;
+overflow-x:auto;
 padding-bottom:10px;
 }
 
@@ -386,181 +239,213 @@ padding-bottom:10px;
 display:none;
 }
 
-.game{
-min-width:190px;
-background:#0d1027;
+.game-card{
+min-width:260px;
+background:#0c1230;
 border-radius:24px;
 overflow:hidden;
-
-border:1px solid rgba(255,255,255,.05);
-
-box-shadow:
-0 0 25px rgba(115,0,255,.18);
+border:1px solid #2a3369;
+box-shadow:0 0 25px #5d2eff22;
+transition:0.3s;
 }
 
-.game img{
+.game-card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 40px #a14fff55;
+}
+
+.game-card img{
 width:100%;
-height:155px;
+height:180px;
 object-fit:cover;
 }
 
-.game-content{
-padding:14px;
+.game-info{
+padding:16px;
 }
 
-.game-content h3{
-font-size:24px;
-margin-bottom:8px;
+.game-info h3{
+font-size:26px;
+margin-bottom:6px;
 }
 
-.game-content p{
-font-size:17px;
-color:#9ea5d0;
-margin-bottom:12px;
+.game-info p{
+color:#999;
+margin-bottom:10px;
+}
+
+.rating{
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:20px;
 }
 
 .play-btn{
+width:52px;
+height:52px;
+border-radius:50%;
+background:linear-gradient(180deg,#ff4fd8,#6b4dff);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+box-shadow:0 0 20px #ff4fd899;
+}
+
+/* BANNER */
+
+.banner{
+margin-top:30px;
+height:180px;
+border-radius:28px;
+overflow:hidden;
+position:relative;
+border:1px solid #7d3cff55;
+box-shadow:0 0 35px #ff3eff44;
+}
+
+.banner img{
 width:100%;
-height:50px;
+height:100%;
+object-fit:cover;
+}
+
+.banner-content{
+position:absolute;
+top:50%;
+right:40px;
+transform:translateY(-50%);
+}
+
+.banner-content h2{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.banner-content button{
+padding:14px 28px;
 border:none;
-border-radius:16px;
-
-background:
-linear-gradient(90deg,#7b5cff,#d04dff);
-
+border-radius:14px;
+background:linear-gradient(90deg,#ff4fd8,#7a5cff);
 color:white;
-
-font-size:18px;
+font-size:20px;
 font-weight:700;
 }
 
-/* NAV */
+/* BOTTOM NAV */
 
 .bottom-nav{
 position:fixed;
 bottom:0;
 left:0;
 width:100%;
-
-background:#090d1d;
-
-border-top:1px solid rgba(255,255,255,.06);
-
+height:95px;
+background:#0b1028;
+border-top:1px solid #2d3568;
 display:flex;
 justify-content:space-around;
 align-items:center;
-
-padding:14px 0;
-
-z-index:999;
+z-index:100;
 }
 
 .nav-item{
-text-align:center;
-font-size:15px;
-color:#9ea5d0;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:6px;
+font-size:18px;
+color:#aaa;
 }
 
 .nav-item.active{
-color:#ff4fd8;
+color:#ff5ce6;
 }
 
 .center-btn{
-width:78px;
-height:78px;
+width:90px;
+height:90px;
 border-radius:50%;
-
+background:linear-gradient(180deg,#ff4fd8,#6c4dff);
 display:flex;
 align-items:center;
 justify-content:center;
-
-font-size:36px;
-
-margin-top:-42px;
-
-background:
-linear-gradient(180deg,#ff4fd8,#8b5cff);
-
-box-shadow:
-0 0 40px rgba(255,0,200,.55);
+font-size:38px;
+margin-top:-40px;
+box-shadow:0 0 40px #ff4fd8aa;
 }
 
-/* MODAL */
+/* MOBILE */
 
-.game-modal{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.92);
-display:none;
-align-items:center;
-justify-content:center;
-z-index:99999;
+@media(max-width:768px){
+
+.logo{
+font-size:28px;
 }
 
-.game-box{
-width:96%;
-height:92%;
-background:#0d1027;
-border-radius:24px;
-overflow:hidden;
-position:relative;
+.hero{
+height:250px;
 }
 
-.close-btn{
-position:absolute;
-top:15px;
-left:15px;
-
-width:48px;
-height:48px;
-
-border:none;
-border-radius:14px;
-
-background:#ff4fd8;
-color:white;
-
-font-size:24px;
-z-index:10;
+.hero-title{
+font-size:48px;
 }
 
-iframe{
-width:100%;
-height:100%;
-border:none;
-background:black;
+.hero-sub{
+font-size:18px;
+}
+
+.hero-btn{
+font-size:16px;
+padding:12px 20px;
+}
+
+.premium-btn{
+width:150px;
+font-size:16px;
+}
+
+.cat{
+min-width:120px;
+}
+
+.game-card{
+min-width:210px;
+}
+
+.banner-content h2{
+font-size:26px;
+}
+
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div class="app">
+<div class="container">
 
-<!-- HEADER -->
+<!-- TOP -->
 
-<div class="header">
+<div class="top-bar">
 
-<div class="header-btn">☰</div>
+<div class="menu-btn">☰</div>
 
 <div class="logo">DidoGame</div>
 
-<div class="header-btn">🔔</div>
+<div class="notify-btn">🔔</div>
 
 </div>
 
 <!-- SEARCH -->
 
-<div class="search-row">
-
 <div class="search-box">
-🔍 ابحث عن لعبة...
-</div>
 
-<div class="vip-box">
-👑 حساب مميز
-</div>
+<div class="search">🔍 ابحث عن لعبة...</div>
+
+<button class="premium-btn">👑 حساب مميز</button>
 
 </div>
 
@@ -568,110 +453,71 @@ background:black;
 
 <div class="hero">
 
+<img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200" />
+
+<div class="overlay"></div>
+
 <div class="hero-content">
 
 <div class="hero-title">
 Dido<br>Game
 </div>
 
-<div class="hero-text">
-أفضل منصة ألعاب أنمي وسباقات وقتال
+<div class="hero-sub">
+عالم يجمع كل ألعابك المفضلة مجاناً
 </div>
 
-<button class="hero-btn">
-🎮 ابدأ اللعب
-</button>
+<a href="#" class="hero-btn">
+🎮 استكشف الألعاب
+</a>
 
-</div>
-
-<div class="slider-dots">
-<span class="active"></span>
-<span></span>
-<span></span>
-<span></span>
 </div>
 
 </div>
 
 <!-- CATEGORIES -->
 
-<div class="category-box">
-
-<div class="category">
-<div class="category-icon">👻</div>
-<h4>الرعب</h4>
-<p>80 لعبة</p>
-</div>
-
-<div class="category">
-<div class="category-icon">⚔️</div>
-<h4>القتال</h4>
-<p>105 لعبة</p>
-</div>
-
-<div class="category">
-<div class="category-icon">⚽</div>
-<h4>الرياضة</h4>
-<p>189 لعبة</p>
-</div>
-
-<div class="category">
-<div class="category-icon">🚗</div>
-<h4>السيارات</h4>
-<p>142 لعبة</p>
-</div>
-
-<div class="category">
-<div class="category-icon">🧩</div>
-<h4>ألغاز</h4>
-<p>178 لعبة</p>
-</div>
-
-</div>
-
-<!-- PLAYERS -->
+<div class="section">
 
 <div class="section-title">
 
-<h2>🏆 أفضل اللاعبين</h2>
+<h2>الأقسام</h2>
 
-<span>عرض المزيد</span>
-
-</div>
-
-<div class="players">
-
-<div class="player-card">
-<img src="https://i.pravatar.cc/150?img=12">
-<h3>Shadow</h3>
-<p>25,680 🏆</p>
-</div>
-
-<div class="player-card">
-<img src="https://i.pravatar.cc/150?img=15">
-<h3>HunterX</h3>
-<p>18,420 🏆</p>
-</div>
-
-<div class="player-card">
-<img src="https://i.pravatar.cc/150?img=32">
-<h3>Nova</h3>
-<p>14,230 🏆</p>
-</div>
+<div class="show-btn">عرض المزيد</div>
 
 </div>
 
-<!-- SUBSCRIBE -->
+<div class="categories">
 
-<div class="subscribe">
+<div class="cat">
+<div class="cat-icon">👻</div>
+<h3>الرعب</h3>
+<p>80 لعبة</p>
+</div>
 
-<div class="subscribe-content">
+<div class="cat">
+<div class="cat-icon">⚽</div>
+<h3>الرياضة</h3>
+<p>189 لعبة</p>
+</div>
 
-<h2>اشترك الآن</h2>
+<div class="cat">
+<div class="cat-icon">🚗</div>
+<h3>السباقات</h3>
+<p>142 لعبة</p>
+</div>
 
-<button>
-اشتراك
-</button>
+<div class="cat">
+<div class="cat-icon">🧩</div>
+<h3>الألغاز</h3>
+<p>178 لعبة</p>
+</div>
+
+<div class="cat">
+<div class="cat-icon">🔥</div>
+<h3>الأكشن</h3>
+<p>200 لعبة</p>
+</div>
 
 </div>
 
@@ -679,68 +525,99 @@ Dido<br>Game
 
 <!-- GAMES -->
 
+<div class="section">
+
 <div class="section-title">
 
-<h2>⚡ أحدث الألعاب</h2>
+<h2>أحدث الألعاب</h2>
 
-<span>عرض الكل</span>
+<div class="show-btn">عرض الكل</div>
 
 </div>
 
 <div class="games">
 
-<div class="game">
+<div class="game-card">
 
-<img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop">
+<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200">
 
-<div class="game-content">
+<div class="game-info">
 
 <h3>Anime Fighters</h3>
 
-<p>⭐ 4.8</p>
+<p>قتال</p>
 
-<button class="play-btn"
-onclick="openGame('https://html5.gamemonetize.com/8t8q8mwd9u4x4jjw5kj2jvpx9v7o7j0d/')">
-▶ تشغيل
-</button>
+<div class="rating">
+
+<div>⭐ 4.8</div>
+
+<div class="play-btn">▶</div>
 
 </div>
 
 </div>
 
-<div class="game">
+</div>
 
-<img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d?q=80&w=1200&auto=format&fit=crop">
+<div class="game-card">
 
-<div class="game-content">
+<img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?q=80&w=1200">
+
+<div class="game-info">
 
 <h3>Car Racing</h3>
 
-<p>⭐ 4.7</p>
+<p>سباقات</p>
 
-<button class="play-btn"
-onclick="openGame('https://html5.gamemonetize.com/6r3j9u9xpx0v8dsvb2b8bxw66d0m3q9h/')">
-▶ تشغيل
-</button>
+<div class="rating">
+
+<div>⭐ 4.6</div>
+
+<div class="play-btn">▶</div>
 
 </div>
 
 </div>
 
-<div class="game">
+</div>
 
-<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop">
+<div class="game-card">
 
-<div class="game-content">
+<img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200">
+
+<div class="game-info">
 
 <h3>Zombie Hunter</h3>
 
-<p>⭐ 4.6</p>
+<p>رعب</p>
 
-<button class="play-btn"
-onclick="openGame('https://html5.gamemonetize.com/nyfww6nsd2l9jvcc6bspw3n0wz8qz5ev/')">
-▶ تشغيل
-</button>
+<div class="rating">
+
+<div>⭐ 4.7</div>
+
+<div class="play-btn">▶</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="game-card">
+
+<img src="https://images.unsplash.com/photo-1511882150382-421056c89033?q=80&w=1200">
+
+<div class="game-info">
+
+<h3>Puzzle Master</h3>
+
+<p>ألغاز</p>
+
+<div class="rating">
+
+<div>⭐ 4.4</div>
+
+<div class="play-btn">▶</div>
 
 </div>
 
@@ -750,16 +627,21 @@ onclick="openGame('https://html5.gamemonetize.com/nyfww6nsd2l9jvcc6bspw3n0wz8qz5
 
 </div>
 
-<!-- GAME MODAL -->
+</div>
 
-<div class="game-modal" id="gameModal">
+<!-- BANNER -->
 
-<div class="game-box">
+<div class="banner">
 
-<button class="close-btn"
-onclick="closeGame()">✕</button>
+<img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200">
 
-<iframe id="gameFrame"></iframe>
+<div class="banner-content">
+
+<h2>اشترك الآن واحصل على مزايا حصرية</h2>
+
+<button>اشترك الآن</button>
+
+</div>
 
 </div>
 
@@ -770,11 +652,13 @@ onclick="closeGame()">✕</button>
 <div class="bottom-nav">
 
 <div class="nav-item active">
-🏠<br>الرئيسية
+🏠
+<span>الرئيسية</span>
 </div>
 
 <div class="nav-item">
-📂<br>الأقسام
+📂
+<span>الأقسام</span>
 </div>
 
 <div class="center-btn">
@@ -782,40 +666,17 @@ onclick="closeGame()">✕</button>
 </div>
 
 <div class="nav-item">
-❤<br>المفضلة
+❤️
+<span>المفضلة</span>
 </div>
 
 <div class="nav-item">
-👤<br>حسابي
+👤
+<span>حسابي</span>
 </div>
 
 </div>
-
-<!-- MUSIC -->
-
-<audio autoplay loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8f0a8b3f1.mp3?filename=cyberpunk-gaming-ambient-110997.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-
-function openGame(url){
-
-document.getElementById("gameModal").style.display="flex";
-
-document.getElementById("gameFrame").src=url;
-
-}
-
-function closeGame(){
-
-document.getElementById("gameModal").style.display="none";
-
-document.getElementById("gameFrame").src="";
-
-}
-
-</script>
 
 </body>
+
 </html>
