@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dido Game</title>
 
-<title>Comic Game World</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
 
 <style>
 
@@ -12,187 +13,185 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:'Cairo',sans-serif;
 }
 
 body{
-background:#111827;
+background:#050816;
 color:white;
 overflow-x:hidden;
 }
 
-/* الخلفية */
-
-body::before{
-content:"";
-position:fixed;
-width:100%;
-height:100%;
-background:
-radial-gradient(circle at top,#1e3a8a55,transparent 40%),
-radial-gradient(circle at bottom,#7c3aed44,transparent 40%);
-z-index:-1;
+.hero{
+min-height:100vh;
+background:url('https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1974&auto=format&fit=crop') center/cover;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:40px;
 }
 
-/* الهيدر */
+.overlay{
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.75);
+backdrop-filter:blur(4px);
+}
 
-header{
-padding:30px 20px;
-text-align:center;
-background:linear-gradient(135deg,#0f172a,#1e293b);
-box-shadow:0 0 30px rgba(0,0,0,0.5);
-position:sticky;
-top:0;
-z-index:100;
+.hero-content{
+position:relative;
+z-index:2;
+max-width:1200px;
 }
 
 .logo{
-font-size:42px;
-font-weight:bold;
-color:#38bdf8;
-text-shadow:0 0 20px #38bdf8;
+font-size:90px;
+font-weight:900;
+background:linear-gradient(45deg,#00d2ff,#ff00c8,#ffe600);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:20px;
 }
 
 .subtitle{
-margin-top:10px;
-color:#cbd5e1;
+font-size:25px;
+color:#ddd;
+margin-bottom:50px;
 }
 
-/* فقاعات القصص */
-
-.bubble{
-position:absolute;
-background:white;
-color:black;
-padding:12px 18px;
-border-radius:20px;
-font-weight:bold;
-box-shadow:0 5px 15px rgba(0,0,0,0.3);
-animation:float 3s infinite ease-in-out;
-}
-
-.bubble::after{
-content:"";
-position:absolute;
-bottom:-10px;
-right:20px;
-border-width:10px;
-border-style:solid;
-border-color:white transparent transparent transparent;
-}
-
-@keyframes float{
-0%{transform:translateY(0px);}
-50%{transform:translateY(-8px);}
-100%{transform:translateY(0px);}
-}
-
-.b1{
-top:160px;
-left:20px;
-}
-
-.b2{
-top:280px;
-right:20px;
-}
-
-/* الأقسام */
-
-.worlds{
-padding:40px 20px;
+.categories{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
 gap:25px;
 }
 
-/* الكروت */
-
-.world-card{
-position:relative;
-height:300px;
+.card{
+background:rgba(255,255,255,0.08);
 border-radius:25px;
 overflow:hidden;
-cursor:pointer;
 transition:0.4s;
-border:4px solid rgba(255,255,255,0.1);
-box-shadow:0 10px 25px rgba(0,0,0,0.5);
+cursor:pointer;
 }
 
-.world-card:hover{
+.card:hover{
 transform:translateY(-10px) scale(1.03);
-box-shadow:0 0 30px rgba(56,189,248,0.6);
+box-shadow:0 0 25px #00d2ff;
 }
 
-.world-card img{
+.card img{
 width:100%;
-height:100%;
+height:180px;
 object-fit:cover;
-filter:brightness(0.7);
+}
+
+.card h2{
+padding:18px;
+font-size:24px;
+}
+
+.section{
+display:none;
+padding:40px;
+min-height:100vh;
+background:#09111f;
+}
+
+.section.active{
+display:block;
+}
+
+.section-title{
+font-size:50px;
+margin-bottom:20px;
+color:#00d2ff;
+}
+
+.games-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+margin-top:30px;
+}
+
+.game-box{
+background:#111c30;
+border-radius:25px;
+overflow:hidden;
+padding-bottom:20px;
 transition:0.4s;
 }
 
-.world-card:hover img{
-transform:scale(1.1);
-filter:brightness(0.9);
+.game-box:hover{
+transform:scale(1.02);
+box-shadow:0 0 20px #ff00c8;
 }
 
-/* النص */
-
-.world-title{
-position:absolute;
-bottom:20px;
-right:20px;
-font-size:28px;
-font-weight:bold;
-text-shadow:0 0 10px black;
-}
-
-/* زر */
-
-.enter-btn{
-position:absolute;
-top:20px;
-left:20px;
-background:#38bdf8;
+.game-box iframe{
+width:100%;
+height:220px;
 border:none;
-padding:10px 18px;
-border-radius:12px;
+}
+
+.game-box h3{
+padding:15px;
+font-size:24px;
+}
+
+.play-btn{
+margin:0 15px;
+background:linear-gradient(45deg,#00d2ff,#ff00c8);
 color:white;
-font-weight:bold;
+border:none;
+padding:12px 18px;
+border-radius:14px;
 cursor:pointer;
-transition:0.3s;
+font-size:18px;
+font-weight:bold;
 }
 
-.enter-btn:hover{
-background:#0ea5e9;
-transform:scale(1.1);
+.back-btn{
+background:#ff0055;
+color:white;
+border:none;
+padding:12px 22px;
+border-radius:14px;
+cursor:pointer;
+margin-bottom:30px;
+font-size:18px;
 }
 
-/* الفوتر */
+.ad-box{
+background:linear-gradient(45deg,#ff00c8,#00d2ff);
+padding:20px;
+border-radius:20px;
+text-align:center;
+margin:30px 0;
+font-size:24px;
+font-weight:bold;
+}
+
+.music-btn{
+position:fixed;
+bottom:20px;
+left:20px;
+background:#00d2ff;
+border:none;
+color:white;
+width:60px;
+height:60px;
+border-radius:50%;
+font-size:24px;
+cursor:pointer;
+z-index:999;
+}
 
 footer{
-padding:30px;
 text-align:center;
-color:#94a3b8;
-}
-
-/* موبايل */
-
-@media(max-width:700px){
-
-.logo{
-font-size:30px;
-}
-
-.world-card{
-height:240px;
-}
-
-.world-title{
-font-size:22px;
-}
-
+padding:30px;
+background:#02040c;
+color:#aaa;
 }
 
 </style>
@@ -200,133 +199,179 @@ font-size:22px;
 
 <body>
 
-<header>
+<audio id="bgMusic" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8a1a0d5f4.mp3?filename=cyberpunk-moonlight-sonata-ambient-11054.mp3" type="audio/mp3">
+</audio>
 
-<div class="logo">🎮 COMIC GAME WORLD</div>
+<button class="music-btn" onclick="toggleMusic()">🎵</button>
 
-<div class="subtitle">
-عالم ألعاب بأسلوب القصص المصورة
+<section class="hero" id="home">
+
+<div class="overlay"></div>
+
+<div class="hero-content">
+
+<h1 class="logo">Dido Game</h1>
+
+<p class="subtitle">
+عالم أنمي ضخم يجمع كل الألعاب المجانية
+</p>
+
+<div class="categories">
+
+<div class="card" onclick="openSection('racing')">
+<img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1883&auto=format&fit=crop">
+<h2>🏎️ ألعاب السباقات</h2>
 </div>
 
-</header>
-
-<!-- فقاعات -->
-
-<div class="bubble b1">
-🔥 ألعاب جديدة كل أسبوع
+<div class="card" onclick="openSection('fight')">
+<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1931&auto=format&fit=crop">
+<h2>⚔️ ألعاب القتال</h2>
 </div>
 
-<div class="bubble b2">
-⚡ ادخل عالمك المفضل الآن
+<div class="card" onclick="openSection('horror')">
+<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop">
+<h2>👻 ألعاب الرعب</h2>
 </div>
 
-<!-- العوالم -->
+</div>
 
-<section class="worlds">
+</div>
+</section>
 
-<!-- نينجا -->
+<section class="section" id="racing">
 
-<div class="world-card">
-
-<img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop">
-
-<button class="enter-btn">
-دخول
+<button class="back-btn" onclick="goHome()">
+⬅ العودة
 </button>
 
-<div class="world-title">
-🥷 عالم القتال
+<h1 class="section-title">
+🏎️ ألعاب السباقات
+</h1>
+
+<div class="ad-box">
+إعلان — أفضل ألعاب السيارات
+</div>
+
+<div class="games-grid">
+
+<div class="game-box">
+<iframe src="https://www.crazygames.com/embed/drift-hunters"></iframe>
+<h3>Drift Hunters</h3>
+<button class="play-btn">العب الآن</button>
+</div>
+
+<div class="game-box">
+<iframe src="https://www.crazygames.com/embed/madalin-stunt-cars-2"></iframe>
+<h3>Madalin Cars</h3>
+<button class="play-btn">ابدأ</button>
 </div>
 
 </div>
+</section>
 
-<!-- سباقات -->
+<section class="section" id="fight">
 
-<div class="world-card">
-
-<img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop">
-
-<button class="enter-btn">
-دخول
+<button class="back-btn" onclick="goHome()">
+⬅ العودة
 </button>
 
-<div class="world-title">
-🏎 عالم السباقات
+<h1 class="section-title">
+⚔️ ألعاب القتال
+</h1>
+
+<div class="ad-box">
+إعلان — قاتل أبطال الأنمي
+</div>
+
+<div class="games-grid">
+
+<div class="game-box">
+<iframe src="https://www.crazygames.com/embed/stickman-fighting-3d"></iframe>
+<h3>Stickman Fighting</h3>
+<button class="play-btn">قاتل</button>
 </div>
 
 </div>
+</section>
 
-<!-- زومبي -->
+<section class="section" id="horror">
 
-<div class="world-card">
-
-<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop">
-
-<button class="enter-btn">
-دخول
+<button class="back-btn" onclick="goHome()">
+⬅ العودة
 </button>
 
-<div class="world-title">
-🧟 عالم الرعب
+<h1 class="section-title">
+👻 ألعاب الرعب
+</h1>
+
+<div class="ad-box">
+إعلان — عالم الزومبي والرعب
+</div>
+
+<div class="games-grid">
+
+<div class="game-box">
+<iframe src="https://www.crazygames.com/embed/dead-zed"></iframe>
+<h3>Dead Zed</h3>
+<button class="play-btn">ابدأ</button>
 </div>
 
 </div>
-
-<!-- حروب -->
-
-<div class="world-card">
-
-<img src="https://images.unsplash.com/photo-1511882150382-421056c89033?q=80&w=1200&auto=format&fit=crop">
-
-<button class="enter-btn">
-دخول
-</button>
-
-<div class="world-title">
-💣 عالم الحروب
-</div>
-
-</div>
-
-<!-- مغامرات -->
-
-<div class="world-card">
-
-<img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop">
-
-<button class="enter-btn">
-دخول
-</button>
-
-<div class="world-title">
-⛰ عالم المغامرات
-</div>
-
-</div>
-
-<!-- ذكاء -->
-
-<div class="world-card">
-
-<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop">
-
-<button class="enter-btn">
-دخول
-</button>
-
-<div class="world-title">
-🧠 عالم الذكاء
-</div>
-
-</div>
-
 </section>
 
 <footer>
-
-© 2026 Comic Game World
-
+جميع الحقوق محفوظة © Dido Game
 </footer>
+
+<script>
+
+function openSection(id){
+
+document.getElementById('home').style.display='none';
+
+document.querySelectorAll('.section').forEach(section=>{
+section.classList.remove('active');
+});
+
+document.getElementById(id).classList.add('active');
+
+window.scrollTo({
+top:0,
+behavior:'smooth'
+});
+
+}
+
+function goHome(){
+
+document.getElementById('home').style.display='flex';
+
+document.querySelectorAll('.section').forEach(section=>{
+section.classList.remove('active');
+});
+
+}
+
+const music=document.getElementById('bgMusic');
+
+function toggleMusic(){
+
+if(music.paused){
+music.play();
+}else{
+music.pause();
+}
+
+}
+
+window.addEventListener('click',()=>{
+
+music.play();
+
+},{once:true});
+
+</script>
 
 </body>
 </html>
