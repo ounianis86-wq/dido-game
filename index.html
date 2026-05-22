@@ -9,7 +9,43 @@
 <title>Dido Game</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+html{
+scroll-behavior:smooth;
+}
 
+.hero{
+transition:1s;
+}
+
+.category:hover{
+transform:translateY(-8px) scale(1.05);
+border-color:#ff00aa;
+transition:0.4s;
+box-shadow:0 0 25px #ff00aa55;
+}
+
+.bottom-nav .nav{
+transition:0.3s;
+cursor:pointer;
+}
+
+.bottom-nav .nav:hover{
+color:#ff00aa;
+transform:translateY(-5px);
+}
+
+body::-webkit-scrollbar{
+width:10px;
+}
+
+body::-webkit-scrollbar-thumb{
+background:linear-gradient(#ff00aa,#7b4dff);
+border-radius:20px;
+}
+
+body::-webkit-scrollbar-track{
+background:#050816;
+}
 <style>
 
 *{
