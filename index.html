@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dido Game</title>
+<title>DidoGame</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 
@@ -19,9 +20,9 @@ font-family:'Cairo',sans-serif;
 }
 
 body{
-background:#050816;
-color:white;
+background:#060816;
 overflow-x:hidden;
+color:white;
 }
 
 body::before{
@@ -29,16 +30,17 @@ content:'';
 position:fixed;
 inset:0;
 background:
-radial-gradient(circle at top,#6b00ff33 0%,transparent 40%),
-radial-gradient(circle at bottom,#ff00c833 0%,transparent 40%);
-pointer-events:none;
+radial-gradient(circle at top,#7a00ff33 0%,transparent 40%),
+radial-gradient(circle at bottom,#ff00d933 0%,transparent 40%);
 z-index:-1;
 }
 
-.container{
+/* APP */
+
+.app{
 max-width:430px;
 margin:auto;
-padding:14px;
+padding:15px;
 padding-bottom:120px;
 }
 
@@ -51,23 +53,27 @@ align-items:center;
 margin-bottom:18px;
 }
 
-.icon-btn{
+.header-btn{
 width:52px;
 height:52px;
 border-radius:18px;
-background:#0c1027;
+background:#0d1027;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:25px;
-border:1px solid rgba(255,255,255,.06);
-box-shadow:0 0 18px rgba(170,0,255,.18);
+font-size:24px;
+border:1px solid rgba(255,255,255,.05);
+
+box-shadow:
+0 0 20px rgba(179,0,255,.15);
 }
 
 .logo{
-font-size:46px;
+font-size:43px;
 font-weight:900;
-background:linear-gradient(90deg,#ff00b7,#ff7b00,#ffffff);
+
+background:linear-gradient(90deg,#ff00d9,#ff7a00,#ffffff);
+
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
@@ -80,76 +86,86 @@ gap:12px;
 margin-bottom:18px;
 }
 
-.search{
+.search-box{
 flex:1;
 height:60px;
-background:#0c1027;
+background:#0d1027;
 border-radius:22px;
+padding:0 18px;
 display:flex;
 align-items:center;
-padding:0 18px;
+color:#9ca3d4;
 font-size:18px;
-color:#949cc7;
 border:1px solid rgba(255,255,255,.05);
 }
 
-.vip{
+.vip-box{
 width:165px;
 height:60px;
 border-radius:22px;
-background:linear-gradient(90deg,#19152d,#11152f);
+
+background:
+linear-gradient(135deg,#17142b,#10142d);
+
 display:flex;
 align-items:center;
 justify-content:center;
+
 font-size:23px;
 font-weight:700;
-color:#ffc933;
+color:#ffcc33;
+
 border:1px solid rgba(255,255,255,.05);
 }
 
 /* HERO */
 
 .hero{
-height:380px;
-border-radius:30px;
+height:400px;
+border-radius:34px;
 overflow:hidden;
 position:relative;
 margin-bottom:22px;
-border:1px solid rgba(255,255,255,.08);
 
 background:
 linear-gradient(to left,
-rgba(10,10,25,.15),
-rgba(10,10,25,.8)),
+rgba(0,0,0,.1),
+rgba(0,0,0,.78)),
 url('https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200&auto=format&fit=crop');
 
 background-size:cover;
 background-position:center;
+
+border:1px solid rgba(255,255,255,.07);
+
 box-shadow:
-0 0 45px rgba(170,0,255,.25),
-inset 0 0 120px rgba(0,0,0,.8);
+0 0 50px rgba(157,0,255,.28),
+inset 0 0 100px rgba(0,0,0,.8);
 }
 
 .hero-content{
 position:absolute;
-right:24px;
+right:25px;
 top:50%;
 transform:translateY(-50%);
-width:48%;
+width:50%;
 z-index:2;
 }
 
 .hero-title{
-font-size:70px;
+font-size:72px;
 font-weight:900;
-line-height:0.95;
-margin-bottom:18px;
-background:linear-gradient(90deg,#ff00b7,#ff9800,#ffffff);
+line-height:.92;
+margin-bottom:16px;
+
+background:
+linear-gradient(90deg,#ff00d9,#ff9100,#ffffff);
+
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
 
-.hero-sub{
+.hero-text{
 font-size:20px;
 line-height:1.7;
 margin-bottom:18px;
@@ -160,14 +176,19 @@ height:58px;
 padding:0 28px;
 border:none;
 border-radius:18px;
-background:linear-gradient(90deg,#7b5cff,#d04dff);
+
+background:
+linear-gradient(90deg,#7b5cff,#d04dff);
+
+color:white;
 font-size:20px;
 font-weight:700;
-color:white;
-box-shadow:0 0 35px rgba(189,0,255,.45);
+
+box-shadow:
+0 0 35px rgba(204,0,255,.45);
 }
 
-.dots{
+.slider-dots{
 position:absolute;
 bottom:18px;
 left:50%;
@@ -176,31 +197,36 @@ display:flex;
 gap:10px;
 }
 
-.dot{
+.slider-dots span{
 width:12px;
 height:12px;
 border-radius:50%;
 background:#666;
 }
 
-.dot.active{
+.slider-dots span.active{
 background:#ff4fd8;
 }
 
-/* CATEGORIES */
+/* CATEGORY */
 
-.categories{
+.category-box{
 display:flex;
 overflow:auto;
 gap:18px;
+
 padding:20px;
+
+background:#0d1027;
+
 border-radius:30px;
-background:#0c1027;
-margin-bottom:22px;
+
 border:1px solid rgba(255,255,255,.05);
+
+margin-bottom:24px;
 }
 
-.categories::-webkit-scrollbar{
+.category-box::-webkit-scrollbar{
 display:none;
 }
 
@@ -210,23 +236,26 @@ text-align:center;
 }
 
 .category-icon{
-width:78px;
-height:78px;
+width:80px;
+height:80px;
 border-radius:50%;
+
 margin:auto;
 margin-bottom:12px;
+
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:34px;
+
+font-size:35px;
 
 background:
-radial-gradient(circle,#28144a,#0d1025);
+radial-gradient(circle,#29134d,#0d1027);
 
-border:2px solid rgba(197,86,255,.35);
+border:2px solid rgba(201,84,255,.35);
 
 box-shadow:
-0 0 28px rgba(197,86,255,.35);
+0 0 30px rgba(201,84,255,.35);
 }
 
 .category h4{
@@ -235,27 +264,27 @@ margin-bottom:5px;
 }
 
 .category p{
-color:#9ba3ce;
+color:#9da4d0;
 font-size:15px;
 }
 
-/* TITLE */
+/* SECTION */
 
-.title{
+.section-title{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:16px;
+margin-bottom:18px;
 }
 
-.title h2{
+.section-title h2{
 font-size:32px;
 font-weight:800;
 }
 
-.title span{
-color:#b84dff;
+.section-title span{
 font-size:18px;
+color:#c04dff;
 }
 
 /* PLAYERS */
@@ -264,53 +293,53 @@ font-size:18px;
 display:flex;
 gap:18px;
 overflow:auto;
-margin-bottom:22px;
+margin-bottom:24px;
 }
 
 .players::-webkit-scrollbar{
 display:none;
 }
 
-.player{
-min-width:125px;
+.player-card{
+min-width:128px;
 padding:15px;
-background:#0c1027;
+background:#0d1027;
 border-radius:24px;
-border:1px solid rgba(255,255,255,.05);
 text-align:center;
+border:1px solid rgba(255,255,255,.05);
 }
 
-.player img{
-width:75px;
-height:75px;
+.player-card img{
+width:78px;
+height:78px;
 border-radius:50%;
 border:3px solid #d04dff;
 margin-bottom:12px;
 }
 
-.player h3{
+.player-card h3{
 font-size:20px;
-margin-bottom:6px;
+margin-bottom:5px;
 }
 
-.player p{
+.player-card p{
+font-size:17px;
 color:#ffc933;
-font-size:18px;
 }
 
 /* BANNER */
 
-.banner{
-height:130px;
+.subscribe{
+height:135px;
 border-radius:30px;
 overflow:hidden;
 position:relative;
-margin-bottom:25px;
+margin-bottom:26px;
 
 background:
 linear-gradient(90deg,
-rgba(204,0,255,.65),
-rgba(0,0,0,.4)),
+rgba(183,0,255,.68),
+rgba(0,0,0,.35)),
 url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop');
 
 background-size:cover;
@@ -319,25 +348,27 @@ background-position:center;
 border:1px solid rgba(255,255,255,.05);
 }
 
-.banner-content{
+.subscribe-content{
 position:absolute;
-top:50%;
 right:20px;
+top:50%;
 transform:translateY(-50%);
 }
 
-.banner-content h2{
+.subscribe-content h2{
 font-size:34px;
 margin-bottom:10px;
 }
 
-.banner-btn{
+.subscribe-content button{
 height:50px;
 padding:0 22px;
 border:none;
 border-radius:16px;
+
 background:#ff4fd8;
 color:white;
+
 font-size:18px;
 font-weight:700;
 }
@@ -349,25 +380,27 @@ display:flex;
 gap:16px;
 overflow:auto;
 padding-bottom:10px;
-margin-bottom:24px;
 }
 
 .games::-webkit-scrollbar{
 display:none;
 }
 
-.game-card{
+.game{
 min-width:190px;
 background:#0d1027;
 border-radius:24px;
 overflow:hidden;
+
 border:1px solid rgba(255,255,255,.05);
-box-shadow:0 0 25px rgba(110,40,255,.15);
+
+box-shadow:
+0 0 25px rgba(115,0,255,.18);
 }
 
-.game-img{
-height:155px;
+.game img{
 width:100%;
+height:155px;
 object-fit:cover;
 }
 
@@ -376,13 +409,13 @@ padding:14px;
 }
 
 .game-content h3{
-font-size:25px;
+font-size:24px;
 margin-bottom:8px;
 }
 
 .game-content p{
 font-size:17px;
-color:#9ca4cd;
+color:#9ea5d0;
 margin-bottom:12px;
 }
 
@@ -391,32 +424,41 @@ width:100%;
 height:50px;
 border:none;
 border-radius:16px;
-background:linear-gradient(90deg,#7b5cff,#d04dff);
+
+background:
+linear-gradient(90deg,#7b5cff,#d04dff);
+
 color:white;
+
 font-size:18px;
 font-weight:700;
 }
 
-/* BOTTOM */
+/* NAV */
 
 .bottom-nav{
 position:fixed;
 bottom:0;
 left:0;
 width:100%;
+
 background:#090d1d;
-border-top:1px solid rgba(255,255,255,.07);
+
+border-top:1px solid rgba(255,255,255,.06);
+
 display:flex;
 justify-content:space-around;
 align-items:center;
+
 padding:14px 0;
+
 z-index:999;
 }
 
 .nav-item{
 text-align:center;
 font-size:15px;
-color:#9ca4cd;
+color:#9ea5d0;
 }
 
 .nav-item.active{
@@ -427,21 +469,25 @@ color:#ff4fd8;
 width:78px;
 height:78px;
 border-radius:50%;
+
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:36px;
-margin-top:-40px;
 
-background:linear-gradient(180deg,#ff4fd8,#8b5cff);
+font-size:36px;
+
+margin-top:-42px;
+
+background:
+linear-gradient(180deg,#ff4fd8,#8b5cff);
 
 box-shadow:
-0 0 40px rgba(255,0,212,.55);
+0 0 40px rgba(255,0,200,.55);
 }
 
 /* MODAL */
 
-.modal{
+.game-modal{
 position:fixed;
 inset:0;
 background:rgba(0,0,0,.92);
@@ -451,7 +497,7 @@ justify-content:center;
 z-index:99999;
 }
 
-.modal-box{
+.game-box{
 width:96%;
 height:92%;
 background:#0d1027;
@@ -460,17 +506,21 @@ overflow:hidden;
 position:relative;
 }
 
-.close{
+.close-btn{
 position:absolute;
 top:15px;
 left:15px;
+
 width:48px;
 height:48px;
+
 border:none;
 border-radius:14px;
+
 background:#ff4fd8;
 color:white;
-font-size:25px;
+
+font-size:24px;
 z-index:10;
 }
 
@@ -478,20 +528,7 @@ iframe{
 width:100%;
 height:100%;
 border:none;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:430px){
-
-.hero-title{
-font-size:58px;
-}
-
-.hero-sub{
-font-size:17px;
-}
-
+background:black;
 }
 
 </style>
@@ -499,17 +536,17 @@ font-size:17px;
 
 <body>
 
-<div class="container">
+<div class="app">
 
 <!-- HEADER -->
 
 <div class="header">
 
-<div class="icon-btn">☰</div>
+<div class="header-btn">☰</div>
 
 <div class="logo">DidoGame</div>
 
-<div class="icon-btn">🔔</div>
+<div class="header-btn">🔔</div>
 
 </div>
 
@@ -517,11 +554,11 @@ font-size:17px;
 
 <div class="search-row">
 
-<div class="search">
+<div class="search-box">
 🔍 ابحث عن لعبة...
 </div>
 
-<div class="vip">
+<div class="vip-box">
 👑 حساب مميز
 </div>
 
@@ -537,28 +574,28 @@ font-size:17px;
 Dido<br>Game
 </div>
 
-<div class="hero-sub">
-عالم واحد يجمع كل ألعابك المفضلة مجاناً 100%
+<div class="hero-text">
+أفضل منصة ألعاب أنمي وسباقات وقتال
 </div>
 
 <button class="hero-btn">
-🎮 استكشف الألعاب الآن
+🎮 ابدأ اللعب
 </button>
 
 </div>
 
-<div class="dots">
-<div class="dot active"></div>
-<div class="dot"></div>
-<div class="dot"></div>
-<div class="dot"></div>
+<div class="slider-dots">
+<span class="active"></span>
+<span></span>
+<span></span>
+<span></span>
 </div>
 
 </div>
 
 <!-- CATEGORIES -->
 
-<div class="categories">
+<div class="category-box">
 
 <div class="category">
 <div class="category-icon">👻</div>
@@ -567,7 +604,7 @@ Dido<br>Game
 </div>
 
 <div class="category">
-<div class="category-icon">✊</div>
+<div class="category-icon">⚔️</div>
 <h4>القتال</h4>
 <p>105 لعبة</p>
 </div>
@@ -594,48 +631,45 @@ Dido<br>Game
 
 <!-- PLAYERS -->
 
-<div class="title">
+<div class="section-title">
+
 <h2>🏆 أفضل اللاعبين</h2>
+
 <span>عرض المزيد</span>
+
 </div>
 
 <div class="players">
 
-<div class="player">
+<div class="player-card">
 <img src="https://i.pravatar.cc/150?img=12">
 <h3>Shadow</h3>
 <p>25,680 🏆</p>
 </div>
 
-<div class="player">
+<div class="player-card">
 <img src="https://i.pravatar.cc/150?img=15">
 <h3>HunterX</h3>
 <p>18,420 🏆</p>
 </div>
 
-<div class="player">
+<div class="player-card">
 <img src="https://i.pravatar.cc/150?img=32">
 <h3>Nova</h3>
 <p>14,230 🏆</p>
 </div>
 
-<div class="player">
-<img src="https://i.pravatar.cc/150?img=18">
-<h3>PixelKing</h3>
-<p>11,300 🏆</p>
 </div>
 
-</div>
+<!-- SUBSCRIBE -->
 
-<!-- BANNER -->
+<div class="subscribe">
 
-<div class="banner">
-
-<div class="banner-content">
+<div class="subscribe-content">
 
 <h2>اشترك الآن</h2>
 
-<button class="banner-btn">
+<button>
 اشتراك
 </button>
 
@@ -645,17 +679,19 @@ Dido<br>Game
 
 <!-- GAMES -->
 
-<div class="title">
+<div class="section-title">
+
 <h2>⚡ أحدث الألعاب</h2>
+
 <span>عرض الكل</span>
+
 </div>
 
 <div class="games">
 
-<div class="game-card">
+<div class="game">
 
-<img class="game-img"
-src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop">
+<img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop">
 
 <div class="game-content">
 
@@ -672,10 +708,9 @@ onclick="openGame('https://html5.gamemonetize.com/8t8q8mwd9u4x4jjw5kj2jvpx9v7o7j
 
 </div>
 
-<div class="game-card">
+<div class="game">
 
-<img class="game-img"
-src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d?q=80&w=1200&auto=format&fit=crop">
+<img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d?q=80&w=1200&auto=format&fit=crop">
 
 <div class="game-content">
 
@@ -692,10 +727,9 @@ onclick="openGame('https://html5.gamemonetize.com/6r3j9u9xpx0v8dsvb2b8bxw66d0m3q
 
 </div>
 
-<div class="game-card">
+<div class="game">
 
-<img class="game-img"
-src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop">
+<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop">
 
 <div class="game-content">
 
@@ -718,11 +752,12 @@ onclick="openGame('https://html5.gamemonetize.com/nyfww6nsd2l9jvcc6bspw3n0wz8qz5
 
 <!-- GAME MODAL -->
 
-<div class="modal" id="gameModal">
+<div class="game-modal" id="gameModal">
 
-<div class="modal-box">
+<div class="game-box">
 
-<button class="close" onclick="closeGame()">✕</button>
+<button class="close-btn"
+onclick="closeGame()">✕</button>
 
 <iframe id="gameFrame"></iframe>
 
@@ -765,13 +800,19 @@ onclick="openGame('https://html5.gamemonetize.com/nyfww6nsd2l9jvcc6bspw3n0wz8qz5
 <script>
 
 function openGame(url){
+
 document.getElementById("gameModal").style.display="flex";
+
 document.getElementById("gameFrame").src=url;
+
 }
 
 function closeGame(){
+
 document.getElementById("gameModal").style.display="none";
+
 document.getElementById("gameFrame").src="";
+
 }
 
 </script>
