@@ -1,27 +1,15 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Dido Game</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-
-:root{
---bg:#060816;
---card:#0d1025;
---card2:#131738;
---pink:#ff4fd8;
---purple:#8b5cff;
---blue:#4ea1ff;
---gold:#ffcc33;
---white:#ffffff;
---text:#b9bdd7;
-}
 
 *{
 margin:0;
@@ -31,14 +19,23 @@ font-family:'Cairo',sans-serif;
 }
 
 body{
-background:
-radial-gradient(circle at top,#18113d 0%,#090b18 40%,#05070f 100%);
+background:#050816;
 color:white;
 overflow-x:hidden;
 }
 
+body::before{
+content:'';
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top,#6b00ff33 0%,transparent 40%),
+radial-gradient(circle at bottom,#ff00c833 0%,transparent 40%);
+pointer-events:none;
+z-index:-1;
+}
+
 .container{
-width:100%;
 max-width:430px;
 margin:auto;
 padding:14px;
@@ -47,197 +44,217 @@ padding-bottom:120px;
 
 /* HEADER */
 
-.topbar{
+.header{
 display:flex;
-align-items:center;
 justify-content:space-between;
+align-items:center;
 margin-bottom:18px;
 }
 
-.menu-btn,
-.notify-btn{
-width:48px;
-height:48px;
+.icon-btn{
+width:52px;
+height:52px;
 border-radius:18px;
-background:#0f132d;
+background:#0c1027;
 display:flex;
 align-items:center;
 justify-content:center;
 font-size:25px;
 border:1px solid rgba(255,255,255,.06);
-box-shadow:0 0 20px rgba(140,80,255,.15);
+box-shadow:0 0 18px rgba(170,0,255,.18);
 }
 
 .logo{
-font-size:42px;
+font-size:46px;
 font-weight:900;
-background:linear-gradient(90deg,#ff4fd8,#ff7b00,#fff);
+background:linear-gradient(90deg,#ff00b7,#ff7b00,#ffffff);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
 
 /* SEARCH */
 
-.search-area{
+.search-row{
 display:flex;
 gap:12px;
 margin-bottom:18px;
 }
 
-.search-box{
+.search{
 flex:1;
-height:58px;
-background:#0c1026;
-border-radius:20px;
-border:1px solid rgba(255,255,255,.07);
+height:60px;
+background:#0c1027;
+border-radius:22px;
 display:flex;
 align-items:center;
 padding:0 18px;
-color:#8f96c7;
 font-size:18px;
+color:#949cc7;
+border:1px solid rgba(255,255,255,.05);
 }
 
-.vip-btn{
-width:160px;
-background:linear-gradient(90deg,#1d132e,#1a1c37);
-border-radius:20px;
+.vip{
+width:165px;
+height:60px;
+border-radius:22px;
+background:linear-gradient(90deg,#19152d,#11152f);
 display:flex;
 align-items:center;
 justify-content:center;
+font-size:23px;
 font-weight:700;
-font-size:22px;
-color:#ffcb35;
-border:1px solid rgba(255,255,255,.07);
+color:#ffc933;
+border:1px solid rgba(255,255,255,.05);
 }
 
 /* HERO */
 
 .hero{
-position:relative;
-height:390px;
-border-radius:28px;
+height:380px;
+border-radius:30px;
 overflow:hidden;
-margin-bottom:20px;
-border:1px solid rgba(255,255,255,.07);
-background:url('https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200&auto=format&fit=crop') center/cover;
-box-shadow:
-0 0 40px rgba(139,92,255,.35),
-inset 0 0 100px rgba(0,0,0,.7);
-}
+position:relative;
+margin-bottom:22px;
+border:1px solid rgba(255,255,255,.08);
 
-.hero::before{
-content:'';
-position:absolute;
-inset:0;
-background:linear-gradient(to left,
-rgba(0,0,0,.2),
-rgba(0,0,0,.85));
+background:
+linear-gradient(to left,
+rgba(10,10,25,.15),
+rgba(10,10,25,.8)),
+url('https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200&auto=format&fit=crop');
+
+background-size:cover;
+background-position:center;
+box-shadow:
+0 0 45px rgba(170,0,255,.25),
+inset 0 0 120px rgba(0,0,0,.8);
 }
 
 .hero-content{
 position:absolute;
+right:24px;
 top:50%;
-right:25px;
 transform:translateY(-50%);
+width:48%;
 z-index:2;
-width:50%;
 }
 
 .hero-title{
-font-size:68px;
-line-height:1;
+font-size:70px;
 font-weight:900;
-background:linear-gradient(90deg,#ff4fd8,#ff9800,#fff);
+line-height:0.95;
+margin-bottom:18px;
+background:linear-gradient(90deg,#ff00b7,#ff9800,#ffffff);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-margin-bottom:14px;
 }
 
-.hero-text{
+.hero-sub{
 font-size:20px;
-color:#fff;
-margin-bottom:16px;
+line-height:1.7;
+margin-bottom:18px;
 }
 
 .hero-btn{
-height:56px;
-border:none;
+height:58px;
 padding:0 28px;
+border:none;
 border-radius:18px;
-background:linear-gradient(90deg,#7b5cff,#b94fff);
-color:white;
+background:linear-gradient(90deg,#7b5cff,#d04dff);
 font-size:20px;
 font-weight:700;
-box-shadow:0 0 30px rgba(191,0,255,.45);
+color:white;
+box-shadow:0 0 35px rgba(189,0,255,.45);
 }
 
-/* CATEGORY */
+.dots{
+position:absolute;
+bottom:18px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+gap:10px;
+}
+
+.dot{
+width:12px;
+height:12px;
+border-radius:50%;
+background:#666;
+}
+
+.dot.active{
+background:#ff4fd8;
+}
+
+/* CATEGORIES */
 
 .categories{
 display:flex;
 overflow:auto;
-gap:16px;
+gap:18px;
 padding:20px;
-background:#0c1026;
-border-radius:28px;
-margin-bottom:20px;
-border:1px solid rgba(255,255,255,.06);
+border-radius:30px;
+background:#0c1027;
+margin-bottom:22px;
+border:1px solid rgba(255,255,255,.05);
 }
 
 .categories::-webkit-scrollbar{
 display:none;
 }
 
-.cat{
-min-width:92px;
+.category{
+min-width:95px;
 text-align:center;
 }
 
-.cat-icon{
-width:76px;
-height:76px;
+.category-icon{
+width:78px;
+height:78px;
 border-radius:50%;
 margin:auto;
+margin-bottom:12px;
 display:flex;
 align-items:center;
 justify-content:center;
 font-size:34px;
-background:radial-gradient(circle,#2c194d,#0e1024);
-border:2px solid rgba(193,92,255,.35);
-box-shadow:0 0 30px rgba(193,92,255,.35);
-margin-bottom:10px;
+
+background:
+radial-gradient(circle,#28144a,#0d1025);
+
+border:2px solid rgba(197,86,255,.35);
+
+box-shadow:
+0 0 28px rgba(197,86,255,.35);
 }
 
-.cat h4{
-font-size:18px;
-margin-bottom:4px;
+.category h4{
+font-size:20px;
+margin-bottom:5px;
 }
 
-.cat p{
-font-size:14px;
-color:#999fc4;
+.category p{
+color:#9ba3ce;
+font-size:15px;
 }
 
-/* SECTION */
+/* TITLE */
 
-.section{
-margin-bottom:24px;
-}
-
-.section-title{
+.title{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:18px;
+margin-bottom:16px;
 }
 
-.section-title h2{
+.title h2{
 font-size:32px;
 font-weight:800;
 }
 
-.section-title span{
-color:#b84fff;
+.title span{
+color:#b84dff;
 font-size:18px;
 }
 
@@ -247,7 +264,7 @@ font-size:18px;
 display:flex;
 gap:18px;
 overflow:auto;
-padding-bottom:8px;
+margin-bottom:22px;
 }
 
 .players::-webkit-scrollbar{
@@ -255,68 +272,67 @@ display:none;
 }
 
 .player{
-min-width:120px;
-background:#0d1027;
-padding:14px;
+min-width:125px;
+padding:15px;
+background:#0c1027;
 border-radius:24px;
-border:1px solid rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.05);
 text-align:center;
 }
 
 .player img{
-width:72px;
-height:72px;
+width:75px;
+height:75px;
 border-radius:50%;
-border:3px solid #b94fff;
-margin-bottom:10px;
+border:3px solid #d04dff;
+margin-bottom:12px;
 }
 
-.player h4{
-font-size:18px;
-margin-bottom:4px;
+.player h3{
+font-size:20px;
+margin-bottom:6px;
 }
 
 .player p{
-color:#ffc94a;
-font-size:16px;
+color:#ffc933;
+font-size:18px;
 }
 
 /* BANNER */
 
 .banner{
 height:130px;
-border-radius:28px;
+border-radius:30px;
 overflow:hidden;
 position:relative;
-background:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop') center/cover;
-margin-bottom:24px;
-border:1px solid rgba(255,255,255,.06);
-}
+margin-bottom:25px;
 
-.banner::before{
-content:'';
-position:absolute;
-inset:0;
-background:linear-gradient(90deg,
-rgba(183,0,255,.75),
-rgba(0,0,0,.35));
+background:
+linear-gradient(90deg,
+rgba(204,0,255,.65),
+rgba(0,0,0,.4)),
+url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop');
+
+background-size:cover;
+background-position:center;
+
+border:1px solid rgba(255,255,255,.05);
 }
 
 .banner-content{
 position:absolute;
-z-index:2;
 top:50%;
 right:20px;
 transform:translateY(-50%);
 }
 
-.banner h2{
-font-size:32px;
+.banner-content h2{
+font-size:34px;
 margin-bottom:10px;
 }
 
-.banner button{
-height:48px;
+.banner-btn{
+height:50px;
 padding:0 22px;
 border:none;
 border-radius:16px;
@@ -332,7 +348,8 @@ font-weight:700;
 display:flex;
 gap:16px;
 overflow:auto;
-padding-bottom:8px;
+padding-bottom:10px;
+margin-bottom:24px;
 }
 
 .games::-webkit-scrollbar{
@@ -340,64 +357,66 @@ display:none;
 }
 
 .game-card{
-min-width:185px;
+min-width:190px;
 background:#0d1027;
 border-radius:24px;
 overflow:hidden;
-border:1px solid rgba(255,255,255,.06);
-box-shadow:0 0 25px rgba(110,40,255,.18);
+border:1px solid rgba(255,255,255,.05);
+box-shadow:0 0 25px rgba(110,40,255,.15);
 }
 
-.game-card img{
+.game-img{
+height:155px;
 width:100%;
-height:150px;
 object-fit:cover;
 }
 
-.game-info{
+.game-content{
 padding:14px;
 }
 
-.game-info h3{
-font-size:24px;
+.game-content h3{
+font-size:25px;
 margin-bottom:8px;
 }
 
-.game-info p{
-color:#9ea6cf;
-margin-bottom:10px;
+.game-content p{
+font-size:17px;
+color:#9ca4cd;
+margin-bottom:12px;
 }
 
 .play-btn{
 width:100%;
-height:48px;
+height:50px;
 border:none;
-border-radius:14px;
-background:linear-gradient(90deg,#7d5cff,#cf49ff);
+border-radius:16px;
+background:linear-gradient(90deg,#7b5cff,#d04dff);
 color:white;
 font-size:18px;
 font-weight:700;
 }
 
-/* BOTTOM NAV */
+/* BOTTOM */
 
 .bottom-nav{
 position:fixed;
 bottom:0;
 left:0;
 width:100%;
-background:#0a0d1d;
-border-top:1px solid rgba(255,255,255,.08);
+background:#090d1d;
+border-top:1px solid rgba(255,255,255,.07);
 display:flex;
 justify-content:space-around;
+align-items:center;
 padding:14px 0;
 z-index:999;
 }
 
 .nav-item{
 text-align:center;
-color:#8f96c5;
 font-size:15px;
+color:#9ca4cd;
 }
 
 .nav-item.active{
@@ -405,25 +424,27 @@ color:#ff4fd8;
 }
 
 .center-btn{
-width:72px;
-height:72px;
-background:linear-gradient(180deg,#ff4fd8,#875bff);
+width:78px;
+height:78px;
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:34px;
-margin-top:-36px;
-box-shadow:0 0 35px rgba(255,0,200,.55);
-color:white;
+font-size:36px;
+margin-top:-40px;
+
+background:linear-gradient(180deg,#ff4fd8,#8b5cff);
+
+box-shadow:
+0 0 40px rgba(255,0,212,.55);
 }
 
-/* GAME MODAL */
+/* MODAL */
 
 .modal{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.88);
+background:rgba(0,0,0,.92);
 display:none;
 align-items:center;
 justify-content:center;
@@ -431,8 +452,8 @@ z-index:99999;
 }
 
 .modal-box{
-width:95%;
-height:90%;
+width:96%;
+height:92%;
 background:#0d1027;
 border-radius:24px;
 overflow:hidden;
@@ -443,13 +464,13 @@ position:relative;
 position:absolute;
 top:15px;
 left:15px;
-width:45px;
-height:45px;
-background:#ff4fd8;
+width:48px;
+height:48px;
 border:none;
 border-radius:14px;
+background:#ff4fd8;
 color:white;
-font-size:24px;
+font-size:25px;
 z-index:10;
 }
 
@@ -457,7 +478,20 @@ iframe{
 width:100%;
 height:100%;
 border:none;
-background:black;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:430px){
+
+.hero-title{
+font-size:58px;
+}
+
+.hero-sub{
+font-size:17px;
+}
+
 }
 
 </style>
@@ -469,25 +503,25 @@ background:black;
 
 <!-- HEADER -->
 
-<div class="topbar">
+<div class="header">
 
-<div class="menu-btn">☰</div>
+<div class="icon-btn">☰</div>
 
 <div class="logo">DidoGame</div>
 
-<div class="notify-btn">🔔</div>
+<div class="icon-btn">🔔</div>
 
 </div>
 
 <!-- SEARCH -->
 
-<div class="search-area">
+<div class="search-row">
 
-<div class="search-box">
+<div class="search">
 🔍 ابحث عن لعبة...
 </div>
 
-<div class="vip-btn">
+<div class="vip">
 👑 حساب مميز
 </div>
 
@@ -500,51 +534,58 @@ background:black;
 <div class="hero-content">
 
 <div class="hero-title">
-Dido Game
+Dido<br>Game
 </div>
 
-<div class="hero-text">
-عالم الألعاب الأنمي والسيارات والرعب
+<div class="hero-sub">
+عالم واحد يجمع كل ألعابك المفضلة مجاناً 100%
 </div>
 
 <button class="hero-btn">
-🎮 ابدأ اللعب الآن
+🎮 استكشف الألعاب الآن
 </button>
 
 </div>
 
+<div class="dots">
+<div class="dot active"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
 </div>
 
-<!-- CATEGORY -->
+</div>
+
+<!-- CATEGORIES -->
 
 <div class="categories">
 
-<div class="cat">
-<div class="cat-icon">👻</div>
+<div class="category">
+<div class="category-icon">👻</div>
 <h4>الرعب</h4>
 <p>80 لعبة</p>
 </div>
 
-<div class="cat">
-<div class="cat-icon">⚔️</div>
-<h4>قتال</h4>
+<div class="category">
+<div class="category-icon">✊</div>
+<h4>القتال</h4>
 <p>105 لعبة</p>
 </div>
 
-<div class="cat">
-<div class="cat-icon">⚽</div>
-<h4>رياضة</h4>
+<div class="category">
+<div class="category-icon">⚽</div>
+<h4>الرياضة</h4>
 <p>189 لعبة</p>
 </div>
 
-<div class="cat">
-<div class="cat-icon">🚗</div>
-<h4>سباقات</h4>
+<div class="category">
+<div class="category-icon">🚗</div>
+<h4>السيارات</h4>
 <p>142 لعبة</p>
 </div>
 
-<div class="cat">
-<div class="cat-icon">🧩</div>
+<div class="category">
+<div class="category-icon">🧩</div>
 <h4>ألغاز</h4>
 <p>178 لعبة</p>
 </div>
@@ -553,9 +594,7 @@ Dido Game
 
 <!-- PLAYERS -->
 
-<div class="section">
-
-<div class="section-title">
+<div class="title">
 <h2>🏆 أفضل اللاعبين</h2>
 <span>عرض المزيد</span>
 </div>
@@ -564,22 +603,26 @@ Dido Game
 
 <div class="player">
 <img src="https://i.pravatar.cc/150?img=12">
-<h4>Shadow</h4>
+<h3>Shadow</h3>
 <p>25,680 🏆</p>
 </div>
 
 <div class="player">
 <img src="https://i.pravatar.cc/150?img=15">
-<h4>HunterX</h4>
+<h3>HunterX</h3>
 <p>18,420 🏆</p>
 </div>
 
 <div class="player">
 <img src="https://i.pravatar.cc/150?img=32">
-<h4>Nova</h4>
+<h3>Nova</h3>
 <p>14,230 🏆</p>
 </div>
 
+<div class="player">
+<img src="https://i.pravatar.cc/150?img=18">
+<h3>PixelKing</h3>
+<p>11,300 🏆</p>
 </div>
 
 </div>
@@ -589,17 +632,20 @@ Dido Game
 <div class="banner">
 
 <div class="banner-content">
+
 <h2>اشترك الآن</h2>
-<button>اشتراك</button>
+
+<button class="banner-btn">
+اشتراك
+</button>
+
 </div>
 
 </div>
 
 <!-- GAMES -->
 
-<div class="section">
-
-<div class="section-title">
+<div class="title">
 <h2>⚡ أحدث الألعاب</h2>
 <span>عرض الكل</span>
 </div>
@@ -608,9 +654,10 @@ Dido Game
 
 <div class="game-card">
 
-<img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop">
+<img class="game-img"
+src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop">
 
-<div class="game-info">
+<div class="game-content">
 
 <h3>Anime Fighters</h3>
 
@@ -627,9 +674,10 @@ onclick="openGame('https://html5.gamemonetize.com/8t8q8mwd9u4x4jjw5kj2jvpx9v7o7j
 
 <div class="game-card">
 
-<img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d?q=80&w=800&auto=format&fit=crop">
+<img class="game-img"
+src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d?q=80&w=1200&auto=format&fit=crop">
 
-<div class="game-info">
+<div class="game-content">
 
 <h3>Car Racing</h3>
 
@@ -646,9 +694,10 @@ onclick="openGame('https://html5.gamemonetize.com/6r3j9u9xpx0v8dsvb2b8bxw66d0m3q
 
 <div class="game-card">
 
-<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=800&auto=format&fit=crop">
+<img class="game-img"
+src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop">
 
-<div class="game-info">
+<div class="game-content">
 
 <h3>Zombie Hunter</h3>
 
@@ -667,9 +716,7 @@ onclick="openGame('https://html5.gamemonetize.com/nyfww6nsd2l9jvcc6bspw3n0wz8qz5
 
 </div>
 
-</div>
-
-<!-- MODAL -->
+<!-- GAME MODAL -->
 
 <div class="modal" id="gameModal">
 
@@ -683,7 +730,7 @@ onclick="openGame('https://html5.gamemonetize.com/nyfww6nsd2l9jvcc6bspw3n0wz8qz5
 
 </div>
 
-<!-- NAV -->
+<!-- BOTTOM NAV -->
 
 <div class="bottom-nav">
 
@@ -709,7 +756,7 @@ onclick="openGame('https://html5.gamemonetize.com/nyfww6nsd2l9jvcc6bspw3n0wz8qz5
 
 </div>
 
-<!-- AUDIO -->
+<!-- MUSIC -->
 
 <audio autoplay loop>
 <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8f0a8b3f1.mp3?filename=cyberpunk-gaming-ambient-110997.mp3" type="audio/mpeg">
