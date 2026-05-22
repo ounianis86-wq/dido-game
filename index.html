@@ -665,7 +665,269 @@ box-shadow:0 0 25px #ff00aa;
 </div>
 
 </nav>
+<!-- =========================
+     نافذة تشغيل الألعاب
+========================= -->
 
+<div id="gameModal" class="game-modal">
+
+<div class="game-box">
+
+<div class="game-top">
+
+<h2 id="gameTitle">🎮 اللعبة</h2>
+
+<button class="close-game" onclick="closeGame()">✖</button>
+
+</div>
+
+<iframe id="gameFrame" src=""></iframe>
+
+</div>
+
+</div>
+
+<!-- =========================
+     موسيقى الخلفية
+========================= -->
+
+<audio id="bgMusic" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=cyberpunk-gaming-112191.mp3" type="audio/mp3">
+</audio>
+
+<button id="musicBtn" onclick="toggleMusic()">
+🎵
+</button>
+
+<style>
+
+/* نافذة اللعبة */
+
+.game-modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.85);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+backdrop-filter:blur(10px);
+}
+
+.game-box{
+width:95%;
+height:90%;
+background:#08111f;
+border-radius:25px;
+overflow:hidden;
+border:2px solid #ff00aa;
+box-shadow:0 0 40px #ff00aa88;
+display:flex;
+flex-direction:column;
+}
+
+.game-top{
+height:70px;
+background:linear-gradient(45deg,#ff00aa,#7b4dff);
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 25px;
+font-size:24px;
+font-weight:bold;
+}
+
+.close-game{
+width:45px;
+height:45px;
+border:none;
+border-radius:50%;
+background:white;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+}
+
+#gameFrame{
+flex:1;
+width:100%;
+border:none;
+background:black;
+}
+
+/* زر الموسيقى */
+
+#musicBtn{
+position:fixed;
+bottom:120px;
+left:20px;
+width:70px;
+height:70px;
+border:none;
+border-radius:50%;
+background:linear-gradient(45deg,#ff00aa,#7b4dff);
+color:white;
+font-size:30px;
+z-index:999;
+box-shadow:0 0 25px #ff00aa;
+cursor:pointer;
+}
+
+/* تأثيرات الألعاب */
+
+.game{
+transition:0.4s;
+cursor:pointer;
+}
+
+.game:hover{
+transform:translateY(-10px) scale(1.03);
+box-shadow:0 0 30px #ff00aa55;
+}
+
+.category{
+transition:0.4s;
+cursor:pointer;
+}
+
+.category:hover{
+transform:scale(1.08);
+border-color:#ff00aa;
+}
+
+/* حركة للواجهة */
+
+.hero{
+animation:glow 5s infinite alternate;
+}
+
+@keyframes glow{
+
+0%{
+box-shadow:0 0 25px #ff00aa44;
+}
+
+100%{
+box-shadow:0 0 45px #8c52ff;
+}
+
+}
+
+</style>
+
+<script>
+
+/* =========================
+   روابط الألعاب الحقيقية
+========================= */
+
+const games = {
+
+"Anime Fighters":
+"https://www.crazygames.com/embed/swordbattle-io",
+
+"Car Racing":
+"https://www.crazygames.com/embed/madalin-stunt-cars-2",
+
+"Zombie Hunter":
+"https://www.crazygames.com/embed/dead-zed"
+
+};
+
+/* =========================
+   تشغيل اللعبة
+========================= */
+
+document.querySelectorAll(".play").forEach((btn,index)=>{
+
+btn.addEventListener("click",()=>{
+
+const title =
+document.querySelectorAll(".game-info h3")[index].innerText;
+
+openGame(title);
+
+});
+
+});
+
+function openGame(title){
+
+document.getElementById("gameTitle").innerText =
+"🎮 " + title;
+
+document.getElementById("gameFrame").src =
+games[title];
+
+document.getElementById("gameModal").style.display =
+"flex";
+
+}
+
+/* =========================
+   إغلاق اللعبة
+========================= */
+
+function closeGame(){
+
+document.getElementById("gameModal").style.display =
+"none";
+
+document.getElementById("gameFrame").src = "";
+
+}
+
+/* =========================
+   الموسيقى
+========================= */
+
+const music =
+document.getElementById("bgMusic");
+
+let playing = false;
+
+function toggleMusic(){
+
+if(!playing){
+
+music.play();
+
+playing = true;
+
+document.getElementById("musicBtn").innerHTML =
+"🔊";
+
+}else{
+
+music.pause();
+
+playing = false;
+
+document.getElementById("musicBtn").innerHTML =
+"🎵";
+
+}
+
+}
+
+/* تشغيل تلقائي بعد أول لمس */
+
+document.body.addEventListener("click",()=>{
+
+if(!playing){
+
+music.play();
+
+playing = true;
+
+document.getElementById("musicBtn").innerHTML =
+"🔊";
+
+}
+
+},{once:true});
+
+</script>
 </body>
 
 </html>
