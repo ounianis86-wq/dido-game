@@ -192,7 +192,7 @@
 
         /* ترتيب اللاعبين - نيون */
         .ranking-section {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             text-align: center;
         }
         
@@ -318,10 +318,10 @@
             background: linear-gradient(135deg, #ff44ff15, #00ffff15);
             border: 2px solid #ff44ff;
             border-radius: 16px;
-            padding: 15px 10px;
-            margin: 8px 0 12px 0;
+            padding: 10px 10px;
+            margin: 5px 0 8px 0;
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: #ffaa88;
             box-shadow: 0 0 25px #ff44ff, inset 0 0 15px #ff44ff20;
             animation: adGlow 2s ease-in-out infinite;
@@ -334,16 +334,16 @@
         
         .ad-space span {
             display: block;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             color: #ff88ff;
             margin-top: 5px;
             text-shadow: 0 0 5px #ff44ff;
         }
         
         .ad-space .ad-icon {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             animation: bounce 1s ease-in-out infinite;
         }
         
@@ -591,13 +591,13 @@
             display: none;
         }
         
-        /* عناوين متوهجة */
+        /* عناوين متوهجة صغيرة */
         .section-title {
             color: white;
-            font-size: 0.7rem;
-            margin: 8px 0 5px 0;
+            font-size: 0.6rem;
+            margin: 5px 0 3px 0;
             text-align: center;
-            text-shadow: 0 0 10px #ff44ff, 0 0 5px #00ffff;
+            text-shadow: 0 0 8px #ff44ff;
             letter-spacing: 1px;
         }
     </style>
@@ -621,12 +621,10 @@
             </div>
             
             <div class="ranking-section">
-                <div class="section-title">🏆 أفضل اللاعبين 🏆</div>
                 <div class="ranking-circles" id="rankingList"></div>
             </div>
             
             <div class="categories-section">
-                <div class="section-title">🎮 أنواع الألعاب النيونية 🎮</div>
                 <div class="categories" id="categoriesList">
                     <div class="cat-badge" data-cat="action">🎯 أكشن</div>
                     <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
@@ -642,7 +640,6 @@
                 <span>❗ اشترك في التسجيل لإزالة الإعلانات ❗</span>
             </div>
             
-            <div class="section-title">🔥 ألعاب نيونية 🔥</div>
             <div class="games-wrapper">
                 <div class="two-rows" id="gamesContainer"></div>
             </div>
@@ -650,7 +647,6 @@
 
         <div id="categoryPage" class="page page-hidden">
             <button class="back-btn" id="backToHomeBtn">🔙 العودة إلى النيون</button>
-            <div class="section-title" id="categoryTitle"></div>
             <div class="two-rows" id="categoryGamesContainer"></div>
         </div>
 
@@ -748,7 +744,6 @@
         const mid = Math.ceil(filtered.length / 2);
         const row1 = filtered.slice(0, mid);
         const row2 = filtered.slice(mid);
-        document.getElementById('categoryTitle').innerHTML = `🎮 ${categoryName} النيونية 🎮`;
         document.getElementById('categoryGamesContainer').innerHTML = `
             <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
             <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
@@ -840,18 +835,28 @@
     document.getElementById('backToHomeBtn').addEventListener('click', ()=> showHomePage());
     document.getElementById('gameModal').addEventListener('click', (e)=>{ if(e.target === document.getElementById('gameModal')) closeGame(); });
     
-    const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3');
+    // 🎵 موسيقى إلكترونية حماسية جديدة 🎵
+    const music = new Audio('https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808f0bf07.mp3?filename=electronic-rock-116199.mp3');
     music.loop = true;
-    music.volume = 0.1;
+    music.volume = 0.12;
     let playing = false;
     const musicBottomBtn = document.getElementById('musicBottomBtn');
     musicBottomBtn.onclick = () => {
-        if(playing) { music.pause(); musicBottomBtn.innerHTML = '🎵 تشغيل'; }
-        else { music.play().catch(e=>{}); musicBottomBtn.innerHTML = '🔇 إيقاف'; }
+        if(playing) { 
+            music.pause(); 
+            musicBottomBtn.innerHTML = '🎵 تشغيل'; 
+        } else { 
+            music.play().catch(e=>console.log('Auto-play prevented')); 
+            musicBottomBtn.innerHTML = '🔇 إيقاف'; 
+        }
         playing = !playing;
     };
     document.body.addEventListener('touchstart', ()=>{
-        if(!playing) { music.play().catch(e=>{}); playing=true; musicBottomBtn.innerHTML='🔇 إيقاف'; }
+        if(!playing) { 
+            music.play().catch(e=>console.log('Auto-play prevented')); 
+            playing=true; 
+            musicBottomBtn.innerHTML='🔇 إيقاف'; 
+        }
     }, {once:true});
     
     updateRanking();
