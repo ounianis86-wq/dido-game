@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DidoGame - 3D Anime Games | العب مباشرة</title>
+    <title>DidoGame - 3D Anime City | العب مباشرة</title>
     <style>
         * {
             margin: 0;
@@ -14,525 +14,504 @@
 
         body {
             background: #05050f;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
             padding: 10px;
         }
 
-        .app {
-            max-width: 400px;
+        /* خلفية مدينة أنمي 3D */
+        .anime-city-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            background: #0a0a1a;
+            height: 100%;
+            background-image: url('https://images5.alphacoders.com/134/1341100.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+        
+        .anime-city-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: -1;
+        }
+
+        .app {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            background: rgba(10,10,30,0.85);
+            backdrop-filter: blur(5px);
             border-radius: 40px;
             overflow: hidden;
-            height: 95vh;
-            max-height: 700px;
-            display: flex;
-            flex-direction: column;
+            min-height: 90vh;
             box-shadow: 0 0 40px #ff00ff30;
             position: relative;
         }
 
-        .bg-neon {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 10%, #1a0033, #000000);
-            z-index: 0;
-        }
-
         .content {
-            position: relative;
-            z-index: 2;
-            padding: 12px 14px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            scrollbar-width: none;
+            padding: 15px;
         }
 
-        .content::-webkit-scrollbar {
-            display: none;
-        }
-
-        .top-bar {
+        /* شخصية أنمي بنظرة تحدي */
+        .anime-hero {
+            background: linear-gradient(135deg, #1a0a3a80, #0a0a2a80);
+            border-radius: 30px;
+            padding: 15px;
+            margin-bottom: 15px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .logo-small {
-            font-size: 1.1rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .premium-badge {
-            background: linear-gradient(135deg, #ff44ff, #aa44ff);
-            padding: 2px 10px;
-            border-radius: 40px;
-            color: white;
-            font-size: 0.6rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .hero-banner {
-            background: linear-gradient(135deg, #1a0a3a, #0a0a2a);
-            border-radius: 24px;
-            margin-bottom: 10px;
-            border: 1px solid #ff44ff55;
-        }
-
-        .hero-image {
-            width: 100%;
-            min-height: 150px;
-            background-image: url('https://images6.alphacoders.com/134/1341100.png');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: flex-end;
+            gap: 15px;
+            border: 1px solid #ff44ff;
+            flex-wrap: wrap;
             justify-content: center;
-            padding: 12px;
-            border-radius: 24px;
         }
-
-        .hero-text {
+        
+        .character-img {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(145deg, #ff44ff30, #aa44ff30);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border: 2px solid #ff44ff;
+            position: relative;
+        }
+        
+        .character-info {
             text-align: center;
-            width: 100%;
         }
-
-        .hero-text h2 {
-            font-size: 1.2rem;
+        
+        .character-info h2 {
             background: linear-gradient(135deg, #ffff00, #ff44ff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-        }
-
-        .hero-text p {
-            color: white;
-            font-size: 0.65rem;
-            margin: 4px 0;
-        }
-
-        .free-badge {
-            display: inline-block;
-            background: #ff3366;
-            padding: 2px 10px;
-            border-radius: 40px;
-            font-size: 0.6rem;
-            font-weight: bold;
-        }
-
-        .discover-btn {
-            background: linear-gradient(135deg, #8a2be2, #4a00e0);
-            border: none;
-            padding: 5px 12px;
-            border-radius: 40px;
-            color: white;
-            font-weight: bold;
-            font-size: 0.65rem;
-            margin-top: 6px;
-            cursor: pointer;
-        }
-
-        .categories {
-            display: flex;
-            justify-content: space-between;
-            gap: 6px;
-            margin-bottom: 12px;
-        }
-
-        .cat-item {
-            text-align: center;
-            flex: 1;
-            cursor: pointer;
-        }
-
-        .cat-icon {
-            background: #1a1a3a;
-            border-radius: 16px;
-            padding: 5px;
             font-size: 1.1rem;
         }
-
-        .cat-item span {
+        
+        .tshirt-text {
+            background: #ff3366;
+            padding: 4px 12px;
+            border-radius: 20px;
             color: white;
-            font-size: 0.55rem;
+            font-size: 0.7rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        
+        .controller-icon {
+            font-size: 2rem;
+            display: inline-block;
+            animation: shake 0.5s ease infinite;
+        }
+        
+        @keyframes shake {
+            0%,100% { transform: rotate(0deg); }
+            50% { transform: rotate(10deg); }
         }
 
+        /* premium banner */
+        .premium-banner {
+            background: linear-gradient(135deg, #ff44ff, #aa44ff);
+            border-radius: 20px;
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+        
+        .premium-banner span {
+            color: white;
+            font-size: 0.7rem;
+        }
+        
+        .premium-banner .upgrade {
+            background: #ffcc00;
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        /* تصنيف اللاعبين */
+        .ranking-section {
+            background: #1a1a3a80;
+            border-radius: 20px;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ff44ff55;
+        }
+        
         .section-title {
             color: white;
             font-size: 0.8rem;
-            margin: 12px 0 6px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
-
-        .section-title span {
-            width: 3px;
-            height: 14px;
-            background: #ff44ff;
-            border-radius: 2px;
-        }
-
-        /* 🔥 صفين متوازيين فقط مع تمرير أفقي */
-        .two-rows-container {
+        
+        .ranking-list {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 8px;
+        }
+        
+        .rank-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #0a0a1a;
+            padding: 8px;
+            border-radius: 15px;
+        }
+        
+        .rank-number {
+            width: 30px;
+            height: 30px;
+            background: #ff44ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .rank-avatar {
+            width: 35px;
+            height: 35px;
+            background: #ff44ff30;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .rank-name {
+            flex: 1;
+            color: white;
+            font-size: 0.8rem;
+        }
+        
+        .rank-points {
+            color: #ffcc00;
+            font-weight: bold;
+            font-size: 0.7rem;
         }
 
+        /* أنواع الألعاب */
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .cat-badge {
+            background: #ff44ff30;
+            border: 1px solid #ff44ff;
+            padding: 6px 15px;
+            border-radius: 30px;
+            color: white;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        /* صفين الألعاب */
+        .two-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
         .game-row {
             display: flex;
             gap: 12px;
             overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            padding-bottom: 8px;
+            padding-bottom: 10px;
         }
-
+        
         .game-row::-webkit-scrollbar {
             display: none;
         }
-
-        /* بطاقة اللعبة */
+        
         .game-card {
-            min-width: 130px;
-            width: 130px;
+            min-width: 140px;
+            width: 140px;
             background: linear-gradient(145deg, #0f0f2a, #0a0a1a);
             border-radius: 20px;
             padding: 10px;
             text-align: center;
             border: 1px solid #ff44ff40;
             cursor: pointer;
-            transition: all 0.2s ease;
-            scroll-snap-align: start;
         }
-
-        .game-card:hover {
-            transform: translateY(-5px);
-            border-color: #ff44ff;
-            box-shadow: 0 0 20px #ff44ff;
-        }
-
-        /* صورة أنمي 3D */
-        .game-img-3d {
+        
+        .game-img {
             width: 100%;
             height: 100px;
             background-size: cover;
             background-position: center;
             border-radius: 16px;
             margin-bottom: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-
-        .game-card h4 {
+        
+        .game-title {
             color: white;
             font-size: 0.7rem;
-            margin: 5px 0;
         }
 
-        .game-card p {
-            color: #aa88ff;
-            font-size: 0.55rem;
-        }
-
-        .new-badge {
-            background: #ff3366;
-            color: white;
-            font-size: 0.5rem;
-            padding: 2px 8px;
+        /* اعلان بين المستويات */
+        .ad-popup {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000000dd;
+            backdrop-filter: blur(10px);
+            border: 2px solid #ff44ff;
             border-radius: 20px;
-            display: inline-block;
-            margin-top: 4px;
-        }
-
-        .players-scroll {
-            display: flex;
-            gap: 12px;
-            overflow-x: auto;
-            padding-bottom: 8px;
-        }
-
-        .players-scroll::-webkit-scrollbar {
+            padding: 15px 25px;
+            text-align: center;
+            z-index: 1000;
             display: none;
         }
-
-        .player {
-            text-align: center;
-            min-width: 60px;
+        
+        .ad-popup button {
+            background: #ff44ff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin-top: 10px;
             cursor: pointer;
         }
 
-        .player-avatar {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(145deg, #ff44ff30, #aa44ff30);
-            border-radius: 50%;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            border: 1px solid #ff44ff;
-        }
-
-        .player-name {
-            color: white;
-            font-size: 0.6rem;
-            font-weight: bold;
-        }
-
+        /* نافذة اللعبة */
         .game-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 1000;
+            background: #000000ee;
+            z-index: 2000;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            backdrop-filter: blur(10px);
+            justify-content: center;
         }
+        
         .game-modal iframe {
             width: 95%;
-            height: 85%;
-            border: 2px solid #ff44ff;
+            height: 80%;
             border-radius: 20px;
-            background: black;
+            border: 2px solid #ff44ff;
         }
+        
         .close-modal {
             position: absolute;
             top: 20px;
             right: 20px;
             background: #ff3366;
-            color: white;
             width: 40px;
             height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
             font-size: 24px;
             cursor: pointer;
-            font-weight: bold;
-            z-index: 1001;
         }
-        .game-title-modal {
-            color: white;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            text-align: center;
-        }
-        .music-btn {
-            position: fixed;
-            bottom: 15px;
-            right: 15px;
-            background: #000000aa;
-            backdrop-filter: blur(10px);
-            border: 1px solid #00ffff;
-            border-radius: 50px;
-            padding: 4px 12px;
-            color: #00ffff;
-            cursor: pointer;
-            font-size: 0.6rem;
-            z-index: 100;
-        }
+        
         .hidden {
             display: none;
         }
-        .row-label {
-            color: #ff88ff;
-            font-size: 0.7rem;
-            margin-bottom: 5px;
-            padding-right: 5px;
+        
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #000000aa;
+            backdrop-filter: blur(5px);
+            padding: 5px 12px;
+            border-radius: 30px;
+            color: #0ff;
+            cursor: pointer;
+            z-index: 100;
         }
     </style>
 </head>
 <body>
+<div class="anime-city-bg"></div>
 <div class="app">
-    <div class="bg-neon"></div>
     <div class="content">
-        <div class="top-bar">
-            <div class="logo-small">🎮 DidoGame</div>
-            <div class="premium-badge" onclick="alert('حساب مميز - سيتم تفعيله قريباً')">👑 حساب مميز</div>
-        </div>
-
-        <div class="hero-banner">
-            <div class="hero-image">
-                <div class="hero-text">
-                    <h2>DidoGame</h2>
-                    <p>🌍 عالم واحد لكل ألعابك - العب مباشرة</p>
-                    <div class="free-badge">✨ مجانية 100% ✨</div>
-                    <button class="discover-btn" onclick="openGame('https://www.onlinegames.io/games/2023/unity/dino-fury/index.html', 'Dino Fury')">اكتشف ▶</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="categories">
-            <div class="cat-item" onclick="openGame('https://html5.gamedistribution.com/6e3f6b7e8b9a4c2e8c4f5a1b3c7d9e2e/', 'لعبة رعب')"><div class="cat-icon">🎃</div><span>رعب</span></div>
-            <div class="cat-item" onclick="openGame('https://html5.gamedistribution.com/8f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c/', 'لعبة قتال')"><div class="cat-icon">🥊</div><span>قتال</span></div>
-            <div class="cat-item" onclick="openGame('https://www.crazygames.com/embed/football-legends', 'Football Legends')"><div class="cat-icon">⚽</div><span>رياضة</span></div>
-            <div class="cat-item" onclick="openGame('https://www.crazygames.com/embed/monster-truck-stunts', 'Monster Truck')"><div class="cat-icon">🏎️</div><span>سباقات</span></div>
-            <div class="cat-item" onclick="openGame('https://www.crazygames.com/embed/block-games/puzzle-games', 'Brain Puzzle')"><div class="cat-icon">🧩</div><span>ألغاز</span></div>
-        </div>
-
-        <div class="section-title"><span></span> ⭐ أبرز اللاعبين</div>
-        <div class="players-scroll">
-            <div class="player" onclick="alert('Shadow - مستوى 99')"><div class="player-avatar">😎</div><div class="player-name">Shadow</div></div>
-            <div class="player" onclick="alert('HunterX - مستوى 87')"><div class="player-avatar">🗡️</div><div class="player-name">HunterX</div></div>
-            <div class="player" onclick="alert('Nova - مستوى 95')"><div class="player-avatar">✨</div><div class="player-name">Nova</div></div>
-            <div class="player" onclick="alert('PixelKing - مستوى 100')"><div class="player-avatar">👑</div><div class="player-name">PixelKing</div></div>
-            <div class="player" onclick="alert('Zero - مستوى 88')"><div class="player-avatar">⚡</div><div class="player-name">Zero</div></div>
-            <div class="player" onclick="alert('Kira - مستوى 92')"><div class="player-avatar">💜</div><div class="player-name">Kira</div></div>
-        </div>
-
-        <div class="section-title"><span></span> 🎮 جميع الألعاب</div>
         
-        <!-- 🔥 صفين متوازيين فقط (هذا هو المطلوب) -->
-        <div class="two-rows-container">
-            <!-- الصف الأول -->
-            <div class="game-row">
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/sonic-the-hedgehog', 'Sonic')">
-                    <div class="game-img-3d" style="background-image: url('https://images6.alphacoders.com/118/1185678.jpg');"></div>
-                    <h4>Sonic</h4>
-                    <p>3D Action</p>
-                    <div class="new-badge">جديد</div>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/paper-io-2', 'Paper.io 2')">
-                    <div class="game-img-3d" style="background-image: url('https://images5.alphacoders.com/133/1338445.png');"></div>
-                    <h4>Paper.io 2</h4>
-                    <p>Arcade</p>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/subway-surfers', 'Subway Surfers')">
-                    <div class="game-img-3d" style="background-image: url('https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg');"></div>
-                    <h4>Subway Surfers</h4>
-                    <p>Runner</p>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/temple-run-2', 'Temple Run 2')">
-                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/pubg-mobile-squad-4k-8q.jpg');"></div>
-                    <h4>Temple Run 2</h4>
-                    <p>Adventure</p>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/minecraft-classic', 'Minecraft')">
-                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/minecraft-creeper-4k-f8.jpg');"></div>
-                    <h4>Minecraft</h4>
-                    <p>Sandbox</p>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/gta-san-andreas', 'GTA')">
-                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/gta-san-andreas-2021-4k-s0.jpg');"></div>
-                    <h4>GTA Style</h4>
-                    <p>Action</p>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/call-of-duty', 'Call of Duty')">
-                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-2020-04-m3.jpg');"></div>
-                    <h4>Call of Duty</h4>
-                    <p>FPS</p>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/free-fire', 'Free Fire')">
-                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/free-fire-2020-game-4k-g6.jpg');"></div>
-                    <h4>Free Fire</h4>
-                    <p>Battle Royale</p>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/hill-climb-racing', 'Hill Climb')">
-                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg');"></div>
-                    <h4>Hill Climb</h4>
-                    <p>Racing</p>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/among-us-online', 'Among Us')">
-                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg');"></div>
-                    <h4>Among Us</h4>
-                    <p>Social</p>
-                </div>
+        <!-- شخصية أنمي بنظرة تحدي -->
+        <div class="anime-hero">
+            <div class="character-img">
+                😤
+                <div class="controller-icon">🎮</div>
             </div>
-
-            <!-- الصف الثاني -->
-            <div class="game-row">
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/slope', 'Slope')">
-                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/slope-game-hd.jpg');"></div>
-                    <h4>Slope</h4>
-                    <p>3D Racing</p>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/get-on-top', 'Get On Top')">
-                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/wrestling-game-art-4k-jz.jpg');"></div>
-                    <h4>Get On Top</h4>
-                    <p>Fighting</p>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/shell-shockers', 'Shell Shockers')">
-                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/egg-game-4k-v9.jpg');"></div>
-                    <h4>Shell Shockers</h4>
-                    <p>Shooting</p>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/basketball-stars', 'Basketball Stars')">
-                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/basketball-4k-2021-6m.jpg');"></div>
-                    <h4>Basketball Stars</h4>
-                    <p>Sports</p>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/clash-royale', 'Clash Royale')">
-                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/clash-royale-4k-2020-3s.jpg');"></div>
-                    <h4>Clash Royale</h4>
-                    <p>Strategy</p>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/gardenscapes', 'Gardenscapes')">
-                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/gardenscapes-2020-2021-4k-47.jpg');"></div>
-                    <h4>Gardenscapes</h4>
-                    <p>Puzzle</p>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/street-fighter', 'Street Fighter')">
-                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg');"></div>
-                    <h4>Street Fighter</h4>
-                    <p>Fighting</p>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/mortal-kombat', 'Mortal Kombat')">
-                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/mortal-kombat-11-4k-2020-45.jpg');"></div>
-                    <h4>Mortal Kombat</h4>
-                    <p>Fighting</p>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/tekken', 'Tekken')">
-                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/tekken-7-4k-2s.jpg');"></div>
-                    <h4>Tekken</h4>
-                    <p>Fighting</p>
-                </div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/uno-online', 'Uno')">
-                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/uno-card-game-4k-2021-4r.jpg');"></div>
-                    <h4>Uno Online</h4>
-                    <p>Cards</p>
-                </div>
+            <div class="character-info">
+                <div class="tshirt-text">⚔️ Dido-Game ⚔️</div>
+                <h2>نظرة التحدي!</h2>
+                <p style="color:#aaa; font-size:0.6rem;">يد تحكم - لا عصا</p>
             </div>
+        </div>
+        
+        <!-- حساب مميز / مدفوع -->
+        <div class="premium-banner" id="premiumBtn">
+            <span>👑 حساب مميز</span>
+            <span class="upgrade">بدون إعلانات - ترقية</span>
+        </div>
+        
+        <!-- تصنيف اللاعبين المتميزين حسب النقاط -->
+        <div class="ranking-section">
+            <div class="section-title">🏆 ترتيب اللاعبين المتميزين</div>
+            <div class="ranking-list" id="rankingList">
+                <!-- يتم تعبئته بالجافاسكريبت -->
+            </div>
+        </div>
+        
+        <!-- أنواع الألعاب -->
+        <div class="section-title">🎮 أنواع الألعاب</div>
+        <div class="categories" id="categoriesList">
+            <div class="cat-badge" data-cat="all">الكل</div>
+            <div class="cat-badge" data-cat="action">أكشن</div>
+            <div class="cat-badge" data-cat="racing">سباقات</div>
+            <div class="cat-badge" data-cat="fighting">قتال</div>
+            <div class="cat-badge" data-cat="puzzle">ألغاز</div>
+        </div>
+        
+        <!-- صفين الألعاب -->
+        <div class="section-title">🔥 الألعاب المتاحة</div>
+        <div class="two-rows" id="gamesContainer">
+            <!-- يتم تعبئته بالجافاسكريبت -->
         </div>
     </div>
 </div>
 
+<!-- نافذة الإعلان -->
+<div id="adPopup" class="ad-popup">
+    <div>📺 إعلان قصير - 5 ثوانٍ</div>
+    <div style="font-size:12px; margin:5px 0;">شكراً لدعمك ❤️</div>
+    <button onclick="closeAd()">تخطي الإعلان ▶</button>
+</div>
+
+<!-- نافذة اللعبة -->
 <div id="gameModal" class="game-modal hidden">
     <div class="close-modal" onclick="closeGame()">✕</div>
-    <div class="game-title-modal" id="modalGameTitle">اسم اللعبة</div>
-    <iframe id="gameIframe" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <iframe id="gameIframe" src="" allowfullscreen></iframe>
 </div>
 
 <div class="music-btn" id="musicToggle">🎵 تشغيل</div>
 
 <script>
-    function openGame(gameUrl, gameTitle) {
+    // بيانات الألعاب (كل لعبة لها صورتها الخاصة)
+    const gamesData = [
+        { id:1, name:"Sonic", img:"https://images6.alphacoders.com/118/1185678.jpg", url:"https://www.crazygames.com/embed/sonic-the-hedgehog", cat:"action", points:150 },
+        { id:2, name:"Subway Surfers", img:"https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action", points:200 },
+        { id:3, name:"Temple Run 2", img:"https://images.hdqwalls.com/wallpapers/pubg-mobile-squad-4k-8q.jpg", url:"https://www.crazygames.com/embed/temple-run-2", cat:"action", points:180 },
+        { id:4, name:"Hill Climb", img:"https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg", url:"https://www.crazygames.com/embed/hill-climb-racing", cat:"racing", points:120 },
+        { id:5, name:"Slope", img:"https://images.hdqwalls.com/wallpapers/slope-game-hd.jpg", url:"https://www.crazygames.com/embed/slope", cat:"racing", points:220 },
+        { id:6, name:"Street Fighter", img:"https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg", url:"https://www.crazygames.com/embed/street-fighter", cat:"fighting", points:300 },
+        { id:7, name:"Mortal Kombat", img:"https://images.hdqwalls.com/wallpapers/mortal-kombat-11-4k-2020-45.jpg", url:"https://www.crazygames.com/embed/mortal-kombat", cat:"fighting", points:280 },
+        { id:8, name:"Among Us", img:"https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg", url:"https://www.crazygames.com/embed/among-us-online", cat:"puzzle", points:90 },
+        { id:9, name:"Gardenscapes", img:"https://images.hdqwalls.com/wallpapers/gardenscapes-2020-2021-4k-47.jpg", url:"https://www.crazygames.com/embed/gardenscapes", cat:"puzzle", points:70 },
+        { id:10, name:"Free Fire", img:"https://images.hdqwalls.com/wallpapers/free-fire-2020-game-4k-g6.jpg", url:"https://www.crazygames.com/embed/free-fire", cat:"action", points:350 },
+        { id:11, name:"Call of Duty", img:"https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-2020-04-m3.jpg", url:"https://www.crazygames.com/embed/call-of-duty", cat:"action", points:320 },
+        { id:12, name:"Basketball Stars", img:"https://images.hdqwalls.com/wallpapers/basketball-4k-2021-6m.jpg", url:"https://www.crazygames.com/embed/basketball-stars", cat:"racing", points:160 }
+    ];
+    
+    let isPremium = false;
+    let currentGame = null;
+    let adTimeout = null;
+    
+    // ترتيب اللاعبين حسب النقاط
+    function updateRanking() {
+        const sorted = [...gamesData].sort((a,b)=>b.points - a.points).slice(0,5);
+        const rankingList = document.getElementById('rankingList');
+        rankingList.innerHTML = sorted.map((g,idx)=>`
+            <div class="rank-item">
+                <div class="rank-number">${idx+1}</div>
+                <div class="rank-avatar">🎮</div>
+                <div class="rank-name">${g.name}</div>
+                <div class="rank-points">⭐ ${g.points} نقطة</div>
+            </div>
+        `).join('');
+    }
+    
+    // عرض الألعاب حسب النوع في صفين متوازيين
+    function renderGames(filterCat = "all") {
+        let filtered = gamesData;
+        if(filterCat !== "all") filtered = gamesData.filter(g=>g.cat === filterCat);
+        
+        // تقسيم إلى صفين متساويين
+        const mid = Math.ceil(filtered.length / 2);
+        const row1 = filtered.slice(0, mid);
+        const row2 = filtered.slice(mid);
+        
+        const container = document.getElementById('gamesContainer');
+        container.innerHTML = `
+            <div class="game-row" id="row1">
+                ${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}">
+                    <div class="game-img" style="background-image: url('${g.img}');"></div>
+                    <div class="game-title">${g.name}</div>
+                </div>`).join('')}
+            </div>
+            <div class="game-row" id="row2">
+                ${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}">
+                    <div class="game-img" style="background-image: url('${g.img}');"></div>
+                    <div class="game-title">${g.name}</div>
+                </div>`).join('')}
+            </div>
+        `;
+        
+        // إضافة أحداث النقر
+        document.querySelectorAll('.game-card').forEach(card=>{
+            card.addEventListener('click', (e)=>{
+                e.stopPropagation();
+                const url = card.getAttribute('data-url');
+                const name = card.getAttribute('data-name');
+                const id = parseInt(card.getAttribute('data-id'));
+                launchGame(url, name, id);
+            });
+        });
+    }
+    
+    // تشغيل اللعبة مع مراعاة الإعلانات
+    function launchGame(url, name, gameId) {
+        currentGame = {url, name, gameId};
+        if(isPremium) {
+            openGameDirect(url, name);
+        } else {
+            showAd(()=>{
+                openGameDirect(url, name);
+                // بعد اللعب إضافة نقاط وهمية لتحديث الترتيب
+                addPointsToPlayer(gameId, 10);
+            });
+        }
+    }
+    
+    function openGameDirect(url, name) {
         const modal = document.getElementById('gameModal');
         const iframe = document.getElementById('gameIframe');
-        const titleSpan = document.getElementById('modalGameTitle');
-        iframe.src = gameUrl;
-        titleSpan.innerText = gameTitle;
+        iframe.src = url;
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
     }
@@ -545,23 +524,70 @@
         document.body.style.overflow = 'auto';
     }
     
+    // إضافة نقاط للاعب وتحديث الترتيب
+    function addPointsToPlayer(gameId, points) {
+        const game = gamesData.find(g=>g.id === gameId);
+        if(game) {
+            game.points += points;
+            updateRanking();
+        }
+    }
+    
+    // إظهار الإعلان
+    function showAd(callback) {
+        const adDiv = document.getElementById('adPopup');
+        adDiv.style.display = 'block';
+        if(adTimeout) clearTimeout(adTimeout);
+        adTimeout = setTimeout(()=>{
+            closeAd(callback);
+        }, 5000);
+    }
+    
+    function closeAd(callback) {
+        const adDiv = document.getElementById('adPopup');
+        adDiv.style.display = 'none';
+        if(adTimeout) clearTimeout(adTimeout);
+        if(callback) callback();
+    }
+    
+    // الترقية للحساب المميز
+    document.getElementById('premiumBtn').addEventListener('click', ()=>{
+        isPremium = true;
+        alert('🎉 أصبحت حساباً مميزاً! لن تظهر لك إعلانات بعد الآن.');
+        document.getElementById('premiumBtn').style.opacity = '0.7';
+    });
+    
+    // فلترة الألعاب حسب النوع
+    document.querySelectorAll('.cat-badge').forEach(badge=>{
+        badge.addEventListener('click', ()=>{
+            const cat = badge.getAttribute('data-cat');
+            renderGames(cat);
+        });
+    });
+    
+    // إغلاق النافذة عند الضغط على خلفيتها
+    document.getElementById('gameModal').addEventListener('click', (e)=>{
+        if(e.target === document.getElementById('gameModal')) closeGame();
+    });
+    
+    // موسيقى خلفية
     const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3');
     music.loop = true;
-    music.volume = 0.15;
+    music.volume = 0.1;
     let playing = false;
-    const btn = document.getElementById('musicToggle');
-    btn.onclick = () => {
-        if (playing) { music.pause(); btn.innerHTML = '🎵 تشغيل'; } 
-        else { music.play().catch(e=>console.log(e)); btn.innerHTML = '🔇 إيقاف'; }
+    const musicBtn = document.getElementById('musicToggle');
+    musicBtn.onclick = () => {
+        if(playing) { music.pause(); musicBtn.innerHTML = '🎵 تشغيل'; }
+        else { music.play().catch(e=>{}); musicBtn.innerHTML = '🔇 إيقاف'; }
         playing = !playing;
     };
-    document.body.addEventListener('touchstart', () => {
-        if (!playing) { music.play().catch(()=>{}); playing = true; btn.innerHTML = '🔇 إيقاف'; }
-    }, { once: true });
+    document.body.addEventListener('touchstart', ()=>{
+        if(!playing) { music.play().catch(e=>{}); playing=true; musicBtn.innerHTML='🔇 إيقاف'; }
+    }, {once:true});
     
-    document.getElementById('gameModal').addEventListener('click', function(e) {
-        if (e.target === this) closeGame();
-    });
+    // تهيئة الصفحة
+    updateRanking();
+    renderGames();
 </script>
 </body>
 </html>
