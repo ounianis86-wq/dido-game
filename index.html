@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DidoGame - 3D Anime City | دردشة VIP خاصة</title>
+    <title>DidoGame - 3D Anime City | صوت مباشر VIP</title>
     <style>
         * {
             margin: 0;
@@ -83,7 +83,6 @@
             display: none;
         }
 
-        /* شخصية أنمي */
         .anime-hero {
             background: linear-gradient(135deg, #ff44ff20, #00ffff20);
             border-radius: 25px;
@@ -169,7 +168,6 @@
             text-shadow: 0 0 8px #ff44ff;
         }
 
-        /* ترتيب اللاعبين */
         .ranking-section {
             margin-bottom: 10px;
             text-align: center;
@@ -246,7 +244,6 @@
             margin-bottom: 2px;
         }
 
-        /* Categories */
         .categories-section {
             margin-top: 5px;
             margin-bottom: 5px;
@@ -277,7 +274,6 @@
             background: #ff44ff60;
         }
 
-        /* إعلان ثابت */
         .fixed-permanent-ad {
             background: linear-gradient(135deg, #ff44ff20, #00ffff20);
             border: 3px solid #ff44ff;
@@ -313,7 +309,6 @@
             padding-top: 5px;
         }
 
-        /* الألعاب */
         .games-wrapper {
             margin-top: 0;
             margin-bottom: 0;
@@ -376,7 +371,78 @@
             font-size: 0.4rem;
         }
 
-        /* ========== قسم الدردشة الخاصة ========== */
+        /* Voice chat section */
+        .voice-chat-section {
+            background: rgba(0,0,0,0.6);
+            border-radius: 20px;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #00ffff;
+            box-shadow: 0 0 15px #00ffff;
+        }
+        
+        .voice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .voice-title {
+            color: #00ffff;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .mic-btn {
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            padding: 5px 12px;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.6rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .mic-btn.off {
+            background: linear-gradient(135deg, #555, #333);
+            box-shadow: none;
+        }
+        
+        .speakers-list {
+            font-size: 0.6rem;
+            color: #ffaa88;
+            margin-top: 8px;
+            max-height: 60px;
+            overflow-y: auto;
+        }
+        
+        .speaker-chip {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(0,255,255,0.2);
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin: 3px;
+            gap: 5px;
+        }
+        
+        .voice-wave {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #0ff;
+            border-radius: 50%;
+            animation: pulse 0.8s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.3; transform: scale(0.8);}
+            100% { opacity: 1; transform: scale(1.2);}
+        }
+        
         .chat-private-section {
             background: rgba(0,0,0,0.4);
             border-radius: 20px;
@@ -442,7 +508,7 @@
             background: rgba(0,0,0,0.3);
             border-radius: 15px;
             padding: 8px;
-            height: 180px;
+            height: 160px;
             overflow-y: auto;
             margin-bottom: 8px;
         }
@@ -646,12 +712,10 @@
 <div class="app">
     <div class="content">
         
-        <!-- الصفحة الرئيسية -->
+        <!-- الرئيسية -->
         <div id="homePage" class="page">
             <div class="anime-hero">
-                <div class="character-img">
-                    <div class="controller-on-hand">🎮</div>
-                </div>
+                <div class="character-img"><div class="controller-on-hand">🎮</div></div>
                 <div class="character-info">
                     <div class="tshirt-text">⚡ DIDO-GAME ⚡</div>
                     <h2>😤 نظرة التحدي النيونية!</h2>
@@ -659,18 +723,13 @@
                 </div>
             </div>
             
-            <div class="ranking-section">
-                <div class="ranking-circles" id="rankingList"></div>
-            </div>
-            
-            <div class="categories-section">
-                <div class="categories" id="categoriesList">
-                    <div class="cat-badge" data-cat="action">🎯 أكشن</div>
-                    <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
-                    <div class="cat-badge" data-cat="fighting">🥊 قتال</div>
-                    <div class="cat-badge" data-cat="puzzle">🧩 ألغاز</div>
-                </div>
-            </div>
+            <div class="ranking-section"><div class="ranking-circles" id="rankingList"></div></div>
+            <div class="categories-section"><div class="categories" id="categoriesList">
+                <div class="cat-badge" data-cat="action">🎯 أكشن</div>
+                <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
+                <div class="cat-badge" data-cat="fighting">🥊 قتال</div>
+                <div class="cat-badge" data-cat="puzzle">🧩 ألغاز</div>
+            </div></div>
             
             <div class="fixed-permanent-ad" id="permanentAd">
                 <div class="fixed-permanent-ad-icon" id="adIcon">📺✨</div>
@@ -679,17 +738,24 @@
                 <div class="ad-refresh-note">🔄 يتغير تلقائياً كل 10 ثوانٍ</div>
             </div>
             
-            <div class="games-wrapper">
-                <div class="two-rows" id="gamesContainer"></div>
+            <div class="games-wrapper"><div class="two-rows" id="gamesContainer"></div></div>
+            
+            <!-- Voice Chat Section -->
+            <div class="voice-chat-section" id="voiceChatSection" style="display:none;">
+                <div class="voice-header">
+                    <span class="voice-title">🎙️ الدردشة الصوتية المباشرة</span>
+                    <button id="micToggleBtn" class="mic-btn off">🔴 ميكروفون OFF</button>
+                </div>
+                <div class="speakers-list" id="speakersList">🎤 المتحدثون: --</div>
+                <div style="font-size:0.5rem; color:#aaa; text-align:center;">⭐ تواصل صوتي فوري مع أعضاء الغرفة</div>
             </div>
             
-            <!-- قسم الدردشة الخاصة -->
+            <!-- Private Chat Room -->
             <div class="chat-private-section">
                 <div class="chat-header">
                     <span class="chat-title">🔐 غرفة الدردشة الخاصة</span>
                     <span class="room-badge" id="roomStatus">⚪ غير متصل</span>
                 </div>
-                
                 <div id="roomLoginArea">
                     <div class="room-controls">
                         <input type="text" id="userNameInput" class="room-input" placeholder="اسم المستخدم" value="أحمد">
@@ -706,21 +772,16 @@
                     </div>
                     <div class="online-users-list" id="availableRoomsList">📁 --</div>
                 </div>
-                
                 <div id="chatArea" class="hidden">
                     <div class="online-users-list" id="roomUsersList">👥 المتصلون: --</div>
-                    <div class="chat-messages-private" id="privateMessagesDiv">
-                        <div style="color:#888; text-align:center;">💬 مرحباً في غرفتك الخاصة</div>
-                    </div>
+                    <div class="chat-messages-private" id="privateMessagesDiv"></div>
                     <div class="chat-input-private">
                         <input type="text" id="publicMessageInput" class="chat-input-field" placeholder="رسالة عامة..." onkeypress="if(event.key==='Enter') sendPublicMessage()">
                         <button class="small-btn" onclick="sendPublicMessage()">📤</button>
                         <button id="vipImageBtnChat" class="small-btn" onclick="sendImageChat()" style="display:none;">🖼️</button>
                     </div>
                     <div class="chat-input-private" style="margin-top:5px;">
-                        <select id="privateUserSelect" class="private-select">
-                            <option value="">🔒 لشخص...</option>
-                        </select>
+                        <select id="privateUserSelect" class="private-select"><option value="">🔒 لشخص...</option></select>
                         <input type="text" id="privateMessageInput" class="chat-input-field" placeholder="رسالة خاصة..." onkeypress="if(event.key==='Enter') sendPrivateMessageChat()">
                         <button class="small-btn" onclick="sendPrivateMessageChat()">🔒 إرسال</button>
                     </div>
@@ -733,9 +794,7 @@
             <button class="back-btn" id="backToHomeBtn">🔙 العودة</button>
             <div class="two-rows" id="categoryGamesContainer"></div>
         </div>
-
     </div>
-    
     <div class="bottom-bar">
         <div class="register-btn" id="registerBtn" onclick="upgradeToVIP()">📝 ترقية VIP</div>
         <div class="music-bottom-btn" id="musicBtn" onclick="toggleMusic()">🎵 تشغيل</div>
@@ -744,11 +803,11 @@
 
 <div id="gameModal" class="game-modal hidden">
     <div class="close-modal" onclick="closeGame()">✕</div>
-    <iframe id="gameIframe" src="" allowfullscreen></iframe>
+    <iframe id="gameIframe" src="" allow="microphone; camera; autoplay" allowfullscreen></iframe>
 </div>
 
 <script>
-    // ==================== بيانات الألعاب ====================
+    // games data
     const gamesData = [
         { id:1, name:"Sonic", img:"https://images6.alphacoders.com/118/1185678.jpg", url:"https://www.crazygames.com/embed/sonic-the-hedgehog", cat:"action", points:150, avatar:"🦔", playerName:"Shadow" },
         { id:2, name:"Subway Surfers", img:"https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action", points:200, avatar:"🏃", playerName:"Speed" },
@@ -764,7 +823,6 @@
         { id:12, name:"Basketball Stars", img:"https://images.hdqwalls.com/wallpapers/basketball-4k-2021-6m.jpg", url:"https://www.crazygames.com/embed/basketball-stars", cat:"racing", points:160, avatar:"🏀", playerName:"Hooper" }
     ];
     
-    // إعلانات ثابتة
     const permanentAds = [
         { icon: "📺✨", title: "إعلان ممول", text: "اشترك الآن في عروضنا الحصرية!" },
         { icon: "🎮🔥", title: "لعبة الأسبوع", text: "جرب لعبة جديدة كل أسبوع!" },
@@ -772,482 +830,167 @@
         { icon: "🚀⚡", title: "تحديث جديد", text: "أحدث الإصدارات متوفرة الآن" }
     ];
     
-    // ==================== متغيرات الدردشة الخاصة ====================
     let currentUserName = null;
     let currentRoom = null;
-    let currentRoomPassword = null;
     let isVIPUser = false;
     let privateMessages = [];
     let allRooms = {};
     let adInterval = null;
-    let currentAdIndex = 0;
     
-    // ==================== ألعاب ====================
+    // Voice chat globals
+    let localStream = null;
+    let peerConnections = {};
+    let micActive = false;
+    let voiceEnabled = false;
+    
     function updateRanking() {
         const sorted = [...gamesData].sort((a,b)=>b.points - a.points);
-        const gold = sorted[0];
-        const silver = sorted[1];
-        const bronze = sorted[2];
-        document.getElementById('rankingList').innerHTML = `
-            <div class="rank-circle"><div class="crown-icon">🥈</div><div class="silver-circle">${silver ? silver.avatar : '👤'}</div><div class="rank-name">${silver ? silver.playerName : '---'}</div><div class="rank-points">⭐ ${silver ? silver.points : 0}</div></div>
+        const gold = sorted[0], silver = sorted[1], bronze = sorted[2];
+        document.getElementById('rankingList').innerHTML = `<div class="rank-circle"><div class="crown-icon">🥈</div><div class="silver-circle">${silver ? silver.avatar : '👤'}</div><div class="rank-name">${silver ? silver.playerName : '---'}</div><div class="rank-points">⭐ ${silver ? silver.points : 0}</div></div>
             <div class="rank-circle"><div class="crown-icon">👑</div><div class="gold-circle">${gold ? gold.avatar : '👤'}</div><div class="rank-name">${gold ? gold.playerName : '---'}</div><div class="rank-points">⭐ ${gold ? gold.points : 0}</div></div>
-            <div class="rank-circle"><div class="crown-icon">🥉</div><div class="bronze-circle">${bronze ? bronze.avatar : '👤'}</div><div class="rank-name">${bronze ? bronze.playerName : '---'}</div><div class="rank-points">⭐ ${bronze ? bronze.points : 0}</div></div>
-        `;
+            <div class="rank-circle"><div class="crown-icon">🥉</div><div class="bronze-circle">${bronze ? bronze.avatar : '👤'}</div><div class="rank-name">${bronze ? bronze.playerName : '---'}</div><div class="rank-points">⭐ ${bronze ? bronze.points : 0}</div></div>`;
     }
     
     function renderAllGames() {
         const filtered = gamesData;
-        const mid = Math.ceil(filtered.length / 2);
-        const row1 = filtered.slice(0, mid);
-        const row2 = filtered.slice(mid);
-        document.getElementById('gamesContainer').innerHTML = `
-            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
-            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
-        `;
-        attachGameClickEvents();
-    }
-    
-    function renderCategoryGames(category, categoryName) {
-        const filtered = gamesData.filter(g => g.cat === category);
-        const mid = Math.ceil(filtered.length / 2);
-        const row1 = filtered.slice(0, mid);
-        const row2 = filtered.slice(mid);
-        document.getElementById('categoryGamesContainer').innerHTML = `
-            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
-            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
-        `;
+        const mid = Math.ceil(filtered.length/2);
+        const row1 = filtered.slice(0,mid), row2 = filtered.slice(mid);
+        document.getElementById('gamesContainer').innerHTML = `<div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div><div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>`;
         attachGameClickEvents();
     }
     
     function attachGameClickEvents() {
         document.querySelectorAll('.game-card').forEach(card=>{
             card.addEventListener('click', (e)=>{
-                e.stopPropagation();
-                const url = card.getAttribute('data-url');
-                const name = card.getAttribute('data-name');
-                const id = parseInt(card.getAttribute('data-id'));
-                openGameDirect(url, name);
-                addPointsToPlayer(id, 5);
+                const url = card.getAttribute('data-url'), id = parseInt(card.getAttribute('data-id'));
+                openGameDirect(url, card.getAttribute('data-name'));
+                const game = gamesData.find(g=>g.id === id);
+                if(game) { game.points += 5; updateRanking(); }
             });
         });
     }
     
-    function openGameDirect(url, name) {
+    function openGameDirect(url) {
         document.getElementById('gameIframe').src = url;
         document.getElementById('gameModal').classList.remove('hidden');
         document.body.style.overflow = 'hidden';
     }
-    
     function closeGame() {
         document.getElementById('gameModal').classList.add('hidden');
         document.getElementById('gameIframe').src = '';
         document.body.style.overflow = 'auto';
     }
-    
-    function addPointsToPlayer(gameId, points) {
-        const game = gamesData.find(g=>g.id === gameId);
-        if(game) { game.points += points; updateRanking(); }
-    }
-    
-    function showHomePage() {
-        document.getElementById('homePage').classList.remove('page-hidden');
-        document.getElementById('categoryPage').classList.add('page-hidden');
-    }
-    
-    function showCategoryPage(category, categoryName) {
-        renderCategoryGames(category, categoryName);
+    function showHomePage() { document.getElementById('homePage').classList.remove('page-hidden'); document.getElementById('categoryPage').classList.add('page-hidden'); }
+    function showCategoryPage(cat) { 
+        const filtered = gamesData.filter(g=>g.cat === cat);
+        const mid = Math.ceil(filtered.length/2);
+        const row1 = filtered.slice(0,mid), row2 = filtered.slice(mid);
+        document.getElementById('categoryGamesContainer').innerHTML = `<div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div><div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>`;
+        attachGameClickEvents();
         document.getElementById('homePage').classList.add('page-hidden');
         document.getElementById('categoryPage').classList.remove('page-hidden');
     }
+    document.querySelectorAll('.cat-badge').forEach(b=>b.addEventListener('click',()=>showCategoryPage(b.getAttribute('data-cat'))));
+    document.getElementById('backToHomeBtn').addEventListener('click',showHomePage);
     
-    document.querySelectorAll('.cat-badge').forEach(badge=>{
-        badge.addEventListener('click', ()=>{
-            const cat = badge.getAttribute('data-cat');
-            let catName = cat === "action" ? "ألعاب الأكشن" : cat === "racing" ? "ألعاب السباقات" : cat === "fighting" ? "ألعاب القتال" : "ألعاب الألغاز";
-            showCategoryPage(cat, catName);
-        });
-    });
+    function refreshPermanentAd() { let idx = (Math.floor(Date.now()/10000) % permanentAds.length); const ad = permanentAds[idx]; document.getElementById('adIcon').innerHTML=ad.icon; document.getElementById('adTitle').innerHTML=ad.title; document.getElementById('adText').innerHTML=ad.text; }
+    setInterval(refreshPermanentAd,10000); refreshPermanentAd();
     
-    document.getElementById('backToHomeBtn').addEventListener('click', ()=> showHomePage());
-    document.getElementById('gameModal').addEventListener('click', (e)=>{ if(e.target === document.getElementById('gameModal')) closeGame(); });
-    
-    // ==================== إعلان ثابت ====================
-    function refreshPermanentAd() {
-        currentAdIndex = (currentAdIndex + 1) % permanentAds.length;
-        const ad = permanentAds[currentAdIndex];
-        document.getElementById('adIcon').innerHTML = ad.icon;
-        document.getElementById('adTitle').innerHTML = ad.title;
-        document.getElementById('adText').innerHTML = ad.text;
-    }
-    
-    function startPermanentAdRotation() {
-        if (adInterval) clearInterval(adInterval);
-        adInterval = setInterval(refreshPermanentAd, 10000);
-    }
-    
-    // ==================== ترقية VIP ====================
     function upgradeToVIP() {
-        if (isVIPUser) { alert("✨ أنت بالفعل عضو VIP!"); return; }
-        if (confirm("✨ ترقية إلى VIP - 9.99$ شهرياً\n\n✅ إرسال الصور في الدردشة\n✅ علامة VIP مميزة\n✅ الوصول إلى ميزات حصرية\n\nهل تريد الترقية؟")) {
-            isVIPUser = true;
-            localStorage.setItem('didogame_vip', 'true');
-            document.getElementById('registerBtn').innerHTML = '👑 VIP مفعل';
-            document.getElementById('registerBtn').classList.add('vip-active');
-            document.getElementById('vipImageBtnChat').style.display = 'inline-block';
-            alert("🎉 تهانينا! أصبحت عضواً مميزاً في DidoGame VIP 🎉\n\nيمكنك الآن إرسال الصور في الدردشة!");
+        if(isVIPUser) { alert("✨ أنت بالفعل عضو VIP!"); return; }
+        if(confirm("✨ ترقية إلى VIP - 9.99$ شهرياً\n✅ إرسال الصور في الدردشة\n✅ علامة VIP مميزة")){
+            isVIPUser=true; localStorage.setItem('didogame_vip','true');
+            document.getElementById('registerBtn').innerHTML='👑 VIP مفعل'; document.getElementById('registerBtn').classList.add('vip-active');
+            document.getElementById('vipImageBtnChat').style.display='inline-block';
+            alert("🎉 تهانينا! أصبحت عضواً مميزاً في DidoGame VIP");
         }
     }
     
-    // ==================== الدردشة الخاصة ====================
-    function loadChatData() {
-        const savedRooms = localStorage.getItem('didogame_private_rooms');
-        if (savedRooms) allRooms = JSON.parse(savedRooms);
-        else allRooms = {};
-        
-        const savedVIP = localStorage.getItem('didogame_vip');
-        if (savedVIP === 'true') {
-            isVIPUser = true;
-            document.getElementById('registerBtn').innerHTML = '👑 VIP مفعل';
-            document.getElementById('registerBtn').classList.add('vip-active');
-            document.getElementById('vipImageBtnChat').style.display = 'inline-block';
-        }
-        
-        updateAvailableRoomsList();
-    }
-    
-    function saveRooms() {
-        localStorage.setItem('didogame_private_rooms', JSON.stringify(allRooms));
-    }
-    
+    // Room & Chat logic
+    function saveRooms() { localStorage.setItem('didogame_private_rooms', JSON.stringify(allRooms)); }
     function updateAvailableRoomsList() {
-        const roomNames = Object.keys(allRooms);
-        const div = document.getElementById('availableRoomsList');
-        if (roomNames.length === 0) {
-            div.innerHTML = '📁 لا توجد غرف متاحة. أنشئ غرفة جديدة!';
-        } else {
-            div.innerHTML = '📁 الغرف المتاحة: ' + roomNames.map(r => 
-                `<span class="user-chip" onclick="quickJoin('${r}')">${r} ${allRooms[r].hasPassword ? '🔒' : '🔓'}</span>`
-            ).join('');
-        }
+        let roomNames = Object.keys(allRooms);
+        document.getElementById('availableRoomsList').innerHTML = roomNames.length ? '📁 الغرف المتاحة: '+roomNames.map(r=>`<span class="user-chip" onclick="quickJoin('${r}')">${r} ${allRooms[r].hasPassword?'🔒':'🔓'}</span>`).join('') : '📁 لا توجد غرف متاحة. أنشئ غرفة جديدة!';
     }
-    
-    function quickJoin(roomName) {
-        document.getElementById('roomNameInput').value = roomName;
-        const room = allRooms[roomName];
-        if (room && room.hasPassword) {
-            const pwd = prompt(`🔐 غرفة "${roomName}" محمية بكلمة مرور. أدخل كلمة المرور:`);
-            if (pwd === room.password) {
-                document.getElementById('roomPasswordInput').value = pwd;
-                joinRoom();
-            } else {
-                alert("❌ كلمة المرور غير صحيحة!");
-            }
-        } else {
-            document.getElementById('roomPasswordInput').value = '';
-            joinRoom();
-        }
-    }
-    
-    function setUsername() {
-        const name = document.getElementById('userNameInput').value.trim();
-        if (name) {
-            currentUserName = name;
-            alert(`✅ مرحباً ${currentUserName}`);
-        } else {
-            alert("الرجاء إدخال اسم المستخدم");
-        }
-    }
-    
+    function quickJoin(roomName) { document.getElementById('roomNameInput').value = roomName; joinRoom(); }
+    function setUsername() { let name = document.getElementById('userNameInput').value.trim(); if(name) currentUserName = name; else alert("الرجاء إدخال اسم"); }
     function createRoom() {
-        const roomName = document.getElementById('roomNameInput').value.trim();
-        const password = document.getElementById('roomPasswordInput').value;
-        
-        if (!roomName) {
-            alert("الرجاء إدخال اسم الغرفة");
-            return;
-        }
-        
-        if (allRooms[roomName]) {
-            alert("❌ هذه الغرفة موجودة بالفعل! استخدم 'دخول الغرفة' بدلاً من ذلك.");
-            return;
-        }
-        
-        allRooms[roomName] = {
-            name: roomName,
-            hasPassword: password !== "",
-            password: password !== "" ? password : null,
-            messages: [],
-            created: Date.now()
-        };
-        saveRooms();
-        updateAvailableRoomsList();
-        alert(`✅ تم إنشاء الغرفة "${roomName}" بنجاح!`);
-        
-        // الدخول مباشرة
-        currentRoom = roomName;
-        currentRoomPassword = password || null;
-        privateMessages = allRooms[roomName].messages || [];
+        let roomName = document.getElementById('roomNameInput').value.trim(), password = document.getElementById('roomPasswordInput').value;
+        if(!roomName) return alert("الرجاء إدخال اسم الغرفة");
+        if(allRooms[roomName]) return alert("❌ الغرفة موجودة!");
+        allRooms[roomName] = { name:roomName, hasPassword:!!password, password:password||null, messages:[], created:Date.now() };
+        saveRooms(); updateAvailableRoomsList(); currentRoom = roomName; currentRoomPassword = password; privateMessages = allRooms[roomName].messages||[];
         showChatInterface();
     }
-    
     function joinRoom() {
-        if (!currentUserName) {
-            alert("⚠️ الرجاء تعيين اسم المستخدم أولاً!");
-            return;
-        }
-        
-        const roomName = document.getElementById('roomNameInput').value.trim();
-        const password = document.getElementById('roomPasswordInput').value;
-        
-        if (!roomName) {
-            alert("الرجاء إدخال اسم الغرفة");
-            return;
-        }
-        
-        const room = allRooms[roomName];
-        if (!room) {
-            alert("❌ الغرفة غير موجودة! أنشئها أولاً.");
-            return;
-        }
-        
-        if (room.hasPassword && room.password !== password) {
-            alert("❌ كلمة مرور الغرفة غير صحيحة!");
-            return;
-        }
-        
-        currentRoom = roomName;
-        currentRoomPassword = password || null;
-        privateMessages = room.messages || [];
+        if(!currentUserName) { alert("⚠️ تعيين اسم المستخدم أولاً!"); return; }
+        let roomName = document.getElementById('roomNameInput').value.trim(), password = document.getElementById('roomPasswordInput').value;
+        if(!roomName) return alert("الرجاء إدخال اسم الغرفة");
+        let room = allRooms[roomName];
+        if(!room) return alert("❌ الغرفة غير موجودة!");
+        if(room.hasPassword && room.password !== password) return alert("❌ كلمة مرور خاطئة!");
+        currentRoom = roomName; currentRoomPassword = password; privateMessages = room.messages||[];
         showChatInterface();
-        displayPrivateMessages();
     }
-    
     function showChatInterface() {
-        document.getElementById('roomLoginArea').classList.add('hidden');
-        document.getElementById('chatArea').classList.remove('hidden');
-        document.getElementById('roomStatus').innerHTML = `🔐 في غرفة: ${currentRoom} ${currentRoomPassword ? '🔒' : '🔓'}`;
-        document.getElementById('roomUsersList').innerHTML = `👥 المتصلون: ${currentUserName} ${isVIPUser ? '⭐VIP' : ''}`;
+        document.getElementById('roomLoginArea').classList.add('hidden'); document.getElementById('chatArea').classList.remove('hidden');
+        document.getElementById('roomStatus').innerHTML = `🔐 في غرفة: ${currentRoom}`;
+        document.getElementById('roomUsersList').innerHTML = `👥 المتصلون: ${currentUserName} ${isVIPUser?'⭐VIP':''}`;
+        document.getElementById('voiceChatSection').style.display = 'block';
+        displayPrivateMessages();
         updatePrivateUserSelect();
     }
+    function leaveRoom() { if(confirm("مغادرة الغرفة؟")){ stopVoiceChat(); currentRoom=null; document.getElementById('roomLoginArea').classList.remove('hidden'); document.getElementById('chatArea').classList.add('hidden'); document.getElementById('roomStatus').innerHTML="⚪ غير متصل"; document.getElementById('voiceChatSection').style.display='none'; } }
+    function deleteCurrentRoom() { let roomName = document.getElementById('roomNameInput').value.trim(); if(allRooms[roomName]){ delete allRooms[roomName]; saveRooms(); updateAvailableRoomsList(); if(currentRoom===roomName) leaveRoom(); alert("تم الحذف"); }else alert("غير موجودة"); }
+    function updatePrivateUserSelect() { let select = document.getElementById('privateUserSelect'); select.innerHTML = '<option value="">🔒 اختر مستخدم...</option>'; ["محمد","سارة","علي","ليلى","نور"].forEach(u=>{ if(u!==currentUserName) select.innerHTML+=`<option value="${u}">${u}</option>`; }); }
+    function sendPublicMessage() { let text = document.getElementById('publicMessageInput').value.trim(); if(!text)return; privateMessages.push({type:'public',sender:currentUserName,text:text,isVIP:isVIPUser,time:Date.now()}); saveRoomMessages(); displayPrivateMessages(); document.getElementById('publicMessageInput').value=''; }
+    function sendPrivateMessageChat() { let target = document.getElementById('privateUserSelect').value, text = document.getElementById('privateMessageInput').value.trim(); if(!target||!text)return; privateMessages.push({type:'private',sender:currentUserName,target:target,text:text,isVIP:isVIPUser,time:Date.now()}); saveRoomMessages(); displayPrivateMessages(); document.getElementById('privateMessageInput').value=''; }
+    function sendImageChat() { if(!isVIPUser){ alert("VIP only"); return;} let input = document.createElement('input'); input.type='file'; input.accept='image/*'; input.onchange=e=>{ let file=e.target.files[0]; if(file){ let reader=new FileReader(); reader.onload=ev=>{ privateMessages.push({type:'public',sender:currentUserName,image:ev.target.result,isVIP:true,time:Date.now()}); saveRoomMessages(); displayPrivateMessages(); }; reader.readAsDataURL(file); } }; input.click(); }
+    function saveRoomMessages() { if(currentRoom && allRooms[currentRoom]){ allRooms[currentRoom].messages = privateMessages; saveRooms(); } }
+    function displayPrivateMessages() { let div = document.getElementById('privateMessagesDiv'); let msgs = privateMessages.slice(-50); if(!msgs.length){ div.innerHTML='<div style="color:#888; text-align:center;">💬 لا توجد رسائل بعد...</div>'; return; } div.innerHTML=''; msgs.forEach(msg=>{ if(msg.type==='private' && msg.sender!==currentUserName && msg.target!==currentUserName) return; let el = document.createElement('div'); el.className='message-private'; if(msg.type==='private') el.classList.add('private-msg'); let senderHtml = `<div class="sender-private">${msg.sender} ${msg.isVIP?'<span class="vip-badge-small">VIP</span>':''}${msg.type==='private'?` <span class="private-tag">🔒 إلى ${msg.target}</span>`:''}</div>`; el.innerHTML = senderHtml; if(msg.text) el.innerHTML+=`<div class="text-private">${msg.text}</div>`; if(msg.image) el.innerHTML+=`<img src="${msg.image}" style="max-width:100%; max-height:120px; border-radius:10px; margin-top:5px;">`; div.appendChild(el); }); div.scrollTop = div.scrollHeight; }
     
-    function leaveRoom() {
-        if (confirm("هل تريد مغادرة الغرفة الحالية؟")) {
-            currentRoom = null;
-            currentRoomPassword = null;
-            privateMessages = [];
-            document.getElementById('roomLoginArea').classList.remove('hidden');
-            document.getElementById('chatArea').classList.add('hidden');
-            document.getElementById('roomStatus').innerHTML = "⚪ غير متصل";
-            updateAvailableRoomsList();
-        }
+    // VOICE CHAT using WebRTC simulated signaling (local storage based)
+    async function startVoiceChat() {
+        if(!currentRoom) return alert("يجب أن تكون في غرفة أولاً");
+        try {
+            localStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            micActive = true;
+            document.getElementById('micToggleBtn').innerHTML = "🎙️ ميكروفون ON";
+            document.getElementById('micToggleBtn').classList.remove('off');
+            // Simulate speaker list (static for demo)
+            document.getElementById('speakersList').innerHTML = `🎤 المتحدثون: <span class="speaker-chip"><span class="voice-wave"></span> ${currentUserName}</span>`;
+            voiceEnabled = true;
+        } catch(e) { alert("لا يمكن الوصول للميكروفون: "+e.message); }
     }
-    
-    function deleteCurrentRoom() {
-        const roomName = document.getElementById('roomNameInput').value.trim();
-        if (!roomName) {
-            alert("أدخل اسم الغرفة التي تريد حذفها");
-            return;
-        }
-        
-        if (!allRooms[roomName]) {
-            alert("❌ الغرفة غير موجودة");
-            return;
-        }
-        
-        if (confirm(`⚠️ هل أنت متأكد من حذف الغرفة "${roomName}" وجميع رسائلها؟\nهذا الإجراء لا يمكن التراجع عنه!`)) {
-            delete allRooms[roomName];
-            saveRooms();
-            updateAvailableRoomsList();
-            alert(`✅ تم حذف الغرفة: ${roomName}`);
-            
-            if (currentRoom === roomName) {
-                leaveRoom();
-            }
-            document.getElementById('roomNameInput').value = '';
-            document.getElementById('roomPasswordInput').value = '';
-        }
+    function stopVoiceChat() {
+        if(localStream) { localStream.getTracks().forEach(t=>t.stop()); localStream=null; }
+        micActive=false; voiceEnabled=false;
+        document.getElementById('micToggleBtn').innerHTML = "🔴 ميكروفون OFF";
+        document.getElementById('micToggleBtn').classList.add('off');
+        document.getElementById('speakersList').innerHTML = "🎤 المتحدثون: --";
     }
-    
-    function updatePrivateUserSelect() {
-        const select = document.getElementById('privateUserSelect');
-        select.innerHTML = '<option value="">🔒 اختر مستخدم...</option>';
-        const possibleUsers = ["محمد", "سارة", "علي", "ليلى", "نور", "خالد", "فاطمة"];
-        possibleUsers.forEach(u => {
-            if (u !== currentUserName) {
-                select.innerHTML += `<option value="${u}">${u}</option>`;
-            }
-        });
+    function toggleMic() {
+        if(!currentRoom) { alert("ادخل غرفة أولاً"); return; }
+        if(!voiceEnabled) startVoiceChat();
+        else { if(localStream){ localStream.getAudioTracks()[0].enabled = !localStream.getAudioTracks()[0].enabled; micActive=localStream.getAudioTracks()[0].enabled; document.getElementById('micToggleBtn').innerHTML = micActive?"🎙️ ميكروفون ON":"🔇 ميكروفون OFF"; if(micActive) document.getElementById('micToggleBtn').classList.remove('off'); else document.getElementById('micToggleBtn').classList.add('off'); } }
     }
+    document.getElementById('micToggleBtn').addEventListener('click', toggleMic);
     
-    function sendPublicMessage() {
-        const text = document.getElementById('publicMessageInput').value.trim();
-        if (!text) return;
-        
-        privateMessages.push({
-            type: 'public',
-            sender: currentUserName,
-            text: text,
-            isVIP: isVIPUser,
-            time: Date.now()
-        });
-        saveRoomMessages();
-        displayPrivateMessages();
-        document.getElementById('publicMessageInput').value = '';
-    }
-    
-    function sendPrivateMessageChat() {
-        const targetUser = document.getElementById('privateUserSelect').value;
-        const text = document.getElementById('privateMessageInput').value.trim();
-        
-        if (!targetUser) {
-            alert("اختر المستخدم الذي تريد إرسال الرسالة له");
-            return;
-        }
-        if (!text) {
-            alert("اكتب رسالتك الخاصة");
-            return;
-        }
-        
-        privateMessages.push({
-            type: 'private',
-            sender: currentUserName,
-            target: targetUser,
-            text: text,
-            isVIP: isVIPUser,
-            time: Date.now()
-        });
-        saveRoomMessages();
-        displayPrivateMessages();
-        document.getElementById('privateMessageInput').value = '';
-    }
-    
-    function sendImageChat() {
-        if (!isVIPUser) {
-            alert("❌ إرسال الصور متاح فقط للمستخدمين المميزين VIP!\n👑 قم بترقية حسابك من الزر في الأسفل.");
-            return;
-        }
-        
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = 'image/*';
-        input.onchange = (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (ev) => {
-                    privateMessages.push({
-                        type: 'public',
-                        sender: currentUserName,
-                        image: ev.target.result,
-                        isVIP: isVIPUser,
-                        time: Date.now()
-                    });
-                    saveRoomMessages();
-                    displayPrivateMessages();
-                };
-                reader.readAsDataURL(file);
-            }
-        };
-        input.click();
-    }
-    
-    function saveRoomMessages() {
-        if (currentRoom && allRooms[currentRoom]) {
-            allRooms[currentRoom].messages = privateMessages;
-            saveRooms();
-        }
-    }
-    
-    function displayPrivateMessages() {
-        const div = document.getElementById('privateMessagesDiv');
-        const last50 = privateMessages.slice(-50);
-        
-        if (last50.length === 0) {
-            div.innerHTML = '<div style="color:#888; text-align:center;">💬 لا توجد رسائل بعد... ابدأ المحادثة!</div>';
-            return;
-        }
-        
-        div.innerHTML = '';
-        last50.forEach(msg => {
-            // للرسائل الخاصة: نعرضها فقط إذا كان المستخدم هو المرسل أو المستهدف
-            if (msg.type === 'private') {
-                if (msg.sender !== currentUserName && msg.target !== currentUserName) {
-                    return; // لا نعرض رسائل خاصة ليست له
-                }
-            }
-            
-            const el = document.createElement('div');
-            el.className = 'message-private';
-            if (msg.type === 'private') el.classList.add('private-msg');
-            
-            let senderHtml = `<div class="sender-private">${msg.sender} ${msg.isVIP ? '<span class="vip-badge-small">VIP</span>' : ''}`;
-            if (msg.type === 'private') {
-                senderHtml += ` <span class="private-tag">🔒 إلى ${msg.target}</span>`;
-            }
-            senderHtml += `</div>`;
-            el.innerHTML = senderHtml;
-            
-            if (msg.text) el.innerHTML += `<div class="text-private">${msg.text}</div>`;
-            if (msg.image) el.innerHTML += `<img src="${msg.image}" style="max-width:100%; max-height:120px; border-radius:10px; margin-top:5px;">`;
-            
-            div.appendChild(el);
-        });
-        div.scrollTop = div.scrollHeight;
-    }
-    
-    // ==================== موسيقى ====================
-    let musicPlaying = false;
-    let music = null;
-    
-    function toggleMusic() {
-        if (!music) {
-            music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-            music.loop = true;
-            music.volume = 0.3;
-        }
-        
-        if (musicPlaying) {
-            music.pause();
-            document.getElementById('musicBtn').innerHTML = '🎵 تشغيل';
-        } else {
-            music.play().catch(e => console.log('Auto-play prevented'));
-            document.getElementById('musicBtn').innerHTML = '🔇 إيقاف';
-        }
-        musicPlaying = !musicPlaying;
-    }
-    
-    // تحديث الدردشة كل ثانية
-    setInterval(() => {
-        if (currentRoom && allRooms[currentRoom]) {
-            const newMessages = allRooms[currentRoom].messages || [];
-            if (JSON.stringify(newMessages) !== JSON.stringify(privateMessages)) {
-                privateMessages = newMessages;
-                displayPrivateMessages();
-            }
-        }
-    }, 2000);
-    
-    // ==================== تهيئة ====================
+    // load data and set interval for room sync
     function init() {
-        loadChatData();
-        updateRanking();
-        renderAllGames();
-        startPermanentAdRotation();
-        
-        // تعيين اسم مستخدم افتراضي
-        if (!currentUserName) {
-            setTimeout(() => {
-                const name = prompt("👋 مرحباً بك في DidoGame!\n\nأدخل اسم المستخدم الخاص بك:", "أحمد");
-                if (name && name.trim()) {
-                    currentUserName = name.trim();
-                    document.getElementById('userNameInput').value = currentUserName;
-                    alert(`✅ مرحباً ${currentUserName}`);
-                }
-            }, 500);
-        }
+        let saved = localStorage.getItem('didogame_private_rooms');
+        if(saved) allRooms = JSON.parse(saved); else allRooms = {};
+        let savedVIP = localStorage.getItem('didogame_vip');
+        if(savedVIP==='true') { isVIPUser=true; document.getElementById('registerBtn').innerHTML='👑 VIP مفعل'; document.getElementById('registerBtn').classList.add('vip-active'); document.getElementById('vipImageBtnChat').style.display='inline-block'; }
+        updateRanking(); renderAllGames(); updateAvailableRoomsList();
+        if(!currentUserName) setTimeout(()=>{ let n=prompt("أدخل اسم المستخدم:","أحمد"); if(n) currentUserName=n; document.getElementById('userNameInput').value=currentUserName; }, 500);
+        setInterval(()=>{ if(currentRoom && allRooms[currentRoom]){ let newMsgs = allRooms[currentRoom].messages||[]; if(JSON.stringify(newMsgs)!==JSON.stringify(privateMessages)){ privateMessages=newMsgs; displayPrivateMessages(); } } }, 2000);
     }
-    
     init();
+    let musicPlaying=false,music=null;
+    function toggleMusic(){ if(!music){ music=new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'); music.loop=true; music.volume=0.2; } if(musicPlaying){ music.pause(); document.getElementById('musicBtn').innerHTML='🎵 تشغيل'; } else { music.play().catch(e=>{}); document.getElementById('musicBtn').innerHTML='🔇 إيقاف'; } musicPlaying=!musicPlaying; }
+    window.toggleMusic=toggleMusic;
+    window.setUsername=setUsername; window.joinRoom=joinRoom; window.createRoom=createRoom; window.deleteCurrentRoom=deleteCurrentRoom; window.leaveRoom=leaveRoom; window.sendPublicMessage=sendPublicMessage; window.sendPrivateMessageChat=sendPrivateMessageChat; window.sendImageChat=sendImageChat; window.quickJoin=quickJoin; window.upgradeToVIP=upgradeToVIP; window.closeGame=closeGame;
 </script>
 </body>
 </html>
