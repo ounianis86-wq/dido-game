@@ -1092,10 +1092,10 @@
     document.getElementById('backToHomeBtn').addEventListener('click', ()=> showHomePage());
     document.getElementById('gameModal').addEventListener('click', (e)=>{ if(e.target === document.getElementById('gameModal')) closeGame(); });
     
-    // 🎵 موسيقى إلكترونية حماسية - صوت 0.50 🎵
+    // 🎵 موسيقى إلكترونية حماسية - صوت 100% (أقصى مستوى) 🎵
     const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
     music.loop = true;
-    music.volume = 0.50;  // صوت أقوى بكثير
+    music.volume = 1.00;  // أقصى صوت ممكن 100%
     let playing = true;
     const musicBottomBtn = document.getElementById('musicBottomBtn');
     musicBottomBtn.innerHTML = '🔇 إيقاف';
