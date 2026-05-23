@@ -264,10 +264,9 @@
             100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
         }
 
-        /* Games - Two rows only, 4 visible games per row, horizontal scroll for more */
+        /* Games - Sticks to bottom */
         .games-wrapper {
-            margin: 0;
-            flex: 1;
+            margin-top: auto;
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -973,13 +972,13 @@
             <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
             
             <div class="games-wrapper" id="gamesWrapper">
-                <!-- Dynamic game rows will be inserted here (only 2 rows, each with horizontal scroll) -->
+                <!-- Dynamic game rows will be inserted here -->
             </div>
         </div>
         
         <div id="categoryPage" class="page page-hidden">
             <button class="create-btn" id="backToHomeBtn" style="margin-bottom:10px;">🔙 Back</button>
-            <div class="two-rows" id="categoryGamesContainer"></div>
+            <div class="games-wrapper" id="categoryGamesContainer"></div>
         </div>
     </div>
     
