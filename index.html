@@ -28,6 +28,12 @@
             background-size: cover;
             background-position: center;
             z-index: -2;
+            animation: slowZoom 20s ease-in-out infinite alternate;
+        }
+        
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
         }
         
         .anime-city-bg::after {
@@ -37,7 +43,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.65);
+            background: rgba(0,0,0,0.5);
             z-index: -1;
         }
 
@@ -45,15 +51,23 @@
             max-width: 500px;
             width: 100%;
             margin: 0 auto;
-            background: rgba(10,10,30,0.85);
-            backdrop-filter: blur(5px);
+            background: rgba(5,5,20,0.75);
+            backdrop-filter: blur(8px);
             border-radius: 25px;
             overflow: hidden;
             height: 98vh;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 30px #ff00ff30;
+            box-shadow: 0 0 50px #ff00ff, 0 0 20px #00ffff, 0 0 10px #ff44ff80;
             position: relative;
+            border: 1px solid rgba(255,68,255,0.3);
+            animation: borderPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes borderPulse {
+            0% { box-shadow: 0 0 20px #ff00ff, 0 0 10px #00ffff; border-color: rgba(255,68,255,0.3); }
+            50% { box-shadow: 0 0 50px #ff44ff, 0 0 30px #00ffff, 0 0 20px #ff44ff; border-color: rgba(255,68,255,0.8); }
+            100% { box-shadow: 0 0 20px #ff00ff, 0 0 10px #00ffff; border-color: rgba(255,68,255,0.3); }
         }
 
         .content {
@@ -69,9 +83,9 @@
             display: none;
         }
 
-        /* شخصية أنمي */
+        /* شخصية أنمي - نيون متوهج */
         .anime-hero {
-            background: linear-gradient(135deg, #1a0a3a80, #0a0a2a80);
+            background: linear-gradient(135deg, #ff44ff20, #00ffff20, #ff44ff20);
             border-radius: 25px;
             padding: 12px;
             margin-bottom: 10px;
@@ -81,6 +95,14 @@
             flex-wrap: wrap;
             justify-content: center;
             border: 1px solid #ff44ff;
+            box-shadow: 0 0 20px #ff44ff, inset 0 0 15px #ff44ff20;
+            animation: glowPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 10px #ff44ff, inset 0 0 10px #ff44ff20; border-color: #ff44ff; }
+            50% { box-shadow: 0 0 30px #ff44ff, 0 0 20px #00ffff, inset 0 0 20px #ff44ff40; border-color: #00ffff; }
+            100% { box-shadow: 0 0 10px #ff44ff, inset 0 0 10px #ff44ff20; border-color: #ff44ff; }
         }
         
         .character-img {
@@ -90,15 +112,23 @@
             background-size: cover;
             background-position: center;
             border-radius: 50%;
-            border: 2px solid #ff44ff;
+            border: 3px solid #ff44ff;
             position: relative;
+            box-shadow: 0 0 25px #ff44ff, 0 0 15px #00ffff;
+            animation: rotateGlow 3s linear infinite;
+        }
+        
+        @keyframes rotateGlow {
+            0% { box-shadow: 0 0 15px #ff44ff; }
+            50% { box-shadow: 0 0 35px #00ffff, 0 0 20px #ff44ff; }
+            100% { box-shadow: 0 0 15px #ff44ff; }
         }
         
         .controller-on-hand {
             position: absolute;
             bottom: -8px;
             right: -8px;
-            background: #ff44ff;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
             border-radius: 50%;
             width: 32px;
             height: 32px;
@@ -107,6 +137,13 @@
             justify-content: center;
             font-size: 1.1rem;
             border: 2px solid white;
+            box-shadow: 0 0 15px #00ffff;
+            animation: spin 4s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         .character-info {
@@ -114,7 +151,7 @@
         }
         
         .tshirt-text {
-            background: linear-gradient(135deg, #ff3366, #ff44ff);
+            background: linear-gradient(135deg, #ff3366, #ff44ff, #00ffff);
             padding: 5px 14px;
             border-radius: 22px;
             color: white;
@@ -123,23 +160,37 @@
             display: inline-block;
             margin: 4px 0;
             font-family: monospace;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            box-shadow: 0 0 15px #ff44ff;
+            animation: textGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes textGlow {
+            0% { box-shadow: 0 0 10px #ff44ff; background: linear-gradient(135deg, #ff3366, #ff44ff); }
+            100% { box-shadow: 0 0 25px #00ffff; background: linear-gradient(135deg, #ff44ff, #00ffff); }
         }
         
         .character-info h2 {
-            background: linear-gradient(135deg, #ffff00, #ff44ff);
+            background: linear-gradient(135deg, #ffff00, #ff44ff, #00ffff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            animation: rainbowText 3s linear infinite;
+        }
+        
+        @keyframes rainbowText {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
         }
         
         .challenge-look {
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             color: #ffaa88;
+            text-shadow: 0 0 8px #ff44ff;
         }
 
-        /* ترتيب اللاعبين */
+        /* ترتيب اللاعبين - نيون */
         .ranking-section {
             margin-bottom: 20px;
             text-align: center;
@@ -155,6 +206,11 @@
         
         .rank-circle {
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .rank-circle:hover {
+            transform: scale(1.1);
         }
         
         .gold-circle {
@@ -168,7 +224,13 @@
             font-size: 1.6rem;
             margin-bottom: 3px;
             border: 2px solid #ffd700;
-            box-shadow: 0 0 10px #ffd700;
+            box-shadow: 0 0 20px #ffd700, 0 0 10px #ffaa00;
+            animation: goldPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes goldPulse {
+            0%, 100% { box-shadow: 0 0 10px #ffd700; }
+            50% { box-shadow: 0 0 30px #ffd700, 0 0 20px #ffaa00; }
         }
         
         .silver-circle {
@@ -182,7 +244,7 @@
             font-size: 1.2rem;
             margin-bottom: 3px;
             border: 1.5px solid #c0c0c0;
-            box-shadow: 0 0 6px #c0c0c0;
+            box-shadow: 0 0 15px #c0c0c0;
         }
         
         .bronze-circle {
@@ -196,7 +258,7 @@
             font-size: 1.2rem;
             margin-bottom: 3px;
             border: 1.5px solid #cd7f32;
-            box-shadow: 0 0 6px #cd7f32;
+            box-shadow: 0 0 15px #cd7f32;
         }
         
         .rank-name {
@@ -204,16 +266,19 @@
             font-size: 0.55rem;
             font-weight: bold;
             margin-top: 2px;
+            text-shadow: 0 0 5px #ff44ff;
         }
         
         .rank-points {
             color: #ffcc00;
             font-size: 0.5rem;
+            text-shadow: 0 0 3px #ffaa00;
         }
         
         .crown-icon {
             font-size: 0.75rem;
             margin-bottom: 2px;
+            filter: drop-shadow(0 0 5px gold);
         }
 
         /* Categories */
@@ -230,18 +295,27 @@
         }
         
         .cat-badge {
-            background: #ff44ff30;
+            background: linear-gradient(135deg, #ff44ff30, #00ffff30);
             border: 1px solid #ff44ff;
             padding: 4px 12px;
             border-radius: 22px;
             color: white;
             font-size: 0.6rem;
             cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 8px #ff44ff;
+        }
+        
+        .cat-badge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #ff44ff, 0 0 10px #00ffff;
+            background: linear-gradient(135deg, #ff44ff60, #00ffff60);
+            border-color: #00ffff;
         }
 
-        /* مساحة الإعلان - مكبرة */
+        /* مساحة الإعلان - نيون */
         .ad-space {
-            background: linear-gradient(135deg, #1a0033cc, #0a002acc);
+            background: linear-gradient(135deg, #ff44ff15, #00ffff15);
             border: 2px solid #ff44ff;
             border-radius: 16px;
             padding: 15px 10px;
@@ -249,7 +323,13 @@
             text-align: center;
             font-size: 0.8rem;
             color: #ffaa88;
-            box-shadow: 0 0 15px #ff44ff40;
+            box-shadow: 0 0 25px #ff44ff, inset 0 0 15px #ff44ff20;
+            animation: adGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes adGlow {
+            0%, 100% { box-shadow: 0 0 15px #ff44ff; border-color: #ff44ff; }
+            50% { box-shadow: 0 0 35px #00ffff; border-color: #00ffff; }
         }
         
         .ad-space span {
@@ -257,15 +337,22 @@
             font-size: 0.6rem;
             color: #ff88ff;
             margin-top: 5px;
+            text-shadow: 0 0 5px #ff44ff;
         }
         
         .ad-space .ad-icon {
             font-size: 1.8rem;
             display: block;
             margin-bottom: 8px;
+            animation: bounce 1s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
-        /* Two rows for games */
+        /* الألعاب */
         .games-wrapper {
             margin-top: 0;
             margin-bottom: 0;
@@ -299,14 +386,17 @@
             border-radius: 14px;
             padding: 7px;
             text-align: center;
-            border: 1px solid #ff44ff40;
+            border: 1px solid #ff44ff;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 10px #ff44ff;
         }
         
         .game-card:hover {
-            transform: translateY(-2px);
-            border-color: #ff44ff;
+            transform: translateY(-5px) scale(1.02);
+            border-color: #00ffff;
+            box-shadow: 0 0 25px #00ffff, 0 0 15px #ff44ff;
+            background: linear-gradient(145deg, #1a1a3a, #0f0f2a);
         }
         
         .game-img {
@@ -316,22 +406,29 @@
             background-position: center;
             border-radius: 10px;
             margin-bottom: 4px;
+            transition: all 0.2s ease;
+        }
+        
+        .game-card:hover .game-img {
+            box-shadow: 0 0 15px #ff44ff;
         }
         
         .game-title {
             color: white;
             font-size: 0.55rem;
             font-weight: bold;
+            text-shadow: 0 0 3px #ff44ff;
         }
         
         .game-cat {
-            color: #aa88ff;
+            color: #00ffff;
             font-size: 0.45rem;
+            text-shadow: 0 0 3px #00ffff;
         }
 
         /* Back button */
         .back-btn {
-            background: #ff44ff;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
             border: none;
             padding: 5px 14px;
             border-radius: 20px;
@@ -341,32 +438,43 @@
             cursor: pointer;
             display: inline-block;
             font-size: 0.55rem;
+            box-shadow: 0 0 15px #ff44ff;
+            transition: all 0.2s ease;
+        }
+        
+        .back-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px #00ffff;
         }
 
-        /* Bottom bar - ملاصق تماماً للألعاب */
+        /* Bottom bar */
         .bottom-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 5px 12px;
-            border-top: 1px solid #ff44ff55;
+            border-top: 1px solid #ff44ff;
             margin-top: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
         }
         
         .register-btn {
-            background: #ff44ff30;
+            background: linear-gradient(135deg, #ff44ff30, #00ffff30);
             border: 1px solid #ff44ff;
             padding: 3px 10px;
             border-radius: 18px;
             color: white;
             font-size: 0.5rem;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 8px #ff44ff;
         }
         
         .register-btn:hover {
-            background: #ff44ff;
-            color: #000;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            box-shadow: 0 0 20px #ff44ff;
+            transform: scale(1.05);
         }
         
         .music-bottom-btn {
@@ -378,6 +486,13 @@
             cursor: pointer;
             font-size: 0.5rem;
             border: 1px solid #0ff;
+            box-shadow: 0 0 8px #0ff;
+            transition: all 0.2s ease;
+        }
+        
+        .music-bottom-btn:hover {
+            box-shadow: 0 0 20px #0ff;
+            transform: scale(1.05);
         }
 
         /* Ad popup */
@@ -394,20 +509,24 @@
             text-align: center;
             z-index: 1000;
             display: none;
+            box-shadow: 0 0 30px #ff44ff;
         }
         
         .ad-popup div {
             font-size: 0.65rem;
+            color: white;
         }
         
         .ad-popup button {
-            background: #ff44ff;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
             border: none;
             padding: 4px 12px;
             border-radius: 20px;
             margin-top: 6px;
             cursor: pointer;
             font-size: 0.55rem;
+            color: white;
+            font-weight: bold;
         }
 
         /* Game modal */
@@ -418,6 +537,7 @@
             width: 100%;
             height: 100%;
             background: #000000ee;
+            backdrop-filter: blur(15px);
             z-index: 2000;
             display: flex;
             flex-direction: column;
@@ -429,24 +549,32 @@
             width: 95%;
             height: 80%;
             border-radius: 15px;
-            border: 2px solid #ff44ff;
+            border: 3px solid #ff44ff;
             background: white;
+            box-shadow: 0 0 50px #ff44ff, 0 0 30px #00ffff;
         }
         
         .close-modal {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: #ff3366;
-            width: 30px;
-            height: 30px;
+            background: linear-gradient(135deg, #ff3366, #ff44ff);
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 18px;
+            font-size: 20px;
             cursor: pointer;
+            box-shadow: 0 0 15px #ff44ff;
+            transition: all 0.2s ease;
+        }
+        
+        .close-modal:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px #ff3366;
         }
         
         .hidden {
@@ -462,6 +590,16 @@
         .page-hidden {
             display: none;
         }
+        
+        /* عناوين متوهجة */
+        .section-title {
+            color: white;
+            font-size: 0.7rem;
+            margin: 8px 0 5px 0;
+            text-align: center;
+            text-shadow: 0 0 10px #ff44ff, 0 0 5px #00ffff;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
@@ -476,17 +614,19 @@
                     <div class="controller-on-hand">🎮</div>
                 </div>
                 <div class="character-info">
-                    <div class="tshirt-text">⚔️ DIDO-GAME ⚔️</div>
-                    <h2>😤 نظرة التحدي!</h2>
-                    <div class="challenge-look">"هيا تحداني!"</div>
+                    <div class="tshirt-text">⚡ DIDO-GAME ⚡</div>
+                    <h2>😤 نظرة التحدي النيونية!</h2>
+                    <div class="challenge-look">"هيا تحداني في عالم النيون!"</div>
                 </div>
             </div>
             
             <div class="ranking-section">
+                <div class="section-title">🏆 أفضل اللاعبين 🏆</div>
                 <div class="ranking-circles" id="rankingList"></div>
             </div>
             
             <div class="categories-section">
+                <div class="section-title">🎮 أنواع الألعاب النيونية 🎮</div>
                 <div class="categories" id="categoriesList">
                     <div class="cat-badge" data-cat="action">🎯 أكشن</div>
                     <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
@@ -497,33 +637,35 @@
             
             <!-- مساحة الإعلان مكبرة -->
             <div class="ad-space" id="adSpace">
-                <div class="ad-icon">📺</div>
-                إعلان هنا
+                <div class="ad-icon">📺✨</div>
+                إعلان نيوني هنا
                 <span>❗ اشترك في التسجيل لإزالة الإعلانات ❗</span>
             </div>
             
+            <div class="section-title">🔥 ألعاب نيونية 🔥</div>
             <div class="games-wrapper">
                 <div class="two-rows" id="gamesContainer"></div>
             </div>
         </div>
 
         <div id="categoryPage" class="page page-hidden">
-            <button class="back-btn" id="backToHomeBtn">🔙 العودة</button>
+            <button class="back-btn" id="backToHomeBtn">🔙 العودة إلى النيون</button>
+            <div class="section-title" id="categoryTitle"></div>
             <div class="two-rows" id="categoryGamesContainer"></div>
         </div>
 
     </div>
     
     <div class="bottom-bar">
-        <div class="register-btn" id="registerBtn">📝 تسجيل</div>
+        <div class="register-btn" id="registerBtn">📝 تسجيل VIP</div>
         <div class="music-bottom-btn" id="musicBottomBtn">🎵 تشغيل</div>
     </div>
 </div>
 
 <div id="adPopup" class="ad-popup">
-    <div>📺 إعلان قصير</div>
+    <div>📺✨ إعلان نيوني قصير ✨📺</div>
     <div style="font-size:9px;">انتظر 5 ثوانٍ</div>
-    <button onclick="closeAd()">تخطي ▶</button>
+    <button onclick="closeAd()">تخطي النيون ▶</button>
 </div>
 
 <div id="gameModal" class="game-modal hidden">
@@ -595,8 +737,8 @@
         const row2 = filtered.slice(mid);
         
         document.getElementById('gamesContainer').innerHTML = `
-            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">${g.cat}</div></div>`).join('')}</div>
-            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">${g.cat}</div></div>`).join('')}</div>
+            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
+            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
         `;
         attachGameClickEvents('#gamesContainer');
     }
@@ -606,9 +748,10 @@
         const mid = Math.ceil(filtered.length / 2);
         const row1 = filtered.slice(0, mid);
         const row2 = filtered.slice(mid);
+        document.getElementById('categoryTitle').innerHTML = `🎮 ${categoryName} النيونية 🎮`;
         document.getElementById('categoryGamesContainer').innerHTML = `
-            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">${g.cat}</div></div>`).join('')}</div>
-            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">${g.cat}</div></div>`).join('')}</div>
+            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
+            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
         `;
         attachGameClickEvents('#categoryGamesContainer');
     }
@@ -681,9 +824,9 @@
     document.getElementById('registerBtn').addEventListener('click', ()=>{
         isPremium = true;
         updateAdSpace();
-        alert('🎉 تم التسجيل! أصبحت مميزاً بدون إعلانات.');
+        alert('🎉✨ تم التسجيل النيوني! أصبحت مميزاً بدون إعلانات ✨🎉');
         document.getElementById('registerBtn').style.opacity = '0.7';
-        document.getElementById('registerBtn').style.background = '#ff44ff';
+        document.getElementById('registerBtn').style.background = 'linear-gradient(135deg, #ff44ff, #00ffff)';
     });
     
     document.querySelectorAll('.cat-badge').forEach(badge=>{
