@@ -309,6 +309,26 @@
             background: linear-gradient(135deg, #ff44ff60, #00ffff60);
             border-color: #00ffff;
         }
+        
+        /* زر المزيد - مميز */
+        .more-btn {
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: 1px solid #ffffff;
+            padding: 4px 12px;
+            border-radius: 22px;
+            color: white;
+            font-size: 0.6rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 12px #ff44ff;
+            font-weight: bold;
+        }
+        
+        .more-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px #00ffff;
+            background: linear-gradient(135deg, #ff44ff, #ff44ff);
+        }
 
         /* الإعلان الثابت - يظهر دائماً في وسط الصفحة ولا يختفي أبداً */
         .fixed-permanent-ad {
@@ -702,6 +722,76 @@
             justify-content: flex-end;
             margin-bottom: 5px;
         }
+        
+        /* نافذة المزيد */
+        .more-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 15000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .more-box {
+            background: linear-gradient(135deg, #1a0033, #0a002a);
+            border: 3px solid #ff44ff;
+            border-radius: 30px;
+            padding: 20px;
+            text-align: center;
+            max-width: 320px;
+            width: 90%;
+            box-shadow: 0 0 50px #ff44ff;
+        }
+        
+        .more-title {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #ff44ff;
+        }
+        
+        .more-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .more-option {
+            background: linear-gradient(135deg, #ff44ff30, #00ffff30);
+            border: 1px solid #ff44ff;
+            padding: 10px;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .more-option:hover {
+            transform: scale(1.02);
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            box-shadow: 0 0 20px #ff44ff;
+        }
+        
+        .close-more-btn {
+            background: linear-gradient(135deg, #ff3366, #ff44ff);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -731,6 +821,7 @@
                     <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
                     <div class="cat-badge" data-cat="fighting">🥊 قتال</div>
                     <div class="cat-badge" data-cat="puzzle">🧩 ألغاز</div>
+                    <div class="more-btn" id="moreBtn">➕ المزيد</div>
                 </div>
             </div>
             
@@ -760,6 +851,20 @@
         </div>
         <div class="register-btn" id="registerBtn">📝 ترقية إلى VIP</div>
         <div class="music-bottom-btn" id="musicBottomBtn">🎵 تشغيل</div>
+    </div>
+</div>
+
+<!-- نافذة المزيد -->
+<div id="moreOverlay" class="more-overlay hidden">
+    <div class="more-box">
+        <div class="more-title">✨ المزيد من الخيارات ✨</div>
+        <div class="more-options">
+            <div class="more-option" data-cat="all">🎮 جميع الألعاب</div>
+            <div class="more-option" data-cat="new">🆕 أحدث الإضافات</div>
+            <div class="more-option" data-cat="popular">🔥 الأكثر شعبية</div>
+            <div class="more-option" data-cat="recommended">⭐ موصى بها</div>
+        </div>
+        <button class="close-more-btn" id="closeMoreBtn">إغلاق</button>
     </div>
 </div>
 
@@ -831,9 +936,6 @@
     let levelupAdTimeout = null;
     let isWaitingForEntryAd = false;
     let isWaitingForLevelUpAd = false;
-    let currentGameUrl = null;
-    let currentGameName = null;
-    let currentGameId = null;
     
     // تحديث الإعلان الثابت (يتغير كل 10 ثوانٍ)
     function refreshPermanentAd() {
@@ -865,7 +967,6 @@
         let seconds = 10;
         timerElement.textContent = seconds;
         
-        // إعادة إنشاء شريط التقدم
         const oldProgress = document.getElementById('entryProgressBar');
         if (oldProgress) {
             const newProgress = oldProgress.cloneNode(true);
@@ -906,7 +1007,6 @@
         let seconds = 8;
         timerElement.textContent = seconds;
         
-        // إعادة إنشاء شريط التقدم
         const oldProgress = document.getElementById('levelupProgressBar');
         if (oldProgress) {
             const newProgress = oldProgress.cloneNode(true);
@@ -934,17 +1034,24 @@
         levelupAdTimeout = countdownInterval;
     }
     
-    // محاكاة الانتقال إلى مستوى جديد (تظهر إعلان بين المستويات للمستخدم العادي)
+    // محاكاة الانتقال إلى مستوى جديد
     function simulateLevelUp() {
         if (isPremium) {
             alert('✨ أنت حساب مميز! لا تظهر لك إعلانات بين المستويات ✨');
             return;
         }
-        
-        // إظهار إعلان بين المستويات
         showLevelUpAd(() => {
             alert('🎉 تم تخطي الإعلان! يمكنك متابعة اللعب في المستوى الجديد 🎉');
         });
+    }
+    
+    // عرض نافذة المزيد
+    function showMoreMenu() {
+        document.getElementById('moreOverlay').classList.remove('hidden');
+    }
+    
+    function hideMoreMenu() {
+        document.getElementById('moreOverlay').classList.add('hidden');
     }
     
     function updateRanking() {
@@ -1013,16 +1120,10 @@
     }
     
     function launchGame(url, name, gameId) {
-        currentGameUrl = url;
-        currentGameName = name;
-        currentGameId = gameId;
-        
         if (isPremium) {
-            // المستخدم المميز: يدخل اللعبة مباشرة دون أي إعلان
             openGameDirect(url, name);
             addPointsToPlayer(gameId, 5);
         } else {
-            // المستخدم العادي: يشاهد إعلان الدخول (10 ثوانٍ)
             showEntryAd(() => {
                 openGameDirect(url, name);
                 addPointsToPlayer(gameId, 5);
@@ -1040,8 +1141,6 @@
         document.getElementById('gameModal').classList.add('hidden');
         document.getElementById('gameIframe').src = '';
         document.body.style.overflow = 'auto';
-        
-        // عند إغلاق اللعبة، المستخدم العادي سيظهر له إعلان الدخول مرة أخرى عند فتح لعبة جديدة
     }
     
     function addPointsToPlayer(gameId, points) {
@@ -1081,6 +1180,32 @@
         simulateLevelUp();
     });
     
+    // زر المزيد
+    document.getElementById('moreBtn').addEventListener('click', () => {
+        showMoreMenu();
+    });
+    
+    document.getElementById('closeMoreBtn').addEventListener('click', () => {
+        hideMoreMenu();
+    });
+    
+    // خيارات المزيد
+    document.querySelectorAll('.more-option').forEach(option => {
+        option.addEventListener('click', (e) => {
+            const cat = e.target.getAttribute('data-cat');
+            hideMoreMenu();
+            if (cat === 'all') {
+                alert('🎮 جميع الألعاب معروضة بالفعل في الأسفل 🎮');
+            } else if (cat === 'new') {
+                alert('🆕 سيتم إضافة ألعاب جديدة قريباً! 🆕');
+            } else if (cat === 'popular') {
+                alert('🔥 الألعاب الأكثر شعبية: Free Fire, Call of Duty, Sonic 🔥');
+            } else if (cat === 'recommended') {
+                alert('⭐ الألعاب الموصى بها: Street Fighter, Mortal Kombat, Slope ⭐');
+            }
+        });
+    });
+    
     document.querySelectorAll('.cat-badge').forEach(badge=>{
         badge.addEventListener('click', ()=>{
             const cat = badge.getAttribute('data-cat');
@@ -1092,10 +1217,10 @@
     document.getElementById('backToHomeBtn').addEventListener('click', ()=> showHomePage());
     document.getElementById('gameModal').addEventListener('click', (e)=>{ if(e.target === document.getElementById('gameModal')) closeGame(); });
     
-    // 🎵 موسيقى إلكترونية حماسية - صوت 100% (أقصى مستوى) 🎵
+    // 🎵 موسيقى إلكترونية حماسية - صوت 100%
     const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
     music.loop = true;
-    music.volume = 1.00;  // أقصى صوت ممكن 100%
+    music.volume = 1.00;
     let playing = true;
     const musicBottomBtn = document.getElementById('musicBottomBtn');
     musicBottomBtn.innerHTML = '🔇 إيقاف';
@@ -1130,9 +1255,7 @@
         }
     };
     
-    // بدء تشغيل الإعلان الثابت المتغير
     startPermanentAdRotation();
-    
     updateRanking();
     renderAllGames();
 </script>
