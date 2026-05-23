@@ -64,10 +64,12 @@
         }
 
         .content {
-            padding: 8px 8px 4px 8px;
+            padding: 8px 8px 0px 8px;
             flex: 1;
             overflow-y: auto;
             scrollbar-width: none;
+            display: flex;
+            flex-direction: column;
         }
         
         .content::-webkit-scrollbar {
@@ -78,29 +80,30 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            flex: 1;
         }
         
         .page-hidden {
             display: none;
         }
 
-        /* Hero Section - Reduced size */
+        /* Hero Section */
         .anime-hero {
             background: linear-gradient(135deg, #ff44ff20, #00ffff20);
-            border-radius: 18px;
-            padding: 8px 12px;
-            margin-bottom: 8px;
+            border-radius: 20px;
+            padding: 12px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             justify-content: center;
             border: 1px solid #ff44ff;
-            box-shadow: 0 0 12px #ff44ff;
+            box-shadow: 0 0 15px #ff44ff;
         }
         
         .character-img {
-            width: 55px;
-            height: 55px;
+            width: 65px;
+            height: 65px;
             background: url('https://i.pinimg.com/originals/6e/5e/6c/6e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png');
             background-size: cover;
             border-radius: 50%;
@@ -114,21 +117,21 @@
             right: -5px;
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.6rem;
+            font-size: 0.7rem;
             border: 1px solid white;
         }
         
         .tshirt-text {
             background: linear-gradient(135deg, #ff3366, #ff44ff, #00ffff);
-            padding: 3px 10px;
-            border-radius: 20px;
+            padding: 4px 12px;
+            border-radius: 22px;
             color: white;
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             font-weight: bold;
             display: inline-block;
         }
@@ -138,12 +141,12 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
         }
 
-        /* Ranking - Reduced size */
+        /* Ranking */
         .ranking-section {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             text-align: center;
         }
         
@@ -151,7 +154,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             flex-wrap: wrap;
         }
         
@@ -160,77 +163,77 @@
         }
         
         .gold-circle {
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             background: linear-gradient(145deg, #ffd700, #ffaa00);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
-            margin-bottom: 2px;
+            font-size: 1.5rem;
+            margin-bottom: 3px;
             border: 2px solid #ffd700;
-            box-shadow: 0 0 15px #ffd700;
+            box-shadow: 0 0 20px #ffd700;
         }
         
         .silver-circle {
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
-            margin-bottom: 2px;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
             border: 1.5px solid #c0c0c0;
-            box-shadow: 0 0 12px #c0c0c0;
+            box-shadow: 0 0 15px #c0c0c0;
         }
         
         .bronze-circle {
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(145deg, #cd7f32, #b8651a);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
-            margin-bottom: 2px;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
             border: 1.5px solid #cd7f32;
-            box-shadow: 0 0 12px #cd7f32;
+            box-shadow: 0 0 15px #cd7f32;
         }
         
         .rank-name {
             color: white;
-            font-size: 0.45rem;
+            font-size: 0.5rem;
             font-weight: bold;
         }
         
         .rank-points {
             color: #ffcc00;
-            font-size: 0.4rem;
+            font-size: 0.45rem;
         }
 
-        /* Categories - Reduced size */
+        /* Categories */
         .categories-section {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
         
         .categories {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
+            gap: 6px;
             justify-content: center;
         }
         
         .cat-badge {
             background: #ff44ff30;
             border: 1px solid #ff44ff;
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 5px 14px;
+            border-radius: 22px;
             color: white;
-            font-size: 0.55rem;
+            font-size: 0.6rem;
             cursor: pointer;
             transition: all 0.2s ease;
         }
@@ -240,35 +243,47 @@
             transform: scale(1.02);
         }
 
-        /* Ad - Reduced size */
+        /* Ad - ENLARGED */
         .fixed-permanent-ad {
-            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
-            border: 1px solid #ff44ff;
-            border-radius: 16px;
-            padding: 5px;
-            margin: 6px 0;
+            background: linear-gradient(135deg, #ff44ff30, #00ffff30);
+            border: 2px solid #ff44ff;
+            border-radius: 20px;
+            padding: 12px 8px;
+            margin: 8px 0 12px 0;
             text-align: center;
             color: white;
-            font-size: 0.55rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 0 15px #ff44ff;
+            animation: adPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes adPulse {
+            0% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
+            50% { box-shadow: 0 0 20px #ff44ff, 0 0 10px #00ffff; border-color: #00ffff; }
+            100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
         }
 
-        /* Games - Compact and aligned */
+        /* Games - Original size, compact at bottom */
         .games-wrapper {
-            margin: 4px 0;
+            margin: 0;
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
         }
         
         .two-rows {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
+            width: 100%;
         }
         
         .game-row {
             display: flex;
-            gap: 6px;
+            gap: 8px;
             overflow-x: auto;
-            padding-bottom: 4px;
-            scrollbar-width: none;
+            padding-bottom: 5px;
         }
         
         .game-row::-webkit-scrollbar {
@@ -276,10 +291,10 @@
         }
         
         .game-card {
-            min-width: 85px;
+            min-width: 95px;
             background: linear-gradient(145deg, #0f0f2a, #0a0a1a);
-            border-radius: 12px;
-            padding: 5px;
+            border-radius: 14px;
+            padding: 6px;
             text-align: center;
             border: 1px solid #ff44ff;
             cursor: pointer;
@@ -287,32 +302,32 @@
         }
         
         .game-card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             border-color: #00ffff;
-            box-shadow: 0 0 12px #00ffff;
+            box-shadow: 0 0 15px #00ffff;
         }
         
         .game-img {
             width: 100%;
-            height: 55px;
+            height: 65px;
             background-size: cover;
             background-position: center;
-            border-radius: 8px;
-            margin-bottom: 3px;
+            border-radius: 10px;
+            margin-bottom: 4px;
         }
         
         .game-title {
             color: white;
-            font-size: 0.45rem;
+            font-size: 0.5rem;
             font-weight: bold;
         }
 
-        /* Bottom Bar - Compact */
+        /* Bottom Bar */
         .bottom-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 6px 16px;
+            padding: 8px 20px;
             border-top: 1px solid #ff44ff;
             background: rgba(0,0,0,0.7);
             position: relative;
@@ -321,10 +336,10 @@
         .register-btn {
             background: #ff44ff30;
             border: 1px solid #ff44ff;
-            padding: 4px 10px;
-            border-radius: 16px;
+            padding: 5px 12px;
+            border-radius: 18px;
             color: white;
-            font-size: 0.45rem;
+            font-size: 0.5rem;
             cursor: pointer;
         }
         
@@ -336,42 +351,42 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            bottom: 6px;
-            width: 48px;
-            height: 48px;
+            bottom: 10px;
+            width: 55px;
+            height: 55px;
             background: linear-gradient(135deg, #ff44ff, #ff00aa, #00ffff);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 0 15px #ff44ff;
+            box-shadow: 0 0 20px #ff44ff;
             transition: all 0.3s ease;
             animation: circlePulse 1.5s ease-in-out infinite;
             z-index: 10;
         }
         
         @keyframes circlePulse {
-            0% { box-shadow: 0 0 8px #ff44ff; transform: translateX(-50%) scale(1); }
-            50% { box-shadow: 0 0 22px #ff44ff, 0 0 15px #00ffff; transform: translateX(-50%) scale(1.04); }
-            100% { box-shadow: 0 0 8px #ff44ff; transform: translateX(-50%) scale(1); }
+            0% { box-shadow: 0 0 10px #ff44ff; transform: translateX(-50%) scale(1); }
+            50% { box-shadow: 0 0 30px #ff44ff, 0 0 20px #00ffff; transform: translateX(-50%) scale(1.05); }
+            100% { box-shadow: 0 0 10px #ff44ff; transform: translateX(-50%) scale(1); }
         }
         
         .chat-circle-btn span {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
         }
         
         .music-bottom-btn {
             background: #000000aa;
-            padding: 4px 10px;
-            border-radius: 16px;
+            padding: 5px 12px;
+            border-radius: 18px;
             color: #0ff;
             cursor: pointer;
-            font-size: 0.45rem;
+            font-size: 0.5rem;
             border: 1px solid #0ff;
         }
         
-        /* Language Dropdown - Compact */
+        /* Language Dropdown */
         .lang-dropdown {
             position: relative;
             display: inline-block;
@@ -379,11 +394,11 @@
         
         .lang-btn {
             background: #000000aa;
-            padding: 4px 10px;
-            border-radius: 16px;
+            padding: 5px 10px;
+            border-radius: 18px;
             color: #0ff;
             cursor: pointer;
-            font-size: 0.45rem;
+            font-size: 0.5rem;
             border: 1px solid #0ff;
             display: flex;
             align-items: center;
@@ -393,25 +408,25 @@
         .lang-dropdown-content {
             display: none;
             position: absolute;
-            bottom: 30px;
+            bottom: 32px;
             right: 0;
             background: #1a1a2e;
             min-width: 140px;
-            border-radius: 10px;
+            border-radius: 12px;
             border: 1px solid #ff44ff;
             z-index: 100;
-            max-height: 280px;
+            max-height: 300px;
             overflow-y: auto;
         }
         
         .lang-dropdown-content a {
             color: white;
-            padding: 6px 10px;
+            padding: 8px 12px;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.65rem;
+            gap: 8px;
+            font-size: 0.7rem;
             cursor: pointer;
             transition: background 0.2s;
         }
@@ -448,57 +463,57 @@
         .security-card {
             background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
             border-radius: 30px;
-            padding: 20px;
+            padding: 25px;
             width: 85%;
-            max-width: 340px;
+            max-width: 350px;
             border: 2px solid #ff44ff;
-            box-shadow: 0 0 40px #ff44ff;
+            box-shadow: 0 0 50px #ff44ff;
             text-align: center;
         }
         
         .security-card h2 {
             color: white;
-            font-size: 1.2rem;
-            margin-bottom: 8px;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
         }
         
         .security-card p {
             color: #aaa;
-            font-size: 0.65rem;
-            margin-bottom: 15px;
+            font-size: 0.7rem;
+            margin-bottom: 20px;
         }
         
         .security-input {
             width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border-radius: 22px;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 25px;
             border: 1px solid #ff44ff;
             background: rgba(0,0,0,0.5);
             color: white;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
         
         .security-btn {
             width: 100%;
-            padding: 10px;
-            margin-top: 12px;
+            padding: 12px;
+            margin-top: 15px;
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             border: none;
-            border-radius: 22px;
+            border-radius: 25px;
             color: white;
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
         }
         
         .security-hint {
             color: #ffaa88;
-            font-size: 0.55rem;
-            margin-top: 12px;
+            font-size: 0.6rem;
+            margin-top: 15px;
         }
 
-        /* ========== MESSENGER 100% STYLE (unchanged) ========== */
+        /* ========== MESSENGER 100% STYLE ========== */
         .chat-page {
             position: fixed;
             top: 0;
@@ -939,7 +954,8 @@
                 </div>
             </div>
             
-            <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now!</div>
+            <!-- ENLARGED AD -->
+            <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
             
             <div class="games-wrapper">
                 <div class="two-rows" id="gamesContainer"></div>
@@ -947,7 +963,7 @@
         </div>
         
         <div id="categoryPage" class="page page-hidden">
-            <button class="create-btn" id="backToHomeBtn" style="margin-bottom:8px; padding:6px 12px; font-size:0.6rem;">🔙 Back</button>
+            <button class="create-btn" id="backToHomeBtn" style="margin-bottom:10px;">🔙 Back</button>
             <div class="two-rows" id="categoryGamesContainer"></div>
         </div>
     </div>
@@ -957,7 +973,7 @@
         <div class="chat-circle-btn" id="openChatBtn">
             <span>💬</span>
         </div>
-        <div style="display: flex; gap: 4px;">
+        <div style="display: flex; gap: 5px;">
             <div class="lang-dropdown">
                 <div class="lang-btn" id="langBtn">🌐 EN</div>
                 <div class="lang-dropdown-content" id="langDropdownContent">
@@ -2160,7 +2176,7 @@
     }, 2000);
     
     // Ads rotation
-    const ads = ["📺 Sponsored Ad - Subscribe Now!", "🎮 Game of the Week - Play Free!", "💰 50% OFF on VIP"];
+    const ads = ["📺 Sponsored Ad - Subscribe Now! 🎮", "🎮 Game of the Week - Play Free! 🔥", "💰 50% OFF on VIP ⭐"];
     let adIdx = 0;
     setInterval(() => {
         adIdx = (adIdx + 1) % ads.length;
