@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DidoGame - 3D Anime City | Secure Chat</title>
+    <title>DidoGame - 3D Anime City | Messenger Style Chat</title>
     <style>
         * {
             margin: 0;
@@ -380,7 +380,7 @@
             background: rgba(0,0,0,0.95);
             backdrop-filter: blur(15px);
             z-index: 1000;
-            display: none; /* Changed from flex to none */
+            display: none;
             align-items: center;
             justify-content: center;
             animation: fadeIn 0.3s ease;
@@ -444,7 +444,7 @@
             margin-top: 15px;
         }
 
-        /* ========== MESSENGER STYLE CHAT PAGE ========== */
+        /* ========== MESSENGER 100% STYLE ========== */
         .chat-page {
             position: fixed;
             top: 0;
@@ -463,244 +463,183 @@
             to { transform: translateY(0); }
         }
         
+        /* Messenger Main Container */
+        .messenger-full {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background: #0a0a1a;
+        }
+        
+        /* Messenger Header */
         .messenger-header {
-            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
             padding: 12px 16px;
+            background: #0a0a1a;
+            border-bottom: 1px solid #2c2c3a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .header-left {
             display: flex;
             align-items: center;
             gap: 12px;
-            border-bottom: 1px solid #ff44ff;
         }
         
-        .back-to-home, .logout-btn {
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
+        .back-btn {
+            background: none;
             border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
+            color: #ff44ff;
+            font-size: 1.5rem;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-        .logout-btn {
-            background: #ff4444;
-            width: auto;
-            padding: 0 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
         }
         
         .messenger-header h2 {
             color: white;
-            font-size: 1.1rem;
-            flex: 1;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
         
-        .messenger-header span {
-            color: #00ff88;
-            font-size: 0.7rem;
-        }
-        
-        .messenger-container {
+        .header-actions {
             display: flex;
-            flex: 1;
-            overflow: hidden;
+            gap: 15px;
         }
         
-        .messenger-sidebar {
-            width: 38%;
-            background: rgba(0,0,0,0.4);
-            border-right: 1px solid rgba(255,68,255,0.3);
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-        }
-        
-        .profile-section {
-            padding: 15px;
-            background: rgba(255,68,255,0.1);
-            border-bottom: 1px solid rgba(255,68,255,0.3);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .profile-avatar {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-        }
-        
-        .profile-info {
-            flex: 1;
-        }
-        
-        .profile-name {
-            color: white;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-        
-        .profile-status {
-            color: #00ff88;
-            font-size: 0.6rem;
-        }
-        
-        .rooms-section {
-            flex: 1;
-            overflow-y: auto;
-            padding: 10px;
-        }
-        
-        .section-title {
+        .header-actions span {
             color: #ff44ff;
-            font-size: 0.7rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            padding: 0 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
         }
         
-        .room-item {
+        /* Chats List (Inbox) */
+        .chats-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+        
+        .chat-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 10px;
-            border-radius: 12px;
-            margin-bottom: 5px;
+            padding: 12px 16px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: background 0.2s;
+            border-bottom: 1px solid #1f1f2e;
         }
         
-        .room-item:hover {
-            background: rgba(255,68,255,0.2);
+        .chat-item:hover {
+            background: #1f1f2e;
         }
         
-        .room-item.active {
-            background: linear-gradient(135deg, rgba(255,68,255,0.3), rgba(0,255,255,0.1));
-            border-left: 3px solid #ff44ff;
-        }
-        
-        .room-avatar {
-            width: 45px;
-            height: 45px;
-            background: rgba(255,68,255,0.3);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-        }
-        
-        .room-details {
-            flex: 1;
-        }
-        
-        .room-name {
-            color: white;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        
-        .room-lock {
-            font-size: 0.6rem;
-            color: #ffaa88;
-        }
-        
-        .users-section {
-            border-top: 1px solid rgba(255,68,255,0.2);
-            padding: 10px;
-            max-height: 40%;
-            overflow-y: auto;
-        }
-        
-        .user-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px;
-            border-radius: 10px;
-            margin-bottom: 3px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .user-item:hover {
-            background: rgba(255,68,255,0.2);
-        }
-        
-        .user-item.selected {
-            background: rgba(0,255,136,0.2);
-            border-right: 2px solid #00ff88;
-        }
-        
-        .user-avatar-small {
-            width: 32px;
-            height: 32px;
+        .chat-avatar {
+            width: 56px;
+            height: 56px;
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 1.5rem;
+            flex-shrink: 0;
         }
         
-        .user-name {
+        .chat-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .chat-name {
             color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .chat-lock {
+            font-size: 0.7rem;
+            color: #ffaa88;
+        }
+        
+        .chat-last-msg {
+            color: #8e8e9e;
             font-size: 0.75rem;
-            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
-        .vip-badge {
-            background: #ff44ff;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-size: 0.45rem;
+        .chat-time {
+            color: #8e8e9e;
+            font-size: 0.65rem;
+            flex-shrink: 0;
         }
         
-        .messenger-main {
-            flex: 1;
+        /* Open Chat View (When a room is selected) */
+        .open-chat-view {
             display: flex;
             flex-direction: column;
-            background: rgba(0,0,0,0.2);
+            height: 100%;
+            background: #0a0a1a;
         }
         
-        .chat-header-area {
-            padding: 12px 15px;
-            background: rgba(0,0,0,0.4);
-            border-bottom: 1px solid rgba(255,68,255,0.3);
+        .chat-header {
+            padding: 12px 16px;
+            background: #0a0a1a;
+            border-bottom: 1px solid #2c2c3a;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 12px;
         }
         
-        .current-chat-room {
-            color: #00ffff;
-            font-size: 0.9rem;
-            font-weight: bold;
+        .chat-header .back-btn {
+            font-size: 1.3rem;
         }
         
-        .mic-indicator {
-            color: #0ff;
-            font-size: 0.7rem;
+        .chat-header-info {
+            flex: 1;
         }
         
-        .messages-container {
+        .chat-header-name {
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .chat-header-status {
+            color: #00ff88;
+            font-size: 0.65rem;
+        }
+        
+        .chat-header-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .chat-header-actions span {
+            color: #ff44ff;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        
+        /* Messages Container */
+        .messages-area {
             flex: 1;
             overflow-y: auto;
-            padding: 15px;
+            padding: 16px;
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
         
+        /* Message Bubbles - Exact Messenger Style */
         .message-row {
             display: flex;
             width: 100%;
@@ -718,24 +657,24 @@
             max-width: 75%;
             padding: 10px 14px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             word-break: break-word;
         }
         
         .message-bubble.outgoing {
-            background: linear-gradient(135deg, #ff44ff, #ff00aa);
+            background: #0084ff;
             color: white;
             border-bottom-right-radius: 5px;
         }
         
         .message-bubble.incoming {
-            background: rgba(255,255,255,0.1);
+            background: #1f1f2e;
             color: white;
             border-bottom-left-radius: 5px;
         }
         
         .message-bubble.private {
-            background: rgba(0,255,136,0.2);
+            background: #2a2a3e;
             border: 1px solid #00ff88;
         }
         
@@ -758,15 +697,24 @@
             margin-left: 5px;
         }
         
+        /* Typing Indicator */
+        .typing-indicator {
+            padding: 8px 16px;
+            color: #8e8e9e;
+            font-size: 0.7rem;
+            font-style: italic;
+        }
+        
+        /* Message Input Area */
         .message-input-area {
             padding: 12px;
-            background: rgba(0,0,0,0.5);
-            border-top: 1px solid rgba(255,68,255,0.3);
+            background: #0a0a1a;
+            border-top: 1px solid #2c2c3a;
         }
         
         .input-wrapper {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             align-items: center;
         }
         
@@ -774,66 +722,75 @@
             flex: 1;
             padding: 12px 16px;
             border-radius: 25px;
-            border: 1px solid #ff44ff;
-            background: rgba(0,0,0,0.5);
+            border: none;
+            background: #1f1f2e;
             color: white;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
         
         .message-input:focus {
             outline: none;
-            border-color: #00ffff;
+            background: #2a2a3e;
         }
         
-        .send-button {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
+        .input-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .mic-btn, .send-btn {
+            background: none;
             border: none;
-            border-radius: 50%;
+            color: #ff44ff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        /* Create Room Modal (Messenger Style) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1100;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            font-size: 1.2rem;
         }
         
-        .mic-button {
+        .modal-content {
+            background: #1f1f2e;
+            border-radius: 20px;
+            padding: 20px;
+            width: 85%;
+            max-width: 320px;
+        }
+        
+        .modal-content input {
             width: 100%;
-            margin-top: 8px;
-            padding: 8px;
-            background: rgba(0,255,255,0.2);
-            border: 1px solid #0ff;
+            padding: 12px;
+            margin: 10px 0;
             border-radius: 25px;
-            color: #0ff;
-            font-size: 0.7rem;
-            cursor: pointer;
-            text-align: center;
-        }
-        
-        .create-room-input {
-            display: flex;
-            gap: 5px;
-            margin-top: 10px;
-        }
-        
-        .room-input-small {
-            flex: 1;
-            padding: 8px;
-            border-radius: 20px;
-            border: 1px solid #ff44ff;
-            background: rgba(0,0,0,0.5);
-            color: white;
-            font-size: 0.7rem;
-        }
-        
-        .create-btn {
-            padding: 8px 12px;
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
             border: none;
-            border-radius: 20px;
+            background: #2a2a3e;
             color: white;
-            font-size: 0.6rem;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .modal-buttons button {
+            flex: 1;
+            padding: 10px;
+            border-radius: 25px;
+            border: none;
             cursor: pointer;
         }
         
@@ -927,7 +884,7 @@
     </div>
 </div>
 
-<!-- لوحة الأمان (تظهر فقط عند الضغط على زر الدردشة إذا لم يكن مسجلاً) -->
+<!-- لوحة الأمان -->
 <div id="securityPanel" class="security-panel">
     <div class="security-card">
         <h2>🔐 إعدادات الأمان</h2>
@@ -940,56 +897,47 @@
     </div>
 </div>
 
-<!-- صفحة الدردشة بتصميم الماسنجر -->
+<!-- صفحة الدردشة بتصميم الماسنجر 100% -->
 <div id="chatPage" class="chat-page hidden">
-    <div class="messenger-header">
-        <button class="back-to-home" id="closeChatBtn">✕</button>
-        <h2>💬 المحادثات</h2>
-        <button id="logoutBtn" class="logout-btn">🚪 خروج</button>
-    </div>
-    
-    <div class="messenger-container">
-        <div class="messenger-sidebar">
-            <div class="profile-section">
-                <div class="profile-avatar" id="profileAvatar">👤</div>
-                <div class="profile-info">
-                    <div class="profile-name" id="profileName">أحمد</div>
-                    <div class="profile-status" id="profileStatus">🟢 متصل</div>
+    <div class="messenger-full">
+        <!-- Inbox View (قائمة المحادثات) -->
+        <div id="inboxView" style="display: flex; flex-direction: column; height: 100%;">
+            <div class="messenger-header">
+                <div class="header-left">
+                    <button class="back-btn" id="closeChatFromInbox">✕</button>
+                    <h2>المحادثات</h2>
+                </div>
+                <div class="header-actions">
+                    <span id="newChatBtn" style="cursor: pointer;">✏️</span>
+                    <span>☰</span>
                 </div>
             </div>
-            
-            <div class="rooms-section">
-                <div class="section-title">📁 المحادثات</div>
-                <div id="roomsListSidebar"></div>
-                
-                <div class="create-room-input">
-                    <input type="text" id="newRoomNameInput" class="room-input-small" placeholder="غرفة جديدة">
-                    <button class="create-btn" onclick="createNewRoom()">➕ إنشاء</button>
-                </div>
-            </div>
-            
-            <div class="users-section">
-                <div class="section-title">👥 أعضاء الغرفة</div>
-                <div id="usersListSidebar"></div>
-            </div>
+            <div class="chats-list" id="chatsListContainer"></div>
         </div>
         
-        <div class="messenger-main">
-            <div class="chat-header-area">
-                <span class="current-chat-room" id="currentRoomDisplay">⚪ اختر محادثة</span>
-                <span class="mic-indicator" id="micIndicator">🎤</span>
+        <!-- Open Chat View (عند فتح محادثة) -->
+        <div id="openChatView" style="display: none; flex-direction: column; height: 100%;">
+            <div class="chat-header">
+                <button class="back-btn" id="backToInboxBtn">←</button>
+                <div class="chat-header-info">
+                    <div class="chat-header-name" id="openChatRoomName">الغرفة</div>
+                    <div class="chat-header-status" id="openChatStatus">🟢 متصل</div>
+                </div>
+                <div class="chat-header-actions">
+                    <span>🔔</span>
+                    <span>⋮</span>
+                </div>
             </div>
-            
-            <div class="messages-container" id="messagesContainer">
-                <div style="color:#888; text-align:center; padding:20px;">✨ اختر غرفة لبدء المحادثة</div>
-            </div>
-            
+            <div class="messages-area" id="openChatMessages"></div>
+            <div class="typing-indicator" id="typingIndicator" style="display: none;">✍️ شخص ما يكتب...</div>
             <div class="message-input-area">
                 <div class="input-wrapper">
-                    <input type="text" id="messageInput" class="message-input" placeholder="اكتب رسالة...">
-                    <button class="send-button" onclick="sendMessage()">📤</button>
+                    <input type="text" id="openMessageInput" class="message-input" placeholder="اكتب رسالة...">
+                    <div class="input-actions">
+                        <button class="mic-btn" id="micBtnOpen" onclick="toggleMicrophoneOpen()">🎙️</button>
+                        <button class="send-btn" id="sendMsgOpen" onclick="sendMessageOpen()">📤</button>
+                    </div>
                 </div>
-                <button class="mic-button" id="micToggleBtn" onclick="toggleMicrophone()">🎙️ تفعيل الميكروفون</button>
             </div>
         </div>
     </div>
@@ -1013,16 +961,16 @@
     
     // ==================== Global Variables ====================
     let currentUser = null;
-    let currentRoom = null;
+    let currentOpenRoom = null;
     let isVIP = false;
     let allRooms = {};
     let audioStream = null;
-    let isMicActive = false;
     let bgMusic = null;
     let isMusicPlaying = false;
     let privateTarget = null;
     let securityPassword = "";
     let sessionTimer = null;
+    let typingTimeout = null;
 
     // ==================== Security Helpers ====================
     function encryptMessage(text) {
@@ -1052,20 +1000,15 @@
     function logout() {
         if(sessionTimer) clearTimeout(sessionTimer);
         currentUser = null;
-        currentRoom = null;
-        privateTarget = null;
+        currentOpenRoom = null;
         if(audioStream) {
             audioStream.getTracks().forEach(track => track.stop());
             audioStream = null;
         }
         document.getElementById('chatPage').classList.add('hidden');
-        // Don't hide security panel, just show it again if needed? No, we will show it on next chat click.
-        // Reset UI
         document.getElementById('securityUsername').value = '';
         document.getElementById('securityRoomPassword').value = '';
         document.getElementById('securityRoomName').value = 'الغرفة الرئيسية';
-        // Update UI to reflect logout if needed
-        updateProfileUI(); 
     }
 
     function validatePassword(pass) {
@@ -1143,11 +1086,10 @@
             document.getElementById('registerBtn').innerHTML = '👑 VIP مفعل';
             document.getElementById('registerBtn').classList.add('vip-active');
             alert("🎉 تهانينا! أصبحت عضواً مميزاً");
-            updateProfileUI();
         }
     }
     
-    // ==================== Chat Functions ====================
+    // ==================== Chat Functions (Messenger Style) ====================
     function saveRooms() {
         localStorage.setItem('didogame_rooms_secure', JSON.stringify(allRooms));
     }
@@ -1156,125 +1098,6 @@
         const data = localStorage.getItem('didogame_rooms_secure');
         if(data) allRooms = JSON.parse(data);
         else allRooms = {};
-    }
-    
-    function updateRoomsSidebar() {
-        const container = document.getElementById('roomsListSidebar');
-        const rooms = Object.keys(allRooms);
-        if(rooms.length === 0) {
-            container.innerHTML = '<div style="color:#888; text-align:center; padding:10px;">لا توجد غرف</div>';
-            return;
-        }
-        container.innerHTML = rooms.map(room => `
-            <div class="room-item ${currentRoom === room ? 'active' : ''}" onclick="selectRoom('${room.replace(/'/g, "\\'")}')">
-                <div class="room-avatar">💬</div>
-                <div class="room-details">
-                    <div class="room-name">${escapeHtml(room)}</div>
-                    <div class="room-lock">${allRooms[room].password ? '🔒 محمية' : '🔓 عامة'} • ${allRooms[room].users?.length || 0} عضو</div>
-                </div>
-            </div>
-        `).join('');
-    }
-    
-    function updateUsersSidebar() {
-        const container = document.getElementById('usersListSidebar');
-        if(!currentRoom || !allRooms[currentRoom]) {
-            container.innerHTML = '<div style="color:#888; text-align:center; padding:10px;">اختر غرفة أولاً</div>';
-            return;
-        }
-        const users = allRooms[currentRoom].users || [];
-        if(users.length === 0) {
-            container.innerHTML = '<div style="color:#888; text-align:center; padding:10px;">لا يوجد أعضاء</div>';
-            return;
-        }
-        container.innerHTML = users.map(user => `
-            <div class="user-item ${privateTarget === user ? 'selected' : ''}" onclick="setPrivateTarget('${user.replace(/'/g, "\\'")}')">
-                <div class="user-avatar-small">${escapeHtml(user.charAt(0))}</div>
-                <div class="user-name">${escapeHtml(user)} ${user === currentUser ? '(أنت)' : ''}</div>
-                ${isVIP && user === currentUser ? '<span class="vip-badge">VIP</span>' : ''}
-            </div>
-        `).join('');
-    }
-    
-    function updateProfileUI() {
-        if(currentUser) {
-            document.getElementById('profileName').innerHTML = `${escapeHtml(currentUser)} ${isVIP ? '⭐' : ''}`;
-            document.getElementById('profileAvatar').innerHTML = escapeHtml(currentUser.charAt(0));
-        } else {
-            document.getElementById('profileName').innerHTML = 'زائر';
-            document.getElementById('profileAvatar').innerHTML = '👤';
-        }
-    }
-    
-    function selectRoom(roomName) {
-        resetSessionTimer();
-        const room = allRooms[roomName];
-        if(!room) return;
-        if(room.password && room.password !== securityPassword) {
-            alert("❌ كلمة مرور الغرفة غير صحيحة!");
-            return;
-        }
-        joinRoom(roomName);
-    }
-    
-    function joinRoom(roomName) {
-        if(!currentUser) return;
-        const room = allRooms[roomName];
-        if(!room) return;
-        
-        if(!room.users.includes(currentUser)) {
-            room.users.push(currentUser);
-            saveRooms();
-        }
-        currentRoom = roomName;
-        privateTarget = null;
-        document.getElementById('messageInput').placeholder = "اكتب رسالة...";
-        updateRoomsSidebar();
-        updateUsersSidebar();
-        displayMessages();
-        document.getElementById('currentRoomDisplay').innerHTML = `🔐 ${escapeHtml(currentRoom)}`;
-        resetSessionTimer();
-    }
-    
-    function createNewRoom() {
-        if(!currentUser) return;
-        const roomName = document.getElementById('newRoomNameInput').value.trim();
-        if(!roomName) { alert("أدخل اسم الغرفة"); return; }
-        if(allRooms[roomName]) { alert("الغرفة موجودة"); return; }
-        
-        if(securityPassword && !validatePassword(securityPassword)) return;
-        
-        allRooms[roomName] = {
-            password: securityPassword || null,
-            users: [currentUser],
-            messages: []
-        };
-        saveRooms();
-        updateRoomsSidebar();
-        currentRoom = roomName;
-        privateTarget = null;
-        updateUsersSidebar();
-        displayMessages();
-        document.getElementById('currentRoomDisplay').innerHTML = `🔐 ${escapeHtml(currentRoom)}`;
-        document.getElementById('newRoomNameInput').value = '';
-        resetSessionTimer();
-    }
-    
-    function setPrivateTarget(username) {
-        resetSessionTimer();
-        if(username === currentUser) return;
-        if(!allRooms[currentRoom] || !allRooms[currentRoom].users.includes(username)) {
-            alert("❌ لا يمكنك إرسال رسالة خاصة لهذا المستخدم لأنه ليس في الغرفة");
-            return;
-        }
-        privateTarget = privateTarget === username ? null : username;
-        updateUsersSidebar();
-        if(privateTarget) {
-            document.getElementById('messageInput').placeholder = `🔒 رسالة خاصة إلى ${escapeHtml(privateTarget)}...`;
-        } else {
-            document.getElementById('messageInput').placeholder = "اكتب رسالة...";
-        }
-        document.getElementById('messageInput').focus();
     }
     
     function escapeHtml(str) {
@@ -1286,16 +1109,87 @@
             return m;
         });
     }
-
-    function displayMessages() {
-        const container = document.getElementById('messagesContainer');
-        if(!currentRoom || !allRooms[currentRoom]) {
-            container.innerHTML = '<div style="color:#888; text-align:center; padding:20px;">✨ اختر غرفة لبدء المحادثة</div>';
+    
+    function getLastMessage(room) {
+        if(!room.messages || room.messages.length === 0) return "لا توجد رسائل";
+        const lastMsg = room.messages[room.messages.length - 1];
+        let text = lastMsg.text;
+        if(lastMsg.encrypted) text = decryptMessage(lastMsg.text);
+        if(text.length > 30) text = text.substring(0, 30) + "...";
+        if(lastMsg.type === 'private') text = "🔒 رسالة خاصة";
+        return text;
+    }
+    
+    function renderChatsList() {
+        const container = document.getElementById('chatsListContainer');
+        const rooms = Object.keys(allRooms);
+        if(rooms.length === 0) {
+            container.innerHTML = '<div style="color:#888; text-align:center; padding:40px;">لا توجد محادثات<br>✏️ أنشئ محادثة جديدة</div>';
             return;
         }
-        const messages = allRooms[currentRoom].messages.slice(-50);
+        container.innerHTML = rooms.map(room => {
+            const roomData = allRooms[room];
+            const lastMsg = getLastMessage(roomData);
+            return `
+                <div class="chat-item" onclick="openRoomChat('${room.replace(/'/g, "\\'")}')">
+                    <div class="chat-avatar">💬</div>
+                    <div class="chat-info">
+                        <div class="chat-name">
+                            ${escapeHtml(room)}
+                            ${roomData.password ? '<span class="chat-lock">🔒</span>' : ''}
+                        </div>
+                        <div class="chat-last-msg">${escapeHtml(lastMsg)}</div>
+                    </div>
+                    <div class="chat-time">الآن</div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    function openRoomChat(roomName) {
+        const room = allRooms[roomName];
+        if(!room) return;
+        if(room.password && room.password !== securityPassword) {
+            alert("❌ كلمة مرور الغرفة غير صحيحة!");
+            return;
+        }
+        if(!room.users.includes(currentUser)) {
+            room.users.push(currentUser);
+            saveRooms();
+        }
+        currentOpenRoom = roomName;
+        privateTarget = null;
+        
+        // Switch views
+        document.getElementById('inboxView').style.display = 'none';
+        document.getElementById('openChatView').style.display = 'flex';
+        document.getElementById('openChatRoomName').innerHTML = escapeHtml(currentOpenRoom);
+        
+        displayMessagesInOpenChat();
+        resetSessionTimer();
+        
+        // Simulate typing indicator for demo
+        startTypingSimulation();
+    }
+    
+    function startTypingSimulation() {
+        const indicator = document.getElementById('typingIndicator');
+        indicator.style.display = 'block';
+        if(typingTimeout) clearTimeout(typingTimeout);
+        typingTimeout = setTimeout(() => {
+            indicator.style.display = 'none';
+        }, 3000);
+    }
+    
+    function displayMessagesInOpenChat() {
+        const container = document.getElementById('openChatMessages');
+        if(!currentOpenRoom || !allRooms[currentOpenRoom]) {
+            container.innerHTML = '<div style="color:#888; text-align:center; padding:20px;">✨ اختر محادثة لبدء المراسلة</div>';
+            return;
+        }
+        const messages = allRooms[currentOpenRoom].messages.slice(-50);
         if(messages.length === 0) {
-            container.innerHTML = '<div style="color:#888; text-align:center; padding:20px;">💬 لا توجد رسائل بعد</div>';
+            container.innerHTML = '<div style="color:#888; text-align:center; padding:20px;">💬 لا توجد رسائل بعد<br>✨ اكتب أول رسالة</div>';
             return;
         }
         container.innerHTML = '';
@@ -1312,7 +1206,7 @@
             if(isPrivate) bubbleClass += ' private';
             
             let senderHtml = '';
-            if(!isOutgoing) {
+            if(!isOutgoing && msg.type !== 'private') {
                 senderHtml = `<div class="message-sender-name">${escapeHtml(msg.sender)}</div>`;
             }
             
@@ -1337,25 +1231,15 @@
                 </div>
             `;
             
-            if(msg.image) {
-                const img = document.createElement('img');
-                img.src = msg.image;
-                img.style.maxWidth = '100%';
-                img.style.maxHeight = '120px';
-                img.style.borderRadius = '10px';
-                img.style.marginTop = '5px';
-                messageDiv.querySelector('.message-bubble').appendChild(img);
-            }
-            
             container.appendChild(messageDiv);
         });
         container.scrollTop = container.scrollHeight;
     }
     
-    function sendMessage() {
-        const input = document.getElementById('messageInput');
+    function sendMessageOpen() {
+        const input = document.getElementById('openMessageInput');
         const text = input.value.trim();
-        if(!text || !currentRoom || !currentUser) return;
+        if(!text || !currentOpenRoom || !currentUser) return;
         
         const encryptedText = encryptMessage(text);
         
@@ -1378,37 +1262,65 @@
                 time: Date.now()
             };
         }
-        allRooms[currentRoom].messages.push(msg);
+        allRooms[currentOpenRoom].messages.push(msg);
         saveRooms();
-        displayMessages();
+        displayMessagesInOpenChat();
         input.value = '';
         resetSessionTimer();
+        
+        // Update chats list to show last message
+        renderChatsList();
+    }
+    
+    function showNewChatModal() {
+        const roomName = prompt("أدخل اسم الغرفة الجديدة:", "غرفة جديدة");
+        if(!roomName) return;
+        if(allRooms[roomName]) { alert("الغرفة موجودة"); return; }
+        
+        const usePassword = confirm("هل تريد حماية الغرفة بكلمة مرور؟");
+        let password = null;
+        if(usePassword) {
+            password = prompt("أدخل كلمة مرور الغرفة:", "");
+            if(password && password.length < 3) { alert("كلمة المرور قصيرة جداً"); return; }
+        }
+        
+        allRooms[roomName] = {
+            password: password,
+            users: [currentUser],
+            messages: []
+        };
+        saveRooms();
+        renderChatsList();
+        alert(`تم إنشاء الغرفة "${roomName}" بنجاح`);
+    }
+    
+    function backToInbox() {
+        document.getElementById('openChatView').style.display = 'none';
+        document.getElementById('inboxView').style.display = 'flex';
+        currentOpenRoom = null;
+        privateTarget = null;
+        renderChatsList();
     }
     
     // ==================== Audio ====================
     async function startMicrophone() {
-        if(!currentRoom) return;
         try {
             if(!audioStream) {
                 audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                isMicActive = true;
-                document.getElementById('micToggleBtn').innerHTML = "🎙️ ميكروفون ON";
-                document.getElementById('micIndicator').innerHTML = "🎤";
+                // For speech to text simulation
+                alert("🎤 تم تفعيل الميكروفون (محاكاة تحويل الصوت لنص)");
             }
         } catch(e) { console.log("Mic error"); }
     }
     
-    function toggleMicrophone() {
-        if(!currentRoom) { alert("ادخل غرفة أولاً"); return; }
+    function toggleMicrophoneOpen() {
+        if(!currentOpenRoom) { alert("افتح محادثة أولاً"); return; }
         if(!audioStream) { startMicrophone(); return; }
         const audioTrack = audioStream.getAudioTracks()[0];
         if(audioTrack) {
             audioTrack.enabled = !audioTrack.enabled;
-            isMicActive = audioTrack.enabled;
-            document.getElementById('micToggleBtn').innerHTML = isMicActive ? "🎙️ ميكروفون ON" : "🔴 ميكروفون OFF";
-            document.getElementById('micIndicator').innerHTML = isMicActive ? "🎤" : "🔇";
+            alert(audioTrack.enabled ? "🎙️ الميكروفون نشط" : "🔴 الميكروفون غير نشط");
         }
-        resetSessionTimer();
     }
     
     // ==================== Music ====================
@@ -1443,32 +1355,31 @@
         
         localStorage.setItem('didogame_username', currentUser);
         
-        document.getElementById('securityPanel').style.display = 'none'; // Hide security panel
+        document.getElementById('securityPanel').style.display = 'none';
         document.getElementById('chatPage').classList.remove('hidden');
         
-        updateProfileUI();
         loadRooms();
-        updateRoomsSidebar();
         
         if(allRooms[roomName]) {
             if(allRooms[roomName].password && allRooms[roomName].password !== roomPassword) {
                 alert("⚠️ كلمة المرور غير صحيحة! سيتم إنشاء غرفة جديدة.");
                 createNewRoomWithName(roomName);
             } else {
-                joinRoom(roomName);
+                if(!allRooms[roomName].users.includes(currentUser)) {
+                    allRooms[roomName].users.push(currentUser);
+                    saveRooms();
+                }
             }
         } else {
             createNewRoomWithName(roomName);
         }
         
-        setTimeout(() => { startMicrophone(); }, 500);
+        renderChatsList();
         startSessionTimer();
         
-        const activityEvents = ['click', 'keypress', 'scroll', 'touchstart'];
-        activityEvents.forEach(event => {
-            document.getElementById('chatPage').addEventListener(event, resetSessionTimer);
-            document.getElementById('messageInput').addEventListener(event, resetSessionTimer);
-        });
+        // Show inbox view by default
+        document.getElementById('inboxView').style.display = 'flex';
+        document.getElementById('openChatView').style.display = 'none';
     }
     
     function createNewRoomWithName(roomName) {
@@ -1481,57 +1392,40 @@
             messages: []
         };
         saveRooms();
-        updateRoomsSidebar();
-        currentRoom = roomName;
-        updateUsersSidebar();
-        displayMessages();
-        document.getElementById('currentRoomDisplay').innerHTML = `🔐 ${escapeHtml(currentRoom)}`;
     }
     
     // ==================== UI Events ====================
-    document.getElementById('closeChatBtn').addEventListener('click', () => {
+    document.getElementById('closeChatFromInbox').addEventListener('click', () => {
         document.getElementById('chatPage').classList.add('hidden');
     });
     
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-        if(confirm("هل أنت متأكد من تسجيل الخروج؟")) {
-            logout();
-        }
-    });
+    document.getElementById('backToInboxBtn').addEventListener('click', backToInbox);
+    
+    document.getElementById('newChatBtn').addEventListener('click', showNewChatModal);
     
     document.getElementById('openChatBtn').addEventListener('click', () => {
         const savedUser = localStorage.getItem('didogame_username');
-        // Check if user is logged in (currentUser exists)
         if(currentUser) {
-            // Already logged in, open chat directly
             document.getElementById('chatPage').classList.remove('hidden');
-            updateRoomsSidebar();
-            if(currentRoom) {
-                updateUsersSidebar();
-                displayMessages();
-            }
+            document.getElementById('inboxView').style.display = 'flex';
+            document.getElementById('openChatView').style.display = 'none';
+            renderChatsList();
             startSessionTimer();
         } else {
-            // Not logged in, show security panel
-            // Reset security panel fields maybe
             document.getElementById('securityPanel').style.display = 'flex';
-            // If there is a saved username, prefill
             if(savedUser) {
                 document.getElementById('securityUsername').value = savedUser;
-            } else {
-                document.getElementById('securityUsername').value = '';
             }
         }
     });
     
-    // Auto refresh
+    // Auto refresh messages
     setInterval(() => {
-        if(currentRoom && allRooms[currentRoom]) {
-            displayMessages();
-            updateUsersSidebar();
+        if(currentOpenRoom && allRooms[currentOpenRoom] && document.getElementById('openChatView').style.display === 'flex') {
+            displayMessagesInOpenChat();
         }
-        if(!document.getElementById('chatPage').classList.contains('hidden')) {
-            updateRoomsSidebar();
+        if(currentUser && document.getElementById('inboxView').style.display === 'flex') {
+            renderChatsList();
         }
     }, 2000);
     
@@ -1557,10 +1451,7 @@
     
     const savedUser = localStorage.getItem('didogame_username');
     if(savedUser) {
-        // Don't automatically log in, just prefill the security panel
         document.getElementById('securityUsername').value = savedUser;
-        // We do NOT set currentUser here anymore, because security panel is not shown automatically.
-        // User must click chat button and then submit.
     }
     
     // Expose functions globally
@@ -1568,12 +1459,10 @@
     window.closeGameModal = closeGameModal;
     window.toggleMusic = toggleMusic;
     window.submitSecurityAndEnter = submitSecurityAndEnter;
-    window.selectRoom = selectRoom;
-    window.createNewRoom = createNewRoom;
-    window.sendMessage = sendMessage;
-    window.setPrivateTarget = setPrivateTarget;
-    window.toggleMicrophone = toggleMicrophone;
-    window.logout = logout;
+    window.openRoomChat = openRoomChat;
+    window.sendMessageOpen = sendMessageOpen;
+    window.toggleMicrophoneOpen = toggleMicrophoneOpen;
+    window.backToInbox = backToInbox;
 </script>
 </body>
 </html>
