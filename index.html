@@ -87,25 +87,26 @@
             display: none;
         }
 
-        /* Hero Section */
+        /* Hero Section - ENLARGED ANIME IMAGE */
         .anime-hero {
             background: linear-gradient(135deg, #ff44ff20, #00ffff20);
             border-radius: 20px;
-            padding: 12px;
+            padding: 15px;
             margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             justify-content: center;
             border: 1px solid #ff44ff;
             box-shadow: 0 0 15px #ff44ff;
         }
         
         .character-img {
-            width: 65px;
-            height: 65px;
+            width: 85px;
+            height: 85px;
             background: url('https://i.pinimg.com/originals/6e/5e/6c/6e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png');
             background-size: cover;
+            background-position: center;
             border-radius: 50%;
             border: 2px solid #ff44ff;
             position: relative;
@@ -117,21 +118,21 @@
             right: -5px;
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             border-radius: 50%;
-            width: 22px;
-            height: 22px;
+            width: 26px;
+            height: 26px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             border: 1px solid white;
         }
         
         .tshirt-text {
             background: linear-gradient(135deg, #ff3366, #ff44ff, #00ffff);
-            padding: 4px 12px;
+            padding: 5px 14px;
             border-radius: 22px;
             color: white;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             font-weight: bold;
             display: inline-block;
         }
@@ -141,10 +142,10 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
         }
 
-        /* Ranking */
+        /* Ranking - unchanged */
         .ranking-section {
             margin-bottom: 12px;
             text-align: center;
@@ -215,7 +216,7 @@
             font-size: 0.45rem;
         }
 
-        /* Categories */
+        /* Categories - unchanged */
         .categories-section {
             margin-bottom: 12px;
         }
@@ -243,28 +244,28 @@
             transform: scale(1.02);
         }
 
-        /* Ad - ENLARGED */
+        /* Ad - ENLARGED AREA */
         .fixed-permanent-ad {
             background: linear-gradient(135deg, #ff44ff30, #00ffff30);
             border: 2px solid #ff44ff;
             border-radius: 20px;
-            padding: 12px 8px;
+            padding: 18px 12px;
             margin: 8px 0 12px 0;
             text-align: center;
             color: white;
-            font-size: 0.8rem;
+            font-size: 1rem;
             font-weight: bold;
-            box-shadow: 0 0 15px #ff44ff;
+            box-shadow: 0 0 20px #ff44ff;
             animation: adPulse 2s ease-in-out infinite;
         }
         
         @keyframes adPulse {
             0% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
-            50% { box-shadow: 0 0 20px #ff44ff, 0 0 10px #00ffff; border-color: #00ffff; }
+            50% { box-shadow: 0 0 25px #ff44ff, 0 0 15px #00ffff; border-color: #00ffff; }
             100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
         }
 
-        /* Games - Sticks to bottom */
+        /* Games - Sticks to bottom (unchanged) */
         .games-wrapper {
             margin-top: auto;
             display: flex;
@@ -336,7 +337,7 @@
             text-overflow: ellipsis;
         }
 
-        /* Bottom Bar */
+        /* Bottom Bar - unchanged */
         .bottom-bar {
             display: flex;
             justify-content: space-between;
@@ -400,7 +401,7 @@
             border: 1px solid #0ff;
         }
         
-        /* Language Dropdown */
+        /* Language Dropdown - unchanged */
         .lang-dropdown {
             position: relative;
             display: inline-block;
@@ -968,7 +969,7 @@
                 </div>
             </div>
             
-            <!-- ENLARGED AD -->
+            <!-- ENLARGED AD AREA -->
             <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
             
             <div class="games-wrapper" id="gamesWrapper">
@@ -1658,7 +1659,7 @@
         }
     }
     
-    // ==================== Games Data (Extended with more games for scrolling demo) ====================
+    // ==================== Games Data ====================
     const gamesData = [
         { id:1, name:"Sonic", img:"https://images6.alphacoders.com/118/1185678.jpg", url:"https://www.crazygames.com/embed/sonic-the-hedgehog", cat:"action", points:150, avatar:"🦔", playerName:"Shadow" },
         { id:2, name:"Subway Surfers", img:"https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action", points:200, avatar:"🏃", playerName:"Speed" },
@@ -1666,7 +1667,6 @@
         { id:4, name:"Hill Climb", img:"https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg", url:"https://www.crazygames.com/embed/hill-climb-racing", cat:"racing", points:120, avatar:"🚗", playerName:"Climber" },
         { id:5, name:"Street Fighter", img:"https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg", url:"https://www.crazygames.com/embed/street-fighter", cat:"fighting", points:300, avatar:"👊", playerName:"Fighter" },
         { id:6, name:"Among Us", img:"https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg", url:"https://www.crazygames.com/embed/among-us-online", cat:"puzzle", points:90, avatar:"👽", playerName:"Impostor" },
-        // Additional games for horizontal scrolling (hidden initially, appear when scrolling)
         { id:7, name:"Call of Duty", img:"https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-2020-8k-2020-32.jpg", url:"https://www.crazygames.com/embed/call-of-duty-mobile", cat:"action", points:250, avatar:"🔫", playerName:"Soldier" },
         { id:8, name:"Minecraft", img:"https://images.hdqwalls.com/wallpapers/minecraft-2020-4k-6p.jpg", url:"https://www.crazygames.com/embed/minecraft-classic", cat:"puzzle", points:200, avatar:"⛏️", playerName:"Builder" },
         { id:9, name:"Fall Guys", img:"https://images.hdqwalls.com/wallpapers/fall-guys-ultimate-knockout-2020-58.jpg", url:"https://www.crazygames.com/embed/fall-guys", cat:"racing", points:180, avatar:"🫘", playerName:"Bean" },
@@ -1679,9 +1679,7 @@
         { id:16, name:"Brawl Stars", img:"https://images.hdqwalls.com/wallpapers/brawl-stars-2020-4k-6n.jpg", url:"https://www.crazygames.com/embed/brawl-stars", cat:"fighting", points:140, avatar:"⭐", playerName:"Brawler" }
     ];
     
-    // Function to create exactly 2 rows, each containing ALL games (horizontally scrollable)
     function renderAllGames() {
-        // Split games into 2 rows equally
         const midPoint = Math.ceil(gamesData.length / 2);
         const row1Games = gamesData.slice(0, midPoint);
         const row2Games = gamesData.slice(midPoint);
@@ -1706,7 +1704,6 @@
             </div>
         `;
         
-        // Add click handlers
         document.querySelectorAll('.game-card').forEach(card => {
             card.addEventListener('click', () => {
                 const id = parseInt(card.dataset.id);
@@ -2287,4 +2284,4 @@
     window.setLanguage = setLanguage;
 </script>
 </body>
-</html>
+</html>here  
