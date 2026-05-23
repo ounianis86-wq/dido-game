@@ -2,27 +2,20 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DidoGame - دردشة VIP | صوت + صور + مكالمات</title>
-    
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DidoGame - تجربة دردشة VIP</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Cairo', 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Cairo', system-ui, sans-serif;
         }
 
         body {
             background: #05050f;
             min-height: 100vh;
-            padding: 6px;
+            padding: 10px;
         }
 
         .anime-city-bg {
@@ -31,20 +24,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://images7.alphacoders.com/132/1322910.jpeg');
-            background-size: cover;
-            background-position: center;
-            z-index: -2;
-        }
-        
-        .anime-city-bg::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.65);
+            background: linear-gradient(135deg, #0a0a2a, #1a0033);
             z-index: -1;
         }
 
@@ -52,23 +32,23 @@
             max-width: 500px;
             width: 100%;
             margin: 0 auto;
-            background: rgba(10,10,30,0.85);
-            backdrop-filter: blur(8px);
+            background: rgba(10,10,30,0.9);
+            backdrop-filter: blur(10px);
             border-radius: 25px;
             overflow: hidden;
-            height: 98vh;
+            height: 95vh;
             display: flex;
             flex-direction: column;
             box-shadow: 0 0 40px #ff00ff30;
-            position: relative;
+            border: 1px solid #ff44ff;
         }
 
         .content {
-            padding: 10px;
+            padding: 15px;
             flex: 1;
-            overflow-y: auto;
             display: flex;
             flex-direction: column;
+            overflow-y: auto;
         }
 
         /* Login Section */
@@ -78,14 +58,13 @@
             padding: 20px;
             text-align: center;
             border: 1px solid #ff44ff;
-            margin-bottom: 15px;
         }
-        
+
         .login-section h3 {
             color: white;
             margin-bottom: 15px;
         }
-        
+
         .login-input {
             width: 100%;
             padding: 10px;
@@ -96,7 +75,7 @@
             color: white;
             text-align: center;
         }
-        
+
         .login-btn {
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             border: none;
@@ -107,7 +86,7 @@
             cursor: pointer;
             margin-top: 10px;
         }
-        
+
         .vip-badge {
             background: #ff44ff;
             color: white;
@@ -115,7 +94,6 @@
             padding: 2px 8px;
             border-radius: 15px;
             margin-left: 5px;
-            display: inline-block;
         }
 
         /* Chat Section */
@@ -123,19 +101,27 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            gap: 10px;
+        }
+
+        .username-display {
+            color: #ffaa88;
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 5px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+        }
+
+        .chat-messages {
+            flex: 1;
             background: rgba(0,0,0,0.3);
             border-radius: 20px;
             padding: 10px;
-            margin-top: 10px;
-        }
-        
-        .chat-messages {
-            flex: 1;
             overflow-y: auto;
-            max-height: 350px;
-            margin-bottom: 10px;
+            max-height: 400px;
         }
-        
+
         .message {
             background: rgba(255,68,255,0.2);
             border-radius: 15px;
@@ -143,59 +129,54 @@
             margin-bottom: 8px;
             border: 1px solid #ff44ff;
         }
-        
+
         .message-sender {
             color: #ff44ff;
             font-size: 0.7rem;
             font-weight: bold;
         }
-        
+
         .message-text {
             color: white;
             font-size: 0.8rem;
             margin-top: 3px;
         }
-        
+
         .message-image {
             max-width: 100%;
             max-height: 150px;
             border-radius: 10px;
             margin-top: 5px;
         }
-        
+
         .message-audio {
             margin-top: 5px;
-            max-width: 100%;
         }
-        
+
         .chat-input-area {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
         }
-        
+
         .chat-input {
             flex: 1;
-            padding: 8px;
-            border-radius: 20px;
+            padding: 10px;
+            border-radius: 25px;
             border: 1px solid #ff44ff;
             background: rgba(0,0,0,0.5);
             color: white;
         }
-        
+
         .send-btn, .image-btn, .audio-btn {
             background: #ff44ff;
             border: none;
-            padding: 8px 12px;
-            border-radius: 20px;
+            padding: 8px 15px;
+            border-radius: 25px;
             color: white;
             cursor: pointer;
         }
-        
-        .image-btn:active, .audio-btn:active, .send-btn:active {
-            transform: scale(0.95);
-        }
-        
+
         .call-section {
             margin-top: 10px;
             padding: 10px;
@@ -203,7 +184,7 @@
             border-radius: 15px;
             text-align: center;
         }
-        
+
         .call-btn {
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             border: none;
@@ -214,59 +195,38 @@
             cursor: pointer;
             margin: 5px;
         }
-        
-        .incoming-call {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1a0033;
-            border: 2px solid #ff44ff;
-            border-radius: 20px;
-            padding: 15px;
-            z-index: 1000;
-            text-align: center;
-            width: 90%;
-            max-width: 300px;
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
+
         .bottom-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 12px;
+            padding: 10px;
             border-top: 1px solid #ff44ff;
             background: rgba(0,0,0,0.5);
         }
-        
+
         .upgrade-btn {
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             border: none;
             padding: 8px 15px;
             border-radius: 25px;
             color: white;
-            font-size: 0.7rem;
-            cursor: pointer;
             font-weight: bold;
-            animation: btnPulse 1.5s infinite;
+            cursor: pointer;
+            animation: pulse 1s infinite;
         }
-        
-        @keyframes btnPulse {
+
+        @keyframes pulse {
             0%, 100% { box-shadow: 0 0 5px #ff44ff; }
-            50% { box-shadow: 0 0 20px #ff44ff, 0 0 10px #00ffff; }
+            50% { box-shadow: 0 0 20px #ff44ff; }
         }
-        
+
         .upgrade-btn.vip-active {
             background: #333;
             animation: none;
             cursor: default;
-            opacity: 0.7;
         }
-        
+
         .music-btn {
             background: #000000aa;
             padding: 5px 12px;
@@ -276,35 +236,15 @@
             font-size: 0.7rem;
             border: 1px solid #0ff;
         }
-        
+
+        .hidden {
+            display: none;
+        }
+
         .online-users {
             font-size: 0.7rem;
             color: #00ff88;
-            margin-bottom: 5px;
             text-align: center;
-        }
-        
-        .feature-locked {
-            opacity: 0.5;
-            filter: grayscale(0.3);
-        }
-        
-        .upgrade-message {
-            background: linear-gradient(135deg, #ff44ff, #ff3366);
-            color: white;
-            padding: 5px;
-            border-radius: 10px;
-            font-size: 0.6rem;
-            text-align: center;
-            margin-top: 5px;
-            cursor: pointer;
-        }
-        
-        .username-display {
-            color: #ffaa88;
-            font-size: 0.7rem;
-            text-align: center;
-            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -315,10 +255,9 @@
         
         <!-- Login Section -->
         <div id="loginSection" class="login-section">
-            <h3>🎮 DidoGame - دردشة VIP 🎮</h3>
+            <h3>🎮 DidoGame - تجربة دردشة VIP 🎮</h3>
             <input type="text" id="loginName" class="login-input" placeholder="اسم المستخدم">
-            <input type="password" id="loginPassword" class="login-input" placeholder="كلمة المرور">
-            <button class="login-btn" onclick="login()">🚀 دخول / تسجيل جديد</button>
+            <button class="login-btn" onclick="login()">🚀 دخول</button>
             <div class="online-users" id="onlineUsers">👥 جاري التحميل...</div>
         </div>
         
@@ -334,7 +273,6 @@
                 <button class="audio-btn" id="audioBtn" onclick="toggleRecording()">🎙️</button>
             </div>
             
-            <!-- VIP Call Section -->
             <div class="call-section" id="callSection">
                 <div style="color:#ffaa88; font-size:0.7rem;">🔊 دردشة صوتية VIP 🔊</div>
                 <div>
@@ -343,11 +281,7 @@
                     </select>
                     <button class="call-btn" onclick="startCall()">📞 اتصال</button>
                 </div>
-                <div id="callStatus" style="color:#ff44ff; font-size:0.6rem; margin-top:5px;"></div>
-            </div>
-            
-            <div id="upgradeMessage" class="upgrade-message hidden" onclick="upgradeToVIP()">
-                ⭐ ترقية إلى VIP - أرسل صوراً ومكالمات صوتية ⭐
+                <div id="callStatus" style="color:#ff44ff; font-size:0.6rem;"></div>
             </div>
         </div>
         
@@ -359,110 +293,75 @@
     </div>
 </div>
 
-<!-- Incoming Call Popup -->
-<div id="incomingCall" class="incoming-call hidden">
-    <div id="callerName" style="color:white;">📞 مكالمة واردة...</div>
-    <button class="call-btn" onclick="answerCall()">✅ رد</button>
-    <button class="call-btn" onclick="rejectCall()">❌ رفض</button>
-</div>
-
 <script>
-    // ==================== Firebase Configuration ====================
-    const firebaseConfig = {
-        apiKey: "AIzaSyDCy9FDf5P35lUzsMo1FKKNUt89ohFnZ1U",
-        authDomain: "dido-game.firebaseapp.com",
-        projectId: "dido-game",
-        storageBucket: "dido-game.firebasestorage.app",
-        messagingSenderId: "477701577179",
-        appId: "1:477701577179:web:680b1b7ba758d72dfe6ffe",
-        measurementId: "G-VCV8T2MZF9"
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-    const storage = firebase.storage();
-    const auth = firebase.auth();
-
-    // ==================== Global Variables ====================
+    // ==================== Local Storage Data (Demo Mode) ====================
     let currentUser = null;
     let isVIP = false;
+    let messages = [];
+    let users = [];
     let mediaRecorder = null;
     let audioChunks = [];
     let isRecording = false;
-    let currentCallDoc = null;
+    let activeCall = null;
     
-    // ==================== Authentication ====================
-    async function login() {
-        const name = document.getElementById('loginName').value.trim();
-        const password = document.getElementById('loginPassword').value.trim();
-        
-        if (!name || !password) {
-            alert("⚠️ الرجاء إدخال اسم المستخدم وكلمة المرور");
-            return;
+    // Load saved data
+    function loadData() {
+        const savedMessages = localStorage.getItem('chat_messages');
+        if (savedMessages) {
+            messages = JSON.parse(savedMessages);
         }
         
-        // Create email from name
-        const email = name.toLowerCase().replace(/[^a-z0-9]/g, '') + '@didogame.com';
-        
-        try {
-            // Try to sign in
-            const userCredential = await auth.signInWithEmailAndPassword(email, password);
-            await loadUserData(userCredential.user.uid, name);
-        } catch (error) {
-            if (error.code === 'auth/user-not-found') {
-                // Create new user
-                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-                // Save user to Firestore
-                await db.collection("users").doc(userCredential.user.uid).set({
-                    username: name,
-                    isVIP: false,
-                    createdAt: new Date(),
-                    online: true
-                });
-                await loadUserData(userCredential.user.uid, name);
-            } else {
-                alert("❌ خطأ: " + error.message);
-            }
+        const savedUsers = localStorage.getItem('chat_users');
+        if (savedUsers) {
+            users = JSON.parse(savedUsers);
         }
     }
     
-    async function loadUserData(uid, defaultName) {
-        const doc = await db.collection("users").doc(uid).get();
-        if (doc.exists) {
-            currentUser = {
-                uid: uid,
-                username: doc.data().username,
-                isVIP: doc.data().isVIP || false
-            };
-        } else {
-            currentUser = {
-                uid: uid,
-                username: defaultName,
-                isVIP: false
-            };
+    function saveMessages() {
+        localStorage.setItem('chat_messages', JSON.stringify(messages));
+    }
+    
+    function saveUsers() {
+        localStorage.setItem('chat_users', JSON.stringify(users));
+    }
+    
+    function login() {
+        const name = document.getElementById('loginName').value.trim();
+        if (!name) {
+            alert("الرجاء إدخال اسم المستخدم");
+            return;
         }
-        isVIP = currentUser.isVIP;
+        
+        // Check if user exists
+        let user = users.find(u => u.username === name);
+        if (!user) {
+            user = {
+                username: name,
+                isVIP: false,
+                online: true
+            };
+            users.push(user);
+            saveUsers();
+        } else {
+            user.online = true;
+            saveUsers();
+        }
+        
+        currentUser = user;
+        isVIP = user.isVIP;
         
         // Update UI
         document.getElementById('loginSection').classList.add('hidden');
         document.getElementById('chatSection').classList.remove('hidden');
         document.getElementById('usernameDisplay').innerHTML = `👤 ${currentUser.username} ${isVIP ? '<span class="vip-badge">VIP ⭐</span>' : ''}`;
         
-        // Update VIP features visibility
         updateVIPFeatures();
-        
-        // Update online status
-        await db.collection("users").doc(currentUser.uid).update({ online: true, lastSeen: new Date() });
-        
-        // Load messages
         loadMessages();
+        updateUsersList();
         
-        // Listen for users
-        listenForUsers();
-        
-        // Listen for calls
-        listenForCalls();
+        // Refresh users list periodically
+        setInterval(updateUsersList, 2000);
+        setInterval(refreshMessages, 1000);
     }
     
     function updateVIPFeatures() {
@@ -470,7 +369,6 @@
         const audioBtn = document.getElementById('audioBtn');
         const callSection = document.getElementById('callSection');
         const upgradeBtn = document.getElementById('upgradeBtn');
-        const upgradeMessage = document.getElementById('upgradeMessage');
         
         if (isVIP) {
             imageBtn.style.display = 'block';
@@ -478,119 +376,102 @@
             callSection.style.display = 'block';
             upgradeBtn.innerHTML = '👑 VIP مفعل';
             upgradeBtn.classList.add('vip-active');
-            upgradeMessage.classList.add('hidden');
         } else {
             imageBtn.style.display = 'none';
             audioBtn.style.display = 'none';
             callSection.style.display = 'none';
             upgradeBtn.innerHTML = '⭐ ترقية VIP (صور + مكالمات صوتية) ⭐';
             upgradeBtn.classList.remove('vip-active');
-            upgradeMessage.classList.remove('hidden');
         }
     }
     
-    async function upgradeToVIP() {
-        if (!currentUser) return;
+    function upgradeToVIP() {
         if (isVIP) {
-            alert("✨ أنت بالفعل عضو VIP مميز! ✨");
+            alert("✨ أنت بالفعل عضو VIP! ✨");
             return;
         }
         
-        // Simulate payment (in real app, integrate payment gateway)
-        const confirmUpgrade = window.confirm(
+        const confirm = window.confirm(
             "🎉✨ ترقية إلى العضوية المميزة VIP ✨🎉\n\n" +
             "💰 السعر: 9.99$ شهرياً\n\n" +
             "✅ المميزات:\n" +
             "   • 📸 إرسال الصور\n" +
             "   • 🎙️ تسجيل وإرسال الرسائل الصوتية\n" +
-            "   • 📞 مكالمات صوتية مباشرة مع VIP آخرين\n" +
-            "   • 👑 علامة مميزة بجانب اسمك\n\n" +
-            "هل تريد الترقية الآن؟"
+            "   • 📞 مكالمات صوتية مباشرة\n\n" +
+            "هل تريد الترقية؟"
         );
         
-        if (confirmUpgrade) {
-            try {
-                await db.collection("users").doc(currentUser.uid).update({
-                    isVIP: true
-                });
-                isVIP = true;
-                currentUser.isVIP = true;
-                updateVIPFeatures();
-                document.getElementById('usernameDisplay').innerHTML = `👤 ${currentUser.username} <span class="vip-badge">VIP ⭐</span>`;
-                alert("🎉🎊 تهانينا! أصبحت عضواً مميزاً في DidoGame VIP 🎊🎉\n\n✅ يمكنك الآن:\n• إرسال الصور\n• التسجيل الصوتي\n• إجراء المكالمات الصوتية مع VIP آخرين");
-            } catch (error) {
-                alert("حدث خطأ: " + error.message);
+        if (confirm) {
+            isVIP = true;
+            currentUser.isVIP = true;
+            
+            // Update in users array
+            const userIndex = users.findIndex(u => u.username === currentUser.username);
+            if (userIndex !== -1) {
+                users[userIndex].isVIP = true;
+                saveUsers();
             }
+            
+            updateVIPFeatures();
+            document.getElementById('usernameDisplay').innerHTML = `👤 ${currentUser.username} <span class="vip-badge">VIP ⭐</span>`;
+            alert("🎉 تهانينا! أصبحت عضواً مميزاً في DidoGame VIP 🎉");
         }
     }
     
-    // ==================== Messaging ====================
     function sendMessage() {
         const text = document.getElementById('messageInput').value.trim();
         if (!text) return;
         
-        db.collection("messages").add({
-            userId: currentUser.uid,
+        const message = {
             username: currentUser.username,
             text: text,
             isVIP: isVIP,
-            timestamp: new Date()
-        });
+            timestamp: Date.now()
+        };
         
+        messages.push(message);
+        saveMessages();
+        displayMessages();
         document.getElementById('messageInput').value = '';
     }
     
-    async function sendImage() {
+    function sendImage() {
         if (!isVIP) {
-            alert("❌ إرسال الصور متاح فقط للمستخدمين المميزين VIP!\n👑 قم بترقية حسابك من الزر الأحمر في الأسفل.");
+            alert("❌ إرسال الصور متاح فقط للمستخدمين المميزين VIP!");
             return;
         }
         
         const input = document.createElement('input');
         input.type = 'file';
         input.accept = 'image/*';
-        input.onchange = async (e) => {
+        input.onchange = (e) => {
             const file = e.target.files[0];
             if (file) {
-                const loadingToast = document.createElement('div');
-                loadingToast.textContent = '📤 جاري رفع الصورة...';
-                loadingToast.style.position = 'fixed';
-                loadingToast.style.bottom = '80px';
-                loadingToast.style.left = '50%';
-                loadingToast.style.transform = 'translateX(-50%)';
-                loadingToast.style.background = '#ff44ff';
-                loadingToast.style.padding = '5px 15px';
-                loadingToast.style.borderRadius = '20px';
-                loadingToast.style.zIndex = '999';
-                document.body.appendChild(loadingToast);
-                
-                const storageRef = storage.ref(`images/${Date.now()}_${file.name}`);
-                await storageRef.put(file);
-                const imageUrl = await storageRef.getDownloadURL();
-                
-                await db.collection("messages").add({
-                    userId: currentUser.uid,
-                    username: currentUser.username,
-                    imageUrl: imageUrl,
-                    isVIP: isVIP,
-                    timestamp: new Date()
-                });
-                
-                loadingToast.remove();
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const message = {
+                        username: currentUser.username,
+                        imageUrl: event.target.result,
+                        isVIP: isVIP,
+                        timestamp: Date.now()
+                    };
+                    messages.push(message);
+                    saveMessages();
+                    displayMessages();
+                };
+                reader.readAsDataURL(file);
             }
         };
         input.click();
     }
     
-    // ==================== Voice Recording (VIP only) ====================
     async function toggleRecording() {
         if (!isVIP) {
-            alert("❌ التسجيل الصوتي متاح فقط للمستخدمين المميزين VIP!\n👑 قم بترقية حسابك من الزر الأحمر في الأسفل.");
+            alert("❌ التسجيل الصوتي متاح فقط للمستخدمين المميزين VIP!");
             return;
         }
         
         if (isRecording) {
-            // Stop recording
             if (mediaRecorder && mediaRecorder.state === 'recording') {
                 mediaRecorder.stop();
                 isRecording = false;
@@ -608,34 +489,20 @@
                     }
                 };
                 
-                mediaRecorder.onstop = async () => {
+                mediaRecorder.onstop = () => {
                     const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-                    const storageRef = storage.ref(`audio/${Date.now()}.webm`);
+                    const audioUrl = URL.createObjectURL(audioBlob);
                     
-                    const loadingToast = document.createElement('div');
-                    loadingToast.textContent = '🎙️ جاري رفع التسجيل الصوتي...';
-                    loadingToast.style.position = 'fixed';
-                    loadingToast.style.bottom = '80px';
-                    loadingToast.style.left = '50%';
-                    loadingToast.style.transform = 'translateX(-50%)';
-                    loadingToast.style.background = '#ff44ff';
-                    loadingToast.style.padding = '5px 15px';
-                    loadingToast.style.borderRadius = '20px';
-                    loadingToast.style.zIndex = '999';
-                    document.body.appendChild(loadingToast);
-                    
-                    await storageRef.put(audioBlob);
-                    const audioUrl = await storageRef.getDownloadURL();
-                    
-                    await db.collection("messages").add({
-                        userId: currentUser.uid,
+                    const message = {
                         username: currentUser.username,
                         audioUrl: audioUrl,
                         isVIP: isVIP,
-                        timestamp: new Date()
-                    });
+                        timestamp: Date.now()
+                    };
+                    messages.push(message);
+                    saveMessages();
+                    displayMessages();
                     
-                    loadingToast.remove();
                     stream.getTracks().forEach(track => track.stop());
                 };
                 
@@ -643,7 +510,6 @@
                 isRecording = true;
                 document.getElementById('audioBtn').innerHTML = '⏹️';
                 
-                // Auto stop after 15 seconds
                 setTimeout(() => {
                     if (isRecording && mediaRecorder && mediaRecorder.state === 'recording') {
                         mediaRecorder.stop();
@@ -653,174 +519,115 @@
                 }, 15000);
                 
             } catch (err) {
-                alert("❌ لا يمكن الوصول إلى الميكروفون: " + err.message);
+                alert("لا يمكن الوصول إلى الميكروفون: " + err.message);
             }
         }
     }
     
     function loadMessages() {
-        db.collection("messages").orderBy("timestamp").limit(100).onSnapshot(snapshot => {
-            const messagesDiv = document.getElementById('chatMessages');
-            messagesDiv.innerHTML = '';
-            
-            snapshot.forEach(doc => {
-                const data = doc.data();
-                const messageDiv = document.createElement('div');
-                messageDiv.className = 'message';
-                
-                const senderSpan = document.createElement('div');
-                senderSpan.className = 'message-sender';
-                senderSpan.innerHTML = data.username + (data.isVIP ? ' <span class="vip-badge">VIP</span>' : '');
-                
-                messageDiv.appendChild(senderSpan);
-                
-                if (data.text) {
-                    const textSpan = document.createElement('div');
-                    textSpan.className = 'message-text';
-                    textSpan.textContent = data.text;
-                    messageDiv.appendChild(textSpan);
-                }
-                
-                if (data.imageUrl) {
-                    const img = document.createElement('img');
-                    img.src = data.imageUrl;
-                    img.className = 'message-image';
-                    img.onclick = () => window.open(data.imageUrl, '_blank');
-                    messageDiv.appendChild(img);
-                }
-                
-                if (data.audioUrl) {
-                    const audio = document.createElement('audio');
-                    audio.src = data.audioUrl;
-                    audio.controls = true;
-                    audio.className = 'message-audio';
-                    messageDiv.appendChild(audio);
-                }
-                
-                messagesDiv.appendChild(messageDiv);
-            });
-            
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        });
+        displayMessages();
     }
     
-    // ==================== Users List ====================
-    function listenForUsers() {
-        db.collection("users").onSnapshot(snapshot => {
-            const users = [];
-            snapshot.forEach(doc => {
-                const data = doc.data();
-                if (data.online && doc.id !== currentUser?.uid) {
-                    users.push({ uid: doc.id, username: data.username, isVIP: data.isVIP });
-                }
-            });
+    function refreshMessages() {
+        displayMessages();
+    }
+    
+    function displayMessages() {
+        const messagesDiv = document.getElementById('chatMessages');
+        messagesDiv.innerHTML = '';
+        
+        const last50 = messages.slice(-50);
+        
+        last50.forEach(msg => {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
             
-            const select = document.getElementById('userToCall');
-            if (select) {
-                select.innerHTML = '<option value="">اختر مستخدم للاتصال...</option>';
-                users.forEach(user => {
-                    const option = document.createElement('option');
-                    option.value = user.uid;
-                    option.textContent = user.username + (user.isVIP ? ' (VIP ⭐)' : '');
-                    select.appendChild(option);
-                });
+            const senderSpan = document.createElement('div');
+            senderSpan.className = 'message-sender';
+            senderSpan.innerHTML = msg.username + (msg.isVIP ? ' <span class="vip-badge">VIP</span>' : '');
+            
+            messageDiv.appendChild(senderSpan);
+            
+            if (msg.text) {
+                const textSpan = document.createElement('div');
+                textSpan.className = 'message-text';
+                textSpan.textContent = msg.text;
+                messageDiv.appendChild(textSpan);
             }
             
-            document.getElementById('chatOnlineUsers').innerHTML = `👥 المتصلون: ${users.length + 1}`;
+            if (msg.imageUrl) {
+                const img = document.createElement('img');
+                img.src = msg.imageUrl;
+                img.className = 'message-image';
+                img.onclick = () => window.open(msg.imageUrl, '_blank');
+                messageDiv.appendChild(img);
+            }
+            
+            if (msg.audioUrl) {
+                const audio = document.createElement('audio');
+                audio.src = msg.audioUrl;
+                audio.controls = true;
+                audio.className = 'message-audio';
+                messageDiv.appendChild(audio);
+            }
+            
+            messagesDiv.appendChild(messageDiv);
         });
+        
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
     }
     
-    // ==================== WebRTC Voice Call (VIP only) ====================
-    async function startCall() {
+    function updateUsersList() {
+        const onlineUsers = users.filter(u => u.online && u.username !== currentUser?.username);
+        const select = document.getElementById('userToCall');
+        
+        if (select) {
+            select.innerHTML = '<option value="">اختر مستخدم للاتصال...</option>';
+            onlineUsers.forEach(user => {
+                const option = document.createElement('option');
+                option.value = user.username;
+                option.textContent = user.username + (user.isVIP ? ' (VIP ⭐)' : '');
+                select.appendChild(option);
+            });
+        }
+        
+        document.getElementById('chatOnlineUsers').innerHTML = `👥 المتصلون: ${onlineUsers.length + 1}`;
+        document.getElementById('onlineUsers').innerHTML = `👥 متصلون: ${users.filter(u => u.online).length}`;
+    }
+    
+    function startCall() {
         if (!isVIP) {
-            alert("❌ المكالمات الصوتية متاحة فقط للمستخدمين المميزين VIP!\n👑 قم بترقية حسابك من الزر الأحمر في الأسفل.");
+            alert("❌ المكالمات الصوتية متاحة فقط للمستخدمين المميزين VIP!");
             return;
         }
         
-        const targetUserId = document.getElementById('userToCall').value;
-        if (!targetUserId) {
-            alert("⚠️ الرجاء اختيار مستخدم للاتصال به");
+        const targetUsername = document.getElementById('userToCall').value;
+        if (!targetUsername) {
+            alert("الرجاء اختيار مستخدم للاتصال به");
             return;
         }
         
-        // Get target user data
-        const targetDoc = await db.collection("users").doc(targetUserId).get();
-        const targetUser = targetDoc.data();
-        
-        if (!targetUser.online) {
-            alert("❌ المستخدم غير متصل حالياً");
+        const targetUser = users.find(u => u.username === targetUsername);
+        if (!targetUser || !targetUser.online) {
+            alert("المستخدم غير متصل حالياً");
             return;
         }
         
         if (!targetUser.isVIP) {
-            alert("❌ يمكنك الاتصال فقط بالمستخدمين المميزين VIP");
+            alert("يمكنك الاتصال فقط بالمستخدمين المميزين VIP");
             return;
         }
         
-        document.getElementById('callStatus').innerHTML = "📞 جاري الاتصال...";
+        document.getElementById('callStatus').innerHTML = `📞 جاري الاتصال بـ ${targetUsername}...`;
         
-        // Create call offer
-        const callId = Date.now().toString();
-        await db.collection("calls").doc(callId).set({
-            from: currentUser.uid,
-            fromName: currentUser.username,
-            to: targetUserId,
-            status: "calling",
-            timestamp: new Date()
-        });
-        
-        // Listen for answer
-        const unsubscribe = db.collection("calls").doc(callId).onSnapshot((doc) => {
-            const data = doc.data();
-            if (data && data.status === "answered") {
-                unsubscribe();
-                document.getElementById('callStatus').innerHTML = "📞 متصل... اضغط رفض لإنهاء المكالمة";
-                showActiveCall(targetUser.username);
-            } else if (data && data.status === "rejected") {
-                unsubscribe();
-                document.getElementById('callStatus').innerHTML = "❌ تم رفض المكالمة";
-                setTimeout(() => {
-                    document.getElementById('callStatus').innerHTML = "";
-                }, 3000);
-            }
-        });
-    }
-    
-    function listenForCalls() {
-        if (!currentUser) return;
-        
-        db.collection("calls").where("to", "==", currentUser.uid).where("status", "==", "calling").onSnapshot(snapshot => {
-            snapshot.forEach(doc => {
-                const data = doc.data();
-                document.getElementById('callerName').innerHTML = `📞 مكالمة صوتية من ${data.fromName}${data.isVIP ? ' (VIP)' : ''}`;
-                document.getElementById('incomingCall').classList.remove('hidden');
-                window.currentCallId = doc.id;
-                window.currentCallerId = data.from;
-                window.currentCallerName = data.fromName;
-            });
-        });
-    }
-    
-    async function answerCall() {
-        const callId = window.currentCallId;
-        await db.collection("calls").doc(callId).update({
-            status: "answered"
-        });
-        document.getElementById('incomingCall').classList.add('hidden');
-        document.getElementById('callStatus').innerHTML = "📞 متصل... اضغط رفض لإنهاء المكالمة";
-        showActiveCall(window.currentCallerName);
-    }
-    
-    async function rejectCall() {
-        const callId = window.currentCallId;
-        await db.collection("calls").doc(callId).update({
-            status: "rejected"
-        });
-        document.getElementById('incomingCall').classList.add('hidden');
+        // Simulate call
+        setTimeout(() => {
+            document.getElementById('callStatus').innerHTML = "📞 متصل...";
+            showActiveCall(targetUsername);
+        }, 2000);
     }
     
     function showActiveCall(callerName) {
-        // Create call UI
         const callDiv = document.createElement('div');
         callDiv.id = 'activeCall';
         callDiv.style.position = 'fixed';
@@ -835,17 +642,25 @@
         callDiv.style.textAlign = 'center';
         callDiv.style.width = '90%';
         callDiv.style.maxWidth = '300px';
+        callDiv.style.background = 'linear-gradient(135deg, #1a0033, #0a002a)';
         callDiv.innerHTML = `
             <div style="color:white; margin-bottom:10px;">🎙️ مكالمة صوتية مع ${callerName}</div>
-            <button onclick="endCall()" style="background:#ff3366; border:none; padding:8px 20px; border-radius:20px; color:white; cursor:pointer;">❌ إنهاء المكالمة</button>
+            <button onclick="endCall()" style="background:#ff3366; border:none; padding:8px 20px; border-radius:20px; color:white; cursor:pointer;">❌ إنهاء</button>
         `;
         document.body.appendChild(callDiv);
         
-        // Simulate ringtone
-        const ringtone = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3');
-        ringtone.volume = 0.3;
-        ringtone.play();
-        setTimeout(() => ringtone.pause(), 2000);
+        // Play ringtone
+        const audio = new Audio();
+        audio.volume = 0.3;
+        setTimeout(() => {
+            const callDivExists = document.getElementById('activeCall');
+            if (callDivExists) {
+                const endBtn = callDivExists.querySelector('button');
+                if (endBtn) {
+                    endBtn.style.animation = 'pulse 1s infinite';
+                }
+            }
+        }, 500);
     }
     
     function endCall() {
@@ -857,7 +672,7 @@
         }, 3000);
     }
     
-    // ==================== Music ====================
+    // Music
     let musicPlaying = false;
     let music = null;
     
@@ -878,12 +693,19 @@
         musicPlaying = !musicPlaying;
     }
     
-    // ==================== Cleanup ====================
-    window.addEventListener('beforeunload', async () => {
+    // Cleanup on page close
+    window.addEventListener('beforeunload', () => {
         if (currentUser) {
-            await db.collection("users").doc(currentUser.uid).update({ online: false });
+            const userIndex = users.findIndex(u => u.username === currentUser.username);
+            if (userIndex !== -1) {
+                users[userIndex].online = false;
+                saveUsers();
+            }
         }
     });
+    
+    // Initialize
+    loadData();
 </script>
 </body>
 </html>
