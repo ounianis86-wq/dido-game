@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DIDO GAME - Superior Gaming</title>
+    <title>DIDO GAME - نسخة طبق الأصل</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
         }
 
         body {
@@ -21,7 +21,7 @@
             padding: 20px;
         }
 
-        /* تأثير الدوائر النيون في الخلفية */
+        /* تأثير الدوائر النيون كما في الصورة */
         .neon-bg {
             position: fixed;
             top: 0;
@@ -32,64 +32,64 @@
             z-index: 0;
         }
 
-        .circle1 {
-            position: absolute;
-            top: 20%;
-            left: 10%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, #ff00ff40, transparent);
-            border-radius: 50%;
-            filter: blur(60px);
-            animation: float 6s infinite;
-        }
-
-        .circle2 {
-            position: absolute;
-            bottom: 20%;
-            right: 10%;
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, #00ffff40, transparent);
-            border-radius: 50%;
-            filter: blur(70px);
-            animation: float 8s infinite reverse;
-        }
-
-        .circle3 {
+        .circle-center {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, #ff00ff30, #00ffff30);
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, #ff00ff60, #00ffff60, transparent);
             border-radius: 50%;
             filter: blur(80px);
             transform: translate(-50%, -50%);
             animation: pulse 4s infinite;
         }
 
+        .circle-top {
+            position: absolute;
+            top: 10%;
+            right: 5%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, #00ffff40, transparent);
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: float 6s infinite;
+        }
+
+        .circle-bottom {
+            position: absolute;
+            bottom: 10%;
+            left: 5%;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, #ff00ff40, transparent);
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: float 7s infinite reverse;
+        }
+
         @keyframes float {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-30px); }
+            50% { transform: translateY(-20px); }
             100% { transform: translateY(0px); }
         }
 
         @keyframes pulse {
-            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            0% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
             50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-            100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
         }
 
         .container {
             position: relative;
             z-index: 1;
-            max-width: 1200px;
+            max-width: 1100px;
             width: 100%;
             margin: 0 auto;
         }
 
-        /* الشعار الرئيسي */
+        /* الشعار كما في الصورة */
         .logo-section {
             text-align: center;
             margin-bottom: 30px;
@@ -98,172 +98,191 @@
         .logo-section h1 {
             font-size: 4rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #ffffff, #00ffff, #ff00ff);
+            background: linear-gradient(135deg, #ffffff, #ffffff);
             -webkit-background-clip: text;
             background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 20px #00ffff, 0 0 40px #ff00ff;
-            letter-spacing: 3px;
+            color: white;
+            text-shadow: 0 0 15px #00ffff, 0 0 30px #ff00ff, 0 0 5px white;
+            letter-spacing: 4px;
         }
 
         .logo-section p {
-            color: #cccccc;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            margin-top: 5px;
+            color: #aaaaaa;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            margin-top: 8px;
+            text-shadow: 0 0 5px #00ffff;
         }
 
-        /* الأزرار الصغيرة (Chat, Guide, etc) */
+        /* الأزرار الصغيرة */
         .small-buttons {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
+            gap: 12px;
+            margin-bottom: 50px;
             flex-wrap: wrap;
         }
 
         .small-btn {
-            background: rgba(255,255,255,0.1);
+            background: rgba(20, 20, 40, 0.7);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 8px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px 22px;
             border-radius: 40px;
-            color: white;
+            color: #dddddd;
             font-size: 0.8rem;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: 0.2s;
         }
 
         .small-btn:hover {
-            background: rgba(255,255,255,0.2);
+            background: rgba(0, 255, 255, 0.2);
             border-color: #00ffff;
+            color: white;
             box-shadow: 0 0 15px #00ffff;
         }
 
-        /* شبكة الألعاب - صف واحد أفقي */
-        .games-slider {
+        /* بطاقات الألعاب - صف واحد أفقي */
+        .games-row {
             display: flex;
             justify-content: center;
             gap: 25px;
             flex-wrap: wrap;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .game-card {
-            background: rgba(30,30,50,0.8);
+            background: rgba(25, 25, 45, 0.85);
             backdrop-filter: blur(15px);
             border-radius: 24px;
-            padding: 25px 20px;
+            padding: 28px 20px;
             width: 220px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: 0.3s;
             cursor: pointer;
         }
 
         .game-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             border-color: #00ffff;
-            box-shadow: 0 0 30px #00ffff55;
+            box-shadow: 0 0 25px #00ffff55;
+            background: rgba(35, 35, 60, 0.9);
         }
 
         .game-icon {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             margin-bottom: 15px;
         }
 
         .game-card h3 {
             color: white;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
             margin-bottom: 8px;
         }
 
         .game-card p {
-            color: #aaaaaa;
-            font-size: 0.8rem;
+            color: #888888;
+            font-size: 0.75rem;
         }
 
-        /* الشريط السفلي */
+        /* الشريط السفلي كما في الصورة */
         .bottom-bar {
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(10px);
-            border-radius: 60px;
-            padding: 15px 30px;
+            border-radius: 50px;
+            padding: 14px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .bottom-text {
             color: #00ffff;
             font-size: 0.9rem;
             font-weight: 600;
-            text-shadow: 0 0 10px cyan;
+            text-shadow: 0 0 8px cyan;
+            letter-spacing: 1px;
         }
 
         .bottom-controls {
             display: flex;
-            gap: 15px;
+            gap: 12px;
         }
 
         .control-icon {
-            background: rgba(255,255,255,0.1);
-            width: 40px;
-            height: 40px;
+            background: rgba(255, 255, 255, 0.08);
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: 0.2s;
-            font-size: 1.2rem;
+            font-size: 1rem;
+            color: #cccccc;
         }
 
         .control-icon:hover {
             background: #00ffff;
             color: black;
-            box-shadow: 0 0 20px cyan;
+            box-shadow: 0 0 15px cyan;
         }
 
-        /* موسيقى */
-        .music-toggle {
+        /* زر الموسيقى */
+        .music-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
             border: 1px solid #00ffff;
             border-radius: 50px;
-            padding: 10px 18px;
-            color: white;
+            padding: 8px 18px;
+            color: #00ffff;
             cursor: pointer;
             z-index: 100;
             font-size: 0.8rem;
+            transition: 0.2s;
         }
 
-        @media (max-width: 768px) {
-            .logo-section h1 { font-size: 2.2rem; }
-            .game-card { width: 180px; padding: 15px; }
-            .game-icon { font-size: 2.5rem; }
+        .music-btn:hover {
+            background: #00ffff;
+            color: black;
+            box-shadow: 0 0 15px cyan;
+        }
+
+        @media (max-width: 900px) {
+            .logo-section h1 { font-size: 2.5rem; }
+            .game-card { width: 180px; padding: 18px 12px; }
+            .game-icon { font-size: 2.8rem; }
             .game-card h3 { font-size: 1rem; }
             .bottom-bar { flex-direction: column; text-align: center; }
+            .small-btn { padding: 6px 16px; font-size: 0.7rem; }
+        }
+
+        @media (max-width: 500px) {
+            .games-row { gap: 12px; }
+            .game-card { width: 160px; }
         }
     </style>
 </head>
 <body>
 
 <div class="neon-bg">
-    <div class="circle1"></div>
-    <div class="circle2"></div>
-    <div class="circle3"></div>
+    <div class="circle-center"></div>
+    <div class="circle-top"></div>
+    <div class="circle-bottom"></div>
 </div>
 
 <div class="container">
-    <!-- الشعار -->
+    <!-- شعار DIDO GAME -->
     <div class="logo-section">
         <h1>DIDO GAME</h1>
         <p>SUPERIOR GAMING EXPERIENCE</p>
@@ -277,24 +296,24 @@
         <div class="small-btn">⚙️ Settings</div>
     </div>
 
-    <!-- بطاقات الألعاب (صف واحد أفقي) -->
-    <div class="games-slider">
-        <div class="game-card" onclick="alert('FPS Game - قريباً')">
+    <!-- بطاقات الألعاب (4 بطاقات في صف واحد) -->
+    <div class="games-row">
+        <div class="game-card" onclick="alert('FPS Game - قريباً!')">
             <div class="game-icon">🔫</div>
             <h3>FPS game</h3>
             <p>2.2k Players</p>
         </div>
-        <div class="game-card" onclick="alert('Multiplayer - قريباً')">
+        <div class="game-card" onclick="alert('Multiplayer - قريباً!')">
             <div class="game-icon">🎮</div>
             <h3>Multiplayer</h3>
             <p>5.1k Players</p>
         </div>
-        <div class="game-card" onclick="alert('PUBG Game - قريباً')">
+        <div class="game-card" onclick="alert('PUBG Game - قريباً!')">
             <div class="game-icon">✈️</div>
             <h3>PUBG game</h3>
             <p>8.7k Players</p>
         </div>
-        <div class="game-card" onclick="alert('Call Of Duty - قريباً')">
+        <div class="game-card" onclick="alert('Call Of Duty - قريباً!')">
             <div class="game-icon">🎖️</div>
             <h3>Call Of Duty</h3>
             <p>3.4k Players</p>
@@ -314,33 +333,36 @@
 </div>
 
 <!-- زر الموسيقى -->
-<div class="music-toggle" id="musicToggle">🎵 تشغيل الموسيقى</div>
+<div class="music-btn" id="musicToggle">🎵 تشغيل</div>
 
 <script>
-    // موسيقى خفيفة
-    let music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-    music.loop = true;
-    music.volume = 0.2;
+    // موسيقى خلفية
+    const bgMusic = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+    bgMusic.loop = true;
+    bgMusic.volume = 0.2;
     let isPlaying = false;
 
     const musicBtn = document.getElementById('musicToggle');
-    musicBtn.onclick = () => {
+    
+    function toggleMusic() {
         if (isPlaying) {
-            music.pause();
-            musicBtn.innerHTML = '🎵 تشغيل الموسيقى';
+            bgMusic.pause();
+            musicBtn.innerHTML = '🎵 تشغيل';
         } else {
-            music.play().catch(() => {});
-            musicBtn.innerHTML = '🔇 إيقاف الموسيقى';
+            bgMusic.play().catch(() => console.log('انتظر تفاعل المستخدم'));
+            musicBtn.innerHTML = '🔇 إيقاف';
         }
         isPlaying = !isPlaying;
-    };
+    }
 
-    // محاولة تشغيل تلقائي عند أول تفاعل
+    musicBtn.onclick = toggleMusic;
+
+    // تشغيل الموسيقى عند أول تفاعل مع الصفحة
     document.body.addEventListener('touchstart', () => {
         if (!isPlaying) {
-            music.play().catch(() => {});
+            bgMusic.play().catch(() => {});
             isPlaying = true;
-            musicBtn.innerHTML = '🔇 إيقاف الموسيقى';
+            musicBtn.innerHTML = '🔇 إيقاف';
         }
     }, { once: true });
 </script>
