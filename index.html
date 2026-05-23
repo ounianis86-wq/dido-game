@@ -3,904 +3,347 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DIDO GAME - PS3 Controller Style</title>
+    <title>DIDO GAME - Superior Gaming</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
+            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
         }
 
         body {
-            background: radial-gradient(circle at 20% 30%, #0a0a0f 0%, #000000 100%);
-            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
-            padding: 12px;
+            background: #000000;
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
 
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
-
-        .app {
-            max-width: 550px;
-            margin: 0 auto;
-        }
-
-        /* ============================================
-           شعار يد تحكم PlayStation 3 - بتفاصيل دقيقة
-           ============================================ */
-        .ps3-controller {
-            background: linear-gradient(145deg, #1a1a2e, #0a0a1a);
-            border-radius: 80px 80px 70px 70px;
-            padding: 15px 20px;
-            margin-bottom: 20px;
-            border: 2px solid #00ffff;
-            box-shadow: 0 0 20px #00ffff, 0 0 10px #ff00ff inset, 0 10px 20px rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            position: relative;
-        }
-        
-        /* الجسم المقوس ليد PS3 */
-        .ps3-controller::before {
-            content: '';
-            position: absolute;
-            top: -8px;
-            left: 10%;
-            width: 80%;
-            height: 16px;
-            background: linear-gradient(90deg, #00ffff, #ff00ff);
-            border-radius: 20px;
-            opacity: 0.6;
-        }
-        
-        /* القسم الأيسر (D-Pad + عصا PS3) */
-        .left-section {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-        
-        /* D-Pad على شكل صليب PS3 */
-        .ps3-dpad {
-            width: 55px;
-            height: 55px;
-            background: #2a2a4a;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 8px cyan, inset 0 0 5px rgba(255,255,255,0.3);
-            position: relative;
-        }
-        
-        .ps3-dpad::before {
-            content: '▲';
-            position: absolute;
-            top: 5px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #00ffff;
-            font-size: 14px;
-            text-shadow: 0 0 5px cyan;
-        }
-        
-        .ps3-dpad::after {
-            content: '▼';
-            position: absolute;
-            bottom: 5px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #00ffff;
-            font-size: 14px;
-            text-shadow: 0 0 5px cyan;
-        }
-        
-        .dpad-left {
-            position: absolute;
-            left: 5px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #00ffff;
-            font-size: 14px;
-            text-shadow: 0 0 5px cyan;
-        }
-        
-        .dpad-right {
-            position: absolute;
-            right: 5px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #00ffff;
-            font-size: 14px;
-            text-shadow: 0 0 5px cyan;
-        }
-        
-        /* عصا التحكم اليسرى (مميزة PS3) */
-        .ps3-left-stick {
-            width: 42px;
-            height: 42px;
-            background: radial-gradient(circle at 35% 35%, #666, #1a1a2a);
-            border-radius: 50%;
-            box-shadow: 0 0 0 3px #00ffff, 0 0 0 5px #ff00ff55;
-            position: relative;
-        }
-        
-        .ps3-left-stick::before {
-            content: '⚫';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 20px;
-            opacity: 0.5;
-        }
-        
-        /* القسم الأوسط (الاسم) */
-        .center-brand {
-            text-align: center;
-            flex: 1;
-        }
-        
-        .center-brand h1 {
-            font-size: 1.6rem;
-            background: linear-gradient(135deg, #00ffff, #ff00ff, #ffff00);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: 3px;
-            font-weight: 800;
-        }
-        
-        .center-brand p {
-            font-size: 0.55rem;
-            color: #ff88ff;
-            text-shadow: 0 0 4px magenta;
-            letter-spacing: 1px;
-        }
-        
-        /* القسم الأيمن (أزرار PS3 + عصا) */
-        .right-section {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-        
-        /* أزرار PlayStation 3 المميزة */
-        .ps3-buttons {
-            display: grid;
-            grid-template-columns: repeat(2, 32px);
-            gap: 6px;
-        }
-        
-        .ps3-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 14px;
-            color: white;
-            text-shadow: 0 0 5px black;
-            box-shadow: 0 0 8px magenta;
-        }
-        
-        /* ألوان أزرار PS3 الأصلية */
-        .ps3-btn:nth-child(1) { background: #ff3366; } /* 🔴 */
-        .ps3-btn:nth-child(2) { background: #ff66cc; } /* 🩷 */
-        .ps3-btn:nth-child(3) { background: #ffcc33; } /* 🟡 */
-        .ps3-btn:nth-child(4) { background: #33cc66; } /* 🟢 */
-        
-        /* عصا التحكم اليمنى */
-        .ps3-right-stick {
-            width: 42px;
-            height: 42px;
-            background: radial-gradient(circle at 65% 65%, #666, #1a1a2a);
-            border-radius: 50%;
-            box-shadow: 0 0 0 3px #ff00ff, 0 0 0 5px #00ffff55;
-            position: relative;
-        }
-        
-        .ps3-right-stick::before {
-            content: '⚫';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 20px;
-            opacity: 0.5;
-        }
-        
-        /* زر PS الموجود في المنتصف */
-        .ps-button {
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #ff00ff;
-            width: 30px;
-            height: 15px;
-            border-radius: 20px;
-            box-shadow: 0 0 10px magenta;
-            font-size: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-        }
-        
-        /* ============================================ */
-        
-        /* باقي التصميم كما هو مع ألوان نيون محسنة */
-        .top-bar {
-            background: #0a0a1ccc;
-            backdrop-filter: blur(12px);
-            border-radius: 40px;
-            padding: 8px 15px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            border: 1px solid #ffff00;
-            box-shadow: 0 0 12px #ffff00;
-        }
-        
-        .music-control {
-            background: #ff00ff30;
-            border-radius: 40px;
-            padding: 5px 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border: 1px solid #ff00ff;
-        }
-        
-        .music-control button {
-            background: #ff00ff;
-            border: none;
-            padding: 6px 15px;
-            border-radius: 40px;
-            color: white;
-            font-weight: bold;
-            box-shadow: 0 0 10px #ff00ff;
-            cursor: pointer;
-            font-size: 0.75rem;
-        }
-        
-        .leaderboard {
-            background: #00ffff30;
-            border-radius: 40px;
-            padding: 5px 12px;
-            font-size: 0.7rem;
-            border: 1px solid #0ff;
-            text-shadow: 0 0 4px cyan;
-        }
-        
-        .leaderboard span {
-            color: #ffff00;
-            font-weight: bold;
-        }
-        
-        .account-section {
-            background: #0a0a2a;
-            border-radius: 40px;
-            padding: 10px 15px;
-            margin-bottom: 20px;
-            border: 2px solid #ff00ff;
-            box-shadow: 0 0 18px #ff00ff;
-        }
-        
-        .account-badge {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        
-        .plan {
-            background: #1a1a4a;
-            border-radius: 40px;
-            padding: 5px 12px;
-            font-weight: bold;
-            font-size: 0.8rem;
-            border: 1px solid #0ff;
-        }
-        
-        button {
-            background: #ff00ff;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 40px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 0 12px #ff00ff;
-            transition: 0.05s linear;
-            font-size: 0.75rem;
-        }
-        
-        button:active {
-            transform: scale(0.96);
-        }
-        
-        .perks {
-            font-size: 0.6rem;
-            margin-top: 6px;
-            color: #0ff;
-        }
-        
-        /* شبكة الألعاب */
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-            margin: 15px 0 20px;
-        }
-        
-        .game-card {
-            background: #0b0b1fdd;
-            backdrop-filter: blur(5px);
-            border-radius: 28px;
-            overflow: hidden;
-            border: 2px solid #00ffff;
-            box-shadow: 0 0 15px #00ffff;
-            transition: 0.1s;
-        }
-        
-        .anime-banner {
-            background-size: cover;
-            background-position: center;
-            padding: 45px 8px;
-            text-align: center;
-            min-height: 120px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        
-        .anime-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 0;
-        }
-        
-        .anime-banner span {
-            position: relative;
-            z-index: 1;
-            color: white;
-            text-shadow: 0 0 10px black;
-            font-weight: bold;
-        }
-        
-        .anime-banner span:first-child {
-            font-size: 1.2rem;
-            background: rgba(0,0,0,0.6);
-            padding: 4px 12px;
-            border-radius: 30px;
-            display: inline-block;
-            margin-bottom: 5px;
-        }
-        
-        .anime-banner span:last-child {
-            font-size: 0.7rem;
-            background: rgba(0,0,0,0.6);
-            padding: 3px 12px;
-            border-radius: 30px;
-        }
-        
-        /* صور أنمي */
-        .game-card:nth-child(1) .anime-banner {
-            background-image: url('https://wallpapercave.com/wp/wp6134065.jpg');
-            background-size: cover;
-        }
-        .game-card:nth-child(2) .anime-banner {
-            background-image: url('https://wallpapercave.com/wp/wp8956810.jpg');
-            background-size: cover;
-        }
-        .game-card:nth-child(3) .anime-banner {
-            background-image: url('https://wallpapercave.com/wp/wp6607500.jpg');
-            background-size: cover;
-        }
-        .game-card:nth-child(4) .anime-banner {
-            background-image: url('https://wallpapercave.com/wp/wp5423231.jpg');
-            background-size: cover;
-        }
-        
-        .game-info {
-            padding: 12px;
-        }
-        
-        .game-info p {
-            font-size: 0.65rem;
-            margin-bottom: 8px;
-            color: #ccddff;
-        }
-        
-        .play-btn {
-            width: 100%;
-            background: linear-gradient(90deg, #00ffff, #ff00ff);
-            margin-top: 5px;
-            padding: 6px;
-            font-size: 0.75rem;
-            color: black;
-            font-weight: bold;
-            text-shadow: 0 0 3px white;
-            box-shadow: 0 0 15px cyan;
-            border-radius: 40px;
-            text-align: center;
-            cursor: pointer;
-        }
-        
-        /* نافذة اللعبة */
-        .modal-game {
+        /* تأثير الدوائر النيون في الخلفية */
+        .neon-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000000ee;
-            backdrop-filter: blur(12px);
-            z-index: 1000;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .circle1 {
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #ff00ff40, transparent);
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: float 6s infinite;
+        }
+
+        .circle2 {
+            position: absolute;
+            bottom: 20%;
+            right: 10%;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #00ffff40, transparent);
+            border-radius: 50%;
+            filter: blur(70px);
+            animation: float 8s infinite reverse;
+        }
+
+        .circle3 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #ff00ff30, #00ffff30);
+            border-radius: 50%;
+            filter: blur(80px);
+            transform: translate(-50%, -50%);
+            animation: pulse 4s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+            100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* الشعار الرئيسي */
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-section h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px #00ffff, 0 0 40px #ff00ff;
+            letter-spacing: 3px;
+        }
+
+        .logo-section p {
+            color: #cccccc;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+
+        /* الأزرار الصغيرة (Chat, Guide, etc) */
+        .small-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .small-btn {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .small-btn:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: #00ffff;
+            box-shadow: 0 0 15px #00ffff;
+        }
+
+        /* شبكة الألعاب - صف واحد أفقي */
+        .games-slider {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .game-card {
+            background: rgba(30,30,50,0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 24px;
+            padding: 25px 20px;
+            width: 220px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: #00ffff;
+            box-shadow: 0 0 30px #00ffff55;
+        }
+
+        .game-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+        }
+
+        .game-card h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .game-card p {
+            color: #aaaaaa;
+            font-size: 0.8rem;
+        }
+
+        /* الشريط السفلي */
+        .bottom-bar {
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 60px;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .bottom-text {
+            color: #00ffff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-shadow: 0 0 10px cyan;
+        }
+
+        .bottom-controls {
+            display: flex;
+            gap: 15px;
+        }
+
+        .control-icon {
+            background: rgba(255,255,255,0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 12px;
-        }
-        
-        .modal-content {
-            background: #0a0a2a;
-            border-radius: 40px;
-            width: 100%;
-            max-width: 380px;
-            max-height: 80vh;
-            overflow-y: auto;
-            padding: 18px;
-            border: 3px solid #00ffff;
-            box-shadow: 0 0 30px #00ffff;
-        }
-        
-        .close-modal {
-            background: #ff00ff;
-            float: right;
-            margin-bottom: 10px;
-            padding: 4px 14px;
-            font-size: 0.7rem;
-            border-radius: 40px;
             cursor: pointer;
+            transition: 0.2s;
+            font-size: 1.2rem;
         }
-        
-        footer {
-            text-align: center;
-            font-size: 0.55rem;
-            margin-top: 20px;
-            color: #0ff;
+
+        .control-icon:hover {
+            background: #00ffff;
+            color: black;
+            box-shadow: 0 0 20px cyan;
         }
-        
-        .hidden { display: none; }
-        
-        input {
-            background: #1a1a3a;
-            border: 2px solid #0ff;
-            color: #0ff;
-            border-radius: 40px;
-            padding: 8px;
-            text-align: center;
-            width: 100%;
+
+        /* موسيقى */
+        .music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid #00ffff;
+            border-radius: 50px;
+            padding: 10px 18px;
+            color: white;
+            cursor: pointer;
+            z-index: 100;
+            font-size: 0.8rem;
         }
-        
-        .game-message {
-            background: #000000aa;
-            border-radius: 30px;
-            padding: 6px;
-            font-size: 0.7rem;
-            text-align: center;
+
+        @media (max-width: 768px) {
+            .logo-section h1 { font-size: 2.2rem; }
+            .game-card { width: 180px; padding: 15px; }
+            .game-icon { font-size: 2.5rem; }
+            .game-card h3 { font-size: 1rem; }
+            .bottom-bar { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
-<div class="app">
-    <!-- شعار يد تحكم PlayStation 3 -->
-    <div class="ps3-controller">
-        <div class="left-section">
-            <div class="ps3-dpad">
-                <span class="dpad-left">◀</span>
-                <span class="dpad-right">▶</span>
-            </div>
-            <div class="ps3-left-stick"></div>
-        </div>
-        <div class="center-brand">
-            <h1>DIDO GAME</h1>
-            <p>✦ PS3 NEON STYLE ✦</p>
-        </div>
-        <div class="right-section">
-            <div class="ps3-buttons">
-                <div class="ps3-btn">●</div>
-                <div class="ps3-btn">♥</div>
-                <div class="ps3-btn">◆</div>
-                <div class="ps3-btn">■</div>
-            </div>
-            <div class="ps3-right-stick"></div>
-        </div>
-        <div class="ps-button">PS</div>
-    </div>
 
-    <div class="top-bar">
-        <div class="music-control">
-            <span>🎵 PS3 BEATS</span>
-            <button id="toggleMusicBtn">▶ تشغيل</button>
-        </div>
-        <div class="leaderboard" id="leaderboardDisplay">
-            🏆 الأفضل: <span id="topPlayerName">—</span> (<span id="topScoreVal">0</span>)
-        </div>
-    </div>
-
-    <div class="account-section" id="accountSection">
-        <div class="account-badge">
-            <div class="plan" id="planType">🎴 مجاني</div>
-            <button id="upgradeBtn">⭐ ترقية مميز</button>
-        </div>
-        <div class="perks" id="perksList">✨ 3 محاولات يومية ✨</div>
-    </div>
-
-    <!-- شبكة الألعاب -->
-    <div class="games-grid">
-        <div class="game-card">
-            <div class="anime-banner">
-                <span>🔮 MAGIC GUESS 🔮</span>
-                <span>خمن الرقم السري</span>
-            </div>
-            <div class="game-info">
-                <p>اختبر حدسك مع قوة الساحرة</p>
-                <div class="play-btn" data-game="guess">🎮 العب الآن</div>
-            </div>
-        </div>
-        <div class="game-card">
-            <div class="anime-banner">
-                <span>🧠 MEMORY DUEL 🧠</span>
-                <span>طابق الأزواج</span>
-            </div>
-            <div class="game-info">
-                <p>درب ذاكرتك مع شخصيات الأنمي</p>
-                <div class="play-btn" data-game="memory">🌀 تحدى</div>
-            </div>
-        </div>
-        <div class="game-card">
-            <div class="anime-banner">
-                <span>⚔️ SAMURAI X & O ⚔️</span>
-                <span>تيك تاك تو</span>
-            </div>
-            <div class="game-info">
-                <p>معركة الساموراي النيون</p>
-                <div class="play-btn" data-game="tictac">🔥 قاتل</div>
-            </div>
-        </div>
-        <div class="game-card">
-            <div class="anime-banner">
-                <span>🎲 ANIME WORLD 🎲</span>
-                <span>قريباً</span>
-            </div>
-            <div class="game-info">
-                <p>مغامرات جديدة تنتظرك</p>
-                <div class="play-btn" data-game="guess">🎮 قريباً</div>
-            </div>
-        </div>
-    </div>
-    <footer>💜 المميز: 5 محاولات + اسم ذهبي + 20% نقاط إضافية</footer>
+<div class="neon-bg">
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <div class="circle3"></div>
 </div>
 
-<div id="gameModal" class="modal-game hidden">
-    <div class="modal-content">
-        <div class="close-modal" id="closeModalBtn">✖ إغلاق</div>
-        <div id="modalGameInner"></div>
+<div class="container">
+    <!-- الشعار -->
+    <div class="logo-section">
+        <h1>DIDO GAME</h1>
+        <p>SUPERIOR GAMING EXPERIENCE</p>
+    </div>
+
+    <!-- أزرار صغيرة -->
+    <div class="small-buttons">
+        <div class="small-btn">💬 Chat</div>
+        <div class="small-btn">📖 Guide</div>
+        <div class="small-btn">🏆 Leaderboard</div>
+        <div class="small-btn">⚙️ Settings</div>
+    </div>
+
+    <!-- بطاقات الألعاب (صف واحد أفقي) -->
+    <div class="games-slider">
+        <div class="game-card" onclick="alert('FPS Game - قريباً')">
+            <div class="game-icon">🔫</div>
+            <h3>FPS game</h3>
+            <p>2.2k Players</p>
+        </div>
+        <div class="game-card" onclick="alert('Multiplayer - قريباً')">
+            <div class="game-icon">🎮</div>
+            <h3>Multiplayer</h3>
+            <p>5.1k Players</p>
+        </div>
+        <div class="game-card" onclick="alert('PUBG Game - قريباً')">
+            <div class="game-icon">✈️</div>
+            <h3>PUBG game</h3>
+            <p>8.7k Players</p>
+        </div>
+        <div class="game-card" onclick="alert('Call Of Duty - قريباً')">
+            <div class="game-icon">🎖️</div>
+            <h3>Call Of Duty</h3>
+            <p>3.4k Players</p>
+        </div>
+    </div>
+
+    <!-- الشريط السفلي -->
+    <div class="bottom-bar">
+        <div class="bottom-text">🌍 WORLD BEST GAMING PLATFORM</div>
+        <div class="bottom-controls">
+            <div class="control-icon">◀</div>
+            <div class="control-icon">▶</div>
+            <div class="control-icon">⏸</div>
+            <div class="control-icon">🔊</div>
+        </div>
     </div>
 </div>
+
+<!-- زر الموسيقى -->
+<div class="music-toggle" id="musicToggle">🎵 تشغيل الموسيقى</div>
 
 <script>
-    // ========== موسيقى ==========
-    const bgMusic = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3');
-    bgMusic.loop = true;
-    bgMusic.volume = 0.2;
-    let musicPlaying = false;
-    
-    function playMusic() {
-        bgMusic.play().then(() => {
-            musicPlaying = true;
-            document.getElementById('toggleMusicBtn').innerHTML = '🔇 كتم';
-        }).catch(e => console.log("انتظر التفاعل"));
-    }
-    function pauseMusic() {
-        bgMusic.pause();
-        musicPlaying = false;
-        document.getElementById('toggleMusicBtn').innerHTML = '🎵 تشغيل';
-    }
-    document.getElementById('toggleMusicBtn').onclick = () => musicPlaying ? pauseMusic() : playMusic();
-    document.body.addEventListener('touchstart', () => { if(!musicPlaying) playMusic(); }, { once: true });
-    setTimeout(() => bgMusic.play().catch(()=>{}), 500);
-    
-    // ===== الحسابات =====
-    let isPremium = false;
-    function updateAccountUI() {
-        const planSpan = document.getElementById('planType');
-        const perksSpan = document.getElementById('perksList');
-        if(isPremium) {
-            planSpan.innerHTML = '👑 مميز نيون 👑';
-            planSpan.style.background = "linear-gradient(90deg,#ff00ff,#00ffff)";
-            planSpan.style.color = "black";
-            perksSpan.innerHTML = '✨ 5 محاولات ✨ اسم ذهبي ✨ +20% نقاط ✨';
+    // موسيقى خفيفة
+    let music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+    music.loop = true;
+    music.volume = 0.2;
+    let isPlaying = false;
+
+    const musicBtn = document.getElementById('musicToggle');
+    musicBtn.onclick = () => {
+        if (isPlaying) {
+            music.pause();
+            musicBtn.innerHTML = '🎵 تشغيل الموسيقى';
         } else {
-            planSpan.innerHTML = '🎴 مجاني';
-            planSpan.style.background = "#1a1a4a";
-            planSpan.style.color = "#0ff";
-            perksSpan.innerHTML = '✨ 3 محاولات يومية ✨';
+            music.play().catch(() => {});
+            musicBtn.innerHTML = '🔇 إيقاف الموسيقى';
         }
-        updateLeaderboardDisplay();
-    }
-    document.getElementById('upgradeBtn').onclick = () => {
-        if(confirm("⭐ ترقية إلى الحساب المميز (4.99$)؟")) {
-            isPremium = true;
-            updateAccountUI();
-            alert("✨ تم الترقية! ✨");
-        }
+        isPlaying = !isPlaying;
     };
-    
-    // ===== أفضل اللاعبين =====
-    let topPlayers = JSON.parse(localStorage.getItem('dido_topPlayers')) || [];
-    function updateLeaderboardDisplay() {
-        if(topPlayers.length === 0) {
-            document.getElementById('topPlayerName').innerText = "—";
-            document.getElementById('topScoreVal').innerText = "0";
-            return;
+
+    // محاولة تشغيل تلقائي عند أول تفاعل
+    document.body.addEventListener('touchstart', () => {
+        if (!isPlaying) {
+            music.play().catch(() => {});
+            isPlaying = true;
+            musicBtn.innerHTML = '🔇 إيقاف الموسيقى';
         }
-        topPlayers.sort((a,b)=>b.score - a.score);
-        const top = topPlayers[0];
-        document.getElementById('topPlayerName').innerHTML = top.isPremiumBonus ? `👑✨ ${top.name} ✨👑` : top.name;
-        document.getElementById('topScoreVal').innerText = top.score;
-    }
-    function recordScore(playerName, gameScore) {
-        if(!playerName) playerName = "مقاتل نيون";
-        let effectiveScore = isPremium ? Math.floor(gameScore * 1.2) : gameScore;
-        topPlayers.push({ name: playerName.slice(0,10), score: effectiveScore, isPremiumBonus: isPremium });
-        topPlayers.sort((a,b)=>b.score - a.score);
-        topPlayers = topPlayers.slice(0,12);
-        localStorage.setItem('dido_topPlayers', JSON.stringify(topPlayers));
-        updateLeaderboardDisplay();
-    }
-    
-    // ===== المحاولات اليومية =====
-    function canPlayGame() {
-        let attempts = parseInt(localStorage.getItem('dido_attempts') || '0');
-        let lastDate = localStorage.getItem('dido_date');
-        const today = new Date().toDateString();
-        if(lastDate !== today) {
-            localStorage.setItem('dido_date', today);
-            localStorage.setItem('dido_attempts', '0');
-            attempts = 0;
-        }
-        const maxAttempts = isPremium ? 5 : 3;
-        if(attempts >= maxAttempts) {
-            alert(`⚠️ انتهت محاولاتك (${maxAttempts}/${maxAttempts})، عُد غداً!`);
-            return false;
-        }
-        return true;
-    }
-    function consumeAttempt() {
-        let attempts = parseInt(localStorage.getItem('dido_attempts') || '0');
-        let lastDate = localStorage.getItem('dido_date');
-        const today = new Date().toDateString();
-        if(lastDate !== today) {
-            localStorage.setItem('dido_date', today);
-            attempts = 0;
-        }
-        attempts++;
-        localStorage.setItem('dido_attempts', attempts);
-        alert(`✅ تبقى ${(isPremium?5:3)-attempts} محاولة اليوم`);
-    }
-    
-    // ===== فتح الألعاب =====
-    function openGameModal(gameType) {
-        if(!canPlayGame()) return;
-        const modal = document.getElementById('gameModal');
-        const inner = document.getElementById('modalGameInner');
-        modal.classList.remove('hidden');
-        if(gameType === 'guess') renderGuessGame(inner);
-        else if(gameType === 'memory') renderMemoryGame(inner);
-        else if(gameType === 'tictac') renderTicTacGame(inner);
-    }
-    function closeModal() { document.getElementById('gameModal').classList.add('hidden'); }
-    document.getElementById('closeModalBtn').onclick = closeModal;
-    document.querySelectorAll('.play-btn').forEach(btn => {
-        btn.onclick = () => openGameModal(btn.getAttribute('data-game'));
-    });
-    
-    // ===== لعبة التخمين =====
-    let secretNum = Math.floor(Math.random()*100)+1, guessCount = 0;
-    function renderGuessGame(container) {
-        secretNum = Math.floor(Math.random()*100)+1;
-        guessCount = 0;
-        container.innerHTML = `
-            <h3 style="color:#0ff; text-align:center;">🔮 خمن الرقم 🔮</h3>
-            <p style="text-align:center;">بين 1 و 100</p>
-            <input type="number" id="guessInput" placeholder="أدخل رقمك">
-            <button id="guessBtn" style="background:#ff00ff; margin:10px 0; width:100%;">خمن!</button>
-            <div id="guessMsg" class="game-message">✨ ابدأ التخمين ✨</div>
-            <button id="finishGameBtn" style="background:#00ffff; width:100%; margin-top:10px;">🏆 حفظ النتيجة</button>
-        `;
-        let finished = false;
-        document.getElementById('guessBtn').onclick = () => {
-            if(finished) return;
-            let val = parseInt(document.getElementById('guessInput').value);
-            let msg = document.getElementById('guessMsg');
-            if(isNaN(val)) { msg.innerText = "أدخل رقماً!"; return; }
-            guessCount++;
-            if(val === secretNum) {
-                msg.innerHTML = `🎉 فوز! الرقم ${secretNum} بعد ${guessCount} محاولات 🎉`;
-                finished = true;
-                consumeAttempt();
-                recordScore("خمن نيون", Math.max(100 - guessCount*2, 10));
-                setTimeout(closeModal, 1500);
-            } else if(val < secretNum) msg.innerText = `⬆️ أكبر من ${val} | محاولة ${guessCount}`;
-            else msg.innerText = `⬇️ أصغر من ${val} | محاولة ${guessCount}`;
-            document.getElementById('guessInput').value = '';
-        };
-        document.getElementById('finishGameBtn').onclick = () => {
-            if(!finished && confirm("إنهاء بدون فوز؟")) {
-                consumeAttempt();
-                recordScore("مغامر", 10);
-                closeModal();
-            } else if(finished) closeModal();
-        };
-    }
-    
-    // ===== لعبة الذاكرة =====
-    let memDeck, memFlipped, memMatched, memLock=false, memFirstIdx=null;
-    function renderMemoryGame(container) {
-        const symbols = ['🌸','🍥','⚡','💀','🎴','🍙','🐉','👘'];
-        let deck = [...symbols, ...symbols];
-        for(let i=deck.length-1; i>0; i--) {
-            let j = Math.floor(Math.random()*(i+1));
-            [deck[i], deck[j]] = [deck[j], deck[i]];
-        }
-        memDeck = deck;
-        memFlipped = new Array(16).fill(false);
-        memMatched = new Array(16).fill(false);
-        memLock = false;
-        memFirstIdx = null;
-        
-        function render() {
-            let html = `<div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;">`;
-            for(let i=0; i<16; i++) {
-                let content = '', bg = '#aa55ff';
-                if(memMatched[i]) { content = '✓'; bg = '#00ffcc'; }
-                else if(memFlipped[i]) { content = memDeck[i]; bg = '#ff66ff'; }
-                else { content = '?'; bg = '#9a4eff'; }
-                html += `<div data-idx="${i}" style="background:${bg}; aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:1.3rem; border-radius:16px;">${content}</div>`;
-            }
-            html += `</div><div id="memMsg" style="margin:10px 0; text-align:center;">💜 اقلب بطاقتين متطابقتين</div><button id="memFinish" style="background:#ffff00; width:100%;">🏆 حفظ النتيجة</button>`;
-            container.innerHTML = html;
-            
-            document.querySelectorAll('[data-idx]').forEach(el => {
-                el.onclick = () => {
-                    if(memLock) return;
-                    let idx = parseInt(el.getAttribute('data-idx'));
-                    if(memMatched[idx] || memFlipped[idx]) return;
-                    if(memFirstIdx === null) {
-                        memFlipped[idx] = true;
-                        memFirstIdx = idx;
-                        render();
-                    } else {
-                        memFlipped[idx] = true;
-                        render();
-                        memLock = true;
-                        if(memDeck[memFirstIdx] === memDeck[idx]) {
-                            memMatched[memFirstIdx] = true;
-                            memMatched[idx] = true;
-                            memFlipped[memFirstIdx] = false;
-                            memFlipped[idx] = false;
-                            memFirstIdx = null;
-                            memLock = false;
-                            render();
-                            if(memMatched.every(v=>v===true)) document.getElementById('memMsg').innerText = '🏆 أكملت اللعبة!';
-                        } else {
-                            setTimeout(() => {
-                                memFlipped[memFirstIdx] = false;
-                                memFlipped[idx] = false;
-                                memFirstIdx = null;
-                                memLock = false;
-                                render();
-                            }, 600);
-                        }
-                    }
-                };
-            });
-            document.getElementById('memFinish').onclick = () => {
-                let matchedCount = memMatched.filter(v=>v===true).length;
-                consumeAttempt();
-                recordScore("ذاكرة نيون", matchedCount * 5);
-                closeModal();
-            };
-        }
-        render();
-    }
-    
-    // ===== تيك تاك تو =====
-    let ticTacBoard, currentPlayer='X', gameEnded=false;
-    function renderTicTacGame(container) {
-        ticTacBoard = ['','','','','','','','',''];
-        currentPlayer = 'X';
-        gameEnded = false;
-        
-        function render() {
-            let html = `<h3 style="color:#ff00ff; text-align:center;">⚔️ X & O ⚔️ دور: ${currentPlayer}</h3>
-                        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; width:220px; margin:0 auto;">`;
-            for(let i=0; i<9; i++) {
-                html += `<div data-idx="${i}" style="background:#b84eff; aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:2rem; border-radius:25px;">${ticTacBoard[i]}</div>`;
-            }
-            html += `</div><div id="ticMsg" style="margin:10px; text-align:center;"></div>
-                     <button id="ticFinish" style="background:#00ffcc; width:100%;">🏆 حفظ النتيجة</button>`;
-            container.innerHTML = html;
-            
-            document.querySelectorAll('[data-idx]').forEach(cell => {
-                cell.onclick = () => {
-                    if(gameEnded) return;
-                    let idx = parseInt(cell.getAttribute('data-idx'));
-                    if(ticTacBoard[idx] !== '') return;
-                    ticTacBoard[idx] = currentPlayer;
-                    
-                    let winner = checkTicWinner();
-                    if(winner) {
-                        document.getElementById('ticMsg').innerHTML = `🏆 الفائز: ${winner} 🏆`;
-                        gameEnded = true;
-                        render();
-                        return;
-                    }
-                    if(ticTacBoard.every(cell => cell !== '')) {
-                        document.getElementById('ticMsg').innerHTML = '🤝 تعادل!';
-                        gameEnded = true;
-                        render();
-                        return;
-                    }
-                    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-                    render();
-                };
-            });
-            document.getElementById('ticFinish').onclick = () => {
-                let winner = checkTicWinner();
-                let points = winner ? 50 : (ticTacBoard.every(c=>c!=='') ? 20 : 5);
-                consumeAttempt();
-                recordScore("مقاتل نيون", points);
-                closeModal();
-            };
-        }
-        
-        function checkTicWinner() {
-            const lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-            for(let line of lines) {
-                const [a,b,c] = line;
-                if(ticTacBoard[a] && ticTacBoard[a] === ticTacBoard[b] && ticTacBoard[a] === ticTacBoard[c]) {
-                    return ticTacBoard[a];
-                }
-            }
-            return null;
-        }
-        render();
-    }
-    
-    updateAccountUI();
+    }, { once: true });
 </script>
+
 </body>
 </html>
