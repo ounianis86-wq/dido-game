@@ -359,8 +359,8 @@
             padding-top: 5px;
         }
 
-        /* إعلان مؤقت - يظهر عند دخول اللعبة فقط للمستخدم العادي */
-        .temp-ad-overlay {
+        /* الإعلان عند الدخول للعبة (للمستخدم العادي) - 10 ثوانٍ */
+        .entry-ad-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -375,7 +375,23 @@
             flex-direction: column;
         }
         
-        .temp-ad-box {
+        /* الإعلان بين المستويات (للمستخدم العادي) - 8 ثوانٍ */
+        .levelup-ad-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .ad-box {
             background: linear-gradient(135deg, #1a0033, #0a002a);
             border: 3px solid #ff44ff;
             border-radius: 30px;
@@ -384,46 +400,74 @@
             max-width: 280px;
             width: 85%;
             box-shadow: 0 0 50px #ff44ff;
+            animation: adBoxPulse 0.5s ease-in-out infinite;
         }
         
-        .temp-ad-icon {
+        @keyframes adBoxPulse {
+            0%, 100% { box-shadow: 0 0 30px #ff44ff; }
+            50% { box-shadow: 0 0 60px #ff44ff, 0 0 30px #00ffff; }
+        }
+        
+        .ad-icon {
             font-size: 3rem;
             margin-bottom: 10px;
+            animation: spinIcon 1s linear infinite;
         }
         
-        .temp-ad-title {
+        @keyframes spinIcon {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .ad-title {
             color: white;
             font-size: 1rem;
             font-weight: bold;
         }
         
-        .temp-ad-timer {
+        .ad-subtitle {
+            color: #ffaa88;
+            font-size: 0.7rem;
+            margin: 5px 0;
+        }
+        
+        .ad-timer {
             color: #ff44ff;
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: bold;
             margin: 15px 0;
+            text-shadow: 0 0 10px #ff44ff;
         }
         
-        .temp-ad-button {
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
-            border: none;
-            padding: 8px 20px;
-            border-radius: 30px;
-            color: white;
-            font-weight: bold;
-            cursor: not-allowed;
-            opacity: 0.5;
+        .ad-progress {
+            width: 80%;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            margin: 10px auto;
+            overflow: hidden;
         }
         
-        .temp-ad-button.active {
-            cursor: pointer;
-            opacity: 1;
-            animation: btnPulse 0.8s infinite;
+        .ad-progress-bar {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff44ff, #00ffff);
+            border-radius: 2px;
+            animation: progressShrink 10s linear forwards;
         }
         
-        @keyframes btnPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        .levelup-progress-bar {
+            animation: progressShrinkLevelUp 8s linear forwards;
+        }
+        
+        @keyframes progressShrink {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+        
+        @keyframes progressShrinkLevelUp {
+            from { width: 100%; }
+            to { width: 0%; }
         }
 
         .games-wrapper {
@@ -571,6 +615,18 @@
             transform: scale(1.05);
         }
 
+        /* زر محاكاة الانتقال بين المستويات */
+        .simulate-levelup-btn {
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            padding: 5px 12px;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.5rem;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
         .game-modal {
             position: fixed;
             top: 0;
@@ -595,7 +651,7 @@
             box-shadow: 0 0 50px #ff44ff, 0 0 30px #00ffff;
         }
         
-        .close-modal {
+        .game-modal .close-modal {
             position: absolute;
             top: 15px;
             right: 15px;
@@ -613,7 +669,7 @@
             transition: all 0.2s ease;
         }
         
-        .close-modal:hover {
+        .game-modal .close-modal:hover {
             transform: scale(1.1);
             box-shadow: 0 0 25px #ff3366;
         }
@@ -641,13 +697,10 @@
             letter-spacing: 1px;
         }
         
-        .vip-badge {
-            background: #ff44ff;
-            color: white;
-            font-size: 0.45rem;
-            padding: 2px 6px;
-            border-radius: 10px;
-            margin-left: 5px;
+        .levelup-demo {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -702,19 +755,39 @@
     </div>
     
     <div class="bottom-bar">
+        <div class="levelup-demo">
+            <button class="simulate-levelup-btn" id="simulateLevelUpBtn">⬆️ محاكاة مستوى جديد</button>
+        </div>
         <div class="register-btn" id="registerBtn">📝 ترقية إلى VIP</div>
         <div class="music-bottom-btn" id="musicBottomBtn">🎵 تشغيل</div>
     </div>
 </div>
 
-<!-- الإعلان المؤقت - يظهر فقط للمستخدم العادي عند دخول اللعبة -->
-<div id="tempAdOverlay" class="temp-ad-overlay hidden">
-    <div class="temp-ad-box">
-        <div class="temp-ad-icon">📺⏳</div>
-        <div class="temp-ad-title">إعلان أثناء اللعب</div>
-        <div class="temp-ad-text" style="color:#ffaa88; font-size:0.7rem; margin:5px 0;">لا يمكن تخطيه</div>
-        <div class="temp-ad-timer" id="tempAdTimer">5</div>
-        <button class="temp-ad-button" id="tempAdBtn" disabled>⏳ انتظر...</button>
+<!-- الإعلان عند الدخول للعبة (للمستخدم العادي) - 10 ثوانٍ -->
+<div id="entryAdOverlay" class="entry-ad-overlay hidden">
+    <div class="ad-box">
+        <div class="ad-icon">🎮🚀</div>
+        <div class="ad-title">إعلان بدء اللعب</div>
+        <div class="ad-subtitle">يظهر عند دخولك لأي لعبة</div>
+        <div class="ad-timer" id="entryAdTimer">10</div>
+        <div class="ad-progress">
+            <div class="ad-progress-bar" id="entryProgressBar"></div>
+        </div>
+        <div class="ad-subtitle" style="font-size:0.6rem;">سيختفي تلقائياً بعد 10 ثوانٍ</div>
+    </div>
+</div>
+
+<!-- الإعلان بين المستويات (للمستخدم العادي) - 8 ثوانٍ -->
+<div id="levelupAdOverlay" class="levelup-ad-overlay hidden">
+    <div class="ad-box">
+        <div class="ad-icon">⬆️🏆</div>
+        <div class="ad-title">إعلان الترقية</div>
+        <div class="ad-subtitle">تهانينا! وصلت إلى مستوى جديد</div>
+        <div class="ad-timer" id="levelupAdTimer">8</div>
+        <div class="ad-progress">
+            <div class="ad-progress-bar levelup-progress-bar" id="levelupProgressBar"></div>
+        </div>
+        <div class="ad-subtitle" style="font-size:0.6rem;">سيختفي تلقائياً بعد 8 ثوانٍ</div>
     </div>
 </div>
 
@@ -750,10 +823,17 @@
     ];
     
     let isPremium = false;
-    let pendingGameCallback = null;
+    let pendingEntryCallback = null;
+    let pendingLevelUpCallback = null;
     let adInterval = null;
     let currentAdIndex = 0;
-    let tempAdInterval = null;
+    let entryAdTimeout = null;
+    let levelupAdTimeout = null;
+    let isWaitingForEntryAd = false;
+    let isWaitingForLevelUpAd = false;
+    let currentGameUrl = null;
+    let currentGameName = null;
+    let currentGameId = null;
     
     // تحديث الإعلان الثابت (يتغير كل 10 ثوانٍ)
     function refreshPermanentAd() {
@@ -772,49 +852,99 @@
         }, 10000);
     }
     
-    // إعلان مؤقت عند دخول اللعبة (للمستخدم العادي فقط)
-    function showTempAd(callback) {
-        pendingGameCallback = callback;
-        const overlay = document.getElementById('tempAdOverlay');
-        const timerElement = document.getElementById('tempAdTimer');
-        const btn = document.getElementById('tempAdBtn');
+    // إعلان عند الدخول للعبة (للمستخدم العادي) - 10 ثوانٍ ويختفي تلقائياً
+    function showEntryAd(callback) {
+        if (isWaitingForEntryAd) return;
+        
+        isWaitingForEntryAd = true;
+        pendingEntryCallback = callback;
+        const overlay = document.getElementById('entryAdOverlay');
+        const timerElement = document.getElementById('entryAdTimer');
         
         overlay.classList.remove('hidden');
-        let seconds = 5;
+        let seconds = 10;
         timerElement.textContent = seconds;
-        btn.disabled = true;
-        btn.classList.remove('active');
-        btn.textContent = '⏳ انتظر...';
         
-        if (tempAdInterval) clearInterval(tempAdInterval);
+        // إعادة إنشاء شريط التقدم
+        const oldProgress = document.getElementById('entryProgressBar');
+        if (oldProgress) {
+            const newProgress = oldProgress.cloneNode(true);
+            oldProgress.parentNode.replaceChild(newProgress, oldProgress);
+            newProgress.style.animation = 'progressShrink 10s linear forwards';
+        }
         
-        tempAdInterval = setInterval(() => {
+        if (entryAdTimeout) clearInterval(entryAdTimeout);
+        
+        const countdownInterval = setInterval(() => {
             seconds--;
             timerElement.textContent = seconds;
             
             if (seconds <= 0) {
-                clearInterval(tempAdInterval);
-                btn.disabled = false;
-                btn.classList.add('active');
-                btn.textContent = '✅ متابعة';
+                clearInterval(countdownInterval);
+                overlay.classList.add('hidden');
+                if (pendingEntryCallback) {
+                    pendingEntryCallback();
+                    pendingEntryCallback = null;
+                }
+                isWaitingForEntryAd = false;
             }
         }, 1000);
         
-        // إعداد زر المتابعة
-        const newBtn = btn.cloneNode(true);
-        btn.parentNode.replaceChild(newBtn, btn);
-        newBtn.id = 'tempAdBtn';
+        entryAdTimeout = countdownInterval;
+    }
+    
+    // إعلان بين المستويات (للمستخدم العادي) - 8 ثوانٍ ويختفي تلقائياً
+    function showLevelUpAd(callback) {
+        if (isWaitingForLevelUpAd) return;
         
-        newBtn.onclick = () => {
-            if (!newBtn.disabled) {
+        isWaitingForLevelUpAd = true;
+        pendingLevelUpCallback = callback;
+        const overlay = document.getElementById('levelupAdOverlay');
+        const timerElement = document.getElementById('levelupAdTimer');
+        
+        overlay.classList.remove('hidden');
+        let seconds = 8;
+        timerElement.textContent = seconds;
+        
+        // إعادة إنشاء شريط التقدم
+        const oldProgress = document.getElementById('levelupProgressBar');
+        if (oldProgress) {
+            const newProgress = oldProgress.cloneNode(true);
+            oldProgress.parentNode.replaceChild(newProgress, oldProgress);
+            newProgress.style.animation = 'progressShrinkLevelUp 8s linear forwards';
+        }
+        
+        if (levelupAdTimeout) clearInterval(levelupAdTimeout);
+        
+        const countdownInterval = setInterval(() => {
+            seconds--;
+            timerElement.textContent = seconds;
+            
+            if (seconds <= 0) {
+                clearInterval(countdownInterval);
                 overlay.classList.add('hidden');
-                if (tempAdInterval) clearInterval(tempAdInterval);
-                if (pendingGameCallback) {
-                    pendingGameCallback();
-                    pendingGameCallback = null;
+                if (pendingLevelUpCallback) {
+                    pendingLevelUpCallback();
+                    pendingLevelUpCallback = null;
                 }
+                isWaitingForLevelUpAd = false;
             }
-        };
+        }, 1000);
+        
+        levelupAdTimeout = countdownInterval;
+    }
+    
+    // محاكاة الانتقال إلى مستوى جديد (تظهر إعلان بين المستويات للمستخدم العادي)
+    function simulateLevelUp() {
+        if (isPremium) {
+            alert('✨ أنت حساب مميز! لا تظهر لك إعلانات بين المستويات ✨');
+            return;
+        }
+        
+        // إظهار إعلان بين المستويات
+        showLevelUpAd(() => {
+            alert('🎉 تم تخطي الإعلان! يمكنك متابعة اللعب في المستوى الجديد 🎉');
+        });
     }
     
     function updateRanking() {
@@ -883,13 +1013,17 @@
     }
     
     function launchGame(url, name, gameId) {
+        currentGameUrl = url;
+        currentGameName = name;
+        currentGameId = gameId;
+        
         if (isPremium) {
             // المستخدم المميز: يدخل اللعبة مباشرة دون أي إعلان
             openGameDirect(url, name);
             addPointsToPlayer(gameId, 5);
         } else {
-            // المستخدم العادي: يشاهد إعلاناً لمدة 5 ثوانٍ قبل الدخول
-            showTempAd(() => {
+            // المستخدم العادي: يشاهد إعلان الدخول (10 ثوانٍ)
+            showEntryAd(() => {
                 openGameDirect(url, name);
                 addPointsToPlayer(gameId, 5);
             });
@@ -906,11 +1040,16 @@
         document.getElementById('gameModal').classList.add('hidden');
         document.getElementById('gameIframe').src = '';
         document.body.style.overflow = 'auto';
+        
+        // عند إغلاق اللعبة، المستخدم العادي سيظهر له إعلان الدخول مرة أخرى عند فتح لعبة جديدة
     }
     
     function addPointsToPlayer(gameId, points) {
         const game = gamesData.find(g=>g.id === gameId);
-        if(game) { game.points += points; updateRanking(); }
+        if(game) { 
+            game.points += points; 
+            updateRanking(); 
+        }
     }
     
     function showHomePage() {
@@ -931,10 +1070,15 @@
             const btn = document.getElementById('registerBtn');
             btn.innerHTML = '👑 VIP مفعل';
             btn.classList.add('vip-active');
-            alert('🎉✨ تهانينا! أصبحت حساباً مميزاً ✨🎉\n\n✅ لن تظهر لك أي إعلانات أثناء اللعب بعد الآن!\n⚠️ ملاحظة: الإعلان الثابت في المنتصف يظهر للجميع.');
+            alert('🎉✨ تهانينا! أصبحت حساباً مميزاً ✨🎉\n\n✅ لن تظهر لك أي إعلانات أثناء الدخول للعبة أو بين المستويات!\n⚠️ ملاحظة: الإعلان الثابت في المنتصف يظهر للجميع.');
         } else {
             alert('أنت بالفعل حساب مميز! 🎉');
         }
+    });
+    
+    // زر محاكاة الانتقال بين المستويات
+    document.getElementById('simulateLevelUpBtn').addEventListener('click', () => {
+        simulateLevelUp();
     });
     
     document.querySelectorAll('.cat-badge').forEach(badge=>{
@@ -948,10 +1092,10 @@
     document.getElementById('backToHomeBtn').addEventListener('click', ()=> showHomePage());
     document.getElementById('gameModal').addEventListener('click', (e)=>{ if(e.target === document.getElementById('gameModal')) closeGame(); });
     
-    // 🎵 موسيقى إلكترونية حماسية 🎵
+    // 🎵 موسيقى إلكترونية حماسية - صوت 0.50 🎵
     const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
     music.loop = true;
-    music.volume = 0.12;
+    music.volume = 0.50;  // صوت أقوى بكثير
     let playing = true;
     const musicBottomBtn = document.getElementById('musicBottomBtn');
     musicBottomBtn.innerHTML = '🔇 إيقاف';
