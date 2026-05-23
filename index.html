@@ -185,15 +185,15 @@
             border-radius: 2px;
         }
 
-        /* 🔥 صفين متوازيين أفقيين مع تمرير يسار/يمين */
-        .double-row-scroll {
+        /* 🔥 صفين متوازيين فقط مع تمرير أفقي */
+        .two-rows-container {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
             margin-bottom: 15px;
         }
 
-        .scroll-row {
+        .game-row {
             display: flex;
             gap: 12px;
             overflow-x: auto;
@@ -203,7 +203,7 @@
             padding-bottom: 8px;
         }
 
-        .scroll-row::-webkit-scrollbar {
+        .game-row::-webkit-scrollbar {
             display: none;
         }
 
@@ -227,6 +227,7 @@
             box-shadow: 0 0 20px #ff44ff;
         }
 
+        /* صورة أنمي 3D */
         .game-img-3d {
             width: 100%;
             height: 100px;
@@ -355,6 +356,12 @@
         .hidden {
             display: none;
         }
+        .row-label {
+            color: #ff88ff;
+            font-size: 0.7rem;
+            margin-bottom: 5px;
+            padding-right: 5px;
+        }
     </style>
 </head>
 <body>
@@ -395,72 +402,117 @@
             <div class="player" onclick="alert('Kira - مستوى 92')"><div class="player-avatar">💜</div><div class="player-name">Kira</div></div>
         </div>
 
-        <!-- قسم 1: ألعاب أكشن وأنمي - صفين متوازيين مع تمرير أفقي -->
-        <div class="section-title"><span></span> 🎮 ألعاب أكشن | 3D Anime</div>
-        <div class="double-row-scroll">
-            <div class="scroll-row">
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/sonic-the-hedgehog', 'Sonic')"><div class="game-img-3d" style="background-image: url('https://images6.alphacoders.com/118/1185678.jpg');"></div><h4>Sonic</h4><p>3D Action</p><div class="new-badge">جديد</div></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/paper-io-2', 'Paper.io 2')"><div class="game-img-3d" style="background-image: url('https://images5.alphacoders.com/133/1338445.png');"></div><h4>Paper.io 2</h4><p>Arcade</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/subway-surfers', 'Subway Surfers')"><div class="game-img-3d" style="background-image: url('https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg');"></div><h4>Subway Surfers</h4><p>Runner</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/temple-run-2', 'Temple Run 2')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/pubg-mobile-squad-4k-8q.jpg');"></div><h4>Temple Run 2</h4><p>Adventure</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/into-space', 'Into Space')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/space-shooter-game-4k-ix.jpg');"></div><h4>Into Space</h4><p>Arcade</p></div>
+        <div class="section-title"><span></span> 🎮 جميع الألعاب</div>
+        
+        <!-- 🔥 صفين متوازيين فقط (هذا هو المطلوب) -->
+        <div class="two-rows-container">
+            <!-- الصف الأول -->
+            <div class="game-row">
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/sonic-the-hedgehog', 'Sonic')">
+                    <div class="game-img-3d" style="background-image: url('https://images6.alphacoders.com/118/1185678.jpg');"></div>
+                    <h4>Sonic</h4>
+                    <p>3D Action</p>
+                    <div class="new-badge">جديد</div>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/paper-io-2', 'Paper.io 2')">
+                    <div class="game-img-3d" style="background-image: url('https://images5.alphacoders.com/133/1338445.png');"></div>
+                    <h4>Paper.io 2</h4>
+                    <p>Arcade</p>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/subway-surfers', 'Subway Surfers')">
+                    <div class="game-img-3d" style="background-image: url('https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg');"></div>
+                    <h4>Subway Surfers</h4>
+                    <p>Runner</p>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/temple-run-2', 'Temple Run 2')">
+                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/pubg-mobile-squad-4k-8q.jpg');"></div>
+                    <h4>Temple Run 2</h4>
+                    <p>Adventure</p>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/minecraft-classic', 'Minecraft')">
+                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/minecraft-creeper-4k-f8.jpg');"></div>
+                    <h4>Minecraft</h4>
+                    <p>Sandbox</p>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/gta-san-andreas', 'GTA')">
+                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/gta-san-andreas-2021-4k-s0.jpg');"></div>
+                    <h4>GTA Style</h4>
+                    <p>Action</p>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/call-of-duty', 'Call of Duty')">
+                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-2020-04-m3.jpg');"></div>
+                    <h4>Call of Duty</h4>
+                    <p>FPS</p>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/free-fire', 'Free Fire')">
+                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/free-fire-2020-game-4k-g6.jpg');"></div>
+                    <h4>Free Fire</h4>
+                    <p>Battle Royale</p>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/hill-climb-racing', 'Hill Climb')">
+                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg');"></div>
+                    <h4>Hill Climb</h4>
+                    <p>Racing</p>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/among-us-online', 'Among Us')">
+                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg');"></div>
+                    <h4>Among Us</h4>
+                    <p>Social</p>
+                </div>
             </div>
-            <div class="scroll-row">
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/stickman-legacy', 'Stickman Legacy')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/stickman-fighter-4k-h8.jpg');"></div><h4>Stickman Legacy</h4><p>Fighting</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/drift-hunters', 'Drift Hunters')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/drift-car-4k-2021-7k.jpg');"></div><h4>Drift Hunters</h4><p>Racing</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/raft-wars', 'Raft Wars')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/raft-battle-4k-2m.jpg');"></div><h4>Raft Wars</h4><p>Shooting</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/fireboy-and-watergirl', 'Fireboy & Watergirl')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/fireboy-and-watergirl-2021-4k-9n.jpg');"></div><h4>Fireboy & Watergirl</h4><p>Puzzle</p></div>
-            </div>
-        </div>
 
-        <!-- قسم 2: ألعاب كلاسيكية وقتال - صفين متوازيين -->
-        <div class="section-title"><span></span> 🔥 ألعاب كلاسيكية | قتال</div>
-        <div class="double-row-scroll">
-            <div class="scroll-row">
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/minecraft-classic', 'Minecraft Classic')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/minecraft-creeper-4k-f8.jpg');"></div><h4>Minecraft Classic</h4><p>Sandbox</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/gta-san-andreas', 'GTA San Andreas')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/gta-san-andreas-2021-4k-s0.jpg');"></div><h4>GTA Style</h4><p>Action</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/call-of-duty', 'Call of Duty')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-2020-04-m3.jpg');"></div><h4>Call of Duty</h4><p>FPS</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/free-fire', 'Free Fire')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/free-fire-2020-game-4k-g6.jpg');"></div><h4>Free Fire</h4><p>Battle Royale</p></div>
-            </div>
-            <div class="scroll-row">
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/street-fighter', 'Street Fighter')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg');"></div><h4>Street Fighter</h4><p>Fighting</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/mortal-kombat', 'Mortal Kombat')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/mortal-kombat-11-4k-2020-45.jpg');"></div><h4>Mortal Kombat</h4><p>Fighting</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/tekken', 'Tekken')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/tekken-7-4k-2s.jpg');"></div><h4>Tekken</h4><p>Fighting</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/boxing-random', 'Boxing Random')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/boxing-game-4k-2021-5t.jpg');"></div><h4>Boxing Random</h4><p>Sports</p></div>
-            </div>
-        </div>
-
-        <!-- قسم 3: سباقات وألغاز - صفين متوازيين -->
-        <div class="section-title"><span></span> ⚡ سباقات | ألغاز</div>
-        <div class="double-row-scroll">
-            <div class="scroll-row">
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/hill-climb-racing', 'Hill Climb Racing')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg');"></div><h4>Hill Climb</h4><p>Racing</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/among-us-online', 'Among Us')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg');"></div><h4>Among Us</h4><p>Social</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/clash-royale', 'Clash Royale')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/clash-royale-4k-2020-3s.jpg');"></div><h4>Clash Royale</h4><p>Strategy</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/gardenscapes', 'Gardenscapes')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/gardenscapes-2020-2021-4k-47.jpg');"></div><h4>Gardenscapes</h4><p>Puzzle</p></div>
-            </div>
-            <div class="scroll-row">
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/racing-limits', 'Racing Limits')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/racing-car-4k-2021-6m.jpg');"></div><h4>Racing Limits</h4><p>Racing</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/candy-jigsaw', 'Candy Jigsaw')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/candy-crush-4k-2021-7p.jpg');"></div><h4>Candy Jigsaw</h4><p>Puzzle</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/bubble-shooter', 'Bubble Shooter')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/bubble-shooter-game-4k-2021-8q.jpg');"></div><h4>Bubble Shooter</h4><p>Puzzle</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/2048', '2048')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/2048-game-4k-2021-9r.jpg');"></div><h4>2048</h4><p>Puzzle</p></div>
-            </div>
-        </div>
-
-        <!-- قسم 4: ألعاب مميزة - صفين متوازيين -->
-        <div class="section-title"><span></span> 💥 ألعاب مميزة</div>
-        <div class="double-row-scroll">
-            <div class="scroll-row">
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/slope', 'Slope')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/slope-game-hd.jpg');"></div><h4>Slope</h4><p>3D Racing</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/get-on-top', 'Get On Top')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/wrestling-game-art-4k-jz.jpg');"></div><h4>Get On Top</h4><p>Fighting</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/shell-shockers', 'Shell Shockers')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/egg-game-4k-v9.jpg');"></div><h4>Shell Shockers</h4><p>Shooting</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/basketball-stars', 'Basketball Stars')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/basketball-4k-2021-6m.jpg');"></div><h4>Basketball Stars</h4><p>Sports</p></div>
-            </div>
-            <div class="scroll-row">
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/uno-online', 'Uno Online')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/uno-card-game-4k-2021-4r.jpg');"></div><h4>Uno Online</h4><p>Cards</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/chess', 'Chess')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/chess-4k-2021-5s.jpg');"></div><h4>Chess</h4><p>Strategy</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/sudoku', 'Sudoku')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/sudoku-game-4k-2021-6t.jpg');"></div><h4>Sudoku</h4><p>Puzzle</p></div>
-                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/word-search', 'Word Search')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/word-search-game-4k-7u.jpg');"></div><h4>Word Search</h4><p>Word</p></div>
+            <!-- الصف الثاني -->
+            <div class="game-row">
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/slope', 'Slope')">
+                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/slope-game-hd.jpg');"></div>
+                    <h4>Slope</h4>
+                    <p>3D Racing</p>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/get-on-top', 'Get On Top')">
+                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/wrestling-game-art-4k-jz.jpg');"></div>
+                    <h4>Get On Top</h4>
+                    <p>Fighting</p>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/shell-shockers', 'Shell Shockers')">
+                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/egg-game-4k-v9.jpg');"></div>
+                    <h4>Shell Shockers</h4>
+                    <p>Shooting</p>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/basketball-stars', 'Basketball Stars')">
+                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/basketball-4k-2021-6m.jpg');"></div>
+                    <h4>Basketball Stars</h4>
+                    <p>Sports</p>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/clash-royale', 'Clash Royale')">
+                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/clash-royale-4k-2020-3s.jpg');"></div>
+                    <h4>Clash Royale</h4>
+                    <p>Strategy</p>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/gardenscapes', 'Gardenscapes')">
+                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/gardenscapes-2020-2021-4k-47.jpg');"></div>
+                    <h4>Gardenscapes</h4>
+                    <p>Puzzle</p>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/street-fighter', 'Street Fighter')">
+                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg');"></div>
+                    <h4>Street Fighter</h4>
+                    <p>Fighting</p>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/mortal-kombat', 'Mortal Kombat')">
+                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/mortal-kombat-11-4k-2020-45.jpg');"></div>
+                    <h4>Mortal Kombat</h4>
+                    <p>Fighting</p>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/tekken', 'Tekken')">
+                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/tekken-7-4k-2s.jpg');"></div>
+                    <h4>Tekken</h4>
+                    <p>Fighting</p>
+                </div>
+                <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/uno-online', 'Uno')">
+                    <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/uno-card-game-4k-2021-4r.jpg');"></div>
+                    <h4>Uno Online</h4>
+                    <p>Cards</p>
+                </div>
             </div>
         </div>
     </div>
