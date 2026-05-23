@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DIDO GAME - Neon Anime Arcade</title>
+    <title>DIDO GAME - PlayStation Style</title>
     <style>
         * {
             margin: 0;
@@ -13,79 +13,113 @@
         }
 
         body {
-            background: radial-gradient(circle at 10% 20%, #0a0a0f, #010005);
+            background: radial-gradient(circle at 30% 10%, #0a0a0f 0%, #020105 100%);
             font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
-            padding: 15px 10px;
+            padding: 15px 12px;
             min-height: 100vh;
         }
 
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
 
-        /* توهج نيون قوي */
-        .neon-glow {
-            text-shadow: 0 0 4px #00ffff, 0 0 7px #00ffff, 0 0 12px #00ffff;
-        }
-        
         .app {
             max-width: 550px;
             margin: 0 auto;
         }
 
-        /* ===== شعار يد تحكم PlayStation جديد ===== */
-        .controller-logo {
-            background: linear-gradient(145deg, #111122, #050510);
-            border-radius: 60px;
+        /* ========== شعار يد تحكم PlayStation حقيقي ========== */
+        .ps-controller {
+            background: linear-gradient(145deg, #1a1a2e, #0f0f1a);
+            border-radius: 80px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 20px #00ffff, 0 0 15px #ff00ff inset;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 6px 20px;
-            margin-bottom: 20px;
-            border: 2px solid #00ffff;
-            box-shadow: 0 0 18px #00ffff, 0 0 25px #ff00ff, inset 0 0 5px #ffffff30;
-            position: relative;
+            gap: 10px;
         }
-        /* أزرار التحكم اليمنى واليسرى */
-        .ctrl-btn {
-            background: #1a1a3a;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
+        /* الجزء الأيسر من يد التحكم */
+        .ctrl-left {
             display: flex;
+            gap: 8px;
             align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: bold;
-            box-shadow: 0 0 10px cyan, inset 0 0 5px white;
-            color: #0ff;
         }
-        .logo-center {
+        .d-pad {
+            display: grid;
+            grid-template-columns: repeat(3, 22px);
+            grid-template-rows: repeat(3, 22px);
+            gap: 2px;
+            background: #2a2a4a;
+            padding: 4px;
+            border-radius: 12px;
+            box-shadow: 0 0 8px cyan;
+        }
+        .d-pad div {
+            background: #3a3a6a;
+            border-radius: 4px;
+        }
+        .d-pad .mid {
+            background: #00ffff;
+            box-shadow: 0 0 6px cyan;
+        }
+        /* العصا اليسرى */
+        .left-stick {
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle at 30% 30%, #444, #111);
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px #00ffff, 0 0 0 5px #ff00ff;
+        }
+        /* الجزء الأوسط (الاسم) */
+        .ctrl-center {
             text-align: center;
         }
-        .logo-center h1 {
-            font-size: 1.9rem;
+        .ctrl-center h1 {
+            font-size: 1.6rem;
             background: linear-gradient(135deg, #00ffff, #ff00ff, #ffff00);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             letter-spacing: 2px;
         }
-        .logo-center p {
-            font-size: 0.6rem;
-            color: #ff77ff;
+        .ctrl-center p {
+            font-size: 0.55rem;
+            color: #ff88ff;
             text-shadow: 0 0 4px magenta;
         }
-        /* عصا التحكم (D-pad) */
-        .ctrl-btn::before {
-            content: "●";
-            font-size: 24px;
-            color: #00ffff;
-            text-shadow: 0 0 5px cyan;
+        /* الجزء الأيمن (الأزرار) */
+        .ctrl-right {
+            display: flex;
+            gap: 8px;
+            align-items: center;
         }
-        .ctrl-btn:last-child::before {
-            content: "▲";
-            font-size: 22px;
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 28px);
+            gap: 6px;
         }
-        /* ============================== */
+        .action-btn {
+            background: #ff00ff;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            box-shadow: 0 0 8px magenta;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .right-stick {
+            width: 35px;
+            height: 35px;
+            background: radial-gradient(circle at 70% 70%, #444, #111);
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px #ff00ff;
+        }
+        /* ===================================== */
 
         /* شريط الموسيقى وترتيب اللاعبين */
         .top-bar {
@@ -180,7 +214,7 @@
             color: #0ff;
         }
 
-        /* ===== شبكة الألعاب (أفقية، من صفين) ===== */
+        /* ===== شبكة الألعاب (أفقية) ===== */
         .games-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -199,11 +233,11 @@
         .anime-header {
             background-size: cover;
             background-position: center;
-            padding: 25px 5px;
+            padding: 30px 5px;
             text-align: center;
             font-weight: bold;
             text-shadow: 0 0 8px black;
-            min-height: 95px;
+            min-height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -211,27 +245,22 @@
             color: white;
             font-size: 1rem;
         }
-        /* صور أنمي حقيقية عالية الجودة */
+        /* صور أنمي حقيقية وواضحة */
         .header-guess { 
-            background-image: linear-gradient(0deg, #000000bb, #1a0033aa), url('https://i.pinimg.com/564x/2a/5f/3e/2a5f3e7f8d4c3b2a1e0f5d6c7b8a9e0f.jpg');
+            background-image: linear-gradient(0deg, #000000bb, #2a0044aa), url('https://i.pinimg.com/236x/6b/2a/4c/6b2a4c8d9e0f1a2b3c4d5e6f7a8b9c0d.jpg');
             background-size: cover;
-            background-position: center;
         }
         .header-memory { 
-            background-image: linear-gradient(0deg, #000000bb, #00331aaa), url('https://i.pinimg.com/564x/5b/6c/7d/5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e.jpg');
+            background-image: linear-gradient(0deg, #000000bb, #00442aaa), url('https://i.pinimg.com/236x/8c/5d/7e/8c5d7e8f9a0b1c2d3e4f5a6b7c8d9e0f.jpg');
             background-size: cover;
-            background-position: center;
         }
         .header-tictac { 
-            background-image: linear-gradient(0deg, #000000bb, #331a00aa), url('https://i.pinimg.com/564x/8a/9b/0c/8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d.jpg');
+            background-image: linear-gradient(0deg, #000000bb, #442a00aa), url('https://i.pinimg.com/236x/2a/5b/6c/2a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d.jpg');
             background-size: cover;
-            background-position: center;
         }
-        /* صور إضافية للعبة الرابعة المضافة */
-        .header-racing {
-            background-image: linear-gradient(0deg, #000000bb, #1a0033aa), url('https://i.pinimg.com/564x/3c/4d/5e/3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f.jpg');
+        .header-extra {
+            background-image: linear-gradient(0deg, #000000bb, #440022aa), url('https://i.pinimg.com/236x/4e/6f/7a/4e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b.jpg');
             background-size: cover;
-            background-position: center;
         }
         .window-body {
             padding: 12px;
@@ -253,7 +282,7 @@
             box-shadow: 0 0 15px cyan;
         }
 
-        /* نافذة اللعبة المنبثقة */
+        /* نافذة اللعبة */
         .modal-game {
             position: fixed;
             top: 0;
@@ -277,7 +306,7 @@
             overflow-y: auto;
             padding: 18px;
             border: 3px solid #00ffff;
-            box-shadow: 0 0 30px #00ffff, 0 0 50px #ff00ff;
+            box-shadow: 0 0 30px #00ffff;
         }
         .close-modal {
             background: #ff00ff;
@@ -291,11 +320,8 @@
             font-size: 0.55rem;
             margin-top: 20px;
             color: #0ff;
-            text-shadow: 0 0 4px cyan;
         }
-        .hidden {
-            display: none;
-        }
+        .hidden { display: none; }
         input {
             background: #1a1a3a;
             border: 2px solid #0ff;
@@ -303,7 +329,6 @@
             border-radius: 40px;
             padding: 8px;
             text-align: center;
-            font-size: 0.9rem;
         }
         .game-message {
             background: #000000aa;
@@ -315,14 +340,29 @@
 </head>
 <body>
 <div class="app">
-    <!-- شعار يد تحكم PlayStation جديد -->
-    <div class="controller-logo">
-        <div class="ctrl-btn"></div>
-        <div class="logo-center">
-            <h1>DIDO GAME</h1>
-            <p>✦ NEON ARCADE ✦</p>
+    <!-- شعار يد تحكم PlayStation حقيقي -->
+    <div class="ps-controller">
+        <div class="ctrl-left">
+            <div class="d-pad">
+                <div></div><div></div><div></div>
+                <div></div><div class="mid"></div><div></div>
+                <div></div><div></div><div></div>
+            </div>
+            <div class="left-stick"></div>
         </div>
-        <div class="ctrl-btn"></div>
+        <div class="ctrl-center">
+            <h1>DIDO GAME</h1>
+            <p>✦ PLAYSTATION STYLE ✦</p>
+        </div>
+        <div class="ctrl-right">
+            <div class="action-buttons">
+                <div class="action-btn">△</div>
+                <div class="action-btn">○</div>
+                <div class="action-btn">✕</div>
+                <div class="action-btn">□</div>
+            </div>
+            <div class="right-stick"></div>
+        </div>
     </div>
 
     <div class="top-bar">
@@ -343,7 +383,7 @@
         <div class="perks" id="perksList">✨ 3 محاولات يومية ✨</div>
     </div>
 
-    <!-- شبكة ألعاب أفقية (2x2) -->
+    <!-- شبكة ألعاب أفقية -->
     <div class="games-grid">
         <div class="game-window-card">
             <div class="anime-header header-guess">🔮 خمن الرقم 🔮</div>
@@ -367,10 +407,10 @@
             </div>
         </div>
         <div class="game-window-card">
-            <div class="anime-header header-racing">🎲 لعبة إضافية 🎲</div>
+            <div class="anime-header header-extra">🎲 قريباً 🎲</div>
             <div class="window-body">
-                <p>مغامرات أنمي جديدة قريباً</p>
-                <button class="launch-btn" data-game="guess">🎲 قدوم</button>
+                <p>مغامرات أنمي جديدة</p>
+                <button class="launch-btn" data-game="guess">🎮 قريباً</button>
             </div>
         </div>
     </div>
@@ -385,7 +425,7 @@
 </div>
 
 <script>
-    // ========== موسيقى مضمونة التشغيل 100% ==========
+    // ========== موسيقى مضمونة التشغيل ==========
     const bgMusic = new Audio('https://www.orangefreesounds.com/wp-content/uploads/2021/02/Retro-game-coin-sound-effect.mp3');
     bgMusic.loop = true;
     bgMusic.volume = 0.25;
@@ -395,39 +435,21 @@
         bgMusic.play().then(() => {
             musicPlaying = true;
             document.getElementById('toggleMusicBtn').innerHTML = '🔇 كتم';
-        }).catch(e => {
-            console.log("التشغيل التلقائي محظور، انتظر التفاعل");
-            musicPlaying = false;
-        });
+        }).catch(e => { console.log("انتظر التفاعل"); });
     }
-    
     function pauseMusic() {
         bgMusic.pause();
         musicPlaying = false;
         document.getElementById('toggleMusicBtn').innerHTML = '🎵 تشغيل';
     }
-    
     document.getElementById('toggleMusicBtn').addEventListener('click', () => {
-        if(musicPlaying) {
-            pauseMusic();
-        } else {
-            playMusic();
-        }
+        musicPlaying ? pauseMusic() : playMusic();
     });
+    // تشغيل عند أول لمسة
+    document.body.addEventListener('touchstart', () => { if(!musicPlaying) playMusic(); }, { once: true });
+    setTimeout(() => { bgMusic.play().catch(()=>{}); }, 500);
     
-    // تشغيل الموسيقى فوراً عند أي تفاعل
-    function startMusicOnTouch() {
-        if(!musicPlaying) playMusic();
-        document.body.removeEventListener('touchstart', startMusicOnTouch);
-        document.body.removeEventListener('click', startMusicOnTouch);
-    }
-    document.body.addEventListener('touchstart', startMusicOnTouch, { once: true });
-    document.body.addEventListener('click', startMusicOnTouch, { once: true });
-    
-    // محاولة تشغيل تلقائي فورية
-    setTimeout(() => { if(!musicPlaying) bgMusic.play().catch(()=>{}); }, 300);
-    
-    // ===== نظام الحسابات =====
+    // ===== الحسابات =====
     let isPremium = false;
     const planSpan = document.getElementById('planType');
     const perksSpan = document.getElementById('perksList');
@@ -446,10 +468,10 @@
         updateLeaderboardDisplay();
     }
     document.getElementById('upgradeBtn').addEventListener('click',()=>{
-        if(confirm("⭐ ترقية إلى الحساب المميز (4.99$)؟ مزايا رائعة!")){
+        if(confirm("⭐ ترقية إلى الحساب المميز (4.99$)؟")){
             isPremium = true;
             updateAccountUI();
-            alert("✨ تم الترقية! أنت الآن عضو مميز ✨");
+            alert("✨ تم الترقية! ✨");
         }
     });
     
@@ -468,8 +490,7 @@
     }
     function recordScore(playerName, gameScore) {
         if(!playerName) playerName = "مقاتل نيون";
-        let effectiveScore = gameScore;
-        if(isPremium) effectiveScore = Math.floor(gameScore * 1.2);
+        let effectiveScore = isPremium ? Math.floor(gameScore * 1.2) : gameScore;
         topPlayers.push({ name: playerName.slice(0,10), score: effectiveScore, isPremiumBonus: isPremium });
         topPlayers.sort((a,b)=>b.score - a.score);
         topPlayers = topPlayers.slice(0,12);
@@ -489,7 +510,7 @@
         }
         let maxAttempts = isPremium ? 5 : 3;
         if(attemptsUsed >= maxAttempts) {
-            alert(`⚠️ لقد استنفذت محاولاتك اليومية (${maxAttempts}/${maxAttempts})، عُد غداً!`);
+            alert(`⚠️ انتهت محاولاتك (${maxAttempts}/${maxAttempts})، عُد غداً!`);
             return false;
         }
         return true;
@@ -504,7 +525,7 @@
         }
         attemptsUsed++;
         localStorage.setItem('dido_attempts_today', attemptsUsed);
-        alert(`✅ تبقى ${(isPremium?5:3)-attemptsUsed} محاولة اليوم`);
+        alert(`✅ تبقى ${(isPremium?5:3)-attemptsUsed} محاولة`);
     }
     
     // ===== فتح الألعاب =====
@@ -527,42 +548,38 @@
     });
     
     // ===== لعبة التخمين =====
-    let secretNumber = Math.floor(Math.random()*100)+1;
-    let guessAttempts = 0;
+    let secret = Math.floor(Math.random()*100)+1, attempts=0;
     function renderGuessGame(container){
-        secretNumber = Math.floor(Math.random()*100)+1;
-        guessAttempts = 0;
+        secret = Math.floor(Math.random()*100)+1; attempts=0;
         container.innerHTML = `
             <h3 style="color:#0ff; text-align:center;">🔮 خمن الرقم 🔮</h3>
             <p style="text-align:center;">بين 1 و 100</p>
             <input type="number" id="guessNum" placeholder="أدخل رقمك" style="width:100%;">
             <button id="guessAction" style="background:#ff00ff; margin:10px 0; width:100%;">خمن!</button>
             <div id="guessMsgGame" class="game-message" style="text-align:center;">✨ ابدأ التخمين ✨</div>
-            <button id="finishGuessBtn" style="background:#00ffff; color:black; width:100%;">🏆 حفظ النتيجة</button>
+            <button id="finishGuessBtn" style="background:#00ffff; width:100%;">🏆 حفظ النتيجة</button>
         `;
         let finished = false;
         document.getElementById('guessAction').onclick = () => {
             if(finished) return;
             let val = parseInt(document.getElementById('guessNum').value);
             let msg = document.getElementById('guessMsgGame');
-            if(isNaN(val)){ msg.innerText = "أدخل رقماً صحيحاً!"; return; }
-            guessAttempts++;
-            if(val === secretNumber){
-                msg.innerHTML = `🎉 فوز! الرقم ${secretNumber} بعد ${guessAttempts} محاولات 🎉`;
+            if(isNaN(val)){ msg.innerText = "أدخل رقماً!"; return; }
+            attempts++;
+            if(val === secret){
+                msg.innerHTML = `🎉 فوز! الرقم ${secret} بعد ${attempts} محاولات 🎉`;
                 finished = true;
                 consumeAttempt();
-                recordScore("خمن نيون", Math.max(100 - (guessAttempts*2), 10));
+                recordScore("خمن نيون", Math.max(100 - (attempts*2), 10));
                 setTimeout(()=>closeModal(),1500);
-            } else if(val < secretNumber) msg.innerText = `⬆️ أكبر من ${val} | محاولة ${guessAttempts}`;
-            else msg.innerText = `⬇️ أصغر من ${val} | محاولة ${guessAttempts}`;
+            } else if(val < secret) msg.innerText = `⬆️ أكبر من ${val} | محاولة ${attempts}`;
+            else msg.innerText = `⬇️ أصغر من ${val} | محاولة ${attempts}`;
             document.getElementById('guessNum').value = '';
         };
         document.getElementById('finishGuessBtn').onclick = () => {
             if(!finished){
                 if(confirm("إنهاء بدون فوز؟")){
-                    consumeAttempt();
-                    recordScore("مغامر", 10);
-                    closeModal();
+                    consumeAttempt(); recordScore("مغامر", 10); closeModal();
                 }
             } else closeModal();
         };
@@ -578,13 +595,13 @@
         function renderBoard(){
             let html = `<div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;">`;
             for(let i=0;i<memCards.length;i++){
-                let content = '', bg='#aa55ff';
+                let content='', bg='#aa55ff';
                 if(memMatched[i]) { content='✓'; bg='#00ffcc';}
                 else if(memFlipped[i]) { content=memCards[i]; bg='#ff66ff';}
                 else { content='?'; bg='#9a4eff';}
                 html += `<div data-idx="${i}" style="background:${bg}; aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:1.4rem; border-radius:18px;">${content}</div>`;
             }
-            html += `</div><div id="memMsgModal" style="margin:10px 0; text-align:center;">💜 اقلب بطاقتين متطابقتين</div><button id="memFinishBtn" style="background:#ffff00; color:black; width:100%;">🏆 حفظ النتيجة</button>`;
+            html += `</div><div id="memMsgModal" style="margin:10px 0; text-align:center;">💜 اقلب بطاقتين</div><button id="memFinishBtn" style="background:#ffff00; width:100%;">🏆 حفظ النتيجة</button>`;
             container.innerHTML = html;
             document.querySelectorAll('[data-idx]').forEach(el=>{
                 el.addEventListener('click',()=>{
@@ -599,7 +616,7 @@
                             memMatched[memFirst]=true; memMatched[idx]=true;
                             memFlipped[memFirst]=false; memFlipped[idx]=false;
                             memFirst=null; memLock=false; renderBoard();
-                            if(memMatched.every(v=>v===true)) document.getElementById('memMsgModal').innerText='🏆 أكملت اللعبة! سجل نتيجتك.';
+                            if(memMatched.every(v=>v===true)) document.getElementById('memMsgModal').innerText='🏆 أكملت!';
                         } else {
                             setTimeout(()=>{
                                 memFlipped[memFirst]=false; memFlipped[idx]=false;
@@ -611,9 +628,8 @@
             });
             document.getElementById('memFinishBtn').onclick = ()=>{
                 let matchedCount = memMatched.filter(v=>v===true).length;
-                let score = matchedCount * 5;
                 consumeAttempt();
-                recordScore("ذاكرة نيون", score);
+                recordScore("ذاكرة نيون", matchedCount*5);
                 closeModal();
             };
         }
@@ -625,11 +641,11 @@
     function renderTicTacGame(container){
         ticBoard=['','','','','','','','','']; ticTurn='X'; ticOver=false;
         function renderTic(){
-            let html = `<h3 style="color:#ff00ff; text-align:center;">⚔️ تيك تاك تو ⚔️ دور: ${ticTurn}</h3><div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; width:220px; margin:0 auto;">`;
+            let html = `<h3 style="color:#ff00ff; text-align:center;">⚔️ X & O ⚔️ دور: ${ticTurn}</h3><div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; width:220px; margin:0 auto;">`;
             for(let i=0;i<9;i++){
-                html += `<div data-tidx="${i}" style="background:#b84eff; aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:2.2rem; border-radius:25px;">${ticBoard[i]}</div>`;
+                html += `<div data-tidx="${i}" style="background:#b84eff; aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:2rem; border-radius:25px;">${ticBoard[i]}</div>`;
             }
-            html += `</div><div id="ticMsgModal" style="margin:10px; text-align:center;"></div><button id="finishTicBtn" style="background:#00ffcc; color:black; width:100%;">🏆 حفظ النتيجة</button>`;
+            html += `</div><div id="ticMsgModal" style="margin:10px; text-align:center;"></div><button id="finishTicBtn" style="background:#00ffcc; width:100%;">🏆 حفظ النتيجة</button>`;
             container.innerHTML = html;
             document.querySelectorAll('[data-tidx]').forEach(cell=>{
                 cell.addEventListener('click',()=>{
@@ -640,29 +656,21 @@
                     let win = checkWin(ticBoard);
                     if(win){
                         document.getElementById('ticMsgModal').innerHTML=`🏆 الفائز: ${win} 🏆`;
-                        ticOver=true;
-                        renderTic();
-                        return;
+                        ticOver=true; renderTic(); return;
                     }
                     if(ticBoard.every(v=>v!=='')){
                         document.getElementById('ticMsgModal').innerHTML='🤝 تعادل!';
-                        ticOver=true;
-                        renderTic();
-                        return;
+                        ticOver=true; renderTic(); return;
                     }
                     ticTurn = (ticTurn==='X')?'O':'X';
                     renderTic();
                 });
             });
             document.getElementById('finishTicBtn').onclick = ()=>{
-                let winnerPoints = 0;
                 let winRes = checkWin(ticBoard);
-                if(winRes==='X') winnerPoints=50;
-                else if(winRes==='O') winnerPoints=50;
-                else if(ticBoard.every(v=>v!=='')) winnerPoints=20;
-                else winnerPoints=5;
+                let points = winRes ? 50 : (ticBoard.every(v=>v!=='') ? 20 : 5);
                 consumeAttempt();
-                recordScore("مقاتل نيون", winnerPoints);
+                recordScore("مقاتل نيون", points);
                 closeModal();
             };
         }
