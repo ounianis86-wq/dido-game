@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DIDO GAME - Anime Neon Arcade</title>
+    <title>DIDO GAME - PS3 Controller Style</title>
     <style>
         * {
             margin: 0;
@@ -27,102 +27,216 @@
         }
 
         /* ============================================
-           شعار يد تحكم PlayStation
+           شعار يد تحكم PlayStation 3 - بتفاصيل دقيقة
            ============================================ */
-        .controller {
+        .ps3-controller {
             background: linear-gradient(145deg, #1a1a2e, #0a0a1a);
-            border-radius: 70px;
-            padding: 12px 16px;
+            border-radius: 80px 80px 70px 70px;
+            padding: 15px 20px;
             margin-bottom: 20px;
             border: 2px solid #00ffff;
-            box-shadow: 0 0 20px #00ffff, 0 0 10px #ff00ff inset;
+            box-shadow: 0 0 20px #00ffff, 0 0 10px #ff00ff inset, 0 10px 20px rgba(0,0,0,0.5);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 10px;
+            gap: 8px;
+            position: relative;
         }
-
-        .left-grip {
+        
+        /* الجسم المقوس ليد PS3 */
+        .ps3-controller::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 10%;
+            width: 80%;
+            height: 16px;
+            background: linear-gradient(90deg, #00ffff, #ff00ff);
+            border-radius: 20px;
+            opacity: 0.6;
+        }
+        
+        /* القسم الأيسر (D-Pad + عصا PS3) */
+        .left-section {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             align-items: center;
         }
-        .dpad {
-            display: grid;
-            grid-template-columns: repeat(3, 20px);
-            grid-template-rows: repeat(3, 20px);
-            gap: 2px;
+        
+        /* D-Pad على شكل صليب PS3 */
+        .ps3-dpad {
+            width: 55px;
+            height: 55px;
             background: #2a2a4a;
-            padding: 4px;
-            border-radius: 12px;
-            box-shadow: 0 0 6px cyan;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 8px cyan, inset 0 0 5px rgba(255,255,255,0.3);
+            position: relative;
         }
-        .dpad div {
-            background: #3a3a6a;
-            border-radius: 3px;
+        
+        .ps3-dpad::before {
+            content: '▲';
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00ffff;
+            font-size: 14px;
+            text-shadow: 0 0 5px cyan;
         }
-        .dpad .center {
-            background: #00ffff;
-            box-shadow: 0 0 4px cyan;
+        
+        .ps3-dpad::after {
+            content: '▼';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00ffff;
+            font-size: 14px;
+            text-shadow: 0 0 5px cyan;
         }
-        .left-stick {
-            width: 38px;
-            height: 38px;
-            background: radial-gradient(circle at 35% 35%, #555, #111);
+        
+        .dpad-left {
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00ffff;
+            font-size: 14px;
+            text-shadow: 0 0 5px cyan;
+        }
+        
+        .dpad-right {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00ffff;
+            font-size: 14px;
+            text-shadow: 0 0 5px cyan;
+        }
+        
+        /* عصا التحكم اليسرى (مميزة PS3) */
+        .ps3-left-stick {
+            width: 42px;
+            height: 42px;
+            background: radial-gradient(circle at 35% 35%, #666, #1a1a2a);
             border-radius: 50%;
-            box-shadow: 0 0 0 2px #00ffff, 0 0 0 4px #ff00ff;
+            box-shadow: 0 0 0 3px #00ffff, 0 0 0 5px #ff00ff55;
+            position: relative;
         }
-
+        
+        .ps3-left-stick::before {
+            content: '⚫';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            opacity: 0.5;
+        }
+        
+        /* القسم الأوسط (الاسم) */
         .center-brand {
             text-align: center;
+            flex: 1;
         }
+        
         .center-brand h1 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             background: linear-gradient(135deg, #00ffff, #ff00ff, #ffff00);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            font-weight: 800;
         }
+        
         .center-brand p {
-            font-size: 0.5rem;
+            font-size: 0.55rem;
             color: #ff88ff;
             text-shadow: 0 0 4px magenta;
+            letter-spacing: 1px;
         }
-
-        .right-grip {
+        
+        /* القسم الأيمن (أزرار PS3 + عصا) */
+        .right-section {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             align-items: center;
         }
-        .ps-buttons {
+        
+        /* أزرار PlayStation 3 المميزة */
+        .ps3-buttons {
             display: grid;
-            grid-template-columns: repeat(2, 26px);
-            gap: 5px;
+            grid-template-columns: repeat(2, 32px);
+            gap: 6px;
         }
-        .ps-btn {
-            background: #ff00ff;
-            width: 26px;
-            height: 26px;
+        
+        .ps3-btn {
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 14px;
             color: white;
-            box-shadow: 0 0 6px magenta;
+            text-shadow: 0 0 5px black;
+            box-shadow: 0 0 8px magenta;
         }
-        .right-stick {
-            width: 34px;
-            height: 34px;
-            background: radial-gradient(circle at 65% 65%, #555, #111);
+        
+        /* ألوان أزرار PS3 الأصلية */
+        .ps3-btn:nth-child(1) { background: #ff3366; } /* 🔴 */
+        .ps3-btn:nth-child(2) { background: #ff66cc; } /* 🩷 */
+        .ps3-btn:nth-child(3) { background: #ffcc33; } /* 🟡 */
+        .ps3-btn:nth-child(4) { background: #33cc66; } /* 🟢 */
+        
+        /* عصا التحكم اليمنى */
+        .ps3-right-stick {
+            width: 42px;
+            height: 42px;
+            background: radial-gradient(circle at 65% 65%, #666, #1a1a2a);
             border-radius: 50%;
-            box-shadow: 0 0 0 2px #ff00ff;
+            box-shadow: 0 0 0 3px #ff00ff, 0 0 0 5px #00ffff55;
+            position: relative;
         }
-
+        
+        .ps3-right-stick::before {
+            content: '⚫';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            opacity: 0.5;
+        }
+        
+        /* زر PS الموجود في المنتصف */
+        .ps-button {
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff00ff;
+            width: 30px;
+            height: 15px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px magenta;
+            font-size: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
         /* ============================================ */
         
+        /* باقي التصميم كما هو مع ألوان نيون محسنة */
         .top-bar {
             background: #0a0a1ccc;
             backdrop-filter: blur(12px);
@@ -137,6 +251,7 @@
             border: 1px solid #ffff00;
             box-shadow: 0 0 12px #ffff00;
         }
+        
         .music-control {
             background: #ff00ff30;
             border-radius: 40px;
@@ -146,6 +261,7 @@
             gap: 10px;
             border: 1px solid #ff00ff;
         }
+        
         .music-control button {
             background: #ff00ff;
             border: none;
@@ -157,6 +273,7 @@
             cursor: pointer;
             font-size: 0.75rem;
         }
+        
         .leaderboard {
             background: #00ffff30;
             border-radius: 40px;
@@ -165,11 +282,12 @@
             border: 1px solid #0ff;
             text-shadow: 0 0 4px cyan;
         }
+        
         .leaderboard span {
             color: #ffff00;
             font-weight: bold;
         }
-
+        
         .account-section {
             background: #0a0a2a;
             border-radius: 40px;
@@ -178,6 +296,7 @@
             border: 2px solid #ff00ff;
             box-shadow: 0 0 18px #ff00ff;
         }
+        
         .account-badge {
             display: flex;
             justify-content: space-between;
@@ -185,6 +304,7 @@
             flex-wrap: wrap;
             gap: 8px;
         }
+        
         .plan {
             background: #1a1a4a;
             border-radius: 40px;
@@ -193,6 +313,7 @@
             font-size: 0.8rem;
             border: 1px solid #0ff;
         }
+        
         button {
             background: #ff00ff;
             border: none;
@@ -205,16 +326,18 @@
             transition: 0.05s linear;
             font-size: 0.75rem;
         }
+        
         button:active {
             transform: scale(0.96);
         }
+        
         .perks {
             font-size: 0.6rem;
             margin-top: 6px;
             color: #0ff;
         }
-
-        /* ===== شبكة الألعاب مع صور أنمي حقيقية ===== */
+        
+        /* شبكة الألعاب */
         .games-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -232,7 +355,6 @@
             transition: 0.1s;
         }
         
-        /* صور أنمي حقيقية - كل بطاقة لها صورة مختلفة */
         .anime-banner {
             background-size: cover;
             background-position: center;
@@ -246,7 +368,6 @@
             position: relative;
         }
         
-        /* طبقة شفافة فوق الصورة لتظهر النصوص بشكل واضح */
         .anime-banner::before {
             content: '';
             position: absolute;
@@ -267,7 +388,7 @@
         }
         
         .anime-banner span:first-child {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             background: rgba(0,0,0,0.6);
             padding: 4px 12px;
             border-radius: 30px;
@@ -276,42 +397,40 @@
         }
         
         .anime-banner span:last-child {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             background: rgba(0,0,0,0.6);
             padding: 3px 12px;
             border-radius: 30px;
         }
         
-        /* صور أنمي حقيقية لكل لعبة */
+        /* صور أنمي */
         .game-card:nth-child(1) .anime-banner {
             background-image: url('https://wallpapercave.com/wp/wp6134065.jpg');
             background-size: cover;
-            background-position: center;
         }
         .game-card:nth-child(2) .anime-banner {
             background-image: url('https://wallpapercave.com/wp/wp8956810.jpg');
             background-size: cover;
-            background-position: center;
         }
         .game-card:nth-child(3) .anime-banner {
             background-image: url('https://wallpapercave.com/wp/wp6607500.jpg');
             background-size: cover;
-            background-position: center;
         }
         .game-card:nth-child(4) .anime-banner {
             background-image: url('https://wallpapercave.com/wp/wp5423231.jpg');
             background-size: cover;
-            background-position: center;
         }
         
         .game-info {
             padding: 12px;
         }
+        
         .game-info p {
             font-size: 0.65rem;
             margin-bottom: 8px;
             color: #ccddff;
         }
+        
         .play-btn {
             width: 100%;
             background: linear-gradient(90deg, #00ffff, #ff00ff);
@@ -326,7 +445,7 @@
             text-align: center;
             cursor: pointer;
         }
-
+        
         /* نافذة اللعبة */
         .modal-game {
             position: fixed;
@@ -342,6 +461,7 @@
             justify-content: center;
             padding: 12px;
         }
+        
         .modal-content {
             background: #0a0a2a;
             border-radius: 40px;
@@ -353,6 +473,7 @@
             border: 3px solid #00ffff;
             box-shadow: 0 0 30px #00ffff;
         }
+        
         .close-modal {
             background: #ff00ff;
             float: right;
@@ -362,13 +483,16 @@
             border-radius: 40px;
             cursor: pointer;
         }
+        
         footer {
             text-align: center;
             font-size: 0.55rem;
             margin-top: 20px;
             color: #0ff;
         }
+        
         .hidden { display: none; }
+        
         input {
             background: #1a1a3a;
             border: 2px solid #0ff;
@@ -378,6 +502,7 @@
             text-align: center;
             width: 100%;
         }
+        
         .game-message {
             background: #000000aa;
             border-radius: 30px;
@@ -389,34 +514,34 @@
 </head>
 <body>
 <div class="app">
-    <!-- شعار يد تحكم PlayStation -->
-    <div class="controller">
-        <div class="left-grip">
-            <div class="dpad">
-                <div></div><div></div><div></div>
-                <div></div><div class="center"></div><div></div>
-                <div></div><div></div><div></div>
+    <!-- شعار يد تحكم PlayStation 3 -->
+    <div class="ps3-controller">
+        <div class="left-section">
+            <div class="ps3-dpad">
+                <span class="dpad-left">◀</span>
+                <span class="dpad-right">▶</span>
             </div>
-            <div class="left-stick"></div>
+            <div class="ps3-left-stick"></div>
         </div>
         <div class="center-brand">
             <h1>DIDO GAME</h1>
-            <p>✦ ANIME NEON ARCADE ✦</p>
+            <p>✦ PS3 NEON STYLE ✦</p>
         </div>
-        <div class="right-grip">
-            <div class="ps-buttons">
-                <div class="ps-btn">△</div>
-                <div class="ps-btn">○</div>
-                <div class="ps-btn">✕</div>
-                <div class="ps-btn">□</div>
+        <div class="right-section">
+            <div class="ps3-buttons">
+                <div class="ps3-btn">●</div>
+                <div class="ps3-btn">♥</div>
+                <div class="ps3-btn">◆</div>
+                <div class="ps3-btn">■</div>
             </div>
-            <div class="right-stick"></div>
+            <div class="ps3-right-stick"></div>
         </div>
+        <div class="ps-button">PS</div>
     </div>
 
     <div class="top-bar">
         <div class="music-control">
-            <span>🎵 ANIME BEATS</span>
+            <span>🎵 PS3 BEATS</span>
             <button id="toggleMusicBtn">▶ تشغيل</button>
         </div>
         <div class="leaderboard" id="leaderboardDisplay">
@@ -432,7 +557,7 @@
         <div class="perks" id="perksList">✨ 3 محاولات يومية ✨</div>
     </div>
 
-    <!-- شبكة ألعاب مع صور أنمي حقيقية -->
+    <!-- شبكة الألعاب -->
     <div class="games-grid">
         <div class="game-card">
             <div class="anime-banner">
