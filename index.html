@@ -153,7 +153,7 @@
             font-weight: bold;
         }
 
-        /* ترتيب اللاعبين - ثلاث دوائر ذهبي فضي برونزي */
+        /* ترتيب اللاعبين - ثلاث دوائر منفصلة */
         .ranking-section {
             background: #1a1a3a80;
             border-radius: 20px;
@@ -173,44 +173,67 @@
             gap: 8px;
         }
         
-        .ranking-circles {
+        .ranking-container {
             display: flex;
             justify-content: center;
-            align-items: flex-end;
-            gap: 25px;
+            align-items: center;
+            gap: 20px;
             flex-wrap: wrap;
         }
         
-        .rank-circle {
+        /* دائرة فضية (يسار) */
+        .rank-circle-silver {
             text-align: center;
+            order: 1;
         }
-        
-        .circle-img {
-            width: 70px;
-            height: 70px;
+        .silver-circle {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2.5rem;
             margin-bottom: 8px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.3);
-        }
-        
-        .gold-circle {
-            background: linear-gradient(145deg, #ffd700, #ffaa00);
-            border: 2px solid #ffd700;
-            box-shadow: 0 0 20px #ffd700;
-        }
-        
-        .silver-circle {
-            background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
             border: 2px solid #c0c0c0;
             box-shadow: 0 0 15px #c0c0c0;
         }
         
+        /* دائرة ذهبية (وسط - أكبر) */
+        .rank-circle-gold {
+            text-align: center;
+            order: 2;
+        }
+        .gold-circle {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(145deg, #ffd700, #ffaa00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.2rem;
+            margin-bottom: 8px;
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 25px #ffd700;
+        }
+        
+        /* دائرة برونزية (يمين) */
+        .rank-circle-bronze {
+            text-align: center;
+            order: 3;
+        }
         .bronze-circle {
+            width: 80px;
+            height: 80px;
             background: linear-gradient(145deg, #cd7f32, #b8651a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 8px;
             border: 2px solid #cd7f32;
             box-shadow: 0 0 15px #cd7f32;
         }
@@ -228,8 +251,8 @@
         }
         
         .crown-icon {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
+            font-size: 1rem;
+            margin-bottom: 3px;
         }
 
         /* Categories */
@@ -434,7 +457,7 @@
             
             <div class="ranking-section">
                 <div class="section-title">🏆 أفضل اللاعبين 🏆</div>
-                <div class="ranking-circles" id="rankingList"></div>
+                <div class="ranking-container" id="rankingList"></div>
             </div>
             
             <div class="section-title">🎮 أنواع الألعاب</div>
@@ -492,28 +515,45 @@
     let adTimeout = null;
     let pendingGameCallback = null;
     
-    // ترتيب اللاعبين - ثلاث دوائر (ذهبي، فضي، برونزي)
+    // ترتيب اللاعبين - ثلاث دوائر منفصلة (ذهبي في الوسط، فضي يسار، برونزي يمين)
     function updateRanking() {
         const sorted = [...gamesData].sort((a,b)=>b.points - a.points);
-        const top3 = sorted.slice(0, 3);
-        
-        const medals = [
-            { class: "gold-circle", icon: "👑", label: "الذهبي" },
-            { class: "silver-circle", icon: "🥈", label: "الفضي" },
-            { class: "bronze-circle", icon: "🥉", label: "البرونزي" }
-        ];
+        const gold = sorted[0];
+        const silver = sorted[1];
+        const bronze = sorted[2];
         
         const rankingContainer = document.getElementById('rankingList');
-        rankingContainer.innerHTML = top3.map((player, idx) => `
-            <div class="rank-circle">
-                <div class="crown-icon">${medals[idx].icon}</div>
-                <div class="circle-img ${medals[idx].class}">
-                    ${player.avatar}
+        rankingContainer.innerHTML = `
+            <!-- الفضي (يسار) -->
+            <div class="rank-circle-silver">
+                <div class="crown-icon">🥈</div>
+                <div class="silver-circle">
+                    ${silver ? silver.avatar : '👤'}
                 </div>
-                <div class="rank-name">${player.playerName}</div>
-                <div class="rank-points">⭐ ${player.points} نقطة</div>
+                <div class="rank-name">${silver ? silver.playerName : '---'}</div>
+                <div class="rank-points">⭐ ${silver ? silver.points : 0} نقطة</div>
             </div>
-        `).join('');
+            
+            <!-- الذهبي (وسط - أكبر) -->
+            <div class="rank-circle-gold">
+                <div class="crown-icon">👑</div>
+                <div class="gold-circle">
+                    ${gold ? gold.avatar : '👤'}
+                </div>
+                <div class="rank-name">${gold ? gold.playerName : '---'}</div>
+                <div class="rank-points">⭐ ${gold ? gold.points : 0} نقطة</div>
+            </div>
+            
+            <!-- البرونزي (يمين) -->
+            <div class="rank-circle-bronze">
+                <div class="crown-icon">🥉</div>
+                <div class="bronze-circle">
+                    ${bronze ? bronze.avatar : '👤'}
+                </div>
+                <div class="rank-name">${bronze ? bronze.playerName : '---'}</div>
+                <div class="rank-points">⭐ ${bronze ? bronze.points : 0} نقطة</div>
+            </div>
+        `;
     }
     
     // عرض جميع الألعاب في الصفحة الرئيسية (صفين)
