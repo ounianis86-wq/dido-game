@@ -370,6 +370,80 @@
             border: 1px solid #0ff;
         }
 
+        /* ========== لوحة إعدادات الأمان ========== */
+        .security-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .security-card {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 30px;
+            padding: 25px;
+            width: 85%;
+            max-width: 350px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 50px #ff44ff;
+            text-align: center;
+        }
+        
+        .security-card h2 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .security-card p {
+            color: #aaa;
+            font-size: 0.7rem;
+            margin-bottom: 20px;
+        }
+        
+        .security-input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 25px;
+            border: 1px solid #ff44ff;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .security-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .security-hint {
+            color: #ffaa88;
+            font-size: 0.6rem;
+            margin-top: 15px;
+        }
+
         /* ========== صفحة الدردشة - تصميم الماسنجر ========== */
         .chat-page {
             position: fixed;
@@ -378,7 +452,7 @@
             width: 100%;
             height: 100%;
             background: #0a0a1a;
-            z-index: 1000;
+            z-index: 900;
             display: flex;
             flex-direction: column;
             animation: slideUp 0.3s ease;
@@ -746,51 +820,63 @@
     </div>
 </div>
 
-<!-- صفحة الدردشة -->
+<!-- لوحة إعدادات الأمان -->
+<div id="securityPanel" class="security-panel">
+    <div class="security-card">
+        <h2>🔐 إعدادات الأمان</h2>
+        <p>أدخل بياناتك للدخول إلى الدردشة</p>
+        <input type="text" id="securityUsername" class="security-input" placeholder="👤 اسم المستخدم" value="أحمد">
+        <input type="password" id="securityRoomPassword" class="security-input" placeholder="🔒 كلمة مرور الغرفة (اختياري)">
+        <input type="text" id="securityRoomName" class="security-input" placeholder="🏠 اسم الغرفة" value="الغرفة الرئيسية">
+        <button class="security-btn" onclick="submitSecurityAndEnter()">🚪 دخول إلى الدردشة</button>
+        <div class="security-hint">💡 يمكنك إنشاء غرفة جديدة أو الانضمام إلى غرفة موجودة</div>
+    </div>
+</div>
+
+<!-- صفحة الدردشة - تصميم الماسنجر -->
 <div id="chatPage" class="chat-page hidden">
     <div class="chat-header">
         <button class="back-chat-btn" id="closeChatBtn">✕</button>
         <div class="chat-header-title">
             <h3>💬 دردشة DidoGame</h3>
-            <p id="chatStatusText">⚪ غير متصل</p>
+            <p id="chatStatusText">🟢 متصل</p>
         </div>
     </div>
     
     <div class="messenger-layout">
+        <!-- الشريط الجانبي -->
         <div class="chat-sidebar">
             <div class="sidebar-section">
                 <div class="sidebar-title">👤 حسابي</div>
-                <input type="text" id="chatUserName" class="room-input" placeholder="اسم المستخدم" style="width:100%; margin-bottom:8px;">
-                <button class="small-btn" onclick="setChatUsername()" style="width:100%;">✅ تعيين الاسم</button>
+                <div style="background:rgba(255,68,255,0.2); padding:8px; border-radius:15px; margin-bottom:5px;">
+                    <span id="displayUsername" style="color:#fff; font-size:0.8rem;">👤 </span>
+                </div>
             </div>
             
             <div class="sidebar-section">
-                <div class="sidebar-title">📁 الغرف</div>
+                <div class="sidebar-title">📁 الغرف المتاحة</div>
                 <div class="rooms-list" id="roomsList"></div>
                 <div class="room-controls">
-                    <input type="text" id="newRoomName" class="room-input" placeholder="اسم الغرفة">
-                    <input type="password" id="newRoomPass" class="room-input" placeholder="كلمة المرور">
-                </div>
-                <div class="room-controls">
+                    <input type="text" id="newRoomName" class="room-input" placeholder="اسم غرفة جديدة">
                     <button class="small-btn" onclick="createNewRoom()" style="flex:1;">✨ إنشاء</button>
-                    <button class="small-btn" onclick="joinSelectedRoom()" style="flex:1;">🚪 دخول</button>
                 </div>
             </div>
             
             <div class="sidebar-section">
-                <div class="sidebar-title">👥 الأعضاء</div>
+                <div class="sidebar-title">👥 أعضاء الغرفة</div>
                 <div class="users-list" id="usersList"></div>
             </div>
         </div>
         
+        <!-- منطقة المحادثة الرئيسية -->
         <div class="chat-main">
             <div class="chat-room-header">
-                <span class="current-room-name" id="currentRoomName">⚪ لا توجد غرفة</span>
+                <span class="current-room-name" id="currentRoomName">⚪ اختر غرفة</span>
                 <span id="micStatus">🎤</span>
             </div>
             
             <div class="messages-area" id="messagesArea">
-                <div style="color:#888; text-align:center; padding:20px;">✨ اختر غرفة وابدأ المحادثة</div>
+                <div style="color:#888; text-align:center; padding:20px;">✨ اختر غرفة من القائمة لبدء المحادثة</div>
             </div>
             
             <div class="chat-input-area">
@@ -830,6 +916,8 @@
     let bgMusic = null;
     let isMusicPlaying = false;
     let privateTarget = null;
+    let securityRoomPassword = "";
+    let securityRoomName = "";
     
     // ==================== الألعاب ====================
     function updateRanking() {
@@ -920,7 +1008,7 @@
             return;
         }
         container.innerHTML = rooms.map(room => `
-            <div class="room-item ${currentRoomId === room ? 'active' : ''}" onclick="selectRoom('${room}')">
+            <div class="room-item ${currentRoomId === room ? 'active' : ''}" onclick="selectAndJoinRoom('${room}')">
                 <span class="room-name">${room}</span>
                 <span>${allRooms[room].password ? '🔒' : '🔓'}</span>
             </div>
@@ -930,10 +1018,14 @@
     function updateUsersList() {
         const container = document.getElementById('usersList');
         if(!currentRoomId || !allRooms[currentRoomId]) {
-            container.innerHTML = '<div style="color:#888; text-align:center;">ادخل غرفة أولاً</div>';
+            container.innerHTML = '<div style="color:#888; text-align:center;">اختر غرفة أولاً</div>';
             return;
         }
         const users = allRooms[currentRoomId].users || [];
+        if(users.length === 0) {
+            container.innerHTML = '<div style="color:#888; text-align:center;">لا يوجد أعضاء</div>';
+            return;
+        }
         container.innerHTML = users.map(user => `
             <div class="user-item" onclick="setPrivateTarget('${user}')">
                 <div class="user-avatar">${user.charAt(0)}</div>
@@ -946,84 +1038,64 @@
     function setPrivateTarget(username) {
         if(username === currentUser) return;
         privateTarget = username;
-        document.getElementById('messageInput').placeholder = `رسالة خاصة إلى ${username}...`;
+        document.getElementById('messageInput').placeholder = `🔒 رسالة خاصة إلى ${username}...`;
+        setTimeout(() => {
+            document.getElementById('messageInput').focus();
+        }, 100);
     }
     
-    function selectRoom(roomName) {
-        document.getElementById('newRoomName').value = roomName;
-        joinSelectedRoom();
+    function selectAndJoinRoom(roomName) {
+        const room = allRooms[roomName];
+        if(!room) return;
+        if(room.password && room.password !== securityRoomPassword) {
+            alert("❌ كلمة مرور الغرفة غير صحيحة!");
+            return;
+        }
+        joinRoom(roomName);
     }
     
-    function setChatUsername() {
-        const name = document.getElementById('chatUserName').value.trim();
-        if(!name) { alert("❌ أدخل اسم المستخدم"); return; }
-        currentUser = name;
-        localStorage.setItem('didogame_username', currentUser);
-        alert(`✅ مرحباً ${currentUser}`);
+    function joinRoom(roomName) {
+        if(!currentUser) return;
+        const room = allRooms[roomName];
+        if(!room) return;
+        
+        if(!room.users.includes(currentUser)) {
+            room.users.push(currentUser);
+            saveRooms();
+        }
+        currentRoomId = roomName;
+        updateRoomsList();
         updateUsersList();
+        displayMessages();
+        document.getElementById('currentRoomName').innerHTML = `🔐 ${currentRoomId}`;
+        document.getElementById('chatStatusText').innerHTML = `🟢 متصل في ${currentRoomId}`;
+        document.getElementById('messagesArea').scrollTop = document.getElementById('messagesArea').scrollHeight;
     }
     
     function createNewRoom() {
-        if(!currentUser) { alert("⚠️ حدد اسم المستخدم أولاً"); return; }
+        if(!currentUser) return;
         const roomName = document.getElementById('newRoomName').value.trim();
-        const password = document.getElementById('newRoomPass').value;
         if(!roomName) { alert("أدخل اسم الغرفة"); return; }
         if(allRooms[roomName]) { alert("الغرفة موجودة"); return; }
+        
         allRooms[roomName] = {
-            password: password || null,
+            password: securityRoomPassword || null,
             users: [currentUser],
             messages: []
         };
         saveRooms();
         updateRoomsList();
         currentRoomId = roomName;
-        enterRoom();
-    }
-    
-    function joinSelectedRoom() {
-        if(!currentUser) { alert("⚠️ حدد اسم المستخدم أولاً"); return; }
-        const roomName = document.getElementById('newRoomName').value.trim();
-        const password = document.getElementById('newRoomPass').value;
-        const room = allRooms[roomName];
-        if(!room) { alert("الغرفة غير موجودة"); return; }
-        if(room.password && room.password !== password) { alert("كلمة مرور خاطئة"); return; }
-        if(!room.users.includes(currentUser)) room.users.push(currentUser);
-        currentRoomId = roomName;
-        saveRooms();
-        enterRoom();
-    }
-    
-    function enterRoom() {
-        updateRoomsList();
         updateUsersList();
         displayMessages();
         document.getElementById('currentRoomName').innerHTML = `🔐 ${currentRoomId}`;
-        document.getElementById('chatStatusText').innerHTML = `🟢 متصل في ${currentRoomId}`;
-        startMicrophone();
-    }
-    
-    function leaveCurrentRoom() {
-        if(currentRoomId && allRooms[currentRoomId]) {
-            allRooms[currentRoomId].users = allRooms[currentRoomId].users.filter(u => u !== currentUser);
-            saveRooms();
-        }
-        if(audioStream) {
-            audioStream.getTracks().forEach(t => t.stop());
-            audioStream = null;
-        }
-        currentRoomId = null;
-        privateTarget = null;
-        document.getElementById('currentRoomName').innerHTML = '⚪ لا توجد غرفة';
-        document.getElementById('chatStatusText').innerHTML = '⚪ غير متصل';
-        document.getElementById('messagesArea').innerHTML = '<div style="color:#888; text-align:center; padding:20px;">✨ اختر غرفة وابدأ المحادثة</div>';
-        updateRoomsList();
-        updateUsersList();
+        document.getElementById('newRoomName').value = '';
     }
     
     function displayMessages() {
         const container = document.getElementById('messagesArea');
         if(!currentRoomId || !allRooms[currentRoomId]) {
-            container.innerHTML = '<div style="color:#888; text-align:center; padding:20px;">✨ اختر غرفة وابدأ المحادثة</div>';
+            container.innerHTML = '<div style="color:#888; text-align:center; padding:20px;">✨ اختر غرفة من القائمة لبدء المحادثة</div>';
             return;
         }
         const messages = allRooms[currentRoomId].messages.slice(-50);
@@ -1050,7 +1122,8 @@
     function sendMessage() {
         const input = document.getElementById('messageInput');
         const text = input.value.trim();
-        if(!text || !currentRoomId) return;
+        if(!text || !currentRoomId || !currentUser) return;
+        
         let msg;
         if(privateTarget) {
             msg = {
@@ -1074,32 +1147,6 @@
         saveRooms();
         displayMessages();
         input.value = '';
-    }
-    
-    function sendImage() {
-        if(!isVIP) { alert("❌ خاصية VIP فقط! قم بالترقية"); return; }
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = 'image/*';
-        input.onchange = (e) => {
-            const file = e.target.files[0];
-            if(file && currentRoomId) {
-                const reader = new FileReader();
-                reader.onload = (ev) => {
-                    const msg = {
-                        type: 'public',
-                        sender: currentUser,
-                        image: ev.target.result,
-                        time: Date.now()
-                    };
-                    allRooms[currentRoomId].messages.push(msg);
-                    saveRooms();
-                    displayMessages();
-                };
-                reader.readAsDataURL(file);
-            }
-        };
-        input.click();
     }
     
     // ==================== الصوت ====================
@@ -1146,22 +1193,90 @@
         isMusicPlaying = !isMusicPlaying;
     }
     
-    // ==================== فتح وإغلاق الدردشة ====================
-    document.getElementById('openChatBtn').addEventListener('click', () => {
+    // ==================== لوحة الأمان والدخول ====================
+    function submitSecurityAndEnter() {
+        const username = document.getElementById('securityUsername').value.trim();
+        const roomPassword = document.getElementById('securityRoomPassword').value;
+        const roomName = document.getElementById('securityRoomName').value.trim();
+        
+        if(!username) { alert("❌ الرجاء إدخال اسم المستخدم"); return; }
+        if(!roomName) { alert("❌ الرجاء إدخال اسم الغرفة"); return; }
+        
+        currentUser = username;
+        securityRoomPassword = roomPassword;
+        securityRoomName = roomName;
+        
+        localStorage.setItem('didogame_username', currentUser);
+        
+        // إخفاء لوحة الأمان
+        document.getElementById('securityPanel').classList.add('hidden');
+        
+        // إظهار واجهة الماسنجر
         document.getElementById('chatPage').classList.remove('hidden');
+        
+        // تحديث عرض اسم المستخدم
+        document.getElementById('displayUsername').innerHTML = `👤 ${currentUser} ${isVIP ? '⭐' : ''}`;
+        
+        // تحميل الغرف
+        loadRooms();
         updateRoomsList();
-        const savedUser = localStorage.getItem('didogame_username');
-        if(savedUser) {
-            currentUser = savedUser;
-            document.getElementById('chatUserName').value = currentUser;
+        
+        // محاولة الانضمام إلى الغرفة أو إنشاؤها
+        if(allRooms[roomName]) {
+            // الغرفة موجودة
+            if(allRooms[roomName].password && allRooms[roomName].password !== roomPassword) {
+                alert("⚠️ كلمة مرور الغرفة غير صحيحة! سيتم إنشاء غرفة جديدة لك.");
+                createNewRoomWithName(roomName);
+            } else {
+                joinRoom(roomName);
+            }
+        } else {
+            // إنشاء غرفة جديدة
+            createNewRoomWithName(roomName);
         }
-        if(currentRoomId) {
-            enterRoom();
-        }
-    });
+        
+        // بدء الصوت تلقائياً
+        setTimeout(() => {
+            startMicrophone();
+        }, 500);
+    }
     
+    function createNewRoomWithName(roomName) {
+        if(!currentUser) return;
+        allRooms[roomName] = {
+            password: securityRoomPassword || null,
+            users: [currentUser],
+            messages: []
+        };
+        saveRooms();
+        updateRoomsList();
+        currentRoomId = roomName;
+        updateUsersList();
+        displayMessages();
+        document.getElementById('currentRoomName').innerHTML = `🔐 ${currentRoomId}`;
+        document.getElementById('chatStatusText').innerHTML = `🟢 متصل في ${currentRoomId}`;
+    }
+    
+    // ==================== إغلاق الدردشة ====================
     document.getElementById('closeChatBtn').addEventListener('click', () => {
         document.getElementById('chatPage').classList.add('hidden');
+        // لا نغلق لوحة الأمان مرة أخرى، يمكن فتحها من الزر
+    });
+    
+    // زر فتح الدردشة - يظهر لوحة الأمان
+    document.getElementById('openChatBtn').addEventListener('click', () => {
+        // إذا كان المستخدم مسجل بالفعل وله جلسة، نفتح الماسنجر مباشرة
+        const savedUser = localStorage.getItem('didogame_username');
+        if(savedUser && currentUser) {
+            document.getElementById('chatPage').classList.remove('hidden');
+            updateRoomsList();
+            if(currentRoomId) {
+                updateUsersList();
+                displayMessages();
+            }
+        } else {
+            document.getElementById('securityPanel').classList.remove('hidden');
+        }
     });
     
     // تحديث تلقائي
@@ -1170,7 +1285,9 @@
             displayMessages();
             updateUsersList();
         }
-        updateRoomsList();
+        if(document.getElementById('chatPage').classList.contains('hidden') === false) {
+            updateRoomsList();
+        }
     }, 2000);
     
     // إعلانات متغيرة
@@ -1185,7 +1302,6 @@
     loadRooms();
     updateRanking();
     renderAllGames();
-    updateRoomsList();
     
     const savedVIP = localStorage.getItem('didogame_vip');
     if(savedVIP === 'true') {
@@ -1197,30 +1313,20 @@
     const savedUser = localStorage.getItem('didogame_username');
     if(savedUser) {
         currentUser = savedUser;
-        document.getElementById('chatUserName').value = currentUser;
-    } else {
-        setTimeout(() => {
-            const name = prompt("👋 مرحباً! أدخل اسم المستخدم:", "أحمد");
-            if(name) {
-                currentUser = name;
-                localStorage.setItem('didogame_username', currentUser);
-                document.getElementById('chatUserName').value = currentUser;
-            }
-        }, 500);
+        document.getElementById('securityUsername').value = currentUser;
+        document.getElementById('displayUsername').innerHTML = `👤 ${currentUser} ${isVIP ? '⭐' : ''}`;
     }
     
     // دوال عامة
     window.upgradeToVIP = upgradeToVIP;
     window.closeGameModal = closeGameModal;
     window.toggleMusic = toggleMusic;
-    window.setChatUsername = setChatUsername;
+    window.submitSecurityAndEnter = submitSecurityAndEnter;
     window.createNewRoom = createNewRoom;
-    window.joinSelectedRoom = joinSelectedRoom;
-    window.selectRoom = selectRoom;
+    window.selectAndJoinRoom = selectAndJoinRoom;
     window.sendMessage = sendMessage;
     window.setPrivateTarget = setPrivateTarget;
     window.toggleMicrophone = toggleMicrophone;
-    window.sendImage = sendImage;
 </script>
 </body>
 </html>
