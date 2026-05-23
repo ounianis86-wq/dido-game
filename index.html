@@ -380,7 +380,7 @@
             background: rgba(0,0,0,0.95);
             backdrop-filter: blur(15px);
             z-index: 1000;
-            display: flex;
+            display: none; /* Changed from flex to none */
             align-items: center;
             justify-content: center;
             animation: fadeIn 0.3s ease;
@@ -927,7 +927,7 @@
     </div>
 </div>
 
-<!-- لوحة الأمان -->
+<!-- لوحة الأمان (تظهر فقط عند الضغط على زر الدردشة إذا لم يكن مسجلاً) -->
 <div id="securityPanel" class="security-panel">
     <div class="security-card">
         <h2>🔐 إعدادات الأمان</h2>
@@ -1026,7 +1026,6 @@
 
     // ==================== Security Helpers ====================
     function encryptMessage(text) {
-        // Simple encryption for demo (Base64)
         return btoa(unescape(encodeURIComponent(text)));
     }
     
@@ -1043,7 +1042,7 @@
         sessionTimer = setTimeout(() => {
             alert("🔐 انتهت الجلسة بسبب عدم النشاط (5 دقائق). سيتم تسجيل الخروج.");
             logout();
-        }, 5 * 60 * 1000); // 5 minutes timeout
+        }, 5 * 60 * 1000);
     }
 
     function resetSessionTimer() {
@@ -1060,10 +1059,13 @@
             audioStream = null;
         }
         document.getElementById('chatPage').classList.add('hidden');
-        document.getElementById('securityPanel').classList.remove('hidden');
+        // Don't hide security panel, just show it again if needed? No, we will show it on next chat click.
+        // Reset UI
         document.getElementById('securityUsername').value = '';
         document.getElementById('securityRoomPassword').value = '';
         document.getElementById('securityRoomName').value = 'الغرفة الرئيسية';
+        // Update UI to reflect logout if needed
+        updateProfileUI(); 
     }
 
     function validatePassword(pass) {
@@ -1198,6 +1200,9 @@
         if(currentUser) {
             document.getElementById('profileName').innerHTML = `${escapeHtml(currentUser)} ${isVIP ? '⭐' : ''}`;
             document.getElementById('profileAvatar').innerHTML = escapeHtml(currentUser.charAt(0));
+        } else {
+            document.getElementById('profileName').innerHTML = 'زائر';
+            document.getElementById('profileAvatar').innerHTML = '👤';
         }
     }
     
@@ -1237,7 +1242,6 @@
         if(!roomName) { alert("أدخل اسم الغرفة"); return; }
         if(allRooms[roomName]) { alert("الغرفة موجودة"); return; }
         
-        // Password validation
         if(securityPassword && !validatePassword(securityPassword)) return;
         
         allRooms[roomName] = {
@@ -1259,7 +1263,6 @@
     function setPrivateTarget(username) {
         resetSessionTimer();
         if(username === currentUser) return;
-        // Security check: make sure target is in same room
         if(!allRooms[currentRoom] || !allRooms[currentRoom].users.includes(username)) {
             alert("❌ لا يمكنك إرسال رسالة خاصة لهذا المستخدم لأنه ليس في الغرفة");
             return;
@@ -1318,7 +1321,6 @@
                 privateHtml = `<span class="private-tag">🔒 إلى ${escapeHtml(msg.target)}</span>`;
             }
             
-            // Decrypt message text
             let messageText = msg.text;
             if(msg.encrypted) {
                 messageText = decryptMessage(msg.text);
@@ -1355,7 +1357,6 @@
         const text = input.value.trim();
         if(!text || !currentRoom || !currentUser) return;
         
-        // Encrypt message before saving
         const encryptedText = encryptMessage(text);
         
         let msg;
@@ -1442,7 +1443,7 @@
         
         localStorage.setItem('didogame_username', currentUser);
         
-        document.getElementById('securityPanel').classList.add('hidden');
+        document.getElementById('securityPanel').style.display = 'none'; // Hide security panel
         document.getElementById('chatPage').classList.remove('hidden');
         
         updateProfileUI();
@@ -1463,7 +1464,6 @@
         setTimeout(() => { startMicrophone(); }, 500);
         startSessionTimer();
         
-        // Add event listeners to reset timer on user activity
         const activityEvents = ['click', 'keypress', 'scroll', 'touchstart'];
         activityEvents.forEach(event => {
             document.getElementById('chatPage').addEventListener(event, resetSessionTimer);
@@ -1501,7 +1501,9 @@
     
     document.getElementById('openChatBtn').addEventListener('click', () => {
         const savedUser = localStorage.getItem('didogame_username');
-        if(savedUser && currentUser) {
+        // Check if user is logged in (currentUser exists)
+        if(currentUser) {
+            // Already logged in, open chat directly
             document.getElementById('chatPage').classList.remove('hidden');
             updateRoomsSidebar();
             if(currentRoom) {
@@ -1510,7 +1512,15 @@
             }
             startSessionTimer();
         } else {
-            document.getElementById('securityPanel').classList.remove('hidden');
+            // Not logged in, show security panel
+            // Reset security panel fields maybe
+            document.getElementById('securityPanel').style.display = 'flex';
+            // If there is a saved username, prefill
+            if(savedUser) {
+                document.getElementById('securityUsername').value = savedUser;
+            } else {
+                document.getElementById('securityUsername').value = '';
+            }
         }
     });
     
@@ -1547,9 +1557,10 @@
     
     const savedUser = localStorage.getItem('didogame_username');
     if(savedUser) {
-        currentUser = savedUser;
-        document.getElementById('securityUsername').value = currentUser;
-        updateProfileUI();
+        // Don't automatically log in, just prefill the security panel
+        document.getElementById('securityUsername').value = savedUser;
+        // We do NOT set currentUser here anymore, because security panel is not shown automatically.
+        // User must click chat button and then submit.
     }
     
     // Expose functions globally
