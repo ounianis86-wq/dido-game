@@ -353,13 +353,13 @@
             margin-top: 10px;
         }
 
-        /* Ad - ENLARGED AREA */
+        /* Ad - ENLARGED AREA (reduced bottom margin to bring games up) */
         .fixed-permanent-ad {
             background: linear-gradient(135deg, #ff44ff30, #00ffff30);
             border: 2px solid #ff44ff;
             border-radius: 20px;
             padding: 18px 12px;
-            margin: 8px 0 4px 0;
+            margin: 8px 0 0px 0;
             text-align: center;
             color: white;
             font-size: 1rem;
@@ -374,19 +374,13 @@
             100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
         }
 
-        /* Bottom content wrapper - games pushed up slightly */
-        .bottom-content-wrapper {
-            margin-top: 0;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Games - moved up (reduced padding/margin) */
+        /* Games - moved up (reduced top spacing) */
         .games-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            padding-bottom: 6px;
+            gap: 12px;
+            padding-bottom: 8px;
+            margin-top: -6px;
         }
         
         .game-row {
@@ -394,7 +388,7 @@
             gap: 10px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            padding: 2px 2px 6px 2px;
+            padding: 4px 2px 8px 2px;
             scrollbar-width: thin;
             scrollbar-color: #ff44ff #1a1a2e;
             -webkit-overflow-scrolling: touch;
@@ -1104,14 +1098,12 @@
                 </div>
             </div>
             
-            <!-- ENLARGED AD AREA (reduced bottom margin to bring games up) -->
+            <!-- ENLARGED AD AREA (no bottom margin) -->
             <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
             
-            <!-- Bottom content wrapper for games -->
-            <div class="bottom-content-wrapper">
-                <div class="games-wrapper" id="gamesWrapper">
-                    <!-- Dynamic game rows will be inserted here -->
-                </div>
+            <!-- Games Section - moved up with negative margin -->
+            <div class="games-wrapper" id="gamesWrapper">
+                <!-- Dynamic game rows will be inserted here -->
             </div>
         </div>
         
