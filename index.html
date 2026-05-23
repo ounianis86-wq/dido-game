@@ -145,7 +145,13 @@
             font-size: 0.8rem;
         }
 
-        /* Ranking Section - Moved to middle */
+        /* Spacer that pushes content down (flexible space) */
+        .flex-spacer {
+            flex: 1;
+            min-height: 20px;
+        }
+
+        /* Ranking Section - Moved to bottom */
         .ranking-section {
             margin-bottom: 12px;
             text-align: center;
@@ -216,7 +222,7 @@
             font-size: 0.45rem;
         }
 
-        /* Categories Section - Moved to middle (below ranking) */
+        /* Categories Section - Moved to bottom */
         .categories-section {
             margin-bottom: 12px;
         }
@@ -244,7 +250,7 @@
             transform: scale(1.02);
         }
 
-        /* Ad - ENLARGED AREA (below categories) */
+        /* Ad - ENLARGED AREA (moved to bottom) */
         .fixed-permanent-ad {
             background: linear-gradient(135deg, #ff44ff30, #00ffff30);
             border: 2px solid #ff44ff;
@@ -265,9 +271,15 @@
             100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
         }
 
+        /* Bottom content wrapper - pushes everything to bottom above games */
+        .bottom-content-wrapper {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
         /* Games - Sticks to bottom (unchanged) */
         .games-wrapper {
-            margin-top: auto;
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -956,26 +968,33 @@
                 </div>
             </div>
             
-            <!-- Ranking Section - Now in the middle -->
-            <div class="ranking-section">
-                <div class="ranking-circles" id="rankingList"></div>
-            </div>
+            <!-- Flexible spacer that pushes the bottom content down -->
+            <div class="flex-spacer"></div>
             
-            <!-- Categories Section - Below ranking -->
-            <div class="categories-section">
-                <div class="categories" id="categoriesList">
-                    <div class="cat-badge" data-cat="action" id="catAction">🎯 Action</div>
-                    <div class="cat-badge" data-cat="racing" id="catRacing">🏎️ Racing</div>
-                    <div class="cat-badge" data-cat="fighting" id="catFighting">🥊 Fighting</div>
-                    <div class="cat-badge" data-cat="puzzle" id="catPuzzle">🧩 Puzzle</div>
+            <!-- Bottom content wrapper (ranking, categories, ad, games) -->
+            <div class="bottom-content-wrapper">
+                <!-- Ranking Section -->
+                <div class="ranking-section">
+                    <div class="ranking-circles" id="rankingList"></div>
                 </div>
-            </div>
-            
-            <!-- ENLARGED AD AREA -->
-            <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
-            
-            <div class="games-wrapper" id="gamesWrapper">
-                <!-- Dynamic game rows will be inserted here -->
+                
+                <!-- Categories Section -->
+                <div class="categories-section">
+                    <div class="categories" id="categoriesList">
+                        <div class="cat-badge" data-cat="action" id="catAction">🎯 Action</div>
+                        <div class="cat-badge" data-cat="racing" id="catRacing">🏎️ Racing</div>
+                        <div class="cat-badge" data-cat="fighting" id="catFighting">🥊 Fighting</div>
+                        <div class="cat-badge" data-cat="puzzle" id="catPuzzle">🧩 Puzzle</div>
+                    </div>
+                </div>
+                
+                <!-- ENLARGED AD AREA -->
+                <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
+                
+                <!-- Games Section -->
+                <div class="games-wrapper" id="gamesWrapper">
+                    <!-- Dynamic game rows will be inserted here -->
+                </div>
             </div>
         </div>
         
