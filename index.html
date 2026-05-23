@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DidoGame - 3D Anime City | Messenger Style Chat</title>
+    <title>DidoGame - 3D Anime City | Messenger Style Chat with Video Calls (VIP)</title>
     <style>
         * {
             margin: 0;
@@ -463,7 +463,6 @@
             to { transform: translateY(0); }
         }
         
-        /* Messenger Main Container */
         .messenger-full {
             display: flex;
             flex-direction: column;
@@ -471,7 +470,6 @@
             background: #0a0a1a;
         }
         
-        /* Messenger Header */
         .messenger-header {
             padding: 12px 16px;
             background: #0a0a1a;
@@ -515,7 +513,6 @@
             cursor: pointer;
         }
         
-        /* Chats List (Inbox) */
         .chats-list {
             flex: 1;
             overflow-y: auto;
@@ -582,7 +579,6 @@
             flex-shrink: 0;
         }
         
-        /* Open Chat View (When a room is selected) */
         .open-chat-view {
             display: flex;
             flex-direction: column;
@@ -629,7 +625,6 @@
             cursor: pointer;
         }
         
-        /* Messages Container */
         .messages-area {
             flex: 1;
             overflow-y: auto;
@@ -639,7 +634,6 @@
             gap: 8px;
         }
         
-        /* Message Bubbles - Exact Messenger Style */
         .message-row {
             display: flex;
             width: 100%;
@@ -697,7 +691,6 @@
             margin-left: 5px;
         }
         
-        /* Typing Indicator */
         .typing-indicator {
             padding: 8px 16px;
             color: #8e8e9e;
@@ -705,7 +698,6 @@
             font-style: italic;
         }
         
-        /* Message Input Area */
         .message-input-area {
             padding: 12px;
             background: #0a0a1a;
@@ -748,50 +740,82 @@
             padding: 8px;
         }
         
-        /* Create Room Modal (Messenger Style) */
-        .modal-overlay {
+        /* Video Call Modal */
+        .video-call-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1100;
+            background: rgba(0,0,0,0.95);
+            z-index: 1200;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-container {
+            width: 100%;
+            height: 70%;
+            background: #000;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         
-        .modal-content {
-            background: #1f1f2e;
-            border-radius: 20px;
-            padding: 20px;
-            width: 85%;
-            max-width: 320px;
+        #localVideo {
+            width: 120px;
+            height: 160px;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            border-radius: 12px;
+            border: 2px solid #ff44ff;
+            object-fit: cover;
+            background: #1a1a2e;
+            z-index: 10;
         }
         
-        .modal-content input {
+        #remoteVideo {
             width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 25px;
+            height: 100%;
+            object-fit: contain;
+            background: #0a0a1a;
+        }
+        
+        .call-controls {
+            display: flex;
+            gap: 30px;
+            padding: 20px;
+            background: #1a1a2e;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .call-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
             border: none;
-            background: #2a2a3e;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .call-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .call-end {
+            background: #ff4444;
             color: white;
         }
         
-        .modal-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .modal-buttons button {
-            flex: 1;
-            padding: 10px;
-            border-radius: 25px;
-            border: none;
-            cursor: pointer;
+        .call-mute, .call-video {
+            background: #2c2c3a;
+            color: white;
         }
         
         .game-modal {
@@ -900,7 +924,6 @@
 <!-- صفحة الدردشة بتصميم الماسنجر 100% -->
 <div id="chatPage" class="chat-page hidden">
     <div class="messenger-full">
-        <!-- Inbox View (قائمة المحادثات) -->
         <div id="inboxView" style="display: flex; flex-direction: column; height: 100%;">
             <div class="messenger-header">
                 <div class="header-left">
@@ -915,7 +938,6 @@
             <div class="chats-list" id="chatsListContainer"></div>
         </div>
         
-        <!-- Open Chat View (عند فتح محادثة) -->
         <div id="openChatView" style="display: none; flex-direction: column; height: 100%;">
             <div class="chat-header">
                 <button class="back-btn" id="backToInboxBtn">←</button>
@@ -924,7 +946,7 @@
                     <div class="chat-header-status" id="openChatStatus">🟢 متصل</div>
                 </div>
                 <div class="chat-header-actions">
-                    <span>🔔</span>
+                    <span id="videoCallBtn" style="cursor: pointer; display: none;">🎥</span>
                     <span>⋮</span>
                 </div>
             </div>
@@ -943,9 +965,22 @@
     </div>
 </div>
 
+<!-- نافذة مكالمة الفيديو (VIP فقط) -->
+<div id="videoCallModal" class="video-call-modal hidden">
+    <div class="video-container">
+        <video id="localVideo" autoplay muted playsinline></video>
+        <video id="remoteVideo" autoplay playsinline></video>
+    </div>
+    <div class="call-controls">
+        <button class="call-btn call-mute" id="muteBtn" onclick="toggleMute()">🔊</button>
+        <button class="call-btn call-end" onclick="endVideoCall()">🔴</button>
+        <button class="call-btn call-video" id="videoToggleBtn" onclick="toggleVideo()">📷</button>
+    </div>
+</div>
+
 <div id="gameModal" class="game-modal hidden">
     <div class="close-modal" onclick="closeGameModal()">✕</div>
-    <iframe id="gameIframe" src="" allow="microphone; autoplay"></iframe>
+    <iframe id="gameIframe" src="" allow="microphone; autoplay; camera"></iframe>
 </div>
 
 <script>
@@ -965,6 +1000,7 @@
     let isVIP = false;
     let allRooms = {};
     let audioStream = null;
+    let videoStream = null;
     let bgMusic = null;
     let isMusicPlaying = false;
     let privateTarget = null;
@@ -1001,10 +1037,10 @@
         if(sessionTimer) clearTimeout(sessionTimer);
         currentUser = null;
         currentOpenRoom = null;
-        if(audioStream) {
-            audioStream.getTracks().forEach(track => track.stop());
-            audioStream = null;
-        }
+        if(audioStream) audioStream.getTracks().forEach(track => track.stop());
+        if(videoStream) videoStream.getTracks().forEach(track => track.stop());
+        audioStream = null;
+        videoStream = null;
         document.getElementById('chatPage').classList.add('hidden');
         document.getElementById('securityUsername').value = '';
         document.getElementById('securityRoomPassword').value = '';
@@ -1086,6 +1122,10 @@
             document.getElementById('registerBtn').innerHTML = '👑 VIP مفعل';
             document.getElementById('registerBtn').classList.add('vip-active');
             alert("🎉 تهانينا! أصبحت عضواً مميزاً");
+            // Show video button if chat is open
+            if(document.getElementById('openChatView').style.display === 'flex') {
+                document.getElementById('videoCallBtn').style.display = 'inline-block';
+            }
         }
     }
     
@@ -1160,15 +1200,21 @@
         currentOpenRoom = roomName;
         privateTarget = null;
         
-        // Switch views
         document.getElementById('inboxView').style.display = 'none';
         document.getElementById('openChatView').style.display = 'flex';
         document.getElementById('openChatRoomName').innerHTML = escapeHtml(currentOpenRoom);
         
+        // Show video call button only if VIP
+        const videoBtn = document.getElementById('videoCallBtn');
+        if(isVIP) {
+            videoBtn.style.display = 'inline-block';
+            videoBtn.onclick = () => startVideoCall();
+        } else {
+            videoBtn.style.display = 'none';
+        }
+        
         displayMessagesInOpenChat();
         resetSessionTimer();
-        
-        // Simulate typing indicator for demo
         startTypingSimulation();
     }
     
@@ -1267,8 +1313,6 @@
         displayMessagesInOpenChat();
         input.value = '';
         resetSessionTimer();
-        
-        // Update chats list to show last message
         renderChatsList();
     }
     
@@ -1302,13 +1346,65 @@
         renderChatsList();
     }
     
+    // ==================== Video Call (VIP only) ====================
+    async function startVideoCall() {
+        if(!isVIP) {
+            alert("🔒 عذراً، خاصية مكالمات الفيديو متاحة فقط للحسابات المميزة (VIP). قم بترقية حسابك الآن!");
+            return;
+        }
+        try {
+            videoStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            const localVideo = document.getElementById('localVideo');
+            localVideo.srcObject = videoStream;
+            
+            // Simulate remote video (in real app, this would be WebRTC)
+            const remoteVideo = document.getElementById('remoteVideo');
+            // For demo, we'll just show a placeholder or mirror local
+            // In real implementation, you'd connect to another peer
+            remoteVideo.srcObject = videoStream; // Demo: mirror local
+            
+            document.getElementById('videoCallModal').classList.remove('hidden');
+        } catch(err) {
+            alert("لا يمكن الوصول إلى الكاميرا/الميكروفون: " + err.message);
+        }
+    }
+    
+    function toggleMute() {
+        if(videoStream) {
+            const audioTrack = videoStream.getAudioTracks()[0];
+            if(audioTrack) {
+                audioTrack.enabled = !audioTrack.enabled;
+                const muteBtn = document.getElementById('muteBtn');
+                muteBtn.innerHTML = audioTrack.enabled ? "🔊" : "🔇";
+            }
+        }
+    }
+    
+    function toggleVideo() {
+        if(videoStream) {
+            const videoTrack = videoStream.getVideoTracks()[0];
+            if(videoTrack) {
+                videoTrack.enabled = !videoTrack.enabled;
+                const videoBtn = document.getElementById('videoToggleBtn');
+                videoBtn.innerHTML = videoTrack.enabled ? "📷" : "🚫📷";
+            }
+        }
+    }
+    
+    function endVideoCall() {
+        if(videoStream) {
+            videoStream.getTracks().forEach(track => track.stop());
+            videoStream = null;
+        }
+        document.getElementById('videoCallModal').classList.add('hidden');
+    }
+    
     // ==================== Audio ====================
     async function startMicrophone() {
         try {
             if(!audioStream) {
                 audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                // For speech to text simulation
-                alert("🎤 تم تفعيل الميكروفون (محاكاة تحويل الصوت لنص)");
+                alert("🎤 تم تفعيل الميكروفون (للرسائل الصوتية)");
             }
         } catch(e) { console.log("Mic error"); }
     }
@@ -1377,7 +1473,6 @@
         renderChatsList();
         startSessionTimer();
         
-        // Show inbox view by default
         document.getElementById('inboxView').style.display = 'flex';
         document.getElementById('openChatView').style.display = 'none';
     }
@@ -1400,7 +1495,6 @@
     });
     
     document.getElementById('backToInboxBtn').addEventListener('click', backToInbox);
-    
     document.getElementById('newChatBtn').addEventListener('click', showNewChatModal);
     
     document.getElementById('openChatBtn').addEventListener('click', () => {
@@ -1463,6 +1557,10 @@
     window.sendMessageOpen = sendMessageOpen;
     window.toggleMicrophoneOpen = toggleMicrophoneOpen;
     window.backToInbox = backToInbox;
+    window.startVideoCall = startVideoCall;
+    window.toggleMute = toggleMute;
+    window.toggleVideo = toggleVideo;
+    window.endVideoCall = endVideoCall;
 </script>
 </body>
 </html>
