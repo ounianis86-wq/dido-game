@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DidoGame - دردشة صوتية وتبادل الصور</title>
+    <title>DidoGame - دردشة VIP | صوت + صور + مكالمات</title>
     
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -111,10 +111,11 @@
         .vip-badge {
             background: #ff44ff;
             color: white;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             padding: 2px 8px;
             border-radius: 15px;
             margin-left: 5px;
+            display: inline-block;
         }
 
         /* Chat Section */
@@ -131,7 +132,7 @@
         .chat-messages {
             flex: 1;
             overflow-y: auto;
-            max-height: 300px;
+            max-height: 350px;
             margin-bottom: 10px;
         }
         
@@ -164,6 +165,7 @@
         
         .message-audio {
             margin-top: 5px;
+            max-width: 100%;
         }
         
         .chat-input-area {
@@ -188,6 +190,10 @@
             border-radius: 20px;
             color: white;
             cursor: pointer;
+        }
+        
+        .image-btn:active, .audio-btn:active, .send-btn:active {
+            transform: scale(0.95);
         }
         
         .call-section {
@@ -220,6 +226,8 @@
             padding: 15px;
             z-index: 1000;
             text-align: center;
+            width: 90%;
+            max-width: 300px;
         }
         
         .hidden {
@@ -238,11 +246,25 @@
         .upgrade-btn {
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             border: none;
-            padding: 5px 12px;
-            border-radius: 18px;
+            padding: 8px 15px;
+            border-radius: 25px;
             color: white;
             font-size: 0.7rem;
             cursor: pointer;
+            font-weight: bold;
+            animation: btnPulse 1.5s infinite;
+        }
+        
+        @keyframes btnPulse {
+            0%, 100% { box-shadow: 0 0 5px #ff44ff; }
+            50% { box-shadow: 0 0 20px #ff44ff, 0 0 10px #00ffff; }
+        }
+        
+        .upgrade-btn.vip-active {
+            background: #333;
+            animation: none;
+            cursor: default;
+            opacity: 0.7;
         }
         
         .music-btn {
@@ -259,11 +281,30 @@
             font-size: 0.7rem;
             color: #00ff88;
             margin-bottom: 5px;
+            text-align: center;
         }
         
-        .vip-only {
-            background: rgba(255,68,255,0.3);
-            border: 1px dashed #ff44ff;
+        .feature-locked {
+            opacity: 0.5;
+            filter: grayscale(0.3);
+        }
+        
+        .upgrade-message {
+            background: linear-gradient(135deg, #ff44ff, #ff3366);
+            color: white;
+            padding: 5px;
+            border-radius: 10px;
+            font-size: 0.6rem;
+            text-align: center;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+        
+        .username-display {
+            color: #ffaa88;
+            font-size: 0.7rem;
+            text-align: center;
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -274,27 +315,28 @@
         
         <!-- Login Section -->
         <div id="loginSection" class="login-section">
-            <h3>🎮 دخول إلى DidoGame 🎮</h3>
+            <h3>🎮 DidoGame - دردشة VIP 🎮</h3>
             <input type="text" id="loginName" class="login-input" placeholder="اسم المستخدم">
             <input type="password" id="loginPassword" class="login-input" placeholder="كلمة المرور">
-            <button class="login-btn" onclick="login()">دخول / تسجيل</button>
+            <button class="login-btn" onclick="login()">🚀 دخول / تسجيل جديد</button>
             <div class="online-users" id="onlineUsers">👥 جاري التحميل...</div>
         </div>
         
-        <!-- Chat Section (hidden until login) -->
+        <!-- Chat Section -->
         <div id="chatSection" class="chat-section hidden">
+            <div class="username-display" id="usernameDisplay"></div>
             <div class="online-users" id="chatOnlineUsers">👥 المتصلون: --</div>
             <div class="chat-messages" id="chatMessages"></div>
             <div class="chat-input-area">
-                <input type="text" id="messageInput" class="chat-input" placeholder="اكتب رسالة...">
+                <input type="text" id="messageInput" class="chat-input" placeholder="اكتب رسالة..." onkeypress="if(event.key==='Enter') sendMessage()">
                 <button class="send-btn" onclick="sendMessage()">📤</button>
                 <button class="image-btn" id="imageBtn" onclick="sendImage()">🖼️</button>
-                <button class="audio-btn" id="audioBtn" onclick="startRecording()">🎙️</button>
+                <button class="audio-btn" id="audioBtn" onclick="toggleRecording()">🎙️</button>
             </div>
             
             <!-- VIP Call Section -->
             <div class="call-section" id="callSection">
-                <div style="color:#ffaa88; font-size:0.7rem;">🔊 دردشة صوتية VIP</div>
+                <div style="color:#ffaa88; font-size:0.7rem;">🔊 دردشة صوتية VIP 🔊</div>
                 <div>
                     <select id="userToCall" class="chat-input" style="width:60%;">
                         <option value="">اختر مستخدم للاتصال...</option>
@@ -303,20 +345,24 @@
                 </div>
                 <div id="callStatus" style="color:#ff44ff; font-size:0.6rem; margin-top:5px;"></div>
             </div>
+            
+            <div id="upgradeMessage" class="upgrade-message hidden" onclick="upgradeToVIP()">
+                ⭐ ترقية إلى VIP - أرسل صوراً ومكالمات صوتية ⭐
+            </div>
         </div>
         
     </div>
     
     <div class="bottom-bar">
-        <button class="upgrade-btn" id="upgradeBtn" onclick="upgradeToVIP()">👑 ترقية إلى VIP</button>
-        <div class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵 موسيقى</div>
+        <button class="upgrade-btn" id="upgradeBtn" onclick="upgradeToVIP()">👑 ترقية VIP (صور + مكالمات)</button>
+        <div class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵 تشغيل</div>
     </div>
 </div>
 
 <!-- Incoming Call Popup -->
 <div id="incomingCall" class="incoming-call hidden">
-    <div id="callerName" style="color:white;">جاري الاتصال...</div>
-    <button class="call-btn" onclick="answerCall()">📞 رد</button>
+    <div id="callerName" style="color:white;">📞 مكالمة واردة...</div>
+    <button class="call-btn" onclick="answerCall()">✅ رد</button>
     <button class="call-btn" onclick="rejectCall()">❌ رفض</button>
 </div>
 
@@ -344,139 +390,144 @@
     let mediaRecorder = null;
     let audioChunks = [];
     let isRecording = false;
-    let currentCall = null;
-    let peerConnection = null;
-    
-    // WebRTC Configuration (with free STUN server)
-    const configuration = {
-        iceServers: [
-            { urls: "stun:stun.l.google.com:19302" },
-            { urls: "stun:stun1.l.google.com:19302" }
-        ]
-    };
-    
-    let localStream = null;
-    let remoteStream = null;
+    let currentCallDoc = null;
     
     // ==================== Authentication ====================
-    function login() {
+    async function login() {
         const name = document.getElementById('loginName').value.trim();
         const password = document.getElementById('loginPassword').value.trim();
         
         if (!name || !password) {
-            alert("الرجاء إدخال اسم المستخدم وكلمة المرور");
+            alert("⚠️ الرجاء إدخال اسم المستخدم وكلمة المرور");
             return;
         }
         
-        // Sign in with email format (using name@dido.com)
+        // Create email from name
         const email = name.toLowerCase().replace(/[^a-z0-9]/g, '') + '@didogame.com';
         
-        auth.signInWithEmailAndPassword(email, password).then(() => {
-            // User exists, login
-            loadUserData(name);
-        }).catch(() => {
-            // User doesn't exist, create new
-            auth.createUserWithEmailAndPassword(email, password).then(() => {
+        try {
+            // Try to sign in
+            const userCredential = await auth.signInWithEmailAndPassword(email, password);
+            await loadUserData(userCredential.user.uid, name);
+        } catch (error) {
+            if (error.code === 'auth/user-not-found') {
+                // Create new user
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
                 // Save user to Firestore
-                db.collection("users").doc(auth.currentUser.uid).set({
+                await db.collection("users").doc(userCredential.user.uid).set({
                     username: name,
                     isVIP: false,
-                    createdAt: new Date()
-                }).then(() => {
-                    loadUserData(name);
+                    createdAt: new Date(),
+                    online: true
                 });
-            }).catch(error => {
-                alert("خطأ: " + error.message);
-            });
-        });
+                await loadUserData(userCredential.user.uid, name);
+            } else {
+                alert("❌ خطأ: " + error.message);
+            }
+        }
     }
     
-    function loadUserData(username) {
-        const uid = auth.currentUser.uid;
-        db.collection("users").doc(uid).get().then(doc => {
-            if (doc.exists) {
-                currentUser = {
-                    uid: uid,
-                    username: doc.data().username,
-                    isVIP: doc.data().isVIP || false
-                };
-                isVIP = currentUser.isVIP;
-                
-                // Update UI
-                document.getElementById('loginSection').classList.add('hidden');
-                document.getElementById('chatSection').classList.remove('hidden');
-                
-                // Update VIP features visibility
-                updateVIPFeatures();
-                
-                // Update online status
-                updateOnlineStatus(true);
-                
-                // Load messages
-                loadMessages();
-                
-                // Listen for users
-                listenForUsers();
-                
-                // Listen for calls
-                listenForCalls();
-            }
-        });
+    async function loadUserData(uid, defaultName) {
+        const doc = await db.collection("users").doc(uid).get();
+        if (doc.exists) {
+            currentUser = {
+                uid: uid,
+                username: doc.data().username,
+                isVIP: doc.data().isVIP || false
+            };
+        } else {
+            currentUser = {
+                uid: uid,
+                username: defaultName,
+                isVIP: false
+            };
+        }
+        isVIP = currentUser.isVIP;
+        
+        // Update UI
+        document.getElementById('loginSection').classList.add('hidden');
+        document.getElementById('chatSection').classList.remove('hidden');
+        document.getElementById('usernameDisplay').innerHTML = `👤 ${currentUser.username} ${isVIP ? '<span class="vip-badge">VIP ⭐</span>' : ''}`;
+        
+        // Update VIP features visibility
+        updateVIPFeatures();
+        
+        // Update online status
+        await db.collection("users").doc(currentUser.uid).update({ online: true, lastSeen: new Date() });
+        
+        // Load messages
+        loadMessages();
+        
+        // Listen for users
+        listenForUsers();
+        
+        // Listen for calls
+        listenForCalls();
     }
     
     function updateVIPFeatures() {
         const imageBtn = document.getElementById('imageBtn');
         const audioBtn = document.getElementById('audioBtn');
         const callSection = document.getElementById('callSection');
+        const upgradeBtn = document.getElementById('upgradeBtn');
+        const upgradeMessage = document.getElementById('upgradeMessage');
         
         if (isVIP) {
             imageBtn.style.display = 'block';
             audioBtn.style.display = 'block';
             callSection.style.display = 'block';
-            document.getElementById('upgradeBtn').innerHTML = '👑 VIP مفعل';
-            document.getElementById('upgradeBtn').style.opacity = '0.7';
+            upgradeBtn.innerHTML = '👑 VIP مفعل';
+            upgradeBtn.classList.add('vip-active');
+            upgradeMessage.classList.add('hidden');
         } else {
             imageBtn.style.display = 'none';
             audioBtn.style.display = 'none';
             callSection.style.display = 'none';
-            document.getElementById('upgradeBtn').innerHTML = '⭐ ترقية إلى VIP (صور + صوت) ⭐';
+            upgradeBtn.innerHTML = '⭐ ترقية VIP (صور + مكالمات صوتية) ⭐';
+            upgradeBtn.classList.remove('vip-active');
+            upgradeMessage.classList.remove('hidden');
         }
     }
     
-    function upgradeToVIP() {
+    async function upgradeToVIP() {
         if (!currentUser) return;
         if (isVIP) {
-            alert("أنت بالفعل عضو VIP!");
+            alert("✨ أنت بالفعل عضو VIP مميز! ✨");
             return;
         }
         
-        // In a real app, this would be a payment process
-        const confirm = window.confirm("⚠️ ترقية إلى VIP - رسوم 9.99$ شهرياً\n\nالمميزات:\n✅ إرسال الصور\n✅ تسجيل وإرسال الصوت\n✅ المكالمات الصوتية المباشرة\n\nهل تريد الترقية؟");
+        // Simulate payment (in real app, integrate payment gateway)
+        const confirmUpgrade = window.confirm(
+            "🎉✨ ترقية إلى العضوية المميزة VIP ✨🎉\n\n" +
+            "💰 السعر: 9.99$ شهرياً\n\n" +
+            "✅ المميزات:\n" +
+            "   • 📸 إرسال الصور\n" +
+            "   • 🎙️ تسجيل وإرسال الرسائل الصوتية\n" +
+            "   • 📞 مكالمات صوتية مباشرة مع VIP آخرين\n" +
+            "   • 👑 علامة مميزة بجانب اسمك\n\n" +
+            "هل تريد الترقية الآن؟"
+        );
         
-        if (confirm) {
-            db.collection("users").doc(currentUser.uid).update({
-                isVIP: true
-            }).then(() => {
+        if (confirmUpgrade) {
+            try {
+                await db.collection("users").doc(currentUser.uid).update({
+                    isVIP: true
+                });
                 isVIP = true;
                 currentUser.isVIP = true;
                 updateVIPFeatures();
-                alert("🎉 تهانينا! أصبحت عضواً مميزاً 🎉\n\nيمكنك الآن إرسال الصور والتسجيلات الصوتية وإجراء المكالمات!");
-            });
+                document.getElementById('usernameDisplay').innerHTML = `👤 ${currentUser.username} <span class="vip-badge">VIP ⭐</span>`;
+                alert("🎉🎊 تهانينا! أصبحت عضواً مميزاً في DidoGame VIP 🎊🎉\n\n✅ يمكنك الآن:\n• إرسال الصور\n• التسجيل الصوتي\n• إجراء المكالمات الصوتية مع VIP آخرين");
+            } catch (error) {
+                alert("حدث خطأ: " + error.message);
+            }
         }
-    }
-    
-    function updateOnlineStatus(isOnline) {
-        if (!currentUser) return;
-        db.collection("users").doc(currentUser.uid).update({
-            online: isOnline,
-            lastSeen: new Date()
-        });
     }
     
     // ==================== Messaging ====================
     function sendMessage() {
         const text = document.getElementById('messageInput').value.trim();
-        if (!text && !imageFile) return;
+        if (!text) return;
         
         db.collection("messages").add({
             userId: currentUser.uid,
@@ -489,9 +540,9 @@
         document.getElementById('messageInput').value = '';
     }
     
-    function sendImage() {
+    async function sendImage() {
         if (!isVIP) {
-            alert("❌ إرسال الصور متاح فقط للمستخدمين المميزين (VIP)!\nقم بترقية حسابك لإرسال الصور.");
+            alert("❌ إرسال الصور متاح فقط للمستخدمين المميزين VIP!\n👑 قم بترقية حسابك من الزر الأحمر في الأسفل.");
             return;
         }
         
@@ -501,74 +552,109 @@
         input.onchange = async (e) => {
             const file = e.target.files[0];
             if (file) {
+                const loadingToast = document.createElement('div');
+                loadingToast.textContent = '📤 جاري رفع الصورة...';
+                loadingToast.style.position = 'fixed';
+                loadingToast.style.bottom = '80px';
+                loadingToast.style.left = '50%';
+                loadingToast.style.transform = 'translateX(-50%)';
+                loadingToast.style.background = '#ff44ff';
+                loadingToast.style.padding = '5px 15px';
+                loadingToast.style.borderRadius = '20px';
+                loadingToast.style.zIndex = '999';
+                document.body.appendChild(loadingToast);
+                
                 const storageRef = storage.ref(`images/${Date.now()}_${file.name}`);
-                const uploadTask = await storageRef.put(file);
+                await storageRef.put(file);
                 const imageUrl = await storageRef.getDownloadURL();
                 
-                db.collection("messages").add({
+                await db.collection("messages").add({
                     userId: currentUser.uid,
                     username: currentUser.username,
                     imageUrl: imageUrl,
                     isVIP: isVIP,
                     timestamp: new Date()
                 });
+                
+                loadingToast.remove();
             }
         };
         input.click();
     }
     
     // ==================== Voice Recording (VIP only) ====================
-    async function startRecording() {
+    async function toggleRecording() {
         if (!isVIP) {
-            alert("❌ التسجيل الصوتي متاح فقط للمستخدمين المميزين (VIP)!");
+            alert("❌ التسجيل الصوتي متاح فقط للمستخدمين المميزين VIP!\n👑 قم بترقية حسابك من الزر الأحمر في الأسفل.");
             return;
         }
         
         if (isRecording) {
             // Stop recording
-            if (mediaRecorder) {
+            if (mediaRecorder && mediaRecorder.state === 'recording') {
                 mediaRecorder.stop();
                 isRecording = false;
                 document.getElementById('audioBtn').innerHTML = '🎙️';
             }
         } else {
-            // Start recording
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            mediaRecorder = new MediaRecorder(stream);
-            audioChunks = [];
-            
-            mediaRecorder.ondataavailable = (event) => {
-                audioChunks.push(event.data);
-            };
-            
-            mediaRecorder.onstop = async () => {
-                const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-                const storageRef = storage.ref(`audio/${Date.now()}.webm`);
-                await storageRef.put(audioBlob);
-                const audioUrl = await storageRef.getDownloadURL();
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+                audioChunks = [];
                 
-                db.collection("messages").add({
-                    userId: currentUser.uid,
-                    username: currentUser.username,
-                    audioUrl: audioUrl,
-                    isVIP: isVIP,
-                    timestamp: new Date()
-                });
+                mediaRecorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) {
+                        audioChunks.push(event.data);
+                    }
+                };
                 
-                stream.getTracks().forEach(track => track.stop());
-            };
-            
-            mediaRecorder.start();
-            isRecording = true;
-            document.getElementById('audioBtn').innerHTML = '⏹️';
-            
-            setTimeout(() => {
-                if (isRecording) {
-                    mediaRecorder.stop();
-                    isRecording = false;
-                    document.getElementById('audioBtn').innerHTML = '🎙️';
-                }
-            }, 15000); // Auto stop after 15 seconds
+                mediaRecorder.onstop = async () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                    const storageRef = storage.ref(`audio/${Date.now()}.webm`);
+                    
+                    const loadingToast = document.createElement('div');
+                    loadingToast.textContent = '🎙️ جاري رفع التسجيل الصوتي...';
+                    loadingToast.style.position = 'fixed';
+                    loadingToast.style.bottom = '80px';
+                    loadingToast.style.left = '50%';
+                    loadingToast.style.transform = 'translateX(-50%)';
+                    loadingToast.style.background = '#ff44ff';
+                    loadingToast.style.padding = '5px 15px';
+                    loadingToast.style.borderRadius = '20px';
+                    loadingToast.style.zIndex = '999';
+                    document.body.appendChild(loadingToast);
+                    
+                    await storageRef.put(audioBlob);
+                    const audioUrl = await storageRef.getDownloadURL();
+                    
+                    await db.collection("messages").add({
+                        userId: currentUser.uid,
+                        username: currentUser.username,
+                        audioUrl: audioUrl,
+                        isVIP: isVIP,
+                        timestamp: new Date()
+                    });
+                    
+                    loadingToast.remove();
+                    stream.getTracks().forEach(track => track.stop());
+                };
+                
+                mediaRecorder.start();
+                isRecording = true;
+                document.getElementById('audioBtn').innerHTML = '⏹️';
+                
+                // Auto stop after 15 seconds
+                setTimeout(() => {
+                    if (isRecording && mediaRecorder && mediaRecorder.state === 'recording') {
+                        mediaRecorder.stop();
+                        isRecording = false;
+                        document.getElementById('audioBtn').innerHTML = '🎙️';
+                    }
+                }, 15000);
+                
+            } catch (err) {
+                alert("❌ لا يمكن الوصول إلى الميكروفون: " + err.message);
+            }
         }
     }
     
@@ -599,6 +685,7 @@
                     const img = document.createElement('img');
                     img.src = data.imageUrl;
                     img.className = 'message-image';
+                    img.onclick = () => window.open(data.imageUrl, '_blank');
                     messageDiv.appendChild(img);
                 }
                 
@@ -629,13 +716,15 @@
             });
             
             const select = document.getElementById('userToCall');
-            select.innerHTML = '<option value="">اختر مستخدم للاتصال...</option>';
-            users.forEach(user => {
-                const option = document.createElement('option');
-                option.value = user.uid;
-                option.textContent = user.username + (user.isVIP ? ' (VIP)' : '');
-                select.appendChild(option);
-            });
+            if (select) {
+                select.innerHTML = '<option value="">اختر مستخدم للاتصال...</option>';
+                users.forEach(user => {
+                    const option = document.createElement('option');
+                    option.value = user.uid;
+                    option.textContent = user.username + (user.isVIP ? ' (VIP ⭐)' : '');
+                    select.appendChild(option);
+                });
+            }
             
             document.getElementById('chatOnlineUsers').innerHTML = `👥 المتصلون: ${users.length + 1}`;
         });
@@ -644,27 +733,31 @@
     // ==================== WebRTC Voice Call (VIP only) ====================
     async function startCall() {
         if (!isVIP) {
-            alert("❌ المكالمات الصوتية متاحة فقط للمستخدمين المميزين (VIP)!");
+            alert("❌ المكالمات الصوتية متاحة فقط للمستخدمين المميزين VIP!\n👑 قم بترقية حسابك من الزر الأحمر في الأسفل.");
             return;
         }
         
         const targetUserId = document.getElementById('userToCall').value;
         if (!targetUserId) {
-            alert("الرجاء اختيار مستخدم للاتصال به");
+            alert("⚠️ الرجاء اختيار مستخدم للاتصال به");
             return;
         }
-        
-        document.getElementById('callStatus').innerHTML = "📞 جاري الاتصال...";
         
         // Get target user data
         const targetDoc = await db.collection("users").doc(targetUserId).get();
         const targetUser = targetDoc.data();
         
         if (!targetUser.online) {
-            alert("المستخدم غير متصل حالياً");
-            document.getElementById('callStatus').innerHTML = "";
+            alert("❌ المستخدم غير متصل حالياً");
             return;
         }
+        
+        if (!targetUser.isVIP) {
+            alert("❌ يمكنك الاتصال فقط بالمستخدمين المميزين VIP");
+            return;
+        }
+        
+        document.getElementById('callStatus').innerHTML = "📞 جاري الاتصال...";
         
         // Create call offer
         const callId = Date.now().toString();
@@ -677,13 +770,18 @@
         });
         
         // Listen for answer
-        db.collection("calls").doc(callId).onSnapshot(async (doc) => {
+        const unsubscribe = db.collection("calls").doc(callId).onSnapshot((doc) => {
             const data = doc.data();
             if (data && data.status === "answered") {
-                document.getElementById('callStatus').innerHTML = "📞 متصل... اضغط إنهاء لإغلاق المكالمة";
-                // In a full implementation, we would establish WebRTC peer connection here
-                // For demo, we'll show a simulated call
-                simulateCall(targetUser.username);
+                unsubscribe();
+                document.getElementById('callStatus').innerHTML = "📞 متصل... اضغط رفض لإنهاء المكالمة";
+                showActiveCall(targetUser.username);
+            } else if (data && data.status === "rejected") {
+                unsubscribe();
+                document.getElementById('callStatus').innerHTML = "❌ تم رفض المكالمة";
+                setTimeout(() => {
+                    document.getElementById('callStatus').innerHTML = "";
+                }, 3000);
             }
         });
     }
@@ -694,42 +792,37 @@
         db.collection("calls").where("to", "==", currentUser.uid).where("status", "==", "calling").onSnapshot(snapshot => {
             snapshot.forEach(doc => {
                 const data = doc.data();
-                if (data.status === "calling") {
-                    document.getElementById('callerName').innerHTML = `📞 مكالمة واردة من ${data.fromName}`;
-                    document.getElementById('incomingCall').classList.remove('hidden');
-                    window.currentCallId = doc.id;
-                    window.currentCallerId = data.from;
-                }
+                document.getElementById('callerName').innerHTML = `📞 مكالمة صوتية من ${data.fromName}${data.isVIP ? ' (VIP)' : ''}`;
+                document.getElementById('incomingCall').classList.remove('hidden');
+                window.currentCallId = doc.id;
+                window.currentCallerId = data.from;
+                window.currentCallerName = data.fromName;
             });
         });
     }
     
-    function answerCall() {
+    async function answerCall() {
         const callId = window.currentCallId;
-        db.collection("calls").doc(callId).update({
+        await db.collection("calls").doc(callId).update({
             status: "answered"
         });
         document.getElementById('incomingCall').classList.add('hidden');
-        document.getElementById('callStatus').innerHTML = "📞 جاري الاتصال...";
-        
-        // Simulate call
-        setTimeout(() => {
-            document.getElementById('callStatus').innerHTML = "📞 متصل... اضغط إنهاء لإغلاق المكالمة";
-        }, 2000);
+        document.getElementById('callStatus').innerHTML = "📞 متصل... اضغط رفض لإنهاء المكالمة";
+        showActiveCall(window.currentCallerName);
     }
     
-    function rejectCall() {
+    async function rejectCall() {
         const callId = window.currentCallId;
-        db.collection("calls").doc(callId).update({
+        await db.collection("calls").doc(callId).update({
             status: "rejected"
         });
         document.getElementById('incomingCall').classList.add('hidden');
-        document.getElementById('callStatus').innerHTML = "";
     }
     
-    function simulateCall(username) {
-        // Simulate an incoming call UI
+    function showActiveCall(callerName) {
+        // Create call UI
         const callDiv = document.createElement('div');
+        callDiv.id = 'activeCall';
         callDiv.style.position = 'fixed';
         callDiv.style.bottom = '100px';
         callDiv.style.left = '50%';
@@ -740,13 +833,28 @@
         callDiv.style.padding = '15px';
         callDiv.style.zIndex = '2000';
         callDiv.style.textAlign = 'center';
+        callDiv.style.width = '90%';
+        callDiv.style.maxWidth = '300px';
         callDiv.innerHTML = `
-            <div style="color:white;">🔊 مكالمة صوتية مع ${username}</div>
-            <button onclick="this.parentElement.remove()" style="background:#ff3366; border:none; padding:5px 15px; border-radius:20px; margin-top:10px; color:white;">❌ إنهاء المكالمة</button>
+            <div style="color:white; margin-bottom:10px;">🎙️ مكالمة صوتية مع ${callerName}</div>
+            <button onclick="endCall()" style="background:#ff3366; border:none; padding:8px 20px; border-radius:20px; color:white; cursor:pointer;">❌ إنهاء المكالمة</button>
         `;
         document.body.appendChild(callDiv);
         
-        document.getElementById('callStatus').innerHTML = "";
+        // Simulate ringtone
+        const ringtone = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3');
+        ringtone.volume = 0.3;
+        ringtone.play();
+        setTimeout(() => ringtone.pause(), 2000);
+    }
+    
+    function endCall() {
+        const callDiv = document.getElementById('activeCall');
+        if (callDiv) callDiv.remove();
+        document.getElementById('callStatus').innerHTML = "📞 انتهت المكالمة";
+        setTimeout(() => {
+            document.getElementById('callStatus').innerHTML = "";
+        }, 3000);
     }
     
     // ==================== Music ====================
@@ -757,23 +865,23 @@
         if (!music) {
             music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
             music.loop = true;
-            music.volume = 0.5;
+            music.volume = 0.3;
         }
         
         if (musicPlaying) {
             music.pause();
-            document.getElementById('musicBtn').innerHTML = '🎵 موسيقى';
+            document.getElementById('musicBtn').innerHTML = '🎵 تشغيل';
         } else {
-            music.play();
+            music.play().catch(e => console.log('Auto-play prevented'));
             document.getElementById('musicBtn').innerHTML = '🔇 إيقاف';
         }
         musicPlaying = !musicPlaying;
     }
     
-    // ==================== Cleanup on page close ====================
-    window.addEventListener('beforeunload', () => {
+    // ==================== Cleanup ====================
+    window.addEventListener('beforeunload', async () => {
         if (currentUser) {
-            updateOnlineStatus(false);
+            await db.collection("users").doc(currentUser.uid).update({ online: false });
         }
     });
 </script>
