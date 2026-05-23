@@ -239,6 +239,18 @@
             cursor: pointer;
         }
 
+        /* مساحة الإعلان فوق الألعاب */
+        .ad-space {
+            background: rgba(0,0,0,0.5);
+            border: 1px dashed #ff44ff;
+            border-radius: 12px;
+            padding: 6px;
+            margin: 5px 0 8px 0;
+            text-align: center;
+            font-size: 0.55rem;
+            color: #ffaa88;
+        }
+
         /* Two rows for games */
         .games-wrapper {
             margin-top: 0;
@@ -469,6 +481,11 @@
                 </div>
             </div>
             
+            <!-- مساحة الإعلان فوق الألعاب مباشرة -->
+            <div class="ad-space" id="adSpace">
+                📺 إعلان هنا - اشترك في التسجيل لإزالته
+            </div>
+            
             <div class="games-wrapper">
                 <div class="two-rows" id="gamesContainer"></div>
             </div>
@@ -544,6 +561,16 @@
                 <div class="rank-points">⭐ ${bronze ? bronze.points : 0}</div>
             </div>
         `;
+    }
+    
+    // إخفاء أو إظهار مساحة الإعلان حسب الحساب المميز
+    function updateAdSpace() {
+        const adSpace = document.getElementById('adSpace');
+        if(isPremium) {
+            adSpace.style.display = 'none';
+        } else {
+            adSpace.style.display = 'block';
+        }
     }
     
     function renderAllGames() {
@@ -638,6 +665,7 @@
     
     document.getElementById('registerBtn').addEventListener('click', ()=>{
         isPremium = true;
+        updateAdSpace();
         alert('🎉 تم التسجيل! أصبحت مميزاً بدون إعلانات.');
         document.getElementById('registerBtn').style.opacity = '0.7';
         document.getElementById('registerBtn').style.background = '#ff44ff';
@@ -669,6 +697,7 @@
     }, {once:true});
     
     updateRanking();
+    updateAdSpace();
     renderAllGames();
 </script>
 </body>
