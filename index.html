@@ -264,41 +264,52 @@
             100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
         }
 
-        /* Games - Original size, compact at bottom */
+        /* Games - Horizontal scroll rows, 4 per row visible */
         .games-wrapper {
             margin: 0;
             flex: 1;
             display: flex;
-            align-items: flex-end;
-        }
-        
-        .two-rows {
-            display: flex;
             flex-direction: column;
-            gap: 8px;
-            width: 100%;
+            gap: 12px;
+            padding-bottom: 8px;
         }
         
         .game-row {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             overflow-x: auto;
-            padding-bottom: 5px;
+            scroll-snap-type: x mandatory;
+            padding: 4px 2px 8px 2px;
+            scrollbar-width: thin;
+            scrollbar-color: #ff44ff #1a1a2e;
         }
         
         .game-row::-webkit-scrollbar {
-            display: none;
+            height: 4px;
+        }
+        
+        .game-row::-webkit-scrollbar-track {
+            background: #1a1a2e;
+            border-radius: 10px;
+        }
+        
+        .game-row::-webkit-scrollbar-thumb {
+            background: #ff44ff;
+            border-radius: 10px;
         }
         
         .game-card {
-            min-width: 95px;
+            min-width: calc(25% - 7.5px);
+            width: calc(25% - 7.5px);
+            max-width: calc(25% - 7.5px);
             background: linear-gradient(145deg, #0f0f2a, #0a0a1a);
             border-radius: 14px;
-            padding: 6px;
+            padding: 8px 6px;
             text-align: center;
             border: 1px solid #ff44ff;
             cursor: pointer;
             transition: all 0.2s ease;
+            scroll-snap-align: start;
         }
         
         .game-card:hover {
@@ -309,17 +320,20 @@
         
         .game-img {
             width: 100%;
-            height: 65px;
+            aspect-ratio: 1 / 0.9;
             background-size: cover;
             background-position: center;
             border-radius: 10px;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
         
         .game-title {
             color: white;
-            font-size: 0.5rem;
+            font-size: 0.55rem;
             font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         /* Bottom Bar */
@@ -957,8 +971,8 @@
             <!-- ENLARGED AD -->
             <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
             
-            <div class="games-wrapper">
-                <div class="two-rows" id="gamesContainer"></div>
+            <div class="games-wrapper" id="gamesWrapper">
+                <!-- Dynamic game rows will be inserted here -->
             </div>
         </div>
         
@@ -1644,15 +1658,120 @@
         }
     }
     
-    // ==================== Games Data ====================
+    // ==================== Games Data (Extended with more games for scrolling demo) ====================
     const gamesData = [
         { id:1, name:"Sonic", img:"https://images6.alphacoders.com/118/1185678.jpg", url:"https://www.crazygames.com/embed/sonic-the-hedgehog", cat:"action", points:150, avatar:"🦔", playerName:"Shadow" },
         { id:2, name:"Subway Surfers", img:"https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action", points:200, avatar:"🏃", playerName:"Speed" },
         { id:3, name:"Temple Run 2", img:"https://images.hdqwalls.com/wallpapers/pubg-mobile-squad-4k-8q.jpg", url:"https://www.crazygames.com/embed/temple-run-2", cat:"action", points:180, avatar:"🏛️", playerName:"RunKing" },
         { id:4, name:"Hill Climb", img:"https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg", url:"https://www.crazygames.com/embed/hill-climb-racing", cat:"racing", points:120, avatar:"🚗", playerName:"Climber" },
         { id:5, name:"Street Fighter", img:"https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg", url:"https://www.crazygames.com/embed/street-fighter", cat:"fighting", points:300, avatar:"👊", playerName:"Fighter" },
-        { id:6, name:"Among Us", img:"https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg", url:"https://www.crazygames.com/embed/among-us-online", cat:"puzzle", points:90, avatar:"👽", playerName:"Impostor" }
+        { id:6, name:"Among Us", img:"https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg", url:"https://www.crazygames.com/embed/among-us-online", cat:"puzzle", points:90, avatar:"👽", playerName:"Impostor" },
+        // Additional games for horizontal scrolling (unlimited)
+        { id:7, name:"Call of Duty", img:"https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-2020-8k-2020-32.jpg", url:"https://www.crazygames.com/embed/call-of-duty-mobile", cat:"action", points:250, avatar:"🔫", playerName:"Soldier" },
+        { id:8, name:"Minecraft", img:"https://images.hdqwalls.com/wallpapers/minecraft-2020-4k-6p.jpg", url:"https://www.crazygames.com/embed/minecraft-classic", cat:"puzzle", points:200, avatar:"⛏️", playerName:"Builder" },
+        { id:9, name:"Fall Guys", img:"https://images.hdqwalls.com/wallpapers/fall-guys-ultimate-knockout-2020-58.jpg", url:"https://www.crazygames.com/embed/fall-guys", cat:"racing", points:180, avatar:"🫘", playerName:"Bean" },
+        { id:10, name:"Roblox", img:"https://images.hdqwalls.com/wallpapers/roblox-2020-artwork-4k-5k.jpg", url:"https://www.crazygames.com/embed/roblox", cat:"action", points:220, avatar:"🧱", playerName:"Noob" },
+        { id:11, name:"Fortnite", img:"https://images.hdqwalls.com/wallpapers/fortnite-chapter-2-season-3-2020-4k-6m.jpg", url:"https://www.crazygames.com/embed/fortnite", cat:"action", points:350, avatar:"🎯", playerName:"Jonesy" },
+        { id:12, name:"GTA V", img:"https://images.hdqwalls.com/wallpapers/grand-theft-auto-v-2020-4k-5z.jpg", url:"https://www.crazygames.com/embed/grand-theft-auto-v", cat:"action", points:400, avatar:"🚗", playerName:"Franklin" }
     ];
+    
+    // Function to chunk games into rows of 4
+    function chunkArray(arr, chunkSize) {
+        const chunks = [];
+        for (let i = 0; i < arr.length; i += chunkSize) {
+            chunks.push(arr.slice(i, i + chunkSize));
+        }
+        return chunks;
+    }
+    
+    function renderAllGames() {
+        const rows = chunkArray(gamesData, 4);
+        const gamesWrapper = document.getElementById('gamesWrapper');
+        gamesWrapper.innerHTML = rows.map(row => `
+            <div class="game-row">
+                ${row.map(game => `
+                    <div class="game-card" data-id="${game.id}" data-url="${game.url}">
+                        <div class="game-img" style="background-image:url('${game.img}')"></div>
+                        <div class="game-title">${game.name}</div>
+                    </div>
+                `).join('')}
+            </div>
+        `).join('');
+        
+        // Add click handlers
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const id = parseInt(card.dataset.id);
+                const game = gamesData.find(g => g.id === id);
+                if (game) { 
+                    game.points += 5; 
+                    updateRanking(); 
+                }
+                document.getElementById('gameIframe').src = card.dataset.url;
+                document.getElementById('gameModal').classList.remove('hidden');
+            });
+        });
+    }
+    
+    function showCategoryGames(category) {
+        const filtered = gamesData.filter(g => g.cat === category);
+        const rows = chunkArray(filtered, 4);
+        document.getElementById('categoryGamesContainer').innerHTML = rows.map(row => `
+            <div class="game-row">
+                ${row.map(game => `
+                    <div class="game-card" data-url="${game.url}">
+                        <div class="game-img" style="background-image:url('${game.img}')"></div>
+                        <div class="game-title">${game.name}</div>
+                    </div>
+                `).join('')}
+            </div>
+        `).join('');
+        
+        document.querySelectorAll('#categoryGamesContainer .game-card').forEach(c => {
+            c.addEventListener('click', () => {
+                document.getElementById('gameIframe').src = c.dataset.url;
+                document.getElementById('gameModal').classList.remove('hidden');
+            });
+        });
+        document.getElementById('homePage').classList.add('page-hidden');
+        document.getElementById('categoryPage').classList.remove('page-hidden');
+    }
+    
+    document.querySelectorAll('.cat-badge').forEach(b => {
+        b.addEventListener('click', () => showCategoryGames(b.dataset.cat));
+    });
+    document.getElementById('backToHomeBtn').addEventListener('click', () => {
+        document.getElementById('homePage').classList.remove('page-hidden');
+        document.getElementById('categoryPage').classList.add('page-hidden');
+    });
+    
+    function updateRanking() {
+        const sorted = [...gamesData].sort((a,b)=>b.points - a.points);
+        document.getElementById('rankingList').innerHTML = `
+            <div class="rank-item"><div class="silver-circle">${sorted[1]?.avatar||'👤'}</div><div class="rank-name">${sorted[1]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[1]?.points||0}</div></div>
+            <div class="rank-item"><div class="gold-circle">${sorted[0]?.avatar||'👤'}</div><div class="rank-name">${sorted[0]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[0]?.points||0}</div></div>
+            <div class="rank-item"><div class="bronze-circle">${sorted[2]?.avatar||'👤'}</div><div class="rank-name">${sorted[2]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[2]?.points||0}</div></div>
+        `;
+    }
+    
+    function closeGameModal() {
+        document.getElementById('gameModal').classList.add('hidden');
+        document.getElementById('gameIframe').src = '';
+    }
+    
+    function upgradeToVIP() {
+        if(isVIP) { alert(translations[currentLang].alreadyVIP); return; }
+        if(confirm(translations[currentLang].upgradeConfirm)) {
+            isVIP = true;
+            localStorage.setItem('didogame_vip', 'true');
+            document.getElementById('registerBtn').innerHTML = translations[currentLang].vipActive;
+            document.getElementById('registerBtn').classList.add('vip-active');
+            alert(translations[currentLang].upgradeSuccess);
+            if(document.getElementById('openChatView').style.display === 'flex') {
+                document.getElementById('videoCallBtn').style.display = 'inline-block';
+            }
+        }
+    }
     
     // ==================== Global Variables ====================
     let currentUser = null;
@@ -1713,79 +1832,6 @@
             return false;
         }
         return true;
-    }
-
-    // ==================== Games Functions ====================
-    function updateRanking() {
-        const sorted = [...gamesData].sort((a,b)=>b.points - a.points);
-        document.getElementById('rankingList').innerHTML = `
-            <div class="rank-item"><div class="silver-circle">${sorted[1]?.avatar||'👤'}</div><div class="rank-name">${sorted[1]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[1]?.points||0}</div></div>
-            <div class="rank-item"><div class="gold-circle">${sorted[0]?.avatar||'👤'}</div><div class="rank-name">${sorted[0]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[0]?.points||0}</div></div>
-            <div class="rank-item"><div class="bronze-circle">${sorted[2]?.avatar||'👤'}</div><div class="rank-name">${sorted[2]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[2]?.points||0}</div></div>
-        `;
-    }
-    
-    function renderAllGames() {
-        const mid = Math.ceil(gamesData.length/2);
-        const row1 = gamesData.slice(0,mid);
-        const row2 = gamesData.slice(mid);
-        document.getElementById('gamesContainer').innerHTML = `
-            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}"><div class="game-img" style="background-image:url('${g.img}')"></div><div class="game-title">${g.name}</div></div>`).join('')}</div>
-            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}"><div class="game-img" style="background-image:url('${g.img}')"></div><div class="game-title">${g.name}</div></div>`).join('')}</div>
-        `;
-        document.querySelectorAll('.game-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const id = parseInt(card.dataset.id);
-                const game = gamesData.find(g=>g.id===id);
-                if(game) { game.points += 5; updateRanking(); }
-                document.getElementById('gameIframe').src = card.dataset.url;
-                document.getElementById('gameModal').classList.remove('hidden');
-            });
-        });
-    }
-    
-    function showCategoryGames(category) {
-        const filtered = gamesData.filter(g=>g.cat===category);
-        const mid = Math.ceil(filtered.length/2);
-        document.getElementById('categoryGamesContainer').innerHTML = `
-            <div class="game-row">${filtered.slice(0,mid).map(g=>`<div class="game-card" data-url="${g.url}"><div class="game-img" style="background-image:url('${g.img}')"></div><div class="game-title">${g.name}</div></div>`).join('')}</div>
-            <div class="game-row">${filtered.slice(mid).map(g=>`<div class="game-card" data-url="${g.url}"><div class="game-img" style="background-image:url('${g.img}')"></div><div class="game-title">${g.name}</div></div>`).join('')}</div>
-        `;
-        document.querySelectorAll('#categoryGamesContainer .game-card').forEach(c=>{
-            c.addEventListener('click',()=>{
-                document.getElementById('gameIframe').src = c.dataset.url;
-                document.getElementById('gameModal').classList.remove('hidden');
-            });
-        });
-        document.getElementById('homePage').classList.add('page-hidden');
-        document.getElementById('categoryPage').classList.remove('page-hidden');
-    }
-    
-    document.querySelectorAll('.cat-badge').forEach(b=>{
-        b.addEventListener('click',()=>showCategoryGames(b.dataset.cat));
-    });
-    document.getElementById('backToHomeBtn').addEventListener('click',()=>{
-        document.getElementById('homePage').classList.remove('page-hidden');
-        document.getElementById('categoryPage').classList.add('page-hidden');
-    });
-    
-    function closeGameModal() {
-        document.getElementById('gameModal').classList.add('hidden');
-        document.getElementById('gameIframe').src = '';
-    }
-    
-    function upgradeToVIP() {
-        if(isVIP) { alert(translations[currentLang].alreadyVIP); return; }
-        if(confirm(translations[currentLang].upgradeConfirm)) {
-            isVIP = true;
-            localStorage.setItem('didogame_vip', 'true');
-            document.getElementById('registerBtn').innerHTML = translations[currentLang].vipActive;
-            document.getElementById('registerBtn').classList.add('vip-active');
-            alert(translations[currentLang].upgradeSuccess);
-            if(document.getElementById('openChatView').style.display === 'flex') {
-                document.getElementById('videoCallBtn').style.display = 'inline-block';
-            }
-        }
     }
     
     // ==================== Chat Functions ====================
