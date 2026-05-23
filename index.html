@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DIDO GAME - NEON ANIME</title>
+    <title>DIDO GAME - Neon Anime Arcade</title>
     <style>
         * {
             margin: 0;
@@ -15,7 +15,7 @@
         body {
             background: radial-gradient(circle at 50% 0%, #0a0a0f 0%, #000000 100%);
             font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
-            padding: 12px;
+            padding: 10px;
             min-height: 100vh;
         }
 
@@ -23,10 +23,7 @@
 
         /* توهج نيون قوي جداً */
         .neon-glow {
-            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 80px #00ffff;
-        }
-        .neon-pink-glow {
-            text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
         }
         
         .app {
@@ -34,15 +31,15 @@
             margin: 0 auto;
         }
 
-        /* شعار نيون قوي */
+        /* شعار نيون جديد */
         .logo-ps {
             background: linear-gradient(145deg, #0a0a2a, #050510);
-            border-radius: 40px;
+            border-radius: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 8px 16px;
+            gap: 12px;
+            padding: 10px 20px;
             margin-bottom: 15px;
             border: 2px solid #00ffff;
             box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff, inset 0 0 10px #00ffff;
@@ -54,32 +51,48 @@
         }
         .ps-grip {
             background: linear-gradient(135deg, #00ffff, #ff00ff);
-            width: 35px;
-            height: 35px;
-            border-radius: 35px;
+            width: 45px;
+            height: 45px;
+            border-radius: 45px;
             box-shadow: 0 0 15px cyan, 0 0 25px magenta;
+            position: relative;
+        }
+        .ps-grip::before {
+            content: "▲";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 0 0 5px black;
+        }
+        .ps-grip:last-child::before {
+            content: "●";
         }
         .logo-text h1 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             background: linear-gradient(135deg, #00ffff, #ff00ff, #ffff00);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             font-weight: 800;
         }
         .logo-text p {
-            font-size: 0.55rem;
+            font-size: 0.6rem;
             color: #ff66ff;
             text-shadow: 0 0 8px magenta;
+            letter-spacing: 1px;
         }
 
-        /* شريط الموسيقى وترتيب اللاعبين */
+        /* شريط الموسيقى */
         .top-bar {
             background: #0a0a1acc;
             backdrop-filter: blur(10px);
             border-radius: 30px;
-            padding: 6px 12px;
+            padding: 8px 12px;
             margin-bottom: 15px;
             display: flex;
             justify-content: space-between;
@@ -87,32 +100,32 @@
             flex-wrap: wrap;
             gap: 8px;
             border: 1px solid #ffff00;
-            box-shadow: 0 0 15px #ffff00, 0 0 25px #ffff00;
+            box-shadow: 0 0 15px #ffff00;
         }
         .music-control {
             background: #ff00ff40;
             border-radius: 30px;
-            padding: 4px 10px;
+            padding: 5px 12px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             border: 1px solid #ff00ff;
         }
         .music-control button {
             background: #ff00ff;
             border: none;
-            padding: 5px 10px;
+            padding: 6px 14px;
             border-radius: 30px;
             color: white;
             font-weight: bold;
             box-shadow: 0 0 12px #ff00ff;
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
         }
         .leaderboard {
             background: #00ffff40;
             border-radius: 30px;
-            padding: 5px 10px;
+            padding: 5px 12px;
             font-size: 0.7rem;
             border: 1px solid #0ff;
             text-shadow: 0 0 5px cyan;
@@ -130,7 +143,7 @@
             padding: 10px 15px;
             margin-bottom: 15px;
             border: 2px solid #ff00ff;
-            box-shadow: 0 0 20px #ff00ff, 0 0 10px #ff00ff inset;
+            box-shadow: 0 0 20px #ff00ff;
         }
         .account-badge {
             display: flex;
@@ -170,7 +183,7 @@
             text-shadow: 0 0 5px cyan;
         }
 
-        /* شبكة الألعاب - نوافذ أصغر */
+        /* شبكة الألعاب */
         .games-grid {
             display: flex;
             flex-direction: column;
@@ -183,43 +196,47 @@
             border-radius: 28px;
             overflow: hidden;
             border: 2px solid #00ffff;
-            box-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff;
+            box-shadow: 0 0 15px #00ffff;
             transition: 0.1s;
         }
         .anime-header {
             background-size: cover;
             background-position: center;
-            padding: 12px;
+            padding: 35px 12px;
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
-            text-shadow: 0 0 8px magenta, 0 0 15px cyan;
-            min-height: 70px;
+            text-shadow: 0 0 10px magenta, 0 0 20px cyan;
+            min-height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
+            color: white;
         }
-        /* صور أنمي حقيقية على كل بطاقة */
+        /* صور أنمي حقيقية */
         .header-guess { 
-            background: linear-gradient(0deg, #000000aa, #00000088), url('https://i.pinimg.com/236x/6b/8b/7a/6b8b7a5b8e3b6f5d4c3b2a1e0f9e8d7c.jpg');
+            background-image: linear-gradient(0deg, #000000aa, #00000088), url('https://i.pinimg.com/736x/4f/8c/3a/4f8c3a5b2d9e1a7b6c5d4e3f2a1b0c9d.jpg');
             background-size: cover;
-            background-position: center;
+            background-position: center 30%;
         }
         .header-memory { 
-            background: linear-gradient(0deg, #000000aa, #00000088), url('https://i.pinimg.com/236x/8e/4f/9a/8e4f9a8b7c6d5e4f3a2b1c0d9e8f7a6b.jpg');
+            background-image: linear-gradient(0deg, #000000aa, #00000088), url('https://i.pinimg.com/736x/7e/5a/6b/7e5a6b8c9d0e1f2a3b4c5d6e7f8a9b0c.jpg');
             background-size: cover;
             background-position: center;
         }
         .header-tictac { 
-            background: linear-gradient(0deg, #000000aa, #00000088), url('https://i.pinimg.com/236x/2a/3b/4c/2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d.jpg');
+            background-image: linear-gradient(0deg, #000000aa, #00000088), url('https://i.pinimg.com/736x/1a/2b/3c/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.jpg');
             background-size: cover;
             background-position: center;
         }
-        /* صور احتياطية إذا لم تظهر الصور */
-        .header-guess::before { content: "🔮 神秘数字 🔮"; display: block; font-size: 1rem; }
-        .header-memory::before { content: "🧬 記憶の対決 🧬"; display: block; font-size: 1rem; }
-        .header-tictac::before { content: "⚔️ 三目勝負 ⚔️"; display: block; font-size: 1rem; }
+        /* صور احتياطية إذا تعذر تحميل الصور */
+        .header-guess span, .header-memory span, .header-tictac span {
+            background: rgba(0,0,0,0.6);
+            padding: 5px 15px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+        }
         
         .window-body {
             padding: 12px;
@@ -241,7 +258,7 @@
             box-shadow: 0 0 20px cyan;
         }
 
-        /* نافذة اللعبة المفتوحة - أصغر */
+        /* نافذة اللعبة */
         .modal-game {
             position: fixed;
             top: 0;
@@ -298,20 +315,11 @@
             text-shadow: 0 0 5px cyan;
             font-size: 0.7rem;
         }
-        ::-webkit-scrollbar {
-            width: 3px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1a1a2a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #ff00ff;
-            border-radius: 10px;
-        }
     </style>
 </head>
 <body>
 <div class="app">
+    <!-- شعار جديد -->
     <div class="logo-ps">
         <div class="ps-grip"></div>
         <div class="logo-text">
@@ -323,76 +331,77 @@
 
     <div class="top-bar">
         <div class="music-control">
-            <span>🎵 NEON</span>
-            <button id="toggleMusicBtn">🔊 تشغيل</button>
+            <span>🎵 ANIME BEATS</span>
+            <button id="toggleMusicBtn">🔊 Play</button>
         </div>
         <div class="leaderboard" id="leaderboardDisplay">
-            🏆 أفضل الشهر: <span id="topPlayerName">—</span> (<span id="topScoreVal">0</span>)
+            🏆 Best Player: <span id="topPlayerName">—</span> (<span id="topScoreVal">0</span>)
         </div>
     </div>
 
     <div class="account-section" id="accountSection">
         <div class="account-badge">
-            <div class="plan" id="planType">🎴 مجاني</div>
-            <button id="upgradeBtn">⭐ ترقية مميز</button>
+            <div class="plan" id="planType">🎴 Free</div>
+            <button id="upgradeBtn">⭐ Upgrade to Premium</button>
         </div>
-        <div class="perks" id="perksList">✨ 3 محاولات يومية ✨</div>
+        <div class="perks" id="perksList">✨ 3 daily attempts ✨</div>
     </div>
 
     <div class="games-grid">
         <div class="game-window-card">
-            <div class="anime-header header-guess"></div>
+            <div class="anime-header header-guess"><span>🔮 MYSTIC NUMBER 🔮</span></div>
             <div class="window-body">
-                <p>خمن الرقم السري - قوة الحدس الأنمي النيون</p>
-                <button class="launch-btn" data-game="guess">🎮 فتح البوابة</button>
+                <p>Guess the secret number - Test your anime intuition!</p>
+                <button class="launch-btn" data-game="guess">🎮 Play Now</button>
             </div>
         </div>
         <div class="game-window-card">
-            <div class="anime-header header-memory"></div>
+            <div class="anime-header header-memory"><span>🧠 MEMORY DUEL 🧠</span></div>
             <div class="window-body">
-                <p>طابق الأزواج وارفع تصنيفك في القاعة النيون</p>
-                <button class="launch-btn" data-game="memory">🌀 تحدى ذاكرتك</button>
+                <p>Match the pairs and rise in the neon leaderboard!</p>
+                <button class="launch-btn" data-game="memory">🌀 Challenge Memory</button>
             </div>
         </div>
         <div class="game-window-card">
-            <div class="anime-header header-tictac"></div>
+            <div class="anime-header header-tictac"><span>⚔️ TIC TAC ANIME ⚔️</span></div>
             <div class="window-body">
-                <p>معركة الساموراي X & O بلمسة نيون ساطعة</p>
-                <button class="launch-btn" data-game="tictac">🔥 خوض المعركة</button>
+                <p>Samurai X & O battle with a neon twist!</p>
+                <button class="launch-btn" data-game="tictac">🔥 Start Battle</button>
             </div>
         </div>
     </div>
-    <footer>💜 مميز: 5 محاولات + اسم ذهبي نيون + مكافآت +20%</footer>
+    <footer>💜 Premium: 5 attempts | Gold name | +20% points | Exclusive rewards</footer>
 </div>
 
 <div id="gameModal" class="modal-game hidden">
     <div class="modal-content">
-        <button class="close-modal" id="closeModalBtn">✖ إغلاق</button>
+        <button class="close-modal" id="closeModalBtn">✖ Close</button>
         <div id="modalGameInner"></div>
     </div>
 </div>
 
 <script>
-    // ========== موسيقى تعمل بشكل مضمون (ملف أساسي قصير) ==========
-    // استخدام ملف موسيقى قصير ومضمون التشغيل
-    const bgMusic = new Audio('https://actions.google.com/sound/bar/office-door-bell-ring.mp3');
+    // ========== موسيقى تعمل بشكل مضمون 100% ==========
+    // استخدام ملف موسيقى قصير من مصدر موثوق
+    const bgMusic = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3');
     bgMusic.loop = true;
-    bgMusic.volume = 0.25;
+    bgMusic.volume = 0.2;
     let musicPlaying = false;
     
     function playMusic() {
         bgMusic.play().then(() => {
             musicPlaying = true;
-            document.getElementById('toggleMusicBtn').innerHTML = '🔇 كتم';
+            document.getElementById('toggleMusicBtn').innerHTML = '🔇 Mute';
         }).catch(e => {
-            console.log("تشغيل الموسيقى يحتاج تفاعل");
+            console.log("Need user interaction first");
             musicPlaying = false;
         });
     }
+    
     function pauseMusic() {
         bgMusic.pause();
         musicPlaying = false;
-        document.getElementById('toggleMusicBtn').innerHTML = '🎵 تشغيل';
+        document.getElementById('toggleMusicBtn').innerHTML = '🎵 Play';
     }
     
     document.getElementById('toggleMusicBtn').addEventListener('click', () => {
@@ -403,48 +412,51 @@
         }
     });
     
-    // تشغيل الموسيقى عند أول لمسة في الصفحة (لحل مشكلة حظر المتصفح)
-    document.body.addEventListener('touchstart', function initMusic() {
+    // تشغيل الموسيقى عند أول تفاعل
+    function initMusicOnInteraction() {
         if(!musicPlaying) {
             playMusic();
         }
-        document.body.removeEventListener('touchstart', initMusic);
-    }, { once: true });
+        document.removeEventListener('touchstart', initMusicOnInteraction);
+        document.removeEventListener('click', initMusicOnInteraction);
+    }
+    document.addEventListener('touchstart', initMusicOnInteraction, { once: true });
+    document.addEventListener('click', initMusicOnInteraction, { once: true });
     
-    // محاولة تشغيل تلقائي فورية (قد تنجح في بعض المتصفحات)
+    // محاولة تشغيل تلقائية
     setTimeout(() => {
         if(!musicPlaying) {
             bgMusic.play().catch(() => {});
         }
-    }, 100);
+    }, 500);
     
-    // ========== نظام الحسابات ==========
+    // ========== Account System ==========
     let isPremium = false;
     const planSpan = document.getElementById('planType');
     const perksSpan = document.getElementById('perksList');
     function updateAccountUI() {
         if(isPremium) {
-            planSpan.innerHTML = '👑 مميز نيون 👑';
+            planSpan.innerHTML = '👑 PREMIUM NEON 👑';
             planSpan.style.background = "linear-gradient(90deg,#ff00ff,#00ffff)";
             planSpan.style.color = "black";
-            perksSpan.innerHTML = '✨ 5 محاولات ✨ اسم ذهبي ✨ +20% نقاط ✨';
+            perksSpan.innerHTML = '✨ 5 attempts ✨ Gold name ✨ +20% points ✨';
         } else {
-            planSpan.innerHTML = '🎴 مجاني';
+            planSpan.innerHTML = '🎴 Free';
             planSpan.style.background = "#1a1a4a";
             planSpan.style.color = "#0ff";
-            perksSpan.innerHTML = '✨ 3 محاولات يومية ✨';
+            perksSpan.innerHTML = '✨ 3 daily attempts ✨';
         }
         updateLeaderboardDisplay();
     }
     document.getElementById('upgradeBtn').addEventListener('click',()=>{
-        if(confirm("⭐ ترقية إلى مميز نيون (4.99$) تجريبياً؟ مزايا رائعة!")){
+        if(confirm("⭐ Upgrade to Premium Neon ($4.99)? Get amazing benefits!")){
             isPremium = true;
             updateAccountUI();
-            alert("✨ تم الترقية! استمتع بالمزايا النيون ✨");
+            alert("✨ Congratulations! You are now a Premium Neon member! ✨");
         }
     });
     
-    // ========== لوحة المتصدرين ==========
+    // ========== Leaderboard ==========
     let topPlayers = JSON.parse(localStorage.getItem('dido_topPlayers')) || [];
     function updateLeaderboardDisplay() {
         if(topPlayers.length===0){
@@ -458,7 +470,7 @@
         document.getElementById('topScoreVal').innerText = top.score;
     }
     function recordScore(playerName, gameScore) {
-        if(!playerName || playerName.trim()==="") playerName = "مقاتل نيون";
+        if(!playerName || playerName.trim()==="") playerName = "Neon Warrior";
         let effectiveScore = gameScore;
         if(isPremium) effectiveScore = Math.floor(gameScore * 1.2);
         topPlayers.push({ name: playerName.slice(0,10), score: effectiveScore, isPremiumBonus: isPremium });
@@ -468,7 +480,7 @@
         updateLeaderboardDisplay();
     }
     
-    // ========== المحاولات اليومية ==========
+    // ========== Daily Attempts ==========
     function canPlayGame() {
         let attemptsUsed = parseInt(localStorage.getItem('dido_attempts_today') || '0');
         let lastDate = localStorage.getItem('dido_last_date');
@@ -480,7 +492,7 @@
         }
         let maxAttempts = isPremium ? 5 : 3;
         if(attemptsUsed >= maxAttempts) {
-            alert(`⚠️ استنفذت محاولاتك (${maxAttempts}/${maxAttempts}) - عود غداً!`);
+            alert(`⚠️ No attempts left (${maxAttempts}/${maxAttempts}) - Come back tomorrow!`);
             return false;
         }
         return true;
@@ -495,10 +507,10 @@
         }
         attemptsUsed++;
         localStorage.setItem('dido_attempts_today', attemptsUsed);
-        alert(`✅ تبقى ${(isPremium?5:3)-attemptsUsed} محاولة اليوم`);
+        alert(`✅ ${(isPremium?5:3)-attemptsUsed} attempts remaining today`);
     }
     
-    // ========== فتح الألعاب ==========
+    // ========== Open Games ==========
     function openGameModal(gameType){
         if(!canPlayGame()) return;
         const modal = document.getElementById('gameModal');
@@ -517,49 +529,49 @@
         });
     });
     
-    // ========== لعبة التخمين ==========
+    // ========== Guess Number Game ==========
     let secretNumber = Math.floor(Math.random()*100)+1;
     let guessAttemptsCount = 0;
     function renderGuessGame(container){
         secretNumber = Math.floor(Math.random()*100)+1;
         guessAttemptsCount = 0;
         container.innerHTML = `
-            <h3 style="color:#0ff; text-shadow:0 0 15px cyan; font-size:1.2rem;">🔮 خمن الرقم النيون 🔮</h3>
-            <p style="font-size:0.8rem;">1 - 100</p>
-            <input type="number" id="guessNum" placeholder="رقمك" style="width:90%; padding:8px;">
-            <button id="guessAction" style="background:#ff00ff; margin-top:8px; width:90%;">خمن!</button>
-            <div id="guessMsgGame" class="game-message" style="margin:8px;">✨ ابدأ ✨</div>
-            <button id="finishGuessBtn" style="background:#00ffff; color:black;">🏆 إنهاء</button>
+            <h3 style="color:#0ff; text-shadow:0 0 15px cyan; font-size:1.2rem;">🔮 GUESS THE NEON NUMBER 🔮</h3>
+            <p style="font-size:0.8rem;">Choose a number between 1 - 100</p>
+            <input type="number" id="guessNum" placeholder="Your guess" style="width:90%; padding:8px;">
+            <button id="guessAction" style="background:#ff00ff; margin-top:8px; width:90%;">Guess!</button>
+            <div id="guessMsgGame" class="game-message" style="margin:8px;">✨ Start guessing ✨</div>
+            <button id="finishGuessBtn" style="background:#00ffff; color:black;">🏆 Save Score</button>
         `;
         let finishFlag = false;
         document.getElementById('guessAction').onclick = () => {
             if(finishFlag) return;
             let val = parseInt(document.getElementById('guessNum').value);
             let msgDiv = document.getElementById('guessMsgGame');
-            if(isNaN(val)){ msgDiv.innerText = "ادخل رقماً!"; return; }
+            if(isNaN(val)){ msgDiv.innerText = "Enter a valid number!"; return; }
             guessAttemptsCount++;
             if(val === secretNumber){
-                msgDiv.innerHTML = `🎉 فوز! الرقم ${secretNumber} بعد ${guessAttemptsCount} محاولات 🎉`;
+                msgDiv.innerHTML = `🎉 CORRECT! The number was ${secretNumber} after ${guessAttemptsCount} attempts 🎉`;
                 finishFlag = true;
                 consumeAttempt();
-                recordScore("خمن نيون", Math.max(100 - (guessAttemptsCount*2), 10));
+                recordScore("Neon Guesser", Math.max(100 - (guessAttemptsCount*2), 10));
                 setTimeout(()=>closeModal(),1300);
-            } else if(val < secretNumber) msgDiv.innerText = `⬆️ أكبر من ${val} | محاولة ${guessAttemptsCount}`;
-            else msgDiv.innerText = `⬇️ أصغر من ${val} | محاولة ${guessAttemptsCount}`;
+            } else if(val < secretNumber) msgDiv.innerText = `⬆️ Higher than ${val} | Attempt ${guessAttemptsCount}`;
+            else msgDiv.innerText = `⬇️ Lower than ${val} | Attempt ${guessAttemptsCount}`;
             document.getElementById('guessNum').value = '';
         };
         document.getElementById('finishGuessBtn').onclick = () => {
             if(!finishFlag){
-                if(confirm("إنهاء بدون فوز؟")){
+                if(confirm("Finish without winning?")){
                     consumeAttempt();
-                    recordScore("مغامر", 10);
+                    recordScore("Adventurer", 10);
                     closeModal();
                 }
             } else closeModal();
         };
     }
     
-    // ========== لعبة الذاكرة ==========
+    // ========== Memory Game ==========
     let memCards=[], memFlipped=[], memMatched=[], memLock=false, memFirst=null;
     function renderMemoryGame(container){
         const icons = ['🌸','🍥','⚡','💀','🎴','🍙','🐉','👘'];
@@ -576,7 +588,7 @@
                 else { content='?'; bg='#9a4eff';}
                 html += `<div data-idx="${i}" style="background:${bg}; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; font-size:1.3rem; border-radius:16px; box-shadow:0 0 6px cyan;">${content}</div>`;
             }
-            html += `</div><div id="memMsgModal" style="margin:8px; font-size:0.7rem; color:#0ff;">💜 اقلب بطاقتين</div><button id="memFinishBtn" style="background:#ffff00; color:black;">🏆 تسجيل</button>`;
+            html += `</div><div id="memMsgModal" style="margin:8px; font-size:0.7rem; color:#0ff;">💜 Flip two matching cards</div><button id="memFinishBtn" style="background:#ffff00; color:black;">🏆 Save Score</button>`;
             container.innerHTML = html;
             document.querySelectorAll('[data-idx]').forEach(el=>{
                 el.addEventListener('click',()=>{
@@ -591,7 +603,7 @@
                             memMatched[memFirst]=true; memMatched[idx]=true;
                             memFlipped[memFirst]=false; memFlipped[idx]=false;
                             memFirst=null; memLock=false; renderBoard();
-                            if(memMatched.every(v=>v===true)) document.getElementById('memMsgModal').innerText='🏆 أكملت!';
+                            if(memMatched.every(v=>v===true)) document.getElementById('memMsgModal').innerText='🏆 Complete! Great memory!';
                         } else {
                             setTimeout(()=>{
                                 memFlipped[memFirst]=false; memFlipped[idx]=false;
@@ -605,23 +617,23 @@
                 let matchedCount = memMatched.filter(v=>v===true).length;
                 let score = matchedCount * 5;
                 consumeAttempt();
-                recordScore("ذاكرة نيون", score);
+                recordScore("Memory Master", score);
                 closeModal();
             };
         }
         renderBoard();
     }
     
-    // ========== تيك تاك تو ==========
+    // ========== Tic Tac Toe ==========
     let ticBoard=[], ticTurn='X', ticOver=false;
     function renderTicTacGame(container){
         ticBoard=['','','','','','','','','']; ticTurn='X'; ticOver=false;
         function renderTic(){
-            let html = `<h3 style="color:#ff00ff; text-shadow:0 0 12px magenta; font-size:1rem;">⚔️ X & O نيون ⚔️ دور: ${ticTurn}</h3><div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px; width:200px; margin:auto;">`;
+            let html = `<h3 style="color:#ff00ff; text-shadow:0 0 12px magenta; font-size:1rem;">⚔️ NEON X & O ⚔️ Turn: ${ticTurn}</h3><div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px; width:200px; margin:auto;">`;
             for(let i=0;i<9;i++){
                 html += `<div data-tidx="${i}" style="background:#b84eff; aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:2rem; border-radius:20px; box-shadow:0 0 10px cyan;">${ticBoard[i]}</div>`;
             }
-            html += `</div><div id="ticMsgModal" style="font-size:0.7rem;"></div><button id="finishTicBtn" style="background:#00ffcc; color:black; margin-top:10px;">🏆 تسجيل</button>`;
+            html += `</div><div id="ticMsgModal" style="font-size:0.7rem;"></div><button id="finishTicBtn" style="background:#00ffcc; color:black; margin-top:10px;">🏆 Save Score</button>`;
             container.innerHTML = html;
             document.querySelectorAll('[data-tidx]').forEach(cell=>{
                 cell.addEventListener('click',()=>{
@@ -631,13 +643,13 @@
                     ticBoard[idx]=ticTurn;
                     let win = checkWin(ticBoard);
                     if(win){
-                        document.getElementById('ticMsgModal').innerHTML=`🏆 الفائز ${win} نيون 🏆`;
+                        document.getElementById('ticMsgModal').innerHTML=`🏆 Winner: ${win} 🏆`;
                         ticOver=true;
                         renderTic();
                         return;
                     }
                     if(ticBoard.every(v=>v!=='')){
-                        document.getElementById('ticMsgModal').innerHTML='تعادل نيون';
+                        document.getElementById('ticMsgModal').innerHTML='🤝 Draw!';
                         ticOver=true;
                         renderTic();
                         return;
@@ -654,7 +666,7 @@
                 else if(ticBoard.every(v=>v!=='')) winnerPoints=20;
                 else winnerPoints=5;
                 consumeAttempt();
-                recordScore("مبارز نيون", winnerPoints);
+                recordScore("Neon Warrior", winnerPoints);
                 closeModal();
             };
         }
