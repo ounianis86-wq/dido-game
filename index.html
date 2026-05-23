@@ -145,12 +145,7 @@
             font-size: 0.8rem;
         }
 
-        /* Spacer above ranking (moved from below ad) */
-        .spacer-above-ranking {
-            height: 6px;
-        }
-
-        /* Ranking Section */
+        /* Ranking Section - Moved to middle */
         .ranking-section {
             margin-bottom: 12px;
             text-align: center;
@@ -221,7 +216,7 @@
             font-size: 0.45rem;
         }
 
-        /* Categories - unchanged */
+        /* Categories Section - Moved to middle (below ranking) */
         .categories-section {
             margin-bottom: 12px;
         }
@@ -249,13 +244,13 @@
             transform: scale(1.02);
         }
 
-        /* Ad - ENLARGED AREA (with reduced bottom margin, half space moved) */
+        /* Ad - ENLARGED AREA (below categories) */
         .fixed-permanent-ad {
             background: linear-gradient(135deg, #ff44ff30, #00ffff30);
             border: 2px solid #ff44ff;
             border-radius: 20px;
             padding: 18px 12px;
-            margin: 8px 0 6px 0;
+            margin: 8px 0 12px 0;
             text-align: center;
             color: white;
             font-size: 1rem;
@@ -961,13 +956,12 @@
                 </div>
             </div>
             
-            <!-- Spacer above ranking (half of the original gap moved here) -->
-            <div class="spacer-above-ranking"></div>
-            
+            <!-- Ranking Section - Now in the middle -->
             <div class="ranking-section">
                 <div class="ranking-circles" id="rankingList"></div>
             </div>
             
+            <!-- Categories Section - Below ranking -->
             <div class="categories-section">
                 <div class="categories" id="categoriesList">
                     <div class="cat-badge" data-cat="action" id="catAction">🎯 Action</div>
@@ -977,7 +971,7 @@
                 </div>
             </div>
             
-            <!-- ENLARGED AD AREA (with reduced bottom margin - half space) -->
+            <!-- ENLARGED AD AREA -->
             <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
             
             <div class="games-wrapper" id="gamesWrapper">
