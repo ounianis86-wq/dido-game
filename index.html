@@ -83,7 +83,6 @@
             display: none;
         }
 
-        /* شخصية أنمي - نيون متوهج */
         .anime-hero {
             background: linear-gradient(135deg, #ff44ff20, #00ffff20, #ff44ff20);
             border-radius: 25px;
@@ -190,7 +189,6 @@
             text-shadow: 0 0 8px #ff44ff;
         }
 
-        /* ترتيب اللاعبين - نيون */
         .ranking-section {
             margin-bottom: 10px;
             text-align: center;
@@ -281,7 +279,6 @@
             filter: drop-shadow(0 0 5px gold);
         }
 
-        /* Categories */
         .categories-section {
             margin-top: 5px;
             margin-bottom: 5px;
@@ -313,7 +310,6 @@
             border-color: #00ffff;
         }
 
-        /* مساحة الإعلان - نيون */
         .ad-space {
             background: linear-gradient(135deg, #ff44ff15, #00ffff15);
             border: 2px solid #ff44ff;
@@ -352,7 +348,6 @@
             50% { transform: translateY(-5px); }
         }
 
-        /* الألعاب */
         .games-wrapper {
             margin-top: 0;
             margin-bottom: 0;
@@ -426,7 +421,6 @@
             text-shadow: 0 0 3px #00ffff;
         }
 
-        /* Back button */
         .back-btn {
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             border: none;
@@ -447,7 +441,6 @@
             box-shadow: 0 0 25px #00ffff;
         }
 
-        /* Bottom bar */
         .bottom-bar {
             display: flex;
             justify-content: space-between;
@@ -495,7 +488,6 @@
             transform: scale(1.05);
         }
 
-        /* Ad popup */
         .ad-popup {
             position: fixed;
             bottom: 15px;
@@ -529,7 +521,6 @@
             font-weight: bold;
         }
 
-        /* Game modal */
         .game-modal {
             position: fixed;
             top: 0;
@@ -591,7 +582,6 @@
             display: none;
         }
         
-        /* عناوين متوهجة صغيرة */
         .section-title {
             color: white;
             font-size: 0.6rem;
@@ -607,7 +597,6 @@
 <div class="app">
     <div class="content">
         
-        <!-- الصفحة الرئيسية -->
         <div id="homePage" class="page">
             <div class="anime-hero">
                 <div class="character-img">
@@ -633,7 +622,6 @@
                 </div>
             </div>
             
-            <!-- مساحة الإعلان مكبرة -->
             <div class="ad-space" id="adSpace">
                 <div class="ad-icon">📺✨</div>
                 إعلان نيوني هنا
@@ -654,7 +642,7 @@
     
     <div class="bottom-bar">
         <div class="register-btn" id="registerBtn">📝 تسجيل VIP</div>
-        <div class="music-bottom-btn" id="musicBottomBtn">🎵 تشغيل</div>
+        <div class="music-bottom-btn" id="musicBottomBtn">🎵 إيقاف</div>
     </div>
 </div>
 
@@ -835,29 +823,52 @@
     document.getElementById('backToHomeBtn').addEventListener('click', ()=> showHomePage());
     document.getElementById('gameModal').addEventListener('click', (e)=>{ if(e.target === document.getElementById('gameModal')) closeGame(); });
     
-    // 🎵 موسيقى إلكترونية حماسية جديدة 🎵
-    const music = new Audio('https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808f0bf07.mp3?filename=electronic-rock-116199.mp3');
+    // 🎵 موسيقى إلكترونية حماسية - تعمل تلقائياً 🎵
+    const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
     music.loop = true;
     music.volume = 0.12;
-    let playing = false;
+    let playing = true; // نبدأ بتشغيل الموسيقى تلقائياً
+    
     const musicBottomBtn = document.getElementById('musicBottomBtn');
+    musicBottomBtn.innerHTML = '🔇 إيقاف'; // زر يظهر أن الموسيقى تعمل
+    
+    // محاولة تشغيل الموسيقى تلقائياً فور تحميل الصفحة
+    const autoPlay = music.play();
+    
+    autoPlay.then(() => {
+        // التشغيل التلقائي نجح
+        playing = true;
+        musicBottomBtn.innerHTML = '🔇 إيقاف';
+    }).catch((error) => {
+        // المتصفح منع التشغيل التلقائي - سنستخدم حل بديل
+        console.log("التشغيل التلقائي يحتاج تفاعل المستخدم");
+        playing = false;
+        musicBottomBtn.innerHTML = '🎵 تشغيل';
+        
+        // عند أول ضغطة في أي مكان على الصفحة، تشغل الموسيقى
+        const playOnInteraction = () => {
+            music.play();
+            playing = true;
+            musicBottomBtn.innerHTML = '🔇 إيقاف';
+            document.removeEventListener('click', playOnInteraction);
+            document.removeEventListener('touchstart', playOnInteraction);
+        };
+        document.addEventListener('click', playOnInteraction);
+        document.addEventListener('touchstart', playOnInteraction);
+    });
+    
+    // زر التحكم في الموسيقى
     musicBottomBtn.onclick = () => {
         if(playing) { 
             music.pause(); 
             musicBottomBtn.innerHTML = '🎵 تشغيل'; 
+            playing = false;
         } else { 
-            music.play().catch(e=>console.log('Auto-play prevented')); 
+            music.play().catch(e => console.log('حدث خطأ في التشغيل')); 
             musicBottomBtn.innerHTML = '🔇 إيقاف'; 
+            playing = true;
         }
-        playing = !playing;
     };
-    document.body.addEventListener('touchstart', ()=>{
-        if(!playing) { 
-            music.play().catch(e=>console.log('Auto-play prevented')); 
-            playing=true; 
-            musicBottomBtn.innerHTML='🔇 إيقاف'; 
-        }
-    }, {once:true});
     
     updateRanking();
     updateAdSpace();
