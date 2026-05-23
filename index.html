@@ -84,7 +84,7 @@
         }
 
         .anime-hero {
-            background: linear-gradient(135deg, #ff44ff20, #00ffff20, #ff44ff20);
+            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
             border-radius: 25px;
             padding: 12px;
             margin-bottom: 10px;
@@ -94,14 +94,14 @@
             flex-wrap: wrap;
             justify-content: center;
             border: 1px solid #ff44ff;
-            box-shadow: 0 0 20px #ff44ff, inset 0 0 15px #ff44ff20;
+            box-shadow: 0 0 20px #ff44ff;
             animation: glowPulse 1.5s ease-in-out infinite;
         }
         
         @keyframes glowPulse {
-            0% { box-shadow: 0 0 10px #ff44ff, inset 0 0 10px #ff44ff20; border-color: #ff44ff; }
-            50% { box-shadow: 0 0 30px #ff44ff, 0 0 20px #00ffff, inset 0 0 20px #ff44ff40; border-color: #00ffff; }
-            100% { box-shadow: 0 0 10px #ff44ff, inset 0 0 10px #ff44ff20; border-color: #ff44ff; }
+            0% { box-shadow: 0 0 10px #ff44ff; border-color: #ff44ff; }
+            50% { box-shadow: 0 0 30px #ff44ff, 0 0 20px #00ffff; border-color: #00ffff; }
+            100% { box-shadow: 0 0 10px #ff44ff; border-color: #ff44ff; }
         }
         
         .character-img {
@@ -114,13 +114,6 @@
             border: 3px solid #ff44ff;
             position: relative;
             box-shadow: 0 0 25px #ff44ff, 0 0 15px #00ffff;
-            animation: rotateGlow 3s linear infinite;
-        }
-        
-        @keyframes rotateGlow {
-            0% { box-shadow: 0 0 15px #ff44ff; }
-            50% { box-shadow: 0 0 35px #00ffff, 0 0 20px #ff44ff; }
-            100% { box-shadow: 0 0 15px #ff44ff; }
         }
         
         .controller-on-hand {
@@ -158,15 +151,7 @@
             font-weight: bold;
             display: inline-block;
             margin: 4px 0;
-            font-family: monospace;
-            letter-spacing: 2px;
             box-shadow: 0 0 15px #ff44ff;
-            animation: textGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes textGlow {
-            0% { box-shadow: 0 0 10px #ff44ff; background: linear-gradient(135deg, #ff3366, #ff44ff); }
-            100% { box-shadow: 0 0 25px #00ffff; background: linear-gradient(135deg, #ff44ff, #00ffff); }
         }
         
         .character-info h2 {
@@ -175,12 +160,6 @@
             background-clip: text;
             color: transparent;
             font-size: 0.85rem;
-            animation: rainbowText 3s linear infinite;
-        }
-        
-        @keyframes rainbowText {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
         }
         
         .challenge-look {
@@ -204,11 +183,6 @@
         
         .rank-circle {
             text-align: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .rank-circle:hover {
-            transform: scale(1.1);
         }
         
         .gold-circle {
@@ -222,13 +196,7 @@
             font-size: 1.6rem;
             margin-bottom: 3px;
             border: 2px solid #ffd700;
-            box-shadow: 0 0 20px #ffd700, 0 0 10px #ffaa00;
-            animation: goldPulse 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes goldPulse {
-            0%, 100% { box-shadow: 0 0 10px #ffd700; }
-            50% { box-shadow: 0 0 30px #ffd700, 0 0 20px #ffaa00; }
+            box-shadow: 0 0 20px #ffd700;
         }
         
         .silver-circle {
@@ -264,19 +232,16 @@
             font-size: 0.55rem;
             font-weight: bold;
             margin-top: 2px;
-            text-shadow: 0 0 5px #ff44ff;
         }
         
         .rank-points {
             color: #ffcc00;
             font-size: 0.5rem;
-            text-shadow: 0 0 3px #ffaa00;
         }
         
         .crown-icon {
             font-size: 0.75rem;
             margin-bottom: 2px;
-            filter: drop-shadow(0 0 5px gold);
         }
 
         .categories-section {
@@ -292,7 +257,7 @@
         }
         
         .cat-badge {
-            background: linear-gradient(135deg, #ff44ff30, #00ffff30);
+            background: #ff44ff30;
             border: 1px solid #ff44ff;
             padding: 4px 12px;
             border-radius: 22px;
@@ -305,15 +270,13 @@
         
         .cat-badge:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 20px #ff44ff, 0 0 10px #00ffff;
-            background: linear-gradient(135deg, #ff44ff60, #00ffff60);
-            border-color: #00ffff;
+            box-shadow: 0 0 20px #ff44ff;
+            background: #ff44ff60;
         }
         
-        /* زر المزيد - مميز */
         .more-btn {
             background: linear-gradient(135deg, #ff44ff, #00ffff);
-            border: 1px solid #ffffff;
+            border: 1px solid white;
             padding: 4px 12px;
             border-radius: 22px;
             color: white;
@@ -327,10 +290,8 @@
         .more-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 0 25px #00ffff;
-            background: linear-gradient(135deg, #ff44ff, #ff44ff);
         }
 
-        /* الإعلان الثابت - يظهر دائماً في وسط الصفحة ولا يختفي أبداً */
         .fixed-permanent-ad {
             background: linear-gradient(135deg, #ff44ff20, #00ffff20);
             border: 3px solid #ff44ff;
@@ -338,31 +299,18 @@
             padding: 12px;
             margin: 10px 0;
             text-align: center;
-            box-shadow: 0 0 25px #ff44ff, inset 0 0 10px #ff44ff30;
-            animation: permanentAdGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes permanentAdGlow {
-            0%, 100% { box-shadow: 0 0 15px #ff44ff; border-color: #ff44ff; }
-            50% { box-shadow: 0 0 35px #00ffff, 0 0 20px #ff44ff; border-color: #00ffff; }
+            box-shadow: 0 0 25px #ff44ff;
         }
         
         .fixed-permanent-ad-icon {
             font-size: 2.2rem;
             margin-bottom: 5px;
-            animation: bounce 1s ease-in-out infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
         
         .fixed-permanent-ad-title {
             color: white;
             font-size: 0.85rem;
             font-weight: bold;
-            text-shadow: 0 0 5px #ff44ff;
         }
         
         .fixed-permanent-ad-text {
@@ -379,8 +327,7 @@
             padding-top: 5px;
         }
 
-        /* الإعلان عند الدخول للعبة (للمستخدم العادي) - 10 ثوانٍ */
-        .entry-ad-overlay {
+        .entry-ad-overlay, .levelup-ad-overlay, .more-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -395,23 +342,7 @@
             flex-direction: column;
         }
         
-        /* الإعلان بين المستويات (للمستخدم العادي) - 8 ثوانٍ */
-        .levelup-ad-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(10px);
-            z-index: 10001;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        
-        .ad-box {
+        .ad-box, .more-box {
             background: linear-gradient(135deg, #1a0033, #0a002a);
             border: 3px solid #ff44ff;
             border-radius: 30px;
@@ -420,29 +351,26 @@
             max-width: 280px;
             width: 85%;
             box-shadow: 0 0 50px #ff44ff;
-            animation: adBoxPulse 0.5s ease-in-out infinite;
         }
         
-        @keyframes adBoxPulse {
-            0%, 100% { box-shadow: 0 0 30px #ff44ff; }
-            50% { box-shadow: 0 0 60px #ff44ff, 0 0 30px #00ffff; }
+        .more-box {
+            max-width: 320px;
         }
         
         .ad-icon {
             font-size: 3rem;
             margin-bottom: 10px;
-            animation: spinIcon 1s linear infinite;
         }
         
-        @keyframes spinIcon {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .ad-title {
+        .ad-title, .more-title {
             color: white;
             font-size: 1rem;
             font-weight: bold;
+        }
+        
+        .more-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
         }
         
         .ad-subtitle {
@@ -456,7 +384,6 @@
             font-size: 2.5rem;
             font-weight: bold;
             margin: 15px 0;
-            text-shadow: 0 0 10px #ff44ff;
         }
         
         .ad-progress {
@@ -489,20 +416,51 @@
             from { width: 100%; }
             to { width: 0%; }
         }
+        
+        .more-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .more-option {
+            background: #ff44ff30;
+            border: 1px solid #ff44ff;
+            padding: 10px;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .more-option:hover {
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            transform: scale(1.02);
+        }
+        
+        .close-more-btn, .close-ad-btn {
+            background: linear-gradient(135deg, #ff3366, #ff44ff);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
 
         .games-wrapper {
             margin-top: 0;
             margin-bottom: 0;
             flex: 1;
-            display: flex;
-            flex-direction: column;
         }
         
         .two-rows {
             display: flex;
             flex-direction: column;
             gap: 6px;
-            margin-bottom: 0;
         }
         
         .game-row {
@@ -530,10 +488,9 @@
         }
         
         .game-card:hover {
-            transform: translateY(-5px) scale(1.02);
+            transform: translateY(-5px);
             border-color: #00ffff;
-            box-shadow: 0 0 25px #00ffff, 0 0 15px #ff44ff;
-            background: linear-gradient(145deg, #1a1a3a, #0f0f2a);
+            box-shadow: 0 0 25px #00ffff;
         }
         
         .game-img {
@@ -543,24 +500,17 @@
             background-position: center;
             border-radius: 10px;
             margin-bottom: 4px;
-            transition: all 0.2s ease;
-        }
-        
-        .game-card:hover .game-img {
-            box-shadow: 0 0 15px #ff44ff;
         }
         
         .game-title {
             color: white;
             font-size: 0.55rem;
             font-weight: bold;
-            text-shadow: 0 0 3px #ff44ff;
         }
         
         .game-cat {
             color: #00ffff;
             font-size: 0.45rem;
-            text-shadow: 0 0 3px #00ffff;
         }
 
         .back-btn {
@@ -575,12 +525,6 @@
             display: inline-block;
             font-size: 0.55rem;
             box-shadow: 0 0 15px #ff44ff;
-            transition: all 0.2s ease;
-        }
-        
-        .back-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px #00ffff;
         }
 
         .bottom-bar {
@@ -589,13 +533,11 @@
             align-items: center;
             padding: 5px 12px;
             border-top: 1px solid #ff44ff;
-            margin-top: 0;
             background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
         }
         
-        .register-btn {
-            background: linear-gradient(135deg, #ff44ff30, #00ffff30);
+        .register-btn, .simulate-levelup-btn {
+            background: #ff44ff30;
             border: 1px solid #ff44ff;
             padding: 3px 10px;
             border-radius: 18px;
@@ -606,20 +548,22 @@
             box-shadow: 0 0 8px #ff44ff;
         }
         
-        .register-btn.vip-active {
+        .simulate-levelup-btn {
             background: linear-gradient(135deg, #ff44ff, #00ffff);
-            box-shadow: 0 0 15px #ff44ff;
+            margin-right: 5px;
         }
         
-        .register-btn:hover {
+        .register-btn.vip-active {
             background: linear-gradient(135deg, #ff44ff, #00ffff);
-            box-shadow: 0 0 20px #ff44ff;
+        }
+        
+        .register-btn:hover, .simulate-levelup-btn:hover {
             transform: scale(1.05);
+            box-shadow: 0 0 20px #ff44ff;
         }
         
         .music-bottom-btn {
             background: #000000aa;
-            backdrop-filter: blur(5px);
             padding: 3px 10px;
             border-radius: 18px;
             color: #0ff;
@@ -627,24 +571,6 @@
             font-size: 0.5rem;
             border: 1px solid #0ff;
             box-shadow: 0 0 8px #0ff;
-            transition: all 0.2s ease;
-        }
-        
-        .music-bottom-btn:hover {
-            box-shadow: 0 0 20px #0ff;
-            transform: scale(1.05);
-        }
-
-        /* زر محاكاة الانتقال بين المستويات */
-        .simulate-levelup-btn {
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
-            border: none;
-            padding: 5px 12px;
-            border-radius: 20px;
-            color: white;
-            font-size: 0.5rem;
-            cursor: pointer;
-            margin-right: 5px;
         }
 
         .game-modal {
@@ -668,10 +594,10 @@
             border-radius: 15px;
             border: 3px solid #ff44ff;
             background: white;
-            box-shadow: 0 0 50px #ff44ff, 0 0 30px #00ffff;
+            box-shadow: 0 0 50px #ff44ff;
         }
         
-        .game-modal .close-modal {
+        .close-modal {
             position: absolute;
             top: 15px;
             right: 15px;
@@ -686,12 +612,6 @@
             font-size: 20px;
             cursor: pointer;
             box-shadow: 0 0 15px #ff44ff;
-            transition: all 0.2s ease;
-        }
-        
-        .game-modal .close-modal:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 25px #ff3366;
         }
         
         .hidden {
@@ -699,7 +619,6 @@
         }
 
         .page {
-            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             height: 100%;
@@ -708,89 +627,10 @@
             display: none;
         }
         
-        .section-title {
-            color: white;
-            font-size: 0.6rem;
-            margin: 5px 0 3px 0;
-            text-align: center;
-            text-shadow: 0 0 8px #ff44ff;
-            letter-spacing: 1px;
-        }
-        
         .levelup-demo {
             display: flex;
             justify-content: flex-end;
             margin-bottom: 5px;
-        }
-        
-        /* نافذة المزيد */
-        .more-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(10px);
-            z-index: 15000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        
-        .more-box {
-            background: linear-gradient(135deg, #1a0033, #0a002a);
-            border: 3px solid #ff44ff;
-            border-radius: 30px;
-            padding: 20px;
-            text-align: center;
-            max-width: 320px;
-            width: 90%;
-            box-shadow: 0 0 50px #ff44ff;
-        }
-        
-        .more-title {
-            color: white;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px #ff44ff;
-        }
-        
-        .more-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .more-option {
-            background: linear-gradient(135deg, #ff44ff30, #00ffff30);
-            border: 1px solid #ff44ff;
-            padding: 10px;
-            border-radius: 20px;
-            color: white;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .more-option:hover {
-            transform: scale(1.02);
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
-            box-shadow: 0 0 20px #ff44ff;
-        }
-        
-        .close-more-btn {
-            background: linear-gradient(135deg, #ff3366, #ff44ff);
-            border: none;
-            padding: 8px 20px;
-            border-radius: 30px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
         }
     </style>
 </head>
@@ -825,12 +665,11 @@
                 </div>
             </div>
             
-            <!-- الإعلان الثابت - يظهر دائماً للجميع ولا يختفي أبداً -->
             <div class="fixed-permanent-ad" id="permanentAd">
                 <div class="fixed-permanent-ad-icon" id="adIcon">📺✨</div>
                 <div class="fixed-permanent-ad-title" id="adTitle">إعلان ممول</div>
                 <div class="fixed-permanent-ad-text" id="adText">هذا الإعلان يظهر للجميع بشكل دائم</div>
-                <div class="ad-refresh-note" id="adRefreshNote">🔄 يتغير تلقائياً كل 10 ثوانٍ</div>
+                <div class="ad-refresh-note">🔄 يتغير تلقائياً كل 10 ثوانٍ</div>
             </div>
             
             <div class="games-wrapper">
@@ -839,7 +678,7 @@
         </div>
 
         <div id="categoryPage" class="page page-hidden">
-            <button class="back-btn" id="backToHomeBtn">🔙 العودة إلى النيون</button>
+            <button class="back-btn" id="backToHomeBtn">🔙 العودة</button>
             <div class="two-rows" id="categoryGamesContainer"></div>
         </div>
 
@@ -847,14 +686,13 @@
     
     <div class="bottom-bar">
         <div class="levelup-demo">
-            <button class="simulate-levelup-btn" id="simulateLevelUpBtn">⬆️ محاكاة مستوى جديد</button>
+            <button class="simulate-levelup-btn" id="simulateLevelUpBtn">⬆️ مستوى جديد</button>
         </div>
-        <div class="register-btn" id="registerBtn">📝 ترقية إلى VIP</div>
+        <div class="register-btn" id="registerBtn">📝 ترقية VIP</div>
         <div class="music-bottom-btn" id="musicBottomBtn">🎵 تشغيل</div>
     </div>
 </div>
 
-<!-- نافذة المزيد -->
 <div id="moreOverlay" class="more-overlay hidden">
     <div class="more-box">
         <div class="more-title">✨ المزيد من الخيارات ✨</div>
@@ -868,7 +706,6 @@
     </div>
 </div>
 
-<!-- الإعلان عند الدخول للعبة (للمستخدم العادي) - 10 ثوانٍ -->
 <div id="entryAdOverlay" class="entry-ad-overlay hidden">
     <div class="ad-box">
         <div class="ad-icon">🎮🚀</div>
@@ -878,11 +715,10 @@
         <div class="ad-progress">
             <div class="ad-progress-bar" id="entryProgressBar"></div>
         </div>
-        <div class="ad-subtitle" style="font-size:0.6rem;">سيختفي تلقائياً بعد 10 ثوانٍ</div>
+        <div class="ad-subtitle">سيختفي تلقائياً بعد 10 ثوانٍ</div>
     </div>
 </div>
 
-<!-- الإعلان بين المستويات (للمستخدم العادي) - 8 ثوانٍ -->
 <div id="levelupAdOverlay" class="levelup-ad-overlay hidden">
     <div class="ad-box">
         <div class="ad-icon">⬆️🏆</div>
@@ -892,7 +728,7 @@
         <div class="ad-progress">
             <div class="ad-progress-bar levelup-progress-bar" id="levelupProgressBar"></div>
         </div>
-        <div class="ad-subtitle" style="font-size:0.6rem;">سيختفي تلقائياً بعد 8 ثوانٍ</div>
+        <div class="ad-subtitle">سيختفي تلقائياً بعد 8 ثوانٍ</div>
     </div>
 </div>
 
@@ -917,7 +753,6 @@
         { id:12, name:"Basketball Stars", img:"https://images.hdqwalls.com/wallpapers/basketball-4k-2021-6m.jpg", url:"https://www.crazygames.com/embed/basketball-stars", cat:"racing", points:160, avatar:"🏀", playerName:"Hooper" }
     ];
     
-    // قائمة الإعلانات الثابتة (تتغير تلقائياً)
     const permanentAds = [
         { icon: "📺✨", title: "إعلان ممول", text: "اشترك الآن في عروضنا الحصرية!" },
         { icon: "🎮🔥", title: "لعبة الأسبوع", text: "جرب لعبة جديدة كل أسبوع!" },
@@ -937,7 +772,6 @@
     let isWaitingForEntryAd = false;
     let isWaitingForLevelUpAd = false;
     
-    // تحديث الإعلان الثابت (يتغير كل 10 ثوانٍ)
     function refreshPermanentAd() {
         currentAdIndex = (currentAdIndex + 1) % permanentAds.length;
         const ad = permanentAds[currentAdIndex];
@@ -946,23 +780,17 @@
         document.getElementById('adText').innerHTML = ad.text;
     }
     
-    // بدء التغيير التلقائي للإعلان الثابت
     function startPermanentAdRotation() {
         if (adInterval) clearInterval(adInterval);
-        adInterval = setInterval(() => {
-            refreshPermanentAd();
-        }, 10000);
+        adInterval = setInterval(refreshPermanentAd, 10000);
     }
     
-    // إعلان عند الدخول للعبة (للمستخدم العادي) - 10 ثوانٍ ويختفي تلقائياً
     function showEntryAd(callback) {
         if (isWaitingForEntryAd) return;
-        
         isWaitingForEntryAd = true;
         pendingEntryCallback = callback;
         const overlay = document.getElementById('entryAdOverlay');
         const timerElement = document.getElementById('entryAdTimer');
-        
         overlay.classList.remove('hidden');
         let seconds = 10;
         timerElement.textContent = seconds;
@@ -975,11 +803,9 @@
         }
         
         if (entryAdTimeout) clearInterval(entryAdTimeout);
-        
         const countdownInterval = setInterval(() => {
             seconds--;
             timerElement.textContent = seconds;
-            
             if (seconds <= 0) {
                 clearInterval(countdownInterval);
                 overlay.classList.add('hidden');
@@ -990,19 +816,15 @@
                 isWaitingForEntryAd = false;
             }
         }, 1000);
-        
         entryAdTimeout = countdownInterval;
     }
     
-    // إعلان بين المستويات (للمستخدم العادي) - 8 ثوانٍ ويختفي تلقائياً
     function showLevelUpAd(callback) {
         if (isWaitingForLevelUpAd) return;
-        
         isWaitingForLevelUpAd = true;
         pendingLevelUpCallback = callback;
         const overlay = document.getElementById('levelupAdOverlay');
         const timerElement = document.getElementById('levelupAdTimer');
-        
         overlay.classList.remove('hidden');
         let seconds = 8;
         timerElement.textContent = seconds;
@@ -1015,11 +837,9 @@
         }
         
         if (levelupAdTimeout) clearInterval(levelupAdTimeout);
-        
         const countdownInterval = setInterval(() => {
             seconds--;
             timerElement.textContent = seconds;
-            
             if (seconds <= 0) {
                 clearInterval(countdownInterval);
                 overlay.classList.add('hidden');
@@ -1030,28 +850,17 @@
                 isWaitingForLevelUpAd = false;
             }
         }, 1000);
-        
         levelupAdTimeout = countdownInterval;
     }
     
-    // محاكاة الانتقال إلى مستوى جديد
     function simulateLevelUp() {
         if (isPremium) {
             alert('✨ أنت حساب مميز! لا تظهر لك إعلانات بين المستويات ✨');
             return;
         }
         showLevelUpAd(() => {
-            alert('🎉 تم تخطي الإعلان! يمكنك متابعة اللعب في المستوى الجديد 🎉');
+            alert('🎉 تم تخطي الإعلان! يمكنك متابعة اللعب 🎉');
         });
-    }
-    
-    // عرض نافذة المزيد
-    function showMoreMenu() {
-        document.getElementById('moreOverlay').classList.remove('hidden');
-    }
-    
-    function hideMoreMenu() {
-        document.getElementById('moreOverlay').classList.add('hidden');
     }
     
     function updateRanking() {
@@ -1059,26 +868,10 @@
         const gold = sorted[0];
         const silver = sorted[1];
         const bronze = sorted[2];
-        
         document.getElementById('rankingList').innerHTML = `
-            <div class="rank-circle">
-                <div class="crown-icon">🥈</div>
-                <div class="silver-circle">${silver ? silver.avatar : '👤'}</div>
-                <div class="rank-name">${silver ? silver.playerName : '---'}</div>
-                <div class="rank-points">⭐ ${silver ? silver.points : 0}</div>
-            </div>
-            <div class="rank-circle">
-                <div class="crown-icon">👑</div>
-                <div class="gold-circle">${gold ? gold.avatar : '👤'}</div>
-                <div class="rank-name">${gold ? gold.playerName : '---'}</div>
-                <div class="rank-points">⭐ ${gold ? gold.points : 0}</div>
-            </div>
-            <div class="rank-circle">
-                <div class="crown-icon">🥉</div>
-                <div class="bronze-circle">${bronze ? bronze.avatar : '👤'}</div>
-                <div class="rank-name">${bronze ? bronze.playerName : '---'}</div>
-                <div class="rank-points">⭐ ${bronze ? bronze.points : 0}</div>
-            </div>
+            <div class="rank-circle"><div class="crown-icon">🥈</div><div class="silver-circle">${silver ? silver.avatar : '👤'}</div><div class="rank-name">${silver ? silver.playerName : '---'}</div><div class="rank-points">⭐ ${silver ? silver.points : 0}</div></div>
+            <div class="rank-circle"><div class="crown-icon">👑</div><div class="gold-circle">${gold ? gold.avatar : '👤'}</div><div class="rank-name">${gold ? gold.playerName : '---'}</div><div class="rank-points">⭐ ${gold ? gold.points : 0}</div></div>
+            <div class="rank-circle"><div class="crown-icon">🥉</div><div class="bronze-circle">${bronze ? bronze.avatar : '👤'}</div><div class="rank-name">${bronze ? bronze.playerName : '---'}</div><div class="rank-points">⭐ ${bronze ? bronze.points : 0}</div></div>
         `;
     }
     
@@ -1087,7 +880,6 @@
         const mid = Math.ceil(filtered.length / 2);
         const row1 = filtered.slice(0, mid);
         const row2 = filtered.slice(mid);
-        
         document.getElementById('gamesContainer').innerHTML = `
             <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
             <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
@@ -1108,8 +900,8 @@
     }
     
     function attachGameClickEvents(containerId) {
-        document.querySelectorAll(`${containerId} .game-card`).forEach(card=>{
-            card.addEventListener('click', (e)=>{
+        document.querySelectorAll(containerId + ' .game-card').forEach(card => {
+            card.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const url = card.getAttribute('data-url');
                 const name = card.getAttribute('data-name');
@@ -1144,10 +936,10 @@
     }
     
     function addPointsToPlayer(gameId, points) {
-        const game = gamesData.find(g=>g.id === gameId);
-        if(game) { 
-            game.points += points; 
-            updateRanking(); 
+        const game = gamesData.find(g => g.id === gameId);
+        if (game) {
+            game.points += points;
+            updateRanking();
         }
     }
     
@@ -1162,62 +954,59 @@
         document.getElementById('categoryPage').classList.remove('page-hidden');
     }
     
-    // الترقية إلى VIP
-    document.getElementById('registerBtn').addEventListener('click', ()=>{
+    document.getElementById('registerBtn').addEventListener('click', () => {
         if (!isPremium) {
             isPremium = true;
             const btn = document.getElementById('registerBtn');
             btn.innerHTML = '👑 VIP مفعل';
             btn.classList.add('vip-active');
-            alert('🎉✨ تهانينا! أصبحت حساباً مميزاً ✨🎉\n\n✅ لن تظهر لك أي إعلانات أثناء الدخول للعبة أو بين المستويات!\n⚠️ ملاحظة: الإعلان الثابت في المنتصف يظهر للجميع.');
+            alert('🎉 أصبحت حساباً مميزاً! لن تظهر لك إعلانات أثناء اللعب');
         } else {
-            alert('أنت بالفعل حساب مميز! 🎉');
+            alert('أنت بالفعل حساب مميز!');
         }
     });
     
-    // زر محاكاة الانتقال بين المستويات
     document.getElementById('simulateLevelUpBtn').addEventListener('click', () => {
         simulateLevelUp();
     });
     
-    // زر المزيد
     document.getElementById('moreBtn').addEventListener('click', () => {
-        showMoreMenu();
+        document.getElementById('moreOverlay').classList.remove('hidden');
     });
     
     document.getElementById('closeMoreBtn').addEventListener('click', () => {
-        hideMoreMenu();
+        document.getElementById('moreOverlay').classList.add('hidden');
     });
     
-    // خيارات المزيد
     document.querySelectorAll('.more-option').forEach(option => {
         option.addEventListener('click', (e) => {
             const cat = e.target.getAttribute('data-cat');
-            hideMoreMenu();
+            document.getElementById('moreOverlay').classList.add('hidden');
             if (cat === 'all') {
-                alert('🎮 جميع الألعاب معروضة بالفعل في الأسفل 🎮');
+                alert('🎮 جميع الألعاب معروضة في الأسفل');
             } else if (cat === 'new') {
-                alert('🆕 سيتم إضافة ألعاب جديدة قريباً! 🆕');
+                alert('🆕 سيتم إضافة ألعاب جديدة قريباً!');
             } else if (cat === 'popular') {
-                alert('🔥 الألعاب الأكثر شعبية: Free Fire, Call of Duty, Sonic 🔥');
+                alert('🔥 الألعاب الأكثر شعبية: Free Fire, Call of Duty, Sonic');
             } else if (cat === 'recommended') {
-                alert('⭐ الألعاب الموصى بها: Street Fighter, Mortal Kombat, Slope ⭐');
+                alert('⭐ الألعاب الموصى بها: Street Fighter, Mortal Kombat, Slope');
             }
         });
     });
     
-    document.querySelectorAll('.cat-badge').forEach(badge=>{
-        badge.addEventListener('click', ()=>{
+    document.querySelectorAll('.cat-badge').forEach(badge => {
+        badge.addEventListener('click', () => {
             const cat = badge.getAttribute('data-cat');
             let catName = cat === "action" ? "ألعاب الأكشن" : cat === "racing" ? "ألعاب السباقات" : cat === "fighting" ? "ألعاب القتال" : "ألعاب الألغاز";
             showCategoryPage(cat, catName);
         });
     });
     
-    document.getElementById('backToHomeBtn').addEventListener('click', ()=> showHomePage());
-    document.getElementById('gameModal').addEventListener('click', (e)=>{ if(e.target === document.getElementById('gameModal')) closeGame(); });
+    document.getElementById('backToHomeBtn').addEventListener('click', () => showHomePage());
+    document.getElementById('gameModal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('gameModal')) closeGame();
+    });
     
-    // 🎵 موسيقى إلكترونية حماسية - صوت 100%
     const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
     music.loop = true;
     music.volume = 1.00;
@@ -1244,13 +1033,13 @@
     });
     
     musicBottomBtn.onclick = () => {
-        if(playing) { 
-            music.pause(); 
-            musicBottomBtn.innerHTML = '🎵 تشغيل'; 
+        if (playing) {
+            music.pause();
+            musicBottomBtn.innerHTML = '🎵 تشغيل';
             playing = false;
-        } else { 
-            music.play().catch(e => {}); 
-            musicBottomBtn.innerHTML = '🔇 إيقاف'; 
+        } else {
+            music.play();
+            musicBottomBtn.innerHTML = '🔇 إيقاف';
             playing = true;
         }
     };
