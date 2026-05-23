@@ -2,371 +2,1102 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>DidoGame - دردشة خاصة VIP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>DidoGame - 3D Anime City | دردشة VIP خاصة</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Cairo', system-ui, sans-serif;
+            font-family: 'Cairo', 'Segoe UI', system-ui, sans-serif;
         }
+
         body {
-            background: linear-gradient(135deg, #0a0a2a, #1a0033);
+            background: #05050f;
             min-height: 100vh;
-            padding: 10px;
+            padding: 6px;
         }
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            background: rgba(10,10,30,0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 25px;
-            padding: 15px;
-            border: 1px solid #ff44ff;
-            box-shadow: 0 0 30px #ff44ff40;
-        }
-        h1, h2 {
-            color: #ff44ff;
-            text-align: center;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-        .section {
-            background: rgba(0,0,0,0.3);
-            border-radius: 15px;
-            padding: 12px;
-            margin-bottom: 12px;
-        }
-        input, select, textarea {
+
+        .anime-city-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            background-image: url('https://images7.alphacoders.com/132/1322910.jpeg');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            animation: slowZoom 20s ease-in-out infinite alternate;
+        }
+        
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        .anime-city-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: -1;
+        }
+
+        .app {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            background: rgba(5,5,20,0.75);
+            backdrop-filter: blur(8px);
+            border-radius: 25px;
+            overflow: hidden;
+            height: 98vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 50px #ff00ff, 0 0 20px #00ffff, 0 0 10px #ff44ff80;
+            position: relative;
+            border: 1px solid rgba(255,68,255,0.3);
+            animation: borderPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes borderPulse {
+            0% { box-shadow: 0 0 20px #ff00ff, 0 0 10px #00ffff; border-color: rgba(255,68,255,0.3); }
+            50% { box-shadow: 0 0 50px #ff44ff, 0 0 30px #00ffff, 0 0 20px #ff44ff; border-color: rgba(255,68,255,0.8); }
+            100% { box-shadow: 0 0 20px #ff00ff, 0 0 10px #00ffff; border-color: rgba(255,68,255,0.3); }
+        }
+
+        .content {
+            padding: 8px 10px;
+            flex: 1;
+            overflow-y: auto;
+            scrollbar-width: none;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* شخصية أنمي */
+        .anime-hero {
+            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
+            border-radius: 25px;
+            padding: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            border: 1px solid #ff44ff;
+            box-shadow: 0 0 20px #ff44ff;
+            animation: glowPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 10px #ff44ff; border-color: #ff44ff; }
+            50% { box-shadow: 0 0 30px #ff44ff, 0 0 20px #00ffff; border-color: #00ffff; }
+            100% { box-shadow: 0 0 10px #ff44ff; border-color: #ff44ff; }
+        }
+        
+        .character-img {
+            width: 100px;
+            height: 100px;
+            background: url('https://i.pinimg.com/originals/6e/5e/6c/6e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            border: 3px solid #ff44ff;
+            position: relative;
+            box-shadow: 0 0 25px #ff44ff, 0 0 15px #00ffff;
+        }
+        
+        .controller-on-hand {
+            position: absolute;
+            bottom: -8px;
+            right: -8px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            border: 2px solid white;
+            box-shadow: 0 0 15px #00ffff;
+            animation: spin 4s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .character-info {
+            text-align: center;
+        }
+        
+        .tshirt-text {
+            background: linear-gradient(135deg, #ff3366, #ff44ff, #00ffff);
+            padding: 5px 14px;
+            border-radius: 22px;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 4px 0;
+            box-shadow: 0 0 15px #ff44ff;
+        }
+        
+        .character-info h2 {
+            background: linear-gradient(135deg, #ffff00, #ff44ff, #00ffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 0.8rem;
+        }
+        
+        .challenge-look {
+            font-size: 0.6rem;
+            color: #ffaa88;
+            text-shadow: 0 0 8px #ff44ff;
+        }
+
+        /* ترتيب اللاعبين */
+        .ranking-section {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .ranking-circles {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .rank-circle {
+            text-align: center;
+        }
+        
+        .gold-circle {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(145deg, #ffd700, #ffaa00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 3px;
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 20px #ffd700;
+        }
+        
+        .silver-circle {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+            border: 1.5px solid #c0c0c0;
+            box-shadow: 0 0 15px #c0c0c0;
+        }
+        
+        .bronze-circle {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(145deg, #cd7f32, #b8651a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+            border: 1.5px solid #cd7f32;
+            box-shadow: 0 0 15px #cd7f32;
+        }
+        
+        .rank-name {
+            color: white;
+            font-size: 0.55rem;
+            font-weight: bold;
+            margin-top: 2px;
+        }
+        
+        .rank-points {
+            color: #ffcc00;
+            font-size: 0.5rem;
+        }
+        
+        .crown-icon {
+            font-size: 0.75rem;
+            margin-bottom: 2px;
+        }
+
+        /* Categories */
+        .categories-section {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+        }
+        
+        .cat-badge {
+            background: #ff44ff30;
+            border: 1px solid #ff44ff;
+            padding: 4px 12px;
+            border-radius: 22px;
+            color: white;
+            font-size: 0.6rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 8px #ff44ff;
+        }
+        
+        .cat-badge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #ff44ff;
+            background: #ff44ff60;
+        }
+
+        /* إعلان ثابت */
+        .fixed-permanent-ad {
+            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
+            border: 3px solid #ff44ff;
+            border-radius: 20px;
             padding: 10px;
             margin: 8px 0;
-            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 0 25px #ff44ff;
+        }
+        
+        .fixed-permanent-ad-icon {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .fixed-permanent-ad-title {
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .fixed-permanent-ad-text {
+            color: #ffaa88;
+            font-size: 0.55rem;
+            margin-top: 5px;
+        }
+        
+        .ad-refresh-note {
+            color: #88ffaa;
+            font-size: 0.45rem;
+            margin-top: 5px;
+            border-top: 1px dashed #ff44ff;
+            padding-top: 5px;
+        }
+
+        /* الألعاب */
+        .games-wrapper {
+            margin-top: 0;
+            margin-bottom: 0;
+            flex: 1;
+        }
+        
+        .two-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .game-row {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+        
+        .game-row::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .game-card {
+            min-width: 95px;
+            width: 95px;
+            background: linear-gradient(145deg, #0f0f2a, #0a0a1a);
+            border-radius: 14px;
+            padding: 6px;
+            text-align: center;
+            border: 1px solid #ff44ff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 10px #ff44ff;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-3px);
+            border-color: #00ffff;
+            box-shadow: 0 0 25px #00ffff;
+        }
+        
+        .game-img {
+            width: 100%;
+            height: 65px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 4px;
+        }
+        
+        .game-title {
+            color: white;
+            font-size: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .game-cat {
+            color: #00ffff;
+            font-size: 0.4rem;
+        }
+
+        /* ========== قسم الدردشة الخاصة ========== */
+        .chat-private-section {
+            background: rgba(0,0,0,0.4);
+            border-radius: 20px;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ff44ff;
+        }
+        
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .chat-title {
+            color: #ff44ff;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .room-badge {
+            background: #ff44ff30;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.6rem;
+            color: #ffaa88;
+        }
+        
+        .room-controls {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+        
+        .room-input {
+            flex: 1;
+            padding: 6px;
+            border-radius: 20px;
             border: 1px solid #ff44ff;
             background: rgba(0,0,0,0.5);
             color: white;
-            font-size: 0.9rem;
-        }
-        button {
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 5px;
-            font-size: 0.85rem;
-        }
-        .messages {
-            background: rgba(0,0,0,0.5);
-            border-radius: 15px;
-            padding: 10px;
-            height: 250px;
-            overflow-y: auto;
-            margin-bottom: 10px;
-        }
-        .message {
-            background: rgba(255,68,255,0.2);
-            border-radius: 15px;
-            padding: 8px 12px;
-            margin-bottom: 8px;
-        }
-        .message.private {
-            background: rgba(0,255,136,0.2);
-            border-right: 3px solid #00ff88;
-        }
-        .sender {
-            color: #ff44ff;
             font-size: 0.7rem;
         }
+        
+        .small-btn {
+            padding: 5px 10px;
+            font-size: 0.6rem;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .danger-btn {
+            background: linear-gradient(135deg, #ff3366, #ff6600);
+        }
+        
+        .chat-messages-private {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 8px;
+            height: 180px;
+            overflow-y: auto;
+            margin-bottom: 8px;
+        }
+        
+        .message-private {
+            background: rgba(255,68,255,0.15);
+            border-radius: 12px;
+            padding: 6px 10px;
+            margin-bottom: 6px;
+        }
+        
+        .message-private.private-msg {
+            background: rgba(0,255,136,0.15);
+            border-right: 2px solid #00ff88;
+        }
+        
+        .sender-private {
+            color: #ff44ff;
+            font-size: 0.6rem;
+        }
+        
         .private-tag {
             color: #00ff88;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             margin-left: 5px;
         }
-        .text {
+        
+        .text-private {
             color: white;
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             margin-top: 3px;
             word-break: break-word;
         }
-        .vip-badge {
-            background: #ff44ff;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.6rem;
-            margin-left: 5px;
+        
+        .chat-input-private {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
         }
-        .users-list {
+        
+        .chat-input-field {
+            flex: 2;
+            padding: 6px;
+            border-radius: 20px;
+            border: 1px solid #ff44ff;
+            background: rgba(0,0,0,0.5);
+            color: white;
             font-size: 0.7rem;
+        }
+        
+        .private-select {
+            flex: 1;
+            padding: 6px;
+            border-radius: 20px;
+            border: 1px solid #ff44ff;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 0.65rem;
+        }
+        
+        .online-users-list {
+            font-size: 0.6rem;
             color: #00ff88;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             text-align: center;
         }
+        
         .user-chip {
             display: inline-block;
             background: rgba(255,68,255,0.3);
-            padding: 4px 10px;
-            border-radius: 20px;
-            margin: 3px;
-            font-size: 0.7rem;
-            cursor: pointer;
+            padding: 2px 8px;
+            border-radius: 15px;
+            margin: 2px;
+            font-size: 0.6rem;
         }
+        
         .user-chip.vip {
             border: 1px solid #ff44ff;
-            background: rgba(255,68,255,0.5);
         }
+        
         .user-chip.selected {
             background: #ff44ff;
             color: white;
         }
+
+        .back-btn {
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            padding: 5px 12px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 8px;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 0.55rem;
+            box-shadow: 0 0 15px #ff44ff;
+        }
+
+        .bottom-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 12px;
+            border-top: 1px solid #ff44ff;
+            background: rgba(0,0,0,0.5);
+        }
+        
+        .register-btn {
+            background: #ff44ff30;
+            border: 1px solid #ff44ff;
+            padding: 3px 10px;
+            border-radius: 18px;
+            color: white;
+            font-size: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 8px #ff44ff;
+        }
+        
+        .register-btn.vip-active {
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+        }
+        
+        .music-bottom-btn {
+            background: #000000aa;
+            padding: 3px 10px;
+            border-radius: 18px;
+            color: #0ff;
+            cursor: pointer;
+            font-size: 0.5rem;
+            border: 1px solid #0ff;
+            box-shadow: 0 0 8px #0ff;
+        }
+
+        .game-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000ee;
+            backdrop-filter: blur(15px);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .game-modal iframe {
+            width: 95%;
+            height: 80%;
+            border-radius: 15px;
+            border: 3px solid #ff44ff;
+            background: white;
+            box-shadow: 0 0 50px #ff44ff;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #ff3366, #ff44ff);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 0 15px #ff44ff;
+        }
+        
         .hidden {
             display: none;
         }
-        .flex-row {
+
+        .page {
             display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            height: 100%;
         }
-        .danger-btn {
-            background: linear-gradient(135deg, #ff3366, #ff6600);
+        .page-hidden {
+            display: none;
         }
-        .room-info {
-            font-size: 0.7rem;
-            color: #ffaa88;
-            text-align: center;
-            margin-bottom: 8px;
-        }
-        img {
-            max-width: 100%;
-            max-height: 150px;
+        
+        .vip-badge-small {
+            background: #ff44ff;
+            padding: 2px 6px;
             border-radius: 10px;
-            margin-top: 5px;
-        }
-        .lock-icon {
-            margin-right: 5px;
+            font-size: 0.5rem;
+            margin-left: 3px;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>🔐 DidoGame VIP - دردشة خاصة</h1>
-    
-    <!-- قسم إنشاء/دخول الغرفة -->
-    <div id="roomSection" class="section">
-        <h2>🏠 إنشاء أو دخول غرفة</h2>
-        <input type="text" id="roomName" placeholder="اسم الغرفة" value="غرفتي">
-        <input type="password" id="roomPassword" placeholder="كلمة مرور الغرفة (اختياري)">
-        <div class="flex-row">
-            <button onclick="createOrJoinRoom()">🚪 دخول الغرفة</button>
-            <button class="danger-btn" onclick="showDeleteConfirm()">🗑️ حذف غرفتي</button>
-        </div>
-        <div class="users-list" id="availableRoomsList">📁 الغرف المتاحة: --</div>
-    </div>
-    
-    <!-- قسم الدردشة (يظهر بعد دخول الغرفة) -->
-    <div id="chatDiv" class="hidden">
-        <div class="section">
-            <div class="room-info" id="roomInfo"></div>
-            <div class="users-list" id="activeUsers">👥 المتصلون في هذه الغرفة: --</div>
-            <div class="messages" id="messagesDiv">
-                <div style="color:#888; text-align:center;">💬 مرحباً بك في الغرفة الخاصة</div>
+<div class="anime-city-bg"></div>
+<div class="app">
+    <div class="content">
+        
+        <!-- الصفحة الرئيسية -->
+        <div id="homePage" class="page">
+            <div class="anime-hero">
+                <div class="character-img">
+                    <div class="controller-on-hand">🎮</div>
+                </div>
+                <div class="character-info">
+                    <div class="tshirt-text">⚡ DIDO-GAME ⚡</div>
+                    <h2>😤 نظرة التحدي النيونية!</h2>
+                    <div class="challenge-look">"هيا تحداني في عالم النيون!"</div>
+                </div>
             </div>
             
-            <div class="flex-row">
-                <input type="text" id="messageInput" placeholder="اكتب رسالة..." style="flex:1;" onkeypress="if(event.key==='Enter') sendMessage()">
-                <button onclick="sendMessage()">📤</button>
-                <button id="vipImageBtn" onclick="sendImage()" style="display:none;">🖼️</button>
+            <div class="ranking-section">
+                <div class="ranking-circles" id="rankingList"></div>
             </div>
             
-            <!-- قسم الرسائل الخاصة -->
-            <div class="section" style="margin-top:8px;">
-                <div style="color:#00ff88; font-size:0.7rem;">🔒 رسالة خاصة لشخص معين:</div>
-                <div class="flex-row">
-                    <select id="privateUserSelect" style="flex:1;"></select>
-                    <input type="text" id="privateMessageInput" placeholder="رسالة خاصة..." style="flex:2;" onkeypress="if(event.key==='Enter') sendPrivateMessage()">
-                    <button onclick="sendPrivateMessage()">🔒 إرسال</button>
+            <div class="categories-section">
+                <div class="categories" id="categoriesList">
+                    <div class="cat-badge" data-cat="action">🎯 أكشن</div>
+                    <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
+                    <div class="cat-badge" data-cat="fighting">🥊 قتال</div>
+                    <div class="cat-badge" data-cat="puzzle">🧩 ألغاز</div>
+                </div>
+            </div>
+            
+            <div class="fixed-permanent-ad" id="permanentAd">
+                <div class="fixed-permanent-ad-icon" id="adIcon">📺✨</div>
+                <div class="fixed-permanent-ad-title" id="adTitle">إعلان ممول</div>
+                <div class="fixed-permanent-ad-text" id="adText">هذا الإعلان يظهر للجميع بشكل دائم</div>
+                <div class="ad-refresh-note">🔄 يتغير تلقائياً كل 10 ثوانٍ</div>
+            </div>
+            
+            <div class="games-wrapper">
+                <div class="two-rows" id="gamesContainer"></div>
+            </div>
+            
+            <!-- قسم الدردشة الخاصة -->
+            <div class="chat-private-section">
+                <div class="chat-header">
+                    <span class="chat-title">🔐 غرفة الدردشة الخاصة</span>
+                    <span class="room-badge" id="roomStatus">⚪ غير متصل</span>
+                </div>
+                
+                <div id="roomLoginArea">
+                    <div class="room-controls">
+                        <input type="text" id="userNameInput" class="room-input" placeholder="اسم المستخدم" value="أحمد">
+                        <button class="small-btn" onclick="setUsername()">👤 تعيين الاسم</button>
+                    </div>
+                    <div class="room-controls">
+                        <input type="text" id="roomNameInput" class="room-input" placeholder="اسم الغرفة" value="غرفتي">
+                        <input type="password" id="roomPasswordInput" class="room-input" placeholder="كلمة المرور (اختياري)">
+                    </div>
+                    <div class="room-controls">
+                        <button class="small-btn" onclick="joinRoom()">🚪 دخول الغرفة</button>
+                        <button class="small-btn" onclick="createRoom()">✨ إنشاء غرفة جديدة</button>
+                        <button class="small-btn danger-btn" onclick="deleteCurrentRoom()">🗑️ حذف غرفتي</button>
+                    </div>
+                    <div class="online-users-list" id="availableRoomsList">📁 --</div>
+                </div>
+                
+                <div id="chatArea" class="hidden">
+                    <div class="online-users-list" id="roomUsersList">👥 المتصلون: --</div>
+                    <div class="chat-messages-private" id="privateMessagesDiv">
+                        <div style="color:#888; text-align:center;">💬 مرحباً في غرفتك الخاصة</div>
+                    </div>
+                    <div class="chat-input-private">
+                        <input type="text" id="publicMessageInput" class="chat-input-field" placeholder="رسالة عامة..." onkeypress="if(event.key==='Enter') sendPublicMessage()">
+                        <button class="small-btn" onclick="sendPublicMessage()">📤</button>
+                        <button id="vipImageBtnChat" class="small-btn" onclick="sendImageChat()" style="display:none;">🖼️</button>
+                    </div>
+                    <div class="chat-input-private" style="margin-top:5px;">
+                        <select id="privateUserSelect" class="private-select">
+                            <option value="">🔒 لشخص...</option>
+                        </select>
+                        <input type="text" id="privateMessageInput" class="chat-input-field" placeholder="رسالة خاصة..." onkeypress="if(event.key==='Enter') sendPrivateMessageChat()">
+                        <button class="small-btn" onclick="sendPrivateMessageChat()">🔒 إرسال</button>
+                    </div>
+                    <button class="small-btn danger-btn" onclick="leaveRoom()" style="margin-top:8px; width:100%;">🚪 مغادرة الغرفة</button>
                 </div>
             </div>
         </div>
+
+        <div id="categoryPage" class="page page-hidden">
+            <button class="back-btn" id="backToHomeBtn">🔙 العودة</button>
+            <div class="two-rows" id="categoryGamesContainer"></div>
+        </div>
+
     </div>
     
-    <!-- زر الترقية -->
-    <div style="text-align:center; margin-top:10px;">
-        <button id="upgradeBtn" onclick="upgradeVIP()" style="background:linear-gradient(135deg,#ffaa00,#ff6600);">👑 ترقية VIP (صور)</button>
+    <div class="bottom-bar">
+        <div class="register-btn" id="registerBtn" onclick="upgradeToVIP()">📝 ترقية VIP</div>
+        <div class="music-bottom-btn" id="musicBtn" onclick="toggleMusic()">🎵 تشغيل</div>
     </div>
 </div>
 
+<div id="gameModal" class="game-modal hidden">
+    <div class="close-modal" onclick="closeGame()">✕</div>
+    <iframe id="gameIframe" src="" allowfullscreen></iframe>
+</div>
+
 <script>
-    // ==================== البيانات ====================
-    let currentUser = null;
+    // ==================== بيانات الألعاب ====================
+    const gamesData = [
+        { id:1, name:"Sonic", img:"https://images6.alphacoders.com/118/1185678.jpg", url:"https://www.crazygames.com/embed/sonic-the-hedgehog", cat:"action", points:150, avatar:"🦔", playerName:"Shadow" },
+        { id:2, name:"Subway Surfers", img:"https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action", points:200, avatar:"🏃", playerName:"Speed" },
+        { id:3, name:"Temple Run 2", img:"https://images.hdqwalls.com/wallpapers/pubg-mobile-squad-4k-8q.jpg", url:"https://www.crazygames.com/embed/temple-run-2", cat:"action", points:180, avatar:"🏛️", playerName:"RunKing" },
+        { id:4, name:"Hill Climb", img:"https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg", url:"https://www.crazygames.com/embed/hill-climb-racing", cat:"racing", points:120, avatar:"🚗", playerName:"Climber" },
+        { id:5, name:"Slope", img:"https://images.hdqwalls.com/wallpapers/slope-game-hd.jpg", url:"https://www.crazygames.com/embed/slope", cat:"racing", points:220, avatar:"⚡", playerName:"Fast" },
+        { id:6, name:"Street Fighter", img:"https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg", url:"https://www.crazygames.com/embed/street-fighter", cat:"fighting", points:300, avatar:"👊", playerName:"Fighter" },
+        { id:7, name:"Mortal Kombat", img:"https://images.hdqwalls.com/wallpapers/mortal-kombat-11-4k-2020-45.jpg", url:"https://www.crazygames.com/embed/mortal-kombat", cat:"fighting", points:280, avatar:"💀", playerName:"Scorpion" },
+        { id:8, name:"Among Us", img:"https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg", url:"https://www.crazygames.com/embed/among-us-online", cat:"puzzle", points:90, avatar:"👽", playerName:"Impostor" },
+        { id:9, name:"Gardenscapes", img:"https://images.hdqwalls.com/wallpapers/gardenscapes-2020-2021-4k-47.jpg", url:"https://www.crazygames.com/embed/gardenscapes", cat:"puzzle", points:70, avatar:"🌷", playerName:"Garden" },
+        { id:10, name:"Free Fire", img:"https://images.hdqwalls.com/wallpapers/free-fire-2020-game-4k-g6.jpg", url:"https://www.crazygames.com/embed/free-fire", cat:"action", points:350, avatar:"🔥", playerName:"Fire" },
+        { id:11, name:"Call of Duty", img:"https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-2020-04-m3.jpg", url:"https://www.crazygames.com/embed/call-of-duty", cat:"action", points:320, avatar:"🔫", playerName:"Soldier" },
+        { id:12, name:"Basketball Stars", img:"https://images.hdqwalls.com/wallpapers/basketball-4k-2021-6m.jpg", url:"https://www.crazygames.com/embed/basketball-stars", cat:"racing", points:160, avatar:"🏀", playerName:"Hooper" }
+    ];
+    
+    // إعلانات ثابتة
+    const permanentAds = [
+        { icon: "📺✨", title: "إعلان ممول", text: "اشترك الآن في عروضنا الحصرية!" },
+        { icon: "🎮🔥", title: "لعبة الأسبوع", text: "جرب لعبة جديدة كل أسبوع!" },
+        { icon: "💰💎", title: "خصم 50%", text: "عروض لا تُفوت! اشترك الآن" },
+        { icon: "🚀⚡", title: "تحديث جديد", text: "أحدث الإصدارات متوفرة الآن" }
+    ];
+    
+    // ==================== متغيرات الدردشة الخاصة ====================
+    let currentUserName = null;
     let currentRoom = null;
     let currentRoomPassword = null;
-    let isVIP = false;
-    let messages = [];
-    let rooms = {};
-    let usersInRoom = [];
+    let isVIPUser = false;
+    let privateMessages = [];
+    let allRooms = {};
+    let adInterval = null;
+    let currentAdIndex = 0;
     
-    // تحميل البيانات
-    function loadData() {
-        let saved = localStorage.getItem('didovip_rooms');
-        if (saved) rooms = JSON.parse(saved);
-        else rooms = {};
+    // ==================== ألعاب ====================
+    function updateRanking() {
+        const sorted = [...gamesData].sort((a,b)=>b.points - a.points);
+        const gold = sorted[0];
+        const silver = sorted[1];
+        const bronze = sorted[2];
+        document.getElementById('rankingList').innerHTML = `
+            <div class="rank-circle"><div class="crown-icon">🥈</div><div class="silver-circle">${silver ? silver.avatar : '👤'}</div><div class="rank-name">${silver ? silver.playerName : '---'}</div><div class="rank-points">⭐ ${silver ? silver.points : 0}</div></div>
+            <div class="rank-circle"><div class="crown-icon">👑</div><div class="gold-circle">${gold ? gold.avatar : '👤'}</div><div class="rank-name">${gold ? gold.playerName : '---'}</div><div class="rank-points">⭐ ${gold ? gold.points : 0}</div></div>
+            <div class="rank-circle"><div class="crown-icon">🥉</div><div class="bronze-circle">${bronze ? bronze.avatar : '👤'}</div><div class="rank-name">${bronze ? bronze.playerName : '---'}</div><div class="rank-points">⭐ ${bronze ? bronze.points : 0}</div></div>
+        `;
+    }
+    
+    function renderAllGames() {
+        const filtered = gamesData;
+        const mid = Math.ceil(filtered.length / 2);
+        const row1 = filtered.slice(0, mid);
+        const row2 = filtered.slice(mid);
+        document.getElementById('gamesContainer').innerHTML = `
+            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
+            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
+        `;
+        attachGameClickEvents();
+    }
+    
+    function renderCategoryGames(category, categoryName) {
+        const filtered = gamesData.filter(g => g.cat === category);
+        const mid = Math.ceil(filtered.length / 2);
+        const row1 = filtered.slice(0, mid);
+        const row2 = filtered.slice(mid);
+        document.getElementById('categoryGamesContainer').innerHTML = `
+            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
+            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
+        `;
+        attachGameClickEvents();
+    }
+    
+    function attachGameClickEvents() {
+        document.querySelectorAll('.game-card').forEach(card=>{
+            card.addEventListener('click', (e)=>{
+                e.stopPropagation();
+                const url = card.getAttribute('data-url');
+                const name = card.getAttribute('data-name');
+                const id = parseInt(card.getAttribute('data-id'));
+                openGameDirect(url, name);
+                addPointsToPlayer(id, 5);
+            });
+        });
+    }
+    
+    function openGameDirect(url, name) {
+        document.getElementById('gameIframe').src = url;
+        document.getElementById('gameModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeGame() {
+        document.getElementById('gameModal').classList.add('hidden');
+        document.getElementById('gameIframe').src = '';
+        document.body.style.overflow = 'auto';
+    }
+    
+    function addPointsToPlayer(gameId, points) {
+        const game = gamesData.find(g=>g.id === gameId);
+        if(game) { game.points += points; updateRanking(); }
+    }
+    
+    function showHomePage() {
+        document.getElementById('homePage').classList.remove('page-hidden');
+        document.getElementById('categoryPage').classList.add('page-hidden');
+    }
+    
+    function showCategoryPage(category, categoryName) {
+        renderCategoryGames(category, categoryName);
+        document.getElementById('homePage').classList.add('page-hidden');
+        document.getElementById('categoryPage').classList.remove('page-hidden');
+    }
+    
+    document.querySelectorAll('.cat-badge').forEach(badge=>{
+        badge.addEventListener('click', ()=>{
+            const cat = badge.getAttribute('data-cat');
+            let catName = cat === "action" ? "ألعاب الأكشن" : cat === "racing" ? "ألعاب السباقات" : cat === "fighting" ? "ألعاب القتال" : "ألعاب الألغاز";
+            showCategoryPage(cat, catName);
+        });
+    });
+    
+    document.getElementById('backToHomeBtn').addEventListener('click', ()=> showHomePage());
+    document.getElementById('gameModal').addEventListener('click', (e)=>{ if(e.target === document.getElementById('gameModal')) closeGame(); });
+    
+    // ==================== إعلان ثابت ====================
+    function refreshPermanentAd() {
+        currentAdIndex = (currentAdIndex + 1) % permanentAds.length;
+        const ad = permanentAds[currentAdIndex];
+        document.getElementById('adIcon').innerHTML = ad.icon;
+        document.getElementById('adTitle').innerHTML = ad.title;
+        document.getElementById('adText').innerHTML = ad.text;
+    }
+    
+    function startPermanentAdRotation() {
+        if (adInterval) clearInterval(adInterval);
+        adInterval = setInterval(refreshPermanentAd, 10000);
+    }
+    
+    // ==================== ترقية VIP ====================
+    function upgradeToVIP() {
+        if (isVIPUser) { alert("✨ أنت بالفعل عضو VIP!"); return; }
+        if (confirm("✨ ترقية إلى VIP - 9.99$ شهرياً\n\n✅ إرسال الصور في الدردشة\n✅ علامة VIP مميزة\n✅ الوصول إلى ميزات حصرية\n\nهل تريد الترقية؟")) {
+            isVIPUser = true;
+            localStorage.setItem('didogame_vip', 'true');
+            document.getElementById('registerBtn').innerHTML = '👑 VIP مفعل';
+            document.getElementById('registerBtn').classList.add('vip-active');
+            document.getElementById('vipImageBtnChat').style.display = 'inline-block';
+            alert("🎉 تهانينا! أصبحت عضواً مميزاً في DidoGame VIP 🎉\n\nيمكنك الآن إرسال الصور في الدردشة!");
+        }
+    }
+    
+    // ==================== الدردشة الخاصة ====================
+    function loadChatData() {
+        const savedRooms = localStorage.getItem('didogame_private_rooms');
+        if (savedRooms) allRooms = JSON.parse(savedRooms);
+        else allRooms = {};
         
-        let savedUser = localStorage.getItem('didovip_current_user');
-        if (savedUser) {
-            let userData = JSON.parse(savedUser);
-            currentUser = userData.username;
-            isVIP = userData.isVIP || false;
-            document.getElementById('vipImageBtn').style.display = isVIP ? 'inline-block' : 'none';
-            if (isVIP) document.getElementById('upgradeBtn').innerHTML = '👑 VIP مفعل';
+        const savedVIP = localStorage.getItem('didogame_vip');
+        if (savedVIP === 'true') {
+            isVIPUser = true;
+            document.getElementById('registerBtn').innerHTML = '👑 VIP مفعل';
+            document.getElementById('registerBtn').classList.add('vip-active');
+            document.getElementById('vipImageBtnChat').style.display = 'inline-block';
         }
         
         updateAvailableRoomsList();
     }
     
     function saveRooms() {
-        localStorage.setItem('didovip_rooms', JSON.stringify(rooms));
+        localStorage.setItem('didogame_private_rooms', JSON.stringify(allRooms));
     }
     
-    function saveCurrentUser() {
-        if (currentUser) {
-            localStorage.setItem('didovip_current_user', JSON.stringify({ username: currentUser, isVIP: isVIP }));
-        }
-    }
-    
-    // عرض الغرف المتاحة
     function updateAvailableRoomsList() {
-        let roomNames = Object.keys(rooms);
-        let div = document.getElementById('availableRoomsList');
+        const roomNames = Object.keys(allRooms);
+        const div = document.getElementById('availableRoomsList');
         if (roomNames.length === 0) {
             div.innerHTML = '📁 لا توجد غرف متاحة. أنشئ غرفة جديدة!';
         } else {
             div.innerHTML = '📁 الغرف المتاحة: ' + roomNames.map(r => 
-                `<span class="user-chip" onclick="quickJoinRoom('${r}')">${r} ${rooms[r].hasPassword ? '🔒' : '🔓'}</span>`
+                `<span class="user-chip" onclick="quickJoin('${r}')">${r} ${allRooms[r].hasPassword ? '🔒' : '🔓'}</span>`
             ).join('');
         }
     }
     
-    // الدخول السريع لغرفة
-    function quickJoinRoom(roomName) {
-        document.getElementById('roomName').value = roomName;
-        let pwd = rooms[roomName]?.password || '';
-        document.getElementById('roomPassword').value = pwd;
-        createOrJoinRoom();
+    function quickJoin(roomName) {
+        document.getElementById('roomNameInput').value = roomName;
+        const room = allRooms[roomName];
+        if (room && room.hasPassword) {
+            const pwd = prompt(`🔐 غرفة "${roomName}" محمية بكلمة مرور. أدخل كلمة المرور:`);
+            if (pwd === room.password) {
+                document.getElementById('roomPasswordInput').value = pwd;
+                joinRoom();
+            } else {
+                alert("❌ كلمة المرور غير صحيحة!");
+            }
+        } else {
+            document.getElementById('roomPasswordInput').value = '';
+            joinRoom();
+        }
     }
     
-    // إنشاء أو دخول غرفة
-    function createOrJoinRoom() {
-        let roomName = document.getElementById('roomName').value.trim();
-        let password = document.getElementById('roomPassword').value;
+    function setUsername() {
+        const name = document.getElementById('userNameInput').value.trim();
+        if (name) {
+            currentUserName = name;
+            alert(`✅ مرحباً ${currentUserName}`);
+        } else {
+            alert("الرجاء إدخال اسم المستخدم");
+        }
+    }
+    
+    function createRoom() {
+        const roomName = document.getElementById('roomNameInput').value.trim();
+        const password = document.getElementById('roomPasswordInput').value;
         
         if (!roomName) {
             alert("الرجاء إدخال اسم الغرفة");
             return;
         }
         
-        // التحقق من وجود الغرفة
-        if (rooms[roomName]) {
-            // غرفة موجودة - تحقق من كلمة المرور
-            if (rooms[roomName].hasPassword && rooms[roomName].password !== password) {
-                alert("❌ كلمة مرور الغرفة غير صحيحة!");
-                return;
-            }
-            currentRoom = roomName;
-            currentRoomPassword = rooms[roomName].password || null;
-            loadRoomMessages();
-            alert(`✅ دخلت الغرفة: ${roomName}`);
-        } else {
-            // إنشاء غرفة جديدة
-            let hasPassword = password !== "";
-            rooms[roomName] = {
-                name: roomName,
-                hasPassword: hasPassword,
-                password: hasPassword ? password : null,
-                messages: [],
-                created: Date.now()
-            };
-            currentRoom = roomName;
-            currentRoomPassword = password || null;
-            messages = [];
-            saveRooms();
-            alert(`🎉 تم إنشاء الغرفة: ${roomName}`);
+        if (allRooms[roomName]) {
+            alert("❌ هذه الغرفة موجودة بالفعل! استخدم 'دخول الغرفة' بدلاً من ذلك.");
+            return;
         }
         
-        // تحديث واجهة المستخدم
-        document.getElementById('roomSection').classList.add('hidden');
-        document.getElementById('chatDiv').classList.remove('hidden');
-        document.getElementById('roomInfo').innerHTML = `🔐 الغرفة: ${currentRoom} ${currentRoomPassword ? '🔒 محمية' : '🔓 مفتوحة'}`;
+        allRooms[roomName] = {
+            name: roomName,
+            hasPassword: password !== "",
+            password: password !== "" ? password : null,
+            messages: [],
+            created: Date.now()
+        };
+        saveRooms();
+        updateAvailableRoomsList();
+        alert(`✅ تم إنشاء الغرفة "${roomName}" بنجاح!`);
         
-        updateUsersInRoom();
-        displayMessages();
+        // الدخول مباشرة
+        currentRoom = roomName;
+        currentRoomPassword = password || null;
+        privateMessages = allRooms[roomName].messages || [];
+        showChatInterface();
+    }
+    
+    function joinRoom() {
+        if (!currentUserName) {
+            alert("⚠️ الرجاء تعيين اسم المستخدم أولاً!");
+            return;
+        }
+        
+        const roomName = document.getElementById('roomNameInput').value.trim();
+        const password = document.getElementById('roomPasswordInput').value;
+        
+        if (!roomName) {
+            alert("الرجاء إدخال اسم الغرفة");
+            return;
+        }
+        
+        const room = allRooms[roomName];
+        if (!room) {
+            alert("❌ الغرفة غير موجودة! أنشئها أولاً.");
+            return;
+        }
+        
+        if (room.hasPassword && room.password !== password) {
+            alert("❌ كلمة مرور الغرفة غير صحيحة!");
+            return;
+        }
+        
+        currentRoom = roomName;
+        currentRoomPassword = password || null;
+        privateMessages = room.messages || [];
+        showChatInterface();
+        displayPrivateMessages();
+    }
+    
+    function showChatInterface() {
+        document.getElementById('roomLoginArea').classList.add('hidden');
+        document.getElementById('chatArea').classList.remove('hidden');
+        document.getElementById('roomStatus').innerHTML = `🔐 في غرفة: ${currentRoom} ${currentRoomPassword ? '🔒' : '🔓'}`;
+        document.getElementById('roomUsersList').innerHTML = `👥 المتصلون: ${currentUserName} ${isVIPUser ? '⭐VIP' : ''}`;
         updatePrivateUserSelect();
     }
     
-    function loadRoomMessages() {
-        if (rooms[currentRoom] && rooms[currentRoom].messages) {
-            messages = rooms[currentRoom].messages;
-        } else {
-            messages = [];
+    function leaveRoom() {
+        if (confirm("هل تريد مغادرة الغرفة الحالية؟")) {
+            currentRoom = null;
+            currentRoomPassword = null;
+            privateMessages = [];
+            document.getElementById('roomLoginArea').classList.remove('hidden');
+            document.getElementById('chatArea').classList.add('hidden');
+            document.getElementById('roomStatus').innerHTML = "⚪ غير متصل";
+            updateAvailableRoomsList();
         }
-        displayMessages();
     }
     
-    function saveRoomMessages() {
-        if (rooms[currentRoom]) {
-            rooms[currentRoom].messages = messages;
+    function deleteCurrentRoom() {
+        const roomName = document.getElementById('roomNameInput').value.trim();
+        if (!roomName) {
+            alert("أدخل اسم الغرفة التي تريد حذفها");
+            return;
+        }
+        
+        if (!allRooms[roomName]) {
+            alert("❌ الغرفة غير موجودة");
+            return;
+        }
+        
+        if (confirm(`⚠️ هل أنت متأكد من حذف الغرفة "${roomName}" وجميع رسائلها؟\nهذا الإجراء لا يمكن التراجع عنه!`)) {
+            delete allRooms[roomName];
             saveRooms();
+            updateAvailableRoomsList();
+            alert(`✅ تم حذف الغرفة: ${roomName}`);
+            
+            if (currentRoom === roomName) {
+                leaveRoom();
+            }
+            document.getElementById('roomNameInput').value = '';
+            document.getElementById('roomPasswordInput').value = '';
         }
     }
     
-    // تحديث قائمة المستخدمين في الغرفة (محاكاة)
-    function updateUsersInRoom() {
-        // في هذا الإصدار، كل مستخدم هو جهاز منفصل
-        // نعرض فقط المستخدم الحالي
-        let usersList = [currentUser];
-        let div = document.getElementById('activeUsers');
-        div.innerHTML = '👥 المتصلون: ' + usersList.map(u => 
-            `<span class="user-chip ${isVIP ? 'vip' : ''}">${u}${isVIP ? '⭐' : ''}</span>`
-        ).join('');
-    }
-    
-    // تحديث قائمة المستخدمين للرسائل الخاصة
     function updatePrivateUserSelect() {
-        let select = document.getElementById('privateUserSelect');
-        select.innerHTML = '<option value="">اختر مستخدم...</option>';
-        // نضيف المستخدمين المحتملين (في هذا الإصدار نضيف أسماء تجريبية)
-        let possibleUsers = ["محمد", "سارة", "علي", "ليلى", "أحمد", "نور"];
+        const select = document.getElementById('privateUserSelect');
+        select.innerHTML = '<option value="">🔒 اختر مستخدم...</option>';
+        const possibleUsers = ["محمد", "سارة", "علي", "ليلى", "نور", "خالد", "فاطمة"];
         possibleUsers.forEach(u => {
-            if (u !== currentUser) {
+            if (u !== currentUserName) {
                 select.innerHTML += `<option value="${u}">${u}</option>`;
             }
         });
     }
     
-    // إرسال رسالة عامة
-    function sendMessage() {
-        let text = document.getElementById('messageInput').value.trim();
+    function sendPublicMessage() {
+        const text = document.getElementById('publicMessageInput').value.trim();
         if (!text) return;
         
-        messages.push({
+        privateMessages.push({
             type: 'public',
-            username: currentUser,
+            sender: currentUserName,
             text: text,
-            isVIP: isVIP,
+            isVIP: isVIPUser,
             time: Date.now()
         });
         saveRoomMessages();
-        displayMessages();
-        document.getElementById('messageInput').value = '';
+        displayPrivateMessages();
+        document.getElementById('publicMessageInput').value = '';
     }
     
-    // إرسال رسالة خاصة
-    function sendPrivateMessage() {
-        let targetUser = document.getElementById('privateUserSelect').value;
-        let text = document.getElementById('privateMessageInput').value.trim();
+    function sendPrivateMessageChat() {
+        const targetUser = document.getElementById('privateUserSelect').value;
+        const text = document.getElementById('privateMessageInput').value.trim();
         
         if (!targetUser) {
             alert("اختر المستخدم الذي تريد إرسال الرسالة له");
@@ -377,40 +1108,42 @@
             return;
         }
         
-        messages.push({
+        privateMessages.push({
             type: 'private',
-            username: currentUser,
-            targetUser: targetUser,
+            sender: currentUserName,
+            target: targetUser,
             text: text,
-            isVIP: isVIP,
+            isVIP: isVIPUser,
             time: Date.now()
         });
         saveRoomMessages();
-        displayMessages();
+        displayPrivateMessages();
         document.getElementById('privateMessageInput').value = '';
-        alert(`🔒 رسالة خاصة أرسلت إلى ${targetUser}`);
     }
     
-    // إرسال صورة
-    function sendImage() {
-        if (!isVIP) { alert("❌ إرسال الصور للمستخدمين المميزين فقط!"); return; }
-        let input = document.createElement('input');
+    function sendImageChat() {
+        if (!isVIPUser) {
+            alert("❌ إرسال الصور متاح فقط للمستخدمين المميزين VIP!\n👑 قم بترقية حسابك من الزر في الأسفل.");
+            return;
+        }
+        
+        const input = document.createElement('input');
         input.type = 'file';
         input.accept = 'image/*';
         input.onchange = (e) => {
-            let file = e.target.files[0];
+            const file = e.target.files[0];
             if (file) {
-                let reader = new FileReader();
+                const reader = new FileReader();
                 reader.onload = (ev) => {
-                    messages.push({
+                    privateMessages.push({
                         type: 'public',
-                        username: currentUser,
+                        sender: currentUserName,
                         image: ev.target.result,
-                        isVIP: isVIP,
+                        isVIP: isVIPUser,
                         time: Date.now()
                     });
                     saveRoomMessages();
-                    displayMessages();
+                    displayPrivateMessages();
                 };
                 reader.readAsDataURL(file);
             }
@@ -418,142 +1151,103 @@
         input.click();
     }
     
-    // عرض الرسائل
-    function displayMessages() {
-        let div = document.getElementById('messagesDiv');
-        let last50 = messages.slice(-50);
+    function saveRoomMessages() {
+        if (currentRoom && allRooms[currentRoom]) {
+            allRooms[currentRoom].messages = privateMessages;
+            saveRooms();
+        }
+    }
+    
+    function displayPrivateMessages() {
+        const div = document.getElementById('privateMessagesDiv');
+        const last50 = privateMessages.slice(-50);
+        
         if (last50.length === 0) {
             div.innerHTML = '<div style="color:#888; text-align:center;">💬 لا توجد رسائل بعد... ابدأ المحادثة!</div>';
             return;
         }
+        
         div.innerHTML = '';
         last50.forEach(msg => {
-            let el = document.createElement('div');
-            el.className = 'message';
+            // للرسائل الخاصة: نعرضها فقط إذا كان المستخدم هو المرسل أو المستهدف
             if (msg.type === 'private') {
-                el.classList.add('private');
-                var isForMe = (msg.targetUser === currentUser);
-                var isFromMe = (msg.username === currentUser);
-                if (isForMe || isFromMe) {
-                    // نعرض الرسائل الخاصة التي تخص المستخدم الحالي فقط
-                } else {
-                    // لا نعرض رسائل خاصة ليست له
-                    return;
+                if (msg.sender !== currentUserName && msg.target !== currentUserName) {
+                    return; // لا نعرض رسائل خاصة ليست له
                 }
             }
             
-            let senderHtml = `<div class="sender">${msg.username} ${msg.isVIP ? '<span class="vip-badge">VIP</span>' : ''}`;
+            const el = document.createElement('div');
+            el.className = 'message-private';
+            if (msg.type === 'private') el.classList.add('private-msg');
+            
+            let senderHtml = `<div class="sender-private">${msg.sender} ${msg.isVIP ? '<span class="vip-badge-small">VIP</span>' : ''}`;
             if (msg.type === 'private') {
-                senderHtml += ` <span class="private-tag">🔒 إلى ${msg.targetUser}</span>`;
+                senderHtml += ` <span class="private-tag">🔒 إلى ${msg.target}</span>`;
             }
             senderHtml += `</div>`;
             el.innerHTML = senderHtml;
             
-            if (msg.text) el.innerHTML += `<div class="text">${msg.text}</div>`;
-            if (msg.image) el.innerHTML += `<img src="${msg.image}" onclick="window.open(this.src)">`;
+            if (msg.text) el.innerHTML += `<div class="text-private">${msg.text}</div>`;
+            if (msg.image) el.innerHTML += `<img src="${msg.image}" style="max-width:100%; max-height:120px; border-radius:10px; margin-top:5px;">`;
+            
             div.appendChild(el);
         });
         div.scrollTop = div.scrollHeight;
     }
     
-    // حذف الغرفة الحالية
-    function showDeleteConfirm() {
-        let roomName = document.getElementById('roomName').value.trim();
-        if (!roomName) {
-            alert("أدخل اسم الغرفة التي تريد حذفها");
-            return;
+    // ==================== موسيقى ====================
+    let musicPlaying = false;
+    let music = null;
+    
+    function toggleMusic() {
+        if (!music) {
+            music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+            music.loop = true;
+            music.volume = 0.3;
         }
-        if (confirm(`⚠️ هل أنت متأكد من حذف الغرفة "${roomName}" وجميع رسائلها؟\nهذا الإجراء لا يمكن التراجع عنه!`)) {
-            if (rooms[roomName]) {
-                delete rooms[roomName];
-                saveRooms();
-                alert(`✅ تم حذف الغرفة: ${roomName}`);
-                document.getElementById('roomName').value = '';
-                document.getElementById('roomPassword').value = '';
-                updateAvailableRoomsList();
-                
-                // إذا كنا في هذه الغرفة، نخرج منها
-                if (currentRoom === roomName) {
-                    document.getElementById('roomSection').classList.remove('hidden');
-                    document.getElementById('chatDiv').classList.add('hidden');
-                    currentRoom = null;
-                }
-            } else {
-                alert("الغرفة غير موجودة");
-            }
+        
+        if (musicPlaying) {
+            music.pause();
+            document.getElementById('musicBtn').innerHTML = '🎵 تشغيل';
+        } else {
+            music.play().catch(e => console.log('Auto-play prevented'));
+            document.getElementById('musicBtn').innerHTML = '🔇 إيقاف';
         }
+        musicPlaying = !musicPlaying;
     }
     
-    // الخروج من الغرفة
-    function leaveRoom() {
-        if (confirm("هل تريد الخروج من الغرفة الحالية؟")) {
-            document.getElementById('roomSection').classList.remove('hidden');
-            document.getElementById('chatDiv').classList.add('hidden');
-            currentRoom = null;
-            updateAvailableRoomsList();
-        }
-    }
-    
-    // الترقية إلى VIP
-    function upgradeVIP() {
-        if (isVIP) { alert("أنت VIP بالفعل!"); return; }
-        if (confirm("✨ ترقية إلى VIP - 9.99$ شهرياً\n✅ إرسال الصور\n✅ علامة مميزة\n\nهل توافق؟")) {
-            isVIP = true;
-            saveCurrentUser();
-            document.getElementById('vipImageBtn').style.display = 'inline-block';
-            document.getElementById('upgradeBtn').innerHTML = '👑 VIP مفعل';
-            document.getElementById('upgradeBtn').style.opacity = '0.7';
-            if (currentUser) {
-                document.getElementById('roomInfo').innerHTML = `🔐 الغرفة: ${currentRoom} ${currentRoomPassword ? '🔒 محمية' : '🔓 مفتوحة'} - VIP`;
-            }
-            alert("🎉 أصبحت عضواً مميزاً! يمكنك الآن إرسال الصور");
-        }
-    }
-    
-    // تسجيل الدخول
-    function setUser() {
-        let name = prompt("أدخل اسم المستخدم الخاص بك:", currentUser || "أحمد");
-        if (name && name.trim()) {
-            currentUser = name.trim();
-            saveCurrentUser();
-            alert(`✅ مرحباً ${currentUser}`);
-            updateAvailableRoomsList();
-        }
-    }
-    
-    // زر الخروج من الغرفة
-    function addExitButton() {
-        let exitBtn = document.createElement('button');
-        exitBtn.innerHTML = '🚪 خروج من الغرفة';
-        exitBtn.className = 'danger-btn';
-        exitBtn.onclick = leaveRoom;
-        exitBtn.style.marginTop = '10px';
-        exitBtn.style.width = '100%';
-        document.querySelector('#chatDiv .section:first-child').appendChild(exitBtn);
-    }
-    
-    // التحقق من اسم المستخدم عند البداية
-    if (!currentUser) {
-        setTimeout(() => {
-            let name = prompt("👋 مرحباً بك في DidoGame!\n\nأدخل اسم المستخدم الخاص بك:", "أحمد");
-            if (name && name.trim()) {
-                currentUser = name.trim();
-                saveCurrentUser();
-                alert(`✅ مرحباً ${currentUser}`);
-                updateAvailableRoomsList();
-            }
-        }, 500);
-    }
-    
-    // تهيئة
-    loadData();
-    addExitButton();
+    // تحديث الدردشة كل ثانية
     setInterval(() => {
-        if (currentRoom) {
-            displayMessages();
-            updateUsersInRoom();
+        if (currentRoom && allRooms[currentRoom]) {
+            const newMessages = allRooms[currentRoom].messages || [];
+            if (JSON.stringify(newMessages) !== JSON.stringify(privateMessages)) {
+                privateMessages = newMessages;
+                displayPrivateMessages();
+            }
         }
     }, 2000);
+    
+    // ==================== تهيئة ====================
+    function init() {
+        loadChatData();
+        updateRanking();
+        renderAllGames();
+        startPermanentAdRotation();
+        
+        // تعيين اسم مستخدم افتراضي
+        if (!currentUserName) {
+            setTimeout(() => {
+                const name = prompt("👋 مرحباً بك في DidoGame!\n\nأدخل اسم المستخدم الخاص بك:", "أحمد");
+                if (name && name.trim()) {
+                    currentUserName = name.trim();
+                    document.getElementById('userNameInput').value = currentUserName;
+                    alert(`✅ مرحباً ${currentUserName}`);
+                }
+            }, 500);
+        }
+    }
+    
+    init();
 </script>
 </body>
 </html>
