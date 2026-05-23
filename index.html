@@ -67,23 +67,23 @@
             display: none;
         }
 
-        /* شخصية أنمي */
+        /* شخصية أنمي - مكبرة */
         .anime-hero {
             background: linear-gradient(135deg, #1a0a3a80, #0a0a2a80);
-            border-radius: 20px;
-            padding: 10px;
-            margin-bottom: 8px;
+            border-radius: 25px;
+            padding: 12px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
             justify-content: center;
             border: 1px solid #ff44ff;
         }
         
         .character-img {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             background: url('https://i.pinimg.com/originals/6e/5e/6c/6e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png');
             background-size: cover;
             background-position: center;
@@ -98,12 +98,12 @@
             right: -8px;
             background: #ff44ff;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 1.1rem;
             border: 2px solid white;
         }
         
@@ -113,13 +113,13 @@
         
         .tshirt-text {
             background: linear-gradient(135deg, #ff3366, #ff44ff);
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 5px 14px;
+            border-radius: 22px;
             color: white;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: bold;
             display: inline-block;
-            margin: 3px 0;
+            margin: 4px 0;
             font-family: monospace;
             letter-spacing: 1px;
         }
@@ -129,17 +129,17 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
         }
         
         .challenge-look {
-            font-size: 0.55rem;
+            font-size: 0.6rem;
             color: #ffaa88;
         }
 
         /* ترتيب اللاعبين */
         .ranking-section {
-            margin-bottom: 8px;
+            margin-bottom: 20px;
             text-align: center;
         }
         
@@ -147,7 +147,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             flex-wrap: wrap;
         }
         
@@ -156,86 +156,90 @@
         }
         
         .gold-circle {
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             background: linear-gradient(145deg, #ffd700, #ffaa00);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 2px;
+            font-size: 1.6rem;
+            margin-bottom: 3px;
             border: 2px solid #ffd700;
             box-shadow: 0 0 10px #ffd700;
         }
         
         .silver-circle {
-            width: 35px;
-            height: 35px;
+            width: 38px;
+            height: 38px;
             background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
-            margin-bottom: 2px;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
             border: 1.5px solid #c0c0c0;
             box-shadow: 0 0 6px #c0c0c0;
         }
         
         .bronze-circle {
-            width: 35px;
-            height: 35px;
+            width: 38px;
+            height: 38px;
             background: linear-gradient(145deg, #cd7f32, #b8651a);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
-            margin-bottom: 2px;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
             border: 1.5px solid #cd7f32;
             box-shadow: 0 0 6px #cd7f32;
         }
         
         .rank-name {
             color: white;
-            font-size: 0.5rem;
+            font-size: 0.55rem;
             font-weight: bold;
             margin-top: 2px;
         }
         
         .rank-points {
             color: #ffcc00;
-            font-size: 0.45rem;
+            font-size: 0.5rem;
         }
         
         .crown-icon {
-            font-size: 0.7rem;
-            margin-bottom: 1px;
+            font-size: 0.75rem;
+            margin-bottom: 2px;
         }
 
-        /* Categories */
+        /* Categories - مسافة أكبر من الأعلى */
+        .categories-section {
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+        
         .categories {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
-            margin-bottom: 8px;
+            gap: 6px;
             justify-content: center;
         }
         
         .cat-badge {
             background: #ff44ff30;
             border: 1px solid #ff44ff;
-            padding: 3px 10px;
-            border-radius: 20px;
+            padding: 4px 12px;
+            border-radius: 22px;
             color: white;
-            font-size: 0.55rem;
+            font-size: 0.6rem;
             cursor: pointer;
         }
 
         /* Two rows for games */
         .games-wrapper {
-            margin-top: 3px;
+            margin-top: 5px;
         }
         
         .two-rows {
@@ -257,11 +261,11 @@
         }
         
         .game-card {
-            min-width: 95px;
-            width: 95px;
+            min-width: 100px;
+            width: 100px;
             background: linear-gradient(145deg, #0f0f2a, #0a0a1a);
-            border-radius: 12px;
-            padding: 6px;
+            border-radius: 14px;
+            padding: 7px;
             text-align: center;
             border: 1px solid #ff44ff40;
             cursor: pointer;
@@ -275,7 +279,7 @@
         
         .game-img {
             width: 100%;
-            height: 65px;
+            height: 70px;
             background-size: cover;
             background-position: center;
             border-radius: 10px;
@@ -446,11 +450,14 @@
                 <div class="ranking-circles" id="rankingList"></div>
             </div>
             
-            <div class="categories" id="categoriesList">
-                <div class="cat-badge" data-cat="action">🎯 أكشن</div>
-                <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
-                <div class="cat-badge" data-cat="fighting">🥊 قتال</div>
-                <div class="cat-badge" data-cat="puzzle">🧩 ألغاز</div>
+            <!-- مسافة أكبر بين تصنيف اللاعبين وأنواع الألعاب -->
+            <div class="categories-section">
+                <div class="categories" id="categoriesList">
+                    <div class="cat-badge" data-cat="action">🎯 أكشن</div>
+                    <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
+                    <div class="cat-badge" data-cat="fighting">🥊 قتال</div>
+                    <div class="cat-badge" data-cat="puzzle">🧩 ألغاز</div>
+                </div>
             </div>
             
             <div class="games-wrapper">
