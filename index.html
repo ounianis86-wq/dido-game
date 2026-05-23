@@ -85,6 +85,243 @@
             display: none;
         }
 
+        /* أنمي هيرو */
+        .anime-hero {
+            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
+            border-radius: 25px;
+            padding: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+            border: 1px solid #ff44ff;
+            box-shadow: 0 0 20px #ff44ff;
+            animation: glowPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 10px #ff44ff; border-color: #ff44ff; }
+            50% { box-shadow: 0 0 30px #ff44ff, 0 0 20px #00ffff; border-color: #00ffff; }
+            100% { box-shadow: 0 0 10px #ff44ff; border-color: #ff44ff; }
+        }
+        
+        .character-img {
+            width: 70px;
+            height: 70px;
+            background: url('https://i.pinimg.com/originals/6e/5e/6c/6e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png');
+            background-size: cover;
+            border-radius: 50%;
+            border: 2px solid #ff44ff;
+            position: relative;
+        }
+        
+        .controller-on-hand {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            border: 1px solid white;
+        }
+        
+        .tshirt-text {
+            background: linear-gradient(135deg, #ff3366, #ff44ff, #00ffff);
+            padding: 4px 12px;
+            border-radius: 22px;
+            color: white;
+            font-size: 0.65rem;
+            font-weight: bold;
+            display: inline-block;
+        }
+        
+        .character-info h2 {
+            background: linear-gradient(135deg, #ffff00, #ff44ff, #00ffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 0.7rem;
+        }
+
+        /* ترتيب اللاعبين */
+        .ranking-section {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .ranking-circles {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .gold-circle {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(145deg, #ffd700, #ffaa00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 3px;
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 20px #ffd700;
+        }
+        
+        .silver-circle {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            margin-bottom: 3px;
+            border: 1.5px solid #c0c0c0;
+            box-shadow: 0 0 15px #c0c0c0;
+        }
+        
+        .bronze-circle {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(145deg, #cd7f32, #b8651a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            margin-bottom: 3px;
+            border: 1.5px solid #cd7f32;
+            box-shadow: 0 0 15px #cd7f32;
+        }
+        
+        .rank-name {
+            color: white;
+            font-size: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .rank-points {
+            color: #ffcc00;
+            font-size: 0.45rem;
+        }
+
+        /* التصنيفات */
+        .categories-section {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+        }
+        
+        .cat-badge {
+            background: #ff44ff30;
+            border: 1px solid #ff44ff;
+            padding: 4px 12px;
+            border-radius: 22px;
+            color: white;
+            font-size: 0.6rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 8px #ff44ff;
+        }
+        
+        .cat-badge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #ff44ff;
+        }
+
+        /* الإعلان الثابت */
+        .fixed-permanent-ad {
+            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
+            border: 2px solid #ff44ff;
+            border-radius: 20px;
+            padding: 8px;
+            margin: 8px 0;
+            text-align: center;
+            color: white;
+            font-size: 0.65rem;
+            box-shadow: 0 0 15px #ff44ff;
+        }
+
+        /* الألعاب - صفين متوازيين */
+        .games-wrapper {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .two-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .game-row {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            scrollbar-width: none;
+        }
+        
+        .game-row::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .game-card {
+            min-width: 95px;
+            width: 95px;
+            background: linear-gradient(145deg, #0f0f2a, #0a0a1a);
+            border-radius: 14px;
+            padding: 6px;
+            text-align: center;
+            border: 1px solid #ff44ff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 10px #ff44ff;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-3px);
+            border-color: #00ffff;
+            box-shadow: 0 0 25px #00ffff;
+        }
+        
+        .game-img {
+            width: 100%;
+            height: 65px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 4px;
+        }
+        
+        .game-title {
+            color: white;
+            font-size: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .game-cat {
+            color: #00ffff;
+            font-size: 0.4rem;
+        }
+
         /* الشريط السفلي مع زر الدردشة الدائري */
         .bottom-bar {
             display: flex;
@@ -208,7 +445,7 @@
         
         .chat-page-title {
             color: white;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             -webkit-background-clip: text;
@@ -225,12 +462,6 @@
             gap: 10px;
         }
         
-        /* أنيميشن للدخول */
-        .chat-hidden {
-            display: none;
-        }
-        
-        /* تنسيقات الدردشة داخل الصفحة */
         .chat-room-section {
             background: rgba(0,0,0,0.4);
             border-radius: 20px;
@@ -283,11 +514,6 @@
             transition: all 0.2s;
         }
         
-        .small-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 15px #ff44ff;
-        }
-        
         .danger-btn {
             background: linear-gradient(135deg, #ff3366, #ff6600);
         }
@@ -296,7 +522,7 @@
             background: rgba(0,0,0,0.3);
             border-radius: 15px;
             padding: 10px;
-            height: 300px;
+            height: 280px;
             overflow-y: auto;
             margin: 10px 0;
         }
@@ -343,23 +569,6 @@
             margin-left: 5px;
         }
         
-        .chat-input-area {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            margin-top: 8px;
-        }
-        
-        .chat-select {
-            padding: 6px;
-            border-radius: 25px;
-            background: rgba(0,0,0,0.5);
-            border: 1px solid #ff44ff;
-            color: white;
-            font-size: 0.65rem;
-        }
-        
-        /* أنيميشن للموجات الصوتية */
         .voice-wave-mini {
             display: inline-block;
             width: 8px;
@@ -380,114 +589,6 @@
             color: #0ff;
             margin-top: 5px;
             text-align: center;
-        }
-        
-        /* باقي التنسيقات */
-        .anime-hero, .ranking-section, .categories-section, .fixed-permanent-ad, .games-wrapper {
-            margin-bottom: 10px;
-        }
-        
-        .anime-hero {
-            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
-            border-radius: 25px;
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            justify-content: center;
-            border: 1px solid #ff44ff;
-        }
-        
-        .character-img {
-            width: 70px;
-            height: 70px;
-            background: url('https://i.pinimg.com/originals/6e/5e/6c/6e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png');
-            background-size: cover;
-            border-radius: 50%;
-            border: 2px solid #ff44ff;
-        }
-        
-        .tshirt-text {
-            background: linear-gradient(135deg, #ff3366, #ff44ff);
-            padding: 4px 12px;
-            border-radius: 22px;
-            color: white;
-            font-size: 0.65rem;
-            display: inline-block;
-        }
-        
-        .ranking-circles {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-        
-        .gold-circle, .silver-circle, .bronze-circle {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-        }
-        .gold-circle { background: linear-gradient(145deg, #ffd700, #ffaa00); box-shadow: 0 0 15px #ffd700; }
-        .silver-circle { background: linear-gradient(145deg, #c0c0c0, #a0a0a0); box-shadow: 0 0 10px #c0c0c0; }
-        .bronze-circle { background: linear-gradient(145deg, #cd7f32, #b8651a); box-shadow: 0 0 10px #cd7f32; }
-        
-        .categories {
-            display: flex;
-            gap: 6px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .cat-badge {
-            background: #ff44ff30;
-            border: 1px solid #ff44ff;
-            padding: 4px 12px;
-            border-radius: 22px;
-            color: white;
-            font-size: 0.6rem;
-            cursor: pointer;
-        }
-        
-        .fixed-permanent-ad {
-            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
-            border: 2px solid #ff44ff;
-            border-radius: 20px;
-            padding: 8px;
-            text-align: center;
-            color: white;
-            font-size: 0.7rem;
-        }
-        
-        .game-row {
-            display: flex;
-            gap: 6px;
-            overflow-x: auto;
-        }
-        
-        .game-card {
-            min-width: 85px;
-            background: #0f0f2a;
-            border-radius: 14px;
-            padding: 5px;
-            text-align: center;
-            border: 1px solid #ff44ff;
-            cursor: pointer;
-        }
-        
-        .game-img {
-            width: 100%;
-            height: 60px;
-            background-size: cover;
-            border-radius: 10px;
-        }
-        
-        .game-title {
-            color: white;
-            font-size: 0.5rem;
         }
         
         .game-modal {
@@ -535,23 +636,41 @@
         <!-- الصفحة الرئيسية -->
         <div id="homePage" class="page">
             <div class="anime-hero">
-                <div class="character-img"></div>
-                <div><div class="tshirt-text">⚡ DIDO-GAME ⚡</div><div style="color:#fff; font-size:0.55rem;">منصة الألعاب الأولى</div></div>
+                <div class="character-img">
+                    <div class="controller-on-hand">🎮</div>
+                </div>
+                <div class="character-info">
+                    <div class="tshirt-text">⚡ DIDO-GAME ⚡</div>
+                    <h2>😤 نظرة التحدي النيونية!</h2>
+                </div>
             </div>
-            <div class="ranking-section"><div class="ranking-circles" id="rankingList"></div></div>
-            <div class="categories-section"><div class="categories" id="categoriesList">
-                <div class="cat-badge" data-cat="action">🎯 أكشن</div>
-                <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
-                <div class="cat-badge" data-cat="fighting">🥊 قتال</div>
-                <div class="cat-badge" data-cat="puzzle">🧩 ألغاز</div>
-            </div></div>
-            <div class="fixed-permanent-ad" id="permanentAd">📺 إعلان ممول - عروض حصرية!</div>
-            <div class="game-row" id="gamesContainer"></div>
+            
+            <div class="ranking-section">
+                <div class="ranking-circles" id="rankingList"></div>
+            </div>
+            
+            <div class="categories-section">
+                <div class="categories" id="categoriesList">
+                    <div class="cat-badge" data-cat="action">🎯 أكشن</div>
+                    <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
+                    <div class="cat-badge" data-cat="fighting">🥊 قتال</div>
+                    <div class="cat-badge" data-cat="puzzle">🧩 ألغاز</div>
+                </div>
+            </div>
+            
+            <div class="fixed-permanent-ad" id="permanentAd">
+                📺 إعلان ممول - اشترك الآن في عروضنا الحصرية!
+            </div>
+            
+            <!-- الألعاب في صفين متوازيين -->
+            <div class="games-wrapper">
+                <div class="two-rows" id="gamesContainer"></div>
+            </div>
         </div>
         
         <div id="categoryPage" class="page page-hidden">
             <button class="small-btn" id="backToHomeBtn" style="margin-bottom:10px;">🔙 العودة للرئيسية</button>
-            <div class="game-row" id="categoryGamesContainer"></div>
+            <div class="two-rows" id="categoryGamesContainer"></div>
         </div>
     </div>
     
@@ -572,7 +691,6 @@
         <span class="chat-page-title">🔐 غرفة الدردشة الخاصة VIP</span>
     </div>
     <div class="chat-page-content">
-        <!-- قسم الدردشة كاملاً -->
         <div class="chat-room-section">
             <div class="chat-room-header">
                 <span class="room-status-badge" id="chatRoomStatus">⚪ غير متصل</span>
@@ -602,15 +720,14 @@
                     <button class="small-btn" onclick="chatSendPublic()">📤</button>
                     <button id="chatVipImageBtn" class="small-btn" onclick="chatSendImage()" style="display:none;">🖼️</button>
                 </div>
-                <div class="chat-input-area">
-                    <select id="chatPrivateSelect" class="chat-select"></select>
-                    <input type="text" id="chatPrivateMsg" class="room-input" placeholder="رسالة خاصة">
+                <div class="room-controls">
+                    <select id="chatPrivateSelect" class="room-input" style="flex:1;"></select>
+                    <input type="text" id="chatPrivateMsg" class="room-input" placeholder="رسالة خاصة" style="flex:2;">
                     <button class="small-btn" onclick="chatSendPrivate()">🔒</button>
                 </div>
                 <button class="small-btn danger-btn" onclick="chatLeaveRoom()" style="width:100%; margin-top:8px;">🚪 مغادرة الغرفة</button>
             </div>
             
-            <!-- صوت -->
             <div class="voice-status" id="chatVoiceStatus">
                 <span class="voice-wave-mini"></span> اضغط ميكروفون للصوت
             </div>
@@ -631,7 +748,14 @@
         { id:2, name:"Subway Surfers", img:"https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action", points:200, avatar:"🏃", playerName:"Speed" },
         { id:3, name:"Temple Run 2", img:"https://images.hdqwalls.com/wallpapers/pubg-mobile-squad-4k-8q.jpg", url:"https://www.crazygames.com/embed/temple-run-2", cat:"action", points:180, avatar:"🏛️", playerName:"RunKing" },
         { id:4, name:"Hill Climb", img:"https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg", url:"https://www.crazygames.com/embed/hill-climb-racing", cat:"racing", points:120, avatar:"🚗", playerName:"Climber" },
-        { id:5, name:"Street Fighter", img:"https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg", url:"https://www.crazygames.com/embed/street-fighter", cat:"fighting", points:300, avatar:"👊", playerName:"Fighter" }
+        { id:5, name:"Slope", img:"https://images.hdqwalls.com/wallpapers/slope-game-hd.jpg", url:"https://www.crazygames.com/embed/slope", cat:"racing", points:220, avatar:"⚡", playerName:"Fast" },
+        { id:6, name:"Street Fighter", img:"https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg", url:"https://www.crazygames.com/embed/street-fighter", cat:"fighting", points:300, avatar:"👊", playerName:"Fighter" },
+        { id:7, name:"Mortal Kombat", img:"https://images.hdqwalls.com/wallpapers/mortal-kombat-11-4k-2020-45.jpg", url:"https://www.crazygames.com/embed/mortal-kombat", cat:"fighting", points:280, avatar:"💀", playerName:"Scorpion" },
+        { id:8, name:"Among Us", img:"https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg", url:"https://www.crazygames.com/embed/among-us-online", cat:"puzzle", points:90, avatar:"👽", playerName:"Impostor" },
+        { id:9, name:"Gardenscapes", img:"https://images.hdqwalls.com/wallpapers/gardenscapes-2020-2021-4k-47.jpg", url:"https://www.crazygames.com/embed/gardenscapes", cat:"puzzle", points:70, avatar:"🌷", playerName:"Garden" },
+        { id:10, name:"Free Fire", img:"https://images.hdqwalls.com/wallpapers/free-fire-2020-game-4k-g6.jpg", url:"https://www.crazygames.com/embed/free-fire", cat:"action", points:350, avatar:"🔥", playerName:"Fire" },
+        { id:11, name:"Call of Duty", img:"https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-2020-04-m3.jpg", url:"https://www.crazygames.com/embed/call-of-duty", cat:"action", points:320, avatar:"🔫", playerName:"Soldier" },
+        { id:12, name:"Basketball Stars", img:"https://images.hdqwalls.com/wallpapers/basketball-4k-2021-6m.jpg", url:"https://www.crazygames.com/embed/basketball-stars", cat:"racing", points:160, avatar:"🏀", playerName:"Hooper" }
     ];
     
     // ==================== Global Variables ====================
@@ -647,38 +771,89 @@
     // ==================== Games Functions ====================
     function updateRanking() {
         const sorted = [...gamesData].sort((a,b)=>b.points - a.points);
+        const gold = sorted[0];
+        const silver = sorted[1];
+        const bronze = sorted[2];
         document.getElementById('rankingList').innerHTML = `
-            <div><div class="silver-circle">${sorted[1]?.avatar||'👤'}</div><div style="font-size:0.45rem;color:#fff;">${sorted[1]?.playerName||'---'}</div></div>
-            <div><div class="gold-circle">${sorted[0]?.avatar||'👤'}</div><div style="font-size:0.45rem;color:#fff;">${sorted[0]?.playerName||'---'}</div></div>
-            <div><div class="bronze-circle">${sorted[2]?.avatar||'👤'}</div><div style="font-size:0.45rem;color:#fff;">${sorted[2]?.playerName||'---'}</div></div>
+            <div class="rank-circle">
+                <div class="crown-icon">🥈</div>
+                <div class="silver-circle">${silver ? silver.avatar : '👤'}</div>
+                <div class="rank-name">${silver ? silver.playerName : '---'}</div>
+                <div class="rank-points">⭐ ${silver ? silver.points : 0}</div>
+            </div>
+            <div class="rank-circle">
+                <div class="crown-icon">👑</div>
+                <div class="gold-circle">${gold ? gold.avatar : '👤'}</div>
+                <div class="rank-name">${gold ? gold.playerName : '---'}</div>
+                <div class="rank-points">⭐ ${gold ? gold.points : 0}</div>
+            </div>
+            <div class="rank-circle">
+                <div class="crown-icon">🥉</div>
+                <div class="bronze-circle">${bronze ? bronze.avatar : '👤'}</div>
+                <div class="rank-name">${bronze ? bronze.playerName : '---'}</div>
+                <div class="rank-points">⭐ ${bronze ? bronze.points : 0}</div>
+            </div>
         `;
     }
     
-    function renderGames() {
-        let html = gamesData.map(g => `<div class="game-card" data-url="${g.url}" data-id="${g.id}"><div class="game-img" style="background-image:url('${g.img}')"></div><div class="game-title">${g.name}</div></div>`).join('');
-        document.getElementById('gamesContainer').innerHTML = html;
+    function renderAllGames() {
+        const filtered = gamesData;
+        const mid = Math.ceil(filtered.length / 2);
+        const row1 = filtered.slice(0, mid);
+        const row2 = filtered.slice(mid);
+        document.getElementById('gamesContainer').innerHTML = `
+            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
+            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
+        `;
+        attachGameClickEvents();
+    }
+    
+    function attachGameClickEvents() {
         document.querySelectorAll('.game-card').forEach(card => {
             card.addEventListener('click', () => {
-                let id = parseInt(card.dataset.id);
-                let game = gamesData.find(g=>g.id===id);
+                const url = card.getAttribute('data-url');
+                const id = parseInt(card.getAttribute('data-id'));
+                const game = gamesData.find(g => g.id === id);
                 if(game) { game.points += 5; updateRanking(); }
-                document.getElementById('gameIframe').src = card.dataset.url;
+                document.getElementById('gameIframe').src = url;
                 document.getElementById('gameModal').classList.remove('hidden');
             });
         });
     }
     
-    function showCategory(cat) {
-        let filtered = gamesData.filter(g=>g.cat===cat);
-        document.getElementById('categoryGamesContainer').innerHTML = filtered.map(g=>`<div class="game-card" data-url="${g.url}"><div class="game-img" style="background-image:url('${g.img}')"></div><div class="game-title">${g.name}</div></div>`).join('');
-        document.querySelectorAll('#categoryGamesContainer .game-card').forEach(c=>c.addEventListener('click',()=>{ document.getElementById('gameIframe').src=c.dataset.url; document.getElementById('gameModal').classList.remove('hidden'); }));
+    function renderCategoryGames(category) {
+        const filtered = gamesData.filter(g => g.cat === category);
+        const mid = Math.ceil(filtered.length / 2);
+        const row1 = filtered.slice(0, mid);
+        const row2 = filtered.slice(mid);
+        document.getElementById('categoryGamesContainer').innerHTML = `
+            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
+            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
+        `;
+        attachGameClickEvents();
+    }
+    
+    function showCategoryPage(category) {
+        renderCategoryGames(category);
         document.getElementById('homePage').classList.add('page-hidden');
         document.getElementById('categoryPage').classList.remove('page-hidden');
     }
     
-    document.querySelectorAll('.cat-badge').forEach(b=>b.addEventListener('click',()=>showCategory(b.dataset.cat)));
-    document.getElementById('backToHomeBtn').addEventListener('click',()=>{ document.getElementById('homePage').classList.remove('page-hidden'); document.getElementById('categoryPage').classList.add('page-hidden'); });
-    function closeGame() { document.getElementById('gameModal').classList.add('hidden'); document.getElementById('gameIframe').src=''; }
+    document.querySelectorAll('.cat-badge').forEach(badge => {
+        badge.addEventListener('click', () => {
+            showCategoryPage(badge.getAttribute('data-cat'));
+        });
+    });
+    
+    document.getElementById('backToHomeBtn').addEventListener('click', () => {
+        document.getElementById('homePage').classList.remove('page-hidden');
+        document.getElementById('categoryPage').classList.add('page-hidden');
+    });
+    
+    function closeGame() { 
+        document.getElementById('gameModal').classList.add('hidden'); 
+        document.getElementById('gameIframe').src = ''; 
+    }
     
     function upgradeToVIP() {
         if(isVIPUser) { alert("✨ أنت بالفعل عضو VIP!"); return; }
@@ -692,7 +867,7 @@
         }
     }
     
-    // ==================== Chat Functions (Inside Chat Page) ====================
+    // ==================== Chat Functions ====================
     function saveRooms() { localStorage.setItem('didogame_rooms', JSON.stringify(allRooms)); }
     function loadRooms() { let data = localStorage.getItem('didogame_rooms'); if(data) allRooms = JSON.parse(data); else allRooms = {}; }
     
@@ -793,7 +968,8 @@
             if(msg.type === 'private' && msg.sender !== currentUserName && msg.target !== currentUserName) return;
             let el = document.createElement('div');
             el.className = 'message-item' + (msg.type==='private' ? ' private' : '');
-            el.innerHTML = `<div class="message-sender">${msg.sender} ${msg.type==='private' ? `🔒 → ${msg.target}` : ''}</div><div class="message-text">${msg.text}</div>`;
+            el.innerHTML = `<div class="message-sender">${msg.sender} ${msg.type==='private' ? `🔒 → ${msg.target}` : ''}</div><div class="message-text">${msg.text || (msg.image ? '📷 صورة' : '')}</div>`;
+            if(msg.image) el.innerHTML += `<img src="${msg.image}" style="max-width:100%; max-height:100px; border-radius:10px; margin-top:5px;">`;
             div.appendChild(el);
         });
         div.scrollTop = div.scrollHeight;
@@ -834,7 +1010,6 @@
         updateChatAvailableRooms();
     }
     
-    // Voice
     async function startChatMicrophone() {
         if(!currentRoom) return;
         try {
@@ -880,7 +1055,6 @@
     document.getElementById('openChatBtn').addEventListener('click', () => {
         document.getElementById('chatPage').classList.remove('hidden');
         updateChatAvailableRooms();
-        // Load saved username
         let saved = localStorage.getItem('didogame_username');
         if(saved) { currentUserName = saved; document.getElementById('chatUserName').value = currentUserName; }
     });
@@ -898,10 +1072,18 @@
         }
     }, 2000);
     
+    // الإعلان المتغير
+    const ads = ["📺 إعلان ممول - اشترك الآن!", "🎮 لعبة الأسبوع - العب مجاناً!", "💰 خصم 50% على العضوية VIP", "🚀 تحديث جديد - ألعاب حصرية"];
+    let adIndex = 0;
+    setInterval(() => {
+        adIndex = (adIndex + 1) % ads.length;
+        document.getElementById('permanentAd').innerHTML = ads[adIndex];
+    }, 10000);
+    
     // ==================== Initialize ====================
     loadRooms();
     updateRanking();
-    renderGames();
+    renderAllGames();
     updateChatAvailableRooms();
     
     let savedVIP = localStorage.getItem('didogame_vip');
