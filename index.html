@@ -15,7 +15,7 @@
         body {
             background: #05050f;
             min-height: 100vh;
-            padding: 10px;
+            padding: 8px;
         }
 
         .anime-city-bg {
@@ -47,34 +47,34 @@
             margin: 0 auto;
             background: rgba(10,10,30,0.85);
             backdrop-filter: blur(5px);
-            border-radius: 40px;
+            border-radius: 30px;
             overflow: hidden;
-            min-height: 90vh;
-            box-shadow: 0 0 40px #ff00ff30;
+            min-height: 95vh;
+            box-shadow: 0 0 30px #ff00ff30;
             position: relative;
         }
 
         .content {
-            padding: 15px;
+            padding: 10px;
         }
 
-        /* شخصية أنمي */
+        /* شخصية أنمي - مصغرة */
         .anime-hero {
             background: linear-gradient(135deg, #1a0a3a80, #0a0a2a80);
-            border-radius: 30px;
-            padding: 15px;
-            margin-bottom: 15px;
+            border-radius: 20px;
+            padding: 10px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             flex-wrap: wrap;
             justify-content: center;
             border: 1px solid #ff44ff;
         }
         
         .character-img {
-            width: 120px;
-            height: 120px;
+            width: 80px;
+            height: 80px;
             background: url('https://i.pinimg.com/originals/6e/5e/6c/6e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png');
             background-size: cover;
             background-position: center;
@@ -85,16 +85,16 @@
         
         .controller-on-hand {
             position: absolute;
-            bottom: -10px;
-            right: -10px;
+            bottom: -8px;
+            right: -8px;
             background: #ff44ff;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 28px;
+            height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1rem;
             border: 2px solid white;
         }
         
@@ -104,13 +104,13 @@
         
         .tshirt-text {
             background: linear-gradient(135deg, #ff3366, #ff44ff);
-            padding: 6px 16px;
-            border-radius: 30px;
+            padding: 4px 12px;
+            border-radius: 20px;
             color: white;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             font-weight: bold;
             display: inline-block;
-            margin: 5px 0;
+            margin: 3px 0;
             font-family: monospace;
             letter-spacing: 1px;
         }
@@ -120,60 +120,60 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            font-size: 0.9rem;
+            font-size: 0.75rem;
         }
         
         .challenge-look {
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             color: #ffaa88;
         }
 
-        /* Premium banner */
+        /* Premium banner - مصغر */
         .premium-banner {
             background: linear-gradient(135deg, #ff44ff, #aa44ff);
-            border-radius: 20px;
-            padding: 8px 15px;
+            border-radius: 15px;
+            padding: 6px 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             cursor: pointer;
         }
         
         .premium-banner span {
             color: white;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
         }
         
         .premium-banner .upgrade {
             background: #ffcc00;
             color: #000;
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 3px 10px;
+            border-radius: 15px;
             font-weight: bold;
         }
 
-        /* ترتيب اللاعبين - بدون إطار خارجي */
+        /* ترتيب اللاعبين - بدون إطار، أحجام صغيرة */
         .ranking-section {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             text-align: center;
         }
         
         .section-title {
             color: white;
-            font-size: 0.8rem;
-            margin-bottom: 10px;
+            font-size: 0.7rem;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
         }
         
         .ranking-circles {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
             flex-wrap: wrap;
         }
         
@@ -181,99 +181,96 @@
             text-align: center;
         }
         
-        /* الدائرة الذهبية - ثلثي الحجم (50px بدلاً من 70px) */
         .gold-circle {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             background: linear-gradient(145deg, #ffd700, #ffaa00);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 5px;
+            font-size: 1.5rem;
+            margin-bottom: 3px;
             border: 2px solid #ffd700;
-            box-shadow: 0 0 15px #ffd700;
+            box-shadow: 0 0 10px #ffd700;
         }
         
-        /* الدائرة الفضية - نصف الحجم (35px بدلاً من 70px) */
         .silver-circle {
-            width: 35px;
-            height: 35px;
+            width: 32px;
+            height: 32px;
             background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            margin-bottom: 5px;
+            font-size: 1rem;
+            margin-bottom: 3px;
             border: 1.5px solid #c0c0c0;
-            box-shadow: 0 0 10px #c0c0c0;
+            box-shadow: 0 0 8px #c0c0c0;
         }
         
-        /* الدائرة البرونزية - نصف الحجم (35px بدلاً من 70px) */
         .bronze-circle {
-            width: 35px;
-            height: 35px;
+            width: 32px;
+            height: 32px;
             background: linear-gradient(145deg, #cd7f32, #b8651a);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            margin-bottom: 5px;
+            font-size: 1rem;
+            margin-bottom: 3px;
             border: 1.5px solid #cd7f32;
-            box-shadow: 0 0 10px #cd7f32;
+            box-shadow: 0 0 8px #cd7f32;
         }
         
         .rank-name {
             color: white;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: bold;
-            margin-top: 3px;
+            margin-top: 2px;
         }
         
         .rank-points {
             color: #ffcc00;
-            font-size: 0.55rem;
+            font-size: 0.5rem;
         }
         
         .crown-icon {
-            font-size: 0.9rem;
-            margin-bottom: 3px;
+            font-size: 0.8rem;
+            margin-bottom: 2px;
         }
 
-        /* Categories */
+        /* Categories - مصغرة */
         .categories {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
+            gap: 6px;
+            margin-bottom: 10px;
         }
         
         .cat-badge {
             background: #ff44ff30;
             border: 1px solid #ff44ff;
-            padding: 6px 15px;
-            border-radius: 30px;
+            padding: 4px 12px;
+            border-radius: 25px;
             color: white;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             cursor: pointer;
         }
 
-        /* Two rows for games */
+        /* Two rows for games - مصغرة */
         .two-rows {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 8px;
+            margin-bottom: 15px;
         }
         
         .game-row {
             display: flex;
-            gap: 12px;
+            gap: 8px;
             overflow-x: auto;
-            padding-bottom: 10px;
+            padding-bottom: 8px;
         }
         
         .game-row::-webkit-scrollbar {
@@ -281,11 +278,11 @@
         }
         
         .game-card {
-            min-width: 140px;
-            width: 140px;
+            min-width: 110px;
+            width: 110px;
             background: linear-gradient(145deg, #0f0f2a, #0a0a1a);
-            border-radius: 20px;
-            padding: 10px;
+            border-radius: 15px;
+            padding: 8px;
             text-align: center;
             border: 1px solid #ff44ff40;
             cursor: pointer;
@@ -293,66 +290,72 @@
         }
         
         .game-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             border-color: #ff44ff;
         }
         
         .game-img {
             width: 100%;
-            height: 100px;
+            height: 80px;
             background-size: cover;
             background-position: center;
-            border-radius: 16px;
-            margin-bottom: 8px;
+            border-radius: 12px;
+            margin-bottom: 5px;
         }
         
         .game-title {
             color: white;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             font-weight: bold;
         }
         
         .game-cat {
             color: #aa88ff;
-            font-size: 0.55rem;
+            font-size: 0.5rem;
         }
 
         /* Back button */
         .back-btn {
             background: #ff44ff;
             border: none;
-            padding: 8px 20px;
-            border-radius: 30px;
+            padding: 6px 16px;
+            border-radius: 25px;
             color: white;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             cursor: pointer;
             display: inline-block;
+            font-size: 0.6rem;
         }
 
         /* Ad popup */
         .ad-popup {
             position: fixed;
-            bottom: 20px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
             background: #000000dd;
             backdrop-filter: blur(10px);
             border: 2px solid #ff44ff;
-            border-radius: 20px;
-            padding: 15px 25px;
+            border-radius: 15px;
+            padding: 12px 20px;
             text-align: center;
             z-index: 1000;
             display: none;
         }
         
+        .ad-popup div {
+            font-size: 0.7rem;
+        }
+        
         .ad-popup button {
             background: #ff44ff;
             border: none;
-            padding: 8px 20px;
-            border-radius: 30px;
-            margin-top: 10px;
+            padding: 5px 15px;
+            border-radius: 25px;
+            margin-top: 8px;
             cursor: pointer;
+            font-size: 0.6rem;
         }
 
         /* Game modal */
@@ -373,24 +376,24 @@
         .game-modal iframe {
             width: 95%;
             height: 80%;
-            border-radius: 20px;
+            border-radius: 15px;
             border: 2px solid #ff44ff;
             background: white;
         }
         
         .close-modal {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             background: #ff3366;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 24px;
+            font-size: 20px;
             cursor: pointer;
         }
         
@@ -400,16 +403,16 @@
         
         .music-btn {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
             background: #000000aa;
             backdrop-filter: blur(5px);
-            padding: 5px 12px;
-            border-radius: 30px;
+            padding: 4px 10px;
+            border-radius: 25px;
             color: #0ff;
             cursor: pointer;
             z-index: 100;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
         }
 
         .page {
@@ -440,10 +443,9 @@
             
             <div class="premium-banner" id="premiumBtn">
                 <span>👑 حساب مميز</span>
-                <span class="upgrade">بدون إعلانات - اضغط للترقية</span>
+                <span class="upgrade">بدون إعلانات - اضغط</span>
             </div>
             
-            <!-- أفضل اللاعبين - بدون إطار خارجي -->
             <div class="ranking-section">
                 <div class="section-title">🏆 أفضل اللاعبين 🏆</div>
                 <div class="ranking-circles" id="rankingList"></div>
@@ -461,9 +463,9 @@
             <div class="two-rows" id="gamesContainer"></div>
         </div>
 
-        <!-- الصفحة الفرعية (لنوع معين) -->
+        <!-- الصفحة الفرعية -->
         <div id="categoryPage" class="page page-hidden">
-            <button class="back-btn" id="backToHomeBtn">🔙 العودة إلى الرئيسية</button>
+            <button class="back-btn" id="backToHomeBtn">🔙 العودة للرئيسية</button>
             <div class="section-title" id="categoryTitle">🎮 ألعاب الأكشن</div>
             <div class="two-rows" id="categoryGamesContainer"></div>
         </div>
@@ -473,7 +475,7 @@
 
 <div id="adPopup" class="ad-popup">
     <div>📺 إعلان قصير</div>
-    <div style="font-size:12px; margin:5px 0;">انتظر 5 ثوانٍ</div>
+    <div style="font-size:10px;">انتظر 5 ثوانٍ</div>
     <button onclick="closeAd()">تخطي الإعلان ▶</button>
 </div>
 
@@ -482,20 +484,20 @@
     <iframe id="gameIframe" src="" allowfullscreen></iframe>
 </div>
 
-<div class="music-btn" id="musicToggle">🎵 تشغيل الموسيقى</div>
+<div class="music-btn" id="musicToggle">🎵 تشغيل</div>
 
 <script>
     const gamesData = [
-        { id:1, name:"Sonic", img:"https://images6.alphacoders.com/118/1185678.jpg", url:"https://www.crazygames.com/embed/sonic-the-hedgehog", cat:"action", points:150, avatar:"🦔", playerName:"ShadowNinja" },
-        { id:2, name:"Subway Surfers", img:"https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action", points:200, avatar:"🏃", playerName:"SpeedMaster" },
+        { id:1, name:"Sonic", img:"https://images6.alphacoders.com/118/1185678.jpg", url:"https://www.crazygames.com/embed/sonic-the-hedgehog", cat:"action", points:150, avatar:"🦔", playerName:"Shadow" },
+        { id:2, name:"Subway Surfers", img:"https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action", points:200, avatar:"🏃", playerName:"Speed" },
         { id:3, name:"Temple Run 2", img:"https://images.hdqwalls.com/wallpapers/pubg-mobile-squad-4k-8q.jpg", url:"https://www.crazygames.com/embed/temple-run-2", cat:"action", points:180, avatar:"🏛️", playerName:"RunKing" },
-        { id:4, name:"Hill Climb", img:"https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg", url:"https://www.crazygames.com/embed/hill-climb-racing", cat:"racing", points:120, avatar:"🚗", playerName:"ClimberPro" },
-        { id:5, name:"Slope", img:"https://images.hdqwalls.com/wallpapers/slope-game-hd.jpg", url:"https://www.crazygames.com/embed/slope", cat:"racing", points:220, avatar:"⚡", playerName:"FastLight" },
-        { id:6, name:"Street Fighter", img:"https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg", url:"https://www.crazygames.com/embed/street-fighter", cat:"fighting", points:300, avatar:"👊", playerName:"FighterX" },
+        { id:4, name:"Hill Climb", img:"https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg", url:"https://www.crazygames.com/embed/hill-climb-racing", cat:"racing", points:120, avatar:"🚗", playerName:"Climber" },
+        { id:5, name:"Slope", img:"https://images.hdqwalls.com/wallpapers/slope-game-hd.jpg", url:"https://www.crazygames.com/embed/slope", cat:"racing", points:220, avatar:"⚡", playerName:"Fast" },
+        { id:6, name:"Street Fighter", img:"https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg", url:"https://www.crazygames.com/embed/street-fighter", cat:"fighting", points:300, avatar:"👊", playerName:"Fighter" },
         { id:7, name:"Mortal Kombat", img:"https://images.hdqwalls.com/wallpapers/mortal-kombat-11-4k-2020-45.jpg", url:"https://www.crazygames.com/embed/mortal-kombat", cat:"fighting", points:280, avatar:"💀", playerName:"Scorpion" },
         { id:8, name:"Among Us", img:"https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg", url:"https://www.crazygames.com/embed/among-us-online", cat:"puzzle", points:90, avatar:"👽", playerName:"Impostor" },
-        { id:9, name:"Gardenscapes", img:"https://images.hdqwalls.com/wallpapers/gardenscapes-2020-2021-4k-47.jpg", url:"https://www.crazygames.com/embed/gardenscapes", cat:"puzzle", points:70, avatar:"🌷", playerName:"Gardener" },
-        { id:10, name:"Free Fire", img:"https://images.hdqwalls.com/wallpapers/free-fire-2020-game-4k-g6.jpg", url:"https://www.crazygames.com/embed/free-fire", cat:"action", points:350, avatar:"🔥", playerName:"FireLord" },
+        { id:9, name:"Gardenscapes", img:"https://images.hdqwalls.com/wallpapers/gardenscapes-2020-2021-4k-47.jpg", url:"https://www.crazygames.com/embed/gardenscapes", cat:"puzzle", points:70, avatar:"🌷", playerName:"Garden" },
+        { id:10, name:"Free Fire", img:"https://images.hdqwalls.com/wallpapers/free-fire-2020-game-4k-g6.jpg", url:"https://www.crazygames.com/embed/free-fire", cat:"action", points:350, avatar:"🔥", playerName:"Fire" },
         { id:11, name:"Call of Duty", img:"https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-2020-04-m3.jpg", url:"https://www.crazygames.com/embed/call-of-duty", cat:"action", points:320, avatar:"🔫", playerName:"Soldier" },
         { id:12, name:"Basketball Stars", img:"https://images.hdqwalls.com/wallpapers/basketball-4k-2021-6m.jpg", url:"https://www.crazygames.com/embed/basketball-stars", cat:"racing", points:160, avatar:"🏀", playerName:"Hooper" }
     ];
@@ -504,43 +506,34 @@
     let adTimeout = null;
     let pendingGameCallback = null;
     
-    // ترتيب اللاعبين - بدون إطار خارجي
     function updateRanking() {
         const sorted = [...gamesData].sort((a,b)=>b.points - a.points);
         const gold = sorted[0];
         const silver = sorted[1];
         const bronze = sorted[2];
         
-        const rankingContainer = document.getElementById('rankingList');
-        rankingContainer.innerHTML = `
+        document.getElementById('rankingList').innerHTML = `
             <div class="rank-circle">
                 <div class="crown-icon">🥈</div>
-                <div class="silver-circle">
-                    ${silver ? silver.avatar : '👤'}
-                </div>
+                <div class="silver-circle">${silver ? silver.avatar : '👤'}</div>
                 <div class="rank-name">${silver ? silver.playerName : '---'}</div>
                 <div class="rank-points">⭐ ${silver ? silver.points : 0}</div>
             </div>
             <div class="rank-circle">
                 <div class="crown-icon">👑</div>
-                <div class="gold-circle">
-                    ${gold ? gold.avatar : '👤'}
-                </div>
+                <div class="gold-circle">${gold ? gold.avatar : '👤'}</div>
                 <div class="rank-name">${gold ? gold.playerName : '---'}</div>
                 <div class="rank-points">⭐ ${gold ? gold.points : 0}</div>
             </div>
             <div class="rank-circle">
                 <div class="crown-icon">🥉</div>
-                <div class="bronze-circle">
-                    ${bronze ? bronze.avatar : '👤'}
-                </div>
+                <div class="bronze-circle">${bronze ? bronze.avatar : '👤'}</div>
                 <div class="rank-name">${bronze ? bronze.playerName : '---'}</div>
                 <div class="rank-points">⭐ ${bronze ? bronze.points : 0}</div>
             </div>
         `;
     }
     
-    // عرض جميع الألعاب في الصفحة الرئيسية (صفين)
     function renderAllGames() {
         const filtered = gamesData;
         const mid = Math.ceil(filtered.length / 2);
@@ -548,63 +541,25 @@
         const row2 = filtered.slice(mid);
         
         document.getElementById('gamesContainer').innerHTML = `
-            <div class="game-row">
-                ${row1.map(g=>`
-                    <div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}">
-                        <div class="game-img" style="background-image: url('${g.img}');"></div>
-                        <div class="game-title">${g.name}</div>
-                        <div class="game-cat">${g.cat}</div>
-                    </div>
-                `).join('')}
-            </div>
-            <div class="game-row">
-                ${row2.map(g=>`
-                    <div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}">
-                        <div class="game-img" style="background-image: url('${g.img}');"></div>
-                        <div class="game-title">${g.name}</div>
-                        <div class="game-cat">${g.cat}</div>
-                    </div>
-                `).join('')}
-            </div>
+            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">${g.cat}</div></div>`).join('')}</div>
+            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">${g.cat}</div></div>`).join('')}</div>
         `;
-        
         attachGameClickEvents('#gamesContainer');
     }
     
-    // عرض ألعاب نوع معين في الصفحة الفرعية
     function renderCategoryGames(category, categoryName) {
         const filtered = gamesData.filter(g => g.cat === category);
         document.getElementById('categoryTitle').innerHTML = `🎮 ${categoryName}`;
-        
         const mid = Math.ceil(filtered.length / 2);
         const row1 = filtered.slice(0, mid);
         const row2 = filtered.slice(mid);
-        
         document.getElementById('categoryGamesContainer').innerHTML = `
-            <div class="game-row">
-                ${row1.map(g=>`
-                    <div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}">
-                        <div class="game-img" style="background-image: url('${g.img}');"></div>
-                        <div class="game-title">${g.name}</div>
-                        <div class="game-cat">${g.cat}</div>
-                    </div>
-                `).join('')}
-            </div>
-            <div class="game-row">
-                ${row2.map(g=>`
-                    <div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}">
-                        <div class="game-img" style="background-image: url('${g.img}');"></div>
-                        <div class="game-title">${g.name}</div>
-                        <div class="game-cat">${g.cat}</div>
-                    </div>
-                `).join('')}
-            </div>
+            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">${g.cat}</div></div>`).join('')}</div>
+            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">${g.cat}</div></div>`).join('')}</div>
         `;
-        
         attachGameClickEvents('#categoryGamesContainer');
     }
     
-    // ربط أحداث النقر على الألعاب
     function attachGameClickEvents(containerId) {
         document.querySelectorAll(`${containerId} .game-card`).forEach(card=>{
             card.addEventListener('click', (e)=>{
@@ -617,7 +572,6 @@
         });
     }
     
-    // تشغيل اللعبة
     function launchGame(url, name, gameId) {
         if(isPremium) {
             openGameDirect(url, name);
@@ -630,27 +584,20 @@
     }
     
     function openGameDirect(url, name) {
-        const modal = document.getElementById('gameModal');
-        const iframe = document.getElementById('gameIframe');
-        iframe.src = url;
-        modal.classList.remove('hidden');
+        document.getElementById('gameIframe').src = url;
+        document.getElementById('gameModal').classList.remove('hidden');
         document.body.style.overflow = 'hidden';
     }
     
     function closeGame() {
-        const modal = document.getElementById('gameModal');
-        const iframe = document.getElementById('gameIframe');
-        modal.classList.add('hidden');
-        iframe.src = '';
+        document.getElementById('gameModal').classList.add('hidden');
+        document.getElementById('gameIframe').src = '';
         document.body.style.overflow = 'auto';
     }
     
     function addPointsToPlayer(gameId, points) {
         const game = gamesData.find(g=>g.id === gameId);
-        if(game) {
-            game.points += points;
-            updateRanking();
-        }
+        if(game) { game.points += points; updateRanking(); }
     }
     
     function showAd(callback) {
@@ -662,16 +609,11 @@
     }
     
     function closeAd() {
-        const adDiv = document.getElementById('adPopup');
-        adDiv.style.display = 'none';
+        document.getElementById('adPopup').style.display = 'none';
         if(adTimeout) clearTimeout(adTimeout);
-        if(pendingGameCallback) {
-            pendingGameCallback();
-            pendingGameCallback = null;
-        }
+        if(pendingGameCallback) { pendingGameCallback(); pendingGameCallback = null; }
     }
     
-    // التنقل بين الصفحات
     function showHomePage() {
         document.getElementById('homePage').classList.remove('page-hidden');
         document.getElementById('categoryPage').classList.add('page-hidden');
@@ -683,52 +625,37 @@
         document.getElementById('categoryPage').classList.remove('page-hidden');
     }
     
-    // Premium
     document.getElementById('premiumBtn').addEventListener('click', ()=>{
         isPremium = true;
-        alert('🎉 أصبحت حساباً مميزاً! لن تظهر لك إعلانات بعد الآن.');
+        alert('🎉 أصبحت حساباً مميزاً! لن تظهر لك إعلانات.');
         document.getElementById('premiumBtn').style.opacity = '0.7';
     });
     
-    // أزرار الأنواع - تفتح صفحة فرعية
     document.querySelectorAll('.cat-badge').forEach(badge=>{
         badge.addEventListener('click', ()=>{
             const cat = badge.getAttribute('data-cat');
-            let catName = "";
-            if(cat === "action") catName = "ألعاب الأكشن";
-            else if(cat === "racing") catName = "ألعاب السباقات";
-            else if(cat === "fighting") catName = "ألعاب القتال";
-            else if(cat === "puzzle") catName = "ألعاب الألغاز";
+            let catName = cat === "action" ? "ألعاب الأكشن" : cat === "racing" ? "ألعاب السباقات" : cat === "fighting" ? "ألعاب القتال" : "ألعاب الألغاز";
             showCategoryPage(cat, catName);
         });
     });
     
-    // زر العودة للرئيسية
-    document.getElementById('backToHomeBtn').addEventListener('click', ()=>{
-        showHomePage();
-    });
+    document.getElementById('backToHomeBtn').addEventListener('click', ()=> showHomePage());
+    document.getElementById('gameModal').addEventListener('click', (e)=>{ if(e.target === document.getElementById('gameModal')) closeGame(); });
     
-    // إغلاق نافذة اللعبة
-    document.getElementById('gameModal').addEventListener('click', (e)=>{
-        if(e.target === document.getElementById('gameModal')) closeGame();
-    });
-    
-    // موسيقى
     const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3');
     music.loop = true;
     music.volume = 0.1;
     let playing = false;
     const musicBtn = document.getElementById('musicToggle');
     musicBtn.onclick = () => {
-        if(playing) { music.pause(); musicBtn.innerHTML = '🎵 تشغيل الموسيقى'; }
-        else { music.play().catch(e=>{}); musicBtn.innerHTML = '🔇 إيقاف الموسيقى'; }
+        if(playing) { music.pause(); musicBtn.innerHTML = '🎵 تشغيل'; }
+        else { music.play().catch(e=>{}); musicBtn.innerHTML = '🔇 إيقاف'; }
         playing = !playing;
     };
     document.body.addEventListener('touchstart', ()=>{
-        if(!playing) { music.play().catch(e=>{}); playing=true; musicBtn.innerHTML='🔇 إيقاف الموسيقى'; }
+        if(!playing) { music.play().catch(e=>{}); playing=true; musicBtn.innerHTML='🔇 إيقاف'; }
     }, {once:true});
     
-    // بدء التشغيل
     updateRanking();
     renderAllGames();
 </script>
