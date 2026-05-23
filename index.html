@@ -1,682 +1,301 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
+<html lang="ar">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Dido Game</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Cairo',sans-serif;
-}
-
-body{
-background:#050816;
-color:white;
-overflow-x:hidden;
-}
-
-a{
-text-decoration:none;
-color:white;
-}
-
-.container{
-padding:18px;
-padding-bottom:120px;
-}
-
-/* TOP */
-
-.top-bar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:20px;
-}
-
-.menu-btn,
-.notify-btn{
-width:48px;
-height:48px;
-border-radius:16px;
-background:#10152f;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:24px;
-border:1px solid #242b54;
-box-shadow:0 0 20px #5d2eff33;
-}
-
-.logo{
-font-size:42px;
-font-weight:900;
-background:linear-gradient(90deg,#ff4fd8,#ffb347);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-/* SEARCH */
-
-.search-box{
-display:flex;
-gap:12px;
-margin-bottom:20px;
-}
-
-.search{
-flex:1;
-height:60px;
-background:#0d1330;
-border:1px solid #2d3568;
-border-radius:20px;
-padding:0 20px;
-display:flex;
-align-items:center;
-font-size:20px;
-color:#888;
-}
-
-.premium-btn{
-width:220px;
-background:linear-gradient(90deg,#ffb100,#ff5fd1);
-border:none;
-border-radius:20px;
-font-size:22px;
-font-weight:700;
-color:white;
-box-shadow:0 0 25px #ff3ef555;
-}
-
-/* HERO */
-
-.hero{
-position:relative;
-height:420px;
-border-radius:30px;
-overflow:hidden;
-margin-bottom:25px;
-border:1px solid #6f36ff55;
-box-shadow:0 0 40px #7d3cff55;
-}
-
-.hero img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-.overlay{
-position:absolute;
-inset:0;
-background:linear-gradient(to left,#00000000,#060b20ee);
-}
-
-.hero-content{
-position:absolute;
-top:50%;
-left:40px;
-transform:translateY(-50%);
-max-width:420px;
-}
-
-.hero-title{
-font-size:78px;
-font-weight:900;
-line-height:1;
-background:linear-gradient(90deg,#ff9b00,#ff3fe0);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-.hero-sub{
-font-size:26px;
-margin-top:15px;
-color:#ddd;
-}
-
-.hero-btn{
-margin-top:25px;
-background:linear-gradient(90deg,#6d5cff,#ba4dff);
-padding:16px 35px;
-border-radius:18px;
-display:inline-block;
-font-size:22px;
-font-weight:700;
-box-shadow:0 0 30px #914dff99;
-}
-
-/* CATEGORIES */
-
-.section{
-margin-top:25px;
-}
-
-.section-title{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:18px;
-}
-
-.section-title h2{
-font-size:34px;
-color:#ff66e5;
-}
-
-.show-btn{
-background:#131a3d;
-padding:10px 22px;
-border-radius:14px;
-font-size:18px;
-border:1px solid #3f4c88;
-}
-
-.categories{
-display:flex;
-gap:18px;
-overflow-x:auto;
-padding-bottom:10px;
-}
-
-.categories::-webkit-scrollbar{
-display:none;
-}
-
-.cat{
-min-width:150px;
-background:#0e1433;
-border:1px solid #2d3568;
-border-radius:28px;
-padding:20px;
-text-align:center;
-box-shadow:0 0 20px #6b33ff33;
-}
-
-.cat-icon{
-width:85px;
-height:85px;
-border-radius:50%;
-background:linear-gradient(180deg,#ff47d5,#6d4cff);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:42px;
-margin:auto;
-margin-bottom:12px;
-box-shadow:0 0 25px #ff47d577;
-}
-
-.cat h3{
-font-size:22px;
-margin-bottom:4px;
-}
-
-.cat p{
-color:#999;
-}
-
-/* GAME CARDS */
-
-.games{
-display:flex;
-gap:18px;
-overflow-x:auto;
-padding-bottom:10px;
-}
-
-.games::-webkit-scrollbar{
-display:none;
-}
-
-.game-card{
-min-width:260px;
-background:#0c1230;
-border-radius:24px;
-overflow:hidden;
-border:1px solid #2a3369;
-box-shadow:0 0 25px #5d2eff22;
-transition:0.3s;
-}
-
-.game-card:hover{
-transform:translateY(-8px);
-box-shadow:0 0 40px #a14fff55;
-}
-
-.game-card img{
-width:100%;
-height:180px;
-object-fit:cover;
-}
-
-.game-info{
-padding:16px;
-}
-
-.game-info h3{
-font-size:26px;
-margin-bottom:6px;
-}
-
-.game-info p{
-color:#999;
-margin-bottom:10px;
-}
-
-.rating{
-display:flex;
-justify-content:space-between;
-align-items:center;
-font-size:20px;
-}
-
-.play-btn{
-width:52px;
-height:52px;
-border-radius:50%;
-background:linear-gradient(180deg,#ff4fd8,#6b4dff);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:22px;
-box-shadow:0 0 20px #ff4fd899;
-}
-
-/* BANNER */
-
-.banner{
-margin-top:30px;
-height:180px;
-border-radius:28px;
-overflow:hidden;
-position:relative;
-border:1px solid #7d3cff55;
-box-shadow:0 0 35px #ff3eff44;
-}
-
-.banner img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-.banner-content{
-position:absolute;
-top:50%;
-right:40px;
-transform:translateY(-50%);
-}
-
-.banner-content h2{
-font-size:42px;
-margin-bottom:10px;
-}
-
-.banner-content button{
-padding:14px 28px;
-border:none;
-border-radius:14px;
-background:linear-gradient(90deg,#ff4fd8,#7a5cff);
-color:white;
-font-size:20px;
-font-weight:700;
-}
-
-/* BOTTOM NAV */
-
-.bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-height:95px;
-background:#0b1028;
-border-top:1px solid #2d3568;
-display:flex;
-justify-content:space-around;
-align-items:center;
-z-index:100;
-}
-
-.nav-item{
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:6px;
-font-size:18px;
-color:#aaa;
-}
-
-.nav-item.active{
-color:#ff5ce6;
-}
-
-.center-btn{
-width:90px;
-height:90px;
-border-radius:50%;
-background:linear-gradient(180deg,#ff4fd8,#6c4dff);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:38px;
-margin-top:-40px;
-box-shadow:0 0 40px #ff4fd8aa;
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-.logo{
-font-size:28px;
-}
-
-.hero{
-height:250px;
-}
-
-.hero-title{
-font-size:48px;
-}
-
-.hero-sub{
-font-size:18px;
-}
-
-.hero-btn{
-font-size:16px;
-padding:12px 20px;
-}
-
-.premium-btn{
-width:150px;
-font-size:16px;
-}
-
-.cat{
-min-width:120px;
-}
-
-.game-card{
-min-width:210px;
-}
-
-.banner-content h2{
-font-size:26px;
-}
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدينة الألعاب - موقع ترفيهي</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .game-container {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+        h1 {
+            color: #ffd966;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .games-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        .game-btn {
+            background: #ff9800;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: white;
+        }
+        .game-btn:hover {
+            background: #f57c00;
+            transform: scale(1.05);
+        }
+        .active-game {
+            background: rgba(0,0,0,0.5);
+            border-radius: 20px;
+            padding: 20px;
+            color: white;
+        }
+        .number-game input, .number-game button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 1rem;
+            border-radius: 10px;
+            border: none;
+        }
+        .memory-game {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .memory-card {
+            background: #ffb74d;
+            padding: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .memory-card.flipped {
+            background: #4caf50;
+            color: white;
+        }
+        .message {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            background: #00000099;
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+        footer {
+            margin-top: 30px;
+            color: #ddd;
+            font-size: 0.8rem;
+        }
+    </style>
 </head>
-
 <body>
-
-<div class="container">
-
-<!-- TOP -->
-
-<div class="top-bar">
-
-<div class="menu-btn">☰</div>
-
-<div class="logo">DidoGame</div>
-
-<div class="notify-btn">🔔</div>
-
+<div class="game-container">
+    <h1>🎮 مدينة الألعاب 🎮</h1>
+    <div class="games-menu">
+        <button class="game-btn" onclick="showGame('guess')">🔢 تخمين الرقم</button>
+        <button class="game-btn" onclick="showGame('memory')">🧠 لعبة الذاكرة</button>
+        <button class="game-btn" onclick="showGame('tictac')">❌⭕ تيك تاك تو</button>
+    </div>
+    <div id="gameArea" class="active-game">
+        <!-- سيتم تحميل اللعبة هنا -->
+    </div>
+    <footer>موقع ترفيهي خالص - ألعاب ذهنية ومسلية بدون أي مقابل مالي</footer>
 </div>
 
-<!-- SEARCH -->
-
-<div class="search-box">
-
-<div class="search">🔍 ابحث عن لعبة...</div>
-
-<button class="premium-btn">👑 حساب مميز</button>
-
-</div>
-
-<!-- HERO -->
-
-<div class="hero">
-
-<img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200" />
-
-<div class="overlay"></div>
-
-<div class="hero-content">
-
-<div class="hero-title">
-Dido<br>Game
-</div>
-
-<div class="hero-sub">
-عالم يجمع كل ألعابك المفضلة مجاناً
-</div>
-
-<a href="#" class="hero-btn">
-🎮 استكشف الألعاب
-</a>
-
-</div>
-
-</div>
-
-<!-- CATEGORIES -->
-
-<div class="section">
-
-<div class="section-title">
-
-<h2>الأقسام</h2>
-
-<div class="show-btn">عرض المزيد</div>
-
-</div>
-
-<div class="categories">
-
-<div class="cat">
-<div class="cat-icon">👻</div>
-<h3>الرعب</h3>
-<p>80 لعبة</p>
-</div>
-
-<div class="cat">
-<div class="cat-icon">⚽</div>
-<h3>الرياضة</h3>
-<p>189 لعبة</p>
-</div>
-
-<div class="cat">
-<div class="cat-icon">🚗</div>
-<h3>السباقات</h3>
-<p>142 لعبة</p>
-</div>
-
-<div class="cat">
-<div class="cat-icon">🧩</div>
-<h3>الألغاز</h3>
-<p>178 لعبة</p>
-</div>
-
-<div class="cat">
-<div class="cat-icon">🔥</div>
-<h3>الأكشن</h3>
-<p>200 لعبة</p>
-</div>
-
-</div>
-
-</div>
-
-<!-- GAMES -->
-
-<div class="section">
-
-<div class="section-title">
-
-<h2>أحدث الألعاب</h2>
-
-<div class="show-btn">عرض الكل</div>
-
-</div>
-
-<div class="games">
-
-<div class="game-card">
-
-<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200">
-
-<div class="game-info">
-
-<h3>Anime Fighters</h3>
-
-<p>قتال</p>
-
-<div class="rating">
-
-<div>⭐ 4.8</div>
-
-<div class="play-btn">▶</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="game-card">
-
-<img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?q=80&w=1200">
-
-<div class="game-info">
-
-<h3>Car Racing</h3>
-
-<p>سباقات</p>
-
-<div class="rating">
-
-<div>⭐ 4.6</div>
-
-<div class="play-btn">▶</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="game-card">
-
-<img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200">
-
-<div class="game-info">
-
-<h3>Zombie Hunter</h3>
-
-<p>رعب</p>
-
-<div class="rating">
-
-<div>⭐ 4.7</div>
-
-<div class="play-btn">▶</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="game-card">
-
-<img src="https://images.unsplash.com/photo-1511882150382-421056c89033?q=80&w=1200">
-
-<div class="game-info">
-
-<h3>Puzzle Master</h3>
-
-<p>ألغاز</p>
-
-<div class="rating">
-
-<div>⭐ 4.4</div>
-
-<div class="play-btn">▶</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- BANNER -->
-
-<div class="banner">
-
-<img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200">
-
-<div class="banner-content">
-
-<h2>اشترك الآن واحصل على مزايا حصرية</h2>
-
-<button>اشترك الآن</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- BOTTOM NAV -->
-
-<div class="bottom-nav">
-
-<div class="nav-item active">
-🏠
-<span>الرئيسية</span>
-</div>
-
-<div class="nav-item">
-📂
-<span>الأقسام</span>
-</div>
-
-<div class="center-btn">
-🎮
-</div>
-
-<div class="nav-item">
-❤️
-<span>المفضلة</span>
-</div>
-
-<div class="nav-item">
-👤
-<span>حسابي</span>
-</div>
-
-</div>
-
+<script>
+    let currentGame = 'guess';
+
+    function showGame(game) {
+        currentGame = game;
+        if(game === 'guess') loadGuessNumber();
+        else if(game === 'memory') loadMemoryGame();
+        else if(game === 'tictac') loadTicTacToe();
+    }
+
+    // لعبة تخمين الرقم
+    function loadGuessNumber() {
+        let secret = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+        const html = `
+            <h3>🔢 خمن الرقم (1-100)</h3>
+            <div class="number-game">
+                <input type="number" id="guessInput" placeholder="أدخل رقمك">
+                <button id="guessBtn">خمن</button>
+                <p id="guessMsg" class="message"></p>
+            </div>
+        `;
+        document.getElementById('gameArea').innerHTML = html;
+        const btn = document.getElementById('guessBtn');
+        const input = document.getElementById('guessInput');
+        const msg = document.getElementById('guessMsg');
+        btn.onclick = () => {
+            let val = parseInt(input.value);
+            if(isNaN(val)) { msg.innerText = "⚠️ أدخل رقماً صحيحاً"; return; }
+            attempts++;
+            if(val === secret) {
+                msg.innerText = `🎉 صحيح! الرقم هو ${secret} بعد ${attempts} محاولات 🎉`;
+                secret = Math.floor(Math.random() * 100) + 1;
+                attempts = 0;
+            } else if(val < secret) msg.innerText = `📉 أكبر من ${val}`;
+            else msg.innerText = `📈 أصغر من ${val}`;
+            input.value = '';
+        };
+    }
+
+    // لعبة الذاكرة (بسيطة: إظهار أرقام)
+    let memoryNumbers = [];
+    let flipped = [];
+    let lockBoard = false;
+    let matched = [];
+
+    function loadMemoryGame() {
+        memoryNumbers = [1,1,2,2,3,3,4,4];
+        for(let i=memoryNumbers.length - 1; i>0; i--){
+            const j = Math.floor(Math.random()*(i+1));
+            [memoryNumbers[i], memoryNumbers[j]] = [memoryNumbers[j], memoryNumbers[i]];
+        }
+        flipped = new Array(8).fill(false);
+        matched = new Array(8).fill(false);
+        lockBoard = false;
+        renderMemoryBoard();
+    }
+
+    function renderMemoryBoard() {
+        let html = `<h3>🧠 لعبة الذاكرة - طابق الأزواج</h3><div class="memory-game">`;
+        for(let i=0; i<memoryNumbers.length; i++) {
+            let display = '';
+            let extraClass = '';
+            if(matched[i]) {
+                display = '✓';
+                extraClass = 'flipped';
+            } else if(flipped[i]) {
+                display = memoryNumbers[i];
+                extraClass = 'flipped';
+            } else {
+                display = '?';
+            }
+            html += `<div class="memory-card ${extraClass}" data-index="${i}">${display}</div>`;
+        }
+        html += `</div><div id="memoryMsg" class="message"></div>`;
+        document.getElementById('gameArea').innerHTML = html;
+        attachMemoryEvents();
+    }
+
+    function attachMemoryEvents() {
+        const cards = document.querySelectorAll('.memory-card');
+        cards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                if(lockBoard) return;
+                let idx = parseInt(card.getAttribute('data-index'));
+                if(matched[idx] || flipped[idx]) return;
+                let alreadyFlippedIndex = flipped.findIndex((v,i)=> v===true && !matched[i]);
+                if(alreadyFlippedIndex !== -1 && alreadyFlippedIndex !== idx) {
+                    // مقارنة
+                    if(memoryNumbers[alreadyFlippedIndex] === memoryNumbers[idx]) {
+                        matched[alreadyFlippedIndex] = true;
+                        matched[idx] = true;
+                        flipped[alreadyFlippedIndex] = false;
+                        flipped[idx] = false;
+                        renderMemoryBoard();
+                        if(matched.every(v=>v===true)) {
+                            document.getElementById('memoryMsg').innerText = '🎉 رائع! لقد أنهيت اللعبة 🎉';
+                        }
+                    } else {
+                        lockBoard = true;
+                        flipped[idx] = true;
+                        renderMemoryBoard();
+                        setTimeout(() => {
+                            flipped[alreadyFlippedIndex] = false;
+                            flipped[idx] = false;
+                            renderMemoryBoard();
+                            lockBoard = false;
+                        }, 800);
+                    }
+                } else {
+                    flipped[idx] = true;
+                    renderMemoryBoard();
+                }
+            });
+        });
+    }
+
+    // لعبة تيك تاك تو
+    let board = ['','','','','','','','',''];
+    let turn = 'X';
+    let gameOver = false;
+
+    function loadTicTacToe() {
+        board = ['','','','','','','','',''];
+        turn = 'X';
+        gameOver = false;
+        renderTicTac();
+    }
+
+    function renderTicTac() {
+        let html = `<h3>❌⭕ تيك تاك تو - دور ${turn}</h3><div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; max-width:300px; margin:auto;">`;
+        for(let i=0; i<9; i++) {
+            let val = board[i];
+            html += `<button style="font-size:2rem; padding:20px; background:#ffb74d; border:none; border-radius:15px; cursor:pointer;" id="cell-${i}" onclick="makeMove(${i})">${val}</button>`;
+        }
+        html += `</div><div id="tictacMsg" class="message"></div><button onclick="loadTicTacToe()" style="margin-top:15px; background:#ff9800; border:none; padding:5px 15px; border-radius:20px;">إعادة اللعبة</button>`;
+        document.getElementById('gameArea').innerHTML = html;
+    }
+
+    window.makeMove = function(idx) {
+        if(gameOver) return;
+        if(board[idx] !== '') return;
+        board[idx] = turn;
+        let winner = checkWinner();
+        if(winner) {
+            document.getElementById('tictacMsg').innerText = `🏆 الفائز: ${winner} 🏆`;
+            gameOver = true;
+            renderTicTac();
+            return;
+        }
+        if(board.every(cell => cell !== '')) {
+            document.getElementById('tictacMsg').innerText = '🤝 تعادل!';
+            gameOver = true;
+            renderTicTac();
+            return;
+        }
+        turn = (turn === 'X') ? 'O' : 'X';
+        renderTicTac();
+    }
+
+    function checkWinner() {
+        const lines = [
+            [0,1,2],[3,4,5],[6,7,8],
+            [0,3,6],[1,4,7],[2,5,8],
+            [0,4,8],[2,4,6]
+        ];
+        for(let line of lines) {
+            const [a,b,c] = line;
+            if(board[a] && board[a] === board[b] && board[a] === board[c]) {
+                return board[a];
+            }
+        }
+        return null;
+    }
+
+    // تحميل اللعبة الافتراضية
+    showGame('guess');
+</script>
 </body>
-
 </html>
