@@ -240,11 +240,6 @@
             transition: all 0.2s ease;
             box-shadow: 0 0 8px #ff44ff;
         }
-        
-        .cat-badge:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px #ff44ff;
-        }
 
         /* الإعلان الثابت */
         .fixed-permanent-ad {
@@ -348,7 +343,6 @@
             background: linear-gradient(135deg, #ff44ff, #00ffff);
         }
         
-        /* زر الدردشة الدائري في المنتصف */
         .chat-circle-btn {
             position: absolute;
             left: 50%;
@@ -398,19 +392,17 @@
             border: 1px solid #0ff;
         }
 
-        /* ==================== صفحة الدردشة المنفصلة ==================== */
+        /* ==================== صفحة الدردشة - تصميم الماسنجر ==================== */
         .chat-page {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(5,5,20,0.95);
-            backdrop-filter: blur(12px);
+            background: #0a0a1a;
             z-index: 1000;
             display: flex;
             flex-direction: column;
-            border-radius: 0;
             animation: slideUp 0.3s ease;
         }
         
@@ -419,20 +411,21 @@
             to { transform: translateY(0); opacity: 1; }
         }
         
-        .chat-page-header {
-            padding: 15px;
-            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
-            border-bottom: 1px solid #ff44ff;
+        /* رأس صفحة الدردشة */
+        .chat-header {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            padding: 12px 16px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
+            border-bottom: 1px solid #ff44ff;
         }
         
         .back-chat-btn {
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             border: none;
-            width: 35px;
-            height: 35px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -440,155 +433,282 @@
             color: white;
             font-size: 1.2rem;
             cursor: pointer;
-            box-shadow: 0 0 15px #ff44ff;
         }
         
-        .chat-page-title {
+        .chat-header-title {
+            flex: 1;
+        }
+        
+        .chat-header-title h3 {
             color: white;
             font-size: 1rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
         }
         
-        .chat-page-content {
+        .chat-header-title p {
+            color: #00ff88;
+            font-size: 0.6rem;
+        }
+        
+        /* تخطيط الماسنجر: شريط جانبي + منطقة محادثة */
+        .messenger-layout {
+            display: flex;
             flex: 1;
-            padding: 12px;
-            overflow-y: auto;
+            overflow: hidden;
+        }
+        
+        /* الشريط الجانبي الأيمن (الغرف والمستخدمين) */
+        .chat-sidebar {
+            width: 40%;
+            background: rgba(0,0,0,0.4);
+            border-right: 1px solid #ff44ff;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            overflow-y: auto;
         }
         
-        .chat-room-section {
-            background: rgba(0,0,0,0.4);
-            border-radius: 20px;
+        .sidebar-section {
             padding: 12px;
-            border: 1px solid #ff44ff;
+            border-bottom: 1px solid rgba(255,68,255,0.2);
         }
         
-        .chat-room-header {
+        .sidebar-title {
+            color: #ff44ff;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-bottom: 8px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-            gap: 8px;
+            gap: 5px;
         }
         
-        .room-status-badge {
-            background: #ff44ff30;
-            padding: 4px 12px;
-            border-radius: 20px;
-            color: #ffaa88;
-            font-size: 0.65rem;
+        .rooms-list {
+            max-height: 200px;
+            overflow-y: auto;
         }
         
-        .room-controls {
+        .room-item {
+            background: rgba(255,68,255,0.1);
+            padding: 8px 10px;
+            border-radius: 12px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
             display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
+            align-items: center;
+            justify-content: space-between;
         }
         
-        .room-input {
-            flex: 1;
-            padding: 8px;
-            border-radius: 25px;
+        .room-item:hover {
+            background: rgba(255,68,255,0.3);
+            transform: translateX(-3px);
+        }
+        
+        .room-item.active {
+            background: linear-gradient(135deg, #ff44ff40, #00ffff40);
             border: 1px solid #ff44ff;
-            background: rgba(0,0,0,0.5);
+        }
+        
+        .room-name {
             color: white;
             font-size: 0.7rem;
         }
         
-        .small-btn {
-            padding: 6px 14px;
-            font-size: 0.65rem;
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
-            border: none;
-            border-radius: 25px;
-            color: white;
+        .room-lock {
+            font-size: 0.5rem;
+        }
+        
+        .users-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .user-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            border-radius: 10px;
+            margin-bottom: 4px;
             cursor: pointer;
             transition: all 0.2s;
         }
         
-        .danger-btn {
-            background: linear-gradient(135deg, #ff3366, #ff6600);
+        .user-item:hover {
+            background: rgba(255,68,255,0.2);
         }
         
-        .chat-messages-box {
+        .user-item.selected {
+            background: rgba(0,255,136,0.2);
+            border-right: 2px solid #00ff88;
+        }
+        
+        .user-avatar {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+        
+        .user-name {
+            color: white;
+            font-size: 0.65rem;
+            flex: 1;
+        }
+        
+        .user-vip {
+            font-size: 0.45rem;
+            background: #ff44ff;
+            padding: 2px 4px;
+            border-radius: 8px;
+        }
+        
+        /* منطقة المحادثة الرئيسية */
+        .chat-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: rgba(0,0,0,0.2);
+        }
+        
+        .chat-room-header {
+            padding: 10px 12px;
             background: rgba(0,0,0,0.3);
-            border-radius: 15px;
-            padding: 10px;
-            height: 280px;
-            overflow-y: auto;
-            margin: 10px 0;
+            border-bottom: 1px solid #ff44ff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         
-        .message-item {
-            background: rgba(255,68,255,0.12);
-            border-radius: 12px;
-            padding: 8px 12px;
-            margin-bottom: 8px;
-        }
-        
-        .message-item.private {
-            background: rgba(0,255,136,0.12);
-            border-right: 3px solid #00ff88;
-        }
-        
-        .message-sender {
-            color: #ff44ff;
-            font-size: 0.6rem;
+        .current-room-name {
+            color: #00ffff;
+            font-size: 0.8rem;
             font-weight: bold;
         }
         
-        .message-text {
-            color: white;
+        .mic-status {
+            font-size: 0.6rem;
+            color: #0ff;
+        }
+        
+        /* منطقة الرسائل */
+        .messages-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        /* فقاعات الدردشة على طراز الماسنجر */
+        .message-bubble {
+            max-width: 85%;
+            padding: 8px 12px;
+            border-radius: 18px;
             font-size: 0.75rem;
-            margin-top: 4px;
+            position: relative;
             word-break: break-word;
         }
         
-        .online-users-chip {
-            display: inline-block;
-            background: rgba(255,68,255,0.3);
-            padding: 3px 10px;
-            border-radius: 20px;
-            margin: 2px;
-            font-size: 0.6rem;
+        .message-out {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #ff44ff, #ff00aa);
+            color: white;
+            border-bottom-right-radius: 4px;
         }
         
-        .vip-tag {
-            background: #ff44ff;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-size: 0.45rem;
-            margin-left: 5px;
+        .message-in {
+            align-self: flex-start;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-bottom-left-radius: 4px;
         }
         
-        .voice-wave-mini {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #0ff;
-            border-radius: 50%;
-            animation: pulse 0.8s infinite;
-            margin-right: 5px;
+        .message-private {
+            background: rgba(0,255,136,0.15);
+            border: 1px solid #00ff88;
         }
         
-        @keyframes pulse {
-            0% { opacity: 0.3; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.2); }
-        }
-        
-        .voice-status {
+        .message-sender-name {
             font-size: 0.55rem;
+            color: #ffaa88;
+            margin-bottom: 3px;
+        }
+        
+        .message-time {
+            font-size: 0.45rem;
+            color: #aaa;
+            margin-top: 3px;
+            text-align: right;
+        }
+        
+        /* منطقة إدخال الرسائل */
+        .chat-input-area {
+            padding: 10px;
+            background: rgba(0,0,0,0.4);
+            border-top: 1px solid #ff44ff;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 25px;
+            border: 1px solid #ff44ff;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 0.75rem;
+        }
+        
+        .chat-input:focus {
+            outline: none;
+            border-color: #00ffff;
+        }
+        
+        .send-btn {
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .image-btn {
+            background: rgba(255,68,255,0.3);
+            border: 1px solid #ff44ff;
+        }
+        
+        /* أزرار الصوت */
+        .voice-controls {
+            display: flex;
+            gap: 5px;
+            margin-top: 8px;
+        }
+        
+        .mic-btn-chat {
+            background: rgba(0,255,255,0.2);
+            border: 1px solid #0ff;
+            padding: 6px 12px;
+            border-radius: 20px;
             color: #0ff;
-            margin-top: 5px;
-            text-align: center;
+            font-size: 0.6rem;
+            cursor: pointer;
+        }
+        
+        .hidden {
+            display: none;
         }
         
         .game-modal {
@@ -625,15 +745,12 @@
             color: white;
             cursor: pointer;
         }
-        
-        .hidden { display: none; }
     </style>
 </head>
 <body>
 <div class="anime-city-bg"></div>
 <div class="app">
     <div class="content">
-        <!-- الصفحة الرئيسية -->
         <div id="homePage" class="page">
             <div class="anime-hero">
                 <div class="character-img">
@@ -658,11 +775,8 @@
                 </div>
             </div>
             
-            <div class="fixed-permanent-ad" id="permanentAd">
-                📺 إعلان ممول - اشترك الآن في عروضنا الحصرية!
-            </div>
+            <div class="fixed-permanent-ad" id="permanentAd">📺 إعلان ممول - اشترك الآن!</div>
             
-            <!-- الألعاب في صفين متوازيين -->
             <div class="games-wrapper">
                 <div class="two-rows" id="gamesContainer"></div>
             </div>
@@ -674,7 +788,6 @@
         </div>
     </div>
     
-    <!-- الشريط السفلي مع زر الدردشة الدائري في المنتصف -->
     <div class="bottom-bar">
         <div class="register-btn" id="registerBtn" onclick="upgradeToVIP()">👑 ترقية VIP</div>
         <div class="chat-circle-btn" id="openChatBtn">
@@ -684,54 +797,68 @@
     </div>
 </div>
 
-<!-- صفحة الدردشة المنفصلة -->
+<!-- صفحة الدردشة بتصميم الماسنجر -->
 <div id="chatPage" class="chat-page hidden">
-    <div class="chat-page-header">
+    <div class="chat-header">
         <button class="back-chat-btn" id="closeChatBtn">✕</button>
-        <span class="chat-page-title">🔐 غرفة الدردشة الخاصة VIP</span>
+        <div class="chat-header-title">
+            <h3>💬 دردشة DidoGame</h3>
+            <p id="chatStatusText">⚪ غير متصل</p>
+        </div>
     </div>
-    <div class="chat-page-content">
-        <div class="chat-room-section">
+    
+    <div class="messenger-layout">
+        <!-- الشريط الجانبي -->
+        <div class="chat-sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">👤 حسابي</div>
+                <div class="room-controls" style="flex-direction:column; gap:8px;">
+                    <input type="text" id="chatUserName" class="room-input" placeholder="اسم المستخدم" style="width:100%;">
+                    <button class="small-btn" onclick="chatSetUsername()" style="width:100%;">✅ تعيين الاسم</button>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">📁 الغرف المتاحة</div>
+                <div class="rooms-list" id="roomsListSidebar"></div>
+                <div class="room-controls" style="margin-top:8px;">
+                    <input type="text" id="chatRoomName" class="room-input" placeholder="اسم الغرفة" style="flex:2;">
+                    <input type="password" id="chatRoomPassword" class="room-input" placeholder="كلمة المرور" style="flex:1;">
+                </div>
+                <div class="room-controls" style="margin-top:5px;">
+                    <button class="small-btn" onclick="chatCreateRoom()" style="flex:1;">✨ إنشاء</button>
+                    <button class="small-btn" onclick="chatJoinRoom()" style="flex:1;">🚪 دخول</button>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">👥 أعضاء الغرفة</div>
+                <div class="users-list" id="usersListSidebar">
+                    <div style="color:#888; text-align:center;">ادخل غرفة أولاً</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- منطقة المحادثة الرئيسية -->
+        <div class="chat-main">
             <div class="chat-room-header">
-                <span class="room-status-badge" id="chatRoomStatus">⚪ غير متصل</span>
+                <span class="current-room-name" id="currentRoomNameDisplay">⚪ لا توجد غرفة</span>
+                <span class="mic-status" id="micStatusDisplay">🎤</span>
             </div>
             
-            <div id="chatRoomLoginArea">
-                <div class="room-controls">
-                    <input type="text" id="chatUserName" class="room-input" placeholder="اسم المستخدم">
-                    <button class="small-btn" onclick="chatSetUsername()">✅ تعيين الاسم</button>
-                </div>
-                <div class="room-controls">
-                    <input type="text" id="chatRoomName" class="room-input" placeholder="اسم الغرفة">
-                    <input type="password" id="chatRoomPassword" class="room-input" placeholder="كلمة المرور">
-                </div>
-                <div class="room-controls">
-                    <button class="small-btn" onclick="chatJoinRoom()">🚪 دخول الغرفة</button>
-                    <button class="small-btn" onclick="chatCreateRoom()">✨ إنشاء غرفة</button>
-                </div>
-                <div class="online-users-chip" id="chatAvailableRooms" style="text-align:center;">📁 --</div>
+            <div class="messages-area" id="messagesArea">
+                <div style="color:#888; text-align:center;">✨ اختر غرفة وابدأ المحادثة</div>
             </div>
             
-            <div id="chatRoomArea" class="hidden">
-                <div class="online-users-chip" id="chatUsersList" style="text-align:center;">👥 --</div>
-                <div class="chat-messages-box" id="chatMessagesDiv"></div>
-                <div class="room-controls">
-                    <input type="text" id="chatPublicMsg" class="room-input" placeholder="رسالة عامة...">
-                    <button class="small-btn" onclick="chatSendPublic()">📤</button>
-                    <button id="chatVipImageBtn" class="small-btn" onclick="chatSendImage()" style="display:none;">🖼️</button>
-                </div>
-                <div class="room-controls">
-                    <select id="chatPrivateSelect" class="room-input" style="flex:1;"></select>
-                    <input type="text" id="chatPrivateMsg" class="room-input" placeholder="رسالة خاصة" style="flex:2;">
-                    <button class="small-btn" onclick="chatSendPrivate()">🔒</button>
-                </div>
-                <button class="small-btn danger-btn" onclick="chatLeaveRoom()" style="width:100%; margin-top:8px;">🚪 مغادرة الغرفة</button>
+            <div class="chat-input-area">
+                <button class="send-btn image-btn" id="chatImageBtn" onclick="chatSendImage()" style="display:none;">🖼️</button>
+                <input type="text" id="chatMessageInput" class="chat-input" placeholder="اكتب رسالة...">
+                <button class="send-btn" onclick="chatSendMessage()">📤</button>
             </div>
             
-            <div class="voice-status" id="chatVoiceStatus">
-                <span class="voice-wave-mini"></span> اضغط ميكروفون للصوت
+            <div class="voice-controls">
+                <button class="mic-btn-chat" id="chatMicBtn" onclick="chatToggleMic()">🎙️ تفعيل الميكروفون</button>
             </div>
-            <button id="chatMicBtn" class="small-btn" style="width:100%; margin-top:5px;" onclick="chatToggleMic()">🎙️ تفعيل الميكروفون</button>
         </div>
     </div>
 </div>
@@ -742,23 +869,18 @@
 </div>
 
 <script>
-    // ==================== Games Data ====================
+    // Games Data
     const gamesData = [
         { id:1, name:"Sonic", img:"https://images6.alphacoders.com/118/1185678.jpg", url:"https://www.crazygames.com/embed/sonic-the-hedgehog", cat:"action", points:150, avatar:"🦔", playerName:"Shadow" },
         { id:2, name:"Subway Surfers", img:"https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action", points:200, avatar:"🏃", playerName:"Speed" },
         { id:3, name:"Temple Run 2", img:"https://images.hdqwalls.com/wallpapers/pubg-mobile-squad-4k-8q.jpg", url:"https://www.crazygames.com/embed/temple-run-2", cat:"action", points:180, avatar:"🏛️", playerName:"RunKing" },
         { id:4, name:"Hill Climb", img:"https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg", url:"https://www.crazygames.com/embed/hill-climb-racing", cat:"racing", points:120, avatar:"🚗", playerName:"Climber" },
-        { id:5, name:"Slope", img:"https://images.hdqwalls.com/wallpapers/slope-game-hd.jpg", url:"https://www.crazygames.com/embed/slope", cat:"racing", points:220, avatar:"⚡", playerName:"Fast" },
-        { id:6, name:"Street Fighter", img:"https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg", url:"https://www.crazygames.com/embed/street-fighter", cat:"fighting", points:300, avatar:"👊", playerName:"Fighter" },
-        { id:7, name:"Mortal Kombat", img:"https://images.hdqwalls.com/wallpapers/mortal-kombat-11-4k-2020-45.jpg", url:"https://www.crazygames.com/embed/mortal-kombat", cat:"fighting", points:280, avatar:"💀", playerName:"Scorpion" },
-        { id:8, name:"Among Us", img:"https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg", url:"https://www.crazygames.com/embed/among-us-online", cat:"puzzle", points:90, avatar:"👽", playerName:"Impostor" },
-        { id:9, name:"Gardenscapes", img:"https://images.hdqwalls.com/wallpapers/gardenscapes-2020-2021-4k-47.jpg", url:"https://www.crazygames.com/embed/gardenscapes", cat:"puzzle", points:70, avatar:"🌷", playerName:"Garden" },
-        { id:10, name:"Free Fire", img:"https://images.hdqwalls.com/wallpapers/free-fire-2020-game-4k-g6.jpg", url:"https://www.crazygames.com/embed/free-fire", cat:"action", points:350, avatar:"🔥", playerName:"Fire" },
-        { id:11, name:"Call of Duty", img:"https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-2020-04-m3.jpg", url:"https://www.crazygames.com/embed/call-of-duty", cat:"action", points:320, avatar:"🔫", playerName:"Soldier" },
-        { id:12, name:"Basketball Stars", img:"https://images.hdqwalls.com/wallpapers/basketball-4k-2021-6m.jpg", url:"https://www.crazygames.com/embed/basketball-stars", cat:"racing", points:160, avatar:"🏀", playerName:"Hooper" }
+        { id:5, name:"Street Fighter", img:"https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg", url:"https://www.crazygames.com/embed/street-fighter", cat:"fighting", points:300, avatar:"👊", playerName:"Fighter" },
+        { id:6, name:"Mortal Kombat", img:"https://images.hdqwalls.com/wallpapers/mortal-kombat-11-4k-2020-45.jpg", url:"https://www.crazygames.com/embed/mortal-kombat", cat:"fighting", points:280, avatar:"💀", playerName:"Scorpion" },
+        { id:7, name:"Among Us", img:"https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg", url:"https://www.crazygames.com/embed/among-us-online", cat:"puzzle", points:90, avatar:"👽", playerName:"Impostor" },
+        { id:8, name:"Free Fire", img:"https://images.hdqwalls.com/wallpapers/free-fire-2020-game-4k-g6.jpg", url:"https://www.crazygames.com/embed/free-fire", cat:"action", points:350, avatar:"🔥", playerName:"Fire" }
     ];
     
-    // ==================== Global Variables ====================
     let currentUserName = null;
     let currentRoom = null;
     let isVIPUser = false;
@@ -768,143 +890,120 @@
     let music = null;
     let musicPlaying = false;
     
-    // ==================== Games Functions ====================
+    // Ranking
     function updateRanking() {
         const sorted = [...gamesData].sort((a,b)=>b.points - a.points);
-        const gold = sorted[0];
-        const silver = sorted[1];
-        const bronze = sorted[2];
         document.getElementById('rankingList').innerHTML = `
-            <div class="rank-circle">
-                <div class="crown-icon">🥈</div>
-                <div class="silver-circle">${silver ? silver.avatar : '👤'}</div>
-                <div class="rank-name">${silver ? silver.playerName : '---'}</div>
-                <div class="rank-points">⭐ ${silver ? silver.points : 0}</div>
-            </div>
-            <div class="rank-circle">
-                <div class="crown-icon">👑</div>
-                <div class="gold-circle">${gold ? gold.avatar : '👤'}</div>
-                <div class="rank-name">${gold ? gold.playerName : '---'}</div>
-                <div class="rank-points">⭐ ${gold ? gold.points : 0}</div>
-            </div>
-            <div class="rank-circle">
-                <div class="crown-icon">🥉</div>
-                <div class="bronze-circle">${bronze ? bronze.avatar : '👤'}</div>
-                <div class="rank-name">${bronze ? bronze.playerName : '---'}</div>
-                <div class="rank-points">⭐ ${bronze ? bronze.points : 0}</div>
-            </div>
+            <div><div class="silver-circle">${sorted[1]?.avatar||'👤'}</div><div class="rank-name">${sorted[1]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[1]?.points||0}</div></div>
+            <div><div class="gold-circle">${sorted[0]?.avatar||'👤'}</div><div class="rank-name">${sorted[0]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[0]?.points||0}</div></div>
+            <div><div class="bronze-circle">${sorted[2]?.avatar||'👤'}</div><div class="rank-name">${sorted[2]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[2]?.points||0}</div></div>
         `;
     }
     
-    function renderAllGames() {
-        const filtered = gamesData;
-        const mid = Math.ceil(filtered.length / 2);
-        const row1 = filtered.slice(0, mid);
-        const row2 = filtered.slice(mid);
+    function renderGames() {
+        const mid = Math.ceil(gamesData.length/2);
+        const row1 = gamesData.slice(0,mid);
+        const row2 = gamesData.slice(mid);
         document.getElementById('gamesContainer').innerHTML = `
-            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
-            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
+            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}"><div class="game-img" style="background-image:url('${g.img}')"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat}</div></div>`).join('')}</div>
+            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}"><div class="game-img" style="background-image:url('${g.img}')"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat}</div></div>`).join('')}</div>
         `;
-        attachGameClickEvents();
-    }
-    
-    function attachGameClickEvents() {
-        document.querySelectorAll('.game-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const url = card.getAttribute('data-url');
-                const id = parseInt(card.getAttribute('data-id'));
-                const game = gamesData.find(g => g.id === id);
-                if(game) { game.points += 5; updateRanking(); }
-                document.getElementById('gameIframe').src = url;
+        document.querySelectorAll('.game-card').forEach(card=>{
+            card.addEventListener('click',()=>{
+                let id = parseInt(card.dataset.id);
+                let game = gamesData.find(g=>g.id===id);
+                if(game) { game.points+=5; updateRanking(); }
+                document.getElementById('gameIframe').src = card.dataset.url;
                 document.getElementById('gameModal').classList.remove('hidden');
             });
         });
     }
     
-    function renderCategoryGames(category) {
-        const filtered = gamesData.filter(g => g.cat === category);
-        const mid = Math.ceil(filtered.length / 2);
-        const row1 = filtered.slice(0, mid);
-        const row2 = filtered.slice(mid);
+    function showCategory(cat){
+        let filtered = gamesData.filter(g=>g.cat===cat);
+        const mid = Math.ceil(filtered.length/2);
         document.getElementById('categoryGamesContainer').innerHTML = `
-            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
-            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
+            <div class="game-row">${filtered.slice(0,mid).map(g=>`<div class="game-card" data-url="${g.url}"><div class="game-img" style="background-image:url('${g.img}')"></div><div class="game-title">${g.name}</div></div>`).join('')}</div>
+            <div class="game-row">${filtered.slice(mid).map(g=>`<div class="game-card" data-url="${g.url}"><div class="game-img" style="background-image:url('${g.img}')"></div><div class="game-title">${g.name}</div></div>`).join('')}</div>
         `;
-        attachGameClickEvents();
-    }
-    
-    function showCategoryPage(category) {
-        renderCategoryGames(category);
+        document.querySelectorAll('#categoryGamesContainer .game-card').forEach(c=>c.addEventListener('click',()=>{ document.getElementById('gameIframe').src=c.dataset.url; document.getElementById('gameModal').classList.remove('hidden'); }));
         document.getElementById('homePage').classList.add('page-hidden');
         document.getElementById('categoryPage').classList.remove('page-hidden');
     }
     
-    document.querySelectorAll('.cat-badge').forEach(badge => {
-        badge.addEventListener('click', () => {
-            showCategoryPage(badge.getAttribute('data-cat'));
-        });
-    });
-    
-    document.getElementById('backToHomeBtn').addEventListener('click', () => {
-        document.getElementById('homePage').classList.remove('page-hidden');
-        document.getElementById('categoryPage').classList.add('page-hidden');
-    });
-    
-    function closeGame() { 
-        document.getElementById('gameModal').classList.add('hidden'); 
-        document.getElementById('gameIframe').src = ''; 
-    }
+    document.querySelectorAll('.cat-badge').forEach(b=>b.addEventListener('click',()=>showCategory(b.dataset.cat)));
+    document.getElementById('backToHomeBtn').addEventListener('click',()=>{ document.getElementById('homePage').classList.remove('page-hidden'); document.getElementById('categoryPage').classList.add('page-hidden'); });
+    function closeGame() { document.getElementById('gameModal').classList.add('hidden'); document.getElementById('gameIframe').src=''; }
     
     function upgradeToVIP() {
-        if(isVIPUser) { alert("✨ أنت بالفعل عضو VIP!"); return; }
-        if(confirm("✨ ترقية إلى VIP - 9.99$ شهرياً\n✅ إرسال الصور\n✅ علامة VIP مميزة")) {
-            isVIPUser = true;
-            localStorage.setItem('didogame_vip', 'true');
-            document.getElementById('registerBtn').innerHTML = '👑 VIP مفعل';
-            document.getElementById('registerBtn').classList.add('vip-active');
-            document.getElementById('chatVipImageBtn').style.display = 'inline-block';
-            alert("🎉 تهانينا! أصبحت عضواً مميزاً");
-        }
+        if(isVIPUser) { alert("✨ أنت VIP"); return; }
+        if(confirm("ترقية VIP؟")) { isVIPUser=true; localStorage.setItem('didogame_vip','true'); document.getElementById('registerBtn').innerHTML='👑 VIP مفعل'; document.getElementById('registerBtn').classList.add('vip-active'); document.getElementById('chatImageBtn').style.display='block'; alert("أصبحت VIP"); }
     }
     
-    // ==================== Chat Functions ====================
+    // Chat Functions
     function saveRooms() { localStorage.setItem('didogame_rooms', JSON.stringify(allRooms)); }
     function loadRooms() { let data = localStorage.getItem('didogame_rooms'); if(data) allRooms = JSON.parse(data); else allRooms = {}; }
     
-    function updateChatAvailableRooms() {
-        let list = Object.keys(allRooms).map(r => `<span class="online-users-chip" onclick="quickChatJoin('${r}')">${r} ${allRooms[r].password?'🔒':'🔓'}</span>`).join('');
-        document.getElementById('chatAvailableRooms').innerHTML = list || "📁 لا توجد غرف";
+    function updateSidebarRooms() {
+        let container = document.getElementById('roomsListSidebar');
+        let rooms = Object.keys(allRooms);
+        if(rooms.length===0) { container.innerHTML='<div style="color:#888; text-align:center;">لا توجد غرف</div>'; return; }
+        container.innerHTML = rooms.map(r => `
+            <div class="room-item ${currentRoom===r ? 'active' : ''}" onclick="quickJoinRoom('${r}')">
+                <span class="room-name">${r}</span>
+                <span class="room-lock">${allRooms[r].password?'🔒':'🔓'}</span>
+            </div>
+        `).join('');
     }
     
-    function quickChatJoin(roomName) {
+    function updateSidebarUsers() {
+        let container = document.getElementById('usersListSidebar');
+        if(!currentRoom || !allRooms[currentRoom]) { container.innerHTML='<div style="color:#888; text-align:center;">ادخل غرفة أولاً</div>'; return; }
+        let users = allRooms[currentRoom].users || [];
+        container.innerHTML = users.map(u => `
+            <div class="user-item" onclick="selectPrivateUser('${u}')">
+                <div class="user-avatar">${u.charAt(0)}</div>
+                <div class="user-name">${u} ${u===currentUserName?'(أنت)':''}</div>
+                ${isVIPUser && u===currentUserName ? '<span class="user-vip">VIP</span>' : ''}
+            </div>
+        `).join('');
+    }
+    
+    function selectPrivateUser(username) {
+        if(username === currentUserName) return;
+        document.getElementById('chatMessageInput').placeholder = `رسالة خاصة إلى ${username}...`;
+        document.getElementById('chatMessageInput').dataset.privateTo = username;
+    }
+    
+    function quickJoinRoom(roomName) {
         document.getElementById('chatRoomName').value = roomName;
         chatJoinRoom();
     }
     
     function chatSetUsername() {
         let name = document.getElementById('chatUserName').value.trim();
-        if(name === "") { alert("❌ أدخل اسم المستخدم"); return; }
+        if(!name) { alert("أدخل اسمك"); return; }
         currentUserName = name;
         localStorage.setItem('didogame_username', currentUserName);
         alert(`✅ مرحباً ${currentUserName}`);
-        document.getElementById('chatUserName').value = currentUserName;
+        updateSidebarUsers();
     }
     
     function chatCreateRoom() {
-        if(!currentUserName) { alert("⚠️ حدد اسم المستخدم أولاً"); return; }
+        if(!currentUserName) { alert("حدد اسم المستخدم أولاً"); return; }
         let roomName = document.getElementById('chatRoomName').value.trim();
         let password = document.getElementById('chatRoomPassword').value;
         if(!roomName) return alert("أدخل اسم الغرفة");
         if(allRooms[roomName]) return alert("الغرفة موجودة");
         allRooms[roomName] = { password: password || null, users: [currentUserName], messages: [] };
         saveRooms();
-        updateChatAvailableRooms();
+        updateSidebarRooms();
         currentRoom = roomName;
-        showChatRoomUI();
+        showChatRoom();
     }
     
     function chatJoinRoom() {
-        if(!currentUserName) { alert("⚠️ حدد اسم المستخدم أولاً"); return; }
+        if(!currentUserName) { alert("حدد اسم المستخدم أولاً"); return; }
         let roomName = document.getElementById('chatRoomName').value.trim();
         let password = document.getElementById('chatRoomPassword').value;
         let room = allRooms[roomName];
@@ -913,70 +1012,61 @@
         if(!room.users.includes(currentUserName)) room.users.push(currentUserName);
         currentRoom = roomName;
         saveRooms();
-        showChatRoomUI();
+        showChatRoom();
     }
     
-    function showChatRoomUI() {
-        document.getElementById('chatRoomLoginArea').classList.add('hidden');
-        document.getElementById('chatRoomArea').classList.remove('hidden');
-        document.getElementById('chatRoomStatus').innerHTML = `🔐 في غرفة: ${currentRoom}`;
-        updateChatUsers();
-        updateChatPrivateSelect();
-        displayChatMessages();
-        startChatMicrophone();
+    function showChatRoom() {
+        updateSidebarRooms();
+        updateSidebarUsers();
+        displayMessages();
+        document.getElementById('currentRoomNameDisplay').innerHTML = `🔐 ${currentRoom}`;
+        document.getElementById('chatStatusText').innerHTML = `🟢 متصل في ${currentRoom}`;
+        startMicrophoneForRoom();
     }
     
-    function updateChatUsers() {
-        if(!currentRoom || !allRooms[currentRoom]) return;
-        let users = allRooms[currentRoom].users;
-        document.getElementById('chatUsersList').innerHTML = `👥 أعضاء الغرفة: ${users.map(u=>`<span class="online-users-chip">${u}${u===currentUserName && isVIPUser?'⭐':''}</span>`).join('')}`;
-    }
-    
-    function updateChatPrivateSelect() {
-        let select = document.getElementById('chatPrivateSelect');
-        let users = allRooms[currentRoom]?.users.filter(u => u !== currentUserName) || [];
-        select.innerHTML = '<option value="">🔒 اختر مستلماً</option>' + users.map(u=>`<option value="${u}">${u}</option>`).join('');
-    }
-    
-    function chatSendPublic() {
-        let text = document.getElementById('chatPublicMsg').value.trim();
-        if(!text || !currentRoom) return;
-        let msg = { type:'public', sender:currentUserName, text, time:Date.now() };
-        allRooms[currentRoom].messages.push(msg);
-        saveRooms();
-        displayChatMessages();
-        document.getElementById('chatPublicMsg').value = '';
-    }
-    
-    function chatSendPrivate() {
-        let target = document.getElementById('chatPrivateSelect').value;
-        let text = document.getElementById('chatPrivateMsg').value.trim();
-        if(!target || !text) return alert("اختر المستلم واكتب رسالة");
-        let msg = { type:'private', sender:currentUserName, target, text, time:Date.now() };
-        allRooms[currentRoom].messages.push(msg);
-        saveRooms();
-        displayChatMessages();
-        document.getElementById('chatPrivateMsg').value = '';
-    }
-    
-    function displayChatMessages() {
-        let div = document.getElementById('chatMessagesDiv');
-        if(!currentRoom || !allRooms[currentRoom]) return;
-        let msgs = allRooms[currentRoom].messages.slice(-40);
-        div.innerHTML = '';
+    function displayMessages() {
+        let container = document.getElementById('messagesArea');
+        if(!currentRoom || !allRooms[currentRoom]) { container.innerHTML='<div style="color:#888; text-align:center;">اختر غرفة</div>'; return; }
+        let msgs = allRooms[currentRoom].messages.slice(-50);
+        if(msgs.length===0) { container.innerHTML='<div style="color:#888; text-align:center;">✨ لا توجد رسائل بعد</div>'; return; }
+        container.innerHTML = '';
         msgs.forEach(msg => {
             if(msg.type === 'private' && msg.sender !== currentUserName && msg.target !== currentUserName) return;
-            let el = document.createElement('div');
-            el.className = 'message-item' + (msg.type==='private' ? ' private' : '');
-            el.innerHTML = `<div class="message-sender">${msg.sender} ${msg.type==='private' ? `🔒 → ${msg.target}` : ''}</div><div class="message-text">${msg.text || (msg.image ? '📷 صورة' : '')}</div>`;
-            if(msg.image) el.innerHTML += `<img src="${msg.image}" style="max-width:100%; max-height:100px; border-radius:10px; margin-top:5px;">`;
-            div.appendChild(el);
+            let isOut = msg.sender === currentUserName;
+            let bubbleClass = isOut ? 'message-out' : 'message-in';
+            if(msg.type === 'private') bubbleClass += ' message-private';
+            let div = document.createElement('div');
+            div.className = `message-bubble ${bubbleClass}`;
+            let senderHtml = !isOut ? `<div class="message-sender-name">${msg.sender}</div>` : '';
+            let targetHtml = msg.type === 'private' && msg.target ? `<span style="font-size:0.5rem;">🔒 إلى ${msg.target}</span>` : '';
+            div.innerHTML = senderHtml + `<div>${msg.text || (msg.image ? '📷 صورة' : '')}</div>` + targetHtml + `<div class="message-time">${new Date(msg.time).toLocaleTimeString()}</div>`;
+            if(msg.image) div.innerHTML += `<img src="${msg.image}" style="max-width:100%; max-height:100px; border-radius:10px; margin-top:5px;">`;
+            container.appendChild(div);
         });
-        div.scrollTop = div.scrollHeight;
+        container.scrollTop = container.scrollHeight;
+    }
+    
+    function chatSendMessage() {
+        let input = document.getElementById('chatMessageInput');
+        let text = input.value.trim();
+        let privateTo = input.dataset.privateTo;
+        if(!text || !currentRoom) return;
+        let msg;
+        if(privateTo) {
+            msg = { type:'private', sender:currentUserName, target:privateTo, text, time:Date.now() };
+            input.dataset.privateTo = '';
+            input.placeholder = 'اكتب رسالة...';
+        } else {
+            msg = { type:'public', sender:currentUserName, text, time:Date.now() };
+        }
+        allRooms[currentRoom].messages.push(msg);
+        saveRooms();
+        displayMessages();
+        input.value = '';
     }
     
     function chatSendImage() {
-        if(!isVIPUser) { alert("❌ خاصية VIP فقط! قم بالترقية"); return; }
+        if(!isVIPUser) { alert("خاصية VIP فقط"); return; }
         let input = document.createElement('input');
         input.type='file'; input.accept='image/*';
         input.onchange = e => {
@@ -987,7 +1077,7 @@
                     let msg = { type:'public', sender:currentUserName, image:ev.target.result, time:Date.now() };
                     allRooms[currentRoom].messages.push(msg);
                     saveRooms();
-                    displayChatMessages();
+                    displayMessages();
                 };
                 reader.readAsDataURL(file);
             }
@@ -1001,110 +1091,79 @@
             saveRooms();
         }
         if(localStream) { localStream.getTracks().forEach(t=>t.stop()); localStream=null; }
-        micActive = false;
         currentRoom = null;
-        document.getElementById('chatRoomLoginArea').classList.remove('hidden');
-        document.getElementById('chatRoomArea').classList.add('hidden');
-        document.getElementById('chatRoomStatus').innerHTML = "⚪ غير متصل";
-        document.getElementById('chatMicBtn').innerHTML = "🎙️ تفعيل الميكروفون";
-        updateChatAvailableRooms();
+        document.getElementById('currentRoomNameDisplay').innerHTML = '⚪ لا توجد غرفة';
+        document.getElementById('chatStatusText').innerHTML = '⚪ غير متصل';
+        document.getElementById('messagesArea').innerHTML = '<div style="color:#888; text-align:center;">✨ اختر غرفة وابدأ المحادثة</div>';
+        updateSidebarRooms();
+        updateSidebarUsers();
     }
     
-    async function startChatMicrophone() {
+    async function startMicrophoneForRoom() {
         if(!currentRoom) return;
         try {
             if(!localStream) {
                 localStream = await navigator.mediaDevices.getUserMedia({ audio: true });
                 micActive = true;
                 document.getElementById('chatMicBtn').innerHTML = "🎙️ ميكروفون ON";
-                document.getElementById('chatVoiceStatus').innerHTML = '<span class="voice-wave-mini"></span> 🎤 الصوت مفعل';
+                document.getElementById('micStatusDisplay').innerHTML = "🎤 صوت مفعل";
             }
         } catch(e) { console.log("Mic error"); }
     }
     
     function chatToggleMic() {
         if(!currentRoom) { alert("ادخل غرفة أولاً"); return; }
-        if(!localStream) { startChatMicrophone(); return; }
+        if(!localStream) { startMicrophoneForRoom(); return; }
         let audioTrack = localStream.getAudioTracks()[0];
         if(audioTrack) {
             audioTrack.enabled = !audioTrack.enabled;
             micActive = audioTrack.enabled;
             document.getElementById('chatMicBtn').innerHTML = micActive ? "🎙️ ميكروفون ON" : "🔴 ميكروفون OFF";
-            document.getElementById('chatVoiceStatus').innerHTML = micActive ? '<span class="voice-wave-mini"></span> 🎤 الصوت مفعل' : '<span class="voice-wave-mini"></span> 🔇 الصوت مكتوم';
+            document.getElementById('micStatusDisplay').innerHTML = micActive ? "🎤 صوت مفعل" : "🔇 صوت مكتوم";
         }
     }
     
-    // ==================== Music 100% ====================
+    // Music
     function toggleMusic() {
-        if(!music) {
-            music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-            music.loop = true;
-            music.volume = 1.0;
-        }
-        if(musicPlaying) {
-            music.pause();
-            document.getElementById('musicBtn').innerHTML = "🎵 تشغيل";
-        } else {
-            music.play().catch(e => console.log("Auto-play prevented"));
-            document.getElementById('musicBtn').innerHTML = "🔇 إيقاف";
-        }
+        if(!music) { music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'); music.loop=true; music.volume=1.0; }
+        if(musicPlaying) { music.pause(); document.getElementById('musicBtn').innerHTML="🎵 تشغيل"; }
+        else { music.play().catch(e=>{}); document.getElementById('musicBtn').innerHTML="🔇 إيقاف"; }
         musicPlaying = !musicPlaying;
     }
     
-    // ==================== Open/Close Chat Page ====================
-    document.getElementById('openChatBtn').addEventListener('click', () => {
+    // Open/Close Chat
+    document.getElementById('openChatBtn').addEventListener('click',()=>{
         document.getElementById('chatPage').classList.remove('hidden');
-        updateChatAvailableRooms();
+        updateSidebarRooms();
         let saved = localStorage.getItem('didogame_username');
         if(saved) { currentUserName = saved; document.getElementById('chatUserName').value = currentUserName; }
+        if(currentRoom) showChatRoom();
     });
+    document.getElementById('closeChatBtn').addEventListener('click',()=>{ document.getElementById('chatPage').classList.add('hidden'); });
     
-    document.getElementById('closeChatBtn').addEventListener('click', () => {
-        document.getElementById('chatPage').classList.add('hidden');
-    });
-    
-    // Auto refresh chat
+    // Auto refresh
     setInterval(() => {
-        if(currentRoom && allRooms[currentRoom]) {
-            updateChatUsers();
-            updateChatPrivateSelect();
-            displayChatMessages();
-        }
+        if(currentRoom && allRooms[currentRoom]) { displayMessages(); updateSidebarUsers(); }
+        updateSidebarRooms();
     }, 2000);
     
-    // الإعلان المتغير
-    const ads = ["📺 إعلان ممول - اشترك الآن!", "🎮 لعبة الأسبوع - العب مجاناً!", "💰 خصم 50% على العضوية VIP", "🚀 تحديث جديد - ألعاب حصرية"];
-    let adIndex = 0;
-    setInterval(() => {
-        adIndex = (adIndex + 1) % ads.length;
-        document.getElementById('permanentAd').innerHTML = ads[adIndex];
-    }, 10000);
+    // Ads
+    const ads = ["📺 إعلان ممول - اشترك الآن!", "🎮 لعبة الأسبوع - العب مجاناً!", "💰 خصم 50% على VIP", "🚀 تحديث جديد"];
+    let adIdx=0;
+    setInterval(()=>{ adIdx=(adIdx+1)%ads.length; document.getElementById('permanentAd').innerHTML=ads[adIdx]; }, 10000);
     
-    // ==================== Initialize ====================
+    // Init
     loadRooms();
     updateRanking();
-    renderAllGames();
-    updateChatAvailableRooms();
-    
+    renderGames();
+    updateSidebarRooms();
     let savedVIP = localStorage.getItem('didogame_vip');
-    if(savedVIP === 'true') { isVIPUser = true; document.getElementById('registerBtn').innerHTML = '👑 VIP مفعل'; document.getElementById('registerBtn').classList.add('vip-active'); document.getElementById('chatVipImageBtn').style.display = 'inline-block'; }
-    
+    if(savedVIP==='true') { isVIPUser=true; document.getElementById('registerBtn').innerHTML='👑 VIP مفعل'; document.getElementById('registerBtn').classList.add('vip-active'); document.getElementById('chatImageBtn').style.display='block'; }
     let savedName = localStorage.getItem('didogame_username');
-    if(savedName) { currentUserName = savedName; document.getElementById('chatUserName').value = currentUserName; }
-    else { setTimeout(()=>{ let n=prompt("👋 مرحباً! أدخل اسم المستخدم:","أحمد"); if(n) { currentUserName=n; localStorage.setItem('didogame_username',currentUserName); document.getElementById('chatUserName').value=currentUserName; } }, 500); }
+    if(savedName) { currentUserName=savedName; document.getElementById('chatUserName').value=currentUserName; }
+    else { setTimeout(()=>{ let n=prompt("👋 اسم المستخدم:","أحمد"); if(n){ currentUserName=n; localStorage.setItem('didogame_username',currentUserName); document.getElementById('chatUserName').value=currentUserName; } },500); }
     
-    window.chatSetUsername = chatSetUsername;
-    window.chatJoinRoom = chatJoinRoom;
-    window.chatCreateRoom = chatCreateRoom;
-    window.chatSendPublic = chatSendPublic;
-    window.chatSendPrivate = chatSendPrivate;
-    window.chatSendImage = chatSendImage;
-    window.chatLeaveRoom = chatLeaveRoom;
-    window.chatToggleMic = chatToggleMic;
-    window.quickChatJoin = quickChatJoin;
-    window.upgradeToVIP = upgradeToVIP;
-    window.closeGame = closeGame;
-    window.toggleMusic = toggleMusic;
+    window.chatSetUsername=chatSetUsername; window.chatJoinRoom=chatJoinRoom; window.chatCreateRoom=chatCreateRoom; window.chatSendMessage=chatSendMessage; window.chatSendImage=chatSendImage; window.chatLeaveRoom=chatLeaveRoom; window.chatToggleMic=chatToggleMic; window.quickJoinRoom=quickJoinRoom; window.selectPrivateUser=selectPrivateUser; window.upgradeToVIP=upgradeToVIP; window.closeGame=closeGame; window.toggleMusic=toggleMusic;
 </script>
 </body>
 </html>
