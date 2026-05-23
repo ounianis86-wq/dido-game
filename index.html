@@ -92,7 +92,7 @@
             background: linear-gradient(135deg, #ff44ff20, #00ffff20);
             border-radius: 20px;
             padding: 15px;
-            margin-bottom: 0px; /* Removed margin to touch ranking */
+            margin-bottom: 0px;
             display: flex;
             align-items: center;
             gap: 15px;
@@ -145,7 +145,7 @@
             font-size: 0.8rem;
         }
 
-        /* Ranking Section - Now touching the hero */
+        /* Ranking Section */
         .ranking-section {
             margin-bottom: 12px;
             text-align: center;
@@ -244,13 +244,13 @@
             transform: scale(1.02);
         }
 
-        /* Ad - ENLARGED AREA */
+        /* Ad - ENLARGED AREA (margin-bottom removed to touch games) */
         .fixed-permanent-ad {
             background: linear-gradient(135deg, #ff44ff30, #00ffff30);
             border: 2px solid #ff44ff;
             border-radius: 20px;
             padding: 18px 12px;
-            margin: 8px 0 12px 0;
+            margin: 8px 0 0px 0;
             text-align: center;
             color: white;
             font-size: 1rem;
@@ -265,14 +265,14 @@
             100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
         }
 
-        /* Bottom content wrapper - pushes everything to bottom above games */
+        /* Bottom content wrapper */
         .bottom-content-wrapper {
             margin-top: auto;
             display: flex;
             flex-direction: column;
         }
 
-        /* Games - Sticks to bottom (unchanged) */
+        /* Games - Sticks to bottom (no margin on top) */
         .games-wrapper {
             display: flex;
             flex-direction: column;
@@ -407,7 +407,7 @@
             border: 1px solid #0ff;
         }
         
-        /* Language Dropdown - unchanged */
+        /* Language Dropdown */
         .lang-dropdown {
             position: relative;
             display: inline-block;
@@ -952,7 +952,7 @@
 <div class="app">
     <div class="content">
         <div id="homePage" class="page">
-            <!-- Hero Section - Touching ranking (margin-bottom: 0) -->
+            <!-- Hero Section - Touching ranking -->
             <div class="anime-hero">
                 <div class="character-img">
                     <div class="controller-on-hand">🎮</div>
@@ -963,7 +963,7 @@
                 </div>
             </div>
             
-            <!-- Ranking Section - Now touching the hero directly -->
+            <!-- Ranking Section -->
             <div class="ranking-section">
                 <div class="ranking-circles" id="rankingList"></div>
             </div>
@@ -978,7 +978,7 @@
                 </div>
             </div>
             
-            <!-- ENLARGED AD AREA -->
+            <!-- ENLARGED AD AREA - No margin bottom (touching games) -->
             <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
             
             <!-- Bottom content wrapper for games at bottom -->
