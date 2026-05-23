@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>DidoGame - دردشة VIP (نسخة الهاتف)</title>
+    <title>DidoGame - دردشة خاصة VIP</title>
     <style>
         * {
             margin: 0;
@@ -26,19 +26,19 @@
             border: 1px solid #ff44ff;
             box-shadow: 0 0 30px #ff44ff40;
         }
-        h1 {
+        h1, h2 {
             color: #ff44ff;
             text-align: center;
             margin-bottom: 15px;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
-        .login-area, .chat-area {
+        .section {
             background: rgba(0,0,0,0.3);
             border-radius: 15px;
             padding: 12px;
             margin-bottom: 12px;
         }
-        input, select {
+        input, select, textarea {
             width: 100%;
             padding: 10px;
             margin: 8px 0;
@@ -57,13 +57,13 @@
             font-weight: bold;
             cursor: pointer;
             margin: 5px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         .messages {
             background: rgba(0,0,0,0.5);
             border-radius: 15px;
             padding: 10px;
-            height: 280px;
+            height: 250px;
             overflow-y: auto;
             margin-bottom: 10px;
         }
@@ -73,14 +73,24 @@
             padding: 8px 12px;
             margin-bottom: 8px;
         }
+        .message.private {
+            background: rgba(0,255,136,0.2);
+            border-right: 3px solid #00ff88;
+        }
         .sender {
             color: #ff44ff;
             font-size: 0.7rem;
+        }
+        .private-tag {
+            color: #00ff88;
+            font-size: 0.6rem;
+            margin-left: 5px;
         }
         .text {
             color: white;
             font-size: 0.85rem;
             margin-top: 3px;
+            word-break: break-word;
         }
         .vip-badge {
             background: #ff44ff;
@@ -102,10 +112,15 @@
             border-radius: 20px;
             margin: 3px;
             font-size: 0.7rem;
+            cursor: pointer;
         }
         .user-chip.vip {
             border: 1px solid #ff44ff;
             background: rgba(255,68,255,0.5);
+        }
+        .user-chip.selected {
+            background: #ff44ff;
+            color: white;
         }
         .hidden {
             display: none;
@@ -115,8 +130,14 @@
             gap: 8px;
             flex-wrap: wrap;
         }
-        .call-select {
-            flex: 1;
+        .danger-btn {
+            background: linear-gradient(135deg, #ff3366, #ff6600);
+        }
+        .room-info {
+            font-size: 0.7rem;
+            color: #ffaa88;
+            text-align: center;
+            margin-bottom: 8px;
         }
         img {
             max-width: 100%;
@@ -124,230 +145,255 @@
             border-radius: 10px;
             margin-top: 5px;
         }
-        audio {
-            max-width: 100%;
-            margin-top: 5px;
-            border-radius: 20px;
-        }
-        .demo-users {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
-        .demo-btn {
-            background: linear-gradient(135deg, #ffaa00, #ff6600);
-            padding: 6px 12px;
-            font-size: 0.7rem;
-        }
-        .recording-indicator {
-            color: #ff3366;
-            font-size: 0.7rem;
-            margin-left: 5px;
-            animation: blink 1s infinite;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+        .lock-icon {
+            margin-right: 5px;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>🎮 DidoGame VIP 🎮</h1>
+    <h1>🔐 DidoGame VIP - دردشة خاصة</h1>
     
-    <div id="loginDiv" class="login-area">
-        <input type="text" id="username" placeholder="اسم المستخدم" value="أحمد">
-        <button onclick="login()">🚀 دخول</button>
-        
-        <div class="demo-users">
-            <button class="demo-btn" onclick="quickAdd('محمد')">➕ محمد</button>
-            <button class="demo-btn" onclick="quickAdd('سارة')">➕ سارة</button>
-            <button class="demo-btn" onclick="quickAdd('علي')">➕ علي</button>
-            <button class="demo-btn" onclick="quickAdd('ليلى')">➕ ليلى</button>
-        </div>
-        
-        <div class="users-list" id="onlineUsersList">👥 --</div>
-    </div>
-    
-    <div id="chatDiv" class="chat-area hidden">
-        <div id="userInfo" style="color:#ffaa88; text-align:center; margin-bottom:8px;"></div>
-        <div class="users-list" id="activeUsers">👥 المتصلون: --</div>
-        <div class="messages" id="messagesDiv">
-            <div style="color:#888; text-align:center;">💬 ابدأ المحادثة...</div>
-        </div>
-        
+    <!-- قسم إنشاء/دخول الغرفة -->
+    <div id="roomSection" class="section">
+        <h2>🏠 إنشاء أو دخول غرفة</h2>
+        <input type="text" id="roomName" placeholder="اسم الغرفة" value="غرفتي">
+        <input type="password" id="roomPassword" placeholder="كلمة مرور الغرفة (اختياري)">
         <div class="flex-row">
-            <input type="text" id="messageInput" placeholder="اكتب رسالة..." style="flex:1;" onkeypress="if(event.key==='Enter') sendMessage()">
-            <button onclick="sendMessage()">📤</button>
-            <button id="vipImageBtn" onclick="sendImage()" style="display:none;">🖼️</button>
-            <button id="vipAudioBtn" onclick="startRecording()" style="display:none;">🎙️</button>
+            <button onclick="createOrJoinRoom()">🚪 دخول الغرفة</button>
+            <button class="danger-btn" onclick="showDeleteConfirm()">🗑️ حذف غرفتي</button>
         </div>
-        
-        <div id="callSection" style="margin-top:12px; text-align:center; display:none;">
-            <div class="flex-row">
-                <select id="callUser" class="call-select"></select>
-                <button onclick="startCall()">📞 اتصال</button>
+        <div class="users-list" id="availableRoomsList">📁 الغرف المتاحة: --</div>
+    </div>
+    
+    <!-- قسم الدردشة (يظهر بعد دخول الغرفة) -->
+    <div id="chatDiv" class="hidden">
+        <div class="section">
+            <div class="room-info" id="roomInfo"></div>
+            <div class="users-list" id="activeUsers">👥 المتصلون في هذه الغرفة: --</div>
+            <div class="messages" id="messagesDiv">
+                <div style="color:#888; text-align:center;">💬 مرحباً بك في الغرفة الخاصة</div>
             </div>
-            <div id="callStatus" style="color:#ff44ff; font-size:0.7rem; margin-top:5px;"></div>
+            
+            <div class="flex-row">
+                <input type="text" id="messageInput" placeholder="اكتب رسالة..." style="flex:1;" onkeypress="if(event.key==='Enter') sendMessage()">
+                <button onclick="sendMessage()">📤</button>
+                <button id="vipImageBtn" onclick="sendImage()" style="display:none;">🖼️</button>
+            </div>
+            
+            <!-- قسم الرسائل الخاصة -->
+            <div class="section" style="margin-top:8px;">
+                <div style="color:#00ff88; font-size:0.7rem;">🔒 رسالة خاصة لشخص معين:</div>
+                <div class="flex-row">
+                    <select id="privateUserSelect" style="flex:1;"></select>
+                    <input type="text" id="privateMessageInput" placeholder="رسالة خاصة..." style="flex:2;" onkeypress="if(event.key==='Enter') sendPrivateMessage()">
+                    <button onclick="sendPrivateMessage()">🔒 إرسال</button>
+                </div>
+            </div>
         </div>
     </div>
     
+    <!-- زر الترقية -->
     <div style="text-align:center; margin-top:10px;">
-        <button id="upgradeBtn" onclick="upgradeVIP()" style="background:linear-gradient(135deg,#ffaa00,#ff6600);">👑 ترقية VIP (صور + مكالمات)</button>
+        <button id="upgradeBtn" onclick="upgradeVIP()" style="background:linear-gradient(135deg,#ffaa00,#ff6600);">👑 ترقية VIP (صور)</button>
     </div>
 </div>
 
 <script>
+    // ==================== البيانات ====================
     let currentUser = null;
+    let currentRoom = null;
+    let currentRoomPassword = null;
     let isVIP = false;
     let messages = [];
-    let users = [];
-    let audioCounter = 0;
+    let rooms = {};
+    let usersInRoom = [];
     
+    // تحميل البيانات
     function loadData() {
-        let saved = localStorage.getItem('mobile_chat_messages');
-        if (saved) messages = JSON.parse(saved);
+        let saved = localStorage.getItem('didovip_rooms');
+        if (saved) rooms = JSON.parse(saved);
+        else rooms = {};
         
-        saved = localStorage.getItem('mobile_chat_users');
-        if (saved) users = JSON.parse(saved);
-        
-        if (users.length === 0) {
-            users = [
-                { username: "محمد", isVIP: true, online: true },
-                { username: "سارة", isVIP: false, online: true },
-                { username: "علي", isVIP: false, online: true },
-                { username: "ليلى", isVIP: true, online: true }
-            ];
-            saveUsers();
+        let savedUser = localStorage.getItem('didovip_current_user');
+        if (savedUser) {
+            let userData = JSON.parse(savedUser);
+            currentUser = userData.username;
+            isVIP = userData.isVIP || false;
+            document.getElementById('vipImageBtn').style.display = isVIP ? 'inline-block' : 'none';
+            if (isVIP) document.getElementById('upgradeBtn').innerHTML = '👑 VIP مفعل';
         }
         
-        updateUsersList();
+        updateAvailableRoomsList();
     }
     
-    function saveMessages() {
-        localStorage.setItem('mobile_chat_messages', JSON.stringify(messages));
+    function saveRooms() {
+        localStorage.setItem('didovip_rooms', JSON.stringify(rooms));
     }
     
-    function saveUsers() {
-        localStorage.setItem('mobile_chat_users', JSON.stringify(users));
+    function saveCurrentUser() {
+        if (currentUser) {
+            localStorage.setItem('didovip_current_user', JSON.stringify({ username: currentUser, isVIP: isVIP }));
+        }
     }
     
-    function quickAdd(name) {
-        let existing = users.find(u => u.username === name);
-        if (existing) {
-            existing.online = true;
-            alert(`✅ ${name} متصل الآن!`);
+    // عرض الغرف المتاحة
+    function updateAvailableRoomsList() {
+        let roomNames = Object.keys(rooms);
+        let div = document.getElementById('availableRoomsList');
+        if (roomNames.length === 0) {
+            div.innerHTML = '📁 لا توجد غرف متاحة. أنشئ غرفة جديدة!';
         } else {
-            users.push({ username: name, isVIP: false, online: true });
-            alert(`✅ تم إضافة ${name} كمتصل`);
-        }
-        saveUsers();
-        updateUsersList();
-        if (document.getElementById('chatDiv').classList.contains('hidden') === false) {
-            updateCallDropdown();
+            div.innerHTML = '📁 الغرف المتاحة: ' + roomNames.map(r => 
+                `<span class="user-chip" onclick="quickJoinRoom('${r}')">${r} ${rooms[r].hasPassword ? '🔒' : '🔓'}</span>`
+            ).join('');
         }
     }
     
-    function updateUsersList() {
-        let online = users.filter(u => u.online);
-        document.getElementById('onlineUsersList').innerHTML = `👥 متصلون الآن: ${online.length}`;
+    // الدخول السريع لغرفة
+    function quickJoinRoom(roomName) {
+        document.getElementById('roomName').value = roomName;
+        let pwd = rooms[roomName]?.password || '';
+        document.getElementById('roomPassword').value = pwd;
+        createOrJoinRoom();
+    }
+    
+    // إنشاء أو دخول غرفة
+    function createOrJoinRoom() {
+        let roomName = document.getElementById('roomName').value.trim();
+        let password = document.getElementById('roomPassword').value;
         
-        let container = document.getElementById('activeUsers');
-        if (container) {
-            if (online.length === 0) {
-                container.innerHTML = '👥 لا يوجد متصلين غيرك';
-            } else {
-                container.innerHTML = '👥 ' + online.map(u => `<span class="user-chip ${u.isVIP ? 'vip' : ''}">${u.username}${u.isVIP ? '⭐' : ''}</span>`).join('');
+        if (!roomName) {
+            alert("الرجاء إدخال اسم الغرفة");
+            return;
+        }
+        
+        // التحقق من وجود الغرفة
+        if (rooms[roomName]) {
+            // غرفة موجودة - تحقق من كلمة المرور
+            if (rooms[roomName].hasPassword && rooms[roomName].password !== password) {
+                alert("❌ كلمة مرور الغرفة غير صحيحة!");
+                return;
             }
+            currentRoom = roomName;
+            currentRoomPassword = rooms[roomName].password || null;
+            loadRoomMessages();
+            alert(`✅ دخلت الغرفة: ${roomName}`);
+        } else {
+            // إنشاء غرفة جديدة
+            let hasPassword = password !== "";
+            rooms[roomName] = {
+                name: roomName,
+                hasPassword: hasPassword,
+                password: hasPassword ? password : null,
+                messages: [],
+                created: Date.now()
+            };
+            currentRoom = roomName;
+            currentRoomPassword = password || null;
+            messages = [];
+            saveRooms();
+            alert(`🎉 تم إنشاء الغرفة: ${roomName}`);
+        }
+        
+        // تحديث واجهة المستخدم
+        document.getElementById('roomSection').classList.add('hidden');
+        document.getElementById('chatDiv').classList.remove('hidden');
+        document.getElementById('roomInfo').innerHTML = `🔐 الغرفة: ${currentRoom} ${currentRoomPassword ? '🔒 محمية' : '🔓 مفتوحة'}`;
+        
+        updateUsersInRoom();
+        displayMessages();
+        updatePrivateUserSelect();
+    }
+    
+    function loadRoomMessages() {
+        if (rooms[currentRoom] && rooms[currentRoom].messages) {
+            messages = rooms[currentRoom].messages;
+        } else {
+            messages = [];
+        }
+        displayMessages();
+    }
+    
+    function saveRoomMessages() {
+        if (rooms[currentRoom]) {
+            rooms[currentRoom].messages = messages;
+            saveRooms();
         }
     }
     
-    function updateCallDropdown() {
-        let select = document.getElementById('callUser');
-        if (!select) return;
-        let online = users.filter(u => u.online && u.username !== currentUser?.username);
+    // تحديث قائمة المستخدمين في الغرفة (محاكاة)
+    function updateUsersInRoom() {
+        // في هذا الإصدار، كل مستخدم هو جهاز منفصل
+        // نعرض فقط المستخدم الحالي
+        let usersList = [currentUser];
+        let div = document.getElementById('activeUsers');
+        div.innerHTML = '👥 المتصلون: ' + usersList.map(u => 
+            `<span class="user-chip ${isVIP ? 'vip' : ''}">${u}${isVIP ? '⭐' : ''}</span>`
+        ).join('');
+    }
+    
+    // تحديث قائمة المستخدمين للرسائل الخاصة
+    function updatePrivateUserSelect() {
+        let select = document.getElementById('privateUserSelect');
         select.innerHTML = '<option value="">اختر مستخدم...</option>';
-        online.forEach(u => {
-            select.innerHTML += `<option value="${u.username}">${u.username} ${u.isVIP ? '⭐VIP' : ''}</option>`;
+        // نضيف المستخدمين المحتملين (في هذا الإصدار نضيف أسماء تجريبية)
+        let possibleUsers = ["محمد", "سارة", "علي", "ليلى", "أحمد", "نور"];
+        possibleUsers.forEach(u => {
+            if (u !== currentUser) {
+                select.innerHTML += `<option value="${u}">${u}</option>`;
+            }
         });
     }
     
-    function login() {
-        let name = document.getElementById('username').value.trim();
-        if (!name) { alert("أدخل اسمك"); return; }
-        
-        let user = users.find(u => u.username === name);
-        if (!user) {
-            user = { username: name, isVIP: false, online: true };
-            users.push(user);
-        } else {
-            user.online = true;
-        }
-        
-        currentUser = user;
-        isVIP = user.isVIP;
-        saveUsers();
-        
-        document.getElementById('loginDiv').classList.add('hidden');
-        document.getElementById('chatDiv').classList.remove('hidden');
-        document.getElementById('userInfo').innerHTML = `👤 ${currentUser.username} ${isVIP ? '<span class="vip-badge">VIP</span>' : ''}`;
-        
-        if (isVIP) {
-            document.getElementById('vipImageBtn').style.display = 'inline-block';
-            document.getElementById('vipAudioBtn').style.display = 'inline-block';
-            document.getElementById('callSection').style.display = 'block';
-            document.getElementById('upgradeBtn').innerHTML = '👑 VIP مفعل';
-            document.getElementById('upgradeBtn').style.opacity = '0.7';
-        } else {
-            document.getElementById('vipImageBtn').style.display = 'none';
-            document.getElementById('vipAudioBtn').style.display = 'none';
-            document.getElementById('callSection').style.display = 'none';
-        }
-        
-        displayMessages();
-        updateUsersList();
-        updateCallDropdown();
-        
-        setInterval(() => {
-            if (currentUser) {
-                displayMessages();
-                updateUsersList();
-            }
-        }, 2000);
-    }
-    
-    function upgradeVIP() {
-        if (isVIP) { alert("أنت VIP بالفعل!"); return; }
-        if (confirm("✨ ترقية إلى VIP - 9.99$ شهرياً\n✅ صور + مكالمات صوتية\n✅ مميزات حصرية\n\nهل توافق؟")) {
-            isVIP = true;
-            currentUser.isVIP = true;
-            let idx = users.findIndex(u => u.username === currentUser.username);
-            if (idx !== -1) users[idx].isVIP = true;
-            saveUsers();
-            
-            document.getElementById('userInfo').innerHTML = `👤 ${currentUser.username} <span class="vip-badge">VIP</span>`;
-            document.getElementById('vipImageBtn').style.display = 'inline-block';
-            document.getElementById('vipAudioBtn').style.display = 'inline-block';
-            document.getElementById('callSection').style.display = 'block';
-            document.getElementById('upgradeBtn').innerHTML = '👑 VIP مفعل';
-            updateCallDropdown();
-            alert("🎉 أصبحت عضواً مميزاً! يمكنك الآن:\n• إرسال الصور 📸\n• التسجيل الصوتي 🎙️\n• إجراء المكالمات الصوتية 📞");
-        }
-    }
-    
+    // إرسال رسالة عامة
     function sendMessage() {
         let text = document.getElementById('messageInput').value.trim();
         if (!text) return;
-        messages.push({ username: currentUser.username, text: text, isVIP: isVIP, time: Date.now() });
-        saveMessages();
+        
+        messages.push({
+            type: 'public',
+            username: currentUser,
+            text: text,
+            isVIP: isVIP,
+            time: Date.now()
+        });
+        saveRoomMessages();
         displayMessages();
         document.getElementById('messageInput').value = '';
     }
     
+    // إرسال رسالة خاصة
+    function sendPrivateMessage() {
+        let targetUser = document.getElementById('privateUserSelect').value;
+        let text = document.getElementById('privateMessageInput').value.trim();
+        
+        if (!targetUser) {
+            alert("اختر المستخدم الذي تريد إرسال الرسالة له");
+            return;
+        }
+        if (!text) {
+            alert("اكتب رسالتك الخاصة");
+            return;
+        }
+        
+        messages.push({
+            type: 'private',
+            username: currentUser,
+            targetUser: targetUser,
+            text: text,
+            isVIP: isVIP,
+            time: Date.now()
+        });
+        saveRoomMessages();
+        displayMessages();
+        document.getElementById('privateMessageInput').value = '';
+        alert(`🔒 رسالة خاصة أرسلت إلى ${targetUser}`);
+    }
+    
+    // إرسال صورة
     function sendImage() {
-        if (!isVIP) { alert("❌ إرسال الصور للمستخدمين المميزين فقط!\n👑 قم بترقية حسابك"); return; }
+        if (!isVIP) { alert("❌ إرسال الصور للمستخدمين المميزين فقط!"); return; }
         let input = document.createElement('input');
         input.type = 'file';
         input.accept = 'image/*';
@@ -356,8 +402,14 @@
             if (file) {
                 let reader = new FileReader();
                 reader.onload = (ev) => {
-                    messages.push({ username: currentUser.username, image: ev.target.result, isVIP: isVIP, time: Date.now() });
-                    saveMessages();
+                    messages.push({
+                        type: 'public',
+                        username: currentUser,
+                        image: ev.target.result,
+                        isVIP: isVIP,
+                        time: Date.now()
+                    });
+                    saveRoomMessages();
                     displayMessages();
                 };
                 reader.readAsDataURL(file);
@@ -366,107 +418,7 @@
         input.click();
     }
     
-    // التسجيل الصوتي - نسخة محسنة للهواتف
-    async function startRecording() {
-        if (!isVIP) { alert("❌ التسجيل الصوتي للمستخدمين المميزين فقط!"); return; }
-        
-        if (window.isRecording) {
-            if (window.mediaRecorder && window.mediaRecorder.state === 'recording') {
-                window.mediaRecorder.stop();
-                window.isRecording = false;
-                document.getElementById('vipAudioBtn').innerHTML = '🎙️';
-                document.getElementById('vipAudioBtn').style.animation = 'none';
-            }
-            return;
-        }
-        
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            window.mediaRecorder = new MediaRecorder(stream);
-            let chunks = [];
-            
-            window.mediaRecorder.ondataavailable = (e) => { 
-                if (e.data.size > 0) chunks.push(e.data); 
-            };
-            
-            window.mediaRecorder.onstop = () => {
-                const audioBlob = new Blob(chunks, { type: 'audio/webm' });
-                const audioId = Date.now() + '_' + (audioCounter++);
-                
-                // حفظ الصوت كـ base64
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    const audioData = reader.result;
-                    messages.push({ 
-                        username: currentUser.username, 
-                        audioData: audioData,
-                        audioType: 'webm',
-                        isVIP: isVIP, 
-                        time: Date.now() 
-                    });
-                    saveMessages();
-                    displayMessages();
-                };
-                reader.readAsDataURL(audioBlob);
-                
-                stream.getTracks().forEach(track => track.stop());
-            };
-            
-            window.mediaRecorder.start();
-            window.isRecording = true;
-            document.getElementById('vipAudioBtn').innerHTML = '⏹️';
-            document.getElementById('vipAudioBtn').style.animation = 'blink 1s infinite';
-            
-            // إظهار إشعار
-            const toast = document.createElement('div');
-            toast.textContent = '🎙️ جاري التسجيل... اضغط مرة أخرى للإيقاف';
-            toast.style.position = 'fixed';
-            toast.style.bottom = '80px';
-            toast.style.left = '50%';
-            toast.style.transform = 'translateX(-50%)';
-            toast.style.background = '#ff3366';
-            toast.style.padding = '8px 16px';
-            toast.style.borderRadius = '25px';
-            toast.style.zIndex = '999';
-            toast.style.fontSize = '0.7rem';
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 2000);
-            
-            // إيقاف تلقائي بعد 30 ثانية
-            setTimeout(() => {
-                if (window.isRecording && window.mediaRecorder && window.mediaRecorder.state === 'recording') {
-                    window.mediaRecorder.stop();
-                    window.isRecording = false;
-                    document.getElementById('vipAudioBtn').innerHTML = '🎙️';
-                    document.getElementById('vipAudioBtn').style.animation = 'none';
-                }
-            }, 30000);
-            
-        } catch(e) { 
-            alert("❌ لا يمكن الوصول للميكروفون: " + e.message + "\n\nتأكد من منح صلاحية الميكروفون");
-        }
-    }
-    
-    function startCall() {
-        if (!isVIP) { alert("❌ المكالمات للمستخدمين المميزين فقط!"); return; }
-        let target = document.getElementById('callUser').value;
-        if (!target) { alert("اختر مستخدم للاتصال"); return; }
-        let targetUser = users.find(u => u.username === target);
-        if (!targetUser?.online) { alert("المستخدم غير متصل حالياً"); return; }
-        if (!targetUser.isVIP) { alert("⚠️ يمكن الاتصال فقط بالمستخدمين المميزين VIP"); return; }
-        
-        document.getElementById('callStatus').innerHTML = `📞 جاري الاتصال بـ ${target}...`;
-        setTimeout(() => {
-            document.getElementById('callStatus').innerHTML = `📞 متصل مع ${target}`;
-            setTimeout(() => {
-                if (document.getElementById('callStatus').innerHTML.includes('متصل')) {
-                    document.getElementById('callStatus').innerHTML = "📞 انتهت المكالمة";
-                    setTimeout(() => document.getElementById('callStatus').innerHTML = "", 3000);
-                }
-            }, 30000);
-        }, 2000);
-    }
-    
+    // عرض الرسائل
     function displayMessages() {
         let div = document.getElementById('messagesDiv');
         let last50 = messages.slice(-50);
@@ -478,26 +430,130 @@
         last50.forEach(msg => {
             let el = document.createElement('div');
             el.className = 'message';
-            el.innerHTML = `<div class="sender">${msg.username} ${msg.isVIP ? '<span class="vip-badge">VIP</span>' : ''}</div>`;
+            if (msg.type === 'private') {
+                el.classList.add('private');
+                var isForMe = (msg.targetUser === currentUser);
+                var isFromMe = (msg.username === currentUser);
+                if (isForMe || isFromMe) {
+                    // نعرض الرسائل الخاصة التي تخص المستخدم الحالي فقط
+                } else {
+                    // لا نعرض رسائل خاصة ليست له
+                    return;
+                }
+            }
+            
+            let senderHtml = `<div class="sender">${msg.username} ${msg.isVIP ? '<span class="vip-badge">VIP</span>' : ''}`;
+            if (msg.type === 'private') {
+                senderHtml += ` <span class="private-tag">🔒 إلى ${msg.targetUser}</span>`;
+            }
+            senderHtml += `</div>`;
+            el.innerHTML = senderHtml;
+            
             if (msg.text) el.innerHTML += `<div class="text">${msg.text}</div>`;
             if (msg.image) el.innerHTML += `<img src="${msg.image}" onclick="window.open(this.src)">`;
-            if (msg.audioData) {
-                el.innerHTML += `<audio src="${msg.audioData}" controls preload="auto"></audio>`;
-            }
             div.appendChild(el);
         });
         div.scrollTop = div.scrollHeight;
     }
     
-    window.addEventListener('beforeunload', () => {
-        if (currentUser) {
-            let idx = users.findIndex(u => u.username === currentUser.username);
-            if (idx !== -1) users[idx].online = false;
-            saveUsers();
+    // حذف الغرفة الحالية
+    function showDeleteConfirm() {
+        let roomName = document.getElementById('roomName').value.trim();
+        if (!roomName) {
+            alert("أدخل اسم الغرفة التي تريد حذفها");
+            return;
         }
-    });
+        if (confirm(`⚠️ هل أنت متأكد من حذف الغرفة "${roomName}" وجميع رسائلها؟\nهذا الإجراء لا يمكن التراجع عنه!`)) {
+            if (rooms[roomName]) {
+                delete rooms[roomName];
+                saveRooms();
+                alert(`✅ تم حذف الغرفة: ${roomName}`);
+                document.getElementById('roomName').value = '';
+                document.getElementById('roomPassword').value = '';
+                updateAvailableRoomsList();
+                
+                // إذا كنا في هذه الغرفة، نخرج منها
+                if (currentRoom === roomName) {
+                    document.getElementById('roomSection').classList.remove('hidden');
+                    document.getElementById('chatDiv').classList.add('hidden');
+                    currentRoom = null;
+                }
+            } else {
+                alert("الغرفة غير موجودة");
+            }
+        }
+    }
     
+    // الخروج من الغرفة
+    function leaveRoom() {
+        if (confirm("هل تريد الخروج من الغرفة الحالية؟")) {
+            document.getElementById('roomSection').classList.remove('hidden');
+            document.getElementById('chatDiv').classList.add('hidden');
+            currentRoom = null;
+            updateAvailableRoomsList();
+        }
+    }
+    
+    // الترقية إلى VIP
+    function upgradeVIP() {
+        if (isVIP) { alert("أنت VIP بالفعل!"); return; }
+        if (confirm("✨ ترقية إلى VIP - 9.99$ شهرياً\n✅ إرسال الصور\n✅ علامة مميزة\n\nهل توافق؟")) {
+            isVIP = true;
+            saveCurrentUser();
+            document.getElementById('vipImageBtn').style.display = 'inline-block';
+            document.getElementById('upgradeBtn').innerHTML = '👑 VIP مفعل';
+            document.getElementById('upgradeBtn').style.opacity = '0.7';
+            if (currentUser) {
+                document.getElementById('roomInfo').innerHTML = `🔐 الغرفة: ${currentRoom} ${currentRoomPassword ? '🔒 محمية' : '🔓 مفتوحة'} - VIP`;
+            }
+            alert("🎉 أصبحت عضواً مميزاً! يمكنك الآن إرسال الصور");
+        }
+    }
+    
+    // تسجيل الدخول
+    function setUser() {
+        let name = prompt("أدخل اسم المستخدم الخاص بك:", currentUser || "أحمد");
+        if (name && name.trim()) {
+            currentUser = name.trim();
+            saveCurrentUser();
+            alert(`✅ مرحباً ${currentUser}`);
+            updateAvailableRoomsList();
+        }
+    }
+    
+    // زر الخروج من الغرفة
+    function addExitButton() {
+        let exitBtn = document.createElement('button');
+        exitBtn.innerHTML = '🚪 خروج من الغرفة';
+        exitBtn.className = 'danger-btn';
+        exitBtn.onclick = leaveRoom;
+        exitBtn.style.marginTop = '10px';
+        exitBtn.style.width = '100%';
+        document.querySelector('#chatDiv .section:first-child').appendChild(exitBtn);
+    }
+    
+    // التحقق من اسم المستخدم عند البداية
+    if (!currentUser) {
+        setTimeout(() => {
+            let name = prompt("👋 مرحباً بك في DidoGame!\n\nأدخل اسم المستخدم الخاص بك:", "أحمد");
+            if (name && name.trim()) {
+                currentUser = name.trim();
+                saveCurrentUser();
+                alert(`✅ مرحباً ${currentUser}`);
+                updateAvailableRoomsList();
+            }
+        }, 500);
+    }
+    
+    // تهيئة
     loadData();
+    addExitButton();
+    setInterval(() => {
+        if (currentRoom) {
+            displayMessages();
+            updateUsersInRoom();
+        }
+    }, 2000);
 </script>
 </body>
 </html>
