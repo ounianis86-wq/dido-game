@@ -87,7 +87,7 @@
             display: none;
         }
 
-        /* Hero Section - ENLARGED ANIME IMAGE & Touching ranking */
+        /* Hero Section - ENLARGED ANIME IMAGE */
         .anime-hero {
             background: linear-gradient(135deg, #ff44ff20, #00ffff20);
             border-radius: 20px;
@@ -145,7 +145,7 @@
             font-size: 0.8rem;
         }
 
-        /* Ranking Section - Pushed down slightly */
+        /* Ranking Section */
         .ranking-section {
             margin-top: 20px;
             margin-bottom: 12px;
@@ -217,7 +217,7 @@
             font-size: 0.45rem;
         }
 
-        /* Categories Section - Pushed down slightly */
+        /* Categories Section - With More button */
         .categories-section {
             margin-bottom: 12px;
         }
@@ -227,6 +227,7 @@
             flex-wrap: wrap;
             gap: 6px;
             justify-content: center;
+            align-items: center;
         }
         
         .cat-badge {
@@ -244,8 +245,93 @@
             background: #ff44ff60;
             transform: scale(1.02);
         }
+        
+        .more-btn {
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            padding: 5px 14px;
+            border-radius: 22px;
+            color: white;
+            font-size: 0.6rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: bold;
+        }
+        
+        .more-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 10px #ff44ff;
+        }
 
-        /* Ad - ENLARGED AREA (margin-bottom removed to touch games) */
+        /* More Categories Modal */
+        .more-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1500;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .more-modal-content {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 30px;
+            padding: 25px;
+            width: 85%;
+            max-width: 350px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 50px #ff44ff;
+            text-align: center;
+        }
+        
+        .more-modal-content h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .more-categories-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .more-cat-badge {
+            background: #ff44ff30;
+            border: 1px solid #ff44ff;
+            padding: 8px 16px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .more-cat-badge:hover {
+            background: #ff44ff60;
+            transform: scale(1.02);
+        }
+        
+        .close-more-modal {
+            background: #ff3366;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Ad - ENLARGED AREA */
         .fixed-permanent-ad {
             background: linear-gradient(135deg, #ff44ff30, #00ffff30);
             border: 2px solid #ff44ff;
@@ -266,14 +352,14 @@
             100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
         }
 
-        /* Bottom content wrapper - pushes everything to bottom above games */
+        /* Bottom content wrapper */
         .bottom-content-wrapper {
             margin-top: auto;
             display: flex;
             flex-direction: column;
         }
 
-        /* Games - Sticks to bottom (no margin on top) */
+        /* Games */
         .games-wrapper {
             display: flex;
             flex-direction: column;
@@ -344,7 +430,7 @@
             text-overflow: ellipsis;
         }
 
-        /* Bottom Bar - unchanged */
+        /* Bottom Bar */
         .bottom-bar {
             display: flex;
             justify-content: space-between;
@@ -953,7 +1039,7 @@
 <div class="app">
     <div class="content">
         <div id="homePage" class="page">
-            <!-- Hero Section - Touching ranking -->
+            <!-- Hero Section -->
             <div class="anime-hero">
                 <div class="character-img">
                     <div class="controller-on-hand">🎮</div>
@@ -964,25 +1050,42 @@
                 </div>
             </div>
             
-            <!-- Ranking Section - Pushed down -->
+            <!-- Ranking Section -->
             <div class="ranking-section">
                 <div class="ranking-circles" id="rankingList"></div>
             </div>
             
-            <!-- Categories Section -->
+            <!-- Categories Section with More button -->
             <div class="categories-section">
                 <div class="categories" id="categoriesList">
                     <div class="cat-badge" data-cat="action" id="catAction">🎯 Action</div>
                     <div class="cat-badge" data-cat="racing" id="catRacing">🏎️ Racing</div>
                     <div class="cat-badge" data-cat="fighting" id="catFighting">🥊 Fighting</div>
                     <div class="cat-badge" data-cat="puzzle" id="catPuzzle">🧩 Puzzle</div>
+                    <div class="more-btn" id="moreCategoriesBtn">➕ More</div>
                 </div>
             </div>
             
-            <!-- ENLARGED AD AREA - No margin bottom (touching games) -->
+            <!-- More Categories Modal -->
+            <div id="moreModal" class="more-modal">
+                <div class="more-modal-content">
+                    <h3>🎮 More Game Categories</h3>
+                    <div class="more-categories-list">
+                        <div class="more-cat-badge" data-cat="battle">🔫 Battle Royale</div>
+                        <div class="more-cat-badge" data-cat="sports">⚽ Sports</div>
+                        <div class="more-cat-badge" data-cat="strategy">🧠 Strategy</div>
+                        <div class="more-cat-badge" data-cat="horror">👻 Horror</div>
+                        <div class="more-cat-badge" data-cat="rpg">⚔️ RPG</div>
+                        <div class="more-cat-badge" data-cat="simulation">🏙️ Simulation</div>
+                    </div>
+                    <button class="close-more-modal" id="closeMoreModal">Close</button>
+                </div>
+            </div>
+            
+            <!-- ENLARGED AD AREA -->
             <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
             
-            <!-- Bottom content wrapper for games at bottom -->
+            <!-- Bottom content wrapper for games -->
             <div class="bottom-content-wrapper">
                 <div class="games-wrapper" id="gamesWrapper">
                     <!-- Dynamic game rows will be inserted here -->
@@ -1099,7 +1202,7 @@
 </div>
 
 <script>
-    // ==================== Language Translations (11 Languages) ====================
+    // ==================== Language Translations ====================
     const translations = {
         en: {
             heroTagline: "😤 Neon Challenge Look!",
@@ -1107,6 +1210,9 @@
             catRacing: "🏎️ Racing",
             catFighting: "🥊 Fighting",
             catPuzzle: "🧩 Puzzle",
+            moreBtn: "➕ More",
+            moreTitle: "🎮 More Game Categories",
+            closeBtn: "Close",
             upgradeVIP: "👑 Upgrade VIP",
             vipActive: "👑 VIP Active",
             playMusic: "🎵 Play",
@@ -1153,6 +1259,9 @@
             catRacing: "🏎️ سباقات",
             catFighting: "🥊 قتال",
             catPuzzle: "🧩 ألغاز",
+            moreBtn: "➕ المزيد",
+            moreTitle: "🎮 المزيد من أنواع الألعاب",
+            closeBtn: "إغلاق",
             upgradeVIP: "👑 ترقية VIP",
             vipActive: "👑 VIP مفعل",
             playMusic: "🎵 تشغيل",
@@ -1199,6 +1308,9 @@
             catRacing: "🏎️ Course",
             catFighting: "🥊 Combat",
             catPuzzle: "🧩 Puzzle",
+            moreBtn: "➕ Plus",
+            moreTitle: "🎮 Plus de catégories de jeux",
+            closeBtn: "Fermer",
             upgradeVIP: "👑 Passer VIP",
             vipActive: "👑 VIP Actif",
             playMusic: "🎵 Lecture",
@@ -1245,6 +1357,9 @@
             catRacing: "🏎️ Carreras",
             catFighting: "🥊 Pelea",
             catPuzzle: "🧩 Rompecabezas",
+            moreBtn: "➕ Más",
+            moreTitle: "🎮 Más categorías de juegos",
+            closeBtn: "Cerrar",
             upgradeVIP: "👑 Mejorar a VIP",
             vipActive: "👑 VIP Activo",
             playMusic: "🎵 Reproducir",
@@ -1291,6 +1406,9 @@
             catRacing: "🏎️ Rennen",
             catFighting: "🥊 Kampf",
             catPuzzle: "🧩 Rätsel",
+            moreBtn: "➕ Mehr",
+            moreTitle: "🎮 Weitere Spielkategorien",
+            closeBtn: "Schließen",
             upgradeVIP: "👑 VIP Upgraden",
             vipActive: "👑 VIP Aktiv",
             playMusic: "🎵 Abspielen",
@@ -1337,6 +1455,9 @@
             catRacing: "🏎️ Corse",
             catFighting: "🥊 Combattimento",
             catPuzzle: "🧩 Puzzle",
+            moreBtn: "➕ Altro",
+            moreTitle: "🎮 Altre categorie di giochi",
+            closeBtn: "Chiudi",
             upgradeVIP: "👑 Passa a VIP",
             vipActive: "👑 VIP Attivo",
             playMusic: "🎵 Riproduci",
@@ -1383,6 +1504,9 @@
             catRacing: "🏎️ Corrida",
             catFighting: "🥊 Luta",
             catPuzzle: "🧩 Quebra-cabeça",
+            moreBtn: "➕ Mais",
+            moreTitle: "🎮 Mais categorias de jogos",
+            closeBtn: "Fechar",
             upgradeVIP: "👑 Upgrade para VIP",
             vipActive: "👑 VIP Ativo",
             playMusic: "🎵 Tocar",
@@ -1429,6 +1553,9 @@
             catRacing: "🏎️ Гонки",
             catFighting: "🥊 Бои",
             catPuzzle: "🧩 Головоломки",
+            moreBtn: "➕ Ещё",
+            moreTitle: "🎮 Больше категорий игр",
+            closeBtn: "Закрыть",
             upgradeVIP: "👑 Повысить до VIP",
             vipActive: "👑 VIP Активен",
             playMusic: "🎵 Воспроизвести",
@@ -1475,6 +1602,9 @@
             catRacing: "🏎️ 赛车",
             catFighting: "🥊 格斗",
             catPuzzle: "🧩 益智",
+            moreBtn: "➕ 更多",
+            moreTitle: "🎮 更多游戏类别",
+            closeBtn: "关闭",
             upgradeVIP: "👑 升级VIP",
             vipActive: "👑 VIP激活",
             playMusic: "🎵 播放",
@@ -1521,6 +1651,9 @@
             catRacing: "🏎️ レーシング",
             catFighting: "🥊 ファイティング",
             catPuzzle: "🧩 パズル",
+            moreBtn: "➕ もっと",
+            moreTitle: "🎮 その他のゲームカテゴリー",
+            closeBtn: "閉じる",
             upgradeVIP: "👑 VIPアップグレード",
             vipActive: "👑 VIPアクティブ",
             playMusic: "🎵 再生",
@@ -1567,6 +1700,9 @@
             catRacing: "🏎️ 레이싱",
             catFighting: "🥊 격투",
             catPuzzle: "🧩 퍼즐",
+            moreBtn: "➕ 더보기",
+            moreTitle: "🎮 더 많은 게임 카테고리",
+            closeBtn: "닫기",
             upgradeVIP: "👑 VIP 업그레이드",
             vipActive: "👑 VIP 활성화",
             playMusic: "🎵 재생",
@@ -1616,6 +1752,9 @@
         localStorage.setItem('didogame_lang', currentLang);
         const t = translations[currentLang];
         document.getElementById('langBtn').innerHTML = t.langLabel;
+        document.getElementById('moreCategoriesBtn').innerHTML = t.moreBtn;
+        document.querySelector('#moreModal h3').innerHTML = t.moreTitle;
+        document.getElementById('closeMoreModal').innerHTML = t.closeBtn;
         document.documentElement.lang = currentLang;
         
         if(currentLang === 'ar') {
@@ -1686,10 +1825,12 @@
         { id:10, name:"Roblox", img:"https://images.hdqwalls.com/wallpapers/roblox-2020-artwork-4k-5k.jpg", url:"https://www.crazygames.com/embed/roblox", cat:"action", points:220, avatar:"🧱", playerName:"Noob" },
         { id:11, name:"Fortnite", img:"https://images.hdqwalls.com/wallpapers/fortnite-chapter-2-season-3-2020-4k-6m.jpg", url:"https://www.crazygames.com/embed/fortnite", cat:"action", points:350, avatar:"🎯", playerName:"Jonesy" },
         { id:12, name:"GTA V", img:"https://images.hdqwalls.com/wallpapers/grand-theft-auto-v-2020-4k-5z.jpg", url:"https://www.crazygames.com/embed/grand-theft-auto-v", cat:"action", points:400, avatar:"🚗", playerName:"Franklin" },
-        { id:13, name:"PUBG", img:"https://images.hdqwalls.com/wallpapers/pubg-mobile-2020-4k-8z.jpg", url:"https://www.crazygames.com/embed/pubg", cat:"action", points:380, avatar:"🎯", playerName:"Player" },
-        { id:14, name:"Clash Royale", img:"https://images.hdqwalls.com/wallpapers/clash-royale-2020-4k-7k.jpg", url:"https://www.crazygames.com/embed/clash-royale", cat:"fighting", points:160, avatar:"⚔️", playerName:"King" },
-        { id:15, name:"Candy Crush", img:"https://images.hdqwalls.com/wallpapers/candy-crush-2020-4k-8m.jpg", url:"https://www.crazygames.com/embed/candy-crush", cat:"puzzle", points:100, avatar:"🍬", playerName:"Crush" },
-        { id:16, name:"Brawl Stars", img:"https://images.hdqwalls.com/wallpapers/brawl-stars-2020-4k-6n.jpg", url:"https://www.crazygames.com/embed/brawl-stars", cat:"fighting", points:140, avatar:"⭐", playerName:"Brawler" }
+        { id:13, name:"PUBG", img:"https://images.hdqwalls.com/wallpapers/pubg-mobile-2020-4k-8z.jpg", url:"https://www.crazygames.com/embed/pubg", cat:"battle", points:380, avatar:"🎯", playerName:"Player" },
+        { id:14, name:"FIFA", img:"https://images.hdqwalls.com/wallpapers/fifa-2020-4k-7k.jpg", url:"https://www.crazygames.com/embed/fifa", cat:"sports", points:250, avatar:"⚽", playerName:"Messi" },
+        { id:15, name:"Chess", img:"https://images.hdqwalls.com/wallpapers/chess-4k-2020-5j.jpg", url:"https://www.crazygames.com/embed/chess", cat:"strategy", points:180, avatar:"♜", playerName:"Grandmaster" },
+        { id:16, name:"Resident Evil", img:"https://images.hdqwalls.com/wallpapers/resident-evil-2020-4k-6p.jpg", url:"https://www.crazygames.com/embed/resident-evil", cat:"horror", points:300, avatar:"🧟", playerName:"Leon" },
+        { id:17, name:"Final Fantasy", img:"https://images.hdqwalls.com/wallpapers/final-fantasy-2020-4k-5z.jpg", url:"https://www.crazygames.com/embed/final-fantasy", cat:"rpg", points:280, avatar:"🗡️", playerName:"Cloud" },
+        { id:18, name:"The Sims", img:"https://images.hdqwalls.com/wallpapers/the-sims-4-2020-4k-6n.jpg", url:"https://www.crazygames.com/embed/the-sims", cat:"simulation", points:150, avatar:"🏠", playerName:"Simmer" }
     ];
     
     function renderAllGames() {
@@ -1766,7 +1907,33 @@
         document.getElementById('categoryPage').classList.remove('page-hidden');
     }
     
+    // More categories modal functionality
+    document.getElementById('moreCategoriesBtn').addEventListener('click', () => {
+        document.getElementById('moreModal').style.display = 'flex';
+    });
+    
+    document.getElementById('closeMoreModal').addEventListener('click', () => {
+        document.getElementById('moreModal').style.display = 'none';
+    });
+    
+    // Close modal when clicking outside
+    document.getElementById('moreModal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('moreModal')) {
+            document.getElementById('moreModal').style.display = 'none';
+        }
+    });
+    
+    // Add click handlers for more category badges
+    document.querySelectorAll('.more-cat-badge').forEach(badge => {
+        badge.addEventListener('click', () => {
+            const category = badge.dataset.cat;
+            document.getElementById('moreModal').style.display = 'none';
+            showCategoryGames(category);
+        });
+    });
+    
     document.querySelectorAll('.cat-badge').forEach(b => {
+        if (b.classList.contains('more-btn')) return;
         b.addEventListener('click', () => showCategoryGames(b.dataset.cat));
     });
     document.getElementById('backToHomeBtn').addEventListener('click', () => {
