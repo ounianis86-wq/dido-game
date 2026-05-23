@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DidoGame - 3D Anime Games</title>
+    <title>DidoGame - 3D Anime Games | العب مباشرة</title>
     <style>
         * {
             margin: 0;
@@ -290,6 +290,51 @@
             font-weight: bold;
         }
 
+        /* نافذة تشغيل اللعبة */
+        .game-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+        .game-modal iframe {
+            width: 95%;
+            height: 85%;
+            border: 2px solid #ff44ff;
+            border-radius: 20px;
+            background: black;
+        }
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff3366;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 1001;
+        }
+        .game-title-modal {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
         .music-btn {
             position: fixed;
             bottom: 15px;
@@ -303,6 +348,9 @@
             cursor: pointer;
             font-size: 0.6rem;
             z-index: 100;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -320,20 +368,20 @@
             <div class="hero-image">
                 <div class="hero-text">
                     <h2>DidoGame</h2>
-                    <p>🌍 عالم واحد لكل ألعابك</p>
+                    <p>🌍 عالم واحد لكل ألعابك - العب مباشرة بدون مغادرة</p>
                     <div class="free-badge">✨ مجانية 100% ✨</div>
-                    <button class="discover-btn" onclick="window.open('https://play.google.com/store/apps', '_blank')">اكتشف ▶</button>
+                    <button class="discover-btn" onclick="openGame('https://www.onlinegames.io/games/2023/unity/dino-fury/index.html', 'Dino Fury - لعبة الكروم')">اكتشف ▶</button>
                 </div>
             </div>
         </div>
 
         <!-- الفئات -->
         <div class="categories">
-            <div class="cat-item" onclick="window.open('https://play.google.com/store/search?q=horror+games&c=apps', '_blank')"><div class="cat-icon">🎃</div><span>رعب</span></div>
-            <div class="cat-item" onclick="window.open('https://play.google.com/store/search?q=fighting+games&c=apps', '_blank')"><div class="cat-icon">🥊</div><span>قتال</span></div>
-            <div class="cat-item" onclick="window.open('https://play.google.com/store/search?q=sports+games&c=apps', '_blank')"><div class="cat-icon">⚽</div><span>رياضة</span></div>
-            <div class="cat-item" onclick="window.open('https://play.google.com/store/search?q=racing+games&c=apps', '_blank')"><div class="cat-icon">🏎️</div><span>سباقات</span></div>
-            <div class="cat-item" onclick="window.open('https://play.google.com/store/search?q=puzzle+games&c=apps', '_blank')"><div class="cat-icon">🧩</div><span>ألغاز</span></div>
+            <div class="cat-item" onclick="openGame('https://html5.gamedistribution.com/6e3f6b7e8b9a4c2e8c4f5a1b3c7d9e2e/', 'لعبة رعب')"><div class="cat-icon">🎃</div><span>رعب</span></div>
+            <div class="cat-item" onclick="openGame('https://html5.gamedistribution.com/8f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c/', 'لعبة قتال')"><div class="cat-icon">🥊</div><span>قتال</span></div>
+            <div class="cat-item" onclick="openGame('https://www.crazygames.com/embed/football-legends', 'Football Legends')"><div class="cat-icon">⚽</div><span>رياضة</span></div>
+            <div class="cat-item" onclick="openGame('https://www.crazygames.com/embed/monster-truck-stunts', 'Monster Truck')"><div class="cat-icon">🏎️</div><span>سباقات</span></div>
+            <div class="cat-item" onclick="openGame('https://www.crazygames.com/embed/block-games/puzzle-games', 'Brain Puzzle')"><div class="cat-icon">🧩</div><span>ألغاز</span></div>
         </div>
 
         <!-- أبرز اللاعبين -->
@@ -350,97 +398,103 @@
         <!-- الصف الأول: ألعاب أكشن و أنمي 3D -->
         <div class="section-title"><span></span> 🎮 ألعاب أكشن | 3D Anime</div>
         <div class="games-scroll">
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.miHoYo.GenshinImpact', '_blank')">
-                <div class="game-img-3d" style="background-image: url('https://images6.alphacoders.com/118/1185678.jpg');"></div>
-                <h4>Genshin Impact</h4>
-                <p>3D Anime RPG</p>
-                <div class="new-badge">جديد</div>
-            </div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.hero.games', '_blank')">
-                <div class="game-img-3d" style="background-image: url('https://images5.alphacoders.com/133/1338445.png');"></div>
-                <h4>Honkai Impact</h4>
-                <p>3D Action</p>
-            </div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.LevelInfinite.WoLong', '_blank')">
-                <div class="game-img-3d" style="background-image: url('https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg');"></div>
-                <h4>Wo Long</h4>
-                <p>3D Samurai</p>
-            </div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.tencent.ig', '_blank')">
-                <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/pubg-mobile-squad-4k-8q.jpg');"></div>
-                <h4>PUBG Mobile</h4>
-                <p>Battle Royale</p>
-            </div>
+            <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/sonic-the-hedgehog', 'Sonic the Hedgehog')"><div class="game-img-3d" style="background-image: url('https://images6.alphacoders.com/118/1185678.jpg');"></div><h4>Sonic</h4><p>3D Action</p><div class="new-badge">جديد</div></div>
+            <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/paper-io-2', 'Paper.io 2')"><div class="game-img-3d" style="background-image: url('https://images5.alphacoders.com/133/1338445.png');"></div><h4>Paper.io 2</h4><p>Arcade</p></div>
+            <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/subway-surfers', 'Subway Surfers')"><div class="game-img-3d" style="background-image: url('https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg');"></div><h4>Subway Surfers</h4><p>Runner</p></div>
+            <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/temple-run-2', 'Temple Run 2')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/pubg-mobile-squad-4k-8q.jpg');"></div><h4>Temple Run 2</h4><p>Adventure</p></div>
         </div>
 
         <!-- الصف الثاني: ألعاب كلاسيكية وألعاب قتال -->
         <div class="section-title"><span></span> 🔥 ألعاب كلاسيكية | قتال</div>
         <div class="games-scroll">
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.mojang.minecraftpe', '_blank')">
-                <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/minecraft-creeper-4k-f8.jpg');"></div>
-                <h4>Minecraft</h4>
-                <p>Sandbox</p>
-            </div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.rockstargames.gtasa', '_blank')">
-                <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/gta-san-andreas-2021-4k-s0.jpg');"></div>
-                <h4>GTA: San Andreas</h4>
-                <p>Action</p>
-            </div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.activision.callofduty.shooter', '_blank')">
-                <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-2020-04-m3.jpg');"></div>
-                <h4>Call of Duty</h4>
-                <p>FPS</p>
-            </div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.dts.freefireth', '_blank')">
-                <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/free-fire-2020-game-4k-g6.jpg');"></div>
-                <h4>Free Fire</h4>
-                <p>Battle Royale</p>
-            </div>
+            <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/minecraft-classic', 'Minecraft Classic')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/minecraft-creeper-4k-f8.jpg');"></div><h4>Minecraft Classic</h4><p>Sandbox</p></div>
+            <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/gta-san-andreas', 'GTA San Andreas')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/gta-san-andreas-2021-4k-s0.jpg');"></div><h4>GTA Style</h4><p>Action</p></div>
+            <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/call-of-duty', 'Call of Duty')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-2020-04-m3.jpg');"></div><h4>Call of Duty</h4><p>FPS</p></div>
+            <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/free-fire', 'Free Fire')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/free-fire-2020-game-4k-g6.jpg');"></div><h4>Free Fire</h4><p>Battle Royale</p></div>
         </div>
 
         <!-- الصف الثالث: ألعاب سباقات وألغاز -->
         <div class="section-title"><span></span> ⚡ سباقات | ألغاز</div>
         <div class="games-scroll">
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.fingersoft.hillclimb', '_blank')">
-                <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg');"></div>
-                <h4>Hill Climb</h4>
-                <p>Racing</p>
-            </div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.innersloth.spacemafia', '_blank')">
-                <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg');"></div>
-                <h4>Among Us</h4>
-                <p>Social</p>
-            </div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.supercell.clashroyale', '_blank')">
-                <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/clash-royale-4k-2020-3s.jpg');"></div>
-                <h4>Clash Royale</h4>
-                <p>Strategy</p>
-            </div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.playrix.farmscapes', '_blank')">
-                <div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/gardenscapes-2020-2021-4k-47.jpg');"></div>
-                <h4>Gardenscapes</h4>
-                <p>Puzzle</p>
-            </div>
+            <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/hill-climb-racing', 'Hill Climb Racing')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg');"></div><h4>Hill Climb</h4><p>Racing</p></div>
+            <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/among-us-online', 'Among Us')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg');"></div><h4>Among Us</h4><p>Social</p></div>
+            <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/clash-royale', 'Clash Royale')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/clash-royale-4k-2020-3s.jpg');"></div><h4>Clash Royale</h4><p>Strategy</p></div>
+            <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/gardenscapes', 'Gardenscapes')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/gardenscapes-2020-2021-4k-47.jpg');"></div><h4>Gardenscapes</h4><p>Puzzle</p></div>
+        </div>
+        
+        <!-- صف رابع ألعاب إضافية -->
+        <div class="section-title"><span></span> 💥 ألعاب مميزة</div>
+        <div class="games-scroll">
+            <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/slope', 'Slope')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/slope-game-hd.jpg');"></div><h4>Slope</h4><p>3D Racing</p></div>
+            <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/get-on-top', 'Get On Top')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/wrestling-game-art-4k-jz.jpg');"></div><h4>Get On Top</h4><p>Fighting</p></div>
+            <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/shell-shockers', 'Shell Shockers')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/egg-game-4k-v9.jpg');"></div><h4>Shell Shockers</h4><p>Shooting</p></div>
+            <div class="game-card" onclick="openGame('https://www.crazygames.com/embed/basketball-stars', 'Basketball Stars')"><div class="game-img-3d" style="background-image: url('https://images.hdqwalls.com/wallpapers/basketball-4k-2021-6m.jpg');"></div><h4>Basketball Stars</h4><p>Sports</p></div>
         </div>
     </div>
+</div>
+
+<!-- نافذة عرض اللعبة المنبثقة -->
+<div id="gameModal" class="game-modal hidden">
+    <div class="close-modal" onclick="closeGame()">✕</div>
+    <div class="game-title-modal" id="modalGameTitle">اسم اللعبة</div>
+    <iframe id="gameIframe" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
 </div>
 
 <div class="music-btn" id="musicToggle">🎵 تشغيل</div>
 
 <script>
+    // وظيفة فتح اللعبة بدون مغادرة الموقع
+    function openGame(gameUrl, gameTitle) {
+        const modal = document.getElementById('gameModal');
+        const iframe = document.getElementById('gameIframe');
+        const titleSpan = document.getElementById('modalGameTitle');
+        
+        iframe.src = gameUrl;
+        titleSpan.innerText = gameTitle;
+        modal.classList.remove('hidden');
+        
+        // منع التمرير خلف النافذة
+        document.body.style.overflow = 'hidden';
+    }
+    
+    // وظيفة إغلاق اللعبة
+    function closeGame() {
+        const modal = document.getElementById('gameModal');
+        const iframe = document.getElementById('gameIframe');
+        
+        modal.classList.add('hidden');
+        iframe.src = ''; // إيقاف تشغيل اللعبة
+        document.body.style.overflow = 'auto';
+    }
+    
+    // إدارة الموسيقى الخلفية
     const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3');
     music.loop = true;
     music.volume = 0.15;
     let playing = false;
     const btn = document.getElementById('musicToggle');
     btn.onclick = () => {
-        if (playing) { music.pause(); btn.innerHTML = '🎵 تشغيل'; }
-        else { music.play().catch(()=>{}); btn.innerHTML = '🔇 إيقاف'; }
+        if (playing) { 
+            music.pause(); 
+            btn.innerHTML = '🎵 تشغيل'; 
+        } else { 
+            music.play().catch(e=>console.log("Audio error:", e)); 
+            btn.innerHTML = '🔇 إيقاف'; 
+        }
         playing = !playing;
     };
     document.body.addEventListener('touchstart', () => {
-        if (!playing) { music.play().catch(()=>{}); playing = true; btn.innerHTML = '🔇 إيقاف'; }
+        if (!playing) { 
+            music.play().catch(e=>console.log("Auto-play prevented")); 
+            playing = true; 
+            btn.innerHTML = '🔇 إيقاف'; 
+        }
     }, { once: true });
+    
+    // إغلاق النافذة عند الضغط على خلفية النافذة (اختياري)
+    document.getElementById('gameModal').addEventListener('click', function(e) {
+        if (e.target === this) closeGame();
+    });
 </script>
 </body>
 </html>
