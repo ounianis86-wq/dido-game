@@ -127,6 +127,7 @@
         audio {
             max-width: 100%;
             margin-top: 5px;
+            border-radius: 20px;
         }
         .demo-users {
             display: flex;
@@ -139,6 +140,16 @@
             background: linear-gradient(135deg, #ffaa00, #ff6600);
             padding: 6px 12px;
             font-size: 0.7rem;
+        }
+        .recording-indicator {
+            color: #ff3366;
+            font-size: 0.7rem;
+            margin-left: 5px;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
     </style>
 </head>
@@ -193,6 +204,7 @@
     let isVIP = false;
     let messages = [];
     let users = [];
+    let audioCounter = 0;
     
     function loadData() {
         let saved = localStorage.getItem('mobile_chat_messages');
@@ -201,7 +213,6 @@
         saved = localStorage.getItem('mobile_chat_users');
         if (saved) users = JSON.parse(saved);
         
-        // إضافة مستخدمين وهميين تلقائيين إذا كانت القائمة فارغة
         if (users.length === 0) {
             users = [
                 { username: "محمد", isVIP: true, online: true },
@@ -355,40 +366,85 @@
         input.click();
     }
     
+    // التسجيل الصوتي - نسخة محسنة للهواتف
     async function startRecording() {
         if (!isVIP) { alert("❌ التسجيل الصوتي للمستخدمين المميزين فقط!"); return; }
+        
         if (window.isRecording) {
-            if (window.mediaRecorder?.state === 'recording') {
+            if (window.mediaRecorder && window.mediaRecorder.state === 'recording') {
                 window.mediaRecorder.stop();
                 window.isRecording = false;
                 document.getElementById('vipAudioBtn').innerHTML = '🎙️';
+                document.getElementById('vipAudioBtn').style.animation = 'none';
             }
             return;
         }
+        
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
             window.mediaRecorder = new MediaRecorder(stream);
             let chunks = [];
-            window.mediaRecorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
-            window.mediaRecorder.onstop = () => {
-                let blob = new Blob(chunks, { type: 'audio/webm' });
-                let url = URL.createObjectURL(blob);
-                messages.push({ username: currentUser.username, audio: url, isVIP: isVIP, time: Date.now() });
-                saveMessages();
-                displayMessages();
-                stream.getTracks().forEach(t => t.stop());
+            
+            window.mediaRecorder.ondataavailable = (e) => { 
+                if (e.data.size > 0) chunks.push(e.data); 
             };
+            
+            window.mediaRecorder.onstop = () => {
+                const audioBlob = new Blob(chunks, { type: 'audio/webm' });
+                const audioId = Date.now() + '_' + (audioCounter++);
+                
+                // حفظ الصوت كـ base64
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const audioData = reader.result;
+                    messages.push({ 
+                        username: currentUser.username, 
+                        audioData: audioData,
+                        audioType: 'webm',
+                        isVIP: isVIP, 
+                        time: Date.now() 
+                    });
+                    saveMessages();
+                    displayMessages();
+                };
+                reader.readAsDataURL(audioBlob);
+                
+                stream.getTracks().forEach(track => track.stop());
+            };
+            
             window.mediaRecorder.start();
             window.isRecording = true;
             document.getElementById('vipAudioBtn').innerHTML = '⏹️';
+            document.getElementById('vipAudioBtn').style.animation = 'blink 1s infinite';
+            
+            // إظهار إشعار
+            const toast = document.createElement('div');
+            toast.textContent = '🎙️ جاري التسجيل... اضغط مرة أخرى للإيقاف';
+            toast.style.position = 'fixed';
+            toast.style.bottom = '80px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.background = '#ff3366';
+            toast.style.padding = '8px 16px';
+            toast.style.borderRadius = '25px';
+            toast.style.zIndex = '999';
+            toast.style.fontSize = '0.7rem';
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+            
+            // إيقاف تلقائي بعد 30 ثانية
             setTimeout(() => {
-                if (window.isRecording && window.mediaRecorder?.state === 'recording') {
+                if (window.isRecording && window.mediaRecorder && window.mediaRecorder.state === 'recording') {
                     window.mediaRecorder.stop();
                     window.isRecording = false;
                     document.getElementById('vipAudioBtn').innerHTML = '🎙️';
+                    document.getElementById('vipAudioBtn').style.animation = 'none';
                 }
-            }, 15000);
-        } catch(e) { alert("لا يمكن الوصول للميكروفون: " + e.message); }
+            }, 30000);
+            
+        } catch(e) { 
+            alert("❌ لا يمكن الوصول للميكروفون: " + e.message + "\n\nتأكد من منح صلاحية الميكروفون");
+        }
     }
     
     function startCall() {
@@ -402,7 +458,6 @@
         document.getElementById('callStatus').innerHTML = `📞 جاري الاتصال بـ ${target}...`;
         setTimeout(() => {
             document.getElementById('callStatus').innerHTML = `📞 متصل مع ${target}`;
-            // محاكاة إنهاء المكالمة بعد 30 ثانية
             setTimeout(() => {
                 if (document.getElementById('callStatus').innerHTML.includes('متصل')) {
                     document.getElementById('callStatus').innerHTML = "📞 انتهت المكالمة";
@@ -426,7 +481,9 @@
             el.innerHTML = `<div class="sender">${msg.username} ${msg.isVIP ? '<span class="vip-badge">VIP</span>' : ''}</div>`;
             if (msg.text) el.innerHTML += `<div class="text">${msg.text}</div>`;
             if (msg.image) el.innerHTML += `<img src="${msg.image}" onclick="window.open(this.src)">`;
-            if (msg.audio) el.innerHTML += `<audio src="${msg.audio}" controls></audio>`;
+            if (msg.audioData) {
+                el.innerHTML += `<audio src="${msg.audioData}" controls preload="auto"></audio>`;
+            }
             div.appendChild(el);
         });
         div.scrollTop = div.scrollHeight;
