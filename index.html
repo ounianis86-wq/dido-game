@@ -18,7 +18,6 @@
             padding: 10px;
         }
 
-        /* خلفية مدينة أنمي 3D حقيقية */
         .anime-city-bg {
             position: fixed;
             top: 0;
@@ -59,7 +58,7 @@
             padding: 15px;
         }
 
-        /* شخصية أنمي حقيقية (وليست ايموجي) */
+        /* شخصية أنمي */
         .anime-hero {
             background: linear-gradient(135deg, #1a0a3a80, #0a0a2a80);
             border-radius: 30px;
@@ -129,7 +128,7 @@
             color: #ffaa88;
         }
 
-        /* premium banner */
+        /* Premium banner */
         .premium-banner {
             background: linear-gradient(135deg, #ff44ff, #aa44ff);
             border-radius: 20px;
@@ -154,7 +153,7 @@
             font-weight: bold;
         }
 
-        /* تصنيف اللاعبين - أفقي */
+        /* Ranking */
         .ranking-section {
             background: #1a1a3a80;
             border-radius: 20px;
@@ -221,7 +220,7 @@
             font-size: 0.6rem;
         }
 
-        /* أنواع الألعاب */
+        /* Categories */
         .categories {
             display: flex;
             flex-wrap: wrap;
@@ -238,13 +237,8 @@
             font-size: 0.7rem;
             cursor: pointer;
         }
-        
-        .cat-badge.active {
-            background: #ff44ff;
-            color: #000;
-        }
 
-        /* صفين الألعاب المتوازيين */
+        /* Two rows for games */
         .two-rows {
             display: flex;
             flex-direction: column;
@@ -300,7 +294,20 @@
             font-size: 0.55rem;
         }
 
-        /* اعلان بين المستويات */
+        /* Back button */
+        .back-btn {
+            background: #ff44ff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 15px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        /* Ad popup */
         .ad-popup {
             position: fixed;
             bottom: 20px;
@@ -325,7 +332,7 @@
             cursor: pointer;
         }
 
-        /* نافذة اللعبة */
+        /* Game modal */
         .game-modal {
             position: fixed;
             top: 0;
@@ -381,6 +388,13 @@
             z-index: 100;
             font-size: 0.7rem;
         }
+
+        .page {
+            transition: all 0.3s ease;
+        }
+        .page-hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -388,58 +402,57 @@
 <div class="app">
     <div class="content">
         
-        <!-- شخصية أنمي حقيقية مع يد تحكم -->
-        <div class="anime-hero">
-            <div class="character-img">
-                <div class="controller-on-hand">🎮</div>
+        <!-- الصفحة الرئيسية -->
+        <div id="homePage" class="page">
+            <div class="anime-hero">
+                <div class="character-img">
+                    <div class="controller-on-hand">🎮</div>
+                </div>
+                <div class="character-info">
+                    <div class="tshirt-text">⚔️ DIDO-GAME ⚔️</div>
+                    <h2>😤 نظرة التحدي!</h2>
+                    <div class="challenge-look">"هيا تحداني!"</div>
+                </div>
             </div>
-            <div class="character-info">
-                <div class="tshirt-text">⚔️ DIDO-GAME ⚔️</div>
-                <h2>😤 نظرة التحدي!</h2>
-                <div class="challenge-look">"هيا تحداني!"</div>
+            
+            <div class="premium-banner" id="premiumBtn">
+                <span>👑 حساب مميز</span>
+                <span class="upgrade">بدون إعلانات - اضغط للترقية</span>
             </div>
-        </div>
-        
-        <!-- حساب مميز -->
-        <div class="premium-banner" id="premiumBtn">
-            <span>👑 حساب مميز</span>
-            <span class="upgrade">بدون إعلانات - اضغط للترقية</span>
-        </div>
-        
-        <!-- تصنيف اللاعبين - أفقي -->
-        <div class="ranking-section">
-            <div class="section-title">🏆 ترتيب اللاعبين المتميزين</div>
-            <div class="ranking-horizontal" id="rankingList">
-                <!-- يتم تعبئته بالجافاسكريبت -->
+            
+            <div class="ranking-section">
+                <div class="section-title">🏆 ترتيب اللاعبين المتميزين</div>
+                <div class="ranking-horizontal" id="rankingList"></div>
             </div>
+            
+            <div class="section-title">🎮 أنواع الألعاب</div>
+            <div class="categories" id="categoriesList">
+                <div class="cat-badge" data-cat="action">🎯 أكشن</div>
+                <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
+                <div class="cat-badge" data-cat="fighting">🥊 قتال</div>
+                <div class="cat-badge" data-cat="puzzle">🧩 ألغاز</div>
+            </div>
+            
+            <div class="section-title">🔥 جميع الألعاب</div>
+            <div class="two-rows" id="gamesContainer"></div>
         </div>
-        
-        <!-- أنواع الألعاب -->
-        <div class="section-title">🎮 أنواع الألعاب</div>
-        <div class="categories" id="categoriesList">
-            <div class="cat-badge active" data-cat="all">الكل</div>
-            <div class="cat-badge" data-cat="action">🎯 أكشن</div>
-            <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
-            <div class="cat-badge" data-cat="fighting">🥊 قتال</div>
-            <div class="cat-badge" data-cat="puzzle">🧩 ألغاز</div>
+
+        <!-- الصفحة الفرعية (لنوع معين) -->
+        <div id="categoryPage" class="page page-hidden">
+            <button class="back-btn" id="backToHomeBtn">🔙 العقل إلى الرئيسية</button>
+            <div class="section-title" id="categoryTitle">🎮 ألعاب الأكشن</div>
+            <div class="two-rows" id="categoryGamesContainer"></div>
         </div>
-        
-        <!-- صفين الألعاب -->
-        <div class="section-title">🔥 الألعاب المتاحة</div>
-        <div class="two-rows" id="gamesContainer">
-            <!-- يتم تعبئته بالجافاسكريبت -->
-        </div>
+
     </div>
 </div>
 
-<!-- نافذة الإعلان -->
 <div id="adPopup" class="ad-popup">
     <div>📺 إعلان قصير</div>
     <div style="font-size:12px; margin:5px 0;">انتظر 5 ثوانٍ</div>
     <button onclick="closeAd()">تخطي الإعلان ▶</button>
 </div>
 
-<!-- نافذة اللعبة -->
 <div id="gameModal" class="game-modal hidden">
     <div class="close-modal" onclick="closeGame()">✕</div>
     <iframe id="gameIframe" src="" allowfullscreen></iframe>
@@ -448,7 +461,6 @@
 <div class="music-btn" id="musicToggle">🎵 تشغيل الموسيقى</div>
 
 <script>
-    // بيانات الألعاب (كل لعبة لها صورتها الخاصة)
     const gamesData = [
         { id:1, name:"Sonic", img:"https://images6.alphacoders.com/118/1185678.jpg", url:"https://www.crazygames.com/embed/sonic-the-hedgehog", cat:"action", points:150, avatar:"🦔" },
         { id:2, name:"Subway Surfers", img:"https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action", points:200, avatar:"🏃" },
@@ -465,15 +477,13 @@
     ];
     
     let isPremium = false;
-    let currentGame = null;
     let adTimeout = null;
     let pendingGameCallback = null;
     
-    // ترتيب اللاعبين - عرض أفقي
+    // ترتيب اللاعبين
     function updateRanking() {
         const sorted = [...gamesData].sort((a,b)=>b.points - a.points).slice(0,6);
-        const rankingContainer = document.getElementById('rankingList');
-        rankingContainer.innerHTML = sorted.map((g,idx)=>`
+        document.getElementById('rankingList').innerHTML = sorted.map((g,idx)=>`
             <div class="rank-card">
                 <div class="rank-number">#${idx+1}</div>
                 <div class="rank-avatar">${g.avatar}</div>
@@ -483,18 +493,14 @@
         `).join('');
     }
     
-    // عرض الألعاب حسب النوع في صفين متوازيين
-    function renderGames(filterCat = "all") {
-        let filtered = gamesData;
-        if(filterCat !== "all") filtered = gamesData.filter(g=>g.cat === filterCat);
-        
-        // تقسيم إلى صفين
+    // عرض جميع الألعاب في الصفحة الرئيسية (صفين)
+    function renderAllGames() {
+        const filtered = gamesData;
         const mid = Math.ceil(filtered.length / 2);
         const row1 = filtered.slice(0, mid);
         const row2 = filtered.slice(mid);
         
-        const container = document.getElementById('gamesContainer');
-        container.innerHTML = `
+        document.getElementById('gamesContainer').innerHTML = `
             <div class="game-row">
                 ${row1.map(g=>`
                     <div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}">
@@ -515,8 +521,45 @@
             </div>
         `;
         
-        // إضافة أحداث النقر
-        document.querySelectorAll('.game-card').forEach(card=>{
+        attachGameClickEvents('#gamesContainer');
+    }
+    
+    // عرض ألعاب نوع معين في الصفحة الفرعية
+    function renderCategoryGames(category, categoryName) {
+        const filtered = gamesData.filter(g => g.cat === category);
+        document.getElementById('categoryTitle').innerHTML = `🎮 ${categoryName}`;
+        
+        const mid = Math.ceil(filtered.length / 2);
+        const row1 = filtered.slice(0, mid);
+        const row2 = filtered.slice(mid);
+        
+        document.getElementById('categoryGamesContainer').innerHTML = `
+            <div class="game-row">
+                ${row1.map(g=>`
+                    <div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}">
+                        <div class="game-img" style="background-image: url('${g.img}');"></div>
+                        <div class="game-title">${g.name}</div>
+                        <div class="game-cat">${g.cat}</div>
+                    </div>
+                `).join('')}
+            </div>
+            <div class="game-row">
+                ${row2.map(g=>`
+                    <div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}">
+                        <div class="game-img" style="background-image: url('${g.img}');"></div>
+                        <div class="game-title">${g.name}</div>
+                        <div class="game-cat">${g.cat}</div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        
+        attachGameClickEvents('#categoryGamesContainer');
+    }
+    
+    // ربط أحداث النقر على الألعاب
+    function attachGameClickEvents(containerId) {
+        document.querySelectorAll(`${containerId} .game-card`).forEach(card=>{
             card.addEventListener('click', (e)=>{
                 e.stopPropagation();
                 const url = card.getAttribute('data-url');
@@ -527,9 +570,8 @@
         });
     }
     
-    // تشغيل اللعبة مع مراعاة الإعلانات
+    // تشغيل اللعبة
     function launchGame(url, name, gameId) {
-        currentGame = {url, name, gameId};
         if(isPremium) {
             openGameDirect(url, name);
         } else {
@@ -556,7 +598,6 @@
         document.body.style.overflow = 'auto';
     }
     
-    // إضافة نقاط للاعب
     function addPointsToPlayer(gameId, points) {
         const game = gamesData.find(g=>g.id === gameId);
         if(game) {
@@ -565,15 +606,12 @@
         }
     }
     
-    // إظهار الإعلان
     function showAd(callback) {
         const adDiv = document.getElementById('adPopup');
         adDiv.style.display = 'block';
         pendingGameCallback = callback;
         if(adTimeout) clearTimeout(adTimeout);
-        adTimeout = setTimeout(()=>{
-            closeAd();
-        }, 5000);
+        adTimeout = setTimeout(()=> closeAd(), 5000);
     }
     
     function closeAd() {
@@ -586,29 +624,49 @@
         }
     }
     
-    // الترقية للحساب المميز
+    // التنقل بين الصفحات
+    function showHomePage() {
+        document.getElementById('homePage').classList.remove('page-hidden');
+        document.getElementById('categoryPage').classList.add('page-hidden');
+    }
+    
+    function showCategoryPage(category, categoryName) {
+        renderCategoryGames(category, categoryName);
+        document.getElementById('homePage').classList.add('page-hidden');
+        document.getElementById('categoryPage').classList.remove('page-hidden');
+    }
+    
+    // Premium
     document.getElementById('premiumBtn').addEventListener('click', ()=>{
         isPremium = true;
         alert('🎉 أصبحت حساباً مميزاً! لن تظهر لك إعلانات بعد الآن.');
         document.getElementById('premiumBtn').style.opacity = '0.7';
     });
     
-    // فلترة الألعاب حسب النوع
+    // أزرار الأنواع - تفتح صفحة فرعية
     document.querySelectorAll('.cat-badge').forEach(badge=>{
         badge.addEventListener('click', ()=>{
-            document.querySelectorAll('.cat-badge').forEach(b=>b.classList.remove('active'));
-            badge.classList.add('active');
             const cat = badge.getAttribute('data-cat');
-            renderGames(cat);
+            let catName = "";
+            if(cat === "action") catName = "ألعاب الأكشن";
+            else if(cat === "racing") catName = "ألعاب السباقات";
+            else if(cat === "fighting") catName = "ألعاب القتال";
+            else if(cat === "puzzle") catName = "ألعاب الألغاز";
+            showCategoryPage(cat, catName);
         });
     });
     
-    // إغلاق النافذة عند الضغط على خلفيتها
+    // زر العودة للرئيسية
+    document.getElementById('backToHomeBtn').addEventListener('click', ()=>{
+        showHomePage();
+    });
+    
+    // إغلاق نافذة اللعبة
     document.getElementById('gameModal').addEventListener('click', (e)=>{
         if(e.target === document.getElementById('gameModal')) closeGame();
     });
     
-    // موسيقى خلفية
+    // موسيقى
     const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3');
     music.loop = true;
     music.volume = 0.1;
@@ -623,9 +681,9 @@
         if(!playing) { music.play().catch(e=>{}); playing=true; musicBtn.innerHTML='🔇 إيقاف الموسيقى'; }
     }, {once:true});
     
-    // تهيئة الصفحة
+    // بدء التشغيل
     updateRanking();
-    renderGames();
+    renderAllGames();
 </script>
 </body>
 </html>
