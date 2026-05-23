@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DidoGame - Compact View</title>
+    <title>DidoGame - 3D Anime Games</title>
     <style>
         * {
             margin: 0;
@@ -21,7 +21,6 @@
             padding: 10px;
         }
 
-        /* شاشة الهاتف بالكامل بدون تمرير */
         .app {
             max-width: 400px;
             width: 100%;
@@ -59,7 +58,6 @@
             display: none;
         }
 
-        /* شريط علوي صغير */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -85,7 +83,7 @@
             font-weight: bold;
         }
 
-        /* بانر مصغر */
+        /* بانر 3D Anime */
         .hero-banner {
             background: linear-gradient(135deg, #1a0a3a, #0a0a2a);
             border-radius: 24px;
@@ -96,7 +94,7 @@
         .hero-image {
             width: 100%;
             min-height: 150px;
-            background-image: url('https://wallpapercave.com/wp/wp6607500.jpg');
+            background-image: url('https://i.pinimg.com/736x/7f/8a/5e/7f8a5e4e1b2a3c4d5e6f7a8b9c0d1e2f.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -146,7 +144,6 @@
             cursor: pointer;
         }
 
-        /* فئات مصغرة */
         .categories {
             display: flex;
             justify-content: space-between;
@@ -157,6 +154,7 @@
         .cat-item {
             text-align: center;
             flex: 1;
+            cursor: pointer;
         }
 
         .cat-icon {
@@ -171,7 +169,6 @@
             font-size: 0.55rem;
         }
 
-        /* عناوين الأقسام صغيرة */
         .section-title {
             color: white;
             font-size: 0.8rem;
@@ -188,7 +185,6 @@
             border-radius: 2px;
         }
 
-        /* قوائم الألعاب مضغوطة */
         .game-row {
             display: flex;
             gap: 8px;
@@ -204,6 +200,12 @@
             text-align: center;
             border: 1px solid #ff44ff40;
             cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .game-card:hover {
+            border-color: #ff44ff;
+            box-shadow: 0 0 15px #ff44ff;
         }
 
         .game-img {
@@ -233,7 +235,6 @@
             margin-top: 3px;
         }
 
-        /* اللاعبين */
         .players-list {
             display: flex;
             gap: 10px;
@@ -243,6 +244,7 @@
         .player {
             text-align: center;
             min-width: 55px;
+            cursor: pointer;
         }
 
         .player-avatar {
@@ -263,7 +265,6 @@
             font-weight: bold;
         }
 
-        /* زر الموسيقى صغير */
         .music-btn {
             position: fixed;
             bottom: 15px;
@@ -289,53 +290,62 @@
             <div class="premium-badge">👑 حساب مميز</div>
         </div>
 
-        <!-- البانر -->
+        <!-- بانر 3D Anime -->
         <div class="hero-banner">
             <div class="hero-image">
                 <div class="hero-text">
                     <h2>DidoGame</h2>
                     <p>🌍 عالم واحد لكل ألعابك</p>
                     <div class="free-badge">✨ مجانية 100% ✨</div>
-                    <button class="discover-btn" onclick="alert('اكتشف الألعاب الآن')">اكتشف ▶</button>
+                    <button class="discover-btn" onclick="window.open('https://play.google.com/store/apps', '_blank')">اكتشف ▶</button>
                 </div>
             </div>
         </div>
 
         <!-- الفئات -->
         <div class="categories">
-            <div class="cat-item"><div class="cat-icon">🎃</div><span>رعب</span></div>
-            <div class="cat-item"><div class="cat-icon">🥊</div><span>قتال</span></div>
-            <div class="cat-item"><div class="cat-icon">⚽</div><span>رياضة</span></div>
-            <div class="cat-item"><div class="cat-icon">🏎️</div><span>سباقات</span></div>
-            <div class="cat-item"><div class="cat-icon">🧩</div><span>ألغاز</span></div>
+            <div class="cat-item" onclick="window.open('https://play.google.com/store/search?q=horror+games&c=apps', '_blank')"><div class="cat-icon">🎃</div><span>رعب</span></div>
+            <div class="cat-item" onclick="window.open('https://play.google.com/store/search?q=fighting+games&c=apps', '_blank')"><div class="cat-icon">🥊</div><span>قتال</span></div>
+            <div class="cat-item" onclick="window.open('https://play.google.com/store/search?q=sports+games&c=apps', '_blank')"><div class="cat-icon">⚽</div><span>رياضة</span></div>
+            <div class="cat-item" onclick="window.open('https://play.google.com/store/search?q=racing+games&c=apps', '_blank')"><div class="cat-icon">🏎️</div><span>سباقات</span></div>
+            <div class="cat-item" onclick="window.open('https://play.google.com/store/search?q=puzzle+games&c=apps', '_blank')"><div class="cat-icon">🧩</div><span>ألغاز</span></div>
         </div>
 
         <!-- أبرز اللاعبين -->
         <div class="section-title"><span></span> ⭐ أبرز اللاعبين</div>
         <div class="players-list">
-            <div class="player"><div class="player-avatar">😎</div><div class="player-name">Shadow</div></div>
-            <div class="player"><div class="player-avatar">🗡️</div><div class="player-name">HunterX</div></div>
-            <div class="player"><div class="player-avatar">✨</div><div class="player-name">Nova</div></div>
-            <div class="player"><div class="player-avatar">👑</div><div class="player-name">King</div></div>
+            <div class="player" onclick="alert('Shadow - مستوى 99')"><div class="player-avatar">😎</div><div class="player-name">Shadow</div></div>
+            <div class="player" onclick="alert('HunterX - مستوى 87')"><div class="player-avatar">🗡️</div><div class="player-name">HunterX</div></div>
+            <div class="player" onclick="alert('Nova - مستوى 95')"><div class="player-avatar">✨</div><div class="player-name">Nova</div></div>
+            <div class="player" onclick="alert('PixelKing - مستوى 100')"><div class="player-avatar">👑</div><div class="player-name">King</div></div>
         </div>
 
-        <!-- ألعاب مميزة -->
+        <!-- ألعاب حقيقية من Google Play -->
         <div class="section-title"><span></span> 🔥 ألعاب مميزة</div>
         <div class="game-row">
-            <div class="game-card" onclick="alert('Anime Fighters')"><div class="game-img">⚔️</div><h4>Anime Fighters</h4><div class="new-badge">جديد</div></div>
-            <div class="game-card" onclick="alert('Car Speed Racing')"><div class="game-img">🏎️</div><h4>Speed Racing</h4></div>
-            <div class="game-card" onclick="alert('Zombie Hunter')"><div class="game-img">🧟</div><h4>Zombie Hunter</h4></div>
-            <div class="game-card" onclick="alert('Puzzle Master')"><div class="game-img">🧩</div><h4>Puzzle Master</h4></div>
+            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.miHoYo.GenshinImpact', '_blank')"><div class="game-img">⚔️</div><h4>Genshin Impact</h4><div class="new-badge">3D Anime</div></div>
+            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.activision.callofduty.shooter', '_blank')"><div class="game-img">🔫</div><h4>Call of Duty</h4></div>
+            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.tencent.ig', '_blank')"><div class="game-img">🏝️</div><h4>PUBG Mobile</h4></div>
+            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.dts.freefireth', '_blank')"><div class="game-img">🔥</div><h4>Free Fire</h4></div>
         </div>
 
         <!-- ألعاب كلاسيكية -->
         <div class="section-title"><span></span> 🎮 ألعاب كلاسيكية</div>
         <div class="game-row">
-            <div class="game-card" onclick="alert('Minecraft')"><div class="game-img">⛏️</div><h4>Minecraft</h4></div>
-            <div class="game-card" onclick="alert('GTA')"><div class="game-img">🏙️</div><h4>GTA VC</h4></div>
-            <div class="game-card" onclick="alert('Stickman')"><div class="game-img">🥋</div><h4>Stickman</h4></div>
-            <div class="game-card" onclick="alert('Among Us')"><div class="game-img">👾</div><h4>Among Us</h4></div>
-            <div class="game-card" onclick="alert('Hill Climb')"><div class="game-img">⛰️</div><h4>Hill Climb</h4></div>
+            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.mojang.minecraftpe', '_blank')"><div class="game-img">⛏️</div><h4>Minecraft</h4></div>
+            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.rockstargames.gtasa', '_blank')"><div class="game-img">🏙️</div><h4>GTA: SA</h4></div>
+            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.playrix.farmscapes', '_blank')"><div class="game-img">🧩</div><h4>FarmScapes</h4></div>
+            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.innersloth.spacemafia', '_blank')"><div class="game-img">👾</div><h4>Among Us</h4></div>
+            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.fingersoft.hillclimb', '_blank')"><div class="game-img">⛰️</div><h4>Hill Climb</h4></div>
+        </div>
+
+        <!-- ألعاب أنمي 3D إضافية -->
+        <div class="section-title"><span></span> ✨ ألعاب أنمي 3D</div>
+        <div class="game-row">
+            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.hero.games', '_blank')"><div class="game-img">🗡️</div><h4>Honkai Impact</h4><div class="new-badge">3D</div></div>
+            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.LevelInfinite.WoLong', '_blank')"><div class="game-img">⚔️</div><h4>Wo Long</h4></div>
+            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.supercell.clashroyale', '_blank')"><div class="game-img">👑</div><h4>Clash Royale</h4></div>
+            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.epicgames.fortnite', '_blank')"><div class="game-img">🎯</div><h4>Fortnite</h4></div>
         </div>
     </div>
 </div>
