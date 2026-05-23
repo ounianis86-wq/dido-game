@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DidoGame - 3D Anime City | دردشة VIP خاصة</title>
+    <title>DidoGame - 3D Anime City | فيديو وصوت مباشر VIP</title>
     <style>
         * {
             margin: 0;
@@ -58,16 +58,8 @@
             height: 98vh;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 50px #ff00ff, 0 0 20px #00ffff, 0 0 10px #ff44ff80;
-            position: relative;
+            box-shadow: 0 0 50px #ff00ff, 0 0 20px #00ffff;
             border: 1px solid rgba(255,68,255,0.3);
-            animation: borderPulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes borderPulse {
-            0% { box-shadow: 0 0 20px #ff00ff, 0 0 10px #00ffff; border-color: rgba(255,68,255,0.3); }
-            50% { box-shadow: 0 0 50px #ff44ff, 0 0 30px #00ffff, 0 0 20px #ff44ff; border-color: rgba(255,68,255,0.8); }
-            100% { box-shadow: 0 0 20px #ff00ff, 0 0 10px #00ffff; border-color: rgba(255,68,255,0.3); }
         }
 
         .content {
@@ -75,14 +67,8 @@
             flex: 1;
             overflow-y: auto;
             scrollbar-width: none;
-            display: flex;
-            flex-direction: column;
         }
         
-        .content::-webkit-scrollbar {
-            display: none;
-        }
-
         .anime-hero {
             background: linear-gradient(135deg, #ff44ff20, #00ffff20);
             border-radius: 25px;
@@ -91,160 +77,54 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            flex-wrap: wrap;
             justify-content: center;
             border: 1px solid #ff44ff;
-            box-shadow: 0 0 20px #ff44ff;
-            animation: glowPulse 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes glowPulse {
-            0% { box-shadow: 0 0 10px #ff44ff; border-color: #ff44ff; }
-            50% { box-shadow: 0 0 30px #ff44ff, 0 0 20px #00ffff; border-color: #00ffff; }
-            100% { box-shadow: 0 0 10px #ff44ff; border-color: #ff44ff; }
         }
         
         .character-img {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             background: url('https://i.pinimg.com/originals/6e/5e/6c/6e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png');
             background-size: cover;
-            background-position: center;
             border-radius: 50%;
             border: 3px solid #ff44ff;
-            position: relative;
-            box-shadow: 0 0 25px #ff44ff, 0 0 15px #00ffff;
-        }
-        
-        .controller-on-hand {
-            position: absolute;
-            bottom: -8px;
-            right: -8px;
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            border: 2px solid white;
-            box-shadow: 0 0 15px #00ffff;
-            animation: spin 4s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .character-info {
-            text-align: center;
         }
         
         .tshirt-text {
-            background: linear-gradient(135deg, #ff3366, #ff44ff, #00ffff);
+            background: linear-gradient(135deg, #ff3366, #ff44ff);
             padding: 5px 14px;
             border-radius: 22px;
             color: white;
             font-size: 0.7rem;
-            font-weight: bold;
             display: inline-block;
-            margin: 4px 0;
-            box-shadow: 0 0 15px #ff44ff;
-        }
-        
-        .character-info h2 {
-            background: linear-gradient(135deg, #ffff00, #ff44ff, #00ffff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-size: 0.8rem;
-        }
-        
-        .challenge-look {
-            font-size: 0.6rem;
-            color: #ffaa88;
-            text-shadow: 0 0 8px #ff44ff;
         }
 
-        .ranking-section {
-            margin-bottom: 10px;
-            text-align: center;
-        }
-        
         .ranking-circles {
             display: flex;
             justify-content: center;
-            align-items: center;
             gap: 15px;
-            flex-wrap: wrap;
+            margin-bottom: 10px;
         }
         
-        .gold-circle {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(145deg, #ffd700, #ffaa00);
+        .gold-circle, .silver-circle, .bronze-circle {
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
-            margin-bottom: 3px;
-            border: 2px solid #ffd700;
-            box-shadow: 0 0 20px #ffd700;
+            font-size: 1.4rem;
         }
-        
-        .silver-circle {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            margin-bottom: 3px;
-            border: 1.5px solid #c0c0c0;
-            box-shadow: 0 0 15px #c0c0c0;
-        }
-        
-        .bronze-circle {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(145deg, #cd7f32, #b8651a);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            margin-bottom: 3px;
-            border: 1.5px solid #cd7f32;
-            box-shadow: 0 0 15px #cd7f32;
-        }
-        
-        .rank-name {
-            color: white;
-            font-size: 0.55rem;
-            font-weight: bold;
-            margin-top: 2px;
-        }
-        
-        .rank-points {
-            color: #ffcc00;
-            font-size: 0.5rem;
-        }
+        .gold-circle { background: linear-gradient(145deg, #ffd700, #ffaa00); box-shadow: 0 0 20px #ffd700; }
+        .silver-circle { background: linear-gradient(145deg, #c0c0c0, #a0a0a0); box-shadow: 0 0 15px #c0c0c0; }
+        .bronze-circle { background: linear-gradient(145deg, #cd7f32, #b8651a); box-shadow: 0 0 15px #cd7f32; }
 
-        .categories-section {
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-        
         .categories {
             display: flex;
-            flex-wrap: wrap;
             gap: 6px;
             justify-content: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
         }
         
         .cat-badge {
@@ -255,89 +135,113 @@
             color: white;
             font-size: 0.6rem;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 0 8px #ff44ff;
         }
-        
+
         .fixed-permanent-ad {
             background: linear-gradient(135deg, #ff44ff20, #00ffff20);
-            border: 3px solid #ff44ff;
+            border: 2px solid #ff44ff;
             border-radius: 20px;
-            padding: 10px;
+            padding: 8px;
             margin: 8px 0;
             text-align: center;
-            box-shadow: 0 0 25px #ff44ff;
+            color: white;
+            font-size: 0.7rem;
         }
-        
-        .games-wrapper {
-            margin-top: 0;
-            margin-bottom: 0;
-            flex: 1;
-        }
-        
-        .two-rows {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        
+
         .game-row {
             display: flex;
             gap: 6px;
             overflow-x: auto;
-            padding-bottom: 5px;
+            margin-bottom: 10px;
         }
         
         .game-card {
-            min-width: 95px;
-            width: 95px;
-            background: linear-gradient(145deg, #0f0f2a, #0a0a1a);
+            min-width: 85px;
+            background: #0f0f2a;
             border-radius: 14px;
-            padding: 6px;
+            padding: 5px;
             text-align: center;
             border: 1px solid #ff44ff;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 0 10px #ff44ff;
         }
         
         .game-img {
             width: 100%;
-            height: 65px;
+            height: 60px;
             background-size: cover;
-            background-position: center;
             border-radius: 10px;
-            margin-bottom: 4px;
         }
         
         .game-title {
             color: white;
             font-size: 0.5rem;
-            font-weight: bold;
         }
 
-        /* Voice & Chat */
-        .voice-chat-section {
-            background: rgba(0,0,0,0.6);
+        /* Video Call Styles */
+        .video-call-section {
+            background: rgba(0,0,0,0.7);
             border-radius: 20px;
             padding: 10px;
             margin-top: 10px;
-            border: 1px solid #00ffff;
+            border: 2px solid #00ffff;
         }
         
-        .mic-btn {
+        .video-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        
+        .video-box {
+            position: relative;
+            width: 140px;
+            height: 105px;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #ff44ff;
+        }
+        
+        .video-box video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            font-size: 0.5rem;
+            text-align: center;
+            padding: 2px;
+        }
+        
+        .video-controls {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 5px;
+        }
+        
+        .cam-btn {
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             border: none;
-            padding: 5px 12px;
+            padding: 6px 12px;
             border-radius: 20px;
             color: white;
             font-size: 0.6rem;
             cursor: pointer;
         }
         
-        .mic-btn.off { background: #555; }
-        
-        .chat-private-section {
+        .cam-btn.off { background: #555; }
+
+        .voice-chat-section, .chat-private-section {
             background: rgba(0,0,0,0.4);
             border-radius: 20px;
             padding: 10px;
@@ -378,7 +282,7 @@
             background: rgba(0,0,0,0.3);
             border-radius: 15px;
             padding: 8px;
-            height: 160px;
+            height: 140px;
             overflow-y: auto;
             margin-bottom: 8px;
         }
@@ -386,19 +290,19 @@
         .message-private {
             background: rgba(255,68,255,0.15);
             border-radius: 12px;
-            padding: 6px 10px;
-            margin-bottom: 6px;
+            padding: 5px 8px;
+            margin-bottom: 5px;
         }
         
-        .message-private.private-msg { background: rgba(0,255,136,0.15); border-right: 2px solid #00ff88; }
-        .sender-private { color: #ff44ff; font-size: 0.6rem; }
-        .text-private { color: white; font-size: 0.7rem; word-break: break-word; }
+        .message-private.private-msg { background: rgba(0,255,136,0.15); }
+        .sender-private { color: #ff44ff; font-size: 0.55rem; }
+        .text-private { color: white; font-size: 0.65rem; }
         
         .online-users-list {
             font-size: 0.6rem;
             color: #00ff88;
-            margin-bottom: 5px;
             text-align: center;
+            margin-bottom: 5px;
         }
         
         .user-chip {
@@ -410,16 +314,6 @@
             font-size: 0.6rem;
         }
         
-        .back-btn {
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
-            border: none;
-            padding: 5px 12px;
-            border-radius: 20px;
-            color: white;
-            margin-bottom: 8px;
-            cursor: pointer;
-        }
-
         .bottom-bar {
             display: flex;
             justify-content: space-between;
@@ -445,10 +339,8 @@
             width: 100%;
             height: 100%;
             background: #000000ee;
-            backdrop-filter: blur(15px);
             z-index: 2000;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
@@ -478,9 +370,8 @@
         .hidden { display: none; }
         .page { display: flex; flex-direction: column; height: 100%; }
         .page-hidden { display: none; }
-        .vip-badge-small { background: #ff44ff; padding: 2px 6px; border-radius: 10px; font-size: 0.5rem; margin-left: 3px; }
-        .speaker-chip { display: inline-block; background: #00ffff30; padding: 2px 8px; border-radius: 15px; margin: 2px; }
-        .voice-wave { display: inline-block; width: 10px; height: 10px; background: #0ff; border-radius: 50%; animation: pulse 0.8s infinite; margin-right: 4px; }
+        .vip-badge { background: #ff44ff; padding: 2px 5px; border-radius: 8px; font-size: 0.45rem; margin-left: 3px; }
+        .voice-wave { display: inline-block; width: 8px; height: 8px; background: #0ff; border-radius: 50%; animation: pulse 0.8s infinite; margin-right: 4px; }
         @keyframes pulse { 0% { opacity: 0.3; } 100% { opacity: 1; } }
     </style>
 </head>
@@ -490,41 +381,54 @@
     <div class="content">
         <div id="homePage" class="page">
             <div class="anime-hero">
-                <div class="character-img"><div class="controller-on-hand">🎮</div></div>
-                <div class="character-info">
-                    <div class="tshirt-text">⚡ DIDO-GAME ⚡</div>
-                    <h2>😤 نظرة التحدي النيونية!</h2>
-                </div>
+                <div class="character-img"></div>
+                <div><div class="tshirt-text">⚡ DIDO-GAME ⚡</div><div style="color:#fff; font-size:0.6rem;">فيديو + صوت مباشر VIP</div></div>
             </div>
-            <div class="ranking-section"><div class="ranking-circles" id="rankingList"></div></div>
-            <div class="categories-section"><div class="categories" id="categoriesList">
+            <div class="ranking-circles" id="rankingList"></div>
+            <div class="categories">
                 <div class="cat-badge" data-cat="action">🎯 أكشن</div>
                 <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
                 <div class="cat-badge" data-cat="fighting">🥊 قتال</div>
-                <div class="cat-badge" data-cat="puzzle">🧩 ألغاز</div>
-            </div></div>
-            <div class="fixed-permanent-ad" id="permanentAd">📺 إعلان ممول - اشترك الآن!</div>
-            <div class="games-wrapper"><div class="two-rows" id="gamesContainer"></div></div>
+            </div>
+            <div class="fixed-permanent-ad" id="permanentAd">📺 إعلان ممول - عروض حصرية!</div>
+            <div class="game-row" id="gamesContainer"></div>
             
-            <!-- Voice Chat -->
-            <div class="voice-chat-section" id="voiceChatSection" style="display:none;">
-                <button id="micToggleBtn" class="mic-btn off">🔴 تفعيل الميكروفون</button>
+            <!-- Video Call Section -->
+            <div class="video-call-section" id="videoSection" style="display:none;">
+                <div class="video-container" id="videoContainer">
+                    <div class="video-box" id="localVideoBox">
+                        <video id="localVideo" autoplay muted playsinline></video>
+                        <div class="video-label">أنت</div>
+                    </div>
+                    <div class="video-box" id="remoteVideoBox" style="display:none;">
+                        <video id="remoteVideo" autoplay playsinline></video>
+                        <div class="video-label" id="remoteLabel">متصل</div>
+                    </div>
+                </div>
+                <div class="video-controls">
+                    <button class="cam-btn" id="camToggleBtn">📹 تشغيل الكاميرا</button>
+                </div>
+            </div>
+            
+            <!-- Voice & Chat -->
+            <div class="voice-chat-section" id="voiceSection" style="display:none;">
+                <button class="small-btn" id="micToggleBtn">🎙️ ميكروفون OFF</button>
                 <div id="speakersList" style="font-size:0.6rem; margin-top:5px; color:#0ff;"></div>
             </div>
             
             <div class="chat-private-section">
                 <div id="roomLoginArea">
                     <div class="room-controls">
-                        <input type="text" id="userNameInput" class="room-input" placeholder="اسم المستخدم" value="أحمد">
-                        <button class="small-btn" onclick="setUsername()">تعيين</button>
+                        <input type="text" id="userNameInput" class="room-input" placeholder="اسم المستخدم">
+                        <button class="small-btn" onclick="setUsername()">✅ تعيين الاسم</button>
                     </div>
                     <div class="room-controls">
-                        <input type="text" id="roomNameInput" class="room-input" placeholder="اسم الغرفة" value="غرفتي">
+                        <input type="text" id="roomNameInput" class="room-input" placeholder="اسم الغرفة">
                         <input type="password" id="roomPasswordInput" class="room-input" placeholder="كلمة المرور">
                     </div>
                     <div class="room-controls">
-                        <button class="small-btn" onclick="joinRoom()">دخول الغرفة</button>
-                        <button class="small-btn" onclick="createRoom()">إنشاء غرفة</button>
+                        <button class="small-btn" onclick="joinRoom()">🚪 دخول الغرفة</button>
+                        <button class="small-btn" onclick="createRoom()">✨ إنشاء غرفة</button>
                     </div>
                     <div class="online-users-list" id="availableRoomsList"></div>
                 </div>
@@ -532,62 +436,74 @@
                     <div class="online-users-list" id="roomUsersList"></div>
                     <div class="chat-messages-private" id="privateMessagesDiv"></div>
                     <div class="room-controls">
-                        <input type="text" id="publicMessageInput" class="room-input" placeholder="رسالة عامة...">
-                        <button class="small-btn" onclick="sendPublicMessage()">إرسال</button>
-                        <button id="vipImageBtnChat" class="small-btn" onclick="sendImageChat()" style="display:none;">🖼️</button>
+                        <input type="text" id="publicMessageInput" class="room-input" placeholder="رسالة عامة">
+                        <button class="small-btn" onclick="sendPublicMessage()">📤</button>
+                        <button id="vipImageBtn" class="small-btn" onclick="sendImageChat()" style="display:none;">🖼️</button>
                     </div>
                     <div class="room-controls">
                         <select id="privateUserSelect" class="room-input"></select>
                         <input type="text" id="privateMessageInput" class="room-input" placeholder="رسالة خاصة">
                         <button class="small-btn" onclick="sendPrivateMessage()">🔒</button>
                     </div>
-                    <button class="small-btn danger-btn" onclick="leaveRoom()">مغادرة الغرفة</button>
+                    <button class="small-btn danger-btn" onclick="leaveRoom()">🚪 مغادرة الغرفة</button>
                 </div>
             </div>
         </div>
         <div id="categoryPage" class="page page-hidden">
-            <button class="back-btn" id="backToHomeBtn">🔙 العودة</button>
-            <div class="two-rows" id="categoryGamesContainer"></div>
+            <button class="small-btn" id="backToHomeBtn" style="margin-bottom:10px;">🔙 العودة</button>
+            <div class="game-row" id="categoryGamesContainer"></div>
         </div>
     </div>
     <div class="bottom-bar">
-        <div class="register-btn" id="registerBtn" onclick="upgradeToVIP()">ترقية VIP</div>
+        <div class="register-btn" id="registerBtn" onclick="upgradeToVIP()">👑 ترقية VIP</div>
         <div class="register-btn" id="musicBtn" onclick="toggleMusic()">🎵 موسيقى</div>
     </div>
 </div>
 <div id="gameModal" class="game-modal hidden">
     <div class="close-modal" onclick="closeGame()">✕</div>
-    <iframe id="gameIframe" src="" allow="microphone; autoplay"></iframe>
+    <iframe id="gameIframe" src="" allow="microphone; camera; autoplay"></iframe>
 </div>
 
 <script>
-    // Games data
+    // ==================== Games Data ====================
     const gamesData = [
         { id:1, name:"Sonic", img:"https://images6.alphacoders.com/118/1185678.jpg", url:"https://www.crazygames.com/embed/sonic-the-hedgehog", cat:"action", points:150, avatar:"🦔", playerName:"Shadow" },
         { id:2, name:"Subway Surfers", img:"https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action", points:200, avatar:"🏃", playerName:"Speed" },
         { id:3, name:"Temple Run 2", img:"https://images.hdqwalls.com/wallpapers/pubg-mobile-squad-4k-8q.jpg", url:"https://www.crazygames.com/embed/temple-run-2", cat:"action", points:180, avatar:"🏛️", playerName:"RunKing" },
-        { id:4, name:"Hill Climb", img:"https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg", url:"https://www.crazygames.com/embed/hill-climb-racing", cat:"racing", points:120, avatar:"🚗", playerName:"Climber" }
+        { id:4, name:"Hill Climb", img:"https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg", url:"https://www.crazygames.com/embed/hill-climb-racing", cat:"racing", points:120, avatar:"🚗", playerName:"Climber" },
+        { id:5, name:"Street Fighter", img:"https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg", url:"https://www.crazygames.com/embed/street-fighter", cat:"fighting", points:300, avatar:"👊", playerName:"Fighter" }
     ];
     
+    // ==================== Global Variables ====================
     let currentUserName = null;
     let currentRoom = null;
     let isVIPUser = false;
-    let allRooms = {};      // Structure: { roomName: { password, users: [], messages: [] } }
-    let localStream = null;
-    let micActive = false;
+    let allRooms = {};
     
+    // Audio/Video Streams
+    let localStream = null;
+    let peerConnection = null;
+    let micActive = false;
+    let cameraActive = false;
+    let music = null;
+    let musicPlaying = false;
+    
+    // STUN Server for WebRTC
+    const configuration = { iceServers: [{ urls: "stun:stun.l.google.com:19302" }] };
+    
+    // ==================== Games Functions ====================
     function updateRanking() {
         const sorted = [...gamesData].sort((a,b)=>b.points - a.points);
         document.getElementById('rankingList').innerHTML = `
-            <div><div class="silver-circle">${sorted[1]?.avatar||'👤'}</div><div>${sorted[1]?.playerName||'---'}</div></div>
-            <div><div class="gold-circle">${sorted[0]?.avatar||'👤'}</div><div>${sorted[0]?.playerName||'---'}</div></div>
-            <div><div class="bronze-circle">${sorted[2]?.avatar||'👤'}</div><div>${sorted[2]?.playerName||'---'}</div></div>
+            <div><div class="silver-circle">${sorted[1]?.avatar||'👤'}</div><div style="font-size:0.5rem;color:#fff;">${sorted[1]?.playerName||'---'}</div></div>
+            <div><div class="gold-circle">${sorted[0]?.avatar||'👤'}</div><div style="font-size:0.5rem;color:#fff;">${sorted[0]?.playerName||'---'}</div></div>
+            <div><div class="bronze-circle">${sorted[2]?.avatar||'👤'}</div><div style="font-size:0.5rem;color:#fff;">${sorted[2]?.playerName||'---'}</div></div>
         `;
     }
     
-    function renderAllGames() {
-        const games = gamesData.map(g => `<div class="game-card" data-url="${g.url}" data-id="${g.id}"><div class="game-img" style="background-image:url('${g.img}')"></div><div class="game-title">${g.name}</div></div>`).join('');
-        document.getElementById('gamesContainer').innerHTML = `<div class="game-row">${games}</div>`;
+    function renderGames() {
+        let html = gamesData.map(g => `<div class="game-card" data-url="${g.url}" data-id="${g.id}"><div class="game-img" style="background-image:url('${g.img}')"></div><div class="game-title">${g.name}</div></div>`).join('');
+        document.getElementById('gamesContainer').innerHTML = html;
         document.querySelectorAll('.game-card').forEach(card => {
             card.addEventListener('click', () => {
                 let id = parseInt(card.dataset.id);
@@ -599,7 +515,7 @@
         });
     }
     
-    function showCategoryPage(cat) {
+    function showCategory(cat) {
         let filtered = gamesData.filter(g=>g.cat===cat);
         document.getElementById('categoryGamesContainer').innerHTML = filtered.map(g=>`<div class="game-card" data-url="${g.url}"><div class="game-img" style="background-image:url('${g.img}')"></div><div class="game-title">${g.name}</div></div>`).join('');
         document.querySelectorAll('#categoryGamesContainer .game-card').forEach(c=>c.addEventListener('click',()=>{ document.getElementById('gameIframe').src=c.dataset.url; document.getElementById('gameModal').classList.remove('hidden'); }));
@@ -607,22 +523,42 @@
         document.getElementById('categoryPage').classList.remove('page-hidden');
     }
     
-    document.querySelectorAll('.cat-badge').forEach(b=>b.addEventListener('click',()=>showCategoryPage(b.dataset.cat)));
+    document.querySelectorAll('.cat-badge').forEach(b=>b.addEventListener('click',()=>showCategory(b.dataset.cat)));
     document.getElementById('backToHomeBtn').addEventListener('click',()=>{ document.getElementById('homePage').classList.remove('page-hidden'); document.getElementById('categoryPage').classList.add('page-hidden'); });
     function closeGame() { document.getElementById('gameModal').classList.add('hidden'); document.getElementById('gameIframe').src=''; }
     
-    function upgradeToVIP() {
-        if(isVIPUser) return alert("أنت VIP بالفعل");
-        if(confirm("ترقية VIP مقابل 9.99$؟")) { isVIPUser=true; localStorage.setItem('didogame_vip','true'); document.getElementById('registerBtn').innerHTML='VIP مفعل'; document.getElementById('vipImageBtnChat').style.display='inline-block'; alert("أصبحت VIP"); }
+    // ==================== Username Fix ====================
+    function setUsername() {
+        let name = document.getElementById('userNameInput').value.trim();
+        if(name === "") {
+            alert("❌ الرجاء إدخال اسم المستخدم!");
+            return;
+        }
+        currentUserName = name;
+        localStorage.setItem('didogame_username', currentUserName);
+        alert(`✅ مرحباً ${currentUserName} ! تم تعيين اسمك بنجاح`);
+        document.getElementById('userNameInput').value = currentUserName;
     }
     
-    // Room functions with private messages (only sender & receiver see private messages)
+    // ==================== VIP ====================
+    function upgradeToVIP() {
+        if(isVIPUser) { alert("✨ أنت بالفعل عضو VIP!"); return; }
+        if(confirm("✨ ترقية إلى VIP - 9.99$ شهرياً\n✅ إرسال الصور\n✅ علامة VIP مميزة")) {
+            isVIPUser = true;
+            localStorage.setItem('didogame_vip', 'true');
+            document.getElementById('registerBtn').innerHTML = '👑 VIP مفعل';
+            document.getElementById('vipImageBtn').style.display = 'inline-block';
+            alert("🎉 تهانينا! أصبحت عضواً مميزاً");
+        }
+    }
+    
+    // ==================== Room & Chat (Private messages only between users) ====================
     function saveRooms() { localStorage.setItem('didogame_rooms', JSON.stringify(allRooms)); }
     function loadRooms() { let data = localStorage.getItem('didogame_rooms'); if(data) allRooms = JSON.parse(data); else allRooms = {}; }
     
     function updateAvailableRooms() {
         let list = Object.keys(allRooms).map(r => `<span class="user-chip" onclick="quickJoin('${r}')">${r} ${allRooms[r].password?'🔒':'🔓'}</span>`).join('');
-        document.getElementById('availableRoomsList').innerHTML = list || "لا توجد غرف";
+        document.getElementById('availableRoomsList').innerHTML = list || "📁 لا توجد غرف";
     }
     
     function quickJoin(roomName) {
@@ -630,36 +566,28 @@
         joinRoom();
     }
     
-    function setUsername() { let name = document.getElementById('userNameInput').value.trim(); if(name) currentUserName = name; else alert("أدخل اسمك"); }
-    
     function createRoom() {
+        if(!currentUserName) { alert("⚠️ الرجاء تعيين اسم المستخدم أولاً!"); return; }
         let roomName = document.getElementById('roomNameInput').value.trim();
         let password = document.getElementById('roomPasswordInput').value;
         if(!roomName) return alert("أدخل اسم الغرفة");
-        if(allRooms[roomName]) return alert("الغرفة موجودة");
-        allRooms[roomName] = { password: password || null, users: [], messages: [] };
+        if(allRooms[roomName]) return alert("الغرفة موجودة بالفعل");
+        allRooms[roomName] = { password: password || null, users: [currentUserName], messages: [] };
         saveRooms();
         updateAvailableRooms();
-        joinRoomAfterCreate(roomName, password);
-    }
-    
-    function joinRoomAfterCreate(roomName, password) {
-        if(!currentUserName) { alert("حدد اسم المستخدم أولاً"); return; }
         currentRoom = roomName;
-        if(!allRooms[currentRoom].users.includes(currentUserName)) allRooms[currentRoom].users.push(currentUserName);
-        saveRooms();
         showChatUI();
     }
     
     function joinRoom() {
-        if(!currentUserName) { alert("حدد اسم المستخدم"); return; }
+        if(!currentUserName) { alert("⚠️ الرجاء تعيين اسم المستخدم أولاً!"); return; }
         let roomName = document.getElementById('roomNameInput').value.trim();
         let password = document.getElementById('roomPasswordInput').value;
         let room = allRooms[roomName];
         if(!room) return alert("الغرفة غير موجودة");
         if(room.password && room.password !== password) return alert("كلمة مرور خاطئة");
+        if(!room.users.includes(currentUserName)) room.users.push(currentUserName);
         currentRoom = roomName;
-        if(!allRooms[currentRoom].users.includes(currentUserName)) allRooms[currentRoom].users.push(currentUserName);
         saveRooms();
         showChatUI();
     }
@@ -667,24 +595,26 @@
     function showChatUI() {
         document.getElementById('roomLoginArea').classList.add('hidden');
         document.getElementById('chatArea').classList.remove('hidden');
-        document.getElementById('voiceChatSection').style.display = 'block';
-        updateRoomUsersList();
-        displayMessages();
+        document.getElementById('videoSection').style.display = 'block';
+        document.getElementById('voiceSection').style.display = 'block';
+        updateRoomUsers();
         updatePrivateSelect();
-        // Start voice chat automatically for room members
-        startVoiceForRoom();
+        displayMessages();
+        // Auto-start microphone for voice
+        startMicrophone();
     }
     
-    function updateRoomUsersList() {
+    function updateRoomUsers() {
         if(!currentRoom || !allRooms[currentRoom]) return;
-        let users = allRooms[currentRoom].users || [];
-        document.getElementById('roomUsersList').innerHTML = `👥 أعضاء الغرفة: ${users.map(u=>`<span class="user-chip">${u}${isVIPUser && u===currentUserName?' ⭐':''}</span>`).join('')}`;
+        let users = allRooms[currentRoom].users;
+        document.getElementById('roomUsersList').innerHTML = `👥 أعضاء الغرفة: ${users.map(u=>`<span class="user-chip">${u}${u===currentUserName && isVIPUser?' ⭐':''}</span>`).join('')}`;
+        document.getElementById('speakersList').innerHTML = `🎤 المتحدثون: ${users.join(', ')} <span class="voice-wave"></span>`;
     }
     
     function updatePrivateSelect() {
         let select = document.getElementById('privateUserSelect');
         let users = allRooms[currentRoom]?.users.filter(u => u !== currentUserName) || [];
-        select.innerHTML = '<option value="">🔒 اختر مستلم</option>' + users.map(u=>`<option value="${u}">${u}</option>`).join('');
+        select.innerHTML = '<option value="">🔒 اختر مستلماً</option>' + users.map(u=>`<option value="${u}">${u}</option>`).join('');
     }
     
     function sendPublicMessage() {
@@ -711,38 +641,20 @@
     function displayMessages() {
         let div = document.getElementById('privateMessagesDiv');
         if(!currentRoom || !allRooms[currentRoom]) return;
-        let msgs = allRooms[currentRoom].messages.slice(-50);
+        let msgs = allRooms[currentRoom].messages.slice(-40);
         div.innerHTML = '';
         msgs.forEach(msg => {
-            // Private message: show only if current user is sender or receiver
-            if(msg.type === 'private') {
-                if(msg.sender !== currentUserName && msg.target !== currentUserName) return;
-            }
+            if(msg.type === 'private' && msg.sender !== currentUserName && msg.target !== currentUserName) return;
             let el = document.createElement('div');
             el.className = 'message-private' + (msg.type==='private' ? ' private-msg' : '');
-            let senderHtml = `<div class="sender-private">${msg.sender} ${msg.type==='private' ? `🔒 إلى ${msg.target}` : ''}</div>`;
-            el.innerHTML = senderHtml + `<div class="text-private">${msg.text}</div>`;
+            el.innerHTML = `<div class="sender-private">${msg.sender} ${msg.type==='private' ? `🔒 → ${msg.target}` : ''}</div><div class="text-private">${msg.text}</div>`;
             div.appendChild(el);
         });
         div.scrollTop = div.scrollHeight;
     }
     
-    function leaveRoom() {
-        if(currentRoom && allRooms[currentRoom]) {
-            allRooms[currentRoom].users = allRooms[currentRoom].users.filter(u => u !== currentUserName);
-            saveRooms();
-        }
-        if(localStream) { localStream.getTracks().forEach(t=>t.stop()); localStream=null; }
-        micActive = false;
-        currentRoom = null;
-        document.getElementById('roomLoginArea').classList.remove('hidden');
-        document.getElementById('chatArea').classList.add('hidden');
-        document.getElementById('voiceChatSection').style.display = 'none';
-        updateAvailableRooms();
-    }
-    
     function sendImageChat() {
-        if(!isVIPUser) { alert("خاصية VIP فقط"); return; }
+        if(!isVIPUser) { alert("❌ خاصية VIP فقط! قم بالترقية"); return; }
         let input = document.createElement('input');
         input.type='file'; input.accept='image/*';
         input.onchange = e => {
@@ -761,63 +673,167 @@
         input.click();
     }
     
-    // Voice chat only between users in same room (simulated)
-    async function startVoiceForRoom() {
-        if(!currentRoom) return;
+    function leaveRoom() {
+        if(currentRoom && allRooms[currentRoom]) {
+            allRooms[currentRoom].users = allRooms[currentRoom].users.filter(u => u !== currentUserName);
+            saveRooms();
+        }
+        stopVideoCall();
+        stopMicrophone();
+        currentRoom = null;
+        document.getElementById('roomLoginArea').classList.remove('hidden');
+        document.getElementById('chatArea').classList.add('hidden');
+        document.getElementById('videoSection').style.display = 'none';
+        document.getElementById('voiceSection').style.display = 'none';
+        updateAvailableRooms();
+    }
+    
+    // ==================== Voice (Microphone 100% volume) ====================
+    async function startMicrophone() {
         try {
             if(!localStream) {
                 localStream = await navigator.mediaDevices.getUserMedia({ audio: true });
                 micActive = true;
                 document.getElementById('micToggleBtn').innerHTML = "🎙️ ميكروفون ON";
-                document.getElementById('micToggleBtn').classList.remove('off');
-                let speakers = allRooms[currentRoom]?.users.join(', ') || currentUserName;
-                document.getElementById('speakersList').innerHTML = `🎤 المتحدثون في الغرفة: ${speakers} <span class="voice-wave"></span>`;
+                document.getElementById('micToggleBtn').style.background = "linear-gradient(135deg, #ff44ff, #00ffff)";
             }
-        } catch(e) { console.log("ميكروفون غير متاح"); }
+        } catch(e) { console.log("Microphone error"); }
+    }
+    
+    function stopMicrophone() {
+        if(localStream) {
+            localStream.getAudioTracks().forEach(t => t.stop());
+            localStream = null;
+        }
+        micActive = false;
     }
     
     function toggleMic() {
         if(!currentRoom) { alert("ادخل غرفة أولاً"); return; }
-        if(!localStream) { startVoiceForRoom(); return; }
+        if(!localStream) { startMicrophone(); return; }
         let audioTrack = localStream.getAudioTracks()[0];
         if(audioTrack) {
             audioTrack.enabled = !audioTrack.enabled;
             micActive = audioTrack.enabled;
             document.getElementById('micToggleBtn').innerHTML = micActive ? "🎙️ ميكروفون ON" : "🔴 ميكروفون OFF";
-            document.getElementById('micToggleBtn').classList.toggle('off', !micActive);
+            document.getElementById('micToggleBtn').style.background = micActive ? "linear-gradient(135deg, #ff44ff, #00ffff)" : "#555";
         }
     }
     
-    document.getElementById('micToggleBtn').addEventListener('click', toggleMic);
+    // ==================== Video Call ====================
+    async function startVideoCall() {
+        if(!currentRoom) { alert("ادخل غرفة أولاً"); return; }
+        try {
+            if(!localStream) {
+                localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+            } else {
+                let videoTrack = await navigator.mediaDevices.getUserMedia({ video: true });
+                videoTrack.getVideoTracks().forEach(t => localStream.addTrack(t));
+            }
+            document.getElementById('localVideo').srcObject = localStream;
+            cameraActive = true;
+            document.getElementById('camToggleBtn').innerHTML = "📹 كاميرا ON";
+            document.getElementById('camToggleBtn').style.background = "linear-gradient(135deg, #ff44ff, #00ffff)";
+            
+            // Create peer connection for remote user (simulated for demo)
+            createPeerConnection();
+        } catch(e) { alert("لا يمكن الوصول للكاميرا: "+e.message); }
+    }
     
-    // Auto-refresh UI every 2 seconds
+    function createPeerConnection() {
+        if(peerConnection) peerConnection.close();
+        peerConnection = new RTCPeerConnection(configuration);
+        localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+        
+        peerConnection.ontrack = (event) => {
+            document.getElementById('remoteVideo').srcObject = event.streams[0];
+            document.getElementById('remoteVideoBox').style.display = 'block';
+            document.getElementById('remoteLabel').innerHTML = `👤 متصل`;
+        };
+        
+        peerConnection.onicecandidate = (event) => {
+            if(event.candidate) {
+                // In real app, send via signaling. For demo, we simulate.
+                console.log("ICE Candidate", event.candidate);
+            }
+        };
+        
+        // Create offer (simulate)
+        peerConnection.createOffer().then(offer => peerConnection.setLocalDescription(offer));
+    }
+    
+    function stopVideoCall() {
+        if(peerConnection) { peerConnection.close(); peerConnection = null; }
+        if(localStream) {
+            localStream.getVideoTracks().forEach(t => t.stop());
+            localStream = null;
+        }
+        cameraActive = false;
+        document.getElementById('localVideo').srcObject = null;
+        document.getElementById('remoteVideo').srcObject = null;
+        document.getElementById('remoteVideoBox').style.display = 'none';
+        document.getElementById('camToggleBtn').innerHTML = "📹 تشغيل الكاميرا";
+        document.getElementById('camToggleBtn').style.background = "#555";
+    }
+    
+    function toggleCamera() {
+        if(!currentRoom) { alert("ادخل غرفة أولاً"); return; }
+        if(!cameraActive) startVideoCall();
+        else stopVideoCall();
+    }
+    
+    // ==================== Music 100% Volume ====================
+    function toggleMusic() {
+        if(!music) {
+            music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+            music.loop = true;
+            music.volume = 1.0;  // 100% volume
+        }
+        if(musicPlaying) {
+            music.pause();
+            document.getElementById('musicBtn').innerHTML = "🎵 موسيقى";
+        } else {
+            music.play().catch(e => console.log("Auto-play prevented"));
+            document.getElementById('musicBtn').innerHTML = "🔇 إيقاف";
+        }
+        musicPlaying = !musicPlaying;
+    }
+    
+    // ==================== Auto Refresh & Init ====================
     setInterval(() => {
         if(currentRoom && allRooms[currentRoom]) {
-            updateRoomUsersList();
+            updateRoomUsers();
             updatePrivateSelect();
             displayMessages();
-            if(localStream && micActive) {
-                let speakers = allRooms[currentRoom]?.users.join(', ') || currentUserName;
-                document.getElementById('speakersList').innerHTML = `🎤 المتحدثون: ${speakers} <span class="voice-wave"></span>`;
-            }
         }
     }, 2000);
-    
-    function toggleMusic() {
-        let music = document.getElementById('bgMusic');
-        if(!music) { let aud = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'); aud.loop=true; aud.volume=0.2; aud.id='bgMusic'; document.body.appendChild(aud); aud.play(); document.getElementById('musicBtn').innerHTML='🔇 إيقاف'; }
-        else { if(music.paused) music.play(); else music.pause(); document.getElementById('musicBtn').innerHTML=music.paused?'🎵 تشغيل':'🔇 إيقاف'; }
-    }
     
     // Initialize
     loadRooms();
     updateRanking();
-    renderAllGames();
+    renderGames();
     updateAvailableRooms();
-    let vip = localStorage.getItem('didogame_vip');
-    if(vip==='true') { isVIPUser=true; document.getElementById('registerBtn').innerHTML='VIP مفعل'; document.getElementById('vipImageBtnChat').style.display='inline-block'; }
-    if(!currentUserName) setTimeout(()=>{ let n=prompt("أدخل اسم المستخدم:","أحمد"); if(n) currentUserName=n; document.getElementById('userNameInput').value=currentUserName; }, 500);
-    window.setUsername=setUsername; window.joinRoom=joinRoom; window.createRoom=createRoom; window.leaveRoom=leaveRoom; window.sendPublicMessage=sendPublicMessage; window.sendPrivateMessage=sendPrivateMessage; window.sendImageChat=sendImageChat; window.quickJoin=quickJoin; window.upgradeToVIP=upgradeToVIP; window.closeGame=closeGame; window.toggleMusic=toggleMusic;
+    
+    let savedName = localStorage.getItem('didogame_username');
+    if(savedName) { currentUserName = savedName; document.getElementById('userNameInput').value = currentUserName; }
+    let savedVIP = localStorage.getItem('didogame_vip');
+    if(savedVIP === 'true') { isVIPUser = true; document.getElementById('registerBtn').innerHTML = '👑 VIP مفعل'; document.getElementById('vipImageBtn').style.display = 'inline-block'; }
+    
+    // Event Listeners
+    document.getElementById('micToggleBtn').addEventListener('click', toggleMic);
+    document.getElementById('camToggleBtn').addEventListener('click', toggleCamera);
+    
+    window.setUsername = setUsername;
+    window.joinRoom = joinRoom;
+    window.createRoom = createRoom;
+    window.leaveRoom = leaveRoom;
+    window.sendPublicMessage = sendPublicMessage;
+    window.sendPrivateMessage = sendPrivateMessage;
+    window.sendImageChat = sendImageChat;
+    window.quickJoin = quickJoin;
+    window.upgradeToVIP = upgradeToVIP;
+    window.closeGame = closeGame;
+    window.toggleMusic = toggleMusic;
 </script>
 </body>
 </html>
