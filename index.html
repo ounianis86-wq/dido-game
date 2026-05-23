@@ -15,7 +15,7 @@
         body {
             background: #05050f;
             min-height: 100vh;
-            padding: 8px;
+            padding: 6px;
         }
 
         .anime-city-bg {
@@ -47,57 +47,63 @@
             margin: 0 auto;
             background: rgba(10,10,30,0.85);
             backdrop-filter: blur(5px);
-            border-radius: 30px;
+            border-radius: 25px;
             overflow: hidden;
-            min-height: 95vh;
-            box-shadow: 0 0 30px #ff00ff30;
-            position: relative;
+            height: 98vh;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 0 30px #ff00ff30;
+            position: relative;
         }
 
         .content {
-            padding: 10px;
+            padding: 8px 10px;
             flex: 1;
+            overflow-y: auto;
+            scrollbar-width: none;
+        }
+        
+        .content::-webkit-scrollbar {
+            display: none;
         }
 
-        /* شخصية أنمي مكبرة */
+        /* شخصية أنمي */
         .anime-hero {
             background: linear-gradient(135deg, #1a0a3a80, #0a0a2a80);
-            border-radius: 25px;
-            padding: 15px;
-            margin-bottom: 10px;
+            border-radius: 20px;
+            padding: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             flex-wrap: wrap;
             justify-content: center;
             border: 1px solid #ff44ff;
         }
         
         .character-img {
-            width: 130px;
-            height: 130px;
+            width: 100px;
+            height: 100px;
             background: url('https://i.pinimg.com/originals/6e/5e/6c/6e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png');
             background-size: cover;
             background-position: center;
             border-radius: 50%;
-            border: 3px solid #ff44ff;
+            border: 2px solid #ff44ff;
             position: relative;
         }
         
         .controller-on-hand {
             position: absolute;
-            bottom: -10px;
-            right: -10px;
+            bottom: -8px;
+            right: -8px;
             background: #ff44ff;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
+            font-size: 1rem;
             border: 2px solid white;
         }
         
@@ -107,15 +113,15 @@
         
         .tshirt-text {
             background: linear-gradient(135deg, #ff3366, #ff44ff);
-            padding: 6px 16px;
-            border-radius: 25px;
+            padding: 4px 12px;
+            border-radius: 20px;
             color: white;
-            font-size: 0.9rem;
+            font-size: 0.7rem;
             font-weight: bold;
             display: inline-block;
-            margin: 5px 0;
+            margin: 3px 0;
             font-family: monospace;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
         
         .character-info h2 {
@@ -123,17 +129,17 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            font-size: 1rem;
+            font-size: 0.75rem;
         }
         
         .challenge-look {
-            font-size: 0.7rem;
+            font-size: 0.55rem;
             color: #ffaa88;
         }
 
         /* ترتيب اللاعبين */
         .ranking-section {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-align: center;
         }
         
@@ -141,7 +147,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
         }
         
@@ -150,100 +156,100 @@
         }
         
         .gold-circle {
-            width: 55px;
-            height: 55px;
+            width: 45px;
+            height: 45px;
             background: linear-gradient(145deg, #ffd700, #ffaa00);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 3px;
+            font-size: 1.5rem;
+            margin-bottom: 2px;
             border: 2px solid #ffd700;
-            box-shadow: 0 0 12px #ffd700;
+            box-shadow: 0 0 10px #ffd700;
         }
         
         .silver-circle {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
-            margin-bottom: 3px;
+            font-size: 1.1rem;
+            margin-bottom: 2px;
             border: 1.5px solid #c0c0c0;
-            box-shadow: 0 0 8px #c0c0c0;
+            box-shadow: 0 0 6px #c0c0c0;
         }
         
         .bronze-circle {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             background: linear-gradient(145deg, #cd7f32, #b8651a);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
-            margin-bottom: 3px;
+            font-size: 1.1rem;
+            margin-bottom: 2px;
             border: 1.5px solid #cd7f32;
-            box-shadow: 0 0 8px #cd7f32;
+            box-shadow: 0 0 6px #cd7f32;
         }
         
         .rank-name {
             color: white;
-            font-size: 0.6rem;
+            font-size: 0.5rem;
             font-weight: bold;
             margin-top: 2px;
         }
         
         .rank-points {
             color: #ffcc00;
-            font-size: 0.55rem;
+            font-size: 0.45rem;
         }
         
         .crown-icon {
-            font-size: 0.9rem;
-            margin-bottom: 2px;
+            font-size: 0.7rem;
+            margin-bottom: 1px;
         }
 
         /* Categories */
         .categories {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 10px;
+            gap: 5px;
+            margin-bottom: 8px;
             justify-content: center;
         }
         
         .cat-badge {
             background: #ff44ff30;
             border: 1px solid #ff44ff;
-            padding: 5px 14px;
-            border-radius: 25px;
+            padding: 3px 10px;
+            border-radius: 20px;
             color: white;
-            font-size: 0.65rem;
+            font-size: 0.55rem;
             cursor: pointer;
         }
 
         /* Two rows for games */
         .games-wrapper {
-            margin-top: 5px;
+            margin-top: 3px;
         }
         
         .two-rows {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-bottom: 15px;
+            gap: 6px;
+            margin-bottom: 8px;
         }
         
         .game-row {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             overflow-x: auto;
-            padding-bottom: 8px;
+            padding-bottom: 5px;
         }
         
         .game-row::-webkit-scrollbar {
@@ -251,11 +257,11 @@
         }
         
         .game-card {
-            min-width: 110px;
-            width: 110px;
+            min-width: 95px;
+            width: 95px;
             background: linear-gradient(145deg, #0f0f2a, #0a0a1a);
-            border-radius: 15px;
-            padding: 8px;
+            border-radius: 12px;
+            padding: 6px;
             text-align: center;
             border: 1px solid #ff44ff40;
             cursor: pointer;
@@ -263,61 +269,60 @@
         }
         
         .game-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             border-color: #ff44ff;
         }
         
         .game-img {
             width: 100%;
-            height: 80px;
+            height: 65px;
             background-size: cover;
             background-position: center;
-            border-radius: 12px;
-            margin-bottom: 5px;
+            border-radius: 10px;
+            margin-bottom: 4px;
         }
         
         .game-title {
             color: white;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: bold;
         }
         
         .game-cat {
             color: #aa88ff;
-            font-size: 0.5rem;
+            font-size: 0.45rem;
         }
 
         /* Back button */
         .back-btn {
             background: #ff44ff;
             border: none;
-            padding: 6px 16px;
-            border-radius: 25px;
+            padding: 5px 14px;
+            border-radius: 20px;
             color: white;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             cursor: pointer;
             display: inline-block;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
         }
 
-        /* Bottom bar - تسجيل وموسيقى */
+        /* Bottom bar */
         .bottom-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 15px;
+            padding: 6px 12px;
             border-top: 1px solid #ff44ff55;
-            margin-top: 5px;
         }
         
         .register-btn {
             background: #ff44ff30;
             border: 1px solid #ff44ff;
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 3px 10px;
+            border-radius: 18px;
             color: white;
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             cursor: pointer;
             transition: 0.2s;
         }
@@ -330,11 +335,11 @@
         .music-bottom-btn {
             background: #000000aa;
             backdrop-filter: blur(5px);
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 3px 10px;
+            border-radius: 18px;
             color: #0ff;
             cursor: pointer;
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             border: 1px solid #0ff;
         }
 
@@ -348,24 +353,24 @@
             backdrop-filter: blur(10px);
             border: 2px solid #ff44ff;
             border-radius: 15px;
-            padding: 12px 20px;
+            padding: 10px 18px;
             text-align: center;
             z-index: 1000;
             display: none;
         }
         
         .ad-popup div {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
         }
         
         .ad-popup button {
             background: #ff44ff;
             border: none;
-            padding: 5px 15px;
-            border-radius: 25px;
-            margin-top: 8px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-top: 6px;
             cursor: pointer;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
         }
 
         /* Game modal */
@@ -396,14 +401,14 @@
             top: 15px;
             right: 15px;
             background: #ff3366;
-            width: 35px;
-            height: 35px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
         }
         
@@ -426,7 +431,6 @@
         
         <!-- الصفحة الرئيسية -->
         <div id="homePage" class="page">
-            <!-- شخصية أنمي مكبرة -->
             <div class="anime-hero">
                 <div class="character-img">
                     <div class="controller-on-hand">🎮</div>
@@ -438,12 +442,10 @@
                 </div>
             </div>
             
-            <!-- أفضل اللاعبين -->
             <div class="ranking-section">
                 <div class="ranking-circles" id="rankingList"></div>
             </div>
             
-            <!-- أنواع الألعاب -->
             <div class="categories" id="categoriesList">
                 <div class="cat-badge" data-cat="action">🎯 أكشن</div>
                 <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
@@ -451,21 +453,18 @@
                 <div class="cat-badge" data-cat="puzzle">🧩 ألغاز</div>
             </div>
             
-            <!-- الألعاب -->
             <div class="games-wrapper">
                 <div class="two-rows" id="gamesContainer"></div>
             </div>
         </div>
 
-        <!-- الصفحة الفرعية -->
         <div id="categoryPage" class="page page-hidden">
-            <button class="back-btn" id="backToHomeBtn">🔙 العودة للرئيسية</button>
+            <button class="back-btn" id="backToHomeBtn">🔙 العودة</button>
             <div class="two-rows" id="categoryGamesContainer"></div>
         </div>
 
     </div>
     
-    <!-- الشريط السفلي: تسجيل في الجهة المقابلة للموسيقى -->
     <div class="bottom-bar">
         <div class="register-btn" id="registerBtn">📝 تسجيل</div>
         <div class="music-bottom-btn" id="musicBottomBtn">🎵 تشغيل</div>
@@ -474,8 +473,8 @@
 
 <div id="adPopup" class="ad-popup">
     <div>📺 إعلان قصير</div>
-    <div style="font-size:10px;">انتظر 5 ثوانٍ</div>
-    <button onclick="closeAd()">تخطي الإعلان ▶</button>
+    <div style="font-size:9px;">انتظر 5 ثوانٍ</div>
+    <button onclick="closeAd()">تخطي ▶</button>
 </div>
 
 <div id="gameModal" class="game-modal hidden">
@@ -621,15 +620,13 @@
         document.getElementById('categoryPage').classList.remove('page-hidden');
     }
     
-    // تسجيل - حساب مميز
     document.getElementById('registerBtn').addEventListener('click', ()=>{
         isPremium = true;
-        alert('🎉 تم التسجيل بنجاح! أصبحت حساباً مميزاً. لن تظهر لك إعلانات.');
+        alert('🎉 تم التسجيل! أصبحت مميزاً بدون إعلانات.');
         document.getElementById('registerBtn').style.opacity = '0.7';
         document.getElementById('registerBtn').style.background = '#ff44ff';
     });
     
-    // أزرار الأنواع
     document.querySelectorAll('.cat-badge').forEach(badge=>{
         badge.addEventListener('click', ()=>{
             const cat = badge.getAttribute('data-cat');
@@ -641,7 +638,6 @@
     document.getElementById('backToHomeBtn').addEventListener('click', ()=> showHomePage());
     document.getElementById('gameModal').addEventListener('click', (e)=>{ if(e.target === document.getElementById('gameModal')) closeGame(); });
     
-    // الموسيقى - زر أسفل الموقع
     const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3');
     music.loop = true;
     music.volume = 0.1;
