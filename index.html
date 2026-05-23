@@ -153,71 +153,83 @@
             font-weight: bold;
         }
 
-        /* Ranking */
+        /* ترتيب اللاعبين - ثلاث دوائر ذهبي فضي برونزي */
         .ranking-section {
             background: #1a1a3a80;
             border-radius: 20px;
-            padding: 10px;
+            padding: 15px 10px;
             margin-bottom: 15px;
             border: 1px solid #ff44ff55;
+            text-align: center;
         }
         
         .section-title {
             color: white;
             font-size: 0.8rem;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
         }
         
-        .ranking-horizontal {
+        .ranking-circles {
             display: flex;
-            gap: 12px;
-            overflow-x: auto;
-            padding-bottom: 5px;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 25px;
+            flex-wrap: wrap;
         }
         
-        .ranking-horizontal::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .rank-card {
-            min-width: 100px;
-            background: linear-gradient(145deg, #0f0f2a, #0a0a1a);
-            border-radius: 15px;
-            padding: 10px;
+        .rank-circle {
             text-align: center;
-            border: 1px solid #ff44ff40;
         }
         
-        .rank-number {
-            width: 30px;
-            height: 30px;
-            background: #ff44ff;
+        .circle-img {
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            color: white;
-            margin: 0 auto 5px;
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
         }
         
-        .rank-avatar {
-            font-size: 2rem;
-            margin: 5px 0;
+        .gold-circle {
+            background: linear-gradient(145deg, #ffd700, #ffaa00);
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 20px #ffd700;
+        }
+        
+        .silver-circle {
+            background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
+            border: 2px solid #c0c0c0;
+            box-shadow: 0 0 15px #c0c0c0;
+        }
+        
+        .bronze-circle {
+            background: linear-gradient(145deg, #cd7f32, #b8651a);
+            border: 2px solid #cd7f32;
+            box-shadow: 0 0 15px #cd7f32;
         }
         
         .rank-name {
             color: white;
             font-size: 0.7rem;
             font-weight: bold;
+            margin-top: 5px;
         }
         
         .rank-points {
             color: #ffcc00;
             font-size: 0.6rem;
+        }
+        
+        .crown-icon {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
         }
 
         /* Categories */
@@ -421,8 +433,8 @@
             </div>
             
             <div class="ranking-section">
-                <div class="section-title">🏆 ترتيب اللاعبين المتميزين</div>
-                <div class="ranking-horizontal" id="rankingList"></div>
+                <div class="section-title">🏆 أفضل اللاعبين 🏆</div>
+                <div class="ranking-circles" id="rankingList"></div>
             </div>
             
             <div class="section-title">🎮 أنواع الألعاب</div>
@@ -439,7 +451,7 @@
 
         <!-- الصفحة الفرعية (لنوع معين) -->
         <div id="categoryPage" class="page page-hidden">
-            <button class="back-btn" id="backToHomeBtn">🔙 العقل إلى الرئيسية</button>
+            <button class="back-btn" id="backToHomeBtn">🔙 العودة إلى الرئيسية</button>
             <div class="section-title" id="categoryTitle">🎮 ألعاب الأكشن</div>
             <div class="two-rows" id="categoryGamesContainer"></div>
         </div>
@@ -462,33 +474,44 @@
 
 <script>
     const gamesData = [
-        { id:1, name:"Sonic", img:"https://images6.alphacoders.com/118/1185678.jpg", url:"https://www.crazygames.com/embed/sonic-the-hedgehog", cat:"action", points:150, avatar:"🦔" },
-        { id:2, name:"Subway Surfers", img:"https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action", points:200, avatar:"🏃" },
-        { id:3, name:"Temple Run 2", img:"https://images.hdqwalls.com/wallpapers/pubg-mobile-squad-4k-8q.jpg", url:"https://www.crazygames.com/embed/temple-run-2", cat:"action", points:180, avatar:"🏛️" },
-        { id:4, name:"Hill Climb", img:"https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg", url:"https://www.crazygames.com/embed/hill-climb-racing", cat:"racing", points:120, avatar:"🚗" },
-        { id:5, name:"Slope", img:"https://images.hdqwalls.com/wallpapers/slope-game-hd.jpg", url:"https://www.crazygames.com/embed/slope", cat:"racing", points:220, avatar:"⚡" },
-        { id:6, name:"Street Fighter", img:"https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg", url:"https://www.crazygames.com/embed/street-fighter", cat:"fighting", points:300, avatar:"👊" },
-        { id:7, name:"Mortal Kombat", img:"https://images.hdqwalls.com/wallpapers/mortal-kombat-11-4k-2020-45.jpg", url:"https://www.crazygames.com/embed/mortal-kombat", cat:"fighting", points:280, avatar:"💀" },
-        { id:8, name:"Among Us", img:"https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg", url:"https://www.crazygames.com/embed/among-us-online", cat:"puzzle", points:90, avatar:"👽" },
-        { id:9, name:"Gardenscapes", img:"https://images.hdqwalls.com/wallpapers/gardenscapes-2020-2021-4k-47.jpg", url:"https://www.crazygames.com/embed/gardenscapes", cat:"puzzle", points:70, avatar:"🌷" },
-        { id:10, name:"Free Fire", img:"https://images.hdqwalls.com/wallpapers/free-fire-2020-game-4k-g6.jpg", url:"https://www.crazygames.com/embed/free-fire", cat:"action", points:350, avatar:"🔥" },
-        { id:11, name:"Call of Duty", img:"https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-2020-04-m3.jpg", url:"https://www.crazygames.com/embed/call-of-duty", cat:"action", points:320, avatar:"🔫" },
-        { id:12, name:"Basketball Stars", img:"https://images.hdqwalls.com/wallpapers/basketball-4k-2021-6m.jpg", url:"https://www.crazygames.com/embed/basketball-stars", cat:"racing", points:160, avatar:"🏀" }
+        { id:1, name:"Sonic", img:"https://images6.alphacoders.com/118/1185678.jpg", url:"https://www.crazygames.com/embed/sonic-the-hedgehog", cat:"action", points:150, avatar:"🦔", playerName:"ShadowNinja" },
+        { id:2, name:"Subway Surfers", img:"https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action", points:200, avatar:"🏃", playerName:"SpeedMaster" },
+        { id:3, name:"Temple Run 2", img:"https://images.hdqwalls.com/wallpapers/pubg-mobile-squad-4k-8q.jpg", url:"https://www.crazygames.com/embed/temple-run-2", cat:"action", points:180, avatar:"🏛️", playerName:"RunKing" },
+        { id:4, name:"Hill Climb", img:"https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg", url:"https://www.crazygames.com/embed/hill-climb-racing", cat:"racing", points:120, avatar:"🚗", playerName:"ClimberPro" },
+        { id:5, name:"Slope", img:"https://images.hdqwalls.com/wallpapers/slope-game-hd.jpg", url:"https://www.crazygames.com/embed/slope", cat:"racing", points:220, avatar:"⚡", playerName:"FastLight" },
+        { id:6, name:"Street Fighter", img:"https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg", url:"https://www.crazygames.com/embed/street-fighter", cat:"fighting", points:300, avatar:"👊", playerName:"FighterX" },
+        { id:7, name:"Mortal Kombat", img:"https://images.hdqwalls.com/wallpapers/mortal-kombat-11-4k-2020-45.jpg", url:"https://www.crazygames.com/embed/mortal-kombat", cat:"fighting", points:280, avatar:"💀", playerName:"Scorpion" },
+        { id:8, name:"Among Us", img:"https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg", url:"https://www.crazygames.com/embed/among-us-online", cat:"puzzle", points:90, avatar:"👽", playerName:"Impostor" },
+        { id:9, name:"Gardenscapes", img:"https://images.hdqwalls.com/wallpapers/gardenscapes-2020-2021-4k-47.jpg", url:"https://www.crazygames.com/embed/gardenscapes", cat:"puzzle", points:70, avatar:"🌷", playerName:"Gardener" },
+        { id:10, name:"Free Fire", img:"https://images.hdqwalls.com/wallpapers/free-fire-2020-game-4k-g6.jpg", url:"https://www.crazygames.com/embed/free-fire", cat:"action", points:350, avatar:"🔥", playerName:"FireLord" },
+        { id:11, name:"Call of Duty", img:"https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-2020-04-m3.jpg", url:"https://www.crazygames.com/embed/call-of-duty", cat:"action", points:320, avatar:"🔫", playerName:"Soldier" },
+        { id:12, name:"Basketball Stars", img:"https://images.hdqwalls.com/wallpapers/basketball-4k-2021-6m.jpg", url:"https://www.crazygames.com/embed/basketball-stars", cat:"racing", points:160, avatar:"🏀", playerName:"Hooper" }
     ];
     
     let isPremium = false;
     let adTimeout = null;
     let pendingGameCallback = null;
     
-    // ترتيب اللاعبين
+    // ترتيب اللاعبين - ثلاث دوائر (ذهبي، فضي، برونزي)
     function updateRanking() {
-        const sorted = [...gamesData].sort((a,b)=>b.points - a.points).slice(0,6);
-        document.getElementById('rankingList').innerHTML = sorted.map((g,idx)=>`
-            <div class="rank-card">
-                <div class="rank-number">#${idx+1}</div>
-                <div class="rank-avatar">${g.avatar}</div>
-                <div class="rank-name">${g.name}</div>
-                <div class="rank-points">⭐ ${g.points} نقطة</div>
+        const sorted = [...gamesData].sort((a,b)=>b.points - a.points);
+        const top3 = sorted.slice(0, 3);
+        
+        const medals = [
+            { class: "gold-circle", icon: "👑", label: "الذهبي" },
+            { class: "silver-circle", icon: "🥈", label: "الفضي" },
+            { class: "bronze-circle", icon: "🥉", label: "البرونزي" }
+        ];
+        
+        const rankingContainer = document.getElementById('rankingList');
+        rankingContainer.innerHTML = top3.map((player, idx) => `
+            <div class="rank-circle">
+                <div class="crown-icon">${medals[idx].icon}</div>
+                <div class="circle-img ${medals[idx].class}">
+                    ${player.avatar}
+                </div>
+                <div class="rank-name">${player.playerName}</div>
+                <div class="rank-points">⭐ ${player.points} نقطة</div>
             </div>
         `).join('');
     }
