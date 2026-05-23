@@ -310,35 +310,25 @@
             border-color: #00ffff;
         }
 
-        .ad-space {
-            background: linear-gradient(135deg, #ff44ff15, #00ffff15);
-            border: 2px solid #ff44ff;
-            border-radius: 16px;
-            padding: 10px 10px;
-            margin: 5px 0 8px 0;
+        /* الإعلان الثابت - يظهر دائماً في وسط الصفحة ولا يختفي أبداً */
+        .fixed-permanent-ad {
+            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
+            border: 3px solid #ff44ff;
+            border-radius: 20px;
+            padding: 12px;
+            margin: 10px 0;
             text-align: center;
-            font-size: 0.7rem;
-            color: #ffaa88;
-            box-shadow: 0 0 25px #ff44ff, inset 0 0 15px #ff44ff20;
-            animation: adGlow 2s ease-in-out infinite;
+            box-shadow: 0 0 25px #ff44ff, inset 0 0 10px #ff44ff30;
+            animation: permanentAdGlow 2s ease-in-out infinite;
         }
         
-        @keyframes adGlow {
+        @keyframes permanentAdGlow {
             0%, 100% { box-shadow: 0 0 15px #ff44ff; border-color: #ff44ff; }
-            50% { box-shadow: 0 0 35px #00ffff; border-color: #00ffff; }
+            50% { box-shadow: 0 0 35px #00ffff, 0 0 20px #ff44ff; border-color: #00ffff; }
         }
         
-        .ad-space span {
-            display: block;
-            font-size: 0.55rem;
-            color: #ff88ff;
-            margin-top: 5px;
-            text-shadow: 0 0 5px #ff44ff;
-        }
-        
-        .ad-space .ad-icon {
-            font-size: 1.5rem;
-            display: block;
+        .fixed-permanent-ad-icon {
+            font-size: 2.2rem;
             margin-bottom: 5px;
             animation: bounce 1s ease-in-out infinite;
         }
@@ -346,6 +336,94 @@
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-5px); }
+        }
+        
+        .fixed-permanent-ad-title {
+            color: white;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-shadow: 0 0 5px #ff44ff;
+        }
+        
+        .fixed-permanent-ad-text {
+            color: #ffaa88;
+            font-size: 0.6rem;
+            margin-top: 5px;
+        }
+        
+        .ad-refresh-note {
+            color: #88ffaa;
+            font-size: 0.5rem;
+            margin-top: 8px;
+            border-top: 1px dashed #ff44ff;
+            padding-top: 5px;
+        }
+
+        /* إعلان مؤقت - يظهر عند دخول اللعبة فقط للمستخدم العادي */
+        .temp-ad-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .temp-ad-box {
+            background: linear-gradient(135deg, #1a0033, #0a002a);
+            border: 3px solid #ff44ff;
+            border-radius: 30px;
+            padding: 25px 20px;
+            text-align: center;
+            max-width: 280px;
+            width: 85%;
+            box-shadow: 0 0 50px #ff44ff;
+        }
+        
+        .temp-ad-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .temp-ad-title {
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        
+        .temp-ad-timer {
+            color: #ff44ff;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .temp-ad-button {
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        
+        .temp-ad-button.active {
+            cursor: pointer;
+            opacity: 1;
+            animation: btnPulse 0.8s infinite;
+        }
+        
+        @keyframes btnPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .games-wrapper {
@@ -464,6 +542,11 @@
             box-shadow: 0 0 8px #ff44ff;
         }
         
+        .register-btn.vip-active {
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            box-shadow: 0 0 15px #ff44ff;
+        }
+        
         .register-btn:hover {
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             box-shadow: 0 0 20px #ff44ff;
@@ -486,39 +569,6 @@
         .music-bottom-btn:hover {
             box-shadow: 0 0 20px #0ff;
             transform: scale(1.05);
-        }
-
-        .ad-popup {
-            position: fixed;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #000000dd;
-            backdrop-filter: blur(10px);
-            border: 2px solid #ff44ff;
-            border-radius: 15px;
-            padding: 10px 18px;
-            text-align: center;
-            z-index: 1000;
-            display: none;
-            box-shadow: 0 0 30px #ff44ff;
-        }
-        
-        .ad-popup div {
-            font-size: 0.65rem;
-            color: white;
-        }
-        
-        .ad-popup button {
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
-            border: none;
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-top: 6px;
-            cursor: pointer;
-            font-size: 0.55rem;
-            color: white;
-            font-weight: bold;
         }
 
         .game-modal {
@@ -590,6 +640,15 @@
             text-shadow: 0 0 8px #ff44ff;
             letter-spacing: 1px;
         }
+        
+        .vip-badge {
+            background: #ff44ff;
+            color: white;
+            font-size: 0.45rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 5px;
+        }
     </style>
 </head>
 <body>
@@ -622,10 +681,12 @@
                 </div>
             </div>
             
-            <div class="ad-space" id="adSpace">
-                <div class="ad-icon">📺✨</div>
-                إعلان نيوني هنا
-                <span>❗ اشترك في التسجيل لإزالة الإعلانات ❗</span>
+            <!-- الإعلان الثابت - يظهر دائماً للجميع ولا يختفي أبداً -->
+            <div class="fixed-permanent-ad" id="permanentAd">
+                <div class="fixed-permanent-ad-icon" id="adIcon">📺✨</div>
+                <div class="fixed-permanent-ad-title" id="adTitle">إعلان ممول</div>
+                <div class="fixed-permanent-ad-text" id="adText">هذا الإعلان يظهر للجميع بشكل دائم</div>
+                <div class="ad-refresh-note" id="adRefreshNote">🔄 يتغير تلقائياً كل 10 ثوانٍ</div>
             </div>
             
             <div class="games-wrapper">
@@ -641,15 +702,20 @@
     </div>
     
     <div class="bottom-bar">
-        <div class="register-btn" id="registerBtn">📝 تسجيل VIP</div>
-        <div class="music-bottom-btn" id="musicBottomBtn">🎵 إيقاف</div>
+        <div class="register-btn" id="registerBtn">📝 ترقية إلى VIP</div>
+        <div class="music-bottom-btn" id="musicBottomBtn">🎵 تشغيل</div>
     </div>
 </div>
 
-<div id="adPopup" class="ad-popup">
-    <div>📺✨ إعلان نيوني قصير ✨📺</div>
-    <div style="font-size:9px;">انتظر 5 ثوانٍ</div>
-    <button onclick="closeAd()">تخطي النيون ▶</button>
+<!-- الإعلان المؤقت - يظهر فقط للمستخدم العادي عند دخول اللعبة -->
+<div id="tempAdOverlay" class="temp-ad-overlay hidden">
+    <div class="temp-ad-box">
+        <div class="temp-ad-icon">📺⏳</div>
+        <div class="temp-ad-title">إعلان أثناء اللعب</div>
+        <div class="temp-ad-text" style="color:#ffaa88; font-size:0.7rem; margin:5px 0;">لا يمكن تخطيه</div>
+        <div class="temp-ad-timer" id="tempAdTimer">5</div>
+        <button class="temp-ad-button" id="tempAdBtn" disabled>⏳ انتظر...</button>
+    </div>
 </div>
 
 <div id="gameModal" class="game-modal hidden">
@@ -673,9 +739,83 @@
         { id:12, name:"Basketball Stars", img:"https://images.hdqwalls.com/wallpapers/basketball-4k-2021-6m.jpg", url:"https://www.crazygames.com/embed/basketball-stars", cat:"racing", points:160, avatar:"🏀", playerName:"Hooper" }
     ];
     
+    // قائمة الإعلانات الثابتة (تتغير تلقائياً)
+    const permanentAds = [
+        { icon: "📺✨", title: "إعلان ممول", text: "اشترك الآن في عروضنا الحصرية!" },
+        { icon: "🎮🔥", title: "لعبة الأسبوع", text: "جرب لعبة جديدة كل أسبوع!" },
+        { icon: "💰💎", title: "خصم 50%", text: "عروض لا تُفوت! اشترك الآن" },
+        { icon: "🚀⚡", title: "تحديث جديد", text: "أحدث الإصدارات متوفرة الآن" },
+        { icon: "🎁🎉", title: "هدية اليوم", text: "احصل على مكافآت يومية" },
+        { icon: "🏆👑", title: "البطولة الكبرى", text: "سجل الآن واربح الجوائز" }
+    ];
+    
     let isPremium = false;
-    let adTimeout = null;
     let pendingGameCallback = null;
+    let adInterval = null;
+    let currentAdIndex = 0;
+    let tempAdInterval = null;
+    
+    // تحديث الإعلان الثابت (يتغير كل 10 ثوانٍ)
+    function refreshPermanentAd() {
+        currentAdIndex = (currentAdIndex + 1) % permanentAds.length;
+        const ad = permanentAds[currentAdIndex];
+        document.getElementById('adIcon').innerHTML = ad.icon;
+        document.getElementById('adTitle').innerHTML = ad.title;
+        document.getElementById('adText').innerHTML = ad.text;
+    }
+    
+    // بدء التغيير التلقائي للإعلان الثابت
+    function startPermanentAdRotation() {
+        if (adInterval) clearInterval(adInterval);
+        adInterval = setInterval(() => {
+            refreshPermanentAd();
+        }, 10000);
+    }
+    
+    // إعلان مؤقت عند دخول اللعبة (للمستخدم العادي فقط)
+    function showTempAd(callback) {
+        pendingGameCallback = callback;
+        const overlay = document.getElementById('tempAdOverlay');
+        const timerElement = document.getElementById('tempAdTimer');
+        const btn = document.getElementById('tempAdBtn');
+        
+        overlay.classList.remove('hidden');
+        let seconds = 5;
+        timerElement.textContent = seconds;
+        btn.disabled = true;
+        btn.classList.remove('active');
+        btn.textContent = '⏳ انتظر...';
+        
+        if (tempAdInterval) clearInterval(tempAdInterval);
+        
+        tempAdInterval = setInterval(() => {
+            seconds--;
+            timerElement.textContent = seconds;
+            
+            if (seconds <= 0) {
+                clearInterval(tempAdInterval);
+                btn.disabled = false;
+                btn.classList.add('active');
+                btn.textContent = '✅ متابعة';
+            }
+        }, 1000);
+        
+        // إعداد زر المتابعة
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+        newBtn.id = 'tempAdBtn';
+        
+        newBtn.onclick = () => {
+            if (!newBtn.disabled) {
+                overlay.classList.add('hidden');
+                if (tempAdInterval) clearInterval(tempAdInterval);
+                if (pendingGameCallback) {
+                    pendingGameCallback();
+                    pendingGameCallback = null;
+                }
+            }
+        };
+    }
     
     function updateRanking() {
         const sorted = [...gamesData].sort((a,b)=>b.points - a.points);
@@ -703,15 +843,6 @@
                 <div class="rank-points">⭐ ${bronze ? bronze.points : 0}</div>
             </div>
         `;
-    }
-    
-    function updateAdSpace() {
-        const adSpace = document.getElementById('adSpace');
-        if(isPremium) {
-            adSpace.style.display = 'none';
-        } else {
-            adSpace.style.display = 'block';
-        }
     }
     
     function renderAllGames() {
@@ -752,10 +883,13 @@
     }
     
     function launchGame(url, name, gameId) {
-        if(isPremium) {
+        if (isPremium) {
+            // المستخدم المميز: يدخل اللعبة مباشرة دون أي إعلان
             openGameDirect(url, name);
+            addPointsToPlayer(gameId, 5);
         } else {
-            showAd(()=>{
+            // المستخدم العادي: يشاهد إعلاناً لمدة 5 ثوانٍ قبل الدخول
+            showTempAd(() => {
                 openGameDirect(url, name);
                 addPointsToPlayer(gameId, 5);
             });
@@ -779,20 +913,6 @@
         if(game) { game.points += points; updateRanking(); }
     }
     
-    function showAd(callback) {
-        const adDiv = document.getElementById('adPopup');
-        adDiv.style.display = 'block';
-        pendingGameCallback = callback;
-        if(adTimeout) clearTimeout(adTimeout);
-        adTimeout = setTimeout(()=> closeAd(), 5000);
-    }
-    
-    function closeAd() {
-        document.getElementById('adPopup').style.display = 'none';
-        if(adTimeout) clearTimeout(adTimeout);
-        if(pendingGameCallback) { pendingGameCallback(); pendingGameCallback = null; }
-    }
-    
     function showHomePage() {
         document.getElementById('homePage').classList.remove('page-hidden');
         document.getElementById('categoryPage').classList.add('page-hidden');
@@ -804,12 +924,17 @@
         document.getElementById('categoryPage').classList.remove('page-hidden');
     }
     
+    // الترقية إلى VIP
     document.getElementById('registerBtn').addEventListener('click', ()=>{
-        isPremium = true;
-        updateAdSpace();
-        alert('🎉✨ تم التسجيل النيوني! أصبحت مميزاً بدون إعلانات ✨🎉');
-        document.getElementById('registerBtn').style.opacity = '0.7';
-        document.getElementById('registerBtn').style.background = 'linear-gradient(135deg, #ff44ff, #00ffff)';
+        if (!isPremium) {
+            isPremium = true;
+            const btn = document.getElementById('registerBtn');
+            btn.innerHTML = '👑 VIP مفعل';
+            btn.classList.add('vip-active');
+            alert('🎉✨ تهانينا! أصبحت حساباً مميزاً ✨🎉\n\n✅ لن تظهر لك أي إعلانات أثناء اللعب بعد الآن!\n⚠️ ملاحظة: الإعلان الثابت في المنتصف يظهر للجميع.');
+        } else {
+            alert('أنت بالفعل حساب مميز! 🎉');
+        }
     });
     
     document.querySelectorAll('.cat-badge').forEach(badge=>{
@@ -823,29 +948,21 @@
     document.getElementById('backToHomeBtn').addEventListener('click', ()=> showHomePage());
     document.getElementById('gameModal').addEventListener('click', (e)=>{ if(e.target === document.getElementById('gameModal')) closeGame(); });
     
-    // 🎵 موسيقى إلكترونية حماسية - تعمل تلقائياً 🎵
+    // 🎵 موسيقى إلكترونية حماسية 🎵
     const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
     music.loop = true;
     music.volume = 0.12;
-    let playing = true; // نبدأ بتشغيل الموسيقى تلقائياً
-    
+    let playing = true;
     const musicBottomBtn = document.getElementById('musicBottomBtn');
-    musicBottomBtn.innerHTML = '🔇 إيقاف'; // زر يظهر أن الموسيقى تعمل
+    musicBottomBtn.innerHTML = '🔇 إيقاف';
     
-    // محاولة تشغيل الموسيقى تلقائياً فور تحميل الصفحة
     const autoPlay = music.play();
-    
     autoPlay.then(() => {
-        // التشغيل التلقائي نجح
         playing = true;
         musicBottomBtn.innerHTML = '🔇 إيقاف';
-    }).catch((error) => {
-        // المتصفح منع التشغيل التلقائي - سنستخدم حل بديل
-        console.log("التشغيل التلقائي يحتاج تفاعل المستخدم");
+    }).catch(() => {
         playing = false;
         musicBottomBtn.innerHTML = '🎵 تشغيل';
-        
-        // عند أول ضغطة في أي مكان على الصفحة، تشغل الموسيقى
         const playOnInteraction = () => {
             music.play();
             playing = true;
@@ -857,21 +974,22 @@
         document.addEventListener('touchstart', playOnInteraction);
     });
     
-    // زر التحكم في الموسيقى
     musicBottomBtn.onclick = () => {
         if(playing) { 
             music.pause(); 
             musicBottomBtn.innerHTML = '🎵 تشغيل'; 
             playing = false;
         } else { 
-            music.play().catch(e => console.log('حدث خطأ في التشغيل')); 
+            music.play().catch(e => {}); 
             musicBottomBtn.innerHTML = '🔇 إيقاف'; 
             playing = true;
         }
     };
     
+    // بدء تشغيل الإعلان الثابت المتغير
+    startPermanentAdRotation();
+    
     updateRanking();
-    updateAdSpace();
     renderAllGames();
 </script>
 </body>
