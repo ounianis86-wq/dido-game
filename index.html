@@ -153,20 +153,16 @@
             font-weight: bold;
         }
 
-        /* ترتيب اللاعبين - ثلاث دوائر ذهبي فضي برونزي */
+        /* ترتيب اللاعبين - بدون إطار خارجي */
         .ranking-section {
-            background: #1a1a3a80;
-            border-radius: 20px;
-            padding: 15px 10px;
             margin-bottom: 15px;
-            border: 1px solid #ff44ff55;
             text-align: center;
         }
         
         .section-title {
             color: white;
             font-size: 0.8rem;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -176,8 +172,8 @@
         .ranking-circles {
             display: flex;
             justify-content: center;
-            align-items: flex-end;
-            gap: 25px;
+            align-items: center;
+            gap: 20px;
             flex-wrap: wrap;
         }
         
@@ -185,51 +181,66 @@
             text-align: center;
         }
         
-        .circle-img {
-            width: 70px;
-            height: 70px;
+        /* الدائرة الذهبية - ثلثي الحجم (50px بدلاً من 70px) */
+        .gold-circle {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(145deg, #ffd700, #ffaa00);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            margin-bottom: 8px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.3);
-        }
-        
-        .gold-circle {
-            background: linear-gradient(145deg, #ffd700, #ffaa00);
+            font-size: 1.8rem;
+            margin-bottom: 5px;
             border: 2px solid #ffd700;
-            box-shadow: 0 0 20px #ffd700;
+            box-shadow: 0 0 15px #ffd700;
         }
         
+        /* الدائرة الفضية - نصف الحجم (35px بدلاً من 70px) */
         .silver-circle {
+            width: 35px;
+            height: 35px;
             background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
-            border: 2px solid #c0c0c0;
-            box-shadow: 0 0 15px #c0c0c0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            border: 1.5px solid #c0c0c0;
+            box-shadow: 0 0 10px #c0c0c0;
         }
         
+        /* الدائرة البرونزية - نصف الحجم (35px بدلاً من 70px) */
         .bronze-circle {
+            width: 35px;
+            height: 35px;
             background: linear-gradient(145deg, #cd7f32, #b8651a);
-            border: 2px solid #cd7f32;
-            box-shadow: 0 0 15px #cd7f32;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            border: 1.5px solid #cd7f32;
+            box-shadow: 0 0 10px #cd7f32;
         }
         
         .rank-name {
             color: white;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             font-weight: bold;
-            margin-top: 5px;
+            margin-top: 3px;
         }
         
         .rank-points {
             color: #ffcc00;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
         }
         
         .crown-icon {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
+            font-size: 0.9rem;
+            margin-bottom: 3px;
         }
 
         /* Categories */
@@ -432,6 +443,7 @@
                 <span class="upgrade">بدون إعلانات - اضغط للترقية</span>
             </div>
             
+            <!-- أفضل اللاعبين - بدون إطار خارجي -->
             <div class="ranking-section">
                 <div class="section-title">🏆 أفضل اللاعبين 🏆</div>
                 <div class="ranking-circles" id="rankingList"></div>
@@ -492,28 +504,40 @@
     let adTimeout = null;
     let pendingGameCallback = null;
     
-    // ترتيب اللاعبين - ثلاث دوائر (ذهبي، فضي، برونزي)
+    // ترتيب اللاعبين - بدون إطار خارجي
     function updateRanking() {
         const sorted = [...gamesData].sort((a,b)=>b.points - a.points);
-        const top3 = sorted.slice(0, 3);
-        
-        const medals = [
-            { class: "gold-circle", icon: "👑", label: "الذهبي" },
-            { class: "silver-circle", icon: "🥈", label: "الفضي" },
-            { class: "bronze-circle", icon: "🥉", label: "البرونزي" }
-        ];
+        const gold = sorted[0];
+        const silver = sorted[1];
+        const bronze = sorted[2];
         
         const rankingContainer = document.getElementById('rankingList');
-        rankingContainer.innerHTML = top3.map((player, idx) => `
+        rankingContainer.innerHTML = `
             <div class="rank-circle">
-                <div class="crown-icon">${medals[idx].icon}</div>
-                <div class="circle-img ${medals[idx].class}">
-                    ${player.avatar}
+                <div class="crown-icon">🥈</div>
+                <div class="silver-circle">
+                    ${silver ? silver.avatar : '👤'}
                 </div>
-                <div class="rank-name">${player.playerName}</div>
-                <div class="rank-points">⭐ ${player.points} نقطة</div>
+                <div class="rank-name">${silver ? silver.playerName : '---'}</div>
+                <div class="rank-points">⭐ ${silver ? silver.points : 0}</div>
             </div>
-        `).join('');
+            <div class="rank-circle">
+                <div class="crown-icon">👑</div>
+                <div class="gold-circle">
+                    ${gold ? gold.avatar : '👤'}
+                </div>
+                <div class="rank-name">${gold ? gold.playerName : '---'}</div>
+                <div class="rank-points">⭐ ${gold ? gold.points : 0}</div>
+            </div>
+            <div class="rank-circle">
+                <div class="crown-icon">🥉</div>
+                <div class="bronze-circle">
+                    ${bronze ? bronze.avatar : '👤'}
+                </div>
+                <div class="rank-name">${bronze ? bronze.playerName : '---'}</div>
+                <div class="rank-points">⭐ ${bronze ? bronze.points : 0}</div>
+            </div>
+        `;
     }
     
     // عرض جميع الألعاب في الصفحة الرئيسية (صفين)
