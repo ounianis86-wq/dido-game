@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DidoGame - الموقع النهائي</title>
+    <title>DidoGame - Compact View</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Cairo', 'Poppins', 'Segoe UI', sans-serif;
+            font-family: 'Cairo', 'Segoe UI', system-ui, sans-serif;
         }
 
         body {
@@ -18,19 +18,22 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 16px;
+            padding: 10px;
         }
 
+        /* شاشة الهاتف بالكامل بدون تمرير */
         .app {
             max-width: 400px;
             width: 100%;
             background: #0a0a1a;
-            border-radius: 48px;
-            overflow-y: auto;
-            overflow-x: hidden;
-            height: 700px;
+            border-radius: 40px;
+            overflow: hidden;
+            height: 95vh;
+            max-height: 700px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 40px #ff00ff30;
             position: relative;
-            box-shadow: 0 0 50px #ff00ff30, 0 0 20px #00ffff20;
         }
 
         .bg-neon {
@@ -44,18 +47,28 @@
         .content {
             position: relative;
             z-index: 2;
-            padding: 20px 16px;
+            padding: 12px 14px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            scrollbar-width: none;
         }
 
+        .content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* شريط علوي صغير */
         .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 8px;
         }
 
         .logo-small {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: bold;
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             -webkit-background-clip: text;
@@ -65,32 +78,32 @@
 
         .premium-badge {
             background: linear-gradient(135deg, #ff44ff, #aa44ff);
-            padding: 4px 12px;
+            padding: 2px 10px;
             border-radius: 40px;
             color: white;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             font-weight: bold;
         }
 
-        /* البانر الرئيسي - صورة أنمي + مدينة */
+        /* بانر مصغر */
         .hero-banner {
             background: linear-gradient(135deg, #1a0a3a, #0a0a2a);
-            border-radius: 32px;
-            margin-bottom: 20px;
-            overflow: hidden;
+            border-radius: 24px;
+            margin-bottom: 10px;
             border: 1px solid #ff44ff55;
         }
 
         .hero-image {
             width: 100%;
-            min-height: 280px;
+            min-height: 150px;
             background-image: url('https://wallpapercave.com/wp/wp6607500.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            padding: 20px;
+            padding: 12px;
+            border-radius: 24px;
         }
 
         .hero-text {
@@ -99,49 +112,46 @@
         }
 
         .hero-text h2 {
-            font-size: 1.6rem;
+            font-size: 1.2rem;
             background: linear-gradient(135deg, #ffff00, #ff44ff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 10px #ff44ff;
         }
 
         .hero-text p {
             color: white;
-            font-size: 0.8rem;
-            margin: 8px 0;
-            text-shadow: 0 0 5px black;
+            font-size: 0.65rem;
+            margin: 4px 0;
         }
 
         .free-badge {
             display: inline-block;
             background: #ff3366;
-            padding: 4px 16px;
+            padding: 2px 10px;
             border-radius: 40px;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             font-weight: bold;
-            margin: 8px 0;
         }
 
         .discover-btn {
             background: linear-gradient(135deg, #8a2be2, #4a00e0);
             border: none;
-            padding: 10px 24px;
+            padding: 5px 12px;
             border-radius: 40px;
             color: white;
             font-weight: bold;
-            margin-top: 8px;
+            font-size: 0.65rem;
+            margin-top: 6px;
             cursor: pointer;
         }
 
-        /* أيقونات الفئات */
+        /* فئات مصغرة */
         .categories {
             display: flex;
             justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
         }
 
         .cat-item {
@@ -151,101 +161,56 @@
 
         .cat-icon {
             background: #1a1a3a;
-            border-radius: 24px;
-            padding: 10px;
-            margin-bottom: 6px;
-            font-size: 1.5rem;
+            border-radius: 16px;
+            padding: 5px;
+            font-size: 1.1rem;
         }
 
         .cat-item span {
             color: white;
-            font-size: 0.7rem;
+            font-size: 0.55rem;
         }
 
+        /* عناوين الأقسام صغيرة */
         .section-title {
             color: white;
-            font-size: 1rem;
-            margin: 16px 0 12px;
+            font-size: 0.8rem;
+            margin: 8px 0 6px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .section-title span {
-            width: 4px;
-            height: 20px;
+            width: 3px;
+            height: 14px;
             background: #ff44ff;
             border-radius: 2px;
         }
 
-        /* قائمة الألعاب */
+        /* قوائم الألعاب مضغوطة */
         .game-row {
             display: flex;
-            gap: 12px;
+            gap: 8px;
             overflow-x: auto;
-            padding-bottom: 8px;
+            padding-bottom: 6px;
         }
 
         .game-card {
-            min-width: 130px;
+            min-width: 100px;
             background: #0f0f2a;
-            border-radius: 20px;
-            padding: 12px;
+            border-radius: 16px;
+            padding: 8px;
             text-align: center;
             border: 1px solid #ff44ff40;
             cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .game-card:hover {
-            border-color: #ff44ff;
-            box-shadow: 0 0 15px #ff44ff;
         }
 
         .game-img {
             width: 100%;
-            height: 80px;
+            height: 55px;
             background: #1a1a3a;
-            border-radius: 16px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-        }
-
-        .game-card h4 {
-            color: white;
-            font-size: 0.8rem;
-        }
-
-        .new-badge {
-            background: red;
-            color: white;
-            font-size: 0.6rem;
-            padding: 2px 8px;
             border-radius: 12px;
-            display: inline-block;
-            margin-top: 4px;
-        }
-
-        /* قائمة اللاعبين المميزين */
-        .players-list {
-            display: flex;
-            gap: 12px;
-            overflow-x: auto;
-        }
-
-        .player {
-            text-align: center;
-            min-width: 70px;
-        }
-
-        .player-avatar {
-            width: 60px;
-            height: 60px;
-            background: #ff44ff30;
-            border-radius: 50%;
             margin-bottom: 5px;
             display: flex;
             align-items: center;
@@ -253,24 +218,64 @@
             font-size: 1.5rem;
         }
 
+        .game-card h4 {
+            color: white;
+            font-size: 0.65rem;
+        }
+
+        .new-badge {
+            background: red;
+            color: white;
+            font-size: 0.5rem;
+            padding: 1px 5px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 3px;
+        }
+
+        /* اللاعبين */
+        .players-list {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+        }
+
+        .player {
+            text-align: center;
+            min-width: 55px;
+        }
+
+        .player-avatar {
+            width: 45px;
+            height: 45px;
+            background: #ff44ff30;
+            border-radius: 50%;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
         .player-name {
             color: white;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             font-weight: bold;
         }
 
+        /* زر الموسيقى صغير */
         .music-btn {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
             background: #000000aa;
             backdrop-filter: blur(10px);
             border: 1px solid #00ffff;
             border-radius: 50px;
-            padding: 6px 16px;
+            padding: 4px 12px;
             color: #00ffff;
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             z-index: 100;
         }
     </style>
@@ -284,24 +289,24 @@
             <div class="premium-badge">👑 حساب مميز</div>
         </div>
 
-        <!-- البانر بصورة أنمي ومدينة -->
+        <!-- البانر -->
         <div class="hero-banner">
             <div class="hero-image">
                 <div class="hero-text">
                     <h2>DidoGame</h2>
-                    <p>🌍 عالم واحد يجمع كل ألعابك المفضلة</p>
+                    <p>🌍 عالم واحد لكل ألعابك</p>
                     <div class="free-badge">✨ مجانية 100% ✨</div>
-                    <button class="discover-btn" onclick="alert('اكتشف الألعاب الآن - قريباً')">اكتشف الألعاب الآن ▶</button>
+                    <button class="discover-btn" onclick="alert('اكتشف الألعاب الآن')">اكتشف ▶</button>
                 </div>
             </div>
         </div>
 
         <!-- الفئات -->
         <div class="categories">
-            <div class="cat-item"><div class="cat-icon">🎃</div><span>ألعاب رعب</span></div>
-            <div class="cat-item"><div class="cat-icon">🥊</div><span>ألعاب قتال</span></div>
-            <div class="cat-item"><div class="cat-icon">⚽</div><span>ألعاب رياضة</span></div>
-            <div class="cat-item"><div class="cat-icon">🏎️</div><span>ألعاب سباقات</span></div>
+            <div class="cat-item"><div class="cat-icon">🎃</div><span>رعب</span></div>
+            <div class="cat-item"><div class="cat-icon">🥊</div><span>قتال</span></div>
+            <div class="cat-item"><div class="cat-icon">⚽</div><span>رياضة</span></div>
+            <div class="cat-item"><div class="cat-icon">🏎️</div><span>سباقات</span></div>
             <div class="cat-item"><div class="cat-icon">🧩</div><span>ألغاز</span></div>
         </div>
 
@@ -311,26 +316,26 @@
             <div class="player"><div class="player-avatar">😎</div><div class="player-name">Shadow</div></div>
             <div class="player"><div class="player-avatar">🗡️</div><div class="player-name">HunterX</div></div>
             <div class="player"><div class="player-avatar">✨</div><div class="player-name">Nova</div></div>
-            <div class="player"><div class="player-avatar">👑</div><div class="player-name">PixelKing</div></div>
+            <div class="player"><div class="player-avatar">👑</div><div class="player-name">King</div></div>
         </div>
 
         <!-- ألعاب مميزة -->
         <div class="section-title"><span></span> 🔥 ألعاب مميزة</div>
         <div class="game-row">
-            <div class="game-card" onclick="alert('Anime Fighters - قريباً')"><div class="game-img">⚔️</div><h4>Anime Fighters</h4><div class="new-badge">جديد</div></div>
-            <div class="game-card" onclick="alert('Car Speed Racing - قريباً')"><div class="game-img">🏎️</div><h4>Car Speed Racing</h4></div>
-            <div class="game-card" onclick="alert('Zombie Hunter - قريباً')"><div class="game-img">🧟</div><h4>Zombie Hunter</h4></div>
-            <div class="game-card" onclick="alert('Puzzle Master - قريباً')"><div class="game-img">🧩</div><h4>Puzzle Master</h4></div>
+            <div class="game-card" onclick="alert('Anime Fighters')"><div class="game-img">⚔️</div><h4>Anime Fighters</h4><div class="new-badge">جديد</div></div>
+            <div class="game-card" onclick="alert('Car Speed Racing')"><div class="game-img">🏎️</div><h4>Speed Racing</h4></div>
+            <div class="game-card" onclick="alert('Zombie Hunter')"><div class="game-img">🧟</div><h4>Zombie Hunter</h4></div>
+            <div class="game-card" onclick="alert('Puzzle Master')"><div class="game-img">🧩</div><h4>Puzzle Master</h4></div>
         </div>
 
         <!-- ألعاب كلاسيكية -->
         <div class="section-title"><span></span> 🎮 ألعاب كلاسيكية</div>
         <div class="game-row">
-            <div class="game-card" onclick="alert('Minecraft Classic - قريباً')"><div class="game-img">⛏️</div><h4>Minecraft Classic</h4></div>
-            <div class="game-card" onclick="alert('GTA: Vice City - قريباً')"><div class="game-img">🏙️</div><h4>GTA: Vice City</h4></div>
-            <div class="game-card" onclick="alert('Stickman Battle - قريباً')"><div class="game-img">🥋</div><h4>Stickman Battle</h4></div>
-            <div class="game-card" onclick="alert('Among Us - قريباً')"><div class="game-img">👾</div><h4>Among Us</h4></div>
-            <div class="game-card" onclick="alert('Hill Climb Racing - قريباً')"><div class="game-img">⛰️</div><h4>Hill Climb Racing</h4></div>
+            <div class="game-card" onclick="alert('Minecraft')"><div class="game-img">⛏️</div><h4>Minecraft</h4></div>
+            <div class="game-card" onclick="alert('GTA')"><div class="game-img">🏙️</div><h4>GTA VC</h4></div>
+            <div class="game-card" onclick="alert('Stickman')"><div class="game-img">🥋</div><h4>Stickman</h4></div>
+            <div class="game-card" onclick="alert('Among Us')"><div class="game-img">👾</div><h4>Among Us</h4></div>
+            <div class="game-card" onclick="alert('Hill Climb')"><div class="game-img">⛰️</div><h4>Hill Climb</h4></div>
         </div>
     </div>
 </div>
@@ -340,7 +345,7 @@
 <script>
     const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3');
     music.loop = true;
-    music.volume = 0.2;
+    music.volume = 0.15;
     let playing = false;
     const btn = document.getElementById('musicToggle');
     btn.onclick = () => {
