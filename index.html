@@ -217,17 +217,35 @@
             font-size: 0.45rem;
         }
 
-        /* Categories Section - With More button on LEFT side */
+        /* Categories Section - All buttons in ONE LINE (horizontal scroll if needed) */
         .categories-section {
             margin-bottom: 12px;
         }
         
         .categories {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: 6px;
             justify-content: center;
             align-items: center;
+            overflow-x: auto;
+            padding: 4px 2px;
+            scrollbar-width: thin;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .categories::-webkit-scrollbar {
+            height: 3px;
+        }
+        
+        .categories::-webkit-scrollbar-track {
+            background: #1a1a2e;
+            border-radius: 10px;
+        }
+        
+        .categories::-webkit-scrollbar-thumb {
+            background: #ff44ff;
+            border-radius: 10px;
         }
         
         .cat-badge {
@@ -239,6 +257,8 @@
             font-size: 0.6rem;
             cursor: pointer;
             transition: all 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         
         .cat-badge:hover {
@@ -256,6 +276,8 @@
             cursor: pointer;
             transition: all 0.2s ease;
             font-weight: bold;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         
         .more-btn:hover {
@@ -331,7 +353,7 @@
             margin-top: 10px;
         }
 
-        /* Ad - ENLARGED AREA (unchanged position) */
+        /* Ad - ENLARGED AREA */
         .fixed-permanent-ad {
             background: linear-gradient(135deg, #ff44ff30, #00ffff30);
             border: 2px solid #ff44ff;
@@ -1055,7 +1077,7 @@
                 <div class="ranking-circles" id="rankingList"></div>
             </div>
             
-            <!-- Categories Section with More button on LEFT side -->
+            <!-- Categories Section - All buttons in ONE LINE (horizontal scrollable) -->
             <div class="categories-section">
                 <div class="categories" id="categoriesList">
                     <div class="more-btn" id="moreCategoriesBtn">➕ More</div>
@@ -1082,7 +1104,7 @@
                 </div>
             </div>
             
-            <!-- ENLARGED AD AREA (unchanged position) -->
+            <!-- ENLARGED AD AREA -->
             <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
             
             <!-- Bottom content wrapper for games -->
