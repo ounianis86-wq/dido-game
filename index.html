@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DidoGame - 3D Anime City | Messenger Style Chat with Video Calls (VIP)</title>
+    <title>DidoGame - 3D Anime City | Messenger Style Chat</title>
     <style>
         * {
             margin: 0;
@@ -368,6 +368,59 @@
             cursor: pointer;
             font-size: 0.5rem;
             border: 1px solid #0ff;
+        }
+        
+        /* Language Dropdown */
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .lang-btn {
+            background: #000000aa;
+            padding: 5px 12px;
+            border-radius: 18px;
+            color: #0ff;
+            cursor: pointer;
+            font-size: 0.5rem;
+            border: 1px solid #0ff;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .lang-dropdown-content {
+            display: none;
+            position: absolute;
+            bottom: 35px;
+            right: 0;
+            background: #1a1a2e;
+            min-width: 160px;
+            border-radius: 12px;
+            border: 1px solid #ff44ff;
+            z-index: 100;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .lang-dropdown-content a {
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .lang-dropdown-content a:hover {
+            background: #ff44ff30;
+        }
+        
+        .lang-dropdown:hover .lang-dropdown-content {
+            display: block;
         }
 
         /* ========== SECURITY PANEL ========== */
@@ -740,7 +793,6 @@
             padding: 8px;
         }
         
-        /* Video Call Modal */
         .video-call-modal {
             position: fixed;
             top: 0;
@@ -869,7 +921,7 @@
                 </div>
                 <div class="character-info">
                     <div class="tshirt-text">⚡ DIDO-GAME ⚡</div>
-                    <h2>😤 نظرة التحدي النيونية!</h2>
+                    <h2 id="heroTagline">😤 Neon Challenge Look!</h2>
                 </div>
             </div>
             
@@ -879,14 +931,14 @@
             
             <div class="categories-section">
                 <div class="categories" id="categoriesList">
-                    <div class="cat-badge" data-cat="action">🎯 أكشن</div>
-                    <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
-                    <div class="cat-badge" data-cat="fighting">🥊 قتال</div>
-                    <div class="cat-badge" data-cat="puzzle">🧩 ألغاز</div>
+                    <div class="cat-badge" data-cat="action" id="catAction">🎯 Action</div>
+                    <div class="cat-badge" data-cat="racing" id="catRacing">🏎️ Racing</div>
+                    <div class="cat-badge" data-cat="fighting" id="catFighting">🥊 Fighting</div>
+                    <div class="cat-badge" data-cat="puzzle" id="catPuzzle">🧩 Puzzle</div>
                 </div>
             </div>
             
-            <div class="fixed-permanent-ad" id="permanentAd">📺 إعلان ممول - اشترك الآن!</div>
+            <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now!</div>
             
             <div class="games-wrapper">
                 <div class="two-rows" id="gamesContainer"></div>
@@ -894,41 +946,59 @@
         </div>
         
         <div id="categoryPage" class="page page-hidden">
-            <button class="create-btn" id="backToHomeBtn" style="margin-bottom:10px;">🔙 العودة</button>
+            <button class="create-btn" id="backToHomeBtn" style="margin-bottom:10px;">🔙 Back</button>
             <div class="two-rows" id="categoryGamesContainer"></div>
         </div>
     </div>
     
     <div class="bottom-bar">
-        <div class="register-btn" id="registerBtn" onclick="upgradeToVIP()">👑 ترقية VIP</div>
+        <div class="register-btn" id="registerBtn" onclick="upgradeToVIP()">👑 Upgrade VIP</div>
         <div class="chat-circle-btn" id="openChatBtn">
             <span>💬</span>
         </div>
-        <div class="music-bottom-btn" id="musicBtn" onclick="toggleMusic()">🎵 تشغيل</div>
+        <div style="display: flex; gap: 5px;">
+            <div class="lang-dropdown">
+                <div class="lang-btn" id="langBtn">🌐 EN</div>
+                <div class="lang-dropdown-content" id="langDropdownContent">
+                    <a onclick="setLanguage('en')">🇺🇸 English</a>
+                    <a onclick="setLanguage('ar')">🇸🇦 العربية</a>
+                    <a onclick="setLanguage('fr')">🇫🇷 Français</a>
+                    <a onclick="setLanguage('es')">🇪🇸 Español</a>
+                    <a onclick="setLanguage('de')">🇩🇪 Deutsch</a>
+                    <a onclick="setLanguage('it')">🇮🇹 Italiano</a>
+                    <a onclick="setLanguage('pt')">🇵🇹 Português</a>
+                    <a onclick="setLanguage('ru')">🇷🇺 Русский</a>
+                    <a onclick="setLanguage('zh')">🇨🇳 中文</a>
+                    <a onclick="setLanguage('ja')">🇯🇵 日本語</a>
+                    <a onclick="setLanguage('ko')">🇰🇷 한국어</a>
+                </div>
+            </div>
+            <div class="music-bottom-btn" id="musicBtn" onclick="toggleMusic()">🎵 Play</div>
+        </div>
     </div>
 </div>
 
-<!-- لوحة الأمان -->
+<!-- Security Panel -->
 <div id="securityPanel" class="security-panel">
     <div class="security-card">
-        <h2>🔐 إعدادات الأمان</h2>
-        <p>أدخل بياناتك للدخول إلى الدردشة</p>
-        <input type="text" id="securityUsername" class="security-input" placeholder="👤 اسم المستخدم" value="أحمد">
-        <input type="password" id="securityRoomPassword" class="security-input" placeholder="🔒 كلمة مرور الغرفة (اختياري)">
-        <input type="text" id="securityRoomName" class="security-input" placeholder="🏠 اسم الغرفة" value="الغرفة الرئيسية">
-        <button class="security-btn" onclick="submitSecurityAndEnter()">🚪 دخول إلى الدردشة</button>
-        <div class="security-hint">💡 يمكنك إنشاء غرفة جديدة أو الانضمام إلى غرفة موجودة</div>
+        <h2 id="securityTitle">🔐 Security Settings</h2>
+        <p id="securityDesc">Enter your details to enter the chat</p>
+        <input type="text" id="securityUsername" class="security-input" placeholder="👤 Username" value="Ahmed">
+        <input type="password" id="securityRoomPassword" class="security-input" placeholder="🔒 Room Password (optional)">
+        <input type="text" id="securityRoomName" class="security-input" placeholder="🏠 Room Name" value="Main Room">
+        <button class="security-btn" id="securityBtn" onclick="submitSecurityAndEnter()">🚪 Enter Chat</button>
+        <div class="security-hint" id="securityHint">💡 You can create a new room or join an existing one</div>
     </div>
 </div>
 
-<!-- صفحة الدردشة بتصميم الماسنجر 100% -->
+<!-- Chat Page -->
 <div id="chatPage" class="chat-page hidden">
     <div class="messenger-full">
         <div id="inboxView" style="display: flex; flex-direction: column; height: 100%;">
             <div class="messenger-header">
                 <div class="header-left">
                     <button class="back-btn" id="closeChatFromInbox">✕</button>
-                    <h2>المحادثات</h2>
+                    <h2 id="chatsTitle">Chats</h2>
                 </div>
                 <div class="header-actions">
                     <span id="newChatBtn" style="cursor: pointer;">✏️</span>
@@ -942,8 +1012,8 @@
             <div class="chat-header">
                 <button class="back-btn" id="backToInboxBtn">←</button>
                 <div class="chat-header-info">
-                    <div class="chat-header-name" id="openChatRoomName">الغرفة</div>
-                    <div class="chat-header-status" id="openChatStatus">🟢 متصل</div>
+                    <div class="chat-header-name" id="openChatRoomName">Room</div>
+                    <div class="chat-header-status" id="openChatStatus">🟢 Online</div>
                 </div>
                 <div class="chat-header-actions">
                     <span id="videoCallBtn" style="cursor: pointer; display: none;">🎥</span>
@@ -951,10 +1021,10 @@
                 </div>
             </div>
             <div class="messages-area" id="openChatMessages"></div>
-            <div class="typing-indicator" id="typingIndicator" style="display: none;">✍️ شخص ما يكتب...</div>
+            <div class="typing-indicator" id="typingIndicator" style="display: none;">✍️ Someone is typing...</div>
             <div class="message-input-area">
                 <div class="input-wrapper">
-                    <input type="text" id="openMessageInput" class="message-input" placeholder="اكتب رسالة...">
+                    <input type="text" id="openMessageInput" class="message-input" placeholder="Type a message...">
                     <div class="input-actions">
                         <button class="mic-btn" id="micBtnOpen" onclick="toggleMicrophoneOpen()">🎙️</button>
                         <button class="send-btn" id="sendMsgOpen" onclick="sendMessageOpen()">📤</button>
@@ -965,7 +1035,7 @@
     </div>
 </div>
 
-<!-- نافذة مكالمة الفيديو (VIP فقط) -->
+<!-- Video Call Modal -->
 <div id="videoCallModal" class="video-call-modal hidden">
     <div class="video-container">
         <video id="localVideo" autoplay muted playsinline></video>
@@ -984,6 +1054,579 @@
 </div>
 
 <script>
+    // ==================== Language Translations (11 Languages) ====================
+    const translations = {
+        en: {
+            heroTagline: "😤 Neon Challenge Look!",
+            catAction: "🎯 Action",
+            catRacing: "🏎️ Racing",
+            catFighting: "🥊 Fighting",
+            catPuzzle: "🧩 Puzzle",
+            upgradeVIP: "👑 Upgrade VIP",
+            vipActive: "👑 VIP Active",
+            playMusic: "🎵 Play",
+            stopMusic: "🔇 Stop",
+            securityTitle: "🔐 Security Settings",
+            securityDesc: "Enter your details to enter the chat",
+            securityUsernamePlaceholder: "👤 Username",
+            securityPasswordPlaceholder: "🔒 Room Password (optional)",
+            securityRoomPlaceholder: "🏠 Room Name",
+            securityBtn: "🚪 Enter Chat",
+            securityHint: "💡 You can create a new room or join an existing one",
+            chatsTitle: "Chats",
+            noChats: "No chats\n✏️ Create a new chat",
+            noMessages: "✨ Select a chat to start messaging\n💬 No messages yet\n✨ Write the first message",
+            typeMessage: "Type a message...",
+            typing: "✍️ Someone is typing...",
+            online: "🟢 Online",
+            videoCallVIPOnly: "🔒 Sorry, video calls are only available for VIP accounts. Upgrade now!",
+            cannotAccessCamera: "Cannot access camera/microphone: ",
+            micActive: "🎙️ Microphone active",
+            micInactive: "🔴 Microphone inactive",
+            sessionTimeout: "🔐 Session expired due to inactivity (5 minutes). You will be logged out.",
+            upgradeConfirm: "✨ Upgrade to VIP - $9.99/month",
+            upgradeSuccess: "🎉 Congratulations! You are now a VIP member",
+            alreadyVIP: "✨ You are already a VIP member!",
+            roomPasswordError: "❌ Incorrect room password!",
+            roomExists: "Room already exists",
+            enterRoomName: "Enter room name:",
+            newRoom: "New Room",
+            protectWithPassword: "Protect room with password?",
+            enterPassword: "Enter room password:",
+            passwordTooShort: "Password too short (min 3 characters)",
+            roomCreated: "Room created successfully",
+            openChatFirst: "Open a chat first",
+            enterUser: "❌ Enter username",
+            enterRoom: "❌ Enter room name",
+            wrongPasswordCreate: "⚠️ Incorrect password! A new room will be created.",
+            back: "🔙 Back",
+            langLabel: "🌐 EN"
+        },
+        ar: {
+            heroTagline: "😤 نظرة التحدي النيونية!",
+            catAction: "🎯 أكشن",
+            catRacing: "🏎️ سباقات",
+            catFighting: "🥊 قتال",
+            catPuzzle: "🧩 ألغاز",
+            upgradeVIP: "👑 ترقية VIP",
+            vipActive: "👑 VIP مفعل",
+            playMusic: "🎵 تشغيل",
+            stopMusic: "🔇 إيقاف",
+            securityTitle: "🔐 إعدادات الأمان",
+            securityDesc: "أدخل بياناتك للدخول إلى الدردشة",
+            securityUsernamePlaceholder: "👤 اسم المستخدم",
+            securityPasswordPlaceholder: "🔒 كلمة مرور الغرفة (اختياري)",
+            securityRoomPlaceholder: "🏠 اسم الغرفة",
+            securityBtn: "🚪 دخول إلى الدردشة",
+            securityHint: "💡 يمكنك إنشاء غرفة جديدة أو الانضمام إلى غرفة موجودة",
+            chatsTitle: "المحادثات",
+            noChats: "لا توجد محادثات\n✏️ أنشئ محادثة جديدة",
+            noMessages: "✨ اختر محادثة لبدء المراسلة\n💬 لا توجد رسائل بعد\n✨ اكتب أول رسالة",
+            typeMessage: "اكتب رسالة...",
+            typing: "✍️ شخص ما يكتب...",
+            online: "🟢 متصل",
+            videoCallVIPOnly: "🔒 عذراً، خاصية مكالمات الفيديو متاحة فقط للحسابات المميزة (VIP). قم بترقية حسابك الآن!",
+            cannotAccessCamera: "لا يمكن الوصول إلى الكاميرا/الميكروفون: ",
+            micActive: "🎙️ الميكروفون نشط",
+            micInactive: "🔴 الميكروفون غير نشط",
+            sessionTimeout: "🔐 انتهت الجلسة بسبب عدم النشاط (5 دقائق). سيتم تسجيل الخروج.",
+            upgradeConfirm: "✨ ترقية إلى VIP - 9.99$ شهرياً",
+            upgradeSuccess: "🎉 تهانينا! أصبحت عضواً مميزاً",
+            alreadyVIP: "✨ أنت بالفعل عضو VIP!",
+            roomPasswordError: "❌ كلمة مرور الغرفة غير صحيحة!",
+            roomExists: "الغرفة موجودة",
+            enterRoomName: "أدخل اسم الغرفة الجديدة:",
+            newRoom: "غرفة جديدة",
+            protectWithPassword: "هل تريد حماية الغرفة بكلمة مرور؟",
+            enterPassword: "أدخل كلمة مرور الغرفة:",
+            passwordTooShort: "كلمة المرور قصيرة جداً (3 أحرف على الأقل)",
+            roomCreated: "تم إنشاء الغرفة بنجاح",
+            openChatFirst: "افتح محادثة أولاً",
+            enterUser: "❌ أدخل اسم المستخدم",
+            enterRoom: "❌ أدخل اسم الغرفة",
+            wrongPasswordCreate: "⚠️ كلمة المرور غير صحيحة! سيتم إنشاء غرفة جديدة.",
+            back: "🔙 العودة",
+            langLabel: "🌐 AR"
+        },
+        fr: {
+            heroTagline: "😤 Look Challenge Néon!",
+            catAction: "🎯 Action",
+            catRacing: "🏎️ Course",
+            catFighting: "🥊 Combat",
+            catPuzzle: "🧩 Puzzle",
+            upgradeVIP: "👑 Passer VIP",
+            vipActive: "👑 VIP Actif",
+            playMusic: "🎵 Lecture",
+            stopMusic: "🔇 Arrêt",
+            securityTitle: "🔐 Paramètres de sécurité",
+            securityDesc: "Entrez vos détails pour accéder au chat",
+            securityUsernamePlaceholder: "👤 Nom d'utilisateur",
+            securityPasswordPlaceholder: "🔒 Mot de passe de la salle (optionnel)",
+            securityRoomPlaceholder: "🏠 Nom de la salle",
+            securityBtn: "🚪 Entrer dans le chat",
+            securityHint: "💡 Vous pouvez créer une nouvelle salle ou rejoindre une salle existante",
+            chatsTitle: "Discussions",
+            noChats: "Aucune discussion\n✏️ Créer une nouvelle discussion",
+            noMessages: "✨ Sélectionnez une discussion pour commencer\n💬 Aucun message encore\n✨ Écrivez le premier message",
+            typeMessage: "Écrivez un message...",
+            typing: "✍️ Quelqu'un écrit...",
+            online: "🟢 En ligne",
+            videoCallVIPOnly: "🔒 Désolé, les appels vidéo sont uniquement disponibles pour les comptes VIP. Passez à VIP maintenant!",
+            cannotAccessCamera: "Impossible d'accéder à la caméra/micro: ",
+            micActive: "🎙️ Microphone actif",
+            micInactive: "🔴 Microphone inactif",
+            sessionTimeout: "🔐 Session expirée (5 minutes). Vous allez être déconnecté.",
+            upgradeConfirm: "✨ Passer à VIP - 9.99$/mois",
+            upgradeSuccess: "🎉 Félicitations! Vous êtes maintenant membre VIP",
+            alreadyVIP: "✨ Vous êtes déjà membre VIP!",
+            roomPasswordError: "❌ Mot de passe incorrect!",
+            roomExists: "La salle existe déjà",
+            enterRoomName: "Entrez le nom de la salle:",
+            newRoom: "Nouvelle salle",
+            protectWithPassword: "Protéger la salle avec un mot de passe?",
+            enterPassword: "Entrez le mot de passe:",
+            passwordTooShort: "Mot de passe trop court (min 3 caractères)",
+            roomCreated: "Salle créée avec succès",
+            openChatFirst: "Ouvrez une discussion d'abord",
+            enterUser: "❌ Entrez un nom d'utilisateur",
+            enterRoom: "❌ Entrez un nom de salle",
+            wrongPasswordCreate: "⚠️ Mot de passe incorrect! Une nouvelle salle sera créée.",
+            back: "🔙 Retour",
+            langLabel: "🇫🇷 FR"
+        },
+        es: {
+            heroTagline: "😤 ¡Look Desafío Neón!",
+            catAction: "🎯 Acción",
+            catRacing: "🏎️ Carreras",
+            catFighting: "🥊 Pelea",
+            catPuzzle: "🧩 Rompecabezas",
+            upgradeVIP: "👑 Mejorar a VIP",
+            vipActive: "👑 VIP Activo",
+            playMusic: "🎵 Reproducir",
+            stopMusic: "🔇 Detener",
+            securityTitle: "🔐 Configuración de seguridad",
+            securityDesc: "Ingrese sus datos para entrar al chat",
+            securityUsernamePlaceholder: "👤 Nombre de usuario",
+            securityPasswordPlaceholder: "🔒 Contraseña de sala (opcional)",
+            securityRoomPlaceholder: "🏠 Nombre de sala",
+            securityBtn: "🚪 Entrar al chat",
+            securityHint: "💡 Puedes crear una nueva sala o unirte a una existente",
+            chatsTitle: "Chats",
+            noChats: "No hay chats\n✏️ Crear nuevo chat",
+            noMessages: "✨ Selecciona un chat para empezar\n💬 No hay mensajes aún\n✨ Escribe el primer mensaje",
+            typeMessage: "Escribe un mensaje...",
+            typing: "✍️ Alguien está escribiendo...",
+            online: "🟢 En línea",
+            videoCallVIPOnly: "🔒 Lo siento, las videollamadas solo están disponibles para cuentas VIP. ¡Mejora ahora!",
+            cannotAccessCamera: "No se puede acceder a la cámara/mic: ",
+            micActive: "🎙️ Micrófono activo",
+            micInactive: "🔴 Micrófono inactivo",
+            sessionTimeout: "🔐 Sesión expirada (5 minutos). Serás desconectado.",
+            upgradeConfirm: "✨ Mejorar a VIP - $9.99/mes",
+            upgradeSuccess: "🎉 ¡Felicidades! Ahora eres miembro VIP",
+            alreadyVIP: "✨ ¡Ya eres miembro VIP!",
+            roomPasswordError: "❌ ¡Contraseña incorrecta!",
+            roomExists: "La sala ya existe",
+            enterRoomName: "Ingrese el nombre de la sala:",
+            newRoom: "Nueva sala",
+            protectWithPassword: "¿Proteger sala con contraseña?",
+            enterPassword: "Ingrese contraseña:",
+            passwordTooShort: "Contraseña demasiado corta (mín 3 caracteres)",
+            roomCreated: "Sala creada exitosamente",
+            openChatFirst: "Abre un chat primero",
+            enterUser: "❌ Ingrese nombre de usuario",
+            enterRoom: "❌ Ingrese nombre de sala",
+            wrongPasswordCreate: "⚠️ ¡Contraseña incorrecta! Se creará una nueva sala.",
+            back: "🔙 Volver",
+            langLabel: "🇪🇸 ES"
+        },
+        de: {
+            heroTagline: "😤 Neon Challenge Look!",
+            catAction: "🎯 Aktion",
+            catRacing: "🏎️ Rennen",
+            catFighting: "🥊 Kampf",
+            catPuzzle: "🧩 Rätsel",
+            upgradeVIP: "👑 VIP Upgraden",
+            vipActive: "👑 VIP Aktiv",
+            playMusic: "🎵 Abspielen",
+            stopMusic: "🔇 Stopp",
+            securityTitle: "🔐 Sicherheitseinstellungen",
+            securityDesc: "Geben Sie Ihre Daten ein, um den Chat zu betreten",
+            securityUsernamePlaceholder: "👤 Benutzername",
+            securityPasswordPlaceholder: "🔒 Raum-Passwort (optional)",
+            securityRoomPlaceholder: "🏠 Raumname",
+            securityBtn: "🚪 Chat betreten",
+            securityHint: "💡 Sie können einen neuen Raum erstellen oder einem bestehenden beitreten",
+            chatsTitle: "Chats",
+            noChats: "Keine Chats\n✏️ Neuen Chat erstellen",
+            noMessages: "✨ Wählen Sie einen Chat aus\n💬 Noch keine Nachrichten\n✨ Schreiben Sie die erste Nachricht",
+            typeMessage: "Nachricht schreiben...",
+            typing: "✍️ Jemand tippt...",
+            online: "🟢 Online",
+            videoCallVIPOnly: "🔒 Videoanrufe sind nur für VIP-Konten verfügbar. Jetzt upgraden!",
+            cannotAccessCamera: "Kamera/Mikrofon nicht zugreifbar: ",
+            micActive: "🎙️ Mikrofon aktiv",
+            micInactive: "🔴 Mikrofon inaktiv",
+            sessionTimeout: "🔐 Sitzung abgelaufen (5 Minuten). Sie werden ausgeloggt.",
+            upgradeConfirm: "✨ Zu VIP upgraden - 9.99$/Monat",
+            upgradeSuccess: "🎉 Glückwunsch! Sie sind jetzt VIP-Mitglied",
+            alreadyVIP: "✨ Sie sind bereits VIP-Mitglied!",
+            roomPasswordError: "❌ Falsches Passwort!",
+            roomExists: "Raum existiert bereits",
+            enterRoomName: "Raumname eingeben:",
+            newRoom: "Neuer Raum",
+            protectWithPassword: "Raum mit Passwort schützen?",
+            enterPassword: "Passwort eingeben:",
+            passwordTooShort: "Passwort zu kurz (min. 3 Zeichen)",
+            roomCreated: "Raum erfolgreich erstellt",
+            openChatFirst: "Öffnen Sie zuerst einen Chat",
+            enterUser: "❌ Benutzername eingeben",
+            enterRoom: "❌ Raumname eingeben",
+            wrongPasswordCreate: "⚠️ Falsches Passwort! Ein neuer Raum wird erstellt.",
+            back: "🔙 Zurück",
+            langLabel: "🇩🇪 DE"
+        },
+        it: {
+            heroTagline: "😤 Look Sfida Neon!",
+            catAction: "🎯 Azione",
+            catRacing: "🏎️ Corse",
+            catFighting: "🥊 Combattimento",
+            catPuzzle: "🧩 Puzzle",
+            upgradeVIP: "👑 Passa a VIP",
+            vipActive: "👑 VIP Attivo",
+            playMusic: "🎵 Riproduci",
+            stopMusic: "🔇 Ferma",
+            securityTitle: "🔐 Impostazioni di sicurezza",
+            securityDesc: "Inserisci i tuoi dati per entrare nella chat",
+            securityUsernamePlaceholder: "👤 Nome utente",
+            securityPasswordPlaceholder: "🔒 Password della stanza (opzionale)",
+            securityRoomPlaceholder: "🏠 Nome stanza",
+            securityBtn: "🚪 Entra nella chat",
+            securityHint: "💡 Puoi creare una nuova stanza o unirti a una esistente",
+            chatsTitle: "Chat",
+            noChats: "Nessuna chat\n✏️ Crea nuova chat",
+            noMessages: "✨ Seleziona una chat per iniziare\n💬 Nessun messaggio ancora\n✨ Scrivi il primo messaggio",
+            typeMessage: "Scrivi un messaggio...",
+            typing: "✍️ Qualcuno sta scrivendo...",
+            online: "🟢 Online",
+            videoCallVIPOnly: "🔒 Le videochiamate sono disponibili solo per account VIP. Passa a VIP ora!",
+            cannotAccessCamera: "Impossibile accedere a fotocamera/microfono: ",
+            micActive: "🎙️ Microfono attivo",
+            micInactive: "🔴 Microfono inattivo",
+            sessionTimeout: "🔐 Sessione scaduta (5 minuti). Verrai disconnesso.",
+            upgradeConfirm: "✨ Passa a VIP - 9.99$/mese",
+            upgradeSuccess: "🎉 Congratulazioni! Ora sei un membro VIP",
+            alreadyVIP: "✨ Sei già un membro VIP!",
+            roomPasswordError: "❌ Password della stanza errata!",
+            roomExists: "La stanza esiste già",
+            enterRoomName: "Inserisci il nome della stanza:",
+            newRoom: "Nuova stanza",
+            protectWithPassword: "Proteggere la stanza con password?",
+            enterPassword: "Inserisci la password:",
+            passwordTooShort: "Password troppo corta (min 3 caratteri)",
+            roomCreated: "Stanza creata con successo",
+            openChatFirst: "Apri prima una chat",
+            enterUser: "❌ Inserisci nome utente",
+            enterRoom: "❌ Inserisci nome stanza",
+            wrongPasswordCreate: "⚠️ Password errata! Verrà creata una nuova stanza.",
+            back: "🔙 Indietro",
+            langLabel: "🇮🇹 IT"
+        },
+        pt: {
+            heroTagline: "😤 Visual Desafio Neon!",
+            catAction: "🎯 Ação",
+            catRacing: "🏎️ Corrida",
+            catFighting: "🥊 Luta",
+            catPuzzle: "🧩 Quebra-cabeça",
+            upgradeVIP: "👑 Upgrade para VIP",
+            vipActive: "👑 VIP Ativo",
+            playMusic: "🎵 Tocar",
+            stopMusic: "🔇 Parar",
+            securityTitle: "🔐 Configurações de Segurança",
+            securityDesc: "Digite seus dados para entrar no chat",
+            securityUsernamePlaceholder: "👤 Nome de usuário",
+            securityPasswordPlaceholder: "🔒 Senha da sala (opcional)",
+            securityRoomPlaceholder: "🏠 Nome da sala",
+            securityBtn: "🚪 Entrar no chat",
+            securityHint: "💡 Você pode criar uma nova sala ou entrar em uma existente",
+            chatsTitle: "Conversas",
+            noChats: "Sem conversas\n✏️ Criar nova conversa",
+            noMessages: "✨ Selecione uma conversa para começar\n💬 Nenhuma mensagem ainda\n✨ Escreva a primeira mensagem",
+            typeMessage: "Digite uma mensagem...",
+            typing: "✍️ Alguém está digitando...",
+            online: "🟢 Online",
+            videoCallVIPOnly: "🔒 Videochamadas disponíveis apenas para contas VIP. Faça upgrade agora!",
+            cannotAccessCamera: "Não foi possível acessar câmera/microfone: ",
+            micActive: "🎙️ Microfone ativo",
+            micInactive: "🔴 Microfone inativo",
+            sessionTimeout: "🔐 Sessão expirada (5 minutos). Você será desconectado.",
+            upgradeConfirm: "✨ Upgrade para VIP - $9.99/mês",
+            upgradeSuccess: "🎉 Parabéns! Agora você é membro VIP",
+            alreadyVIP: "✨ Você já é membro VIP!",
+            roomPasswordError: "❌ Senha da sala incorreta!",
+            roomExists: "A sala já existe",
+            enterRoomName: "Digite o nome da sala:",
+            newRoom: "Nova sala",
+            protectWithPassword: "Proteger sala com senha?",
+            enterPassword: "Digite a senha da sala:",
+            passwordTooShort: "Senha muito curta (mínimo 3 caracteres)",
+            roomCreated: "Sala criada com sucesso",
+            openChatFirst: "Abra uma conversa primeiro",
+            enterUser: "❌ Digite o nome de usuário",
+            enterRoom: "❌ Digite o nome da sala",
+            wrongPasswordCreate: "⚠️ Senha incorreta! Uma nova sala será criada.",
+            back: "🔙 Voltar",
+            langLabel: "🇵🇹 PT"
+        },
+        ru: {
+            heroTagline: "😤 Неоновый вызов!",
+            catAction: "🎯 Экшн",
+            catRacing: "🏎️ Гонки",
+            catFighting: "🥊 Бои",
+            catPuzzle: "🧩 Головоломки",
+            upgradeVIP: "👑 Повысить до VIP",
+            vipActive: "👑 VIP Активен",
+            playMusic: "🎵 Воспроизвести",
+            stopMusic: "🔇 Остановить",
+            securityTitle: "🔐 Настройки безопасности",
+            securityDesc: "Введите данные для входа в чат",
+            securityUsernamePlaceholder: "👤 Имя пользователя",
+            securityPasswordPlaceholder: "🔒 Пароль комнаты (опционально)",
+            securityRoomPlaceholder: "🏠 Название комнаты",
+            securityBtn: "🚪 Войти в чат",
+            securityHint: "💡 Вы можете создать новую комнату или присоединиться к существующей",
+            chatsTitle: "Чаты",
+            noChats: "Нет чатов\n✏️ Создать новый чат",
+            noMessages: "✨ Выберите чат для начала\n💬 Пока нет сообщений\n✨ Напишите первое сообщение",
+            typeMessage: "Введите сообщение...",
+            typing: "✍️ Кто-то печатает...",
+            online: "🟢 Онлайн",
+            videoCallVIPOnly: "🔒 Видеозвонки доступны только для VIP-аккаунтов. Повысьте статус сейчас!",
+            cannotAccessCamera: "Нет доступа к камере/микрофону: ",
+            micActive: "🎙️ Микрофон активен",
+            micInactive: "🔴 Микрофон неактивен",
+            sessionTimeout: "🔐 Сессия истекла (5 минут). Вы будете выйти из системы.",
+            upgradeConfirm: "✨ Повысить до VIP - $9.99/месяц",
+            upgradeSuccess: "🎉 Поздравляем! Теперь вы VIP-участник",
+            alreadyVIP: "✨ Вы уже VIP-участник!",
+            roomPasswordError: "❌ Неверный пароль комнаты!",
+            roomExists: "Комната уже существует",
+            enterRoomName: "Введите название комнаты:",
+            newRoom: "Новая комната",
+            protectWithPassword: "Защитить комнату паролем?",
+            enterPassword: "Введите пароль:",
+            passwordTooShort: "Пароль слишком короткий (мин. 3 символа)",
+            roomCreated: "Комната успешно создана",
+            openChatFirst: "Сначала откройте чат",
+            enterUser: "❌ Введите имя пользователя",
+            enterRoom: "❌ Введите название комнаты",
+            wrongPasswordCreate: "⚠️ Неверный пароль! Будет создана новая комната.",
+            back: "🔙 Назад",
+            langLabel: "🇷🇺 RU"
+        },
+        zh: {
+            heroTagline: "😤 霓虹挑战造型！",
+            catAction: "🎯 动作",
+            catRacing: "🏎️ 赛车",
+            catFighting: "🥊 格斗",
+            catPuzzle: "🧩 益智",
+            upgradeVIP: "👑 升级VIP",
+            vipActive: "👑 VIP激活",
+            playMusic: "🎵 播放",
+            stopMusic: "🔇 停止",
+            securityTitle: "🔐 安全设置",
+            securityDesc: "输入您的详细信息以进入聊天室",
+            securityUsernamePlaceholder: "👤 用户名",
+            securityPasswordPlaceholder: "🔒 房间密码（可选）",
+            securityRoomPlaceholder: "🏠 房间名称",
+            securityBtn: "🚪 进入聊天",
+            securityHint: "💡 您可以创建新房间或加入现有房间",
+            chatsTitle: "聊天",
+            noChats: "没有聊天\n✏️ 创建新聊天",
+            noMessages: "✨ 选择聊天开始\n💬 还没有消息\n✨ 写第一条消息",
+            typeMessage: "输入消息...",
+            typing: "✍️ 有人正在输入...",
+            online: "🟢 在线",
+            videoCallVIPOnly: "🔒 视频通话仅适用于VIP账户。立即升级！",
+            cannotAccessCamera: "无法访问摄像头/麦克风：",
+            micActive: "🎙️ 麦克风激活",
+            micInactive: "🔴 麦克风未激活",
+            sessionTimeout: "🔐 会话已过期（5分钟）。您将被登出。",
+            upgradeConfirm: "✨ 升级到VIP - $9.99/月",
+            upgradeSuccess: "🎉 恭喜！您现在已经是VIP会员",
+            alreadyVIP: "✨ 您已经是VIP会员！",
+            roomPasswordError: "❌ 房间密码错误！",
+            roomExists: "房间已存在",
+            enterRoomName: "输入房间名称：",
+            newRoom: "新房间",
+            protectWithPassword: "用密码保护房间？",
+            enterPassword: "输入房间密码：",
+            passwordTooShort: "密码太短（至少3个字符）",
+            roomCreated: "房间创建成功",
+            openChatFirst: "先打开聊天",
+            enterUser: "❌ 输入用户名",
+            enterRoom: "❌ 输入房间名称",
+            wrongPasswordCreate: "⚠️ 密码错误！将创建新房间。",
+            back: "🔙 返回",
+            langLabel: "🇨🇳 中文"
+        },
+        ja: {
+            heroTagline: "😤 ネオンチャレンジルック！",
+            catAction: "🎯 アクション",
+            catRacing: "🏎️ レーシング",
+            catFighting: "🥊 ファイティング",
+            catPuzzle: "🧩 パズル",
+            upgradeVIP: "👑 VIPアップグレード",
+            vipActive: "👑 VIPアクティブ",
+            playMusic: "🎵 再生",
+            stopMusic: "🔇 停止",
+            securityTitle: "🔐 セキュリティ設定",
+            securityDesc: "チャットに入るために詳細を入力してください",
+            securityUsernamePlaceholder: "👤 ユーザー名",
+            securityPasswordPlaceholder: "🔒 ルームパスワード（オプション）",
+            securityRoomPlaceholder: "🏠 ルーム名",
+            securityBtn: "🚪 チャットに入る",
+            securityHint: "💡 新しいルームを作成するか、既存のルームに参加できます",
+            chatsTitle: "チャット",
+            noChats: "チャットがありません\n✏️ 新しいチャットを作成",
+            noMessages: "✨ チャットを選択して開始\n💬 まだメッセージはありません\n✨ 最初のメッセージを書く",
+            typeMessage: "メッセージを入力...",
+            typing: "✍️ 誰かが入力中...",
+            online: "🟢 オンライン",
+            videoCallVIPOnly: "🔒 ビデオ通話はVIPアカウントのみ利用可能です。今すぐアップグレード！",
+            cannotAccessCamera: "カメラ/マイクにアクセスできません：",
+            micActive: "🎙️ マイクアクティブ",
+            micInactive: "🔴 マイク非アクティブ",
+            sessionTimeout: "🔐 セッションが期限切れになりました（5分）。ログアウトします。",
+            upgradeConfirm: "✨ VIPにアップグレード - $9.99/月",
+            upgradeSuccess: "🎉 おめでとうございます！VIPメンバーになりました",
+            alreadyVIP: "✨ あなたはすでにVIPメンバーです！",
+            roomPasswordError: "❌ ルームパスワードが間違っています！",
+            roomExists: "ルームは既に存在します",
+            enterRoomName: "ルーム名を入力してください：",
+            newRoom: "新規ルーム",
+            protectWithPassword: "パスワードでルームを保護しますか？",
+            enterPassword: "ルームパスワードを入力：",
+            passwordTooShort: "パスワードが短すぎます（最小3文字）",
+            roomCreated: "ルームが正常に作成されました",
+            openChatFirst: "まずチャットを開いてください",
+            enterUser: "❌ ユーザー名を入力してください",
+            enterRoom: "❌ ルーム名を入力してください",
+            wrongPasswordCreate: "⚠️ パスワードが間違っています！新しいルームが作成されます。",
+            back: "🔙 戻る",
+            langLabel: "🇯🇵 日本語"
+        },
+        ko: {
+            heroTagline: "😤 네온 챌린지 룩!",
+            catAction: "🎯 액션",
+            catRacing: "🏎️ 레이싱",
+            catFighting: "🥊 격투",
+            catPuzzle: "🧩 퍼즐",
+            upgradeVIP: "👑 VIP 업그레이드",
+            vipActive: "👑 VIP 활성화",
+            playMusic: "🎵 재생",
+            stopMusic: "🔇 중지",
+            securityTitle: "🔐 보안 설정",
+            securityDesc: "채팅에 들어가려면 세부 정보를 입력하세요",
+            securityUsernamePlaceholder: "👤 사용자 이름",
+            securityPasswordPlaceholder: "🔒 방 비밀번호 (선택 사항)",
+            securityRoomPlaceholder: "🏠 방 이름",
+            securityBtn: "🚪 채팅 입장",
+            securityHint: "💡 새 방을 만들거나 기존 방에 참여할 수 있습니다",
+            chatsTitle: "채팅",
+            noChats: "채팅 없음\n✏️ 새 채팅 만들기",
+            noMessages: "✨ 시작할 채팅 선택\n💬 아직 메시지 없음\n✨ 첫 메시지 작성",
+            typeMessage: "메시지를 입력하세요...",
+            typing: "✍️ 누군가 입력 중...",
+            online: "🟢 온라인",
+            videoCallVIPOnly: "🔒 화상 통화는 VIP 계정만 사용할 수 있습니다. 지금 업그레이드하세요!",
+            cannotAccessCamera: "카메라/마이크에 액세스할 수 없습니다: ",
+            micActive: "🎙️ 마이크 활성화",
+            micInactive: "🔴 마이크 비활성화",
+            sessionTimeout: "🔐 세션이 만료되었습니다 (5분). 로그아웃됩니다.",
+            upgradeConfirm: "✨ VIP로 업그레이드 - $9.99/월",
+            upgradeSuccess: "🎉 축하합니다! 이제 VIP 회원이 되셨습니다",
+            alreadyVIP: "✨ 이미 VIP 회원이십니다!",
+            roomPasswordError: "❌ 방 비밀번호가 잘못되었습니다!",
+            roomExists: "방이 이미 존재합니다",
+            enterRoomName: "방 이름을 입력하세요:",
+            newRoom: "새 방",
+            protectWithPassword: "비밀번호로 방을 보호하시겠습니까?",
+            enterPassword: "방 비밀번호 입력:",
+            passwordTooShort: "비밀번호가 너무 짧습니다 (최소 3자)",
+            roomCreated: "방이 성공적으로 생성되었습니다",
+            openChatFirst: "먼저 채팅을 여세요",
+            enterUser: "❌ 사용자 이름을 입력하세요",
+            enterRoom: "❌ 방 이름을 입력하세요",
+            wrongPasswordCreate: "⚠️ 비밀번호가 잘못되었습니다! 새 방이 생성됩니다.",
+            back: "🔙 뒤로",
+            langLabel: "🇰🇷 한국어"
+        }
+    };
+    
+    let currentLang = 'en';
+    
+    function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('didogame_lang', currentLang);
+        const t = translations[currentLang];
+        document.getElementById('langBtn').innerHTML = t.langLabel;
+        document.documentElement.lang = currentLang;
+        
+        if(currentLang === 'ar') {
+            document.body.style.direction = 'rtl';
+            document.querySelector('.app').style.direction = 'rtl';
+        } else {
+            document.body.style.direction = 'ltr';
+            document.querySelector('.app').style.direction = 'ltr';
+        }
+        
+        updateAllTexts();
+    }
+    
+    function updateAllTexts() {
+        const t = translations[currentLang];
+        document.getElementById('heroTagline').innerText = t.heroTagline;
+        document.getElementById('catAction').innerHTML = t.catAction;
+        document.getElementById('catRacing').innerHTML = t.catRacing;
+        document.getElementById('catFighting').innerHTML = t.catFighting;
+        document.getElementById('catPuzzle').innerHTML = t.catPuzzle;
+        
+        const registerBtn = document.getElementById('registerBtn');
+        if(isVIP) {
+            registerBtn.innerHTML = t.vipActive;
+        } else {
+            registerBtn.innerHTML = t.upgradeVIP;
+        }
+        
+        if(isMusicPlaying) {
+            document.getElementById('musicBtn').innerHTML = t.stopMusic;
+        } else {
+            document.getElementById('musicBtn').innerHTML = t.playMusic;
+        }
+        
+        document.getElementById('securityTitle').innerText = t.securityTitle;
+        document.getElementById('securityDesc').innerText = t.securityDesc;
+        document.getElementById('securityUsername').placeholder = t.securityUsernamePlaceholder;
+        document.getElementById('securityRoomPassword').placeholder = t.securityPasswordPlaceholder;
+        document.getElementById('securityRoomName').placeholder = t.securityRoomPlaceholder;
+        document.getElementById('securityBtn').innerText = t.securityBtn;
+        document.getElementById('securityHint').innerText = t.securityHint;
+        
+        document.getElementById('chatsTitle').innerText = t.chatsTitle;
+        document.getElementById('backToHomeBtn').innerHTML = t.back;
+        
+        if(document.getElementById('openChatView').style.display === 'flex') {
+            document.getElementById('openMessageInput').placeholder = t.typeMessage;
+            document.getElementById('openChatStatus').innerHTML = t.online;
+        }
+        
+        renderChatsList();
+        if(currentOpenRoom && document.getElementById('openChatView').style.display === 'flex') {
+            displayMessagesInOpenChat();
+        }
+    }
+    
     // ==================== Games Data ====================
     const gamesData = [
         { id:1, name:"Sonic", img:"https://images6.alphacoders.com/118/1185678.jpg", url:"https://www.crazygames.com/embed/sonic-the-hedgehog", cat:"action", points:150, avatar:"🦔", playerName:"Shadow" },
@@ -1017,14 +1660,14 @@
         try {
             return decodeURIComponent(escape(atob(encrypted)));
         } catch(e) {
-            return "⚠️ رسالة مشفرة";
+            return "⚠️ Encrypted message";
         }
     }
 
     function startSessionTimer() {
         if(sessionTimer) clearTimeout(sessionTimer);
         sessionTimer = setTimeout(() => {
-            alert("🔐 انتهت الجلسة بسبب عدم النشاط (5 دقائق). سيتم تسجيل الخروج.");
+            alert(translations[currentLang].sessionTimeout);
             logout();
         }, 5 * 60 * 1000);
     }
@@ -1044,12 +1687,12 @@
         document.getElementById('chatPage').classList.add('hidden');
         document.getElementById('securityUsername').value = '';
         document.getElementById('securityRoomPassword').value = '';
-        document.getElementById('securityRoomName').value = 'الغرفة الرئيسية';
+        document.getElementById('securityRoomName').value = 'Main Room';
     }
 
     function validatePassword(pass) {
         if(pass && pass.length < 3) {
-            alert("⚠️ كلمة المرور يجب أن تكون 3 أحرف على الأقل");
+            alert(translations[currentLang].passwordTooShort);
             return false;
         }
         return true;
@@ -1115,21 +1758,20 @@
     }
     
     function upgradeToVIP() {
-        if(isVIP) { alert("✨ أنت بالفعل عضو VIP!"); return; }
-        if(confirm("✨ ترقية إلى VIP - 9.99$ شهرياً")) {
+        if(isVIP) { alert(translations[currentLang].alreadyVIP); return; }
+        if(confirm(translations[currentLang].upgradeConfirm)) {
             isVIP = true;
             localStorage.setItem('didogame_vip', 'true');
-            document.getElementById('registerBtn').innerHTML = '👑 VIP مفعل';
+            document.getElementById('registerBtn').innerHTML = translations[currentLang].vipActive;
             document.getElementById('registerBtn').classList.add('vip-active');
-            alert("🎉 تهانينا! أصبحت عضواً مميزاً");
-            // Show video button if chat is open
+            alert(translations[currentLang].upgradeSuccess);
             if(document.getElementById('openChatView').style.display === 'flex') {
                 document.getElementById('videoCallBtn').style.display = 'inline-block';
             }
         }
     }
     
-    // ==================== Chat Functions (Messenger Style) ====================
+    // ==================== Chat Functions ====================
     function saveRooms() {
         localStorage.setItem('didogame_rooms_secure', JSON.stringify(allRooms));
     }
@@ -1151,12 +1793,12 @@
     }
     
     function getLastMessage(room) {
-        if(!room.messages || room.messages.length === 0) return "لا توجد رسائل";
+        if(!room.messages || room.messages.length === 0) return translations[currentLang].noChats.split('\n')[0];
         const lastMsg = room.messages[room.messages.length - 1];
         let text = lastMsg.text;
         if(lastMsg.encrypted) text = decryptMessage(lastMsg.text);
         if(text.length > 30) text = text.substring(0, 30) + "...";
-        if(lastMsg.type === 'private') text = "🔒 رسالة خاصة";
+        if(lastMsg.type === 'private') text = "🔒 Private message";
         return text;
     }
     
@@ -1164,7 +1806,7 @@
         const container = document.getElementById('chatsListContainer');
         const rooms = Object.keys(allRooms);
         if(rooms.length === 0) {
-            container.innerHTML = '<div style="color:#888; text-align:center; padding:40px;">لا توجد محادثات<br>✏️ أنشئ محادثة جديدة</div>';
+            container.innerHTML = `<div style="color:#888; text-align:center; padding:40px;">${translations[currentLang].noChats.replace('\n', '<br>')}</div>`;
             return;
         }
         container.innerHTML = rooms.map(room => {
@@ -1180,7 +1822,7 @@
                         </div>
                         <div class="chat-last-msg">${escapeHtml(lastMsg)}</div>
                     </div>
-                    <div class="chat-time">الآن</div>
+                    <div class="chat-time">Now</div>
                 </div>
             `;
         }).join('');
@@ -1190,7 +1832,7 @@
         const room = allRooms[roomName];
         if(!room) return;
         if(room.password && room.password !== securityPassword) {
-            alert("❌ كلمة مرور الغرفة غير صحيحة!");
+            alert(translations[currentLang].roomPasswordError);
             return;
         }
         if(!room.users.includes(currentUser)) {
@@ -1203,8 +1845,9 @@
         document.getElementById('inboxView').style.display = 'none';
         document.getElementById('openChatView').style.display = 'flex';
         document.getElementById('openChatRoomName').innerHTML = escapeHtml(currentOpenRoom);
+        document.getElementById('openChatStatus').innerHTML = translations[currentLang].online;
+        document.getElementById('openMessageInput').placeholder = translations[currentLang].typeMessage;
         
-        // Show video call button only if VIP
         const videoBtn = document.getElementById('videoCallBtn');
         if(isVIP) {
             videoBtn.style.display = 'inline-block';
@@ -1215,10 +1858,7 @@
         
         displayMessagesInOpenChat();
         resetSessionTimer();
-        startTypingSimulation();
-    }
-    
-    function startTypingSimulation() {
+        
         const indicator = document.getElementById('typingIndicator');
         indicator.style.display = 'block';
         if(typingTimeout) clearTimeout(typingTimeout);
@@ -1230,12 +1870,12 @@
     function displayMessagesInOpenChat() {
         const container = document.getElementById('openChatMessages');
         if(!currentOpenRoom || !allRooms[currentOpenRoom]) {
-            container.innerHTML = '<div style="color:#888; text-align:center; padding:20px;">✨ اختر محادثة لبدء المراسلة</div>';
+            container.innerHTML = `<div style="color:#888; text-align:center; padding:20px;">${translations[currentLang].noMessages.split('\n')[0]}</div>`;
             return;
         }
         const messages = allRooms[currentOpenRoom].messages.slice(-50);
         if(messages.length === 0) {
-            container.innerHTML = '<div style="color:#888; text-align:center; padding:20px;">💬 لا توجد رسائل بعد<br>✨ اكتب أول رسالة</div>';
+            container.innerHTML = `<div style="color:#888; text-align:center; padding:20px;">${translations[currentLang].noMessages.replace('\n', '<br>')}</div>`;
             return;
         }
         container.innerHTML = '';
@@ -1258,7 +1898,7 @@
             
             let privateHtml = '';
             if(isPrivate && msg.target) {
-                privateHtml = `<span class="private-tag">🔒 إلى ${escapeHtml(msg.target)}</span>`;
+                privateHtml = `<span class="private-tag">🔒 to ${escapeHtml(msg.target)}</span>`;
             }
             
             let messageText = msg.text;
@@ -1317,15 +1957,15 @@
     }
     
     function showNewChatModal() {
-        const roomName = prompt("أدخل اسم الغرفة الجديدة:", "غرفة جديدة");
+        const roomName = prompt(translations[currentLang].enterRoomName, translations[currentLang].newRoom);
         if(!roomName) return;
-        if(allRooms[roomName]) { alert("الغرفة موجودة"); return; }
+        if(allRooms[roomName]) { alert(translations[currentLang].roomExists); return; }
         
-        const usePassword = confirm("هل تريد حماية الغرفة بكلمة مرور؟");
+        const usePassword = confirm(translations[currentLang].protectWithPassword);
         let password = null;
         if(usePassword) {
-            password = prompt("أدخل كلمة مرور الغرفة:", "");
-            if(password && password.length < 3) { alert("كلمة المرور قصيرة جداً"); return; }
+            password = prompt(translations[currentLang].enterPassword, "");
+            if(password && password.length < 3) { alert(translations[currentLang].passwordTooShort); return; }
         }
         
         allRooms[roomName] = {
@@ -1335,7 +1975,7 @@
         };
         saveRooms();
         renderChatsList();
-        alert(`تم إنشاء الغرفة "${roomName}" بنجاح`);
+        alert(translations[currentLang].roomCreated);
     }
     
     function backToInbox() {
@@ -1349,23 +1989,18 @@
     // ==================== Video Call (VIP only) ====================
     async function startVideoCall() {
         if(!isVIP) {
-            alert("🔒 عذراً، خاصية مكالمات الفيديو متاحة فقط للحسابات المميزة (VIP). قم بترقية حسابك الآن!");
+            alert(translations[currentLang].videoCallVIPOnly);
             return;
         }
         try {
             videoStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
             const localVideo = document.getElementById('localVideo');
             localVideo.srcObject = videoStream;
-            
-            // Simulate remote video (in real app, this would be WebRTC)
             const remoteVideo = document.getElementById('remoteVideo');
-            // For demo, we'll just show a placeholder or mirror local
-            // In real implementation, you'd connect to another peer
-            remoteVideo.srcObject = videoStream; // Demo: mirror local
-            
+            remoteVideo.srcObject = videoStream;
             document.getElementById('videoCallModal').classList.remove('hidden');
         } catch(err) {
-            alert("لا يمكن الوصول إلى الكاميرا/الميكروفون: " + err.message);
+            alert(translations[currentLang].cannotAccessCamera + err.message);
         }
     }
     
@@ -1404,18 +2039,18 @@
         try {
             if(!audioStream) {
                 audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                alert("🎤 تم تفعيل الميكروفون (للرسائل الصوتية)");
+                alert(translations[currentLang].micActive);
             }
         } catch(e) { console.log("Mic error"); }
     }
     
     function toggleMicrophoneOpen() {
-        if(!currentOpenRoom) { alert("افتح محادثة أولاً"); return; }
+        if(!currentOpenRoom) { alert(translations[currentLang].openChatFirst); return; }
         if(!audioStream) { startMicrophone(); return; }
         const audioTrack = audioStream.getAudioTracks()[0];
         if(audioTrack) {
             audioTrack.enabled = !audioTrack.enabled;
-            alert(audioTrack.enabled ? "🎙️ الميكروفون نشط" : "🔴 الميكروفون غير نشط");
+            alert(audioTrack.enabled ? translations[currentLang].micActive : translations[currentLang].micInactive);
         }
     }
     
@@ -1428,10 +2063,10 @@
         }
         if(isMusicPlaying) {
             bgMusic.pause();
-            document.getElementById('musicBtn').innerHTML = "🎵 تشغيل";
+            document.getElementById('musicBtn').innerHTML = translations[currentLang].playMusic;
         } else {
             bgMusic.play().catch(e => console.log("Auto-play prevented"));
-            document.getElementById('musicBtn').innerHTML = "🔇 إيقاف";
+            document.getElementById('musicBtn').innerHTML = translations[currentLang].stopMusic;
         }
         isMusicPlaying = !isMusicPlaying;
     }
@@ -1442,8 +2077,8 @@
         const roomPassword = document.getElementById('securityRoomPassword').value;
         const roomName = document.getElementById('securityRoomName').value.trim();
         
-        if(!username) { alert("❌ أدخل اسم المستخدم"); return; }
-        if(!roomName) { alert("❌ أدخل اسم الغرفة"); return; }
+        if(!username) { alert(translations[currentLang].enterUser); return; }
+        if(!roomName) { alert(translations[currentLang].enterRoom); return; }
         if(roomPassword && !validatePassword(roomPassword)) return;
         
         currentUser = username;
@@ -1458,7 +2093,7 @@
         
         if(allRooms[roomName]) {
             if(allRooms[roomName].password && allRooms[roomName].password !== roomPassword) {
-                alert("⚠️ كلمة المرور غير صحيحة! سيتم إنشاء غرفة جديدة.");
+                alert(translations[currentLang].wrongPasswordCreate);
                 createNewRoomWithName(roomName);
             } else {
                 if(!allRooms[roomName].users.includes(currentUser)) {
@@ -1524,7 +2159,7 @@
     }, 2000);
     
     // Ads rotation
-    const ads = ["📺 إعلان ممول - اشترك الآن!", "🎮 لعبة الأسبوع - العب مجاناً!", "💰 خصم 50% على VIP"];
+    const ads = ["📺 Sponsored Ad - Subscribe Now!", "🎮 Game of the Week - Play Free!", "💰 50% OFF on VIP"];
     let adIdx = 0;
     setInterval(() => {
         adIdx = (adIdx + 1) % ads.length;
@@ -1539,13 +2174,19 @@
     const savedVIP = localStorage.getItem('didogame_vip');
     if(savedVIP === 'true') {
         isVIP = true;
-        document.getElementById('registerBtn').innerHTML = '👑 VIP مفعل';
         document.getElementById('registerBtn').classList.add('vip-active');
     }
     
     const savedUser = localStorage.getItem('didogame_username');
     if(savedUser) {
         document.getElementById('securityUsername').value = savedUser;
+    }
+    
+    const savedLang = localStorage.getItem('didogame_lang');
+    if(savedLang && translations[savedLang]) {
+        setLanguage(savedLang);
+    } else {
+        setLanguage('en');
     }
     
     // Expose functions globally
@@ -1561,6 +2202,7 @@
     window.toggleMute = toggleMute;
     window.toggleVideo = toggleVideo;
     window.endVideoCall = endVideoCall;
+    window.setLanguage = setLanguage;
 </script>
 </body>
 </html>
