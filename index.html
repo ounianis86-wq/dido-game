@@ -3,404 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DidoGame - Anime Neon Interface</title>
+    <title>DidoGame - واجهة أنمي نيون</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Cairo', 'Poppins', 'Segoe UI', sans-serif;
         }
 
         body {
-            background: #0a0a1a;
-            min-height: 100vh;
+            background: #05050f;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
             padding: 16px;
         }
 
-        /* الهاتف المحاكي */
-        .phone-screen {
+        .app {
             max-width: 400px;
             width: 100%;
-            background: linear-gradient(145deg, #0d0d1a, #05050f);
+            background: #0a0a1a;
             border-radius: 48px;
-            overflow: hidden;
-            box-shadow: 0 0 50px rgba(255, 0, 255, 0.3), 0 0 20px rgba(0, 255, 255, 0.2);
+            overflow-y: auto;
+            overflow-x: hidden;
+            height: 700px;
             position: relative;
+            box-shadow: 0 0 50px #ff00ff30, 0 0 20px #00ffff20;
         }
 
-        /* خلفية نيون متحركة */
-        .neon-bg {
+        .bg-neon {
             position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            background: radial-gradient(circle at 30% 10%, #1a0033, #000000);
             z-index: 0;
-        }
-
-        .city-glow {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: linear-gradient(0deg, #4a00e0, #8e2de2, transparent);
-            opacity: 0.3;
-            filter: blur(40px);
-        }
-
-        .neon-circle {
-            position: absolute;
-            top: 20%;
-            right: -50px;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, #ff00ff40, transparent);
-            border-radius: 50%;
-            filter: blur(60px);
-        }
-
-        .neon-circle2 {
-            position: absolute;
-            bottom: 10%;
-            left: -30px;
-            width: 180px;
-            height: 180px;
-            background: radial-gradient(circle, #00ffff40, transparent);
-            border-radius: 50%;
-            filter: blur(50px);
         }
 
         .content {
             position: relative;
             z-index: 2;
-            padding: 20px;
+            padding: 20px 16px;
         }
 
-        /* البانر العلوي مع شخصية الأنمي */
-        .hero-banner {
-            background: linear-gradient(135deg, #1a0a3a, #0a0a2a);
-            border-radius: 32px;
-            padding: 16px;
-            margin-bottom: 24px;
+        .top-bar {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 16px;
-            border: 1px solid #ff00ff55;
-            box-shadow: 0 0 20px #ff00ff30;
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 16px;
         }
 
-        .anime-character {
-            flex: 0.8;
-            text-align: center;
+        .logo-small {
+            font-size: 1.3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
-        .character-avatar {
-            width: 110px;
-            height: 110px;
-            background: linear-gradient(145deg, #2a1a4a, #1a0a3a);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #ff44ff;
-            box-shadow: 0 0 20px #ff44ff;
-            font-size: 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* تمثيل شخصية الأنمي برموز */
-        .character-avatar::before {
-            content: "👤";
-            font-size: 4rem;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .character-avatar::after {
-            content: "🎧";
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 1.2rem;
-        }
-
-        .hoodie-text {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #ff00ff;
+        .premium-badge {
+            background: linear-gradient(135deg, #ff44ff, #aa44ff);
+            padding: 4px 12px;
+            border-radius: 40px;
             color: white;
-            font-size: 0.5rem;
-            padding: 2px 8px;
-            border-radius: 20px;
+            font-size: 0.7rem;
             font-weight: bold;
         }
 
+        /* البانر الرئيسي - صورة أنمي + مدينة */
+        .hero-banner {
+            background: linear-gradient(135deg, #1a0a3a, #0a0a2a);
+            border-radius: 32px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid #ff44ff55;
+        }
+
+        .hero-image {
+            width: 100%;
+            min-height: 280px;
+            background-image: url('https://i.pinimg.com/736x/8e/2a/7c/8e2a7c0e6b1a4f8c3d5e7a9b2c4d6f8e.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 20px;
+        }
+
         .hero-text {
-            flex: 1.2;
+            text-align: center;
+            width: 100%;
         }
 
         .hero-text h2 {
-            color: #ff44ff;
-            font-size: 1.2rem;
-            text-shadow: 0 0 10px magenta;
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, #ffff00, #ff44ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px #ff44ff;
         }
 
         .hero-text p {
-            color: #aaaaff;
-            font-size: 0.7rem;
-            margin-top: 5px;
+            color: white;
+            font-size: 0.8rem;
+            margin: 8px 0;
+            text-shadow: 0 0 5px black;
         }
 
-        .city-background {
-            background: linear-gradient(0deg, #2a0066, transparent);
-            height: 60px;
-            margin-top: 10px;
-            border-radius: 20px;
+        .free-badge {
+            display: inline-block;
+            background: #ff3366;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+
+        .discover-btn {
+            background: linear-gradient(135deg, #8a2be2, #4a00e0);
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            margin-top: 8px;
+            cursor: pointer;
+        }
+
+        /* أيقونات الفئات */
+        .categories {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 0.7rem;
-            color: #00ffff;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
         }
 
-        /* عنوان القسم */
+        .cat-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .cat-icon {
+            background: #1a1a3a;
+            border-radius: 24px;
+            padding: 10px;
+            margin-bottom: 6px;
+            font-size: 1.5rem;
+        }
+
+        .cat-item span {
+            color: white;
+            font-size: 0.7rem;
+        }
+
         .section-title {
             color: white;
             font-size: 1rem;
-            margin-bottom: 12px;
+            margin: 16px 0 12px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
         .section-title span {
-            background: #ff00ff;
             width: 4px;
             height: 20px;
+            background: #ff44ff;
             border-radius: 2px;
         }
 
-        /* شبكة الألعاب */
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-            margin-bottom: 24px;
+        /* قائمة الألعاب */
+        .game-row {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 8px;
         }
 
         .game-card {
-            background: rgba(20, 10, 40, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 16px 12px;
+            min-width: 130px;
+            background: #0f0f2a;
+            border-radius: 20px;
+            padding: 12px;
             text-align: center;
-            border: 1px solid rgba(255, 0, 255, 0.3);
-            transition: 0.2s;
+            border: 1px solid #ff44ff40;
             cursor: pointer;
+            transition: 0.2s;
         }
 
         .game-card:hover {
-            transform: translateY(-5px);
-            border-color: #ff00ff;
-            box-shadow: 0 0 20px #ff00ff;
+            border-color: #ff44ff;
+            box-shadow: 0 0 15px #ff44ff;
         }
 
-        .game-icon {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+        .game-img {
+            width: 100%;
+            height: 80px;
+            background: #1a1a3a;
+            border-radius: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
         }
 
         .game-card h4 {
-            color: #ff44ff;
-            font-size: 0.85rem;
-            margin-bottom: 5px;
+            color: white;
+            font-size: 0.8rem;
         }
 
-        .game-card p {
-            color: #8888aa;
+        .new-badge {
+            background: red;
+            color: white;
             font-size: 0.6rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-top: 4px;
         }
 
-        /* شعار DIDO GAME */
-        .logo {
-            text-align: center;
-            margin-bottom: 16px;
-        }
-
-        .logo h1 {
-            font-size: 2rem;
-            background: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 20px #ff00ff;
-        }
-
-        /* شريط سفلي */
-        .bottom-nav {
+        /* قائمة اللاعبين المميزين */
+        .players-list {
             display: flex;
-            justify-content: space-around;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(15px);
-            border-radius: 40px;
-            padding: 10px;
-            margin-top: 10px;
-            border: 1px solid #ff00ff55;
+            gap: 12px;
+            overflow-x: auto;
         }
 
-        .nav-item {
-            color: #aaaaff;
-            font-size: 0.7rem;
+        .player {
             text-align: center;
-            cursor: pointer;
-            transition: 0.2s;
+            min-width: 70px;
         }
 
-        .nav-item.active {
-            color: #ff44ff;
-            text-shadow: 0 0 10px magenta;
+        .player-avatar {
+            width: 60px;
+            height: 60px;
+            background: #ff44ff30;
+            border-radius: 50%;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
         }
 
-        /* زر الموسيقى */
+        .player-name {
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
         .music-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgba(0, 0, 0, 0.7);
+            background: #000000aa;
             backdrop-filter: blur(10px);
             border: 1px solid #00ffff;
             border-radius: 50px;
-            padding: 8px 18px;
+            padding: 6px 16px;
             color: #00ffff;
             cursor: pointer;
+            font-size: 0.7rem;
             z-index: 100;
-            font-size: 0.8rem;
-        }
-
-        @media (max-width: 450px) {
-            .phone-screen { border-radius: 32px; }
-            .content { padding: 16px; }
-            .character-avatar { width: 80px; height: 80px; }
-            .hero-text h2 { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
-    <div class="phone-screen">
-        <div class="neon-bg">
-            <div class="city-glow"></div>
-            <div class="neon-circle"></div>
-            <div class="neon-circle2"></div>
+<div class="app">
+    <div class="bg-neon"></div>
+    <div class="content">
+        <div class="top-bar">
+            <div class="logo-small">🎮 DidoGame</div>
+            <div class="premium-badge">👑 حساب مميز</div>
         </div>
-        <div class="content">
-            <!-- شعار DidoGame -->
-            <div class="logo">
-                <h1>DIDO GAME</h1>
-            </div>
 
-            <!-- البانر الرئيسي مع شخصية الأنمي -->
-            <div class="hero-banner">
-                <div class="anime-character">
-                    <div class="character-avatar">
-                        <div class="hoodie-text">DIDO</div>
-                    </div>
-                </div>
+        <!-- البانر بصورة أنمي ومدينة -->
+        <div class="hero-banner">
+            <div class="hero-image">
                 <div class="hero-text">
-                    <h2>⚡ READY TO PLAY?</h2>
-                    <p>الشاب ذو الشعر الداكن وسماعات الرأس يتحداك! اختر لعبتك وابدأ المغامرة.</p>
+                    <h2>DidoGame</h2>
+                    <p>🌍 عالم واحد يجمع كل ألعابك المفضلة</p>
+                    <div class="free-badge">✨ مجانية 100% ✨</div>
+                    <button class="discover-btn" onclick="alert('اكتشف الألعاب الآن - قريباً')">اكتشف الألعاب الآن ▶</button>
                 </div>
             </div>
+        </div>
 
-            <!-- مشهد المدينة الخلفية -->
-            <div class="city-background">
-                <span>🏙️</span> <span>✦ NEO TOKYO 2077 ✦</span> <span>🌃</span>
-            </div>
+        <!-- الفئات -->
+        <div class="categories">
+            <div class="cat-item"><div class="cat-icon">🎃</div><span>ألعاب رعب</span></div>
+            <div class="cat-item"><div class="cat-icon">🥊</div><span>ألعاب قتال</span></div>
+            <div class="cat-item"><div class="cat-icon">⚽</div><span>ألعاب رياضة</span></div>
+            <div class="cat-item"><div class="cat-icon">🏎️</div><span>ألعاب سباقات</span></div>
+            <div class="cat-item"><div class="cat-icon">🧩</div><span>ألغاز</span></div>
+        </div>
 
-            <!-- عنوان القسم -->
-            <div class="section-title">
-                <span></span> <span>🔥热门游戏 / HOT GAMES 🔥</span>
-            </div>
+        <!-- أبرز اللاعبين -->
+        <div class="section-title"><span></span> ⭐ أبرز اللاعبين</div>
+        <div class="players-list">
+            <div class="player"><div class="player-avatar">😎</div><div class="player-name">Shadow</div></div>
+            <div class="player"><div class="player-avatar">🗡️</div><div class="player-name">HunterX</div></div>
+            <div class="player"><div class="player-avatar">✨</div><div class="player-name">Nova</div></div>
+            <div class="player"><div class="player-avatar">👑</div><div class="player-name">PixelKing</div></div>
+        </div>
 
-            <!-- شبكة الألعاب (4 ألعاب) -->
-            <div class="games-grid">
-                <div class="game-card" onclick="alert('Anime Fighters - قريباً!')">
-                    <div class="game-icon">⚔️🇯🇵</div>
-                    <h4>Anime Fighters</h4>
-                    <p>1.2k نشط الآن</p>
-                </div>
-                <div class="game-card" onclick="alert('Car Speed Racing - قريباً!')">
-                    <div class="game-icon">🏎️💨</div>
-                    <h4>Car Speed Racing</h4>
-                    <p>856 نشط الآن</p>
-                </div>
-                <div class="game-card" onclick="alert('Zombie Hunter - قريباً!')">
-                    <div class="game-icon">🧟🔫</div>
-                    <h4>Zombie Hunter</h4>
-                    <p>2.1k نشط الآن</p>
-                </div>
-                <div class="game-card" onclick="alert('Puzzle Master - قريباً!')">
-                    <div class="game-icon">🧩🧠</div>
-                    <h4>Puzzle Master</h4>
-                    <p>643 نشط الآن</p>
-                </div>
-            </div>
+        <!-- ألعاب مميزة -->
+        <div class="section-title"><span></span> 🔥 ألعاب مميزة</div>
+        <div class="game-row">
+            <div class="game-card" onclick="alert('Anime Fighters - قريباً')"><div class="game-img">⚔️</div><h4>Anime Fighters</h4><div class="new-badge">جديد</div></div>
+            <div class="game-card" onclick="alert('Car Speed Racing - قريباً')"><div class="game-img">🏎️</div><h4>Car Speed Racing</h4></div>
+            <div class="game-card" onclick="alert('Zombie Hunter - قريباً')"><div class="game-img">🧟</div><h4>Zombie Hunter</h4></div>
+            <div class="game-card" onclick="alert('Puzzle Master - قريباً')"><div class="game-img">🧩</div><h4>Puzzle Master</h4></div>
+        </div>
 
-            <!-- الشريط السفلي -->
-            <div class="bottom-nav">
-                <div class="nav-item active">🏠 HOME</div>
-                <div class="nav-item">🎮 GAMES</div>
-                <div class="nav-item">👤 PROFILE</div>
-                <div class="nav-item">⚙️ SETTINGS</div>
-            </div>
+        <!-- ألعاب كلاسيكية -->
+        <div class="section-title"><span></span> 🎮 ألعاب كلاسيكية</div>
+        <div class="game-row">
+            <div class="game-card" onclick="alert('Minecraft Classic - قريباً')"><div class="game-img">⛏️</div><h4>Minecraft Classic</h4></div>
+            <div class="game-card" onclick="alert('GTA: Vice City - قريباً')"><div class="game-img">🏙️</div><h4>GTA: Vice City</h4></div>
+            <div class="game-card" onclick="alert('Stickman Battle - قريباً')"><div class="game-img">🥋</div><h4>Stickman Battle</h4></div>
+            <div class="game-card" onclick="alert('Among Us - قريباً')"><div class="game-img">👾</div><h4>Among Us</h4></div>
+            <div class="game-card" onclick="alert('Hill Climb Racing - قريباً')"><div class="game-img">⛰️</div><h4>Hill Climb Racing</h4></div>
         </div>
     </div>
+</div>
 
-    <!-- زر الموسيقى -->
-    <div class="music-btn" id="musicToggle">🎵 تشغيل</div>
+<div class="music-btn" id="musicToggle">🎵 تشغيل</div>
 
-    <script>
-        // موسيقى خلفية أنمي
-        const bgMusic = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-        bgMusic.loop = true;
-        bgMusic.volume = 0.2;
-        let isPlaying = false;
-        const musicBtn = document.getElementById('musicToggle');
-
-        function toggleMusic() {
-            if (isPlaying) {
-                bgMusic.pause();
-                musicBtn.innerHTML = '🎵 تشغيل';
-            } else {
-                bgMusic.play().catch(() => console.log('انتظر تفاعل'));
-                musicBtn.innerHTML = '🔇 إيقاف';
-            }
-            isPlaying = !isPlaying;
-        }
-
-        musicBtn.onclick = toggleMusic;
-
-        // تشغيل عند أول تفاعل
-        document.body.addEventListener('touchstart', () => {
-            if (!isPlaying) {
-                bgMusic.play().catch(() => {});
-                isPlaying = true;
-                musicBtn.innerHTML = '🔇 إيقاف';
-            }
-        }, { once: true });
-    </script>
+<script>
+    const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3');
+    music.loop = true;
+    music.volume = 0.2;
+    let playing = false;
+    const btn = document.getElementById('musicToggle');
+    btn.onclick = () => {
+        if (playing) { music.pause(); btn.innerHTML = '🎵 تشغيل'; }
+        else { music.play().catch(()=>{}); btn.innerHTML = '🔇 إيقاف'; }
+        playing = !playing;
+    };
+    document.body.addEventListener('touchstart', () => {
+        if (!playing) { music.play().catch(()=>{}); playing = true; btn.innerHTML = '🔇 إيقاف'; }
+    }, { once: true });
+</script>
 </body>
 </html>
