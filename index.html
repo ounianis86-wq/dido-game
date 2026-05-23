@@ -353,7 +353,7 @@
             margin-top: 10px;
         }
 
-        /* Ad - ENLARGED AREA (reduced bottom margin to bring games up) */
+        /* Ad - ENLARGED AREA */
         .fixed-permanent-ad {
             background: linear-gradient(135deg, #ff44ff30, #00ffff30);
             border: 2px solid #ff44ff;
@@ -374,13 +374,14 @@
             100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
         }
 
-        /* Games - moved up (reduced top spacing) */
+        /* Games - moved down (pushed to bottom) */
         .games-wrapper {
             display: flex;
             flex-direction: column;
             gap: 12px;
             padding-bottom: 8px;
-            margin-top: -6px;
+            margin-top: auto;
+            margin-bottom: 0;
         }
         
         .game-row {
@@ -1098,10 +1099,10 @@
                 </div>
             </div>
             
-            <!-- ENLARGED AD AREA (no bottom margin) -->
+            <!-- ENLARGED AD AREA -->
             <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
             
-            <!-- Games Section - moved up with negative margin -->
+            <!-- Games Section - pushed to bottom -->
             <div class="games-wrapper" id="gamesWrapper">
                 <!-- Dynamic game rows will be inserted here -->
             </div>
