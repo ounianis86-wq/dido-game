@@ -2,370 +2,57 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DidoGame - 3D Anime Games</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أركيد الألعاب - بدون Google Play</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', 'Segoe UI', system-ui, sans-serif;
-        }
-
-        body {
-            background: #05050f;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 10px;
-        }
-
-        .app {
-            max-width: 400px;
-            width: 100%;
-            background: #0a0a1a;
-            border-radius: 40px;
-            overflow: hidden;
-            height: 95vh;
-            max-height: 700px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 0 40px #ff00ff30;
-            position: relative;
-        }
-
-        .bg-neon {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 10%, #1a0033, #000000);
-            z-index: 0;
-        }
-
-        .content {
-            position: relative;
-            z-index: 2;
-            padding: 12px 14px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            scrollbar-width: none;
-        }
-
-        .content::-webkit-scrollbar {
-            display: none;
-        }
-
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .logo-small {
-            font-size: 1.1rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .premium-badge {
-            background: linear-gradient(135deg, #ff44ff, #aa44ff);
-            padding: 2px 10px;
-            border-radius: 40px;
-            color: white;
-            font-size: 0.6rem;
-            font-weight: bold;
-        }
-
-        /* بانر 3D Anime */
-        .hero-banner {
-            background: linear-gradient(135deg, #1a0a3a, #0a0a2a);
-            border-radius: 24px;
-            margin-bottom: 10px;
-            border: 1px solid #ff44ff55;
-        }
-
-        .hero-image {
-            width: 100%;
-            min-height: 150px;
-            background-image: url('https://i.pinimg.com/736x/7f/8a/5e/7f8a5e4e1b2a3c4d5e6f7a8b9c0d1e2f.jpg');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding: 12px;
-            border-radius: 24px;
-        }
-
-        .hero-text {
-            text-align: center;
-            width: 100%;
-        }
-
-        .hero-text h2 {
-            font-size: 1.2rem;
-            background: linear-gradient(135deg, #ffff00, #ff44ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .hero-text p {
-            color: white;
-            font-size: 0.65rem;
-            margin: 4px 0;
-        }
-
-        .free-badge {
-            display: inline-block;
-            background: #ff3366;
-            padding: 2px 10px;
-            border-radius: 40px;
-            font-size: 0.6rem;
-            font-weight: bold;
-        }
-
-        .discover-btn {
-            background: linear-gradient(135deg, #8a2be2, #4a00e0);
-            border: none;
-            padding: 5px 12px;
-            border-radius: 40px;
-            color: white;
-            font-weight: bold;
-            font-size: 0.65rem;
-            margin-top: 6px;
-            cursor: pointer;
-        }
-
-        .categories {
-            display: flex;
-            justify-content: space-between;
-            gap: 6px;
-            margin-bottom: 12px;
-        }
-
-        .cat-item {
-            text-align: center;
-            flex: 1;
-            cursor: pointer;
-        }
-
-        .cat-icon {
-            background: #1a1a3a;
-            border-radius: 16px;
-            padding: 5px;
-            font-size: 1.1rem;
-        }
-
-        .cat-item span {
-            color: white;
-            font-size: 0.55rem;
-        }
-
-        .section-title {
-            color: white;
-            font-size: 0.8rem;
-            margin: 8px 0 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .section-title span {
-            width: 3px;
-            height: 14px;
-            background: #ff44ff;
-            border-radius: 2px;
-        }
-
-        .game-row {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding-bottom: 6px;
-        }
-
-        .game-card {
-            min-width: 100px;
-            background: #0f0f2a;
-            border-radius: 16px;
-            padding: 8px;
-            text-align: center;
-            border: 1px solid #ff44ff40;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .game-card:hover {
-            border-color: #ff44ff;
-            box-shadow: 0 0 15px #ff44ff;
-        }
-
-        .game-img {
-            width: 100%;
-            height: 55px;
-            background: #1a1a3a;
-            border-radius: 12px;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .game-card h4 {
-            color: white;
-            font-size: 0.65rem;
-        }
-
-        .new-badge {
-            background: red;
-            color: white;
-            font-size: 0.5rem;
-            padding: 1px 5px;
-            border-radius: 10px;
-            display: inline-block;
-            margin-top: 3px;
-        }
-
-        .players-list {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-        }
-
-        .player {
-            text-align: center;
-            min-width: 55px;
-            cursor: pointer;
-        }
-
-        .player-avatar {
-            width: 45px;
-            height: 45px;
-            background: #ff44ff30;
-            border-radius: 50%;
-            margin-bottom: 3px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .player-name {
-            color: white;
-            font-size: 0.6rem;
-            font-weight: bold;
-        }
-
-        .music-btn {
-            position: fixed;
-            bottom: 15px;
-            right: 15px;
-            background: #000000aa;
-            backdrop-filter: blur(10px);
-            border: 1px solid #00ffff;
-            border-radius: 50px;
-            padding: 4px 12px;
-            color: #00ffff;
-            cursor: pointer;
-            font-size: 0.6rem;
-            z-index: 100;
-        }
+        body { font-family: Arial, sans-serif; text-align: center; background: #1e1e2f; color: white; }
+        .game-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 20px; }
+        .game-card { background: #28293d; padding: 15px; border-radius: 15px; width: 200px; cursor: pointer; }
+        iframe { width: 100%; height: 500px; border: none; border-radius: 15px; margin-top: 20px; display: none; }
+        button { background: #ff4757; color: white; border: none; padding: 10px 20px; margin: 10px; border-radius: 8px; cursor: pointer; }
+        .back-btn { background: #1e90ff; }
     </style>
 </head>
 <body>
-<div class="app">
-    <div class="bg-neon"></div>
-    <div class="content">
-        <div class="top-bar">
-            <div class="logo-small">🎮 DidoGame</div>
-            <div class="premium-badge">👑 حساب مميز</div>
+    <h1>🎮 ألعاب فورية - بدون العودة إلى Google Play</h1>
+    <div class="game-list">
+        <div class="game-card" data-game="https://html5.gamedistribution.com/6e3f6b7e8b9a4c2e8c4f5a1b3c7d9e2e/?gd_sdk_referrer_url=embed">
+            <h3>كرة القدم</h3>
+            <p>اضغط لتشغيل</p>
         </div>
-
-        <!-- بانر 3D Anime -->
-        <div class="hero-banner">
-            <div class="hero-image">
-                <div class="hero-text">
-                    <h2>DidoGame</h2>
-                    <p>🌍 عالم واحد لكل ألعابك</p>
-                    <div class="free-badge">✨ مجانية 100% ✨</div>
-                    <button class="discover-btn" onclick="window.open('https://play.google.com/store/apps', '_blank')">اكتشف ▶</button>
-                </div>
-            </div>
+        <div class="game-card" data-game="https://html5.gamedistribution.com/8f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c/">
+            <h3>سباق السيارات</h3>
+            <p>اضغط لتشغيل</p>
         </div>
-
-        <!-- الفئات -->
-        <div class="categories">
-            <div class="cat-item" onclick="window.open('https://play.google.com/store/search?q=horror+games&c=apps', '_blank')"><div class="cat-icon">🎃</div><span>رعب</span></div>
-            <div class="cat-item" onclick="window.open('https://play.google.com/store/search?q=fighting+games&c=apps', '_blank')"><div class="cat-icon">🥊</div><span>قتال</span></div>
-            <div class="cat-item" onclick="window.open('https://play.google.com/store/search?q=sports+games&c=apps', '_blank')"><div class="cat-icon">⚽</div><span>رياضة</span></div>
-            <div class="cat-item" onclick="window.open('https://play.google.com/store/search?q=racing+games&c=apps', '_blank')"><div class="cat-icon">🏎️</div><span>سباقات</span></div>
-            <div class="cat-item" onclick="window.open('https://play.google.com/store/search?q=puzzle+games&c=apps', '_blank')"><div class="cat-icon">🧩</div><span>ألغاز</span></div>
-        </div>
-
-        <!-- أبرز اللاعبين -->
-        <div class="section-title"><span></span> ⭐ أبرز اللاعبين</div>
-        <div class="players-list">
-            <div class="player" onclick="alert('Shadow - مستوى 99')"><div class="player-avatar">😎</div><div class="player-name">Shadow</div></div>
-            <div class="player" onclick="alert('HunterX - مستوى 87')"><div class="player-avatar">🗡️</div><div class="player-name">HunterX</div></div>
-            <div class="player" onclick="alert('Nova - مستوى 95')"><div class="player-avatar">✨</div><div class="player-name">Nova</div></div>
-            <div class="player" onclick="alert('PixelKing - مستوى 100')"><div class="player-avatar">👑</div><div class="player-name">King</div></div>
-        </div>
-
-        <!-- ألعاب حقيقية من Google Play -->
-        <div class="section-title"><span></span> 🔥 ألعاب مميزة</div>
-        <div class="game-row">
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.miHoYo.GenshinImpact', '_blank')"><div class="game-img">⚔️</div><h4>Genshin Impact</h4><div class="new-badge">3D Anime</div></div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.activision.callofduty.shooter', '_blank')"><div class="game-img">🔫</div><h4>Call of Duty</h4></div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.tencent.ig', '_blank')"><div class="game-img">🏝️</div><h4>PUBG Mobile</h4></div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.dts.freefireth', '_blank')"><div class="game-img">🔥</div><h4>Free Fire</h4></div>
-        </div>
-
-        <!-- ألعاب كلاسيكية -->
-        <div class="section-title"><span></span> 🎮 ألعاب كلاسيكية</div>
-        <div class="game-row">
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.mojang.minecraftpe', '_blank')"><div class="game-img">⛏️</div><h4>Minecraft</h4></div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.rockstargames.gtasa', '_blank')"><div class="game-img">🏙️</div><h4>GTA: SA</h4></div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.playrix.farmscapes', '_blank')"><div class="game-img">🧩</div><h4>FarmScapes</h4></div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.innersloth.spacemafia', '_blank')"><div class="game-img">👾</div><h4>Among Us</h4></div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.fingersoft.hillclimb', '_blank')"><div class="game-img">⛰️</div><h4>Hill Climb</h4></div>
-        </div>
-
-        <!-- ألعاب أنمي 3D إضافية -->
-        <div class="section-title"><span></span> ✨ ألعاب أنمي 3D</div>
-        <div class="game-row">
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.hero.games', '_blank')"><div class="game-img">🗡️</div><h4>Honkai Impact</h4><div class="new-badge">3D</div></div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.LevelInfinite.WoLong', '_blank')"><div class="game-img">⚔️</div><h4>Wo Long</h4></div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.supercell.clashroyale', '_blank')"><div class="game-img">👑</div><h4>Clash Royale</h4></div>
-            <div class="game-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.epicgames.fortnite', '_blank')"><div class="game-img">🎯</div><h4>Fortnite</h4></div>
+        <div class="game-card" data-game="https://t1.gstatic.com/og/_/js/k=og.qtm.en_US.3Fz7XWZhrxU.o/m=wsem_market_web_embed_ris/rt=j/d=1/ed=1/rs=AA2YrTvGkXMqLqRqZ5LqGvXqXqQ/">
+            <h3>سلة السيارات</h3>
+            <p>اضغط لتشغيل</p>
         </div>
     </div>
-</div>
+    <button class="back-btn" id="backBtn" style="display:none;">🔙 العودة للألعاب</button>
+    <iframe id="gameFrame" allow="autoplay; fullscreen"></iframe>
 
-<div class="music-btn" id="musicToggle">🎵 تشغيل</div>
+    <script>
+        const games = document.querySelectorAll('.game-card');
+        const frame = document.getElementById('gameFrame');
+        const backBtn = document.getElementById('backBtn');
 
-<script>
-    const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3');
-    music.loop = true;
-    music.volume = 0.15;
-    let playing = false;
-    const btn = document.getElementById('musicToggle');
-    btn.onclick = () => {
-        if (playing) { music.pause(); btn.innerHTML = '🎵 تشغيل'; }
-        else { music.play().catch(()=>{}); btn.innerHTML = '🔇 إيقاف'; }
-        playing = !playing;
-    };
-    document.body.addEventListener('touchstart', () => {
-        if (!playing) { music.play().catch(()=>{}); playing = true; btn.innerHTML = '🔇 إيقاف'; }
-    }, { once: true });
-</script>
+        games.forEach(game => {
+            game.addEventListener('click', () => {
+                const url = game.getAttribute('data-game');
+                frame.src = url;
+                frame.style.display = 'block';
+                backBtn.style.display = 'inline-block';
+                document.querySelector('.game-list').style.display = 'none';
+            });
+        });
+
+        backBtn.addEventListener('click', () => {
+            frame.src = '';
+            frame.style.display = 'none';
+            backBtn.style.display = 'none';
+            document.querySelector('.game-list').style.display = 'flex';
+        });
+    </script>
 </body>
 </html>
