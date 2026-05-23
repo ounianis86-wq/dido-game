@@ -145,7 +145,12 @@
             font-size: 0.8rem;
         }
 
-        /* Ranking - unchanged */
+        /* Spacer above ranking (moved from below ad) */
+        .spacer-above-ranking {
+            height: 6px;
+        }
+
+        /* Ranking Section */
         .ranking-section {
             margin-bottom: 12px;
             text-align: center;
@@ -244,13 +249,13 @@
             transform: scale(1.02);
         }
 
-        /* Ad - ENLARGED AREA */
+        /* Ad - ENLARGED AREA (with reduced bottom margin, half space moved) */
         .fixed-permanent-ad {
             background: linear-gradient(135deg, #ff44ff30, #00ffff30);
             border: 2px solid #ff44ff;
             border-radius: 20px;
             padding: 18px 12px;
-            margin: 8px 0 12px 0;
+            margin: 8px 0 6px 0;
             text-align: center;
             color: white;
             font-size: 1rem;
@@ -956,6 +961,9 @@
                 </div>
             </div>
             
+            <!-- Spacer above ranking (half of the original gap moved here) -->
+            <div class="spacer-above-ranking"></div>
+            
             <div class="ranking-section">
                 <div class="ranking-circles" id="rankingList"></div>
             </div>
@@ -969,7 +977,7 @@
                 </div>
             </div>
             
-            <!-- ENLARGED AD AREA -->
+            <!-- ENLARGED AD AREA (with reduced bottom margin - half space) -->
             <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
             
             <div class="games-wrapper" id="gamesWrapper">
@@ -2284,4 +2292,4 @@
     window.setLanguage = setLanguage;
 </script>
 </body>
-</html>here  
+</html>
