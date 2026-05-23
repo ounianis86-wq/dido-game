@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DidoGame - 3D Anime City | العب مباشرة</title>
+    <title>DidoGame - دردشة صوتية وتبادل الصور</title>
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -28,12 +35,6 @@
             background-size: cover;
             background-position: center;
             z-index: -2;
-            animation: slowZoom 20s ease-in-out infinite alternate;
-        }
-        
-        @keyframes slowZoom {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.05); }
         }
         
         .anime-city-bg::after {
@@ -43,7 +44,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.65);
             z-index: -1;
         }
 
@@ -51,586 +52,218 @@
             max-width: 500px;
             width: 100%;
             margin: 0 auto;
-            background: rgba(5,5,20,0.75);
+            background: rgba(10,10,30,0.85);
             backdrop-filter: blur(8px);
             border-radius: 25px;
             overflow: hidden;
             height: 98vh;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 50px #ff00ff, 0 0 20px #00ffff, 0 0 10px #ff44ff80;
+            box-shadow: 0 0 40px #ff00ff30;
             position: relative;
-            border: 1px solid rgba(255,68,255,0.3);
-            animation: borderPulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes borderPulse {
-            0% { box-shadow: 0 0 20px #ff00ff, 0 0 10px #00ffff; border-color: rgba(255,68,255,0.3); }
-            50% { box-shadow: 0 0 50px #ff44ff, 0 0 30px #00ffff, 0 0 20px #ff44ff; border-color: rgba(255,68,255,0.8); }
-            100% { box-shadow: 0 0 20px #ff00ff, 0 0 10px #00ffff; border-color: rgba(255,68,255,0.3); }
         }
 
         .content {
-            padding: 8px 10px;
+            padding: 10px;
             flex: 1;
             overflow-y: auto;
-            scrollbar-width: none;
             display: flex;
             flex-direction: column;
         }
-        
-        .content::-webkit-scrollbar {
-            display: none;
-        }
 
-        .anime-hero {
+        /* Login Section */
+        .login-section {
             background: linear-gradient(135deg, #ff44ff20, #00ffff20);
-            border-radius: 25px;
-            padding: 12px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
-            border: 1px solid #ff44ff;
-            box-shadow: 0 0 20px #ff44ff;
-            animation: glowPulse 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes glowPulse {
-            0% { box-shadow: 0 0 10px #ff44ff; border-color: #ff44ff; }
-            50% { box-shadow: 0 0 30px #ff44ff, 0 0 20px #00ffff; border-color: #00ffff; }
-            100% { box-shadow: 0 0 10px #ff44ff; border-color: #ff44ff; }
-        }
-        
-        .character-img {
-            width: 120px;
-            height: 120px;
-            background: url('https://i.pinimg.com/originals/6e/5e/6c/6e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png');
-            background-size: cover;
-            background-position: center;
-            border-radius: 50%;
-            border: 3px solid #ff44ff;
-            position: relative;
-            box-shadow: 0 0 25px #ff44ff, 0 0 15px #00ffff;
-        }
-        
-        .controller-on-hand {
-            position: absolute;
-            bottom: -8px;
-            right: -8px;
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            border: 2px solid white;
-            box-shadow: 0 0 15px #00ffff;
-            animation: spin 4s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .character-info {
-            text-align: center;
-        }
-        
-        .tshirt-text {
-            background: linear-gradient(135deg, #ff3366, #ff44ff, #00ffff);
-            padding: 5px 14px;
-            border-radius: 22px;
-            color: white;
-            font-size: 0.75rem;
-            font-weight: bold;
-            display: inline-block;
-            margin: 4px 0;
-            box-shadow: 0 0 15px #ff44ff;
-        }
-        
-        .character-info h2 {
-            background: linear-gradient(135deg, #ffff00, #ff44ff, #00ffff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-size: 0.85rem;
-        }
-        
-        .challenge-look {
-            font-size: 0.65rem;
-            color: #ffaa88;
-            text-shadow: 0 0 8px #ff44ff;
-        }
-
-        .ranking-section {
-            margin-bottom: 10px;
-            text-align: center;
-        }
-        
-        .ranking-circles {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .rank-circle {
-            text-align: center;
-        }
-        
-        .gold-circle {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(145deg, #ffd700, #ffaa00);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            margin-bottom: 3px;
-            border: 2px solid #ffd700;
-            box-shadow: 0 0 20px #ffd700;
-        }
-        
-        .silver-circle {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            margin-bottom: 3px;
-            border: 1.5px solid #c0c0c0;
-            box-shadow: 0 0 15px #c0c0c0;
-        }
-        
-        .bronze-circle {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(145deg, #cd7f32, #b8651a);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            margin-bottom: 3px;
-            border: 1.5px solid #cd7f32;
-            box-shadow: 0 0 15px #cd7f32;
-        }
-        
-        .rank-name {
-            color: white;
-            font-size: 0.55rem;
-            font-weight: bold;
-            margin-top: 2px;
-        }
-        
-        .rank-points {
-            color: #ffcc00;
-            font-size: 0.5rem;
-        }
-        
-        .crown-icon {
-            font-size: 0.75rem;
-            margin-bottom: 2px;
-        }
-
-        .categories-section {
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-        
-        .categories {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            justify-content: center;
-        }
-        
-        .cat-badge {
-            background: #ff44ff30;
-            border: 1px solid #ff44ff;
-            padding: 4px 12px;
-            border-radius: 22px;
-            color: white;
-            font-size: 0.6rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 0 8px #ff44ff;
-        }
-        
-        .cat-badge:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px #ff44ff;
-            background: #ff44ff60;
-        }
-        
-        .more-btn {
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
-            border: 1px solid white;
-            padding: 4px 12px;
-            border-radius: 22px;
-            color: white;
-            font-size: 0.6rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 0 12px #ff44ff;
-            font-weight: bold;
-        }
-        
-        .more-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px #00ffff;
-        }
-
-        .fixed-permanent-ad {
-            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
-            border: 3px solid #ff44ff;
             border-radius: 20px;
-            padding: 12px;
-            margin: 10px 0;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 0 25px #ff44ff;
-        }
-        
-        .fixed-permanent-ad-icon {
-            font-size: 2.2rem;
-            margin-bottom: 5px;
-        }
-        
-        .fixed-permanent-ad-title {
-            color: white;
-            font-size: 0.85rem;
-            font-weight: bold;
-        }
-        
-        .fixed-permanent-ad-text {
-            color: #ffaa88;
-            font-size: 0.6rem;
-            margin-top: 5px;
-        }
-        
-        .ad-refresh-note {
-            color: #88ffaa;
-            font-size: 0.5rem;
-            margin-top: 8px;
-            border-top: 1px dashed #ff44ff;
-            padding-top: 5px;
-        }
-
-        .entry-ad-overlay, .levelup-ad-overlay, .more-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(10px);
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        
-        .ad-box, .more-box {
-            background: linear-gradient(135deg, #1a0033, #0a002a);
-            border: 3px solid #ff44ff;
-            border-radius: 30px;
-            padding: 25px 20px;
-            text-align: center;
-            max-width: 280px;
-            width: 85%;
-            box-shadow: 0 0 50px #ff44ff;
-        }
-        
-        .more-box {
-            max-width: 320px;
-        }
-        
-        .ad-icon {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-        
-        .ad-title, .more-title {
-            color: white;
-            font-size: 1rem;
-            font-weight: bold;
-        }
-        
-        .more-title {
-            font-size: 1.2rem;
+            border: 1px solid #ff44ff;
             margin-bottom: 15px;
         }
         
-        .ad-subtitle {
-            color: #ffaa88;
-            font-size: 0.7rem;
-            margin: 5px 0;
-        }
-        
-        .ad-timer {
-            color: #ff44ff;
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin: 15px 0;
-        }
-        
-        .ad-progress {
-            width: 80%;
-            height: 4px;
-            background: #333;
-            border-radius: 2px;
-            margin: 10px auto;
-            overflow: hidden;
-        }
-        
-        .ad-progress-bar {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, #ff44ff, #00ffff);
-            border-radius: 2px;
-            animation: progressShrink 10s linear forwards;
-        }
-        
-        .levelup-progress-bar {
-            animation: progressShrinkLevelUp 8s linear forwards;
-        }
-        
-        @keyframes progressShrink {
-            from { width: 100%; }
-            to { width: 0%; }
-        }
-        
-        @keyframes progressShrinkLevelUp {
-            from { width: 100%; }
-            to { width: 0%; }
-        }
-        
-        .more-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        
-        .more-option {
-            background: #ff44ff30;
-            border: 1px solid #ff44ff;
-            padding: 10px;
-            border-radius: 20px;
+        .login-section h3 {
             color: white;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            margin-bottom: 15px;
         }
         
-        .more-option:hover {
+        .login-input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 25px;
+            border: 1px solid #ff44ff;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            text-align: center;
+        }
+        
+        .login-btn {
             background: linear-gradient(135deg, #ff44ff, #00ffff);
-            transform: scale(1.02);
-        }
-        
-        .close-more-btn, .close-ad-btn {
-            background: linear-gradient(135deg, #ff3366, #ff44ff);
             border: none;
-            padding: 8px 20px;
-            border-radius: 30px;
+            padding: 10px 20px;
+            border-radius: 25px;
             color: white;
             font-weight: bold;
             cursor: pointer;
             margin-top: 10px;
         }
-
-        .games-wrapper {
-            margin-top: 0;
-            margin-bottom: 0;
-            flex: 1;
-        }
         
-        .two-rows {
+        .vip-badge {
+            background: #ff44ff;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 15px;
+            margin-left: 5px;
+        }
+
+        /* Chat Section */
+        .chat-section {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: 10px;
+            margin-top: 10px;
         }
         
-        .game-row {
-            display: flex;
-            gap: 6px;
-            overflow-x: auto;
-            padding-bottom: 5px;
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            max-height: 300px;
+            margin-bottom: 10px;
         }
         
-        .game-row::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .game-card {
-            min-width: 100px;
-            width: 100px;
-            background: linear-gradient(145deg, #0f0f2a, #0a0a1a);
-            border-radius: 14px;
-            padding: 7px;
-            text-align: center;
+        .message {
+            background: rgba(255,68,255,0.2);
+            border-radius: 15px;
+            padding: 8px 12px;
+            margin-bottom: 8px;
             border: 1px solid #ff44ff;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 0 10px #ff44ff;
         }
         
-        .game-card:hover {
-            transform: translateY(-5px);
-            border-color: #00ffff;
-            box-shadow: 0 0 25px #00ffff;
-        }
-        
-        .game-img {
-            width: 100%;
-            height: 70px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 10px;
-            margin-bottom: 4px;
-        }
-        
-        .game-title {
-            color: white;
-            font-size: 0.55rem;
+        .message-sender {
+            color: #ff44ff;
+            font-size: 0.7rem;
             font-weight: bold;
         }
         
-        .game-cat {
-            color: #00ffff;
-            font-size: 0.45rem;
+        .message-text {
+            color: white;
+            font-size: 0.8rem;
+            margin-top: 3px;
         }
-
-        .back-btn {
+        
+        .message-image {
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 10px;
+            margin-top: 5px;
+        }
+        
+        .message-audio {
+            margin-top: 5px;
+        }
+        
+        .chat-input-area {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 8px;
+            border-radius: 20px;
+            border: 1px solid #ff44ff;
+            background: rgba(0,0,0,0.5);
+            color: white;
+        }
+        
+        .send-btn, .image-btn, .audio-btn {
+            background: #ff44ff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .call-section {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(255,68,255,0.1);
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .call-btn {
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             border: none;
-            padding: 5px 14px;
+            padding: 8px 15px;
             border-radius: 20px;
             color: white;
             font-weight: bold;
-            margin-bottom: 8px;
             cursor: pointer;
-            display: inline-block;
-            font-size: 0.55rem;
-            box-shadow: 0 0 15px #ff44ff;
-        }
-
-        .bottom-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 5px 12px;
-            border-top: 1px solid #ff44ff;
-            background: rgba(0,0,0,0.5);
+            margin: 5px;
         }
         
-        .register-btn, .simulate-levelup-btn {
-            background: #ff44ff30;
-            border: 1px solid #ff44ff;
-            padding: 3px 10px;
-            border-radius: 18px;
-            color: white;
-            font-size: 0.5rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 0 8px #ff44ff;
-        }
-        
-        .simulate-levelup-btn {
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
-            margin-right: 5px;
-        }
-        
-        .register-btn.vip-active {
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
-        }
-        
-        .register-btn:hover, .simulate-levelup-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px #ff44ff;
-        }
-        
-        .music-bottom-btn {
-            background: #000000aa;
-            padding: 3px 10px;
-            border-radius: 18px;
-            color: #0ff;
-            cursor: pointer;
-            font-size: 0.5rem;
-            border: 1px solid #0ff;
-            box-shadow: 0 0 8px #0ff;
-        }
-
-        .game-modal {
+        .incoming-call {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000000ee;
-            backdrop-filter: blur(15px);
-            z-index: 2000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .game-modal iframe {
-            width: 95%;
-            height: 80%;
-            border-radius: 15px;
-            border: 3px solid #ff44ff;
-            background: white;
-            box-shadow: 0 0 50px #ff44ff;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: linear-gradient(135deg, #ff3366, #ff44ff);
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 0 15px #ff44ff;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a0033;
+            border: 2px solid #ff44ff;
+            border-radius: 20px;
+            padding: 15px;
+            z-index: 1000;
+            text-align: center;
         }
         
         .hidden {
             display: none;
         }
-
-        .page {
+        
+        .bottom-bar {
             display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        .page-hidden {
-            display: none;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            border-top: 1px solid #ff44ff;
+            background: rgba(0,0,0,0.5);
         }
         
-        .levelup-demo {
-            display: flex;
-            justify-content: flex-end;
+        .upgrade-btn {
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            padding: 5px 12px;
+            border-radius: 18px;
+            color: white;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        
+        .music-btn {
+            background: #000000aa;
+            padding: 5px 12px;
+            border-radius: 18px;
+            color: #0ff;
+            cursor: pointer;
+            font-size: 0.7rem;
+            border: 1px solid #0ff;
+        }
+        
+        .online-users {
+            font-size: 0.7rem;
+            color: #00ff88;
             margin-bottom: 5px;
+        }
+        
+        .vip-only {
+            background: rgba(255,68,255,0.3);
+            border: 1px dashed #ff44ff;
         }
     </style>
 </head>
@@ -639,414 +272,510 @@
 <div class="app">
     <div class="content">
         
-        <div id="homePage" class="page">
-            <div class="anime-hero">
-                <div class="character-img">
-                    <div class="controller-on-hand">🎮</div>
+        <!-- Login Section -->
+        <div id="loginSection" class="login-section">
+            <h3>🎮 دخول إلى DidoGame 🎮</h3>
+            <input type="text" id="loginName" class="login-input" placeholder="اسم المستخدم">
+            <input type="password" id="loginPassword" class="login-input" placeholder="كلمة المرور">
+            <button class="login-btn" onclick="login()">دخول / تسجيل</button>
+            <div class="online-users" id="onlineUsers">👥 جاري التحميل...</div>
+        </div>
+        
+        <!-- Chat Section (hidden until login) -->
+        <div id="chatSection" class="chat-section hidden">
+            <div class="online-users" id="chatOnlineUsers">👥 المتصلون: --</div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input-area">
+                <input type="text" id="messageInput" class="chat-input" placeholder="اكتب رسالة...">
+                <button class="send-btn" onclick="sendMessage()">📤</button>
+                <button class="image-btn" id="imageBtn" onclick="sendImage()">🖼️</button>
+                <button class="audio-btn" id="audioBtn" onclick="startRecording()">🎙️</button>
+            </div>
+            
+            <!-- VIP Call Section -->
+            <div class="call-section" id="callSection">
+                <div style="color:#ffaa88; font-size:0.7rem;">🔊 دردشة صوتية VIP</div>
+                <div>
+                    <select id="userToCall" class="chat-input" style="width:60%;">
+                        <option value="">اختر مستخدم للاتصال...</option>
+                    </select>
+                    <button class="call-btn" onclick="startCall()">📞 اتصال</button>
                 </div>
-                <div class="character-info">
-                    <div class="tshirt-text">⚡ DIDO-GAME ⚡</div>
-                    <h2>😤 نظرة التحدي النيونية!</h2>
-                    <div class="challenge-look">"هيا تحداني في عالم النيون!"</div>
-                </div>
-            </div>
-            
-            <div class="ranking-section">
-                <div class="ranking-circles" id="rankingList"></div>
-            </div>
-            
-            <div class="categories-section">
-                <div class="categories" id="categoriesList">
-                    <div class="cat-badge" data-cat="action">🎯 أكشن</div>
-                    <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
-                    <div class="cat-badge" data-cat="fighting">🥊 قتال</div>
-                    <div class="cat-badge" data-cat="puzzle">🧩 ألغاز</div>
-                    <div class="more-btn" id="moreBtn">➕ المزيد</div>
-                </div>
-            </div>
-            
-            <div class="fixed-permanent-ad" id="permanentAd">
-                <div class="fixed-permanent-ad-icon" id="adIcon">📺✨</div>
-                <div class="fixed-permanent-ad-title" id="adTitle">إعلان ممول</div>
-                <div class="fixed-permanent-ad-text" id="adText">هذا الإعلان يظهر للجميع بشكل دائم</div>
-                <div class="ad-refresh-note">🔄 يتغير تلقائياً كل 10 ثوانٍ</div>
-            </div>
-            
-            <div class="games-wrapper">
-                <div class="two-rows" id="gamesContainer"></div>
+                <div id="callStatus" style="color:#ff44ff; font-size:0.6rem; margin-top:5px;"></div>
             </div>
         </div>
-
-        <div id="categoryPage" class="page page-hidden">
-            <button class="back-btn" id="backToHomeBtn">🔙 العودة</button>
-            <div class="two-rows" id="categoryGamesContainer"></div>
-        </div>
-
+        
     </div>
     
     <div class="bottom-bar">
-        <div class="levelup-demo">
-            <button class="simulate-levelup-btn" id="simulateLevelUpBtn">⬆️ مستوى جديد</button>
-        </div>
-        <div class="register-btn" id="registerBtn">📝 ترقية VIP</div>
-        <div class="music-bottom-btn" id="musicBottomBtn">🎵 تشغيل</div>
+        <button class="upgrade-btn" id="upgradeBtn" onclick="upgradeToVIP()">👑 ترقية إلى VIP</button>
+        <div class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵 موسيقى</div>
     </div>
 </div>
 
-<div id="moreOverlay" class="more-overlay hidden">
-    <div class="more-box">
-        <div class="more-title">✨ المزيد من الخيارات ✨</div>
-        <div class="more-options">
-            <div class="more-option" data-cat="all">🎮 جميع الألعاب</div>
-            <div class="more-option" data-cat="new">🆕 أحدث الإضافات</div>
-            <div class="more-option" data-cat="popular">🔥 الأكثر شعبية</div>
-            <div class="more-option" data-cat="recommended">⭐ موصى بها</div>
-        </div>
-        <button class="close-more-btn" id="closeMoreBtn">إغلاق</button>
-    </div>
-</div>
-
-<div id="entryAdOverlay" class="entry-ad-overlay hidden">
-    <div class="ad-box">
-        <div class="ad-icon">🎮🚀</div>
-        <div class="ad-title">إعلان بدء اللعب</div>
-        <div class="ad-subtitle">يظهر عند دخولك لأي لعبة</div>
-        <div class="ad-timer" id="entryAdTimer">10</div>
-        <div class="ad-progress">
-            <div class="ad-progress-bar" id="entryProgressBar"></div>
-        </div>
-        <div class="ad-subtitle">سيختفي تلقائياً بعد 10 ثوانٍ</div>
-    </div>
-</div>
-
-<div id="levelupAdOverlay" class="levelup-ad-overlay hidden">
-    <div class="ad-box">
-        <div class="ad-icon">⬆️🏆</div>
-        <div class="ad-title">إعلان الترقية</div>
-        <div class="ad-subtitle">تهانينا! وصلت إلى مستوى جديد</div>
-        <div class="ad-timer" id="levelupAdTimer">8</div>
-        <div class="ad-progress">
-            <div class="ad-progress-bar levelup-progress-bar" id="levelupProgressBar"></div>
-        </div>
-        <div class="ad-subtitle">سيختفي تلقائياً بعد 8 ثوانٍ</div>
-    </div>
-</div>
-
-<div id="gameModal" class="game-modal hidden">
-    <div class="close-modal" onclick="closeGame()">✕</div>
-    <iframe id="gameIframe" src="" allowfullscreen></iframe>
+<!-- Incoming Call Popup -->
+<div id="incomingCall" class="incoming-call hidden">
+    <div id="callerName" style="color:white;">جاري الاتصال...</div>
+    <button class="call-btn" onclick="answerCall()">📞 رد</button>
+    <button class="call-btn" onclick="rejectCall()">❌ رفض</button>
 </div>
 
 <script>
-    const gamesData = [
-        { id:1, name:"Sonic", img:"https://images6.alphacoders.com/118/1185678.jpg", url:"https://www.crazygames.com/embed/sonic-the-hedgehog", cat:"action", points:150, avatar:"🦔", playerName:"Shadow" },
-        { id:2, name:"Subway Surfers", img:"https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action", points:200, avatar:"🏃", playerName:"Speed" },
-        { id:3, name:"Temple Run 2", img:"https://images.hdqwalls.com/wallpapers/pubg-mobile-squad-4k-8q.jpg", url:"https://www.crazygames.com/embed/temple-run-2", cat:"action", points:180, avatar:"🏛️", playerName:"RunKing" },
-        { id:4, name:"Hill Climb", img:"https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg", url:"https://www.crazygames.com/embed/hill-climb-racing", cat:"racing", points:120, avatar:"🚗", playerName:"Climber" },
-        { id:5, name:"Slope", img:"https://images.hdqwalls.com/wallpapers/slope-game-hd.jpg", url:"https://www.crazygames.com/embed/slope", cat:"racing", points:220, avatar:"⚡", playerName:"Fast" },
-        { id:6, name:"Street Fighter", img:"https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg", url:"https://www.crazygames.com/embed/street-fighter", cat:"fighting", points:300, avatar:"👊", playerName:"Fighter" },
-        { id:7, name:"Mortal Kombat", img:"https://images.hdqwalls.com/wallpapers/mortal-kombat-11-4k-2020-45.jpg", url:"https://www.crazygames.com/embed/mortal-kombat", cat:"fighting", points:280, avatar:"💀", playerName:"Scorpion" },
-        { id:8, name:"Among Us", img:"https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg", url:"https://www.crazygames.com/embed/among-us-online", cat:"puzzle", points:90, avatar:"👽", playerName:"Impostor" },
-        { id:9, name:"Gardenscapes", img:"https://images.hdqwalls.com/wallpapers/gardenscapes-2020-2021-4k-47.jpg", url:"https://www.crazygames.com/embed/gardenscapes", cat:"puzzle", points:70, avatar:"🌷", playerName:"Garden" },
-        { id:10, name:"Free Fire", img:"https://images.hdqwalls.com/wallpapers/free-fire-2020-game-4k-g6.jpg", url:"https://www.crazygames.com/embed/free-fire", cat:"action", points:350, avatar:"🔥", playerName:"Fire" },
-        { id:11, name:"Call of Duty", img:"https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-2020-04-m3.jpg", url:"https://www.crazygames.com/embed/call-of-duty", cat:"action", points:320, avatar:"🔫", playerName:"Soldier" },
-        { id:12, name:"Basketball Stars", img:"https://images.hdqwalls.com/wallpapers/basketball-4k-2021-6m.jpg", url:"https://www.crazygames.com/embed/basketball-stars", cat:"racing", points:160, avatar:"🏀", playerName:"Hooper" }
-    ];
+    // ==================== Firebase Configuration ====================
+    const firebaseConfig = {
+        apiKey: "AIzaSyDCy9FDf5P35lUzsMo1FKKNUt89ohFnZ1U",
+        authDomain: "dido-game.firebaseapp.com",
+        projectId: "dido-game",
+        storageBucket: "dido-game.firebasestorage.app",
+        messagingSenderId: "477701577179",
+        appId: "1:477701577179:web:680b1b7ba758d72dfe6ffe",
+        measurementId: "G-VCV8T2MZF9"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const storage = firebase.storage();
+    const auth = firebase.auth();
+
+    // ==================== Global Variables ====================
+    let currentUser = null;
+    let isVIP = false;
+    let mediaRecorder = null;
+    let audioChunks = [];
+    let isRecording = false;
+    let currentCall = null;
+    let peerConnection = null;
     
-    const permanentAds = [
-        { icon: "📺✨", title: "إعلان ممول", text: "اشترك الآن في عروضنا الحصرية!" },
-        { icon: "🎮🔥", title: "لعبة الأسبوع", text: "جرب لعبة جديدة كل أسبوع!" },
-        { icon: "💰💎", title: "خصم 50%", text: "عروض لا تُفوت! اشترك الآن" },
-        { icon: "🚀⚡", title: "تحديث جديد", text: "أحدث الإصدارات متوفرة الآن" },
-        { icon: "🎁🎉", title: "هدية اليوم", text: "احصل على مكافآت يومية" },
-        { icon: "🏆👑", title: "البطولة الكبرى", text: "سجل الآن واربح الجوائز" }
-    ];
-    
-    let isPremium = false;
-    let pendingEntryCallback = null;
-    let pendingLevelUpCallback = null;
-    let adInterval = null;
-    let currentAdIndex = 0;
-    let entryAdTimeout = null;
-    let levelupAdTimeout = null;
-    let isWaitingForEntryAd = false;
-    let isWaitingForLevelUpAd = false;
-    
-    function refreshPermanentAd() {
-        currentAdIndex = (currentAdIndex + 1) % permanentAds.length;
-        const ad = permanentAds[currentAdIndex];
-        document.getElementById('adIcon').innerHTML = ad.icon;
-        document.getElementById('adTitle').innerHTML = ad.title;
-        document.getElementById('adText').innerHTML = ad.text;
-    }
-    
-    function startPermanentAdRotation() {
-        if (adInterval) clearInterval(adInterval);
-        adInterval = setInterval(refreshPermanentAd, 10000);
-    }
-    
-    function showEntryAd(callback) {
-        if (isWaitingForEntryAd) return;
-        isWaitingForEntryAd = true;
-        pendingEntryCallback = callback;
-        const overlay = document.getElementById('entryAdOverlay');
-        const timerElement = document.getElementById('entryAdTimer');
-        overlay.classList.remove('hidden');
-        let seconds = 10;
-        timerElement.textContent = seconds;
-        
-        const oldProgress = document.getElementById('entryProgressBar');
-        if (oldProgress) {
-            const newProgress = oldProgress.cloneNode(true);
-            oldProgress.parentNode.replaceChild(newProgress, oldProgress);
-            newProgress.style.animation = 'progressShrink 10s linear forwards';
-        }
-        
-        if (entryAdTimeout) clearInterval(entryAdTimeout);
-        const countdownInterval = setInterval(() => {
-            seconds--;
-            timerElement.textContent = seconds;
-            if (seconds <= 0) {
-                clearInterval(countdownInterval);
-                overlay.classList.add('hidden');
-                if (pendingEntryCallback) {
-                    pendingEntryCallback();
-                    pendingEntryCallback = null;
-                }
-                isWaitingForEntryAd = false;
-            }
-        }, 1000);
-        entryAdTimeout = countdownInterval;
-    }
-    
-    function showLevelUpAd(callback) {
-        if (isWaitingForLevelUpAd) return;
-        isWaitingForLevelUpAd = true;
-        pendingLevelUpCallback = callback;
-        const overlay = document.getElementById('levelupAdOverlay');
-        const timerElement = document.getElementById('levelupAdTimer');
-        overlay.classList.remove('hidden');
-        let seconds = 8;
-        timerElement.textContent = seconds;
-        
-        const oldProgress = document.getElementById('levelupProgressBar');
-        if (oldProgress) {
-            const newProgress = oldProgress.cloneNode(true);
-            oldProgress.parentNode.replaceChild(newProgress, oldProgress);
-            newProgress.style.animation = 'progressShrinkLevelUp 8s linear forwards';
-        }
-        
-        if (levelupAdTimeout) clearInterval(levelupAdTimeout);
-        const countdownInterval = setInterval(() => {
-            seconds--;
-            timerElement.textContent = seconds;
-            if (seconds <= 0) {
-                clearInterval(countdownInterval);
-                overlay.classList.add('hidden');
-                if (pendingLevelUpCallback) {
-                    pendingLevelUpCallback();
-                    pendingLevelUpCallback = null;
-                }
-                isWaitingForLevelUpAd = false;
-            }
-        }, 1000);
-        levelupAdTimeout = countdownInterval;
-    }
-    
-    function simulateLevelUp() {
-        if (isPremium) {
-            alert('✨ أنت حساب مميز! لا تظهر لك إعلانات بين المستويات ✨');
-            return;
-        }
-        showLevelUpAd(() => {
-            alert('🎉 تم تخطي الإعلان! يمكنك متابعة اللعب 🎉');
-        });
-    }
-    
-    function updateRanking() {
-        const sorted = [...gamesData].sort((a,b)=>b.points - a.points);
-        const gold = sorted[0];
-        const silver = sorted[1];
-        const bronze = sorted[2];
-        document.getElementById('rankingList').innerHTML = `
-            <div class="rank-circle"><div class="crown-icon">🥈</div><div class="silver-circle">${silver ? silver.avatar : '👤'}</div><div class="rank-name">${silver ? silver.playerName : '---'}</div><div class="rank-points">⭐ ${silver ? silver.points : 0}</div></div>
-            <div class="rank-circle"><div class="crown-icon">👑</div><div class="gold-circle">${gold ? gold.avatar : '👤'}</div><div class="rank-name">${gold ? gold.playerName : '---'}</div><div class="rank-points">⭐ ${gold ? gold.points : 0}</div></div>
-            <div class="rank-circle"><div class="crown-icon">🥉</div><div class="bronze-circle">${bronze ? bronze.avatar : '👤'}</div><div class="rank-name">${bronze ? bronze.playerName : '---'}</div><div class="rank-points">⭐ ${bronze ? bronze.points : 0}</div></div>
-        `;
-    }
-    
-    function renderAllGames() {
-        const filtered = gamesData;
-        const mid = Math.ceil(filtered.length / 2);
-        const row1 = filtered.slice(0, mid);
-        const row2 = filtered.slice(mid);
-        document.getElementById('gamesContainer').innerHTML = `
-            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
-            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
-        `;
-        attachGameClickEvents('#gamesContainer');
-    }
-    
-    function renderCategoryGames(category, categoryName) {
-        const filtered = gamesData.filter(g => g.cat === category);
-        const mid = Math.ceil(filtered.length / 2);
-        const row1 = filtered.slice(0, mid);
-        const row2 = filtered.slice(mid);
-        document.getElementById('categoryGamesContainer').innerHTML = `
-            <div class="game-row">${row1.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
-            <div class="game-row">${row2.map(g=>`<div class="game-card" data-id="${g.id}" data-url="${g.url}" data-name="${g.name}"><div class="game-img" style="background-image: url('${g.img}');"></div><div class="game-title">${g.name}</div><div class="game-cat">✨ ${g.cat} ✨</div></div>`).join('')}</div>
-        `;
-        attachGameClickEvents('#categoryGamesContainer');
-    }
-    
-    function attachGameClickEvents(containerId) {
-        document.querySelectorAll(containerId + ' .game-card').forEach(card => {
-            card.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const url = card.getAttribute('data-url');
-                const name = card.getAttribute('data-name');
-                const id = parseInt(card.getAttribute('data-id'));
-                launchGame(url, name, id);
-            });
-        });
-    }
-    
-    function launchGame(url, name, gameId) {
-        if (isPremium) {
-            openGameDirect(url, name);
-            addPointsToPlayer(gameId, 5);
-        } else {
-            showEntryAd(() => {
-                openGameDirect(url, name);
-                addPointsToPlayer(gameId, 5);
-            });
-        }
-    }
-    
-    function openGameDirect(url, name) {
-        document.getElementById('gameIframe').src = url;
-        document.getElementById('gameModal').classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
-    
-    function closeGame() {
-        document.getElementById('gameModal').classList.add('hidden');
-        document.getElementById('gameIframe').src = '';
-        document.body.style.overflow = 'auto';
-    }
-    
-    function addPointsToPlayer(gameId, points) {
-        const game = gamesData.find(g => g.id === gameId);
-        if (game) {
-            game.points += points;
-            updateRanking();
-        }
-    }
-    
-    function showHomePage() {
-        document.getElementById('homePage').classList.remove('page-hidden');
-        document.getElementById('categoryPage').classList.add('page-hidden');
-    }
-    
-    function showCategoryPage(category, categoryName) {
-        renderCategoryGames(category, categoryName);
-        document.getElementById('homePage').classList.add('page-hidden');
-        document.getElementById('categoryPage').classList.remove('page-hidden');
-    }
-    
-    document.getElementById('registerBtn').addEventListener('click', () => {
-        if (!isPremium) {
-            isPremium = true;
-            const btn = document.getElementById('registerBtn');
-            btn.innerHTML = '👑 VIP مفعل';
-            btn.classList.add('vip-active');
-            alert('🎉 أصبحت حساباً مميزاً! لن تظهر لك إعلانات أثناء اللعب');
-        } else {
-            alert('أنت بالفعل حساب مميز!');
-        }
-    });
-    
-    document.getElementById('simulateLevelUpBtn').addEventListener('click', () => {
-        simulateLevelUp();
-    });
-    
-    document.getElementById('moreBtn').addEventListener('click', () => {
-        document.getElementById('moreOverlay').classList.remove('hidden');
-    });
-    
-    document.getElementById('closeMoreBtn').addEventListener('click', () => {
-        document.getElementById('moreOverlay').classList.add('hidden');
-    });
-    
-    document.querySelectorAll('.more-option').forEach(option => {
-        option.addEventListener('click', (e) => {
-            const cat = e.target.getAttribute('data-cat');
-            document.getElementById('moreOverlay').classList.add('hidden');
-            if (cat === 'all') {
-                alert('🎮 جميع الألعاب معروضة في الأسفل');
-            } else if (cat === 'new') {
-                alert('🆕 سيتم إضافة ألعاب جديدة قريباً!');
-            } else if (cat === 'popular') {
-                alert('🔥 الألعاب الأكثر شعبية: Free Fire, Call of Duty, Sonic');
-            } else if (cat === 'recommended') {
-                alert('⭐ الألعاب الموصى بها: Street Fighter, Mortal Kombat, Slope');
-            }
-        });
-    });
-    
-    document.querySelectorAll('.cat-badge').forEach(badge => {
-        badge.addEventListener('click', () => {
-            const cat = badge.getAttribute('data-cat');
-            let catName = cat === "action" ? "ألعاب الأكشن" : cat === "racing" ? "ألعاب السباقات" : cat === "fighting" ? "ألعاب القتال" : "ألعاب الألغاز";
-            showCategoryPage(cat, catName);
-        });
-    });
-    
-    document.getElementById('backToHomeBtn').addEventListener('click', () => showHomePage());
-    document.getElementById('gameModal').addEventListener('click', (e) => {
-        if (e.target === document.getElementById('gameModal')) closeGame();
-    });
-    
-    const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-    music.loop = true;
-    music.volume = 1.00;
-    let playing = true;
-    const musicBottomBtn = document.getElementById('musicBottomBtn');
-    musicBottomBtn.innerHTML = '🔇 إيقاف';
-    
-    const autoPlay = music.play();
-    autoPlay.then(() => {
-        playing = true;
-        musicBottomBtn.innerHTML = '🔇 إيقاف';
-    }).catch(() => {
-        playing = false;
-        musicBottomBtn.innerHTML = '🎵 تشغيل';
-        const playOnInteraction = () => {
-            music.play();
-            playing = true;
-            musicBottomBtn.innerHTML = '🔇 إيقاف';
-            document.removeEventListener('click', playOnInteraction);
-            document.removeEventListener('touchstart', playOnInteraction);
-        };
-        document.addEventListener('click', playOnInteraction);
-        document.addEventListener('touchstart', playOnInteraction);
-    });
-    
-    musicBottomBtn.onclick = () => {
-        if (playing) {
-            music.pause();
-            musicBottomBtn.innerHTML = '🎵 تشغيل';
-            playing = false;
-        } else {
-            music.play();
-            musicBottomBtn.innerHTML = '🔇 إيقاف';
-            playing = true;
-        }
+    // WebRTC Configuration (with free STUN server)
+    const configuration = {
+        iceServers: [
+            { urls: "stun:stun.l.google.com:19302" },
+            { urls: "stun:stun1.l.google.com:19302" }
+        ]
     };
     
-    startPermanentAdRotation();
-    updateRanking();
-    renderAllGames();
+    let localStream = null;
+    let remoteStream = null;
+    
+    // ==================== Authentication ====================
+    function login() {
+        const name = document.getElementById('loginName').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+        
+        if (!name || !password) {
+            alert("الرجاء إدخال اسم المستخدم وكلمة المرور");
+            return;
+        }
+        
+        // Sign in with email format (using name@dido.com)
+        const email = name.toLowerCase().replace(/[^a-z0-9]/g, '') + '@didogame.com';
+        
+        auth.signInWithEmailAndPassword(email, password).then(() => {
+            // User exists, login
+            loadUserData(name);
+        }).catch(() => {
+            // User doesn't exist, create new
+            auth.createUserWithEmailAndPassword(email, password).then(() => {
+                // Save user to Firestore
+                db.collection("users").doc(auth.currentUser.uid).set({
+                    username: name,
+                    isVIP: false,
+                    createdAt: new Date()
+                }).then(() => {
+                    loadUserData(name);
+                });
+            }).catch(error => {
+                alert("خطأ: " + error.message);
+            });
+        });
+    }
+    
+    function loadUserData(username) {
+        const uid = auth.currentUser.uid;
+        db.collection("users").doc(uid).get().then(doc => {
+            if (doc.exists) {
+                currentUser = {
+                    uid: uid,
+                    username: doc.data().username,
+                    isVIP: doc.data().isVIP || false
+                };
+                isVIP = currentUser.isVIP;
+                
+                // Update UI
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('chatSection').classList.remove('hidden');
+                
+                // Update VIP features visibility
+                updateVIPFeatures();
+                
+                // Update online status
+                updateOnlineStatus(true);
+                
+                // Load messages
+                loadMessages();
+                
+                // Listen for users
+                listenForUsers();
+                
+                // Listen for calls
+                listenForCalls();
+            }
+        });
+    }
+    
+    function updateVIPFeatures() {
+        const imageBtn = document.getElementById('imageBtn');
+        const audioBtn = document.getElementById('audioBtn');
+        const callSection = document.getElementById('callSection');
+        
+        if (isVIP) {
+            imageBtn.style.display = 'block';
+            audioBtn.style.display = 'block';
+            callSection.style.display = 'block';
+            document.getElementById('upgradeBtn').innerHTML = '👑 VIP مفعل';
+            document.getElementById('upgradeBtn').style.opacity = '0.7';
+        } else {
+            imageBtn.style.display = 'none';
+            audioBtn.style.display = 'none';
+            callSection.style.display = 'none';
+            document.getElementById('upgradeBtn').innerHTML = '⭐ ترقية إلى VIP (صور + صوت) ⭐';
+        }
+    }
+    
+    function upgradeToVIP() {
+        if (!currentUser) return;
+        if (isVIP) {
+            alert("أنت بالفعل عضو VIP!");
+            return;
+        }
+        
+        // In a real app, this would be a payment process
+        const confirm = window.confirm("⚠️ ترقية إلى VIP - رسوم 9.99$ شهرياً\n\nالمميزات:\n✅ إرسال الصور\n✅ تسجيل وإرسال الصوت\n✅ المكالمات الصوتية المباشرة\n\nهل تريد الترقية؟");
+        
+        if (confirm) {
+            db.collection("users").doc(currentUser.uid).update({
+                isVIP: true
+            }).then(() => {
+                isVIP = true;
+                currentUser.isVIP = true;
+                updateVIPFeatures();
+                alert("🎉 تهانينا! أصبحت عضواً مميزاً 🎉\n\nيمكنك الآن إرسال الصور والتسجيلات الصوتية وإجراء المكالمات!");
+            });
+        }
+    }
+    
+    function updateOnlineStatus(isOnline) {
+        if (!currentUser) return;
+        db.collection("users").doc(currentUser.uid).update({
+            online: isOnline,
+            lastSeen: new Date()
+        });
+    }
+    
+    // ==================== Messaging ====================
+    function sendMessage() {
+        const text = document.getElementById('messageInput').value.trim();
+        if (!text && !imageFile) return;
+        
+        db.collection("messages").add({
+            userId: currentUser.uid,
+            username: currentUser.username,
+            text: text,
+            isVIP: isVIP,
+            timestamp: new Date()
+        });
+        
+        document.getElementById('messageInput').value = '';
+    }
+    
+    function sendImage() {
+        if (!isVIP) {
+            alert("❌ إرسال الصور متاح فقط للمستخدمين المميزين (VIP)!\nقم بترقية حسابك لإرسال الصور.");
+            return;
+        }
+        
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.onchange = async (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const storageRef = storage.ref(`images/${Date.now()}_${file.name}`);
+                const uploadTask = await storageRef.put(file);
+                const imageUrl = await storageRef.getDownloadURL();
+                
+                db.collection("messages").add({
+                    userId: currentUser.uid,
+                    username: currentUser.username,
+                    imageUrl: imageUrl,
+                    isVIP: isVIP,
+                    timestamp: new Date()
+                });
+            }
+        };
+        input.click();
+    }
+    
+    // ==================== Voice Recording (VIP only) ====================
+    async function startRecording() {
+        if (!isVIP) {
+            alert("❌ التسجيل الصوتي متاح فقط للمستخدمين المميزين (VIP)!");
+            return;
+        }
+        
+        if (isRecording) {
+            // Stop recording
+            if (mediaRecorder) {
+                mediaRecorder.stop();
+                isRecording = false;
+                document.getElementById('audioBtn').innerHTML = '🎙️';
+            }
+        } else {
+            // Start recording
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+            audioChunks = [];
+            
+            mediaRecorder.ondataavailable = (event) => {
+                audioChunks.push(event.data);
+            };
+            
+            mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                const storageRef = storage.ref(`audio/${Date.now()}.webm`);
+                await storageRef.put(audioBlob);
+                const audioUrl = await storageRef.getDownloadURL();
+                
+                db.collection("messages").add({
+                    userId: currentUser.uid,
+                    username: currentUser.username,
+                    audioUrl: audioUrl,
+                    isVIP: isVIP,
+                    timestamp: new Date()
+                });
+                
+                stream.getTracks().forEach(track => track.stop());
+            };
+            
+            mediaRecorder.start();
+            isRecording = true;
+            document.getElementById('audioBtn').innerHTML = '⏹️';
+            
+            setTimeout(() => {
+                if (isRecording) {
+                    mediaRecorder.stop();
+                    isRecording = false;
+                    document.getElementById('audioBtn').innerHTML = '🎙️';
+                }
+            }, 15000); // Auto stop after 15 seconds
+        }
+    }
+    
+    function loadMessages() {
+        db.collection("messages").orderBy("timestamp").limit(100).onSnapshot(snapshot => {
+            const messagesDiv = document.getElementById('chatMessages');
+            messagesDiv.innerHTML = '';
+            
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message';
+                
+                const senderSpan = document.createElement('div');
+                senderSpan.className = 'message-sender';
+                senderSpan.innerHTML = data.username + (data.isVIP ? ' <span class="vip-badge">VIP</span>' : '');
+                
+                messageDiv.appendChild(senderSpan);
+                
+                if (data.text) {
+                    const textSpan = document.createElement('div');
+                    textSpan.className = 'message-text';
+                    textSpan.textContent = data.text;
+                    messageDiv.appendChild(textSpan);
+                }
+                
+                if (data.imageUrl) {
+                    const img = document.createElement('img');
+                    img.src = data.imageUrl;
+                    img.className = 'message-image';
+                    messageDiv.appendChild(img);
+                }
+                
+                if (data.audioUrl) {
+                    const audio = document.createElement('audio');
+                    audio.src = data.audioUrl;
+                    audio.controls = true;
+                    audio.className = 'message-audio';
+                    messageDiv.appendChild(audio);
+                }
+                
+                messagesDiv.appendChild(messageDiv);
+            });
+            
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        });
+    }
+    
+    // ==================== Users List ====================
+    function listenForUsers() {
+        db.collection("users").onSnapshot(snapshot => {
+            const users = [];
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                if (data.online && doc.id !== currentUser?.uid) {
+                    users.push({ uid: doc.id, username: data.username, isVIP: data.isVIP });
+                }
+            });
+            
+            const select = document.getElementById('userToCall');
+            select.innerHTML = '<option value="">اختر مستخدم للاتصال...</option>';
+            users.forEach(user => {
+                const option = document.createElement('option');
+                option.value = user.uid;
+                option.textContent = user.username + (user.isVIP ? ' (VIP)' : '');
+                select.appendChild(option);
+            });
+            
+            document.getElementById('chatOnlineUsers').innerHTML = `👥 المتصلون: ${users.length + 1}`;
+        });
+    }
+    
+    // ==================== WebRTC Voice Call (VIP only) ====================
+    async function startCall() {
+        if (!isVIP) {
+            alert("❌ المكالمات الصوتية متاحة فقط للمستخدمين المميزين (VIP)!");
+            return;
+        }
+        
+        const targetUserId = document.getElementById('userToCall').value;
+        if (!targetUserId) {
+            alert("الرجاء اختيار مستخدم للاتصال به");
+            return;
+        }
+        
+        document.getElementById('callStatus').innerHTML = "📞 جاري الاتصال...";
+        
+        // Get target user data
+        const targetDoc = await db.collection("users").doc(targetUserId).get();
+        const targetUser = targetDoc.data();
+        
+        if (!targetUser.online) {
+            alert("المستخدم غير متصل حالياً");
+            document.getElementById('callStatus').innerHTML = "";
+            return;
+        }
+        
+        // Create call offer
+        const callId = Date.now().toString();
+        await db.collection("calls").doc(callId).set({
+            from: currentUser.uid,
+            fromName: currentUser.username,
+            to: targetUserId,
+            status: "calling",
+            timestamp: new Date()
+        });
+        
+        // Listen for answer
+        db.collection("calls").doc(callId).onSnapshot(async (doc) => {
+            const data = doc.data();
+            if (data && data.status === "answered") {
+                document.getElementById('callStatus').innerHTML = "📞 متصل... اضغط إنهاء لإغلاق المكالمة";
+                // In a full implementation, we would establish WebRTC peer connection here
+                // For demo, we'll show a simulated call
+                simulateCall(targetUser.username);
+            }
+        });
+    }
+    
+    function listenForCalls() {
+        if (!currentUser) return;
+        
+        db.collection("calls").where("to", "==", currentUser.uid).where("status", "==", "calling").onSnapshot(snapshot => {
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                if (data.status === "calling") {
+                    document.getElementById('callerName').innerHTML = `📞 مكالمة واردة من ${data.fromName}`;
+                    document.getElementById('incomingCall').classList.remove('hidden');
+                    window.currentCallId = doc.id;
+                    window.currentCallerId = data.from;
+                }
+            });
+        });
+    }
+    
+    function answerCall() {
+        const callId = window.currentCallId;
+        db.collection("calls").doc(callId).update({
+            status: "answered"
+        });
+        document.getElementById('incomingCall').classList.add('hidden');
+        document.getElementById('callStatus').innerHTML = "📞 جاري الاتصال...";
+        
+        // Simulate call
+        setTimeout(() => {
+            document.getElementById('callStatus').innerHTML = "📞 متصل... اضغط إنهاء لإغلاق المكالمة";
+        }, 2000);
+    }
+    
+    function rejectCall() {
+        const callId = window.currentCallId;
+        db.collection("calls").doc(callId).update({
+            status: "rejected"
+        });
+        document.getElementById('incomingCall').classList.add('hidden');
+        document.getElementById('callStatus').innerHTML = "";
+    }
+    
+    function simulateCall(username) {
+        // Simulate an incoming call UI
+        const callDiv = document.createElement('div');
+        callDiv.style.position = 'fixed';
+        callDiv.style.bottom = '100px';
+        callDiv.style.left = '50%';
+        callDiv.style.transform = 'translateX(-50%)';
+        callDiv.style.backgroundColor = '#1a0033';
+        callDiv.style.border = '2px solid #ff44ff';
+        callDiv.style.borderRadius = '20px';
+        callDiv.style.padding = '15px';
+        callDiv.style.zIndex = '2000';
+        callDiv.style.textAlign = 'center';
+        callDiv.innerHTML = `
+            <div style="color:white;">🔊 مكالمة صوتية مع ${username}</div>
+            <button onclick="this.parentElement.remove()" style="background:#ff3366; border:none; padding:5px 15px; border-radius:20px; margin-top:10px; color:white;">❌ إنهاء المكالمة</button>
+        `;
+        document.body.appendChild(callDiv);
+        
+        document.getElementById('callStatus').innerHTML = "";
+    }
+    
+    // ==================== Music ====================
+    let musicPlaying = false;
+    let music = null;
+    
+    function toggleMusic() {
+        if (!music) {
+            music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+            music.loop = true;
+            music.volume = 0.5;
+        }
+        
+        if (musicPlaying) {
+            music.pause();
+            document.getElementById('musicBtn').innerHTML = '🎵 موسيقى';
+        } else {
+            music.play();
+            document.getElementById('musicBtn').innerHTML = '🔇 إيقاف';
+        }
+        musicPlaying = !musicPlaying;
+    }
+    
+    // ==================== Cleanup on page close ====================
+    window.addEventListener('beforeunload', () => {
+        if (currentUser) {
+            updateOnlineStatus(false);
+        }
+    });
 </script>
 </body>
 </html>
