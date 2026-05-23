@@ -217,7 +217,7 @@
             font-size: 0.45rem;
         }
 
-        /* Categories Section - All buttons in ONE LINE (horizontal scroll if needed) */
+        /* Categories Section - All buttons in ONE LINE */
         .categories-section {
             margin-bottom: 12px;
         }
@@ -359,7 +359,7 @@
             border: 2px solid #ff44ff;
             border-radius: 20px;
             padding: 18px 12px;
-            margin: 8px 0 0px 0;
+            margin: 8px 0 4px 0;
             text-align: center;
             color: white;
             font-size: 1rem;
@@ -374,19 +374,19 @@
             100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
         }
 
-        /* Bottom content wrapper */
+        /* Bottom content wrapper - games pushed up slightly */
         .bottom-content-wrapper {
-            margin-top: auto;
+            margin-top: 0;
             display: flex;
             flex-direction: column;
         }
 
-        /* Games */
+        /* Games - moved up (reduced padding/margin) */
         .games-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            padding-bottom: 8px;
+            gap: 10px;
+            padding-bottom: 6px;
         }
         
         .game-row {
@@ -394,7 +394,7 @@
             gap: 10px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            padding: 4px 2px 8px 2px;
+            padding: 2px 2px 6px 2px;
             scrollbar-width: thin;
             scrollbar-color: #ff44ff #1a1a2e;
             -webkit-overflow-scrolling: touch;
@@ -1077,7 +1077,7 @@
                 <div class="ranking-circles" id="rankingList"></div>
             </div>
             
-            <!-- Categories Section - All buttons in ONE LINE (horizontal scrollable) -->
+            <!-- Categories Section -->
             <div class="categories-section">
                 <div class="categories" id="categoriesList">
                     <div class="more-btn" id="moreCategoriesBtn">➕ More</div>
@@ -1104,7 +1104,7 @@
                 </div>
             </div>
             
-            <!-- ENLARGED AD AREA -->
+            <!-- ENLARGED AD AREA (reduced bottom margin to bring games up) -->
             <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
             
             <!-- Bottom content wrapper for games -->
