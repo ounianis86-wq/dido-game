@@ -2,57 +2,190 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أركيد الألعاب - بدون Google Play</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>أركيد الألعاب - العب فوراً</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; background: #1e1e2f; color: white; }
-        .game-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 20px; }
-        .game-card { background: #28293d; padding: 15px; border-radius: 15px; width: 200px; cursor: pointer; }
-        iframe { width: 100%; height: 500px; border: none; border-radius: 15px; margin-top: 20px; display: none; }
-        button { background: #ff4757; color: white; border: none; padding: 10px 20px; margin: 10px; border-radius: 8px; cursor: pointer; }
-        .back-btn { background: #1e90ff; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2rem;
+            text-shadow: 0 0 10px rgba(0,255,255,0.5);
+        }
+        .sub {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .game-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.2);
+        }
+        .game-card h3 {
+            margin-bottom: 10px;
+        }
+        .game-card p {
+            font-size: 12px;
+            color: #ddd;
+        }
+        .game-iframe-container {
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 20px;
+            position: relative;
+        }
+        iframe {
+            width: 100%;
+            height: 550px;
+            border: none;
+            display: block;
+        }
+        .back-btn {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 15px;
+            transition: 0.2s;
+            display: inline-block;
+        }
+        .back-btn:hover {
+            background: #e03a4a;
+            transform: scale(1.02);
+        }
+        .hidden {
+            display: none;
+        }
+        .game-title-bar {
+            background: #1e1e2e;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        @media (max-width: 600px) {
+            iframe { height: 400px; }
+            .games-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            h1 { font-size: 1.4rem; }
+        }
     </style>
 </head>
 <body>
-    <h1>🎮 ألعاب فورية - بدون العودة إلى Google Play</h1>
-    <div class="game-list">
-        <div class="game-card" data-game="https://html5.gamedistribution.com/6e3f6b7e8b9a4c2e8c4f5a1b3c7d9e2e/?gd_sdk_referrer_url=embed">
-            <h3>كرة القدم</h3>
-            <p>اضغط لتشغيل</p>
+<div class="container">
+    <h1>🎮 أركيد بلا حدود</h1>
+    <div class="sub">⚡ ألعاب HTML5 تعمل مباشرة - بدون متجر Google Play ⚡</div>
+
+    <!-- قائمة الألعاب -->
+    <div id="gamesList" class="games-grid">
+        <div class="game-card" data-game="https://www.crazygames.com/embed/football-legends" data-name="⚽ Football Legends">
+            <h3>⚽ Football Legends</h3>
+            <p>كرة القدم - نمط سوبر ماريو</p>
         </div>
-        <div class="game-card" data-game="https://html5.gamedistribution.com/8f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c/">
-            <h3>سباق السيارات</h3>
-            <p>اضغط لتشغيل</p>
+        <div class="game-card" data-game="https://www.crazygames.com/embed/subway-surfers" data-name="🚇 Subway Surfers">
+            <h3>🚇 Subway Surfers</h3>
+            <p>الجري اللامتناهي الأسطوري</p>
         </div>
-        <div class="game-card" data-game="https://t1.gstatic.com/og/_/js/k=og.qtm.en_US.3Fz7XWZhrxU.o/m=wsem_market_web_embed_ris/rt=j/d=1/ed=1/rs=AA2YrTvGkXMqLqRqZ5LqGvXqXqQ/">
-            <h3>سلة السيارات</h3>
-            <p>اضغط لتشغيل</p>
+        <div class="game-card" data-game="https://www.crazygames.com/embed/temple-run-2" data-name="🏃 Temple Run 2">
+            <h3>🏃 Temple Run 2</h3>
+            <p>اهرب من المعبد وجمع العملات</p>
+        </div>
+        <div class="game-card" data-game="https://www.crazygames.com/embed/papas-burgeria" data-name="🍔 Papa's Burgeria">
+            <h3>🍔 Papa's Burgeria</h3>
+            <p>لعبة طبخ وإدارة البرجر</p>
+        </div>
+        <div class="game-card" data-game="https://www.crazygames.com/embed/shell-shockers" data-name="🥚 Shell Shockers">
+            <h3>🥚 Shell Shockers</h3>
+            <p>لعبة إطلاق بيض - FPS مضحكة</p>
+        </div>
+        <div class="game-card" data-game="https://www.crazygames.com/embed/doodle-jump" data-name="🦘 Doodle Jump">
+            <h3>🦘 Doodle Jump</h3>
+            <p>قفز كلاسيكي لا ينتهي</p>
+        </div>
+        <div class="game-card" data-game="https://www.crazygames.com/embed/slope" data-name="⛰️ Slope">
+            <h3>⛰️ Slope</h3>
+            <p>لعبة كرة سريعة على منحدر 3D</p>
+        </div>
+        <div class="game-card" data-game="https://www.crazygames.com/embed/get-on-top" data-name="🤼 Get On Top">
+            <h3>🤼 Get On Top</h3>
+            <p>مصارعة ثنائية اللاعبين</p>
         </div>
     </div>
-    <button class="back-btn" id="backBtn" style="display:none;">🔙 العودة للألعاب</button>
-    <iframe id="gameFrame" allow="autoplay; fullscreen"></iframe>
 
-    <script>
-        const games = document.querySelectorAll('.game-card');
-        const frame = document.getElementById('gameFrame');
-        const backBtn = document.getElementById('backBtn');
+    <!-- منطقة عرض اللعبة -->
+    <div id="gameArea" class="hidden">
+        <button class="back-btn" id="closeGameBtn">🔙 العودة إلى قائمة الألعاب</button>
+        <div class="game-iframe-container">
+            <div class="game-title-bar" id="gameTitle">اللعبة</div>
+            <iframe id="gameIframe" allow="autoplay; fullscreen; clipboard-write" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
 
-        games.forEach(game => {
-            game.addEventListener('click', () => {
-                const url = game.getAttribute('data-game');
-                frame.src = url;
-                frame.style.display = 'block';
-                backBtn.style.display = 'inline-block';
-                document.querySelector('.game-list').style.display = 'none';
-            });
+<script>
+    // اختيار العناصر
+    const gamesList = document.getElementById('gamesList');
+    const gameArea = document.getElementById('gameArea');
+    const gameIframe = document.getElementById('gameIframe');
+    const gameTitleSpan = document.getElementById('gameTitle');
+    const closeBtn = document.getElementById('closeGameBtn');
+
+    // إضافة حدث النقر لكل بطاقة لعبة
+    document.querySelectorAll('.game-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const gameUrl = card.getAttribute('data-game');
+            const gameName = card.getAttribute('data-name');
+
+            // تفعيل عرض اللعبة
+            gameIframe.src = gameUrl;
+            gameTitleSpan.innerText = gameName;
+            gamesList.classList.add('hidden');
+            gameArea.classList.remove('hidden');
+
+            // تمرير الشاشة إلى الأعلى لتجربة أفضل
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
+    });
 
-        backBtn.addEventListener('click', () => {
-            frame.src = '';
-            frame.style.display = 'none';
-            backBtn.style.display = 'none';
-            document.querySelector('.game-list').style.display = 'flex';
-        });
-    </script>
+    // زر العودة إلى القائمة
+    closeBtn.addEventListener('click', () => {
+        gameIframe.src = '';   // إيقاف اللعبة
+        gamesList.classList.remove('hidden');
+        gameArea.classList.add('hidden');
+    });
+</script>
 </body>
 </html>
