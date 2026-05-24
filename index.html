@@ -1378,7 +1378,7 @@
     </div>
     
     <div class="bottom-bar">
-        <div class="register-btn" id="registerBtn" onclick="openPaymentModal()">👑 Upgrade VIP</div>
+        <div class="register-btn" id="registerBtn">👑 Upgrade VIP</div>
         <div class="chat-circle-btn" id="openChatBtn">
             <span>💬</span>
         </div>
@@ -2482,6 +2482,9 @@
             closePaymentModal();
         }
     });
+    
+    // Add click event for Register/Upgrade button
+    document.getElementById('registerBtn').addEventListener('click', openPaymentModal);
     
     // Set default selected currency
     document.querySelector('.currency-btn[data-currency="USD"]').classList.add('active');
