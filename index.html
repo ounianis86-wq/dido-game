@@ -16,6 +16,7 @@
             background: #05050f;
             min-height: 100vh;
             padding: 6px;
+            overflow: hidden;
         }
 
         .anime-city-bg {
@@ -87,7 +88,6 @@
             display: none;
         }
 
-        /* Hero Section */
         .anime-hero {
             background: linear-gradient(135deg, rgba(255,68,255,0.2), rgba(0,255,255,0.2));
             border-radius: 20px;
@@ -109,6 +109,11 @@
             border-radius: 50%;
             border: 3px solid #ff44ff;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
         }
         
         .controller-on-hand {
@@ -144,7 +149,6 @@
             font-size: 0.8rem;
         }
 
-        /* Ranking Section */
         .ranking-section {
             margin-top: 20px;
             margin-bottom: 12px;
@@ -216,7 +220,6 @@
             font-size: 0.45rem;
         }
 
-        /* Categories Section */
         .categories-section {
             margin-bottom: 12px;
         }
@@ -284,7 +287,6 @@
             box-shadow: 0 0 10px #ff44ff;
         }
 
-        /* More Categories Modal */
         .more-modal {
             position: fixed;
             top: 0;
@@ -352,7 +354,6 @@
             margin-top: 10px;
         }
 
-        /* Settings Modal */
         .settings-modal {
             position: fixed;
             top: 0;
@@ -531,7 +532,6 @@
             margin-top: 15px;
         }
 
-        /* Favorites Modal */
         .favorites-modal {
             position: fixed;
             top: 0;
@@ -654,7 +654,6 @@
             margin-top: 10px;
         }
 
-        /* Wallet Modal */
         .wallet-modal {
             position: fixed;
             top: 0;
@@ -745,7 +744,6 @@
             margin-top: 10px;
         }
 
-        /* VIP Payment Modal */
         .payment-modal {
             position: fixed;
             top: 0;
@@ -857,7 +855,6 @@
             margin-top: 15px;
         }
 
-        /* Ad */
         .fixed-permanent-ad {
             background: linear-gradient(135deg, rgba(255,68,255,0.3), rgba(0,255,255,0.3));
             border: 2px solid #ff44ff;
@@ -878,7 +875,6 @@
             100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
         }
 
-        /* Games */
         .games-wrapper {
             display: flex;
             flex-direction: column;
@@ -973,7 +969,7 @@
             text-overflow: ellipsis;
         }
 
-        /* ========== BOTTOM BAR - LEFT: 2 BUTTONS, RIGHT: 2 BUTTONS, CHAT IN CENTER ========== */
+        /* BOTTOM BAR */
         .bottom-bar {
             display: flex;
             justify-content: space-between;
@@ -986,7 +982,6 @@
             position: relative;
         }
         
-        /* Left section - 2 buttons */
         .bottom-left {
             display: flex;
             gap: 20px;
@@ -994,7 +989,6 @@
             justify-content: flex-start;
         }
         
-        /* Center section - Chat button */
         .bottom-center {
             position: absolute;
             left: 50%;
@@ -1003,7 +997,6 @@
             transform: translate(-50%, 50%);
         }
         
-        /* Right section - 2 buttons */
         .bottom-right {
             display: flex;
             gap: 20px;
@@ -1011,7 +1004,6 @@
             justify-content: flex-end;
         }
         
-        /* Base button style */
         .nav-btn {
             display: flex;
             flex-direction: column;
@@ -1070,12 +1062,10 @@
             color: #ff44ff;
         }
         
-        /* Individual button colors */
         .wallet-btn .icon { color: #ffd700; }
         .settings-btn .icon { color: #00ffff; }
         .favs-btn .icon { color: #ffcc00; }
         
-        /* VIP button style */
         .vip-btn {
             background: linear-gradient(135deg, rgba(255,68,255,0.2), rgba(0,255,255,0.2));
             border: 1px solid rgba(255,68,255,0.5);
@@ -1104,7 +1094,6 @@
             text-shadow: 0 0 5px #00ffff;
         }
         
-        /* Chat button - BIG, CENTERED, FLOATING */
         .chat-btn {
             background: linear-gradient(135deg, #ff44ff, #ff00aa, #00ffff);
             width: 65px;
@@ -1113,7 +1102,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 30px rgba(255,68,255,0.6), 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 0 30px rgba(255,68,255,0.6);
             animation: circlePulse 2s ease-in-out infinite;
             padding: 0;
             border: 2px solid rgba(255,255,255,0.3);
@@ -1145,7 +1134,7 @@
             100% { box-shadow: 0 0 15px rgba(255,68,255,0.5), 0 5px 15px rgba(0,0,0,0.3); transform: scale(1); }
         }
 
-        /* ========== CHAT PAGE - CENTERED BEAUTIFULLY ========== */
+        /* CHAT PAGE - FIXED */
         .chat-page {
             position: fixed;
             top: 50%;
@@ -1157,24 +1146,12 @@
             max-height: 700px;
             background: linear-gradient(145deg, #0a0a1a, #0f0f2a);
             z-index: 1000;
-            display: flex;
+            display: none;
             flex-direction: column;
             border-radius: 30px;
             border: 2px solid #ff44ff;
             box-shadow: 0 0 50px rgba(255,68,255,0.5), 0 20px 40px rgba(0,0,0,0.5);
-            animation: zoomIn 0.3s ease;
             overflow: hidden;
-        }
-        
-        @keyframes zoomIn {
-            from {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
         }
         
         .messenger-full {
@@ -1485,7 +1462,6 @@
             color: #ff44ff;
             font-size: 1.1rem;
             cursor: pointer;
-            padding: 8px;
             width: 36px;
             height: 36px;
             border-radius: 50%;
@@ -1508,7 +1484,7 @@
             height: 100%;
             background: rgba(0,0,0,0.95);
             z-index: 1200;
-            display: flex;
+            display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -1585,7 +1561,7 @@
             height: 100%;
             background: #000000ee;
             z-index: 2000;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
         }
@@ -1612,8 +1588,70 @@
             cursor: pointer;
         }
         
-        .hidden {
-            display: none;
+        .security-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .security-card {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 30px;
+            padding: 25px;
+            width: 85%;
+            max-width: 350px;
+            border: 2px solid #ff44ff;
+            text-align: center;
+        }
+        
+        .security-card h2 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .security-card p {
+            color: #aaa;
+            font-size: 0.7rem;
+            margin-bottom: 20px;
+        }
+        
+        .security-input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 25px;
+            border: 1px solid #ff44ff;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .security-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .security-hint {
+            color: #ffaa88;
+            font-size: 0.6rem;
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -1623,9 +1661,7 @@
     <div class="content">
         <div id="homePage" class="page">
             <div class="anime-hero">
-                <div class="character-img" id="mainAvatarImg" style="background-image: url('https://i.pinimg.com/originals/6e/5e/6c/6e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png'); background-size: cover;">
-                    <div class="controller-on-hand">🎮</div>
-                </div>
+                <div class="character-img" id="mainAvatarImg">😎<div class="controller-on-hand">🎮</div></div>
                 <div class="character-info">
                     <div class="tshirt-text">⚡ DIDO-GAME ⚡</div>
                     <h2 id="heroTagline">😤 Neon Challenge Look!</h2>
@@ -1654,7 +1690,6 @@
                 </div>
             </div>
             
-            <!-- Settings Modal -->
             <div id="settingsModal" class="settings-modal">
                 <div class="settings-card">
                     <h3>⚙️ Settings</h3>
@@ -1698,7 +1733,6 @@
                 </div>
             </div>
             
-            <!-- Favorites Modal -->
             <div id="favoritesModal" class="favorites-modal">
                 <div class="favorites-card">
                     <h3>⭐ My Favorites</h3>
@@ -1710,7 +1744,6 @@
                 </div>
             </div>
             
-            <!-- Wallet Modal -->
             <div id="walletModal" class="wallet-modal">
                 <div class="wallet-card">
                     <h3>💳 Wallet</h3>
@@ -1743,7 +1776,6 @@
                 </div>
             </div>
             
-            <!-- VIP Payment Modal -->
             <div id="paymentModal" class="payment-modal">
                 <div class="payment-card">
                     <h3 id="paymentTitle">💎 VIP Membership</h3>
@@ -1784,35 +1816,17 @@
         </div>
     </div>
     
-    <!-- BOTTOM BAR - LEFT: 2 BUTTONS (Wallet, Settings), RIGHT: 2 BUTTONS (Favorites, VIP), CHAT IN CENTER -->
     <div class="bottom-bar">
         <div class="bottom-left">
-            <button class="nav-btn wallet-btn" id="walletBtn">
-                <span class="icon">💳</span>
-                <span class="label" id="walletLabel">Wallet</span>
-            </button>
-            <button class="nav-btn settings-btn" id="settingsBtn">
-                <span class="icon">⚙️</span>
-                <span class="label" id="settingsLabel">Settings</span>
-            </button>
+            <button class="nav-btn wallet-btn" id="walletBtn"><span class="icon">💳</span><span class="label" id="walletLabel">Wallet</span></button>
+            <button class="nav-btn settings-btn" id="settingsBtn"><span class="icon">⚙️</span><span class="label" id="settingsLabel">Settings</span></button>
         </div>
-        
         <div class="bottom-center">
-            <button class="nav-btn chat-btn" id="openChatBtn">
-                <span class="icon">💬</span>
-                <span class="label" id="chatLabel">Chat</span>
-            </button>
+            <button class="nav-btn chat-btn" id="openChatBtn"><span class="icon">💬</span><span class="label" id="chatLabel">Chat</span></button>
         </div>
-        
         <div class="bottom-right">
-            <button class="nav-btn favs-btn" id="favoritesBtn">
-                <span class="icon">⭐</span>
-                <span class="label" id="favoritesLabel">Favorites</span>
-            </button>
-            <button class="nav-btn vip-btn" id="registerBtn">
-                <span class="icon">👑</span>
-                <span class="label" id="vipLabel">VIP</span>
-            </button>
+            <button class="nav-btn favs-btn" id="favoritesBtn"><span class="icon">⭐</span><span class="label" id="favoritesLabel">Favorites</span></button>
+            <button class="nav-btn vip-btn" id="registerBtn"><span class="icon">👑</span><span class="label" id="vipLabel">VIP</span></button>
         </div>
     </div>
 </div>
@@ -1824,12 +1838,12 @@
         <input type="text" id="securityUsername" class="security-input" placeholder="👤 Username" value="Ahmed">
         <input type="password" id="securityRoomPassword" class="security-input" placeholder="🔒 Room Password (optional)">
         <input type="text" id="securityRoomName" class="security-input" placeholder="🏠 Room Name" value="Main Room">
-        <button class="security-btn" id="securityBtn" onclick="submitSecurityAndEnter()">🚪 Enter Chat</button>
+        <button class="security-btn" id="securityBtn">🚪 Enter Chat</button>
         <div class="security-hint" id="securityHint">💡 You can create a new room or join an existing one</div>
     </div>
 </div>
 
-<div id="chatPage" class="chat-page hidden">
+<div id="chatPage" class="chat-page">
     <div class="messenger-full">
         <div id="inboxView" style="display: flex; flex-direction: column; height: 100%;">
             <div class="messenger-header">
@@ -1872,7 +1886,7 @@
     </div>
 </div>
 
-<div id="videoCallModal" class="video-call-modal hidden">
+<div id="videoCallModal" class="video-call-modal">
     <div class="video-container">
         <video id="localVideo" autoplay muted playsinline></video>
         <video id="remoteVideo" autoplay playsinline></video>
@@ -1884,156 +1898,53 @@
     </div>
 </div>
 
-<div id="gameModal" class="game-modal hidden">
+<div id="gameModal" class="game-modal">
     <div class="close-modal" onclick="closeGameModal()">✕</div>
     <iframe id="gameIframe" src="" allow="microphone; autoplay; camera"></iframe>
 </div>
 
 <script>
-    // ==================== Language Translations (Simplified for length - keeping structure) ====================
+    // Language Translations
     const translations = {
         en: {
-            heroTagline: "😤 Neon Challenge Look!",
-            catAction: "🎯 Action",
-            catRacing: "🏎️ Racing",
-            catFighting: "🥊 Fighting",
-            catPuzzle: "🧩 Puzzle",
-            moreBtn: "➕ More",
-            moreTitle: "🎮 More Game Categories",
-            closeBtn: "Close",
-            catBattle: "🔫 Battle Royale",
-            catSports: "⚽ Sports",
-            catStrategy: "🧠 Strategy",
-            catHorror: "👻 Horror",
-            catRpg: "⚔️ RPG",
-            catSimulation: "🏙️ Simulation",
-            upgradeVIP: "👑 Upgrade VIP",
-            vipActive: "👑 VIP Active",
-            playMusic: "🎵 Play",
-            stopMusic: "🔇 Stop",
-            securityTitle: "🔐 Security Settings",
-            securityDesc: "Enter your details to enter the chat",
-            securityUsernamePlaceholder: "👤 Username",
-            securityPasswordPlaceholder: "🔒 Room Password (optional)",
-            securityRoomPlaceholder: "🏠 Room Name",
-            securityBtn: "🚪 Enter Chat",
-            securityHint: "💡 You can create a new room or join an existing one",
-            chatsTitle: "Chats",
-            noChats: "No chats\n✏️ Create a new chat",
-            noMessages: "✨ Select a chat to start messaging\n💬 No messages yet\n✨ Write the first message",
-            typeMessage: "Type a message...",
-            typing: "✍️ Someone is typing...",
-            online: "🟢 Online",
+            walletLabel: "Wallet", settingsLabel: "Settings", favoritesLabel: "Favorites", vipLabel: "VIP", chatLabel: "Chat",
+            securityTitle: "🔐 Security Settings", securityDesc: "Enter your details to enter the chat",
+            securityUsernamePlaceholder: "👤 Username", securityPasswordPlaceholder: "🔒 Room Password (optional)",
+            securityRoomPlaceholder: "🏠 Room Name", securityBtn: "🚪 Enter Chat", securityHint: "💡 You can create a new room or join an existing one",
+            chatsTitle: "Chats", noChats: "No chats\n✏️ Create a new chat", noMessages: "✨ Select a chat to start messaging\n💬 No messages yet\n✨ Write the first message",
+            typeMessage: "Type a message...", typing: "✍️ Someone is typing...", online: "🟢 Online",
             videoCallVIPOnly: "🔒 Sorry, video calls are only available for VIP accounts. Upgrade now!",
-            cannotAccessCamera: "Cannot access camera/microphone: ",
-            micActive: "🎙️ Microphone active",
-            micInactive: "🔴 Microphone inactive",
+            cannotAccessCamera: "Cannot access camera/microphone: ", micActive: "🎙️ Microphone active", micInactive: "🔴 Microphone inactive",
             sessionTimeout: "🔐 Session expired due to inactivity (5 minutes). You will be logged out.",
-            upgradeConfirm: "✨ Upgrade to VIP - $9.99/month",
-            upgradeSuccess: "🎉 Congratulations! You are now a VIP member",
-            alreadyVIP: "✨ You are already a VIP member!",
-            roomPasswordError: "❌ Incorrect room password!",
-            roomExists: "Room already exists",
-            enterRoomName: "Enter room name:",
-            newRoom: "New Room",
-            protectWithPassword: "Protect room with password?",
-            enterPassword: "Enter room password:",
-            passwordTooShort: "Password too short (min 3 characters)",
-            roomCreated: "Room created successfully",
-            openChatFirst: "Open a chat first",
-            enterUser: "❌ Enter username",
-            enterRoom: "❌ Enter room name",
-            wrongPasswordCreate: "⚠️ Incorrect password! A new room will be created.",
-            back: "🔙 Back",
-            langLabel: "🌐 EN",
-            paymentTitle: "💎 VIP Membership",
-            paymentDesc: "Choose your currency",
-            payNow: "💎 Pay Now & Upgrade VIP",
-            cancel: "Cancel",
-            paymentSuccess: "🎉 Payment successful! You are now a VIP member!",
-            paymentError: "❌ Payment failed. Please try again.",
-            walletLabel: "Wallet",
-            settingsLabel: "Settings",
-            favoritesLabel: "Favorites",
-            vipLabel: "VIP",
-            chatLabel: "Chat",
-            musicOn: "🎵 Music ON",
-            musicOff: "🔇 Music OFF"
+            roomPasswordError: "❌ Incorrect room password!", roomExists: "Room already exists",
+            enterRoomName: "Enter room name:", newRoom: "New Room", protectWithPassword: "Protect room with password?",
+            enterPassword: "Enter room password:", passwordTooShort: "Password too short (min 3 characters)",
+            roomCreated: "Room created successfully", openChatFirst: "Open a chat first", enterUser: "❌ Enter username",
+            enterRoom: "❌ Enter room name", wrongPasswordCreate: "⚠️ Incorrect password! A new room will be created.",
+            back: "🔙 Back", alreadyVIP: "✨ You are already a VIP member!", paymentSuccess: "🎉 Payment successful! You are now a VIP member!",
+            musicOn: "🎵 Music ON", musicOff: "🔇 Music OFF"
         },
         ar: {
-            heroTagline: "😤 نظرة التحدي النيونية!",
-            catAction: "🎯 أكشن",
-            catRacing: "🏎️ سباقات",
-            catFighting: "🥊 قتال",
-            catPuzzle: "🧩 ألغاز",
-            moreBtn: "➕ المزيد",
-            moreTitle: "🎮 المزيد من أنواع الألعاب",
-            closeBtn: "إغلاق",
-            catBattle: "🔫 معركة رويال",
-            catSports: "⚽ رياضات",
-            catStrategy: "🧠 استراتيجية",
-            catHorror: "👻 رعب",
-            catRpg: "⚔️ آر بي جي",
-            catSimulation: "🏙️ محاكاة",
-            upgradeVIP: "👑 ترقية VIP",
-            vipActive: "👑 VIP مفعل",
-            playMusic: "🎵 تشغيل",
-            stopMusic: "🔇 إيقاف",
-            securityTitle: "🔐 إعدادات الأمان",
-            securityDesc: "أدخل بياناتك للدخول إلى الدردشة",
-            securityUsernamePlaceholder: "👤 اسم المستخدم",
-            securityPasswordPlaceholder: "🔒 كلمة مرور الغرفة (اختياري)",
-            securityRoomPlaceholder: "🏠 اسم الغرفة",
-            securityBtn: "🚪 دخول إلى الدردشة",
-            securityHint: "💡 يمكنك إنشاء غرفة جديدة أو الانضمام إلى غرفة موجودة",
-            chatsTitle: "المحادثات",
-            noChats: "لا توجد محادثات\n✏️ أنشئ محادثة جديدة",
-            noMessages: "✨ اختر محادثة لبدء المراسلة\n💬 لا توجد رسائل بعد\n✨ اكتب أول رسالة",
-            typeMessage: "اكتب رسالة...",
-            typing: "✍️ شخص ما يكتب...",
-            online: "🟢 متصل",
+            walletLabel: "المحفظة", settingsLabel: "الإعدادات", favoritesLabel: "المفضلة", vipLabel: "VIP", chatLabel: "الدردشة",
+            securityTitle: "🔐 إعدادات الأمان", securityDesc: "أدخل بياناتك للدخول إلى الدردشة",
+            securityUsernamePlaceholder: "👤 اسم المستخدم", securityPasswordPlaceholder: "🔒 كلمة مرور الغرفة (اختياري)",
+            securityRoomPlaceholder: "🏠 اسم الغرفة", securityBtn: "🚪 دخول إلى الدردشة", securityHint: "💡 يمكنك إنشاء غرفة جديدة أو الانضمام إلى غرفة موجودة",
+            chatsTitle: "المحادثات", noChats: "لا توجد محادثات\n✏️ أنشئ محادثة جديدة", noMessages: "✨ اختر محادثة لبدء المراسلة\n💬 لا توجد رسائل بعد\n✨ اكتب أول رسالة",
+            typeMessage: "اكتب رسالة...", typing: "✍️ شخص ما يكتب...", online: "🟢 متصل",
             videoCallVIPOnly: "🔒 عذراً، خاصية مكالمات الفيديو متاحة فقط للحسابات المميزة (VIP). قم بترقية حسابك الآن!",
-            cannotAccessCamera: "لا يمكن الوصول إلى الكاميرا/الميكروفون: ",
-            micActive: "🎙️ الميكروفون نشط",
-            micInactive: "🔴 الميكروفون غير نشط",
+            cannotAccessCamera: "لا يمكن الوصول إلى الكاميرا/الميكروفون: ", micActive: "🎙️ الميكروفون نشط", micInactive: "🔴 الميكروفون غير نشط",
             sessionTimeout: "🔐 انتهت الجلسة بسبب عدم النشاط (5 دقائق). سيتم تسجيل الخروج.",
-            upgradeConfirm: "✨ ترقية إلى VIP - 9.99$ شهرياً",
-            upgradeSuccess: "🎉 تهانينا! أصبحت عضواً مميزاً",
-            alreadyVIP: "✨ أنت بالفعل عضو VIP!",
-            roomPasswordError: "❌ كلمة مرور الغرفة غير صحيحة!",
-            roomExists: "الغرفة موجودة",
-            enterRoomName: "أدخل اسم الغرفة الجديدة:",
-            newRoom: "غرفة جديدة",
-            protectWithPassword: "هل تريد حماية الغرفة بكلمة مرور؟",
-            enterPassword: "أدخل كلمة مرور الغرفة:",
-            passwordTooShort: "كلمة المرور قصيرة جداً (3 أحرف على الأقل)",
-            roomCreated: "تم إنشاء الغرفة بنجاح",
-            openChatFirst: "افتح محادثة أولاً",
-            enterUser: "❌ أدخل اسم المستخدم",
-            enterRoom: "❌ أدخل اسم الغرفة",
-            wrongPasswordCreate: "⚠️ كلمة المرور غير صحيحة! سيتم إنشاء غرفة جديدة.",
-            back: "🔙 العودة",
-            langLabel: "🌐 AR",
-            paymentTitle: "💎 عضوية VIP",
-            paymentDesc: "اختر العملة",
-            payNow: "💎 ادفع الآن وفعّل VIP",
-            cancel: "إلغاء",
-            paymentSuccess: "🎉 تم الدفع بنجاح! أصبحت عضواً مميزاً",
-            paymentError: "❌ فشل الدفع. الرجاء المحاولة مرة أخرى",
-            walletLabel: "المحفظة",
-            settingsLabel: "الإعدادات",
-            favoritesLabel: "المفضلة",
-            vipLabel: "VIP",
-            chatLabel: "الدردشة",
-            musicOn: "🎵 الموسيقى قيد التشغيل",
-            musicOff: "🔇 الموسيقى متوقفة"
+            roomPasswordError: "❌ كلمة مرور الغرفة غير صحيحة!", roomExists: "الغرفة موجودة",
+            enterRoomName: "أدخل اسم الغرفة الجديدة:", newRoom: "غرفة جديدة", protectWithPassword: "هل تريد حماية الغرفة بكلمة مرور؟",
+            enterPassword: "أدخل كلمة مرور الغرفة:", passwordTooShort: "كلمة المرور قصيرة جداً (3 أحرف على الأقل)",
+            roomCreated: "تم إنشاء الغرفة بنجاح", openChatFirst: "افتح محادثة أولاً", enterUser: "❌ أدخل اسم المستخدم",
+            enterRoom: "❌ أدخل اسم الغرفة", wrongPasswordCreate: "⚠️ كلمة المرور غير صحيحة! سيتم إنشاء غرفة جديدة.",
+            back: "🔙 العودة", alreadyVIP: "✨ أنت بالفعل عضو VIP!", paymentSuccess: "🎉 تم الدفع بنجاح! أصبحت عضواً مميزاً",
+            musicOn: "🎵 الموسيقى قيد التشغيل", musicOff: "🔇 الموسيقى متوقفة"
         }
     };
     
     let currentLang = 'en';
-    let selectedCurrency = 'USD';
-    let selectedCurrencySymbol = '$';
-    let currencyRate = 1;
     let currentAvatar = '😎';
     let isVIP = false;
     let bgMusic = null;
@@ -2042,306 +1953,64 @@
     
     // Favorites System
     let favorites = JSON.parse(localStorage.getItem('didogame_favorites') || '[]');
-    
-    function saveFavorites() {
-        localStorage.setItem('didogame_favorites', JSON.stringify(favorites));
-    }
-    
+    function saveFavorites() { localStorage.setItem('didogame_favorites', JSON.stringify(favorites)); }
+    function isFavorite(id) { return favorites.includes(id); }
     function toggleFavorite(gameId) {
-        const index = favorites.indexOf(gameId);
-        if (index === -1) {
-            favorites.push(gameId);
-        } else {
-            favorites.splice(index, 1);
-        }
+        if (favorites.includes(gameId)) favorites = favorites.filter(id => id !== gameId);
+        else favorites.push(gameId);
         saveFavorites();
         renderAllGames();
         renderFavoritesList();
     }
-    
-    function isFavorite(gameId) {
-        return favorites.includes(gameId);
-    }
-    
-    function openFavoritesModal() {
-        renderFavoritesList();
-        document.getElementById('favoritesModal').style.display = 'flex';
-    }
-    
-    function closeFavoritesModal() {
-        document.getElementById('favoritesModal').style.display = 'none';
-    }
-    
     function renderFavoritesList() {
         const container = document.getElementById('favoritesList');
         const favGames = gamesData.filter(game => favorites.includes(game.id));
-        
-        if (favGames.length === 0) {
-            container.innerHTML = `<div class="empty-favorites">No favorite games yet<br>⭐ Click the star on any game to add it!</div>`;
-            return;
-        }
-        
-        container.innerHTML = favGames.map(game => `
-            <div class="favorite-item" onclick="playGameFromFav(${game.id})">
-                <div class="favorite-img" style="background-image: url('${game.img}')"></div>
-                <div class="favorite-info">
-                    <div class="favorite-name">${game.name}</div>
-                    <div class="favorite-cat">${game.cat}</div>
-                </div>
-                <button class="remove-fav" onclick="event.stopPropagation(); toggleFavorite(${game.id})">🗑️</button>
-            </div>
-        `).join('');
+        if (favGames.length === 0) { container.innerHTML = '<div class="empty-favorites">No favorite games yet<br>⭐ Click the star on any game to add it!</div>'; return; }
+        container.innerHTML = favGames.map(game => `<div class="favorite-item" onclick="playGameFromFav(${game.id})"><div class="favorite-img" style="background-image: url('${game.img}')"></div><div class="favorite-info"><div class="favorite-name">${game.name}</div><div class="favorite-cat">${game.cat}</div></div><button class="remove-fav" onclick="event.stopPropagation(); toggleFavorite(${game.id})">🗑️</button></div>`).join('');
     }
-    
-    function playGameFromFav(gameId) {
-        const game = gamesData.find(g => g.id === gameId);
-        if (game) {
-            document.getElementById('gameIframe').src = game.url;
-            document.getElementById('gameModal').classList.remove('hidden');
-            closeFavoritesModal();
-        }
-    }
+    function playGameFromFav(gameId) { const game = gamesData.find(g => g.id === gameId); if (game) { document.getElementById('gameIframe').src = game.url; document.getElementById('gameModal').style.display = 'flex'; closeFavoritesModal(); } }
+    function openFavoritesModal() { renderFavoritesList(); document.getElementById('favoritesModal').style.display = 'flex'; }
+    function closeFavoritesModal() { document.getElementById('favoritesModal').style.display = 'none'; }
     
     // Music Functions
-    function initMusic() {
-        if (!bgMusic) {
-            bgMusic = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-            bgMusic.loop = true;
-            bgMusic.volume = 0.5;
-        }
-    }
-    
-    function startMusicOnFirstTouch() {
-        if (!musicStarted && bgMusic) {
-            bgMusic.play().catch(e => console.log("Auto-play prevented"));
-            musicStarted = true;
-            isMusicPlaying = true;
-            updateMusicButtonText();
-        }
-    }
-    
-    function toggleMusic() {
-        initMusic();
-        if (isMusicPlaying) {
-            bgMusic.pause();
-            isMusicPlaying = false;
-        } else {
-            bgMusic.play().catch(e => console.log("Playback failed"));
-            isMusicPlaying = true;
-            musicStarted = true;
-        }
-        updateMusicButtonText();
-        localStorage.setItem('didogame_music', isMusicPlaying ? 'on' : 'off');
-    }
-    
-    function updateMusicButtonText() {
-        const musicBtn = document.getElementById('musicToggleBtn');
-        if (musicBtn) {
-            const t = translations[currentLang];
-            musicBtn.innerHTML = isMusicPlaying ? t.musicOn : t.musicOff;
-        }
-    }
+    function initMusic() { if (!bgMusic) { bgMusic = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'); bgMusic.loop = true; bgMusic.volume = 0.5; } }
+    function startMusicOnFirstTouch() { if (!musicStarted && bgMusic) { bgMusic.play().catch(e => console.log("Auto-play prevented")); musicStarted = true; isMusicPlaying = true; updateMusicButtonText(); } }
+    function toggleMusic() { initMusic(); if (isMusicPlaying) { bgMusic.pause(); isMusicPlaying = false; } else { bgMusic.play().catch(e => console.log("Playback failed")); isMusicPlaying = true; musicStarted = true; } updateMusicButtonText(); localStorage.setItem('didogame_music', isMusicPlaying ? 'on' : 'off'); }
+    function updateMusicButtonText() { const musicBtn = document.getElementById('musicToggleBtn'); if (musicBtn) { const t = translations[currentLang]; musicBtn.innerHTML = isMusicPlaying ? t.musicOn : t.musicOff; } }
     
     // Settings Functions
-    function openSettingsModal() {
-        document.getElementById('avatarPreview').innerHTML = currentAvatar;
-        document.getElementById('settingsLangSelect').value = currentLang;
-        updateMusicButtonText();
-        document.querySelectorAll('.avatar-option').forEach(opt => {
-            if (opt.dataset.avatar === currentAvatar) {
-                opt.classList.add('selected');
-            } else {
-                opt.classList.remove('selected');
-            }
-        });
-        document.getElementById('settingsModal').style.display = 'flex';
-    }
-    
-    function closeSettingsModal() {
-        document.getElementById('settingsModal').style.display = 'none';
-    }
-    
-    function saveSettings() {
-        const newLang = document.getElementById('settingsLangSelect').value;
-        if (newLang !== currentLang) {
-            setLanguage(newLang);
-        }
-        const selectedAvatar = document.querySelector('.avatar-option.selected');
-        if (selectedAvatar) {
-            currentAvatar = selectedAvatar.dataset.avatar;
-            localStorage.setItem('didogame_avatar', currentAvatar);
-            document.getElementById('avatarPreview').innerHTML = currentAvatar;
-            const mainAvatarDiv = document.getElementById('mainAvatarImg');
-            mainAvatarDiv.style.background = 'linear-gradient(135deg, #ff44ff, #00ffff)';
-            mainAvatarDiv.style.display = 'flex';
-            mainAvatarDiv.style.alignItems = 'center';
-            mainAvatarDiv.style.justifyContent = 'center';
-            mainAvatarDiv.style.fontSize = '3rem';
-            mainAvatarDiv.innerHTML = `<div class="controller-on-hand">🎮</div>${currentAvatar}`;
-        }
-        closeSettingsModal();
-    }
-    
-    function selectAvatarOption(element) {
-        document.querySelectorAll('.avatar-option').forEach(opt => {
-            opt.classList.remove('selected');
-        });
-        element.classList.add('selected');
-        document.getElementById('avatarPreview').innerHTML = element.dataset.avatar;
-    }
+    function openSettingsModal() { document.getElementById('avatarPreview').innerHTML = currentAvatar; document.getElementById('settingsLangSelect').value = currentLang; updateMusicButtonText(); document.querySelectorAll('.avatar-option').forEach(opt => { if (opt.dataset.avatar === currentAvatar) opt.classList.add('selected'); else opt.classList.remove('selected'); }); document.getElementById('settingsModal').style.display = 'flex'; }
+    function closeSettingsModal() { document.getElementById('settingsModal').style.display = 'none'; }
+    function saveSettings() { const newLang = document.getElementById('settingsLangSelect').value; if (newLang !== currentLang) setLanguage(newLang); const selectedAvatar = document.querySelector('.avatar-option.selected'); if (selectedAvatar) { currentAvatar = selectedAvatar.dataset.avatar; localStorage.setItem('didogame_avatar', currentAvatar); document.getElementById('avatarPreview').innerHTML = currentAvatar; const mainAvatarDiv = document.getElementById('mainAvatarImg'); mainAvatarDiv.style.background = 'linear-gradient(135deg, #ff44ff, #00ffff)'; mainAvatarDiv.style.display = 'flex'; mainAvatarDiv.style.alignItems = 'center'; mainAvatarDiv.style.justifyContent = 'center'; mainAvatarDiv.style.fontSize = '3rem'; mainAvatarDiv.innerHTML = `<div class="controller-on-hand">🎮</div>${currentAvatar}`; } closeSettingsModal(); }
+    function selectAvatarOption(element) { document.querySelectorAll('.avatar-option').forEach(opt => opt.classList.remove('selected')); element.classList.add('selected'); document.getElementById('avatarPreview').innerHTML = element.dataset.avatar; }
     
     // Wallet Functions
-    function openWalletModal() {
-        document.getElementById('walletModal').style.display = 'flex';
-    }
-    
-    function closeWalletModal() {
-        document.getElementById('walletModal').style.display = 'none';
-    }
+    function openWalletModal() { document.getElementById('walletModal').style.display = 'flex'; }
+    function closeWalletModal() { document.getElementById('walletModal').style.display = 'none'; }
     
     // Language Functions
     function setLanguage(lang) {
-        currentLang = lang;
-        localStorage.setItem('didogame_lang', currentLang);
-        const t = translations[currentLang];
-        
-        document.getElementById('moreCategoriesBtn').innerHTML = t.moreBtn;
-        document.getElementById('moreModalTitle').innerHTML = t.moreTitle;
-        document.getElementById('closeMoreModal').innerHTML = t.closeBtn;
-        document.getElementById('paymentTitle').innerHTML = t.paymentTitle;
-        document.getElementById('paymentDesc').innerHTML = t.paymentDesc;
-        document.getElementById('payNowBtn').innerHTML = t.payNow;
-        document.getElementById('closePaymentBtn').innerHTML = t.cancel;
-        
-        document.getElementById('walletLabel').innerText = t.walletLabel;
-        document.getElementById('settingsLabel').innerText = t.settingsLabel;
-        document.getElementById('favoritesLabel').innerText = t.favoritesLabel;
-        document.getElementById('vipLabel').innerText = t.vipLabel;
-        document.getElementById('chatLabel').innerText = t.chatLabel;
-        
-        updateMusicButtonText();
-        
-        const registerBtn = document.getElementById('registerBtn');
-        if(isVIP) {
-            registerBtn.classList.add('active');
-        } else {
-            registerBtn.classList.remove('active');
-        }
-        
-        const moreCategoriesList = document.getElementById('moreCategoriesList');
-        if (moreCategoriesList) {
-            moreCategoriesList.innerHTML = `
-                <div class="more-cat-badge" data-cat="battle">${t.catBattle}</div>
-                <div class="more-cat-badge" data-cat="sports">${t.catSports}</div>
-                <div class="more-cat-badge" data-cat="strategy">${t.catStrategy}</div>
-                <div class="more-cat-badge" data-cat="horror">${t.catHorror}</div>
-                <div class="more-cat-badge" data-cat="rpg">${t.catRpg}</div>
-                <div class="more-cat-badge" data-cat="simulation">${t.catSimulation}</div>
-            `;
-            document.querySelectorAll('.more-cat-badge').forEach(badge => {
-                badge.addEventListener('click', () => {
-                    const category = badge.dataset.cat;
-                    document.getElementById('moreModal').style.display = 'none';
-                    showCategoryGames(category);
-                });
-            });
-        }
-        
-        document.documentElement.lang = currentLang;
-        
-        if(currentLang === 'ar') {
-            document.body.style.direction = 'rtl';
-            document.querySelector('.app').style.direction = 'rtl';
-        } else {
-            document.body.style.direction = 'ltr';
-            document.querySelector('.app').style.direction = 'ltr';
-        }
-        
-        updateAllTexts();
-    }
-    
-    function updateAllTexts() {
-        const t = translations[currentLang];
-        document.getElementById('heroTagline').innerText = t.heroTagline;
-        document.getElementById('catAction').innerHTML = t.catAction;
-        document.getElementById('catRacing').innerHTML = t.catRacing;
-        document.getElementById('catFighting').innerHTML = t.catFighting;
-        document.getElementById('catPuzzle').innerHTML = t.catPuzzle;
-        
-        document.getElementById('securityTitle').innerText = t.securityTitle;
-        document.getElementById('securityDesc').innerText = t.securityDesc;
-        document.getElementById('securityUsername').placeholder = t.securityUsernamePlaceholder;
-        document.getElementById('securityRoomPassword').placeholder = t.securityPasswordPlaceholder;
-        document.getElementById('securityRoomName').placeholder = t.securityRoomPlaceholder;
-        document.getElementById('securityBtn').innerText = t.securityBtn;
-        document.getElementById('securityHint').innerText = t.securityHint;
-        
-        document.getElementById('chatsTitle').innerText = t.chatsTitle;
+        currentLang = lang; localStorage.setItem('didogame_lang', currentLang); const t = translations[currentLang];
+        document.getElementById('walletLabel').innerText = t.walletLabel; document.getElementById('settingsLabel').innerText = t.settingsLabel;
+        document.getElementById('favoritesLabel').innerText = t.favoritesLabel; document.getElementById('vipLabel').innerText = t.vipLabel;
+        document.getElementById('chatLabel').innerText = t.chatLabel; updateMusicButtonText();
+        document.getElementById('securityTitle').innerText = t.securityTitle; document.getElementById('securityDesc').innerText = t.securityDesc;
+        document.getElementById('securityUsername').placeholder = t.securityUsernamePlaceholder; document.getElementById('securityRoomPassword').placeholder = t.securityPasswordPlaceholder;
+        document.getElementById('securityRoomName').placeholder = t.securityRoomPlaceholder; document.getElementById('securityBtn').innerText = t.securityBtn;
+        document.getElementById('securityHint').innerText = t.securityHint; document.getElementById('chatsTitle').innerText = t.chatsTitle;
         document.getElementById('backToHomeBtn').innerHTML = t.back;
-        
-        if(document.getElementById('openChatView').style.display === 'flex') {
-            document.getElementById('openMessageInput').placeholder = t.typeMessage;
-            document.getElementById('openChatStatus').innerHTML = t.online;
-        }
-        
-        renderChatsList();
-        if(currentOpenRoom && document.getElementById('openChatView').style.display === 'flex') {
-            displayMessagesInOpenChat();
-        }
+        if(document.getElementById('openChatView').style.display === 'flex') { document.getElementById('openMessageInput').placeholder = t.typeMessage; document.getElementById('openChatStatus').innerHTML = t.online; }
+        renderChatsList(); if(currentOpenRoom && document.getElementById('openChatView').style.display === 'flex') displayMessagesInOpenChat();
     }
     
     // Payment System
-    function openPaymentModal() {
-        if(isVIP) {
-            alert(translations[currentLang].alreadyVIP);
-            return;
-        }
-        document.getElementById('paymentModal').style.display = 'flex';
-        updatePriceDisplay();
-    }
-    
-    function closePaymentModal() {
-        document.getElementById('paymentModal').style.display = 'none';
-    }
-    
-    function selectCurrency(currency, symbol, rate) {
-        selectedCurrency = currency;
-        selectedCurrencySymbol = symbol;
-        currencyRate = rate;
-        document.querySelectorAll('.currency-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if(btn.dataset.currency === currency) {
-                btn.classList.add('active');
-            }
-        });
-        updatePriceDisplay();
-    }
-    
-    function updatePriceDisplay() {
-        const basePrice = 9.99;
-        const convertedPrice = (basePrice * currencyRate).toFixed(2);
-        document.getElementById('priceAmount').innerHTML = convertedPrice;
-        document.getElementById('priceCurrency').innerHTML = selectedCurrencySymbol;
-    }
-    
-    function processPayment() {
-        const t = translations[currentLang];
-        setTimeout(() => {
-            alert(t.paymentSuccess);
-            closePaymentModal();
-            upgradeToVIP();
-        }, 1500);
-    }
-    
-    function upgradeToVIP() {
-        if(isVIP) return;
-        isVIP = true;
-        localStorage.setItem('didogame_vip', 'true');
-        document.getElementById('registerBtn').classList.add('active');
-        if(document.getElementById('openChatView').style.display === 'flex') {
-            document.getElementById('videoCallBtn').style.display = 'inline-block';
-        }
-    }
+    let selectedCurrency = 'USD', selectedCurrencySymbol = '$', currencyRate = 1;
+    function openPaymentModal() { if(isVIP) { alert(translations[currentLang].alreadyVIP); return; } document.getElementById('paymentModal').style.display = 'flex'; updatePriceDisplay(); }
+    function closePaymentModal() { document.getElementById('paymentModal').style.display = 'none'; }
+    function selectCurrency(currency, symbol, rate) { selectedCurrency = currency; selectedCurrencySymbol = symbol; currencyRate = rate; document.querySelectorAll('.currency-btn').forEach(btn => { btn.classList.remove('active'); if(btn.dataset.currency === currency) btn.classList.add('active'); }); updatePriceDisplay(); }
+    function updatePriceDisplay() { const basePrice = 9.99; const convertedPrice = (basePrice * currencyRate).toFixed(2); document.getElementById('priceAmount').innerHTML = convertedPrice; document.getElementById('priceCurrency').innerHTML = selectedCurrencySymbol; }
+    function processPayment() { setTimeout(() => { alert(translations[currentLang].paymentSuccess); closePaymentModal(); upgradeToVIP(); }, 1500); }
+    function upgradeToVIP() { if(isVIP) return; isVIP = true; localStorage.setItem('didogame_vip', 'true'); document.getElementById('registerBtn').classList.add('active'); if(document.getElementById('openChatView').style.display === 'flex') document.getElementById('videoCallBtn').style.display = 'inline-block'; }
     
     // Games Data
     const gamesData = [
@@ -2367,122 +2036,27 @@
     
     function renderAllGames() {
         const midPoint = Math.ceil(gamesData.length / 2);
-        const row1Games = gamesData.slice(0, midPoint);
-        const row2Games = gamesData.slice(midPoint);
-        
         const gamesWrapper = document.getElementById('gamesWrapper');
-        gamesWrapper.innerHTML = `
-            <div class="game-row">
-                ${row1Games.map(game => `
-                    <div class="game-card" data-id="${game.id}" data-url="${game.url}">
-                        <div class="fav-star ${isFavorite(game.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${game.id})">${isFavorite(game.id) ? '⭐' : '☆'}</div>
-                        <div class="game-img" style="background-image:url('${game.img}')"></div>
-                        <div class="game-title">${game.name}</div>
-                    </div>
-                `).join('')}
-            </div>
-            <div class="game-row">
-                ${row2Games.map(game => `
-                    <div class="game-card" data-id="${game.id}" data-url="${game.url}">
-                        <div class="fav-star ${isFavorite(game.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${game.id})">${isFavorite(game.id) ? '⭐' : '☆'}</div>
-                        <div class="game-img" style="background-image:url('${game.img}')"></div>
-                        <div class="game-title">${game.name}</div>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-        
-        document.querySelectorAll('.game-card').forEach(card => {
-            card.addEventListener('click', (e) => {
-                if(e.target.classList.contains('fav-star')) return;
-                const id = parseInt(card.dataset.id);
-                const game = gamesData.find(g => g.id === id);
-                if (game) { 
-                    game.points += 5; 
-                    updateRanking(); 
-                }
-                document.getElementById('gameIframe').src = card.dataset.url;
-                document.getElementById('gameModal').classList.remove('hidden');
-            });
-        });
+        gamesWrapper.innerHTML = `<div class="game-row">${gamesData.slice(0, midPoint).map(game => `<div class="game-card" data-id="${game.id}" data-url="${game.url}"><div class="fav-star ${isFavorite(game.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${game.id})">${isFavorite(game.id) ? '⭐' : '☆'}</div><div class="game-img" style="background-image:url('${game.img}')"></div><div class="game-title">${game.name}</div></div>`).join('')}</div><div class="game-row">${gamesData.slice(midPoint).map(game => `<div class="game-card" data-id="${game.id}" data-url="${game.url}"><div class="fav-star ${isFavorite(game.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${game.id})">${isFavorite(game.id) ? '⭐' : '☆'}</div><div class="game-img" style="background-image:url('${game.img}')"></div><div class="game-title">${game.name}</div></div>`).join('')}</div>`;
+        document.querySelectorAll('.game-card').forEach(card => { card.addEventListener('click', (e) => { if(e.target.classList.contains('fav-star')) return; const id = parseInt(card.dataset.id); const game = gamesData.find(g => g.id === id); if (game) { game.points += 5; updateRanking(); } document.getElementById('gameIframe').src = card.dataset.url; document.getElementById('gameModal').style.display = 'flex'; }); });
     }
     
     function showCategoryGames(category) {
         const filtered = gamesData.filter(g => g.cat === category);
         const midPoint = Math.ceil(filtered.length / 2);
-        const row1Games = filtered.slice(0, midPoint);
-        const row2Games = filtered.slice(midPoint);
-        
-        document.getElementById('categoryGamesContainer').innerHTML = `
-            <div class="game-row">
-                ${row1Games.map(game => `
-                    <div class="game-card" data-url="${game.url}" data-id="${game.id}">
-                        <div class="fav-star ${isFavorite(game.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${game.id})">${isFavorite(game.id) ? '⭐' : '☆'}</div>
-                        <div class="game-img" style="background-image:url('${game.img}')"></div>
-                        <div class="game-title">${game.name}</div>
-                    </div>
-                `).join('')}
-            </div>
-            <div class="game-row">
-                ${row2Games.map(game => `
-                    <div class="game-card" data-url="${game.url}" data-id="${game.id}">
-                        <div class="fav-star ${isFavorite(game.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${game.id})">${isFavorite(game.id) ? '⭐' : '☆'}</div>
-                        <div class="game-img" style="background-image:url('${game.img}')"></div>
-                        <div class="game-title">${game.name}</div>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-        
-        document.querySelectorAll('#categoryGamesContainer .game-card').forEach(c => {
-            c.addEventListener('click', (e) => {
-                if(e.target.classList.contains('fav-star')) return;
-                document.getElementById('gameIframe').src = c.dataset.url;
-                document.getElementById('gameModal').classList.remove('hidden');
-            });
-        });
-        document.getElementById('homePage').classList.add('page-hidden');
-        document.getElementById('categoryPage').classList.remove('page-hidden');
+        document.getElementById('categoryGamesContainer').innerHTML = `<div class="game-row">${filtered.slice(0, midPoint).map(game => `<div class="game-card" data-url="${game.url}" data-id="${game.id}"><div class="fav-star ${isFavorite(game.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${game.id})">${isFavorite(game.id) ? '⭐' : '☆'}</div><div class="game-img" style="background-image:url('${game.img}')"></div><div class="game-title">${game.name}</div></div>`).join('')}</div><div class="game-row">${filtered.slice(midPoint).map(game => `<div class="game-card" data-url="${game.url}" data-id="${game.id}"><div class="fav-star ${isFavorite(game.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${game.id})">${isFavorite(game.id) ? '⭐' : '☆'}</div><div class="game-img" style="background-image:url('${game.img}')"></div><div class="game-title">${game.name}</div></div>`).join('')}</div>`;
+        document.querySelectorAll('#categoryGamesContainer .game-card').forEach(c => { c.addEventListener('click', (e) => { if(e.target.classList.contains('fav-star')) return; document.getElementById('gameIframe').src = c.dataset.url; document.getElementById('gameModal').style.display = 'flex'; }); });
+        document.getElementById('homePage').classList.add('page-hidden'); document.getElementById('categoryPage').classList.remove('page-hidden');
     }
-    
-    document.getElementById('moreCategoriesBtn').addEventListener('click', () => {
-        document.getElementById('moreModal').style.display = 'flex';
-    });
-    
-    document.getElementById('closeMoreModal').addEventListener('click', () => {
-        document.getElementById('moreModal').style.display = 'none';
-    });
-    
-    document.getElementById('moreModal').addEventListener('click', (e) => {
-        if (e.target === document.getElementById('moreModal')) {
-            document.getElementById('moreModal').style.display = 'none';
-        }
-    });
-    
-    document.querySelectorAll('.cat-badge').forEach(b => {
-        if (b.classList.contains('more-btn')) return;
-        b.addEventListener('click', () => showCategoryGames(b.dataset.cat));
-    });
-    document.getElementById('backToHomeBtn').addEventListener('click', () => {
-        document.getElementById('homePage').classList.remove('page-hidden');
-        document.getElementById('categoryPage').classList.add('page-hidden');
-    });
     
     function updateRanking() {
         const sorted = [...gamesData].sort((a,b)=>b.points - a.points);
-        document.getElementById('rankingList').innerHTML = `
-            <div class="rank-item"><div class="silver-circle">${sorted[1]?.avatar||'👤'}</div><div class="rank-name">${sorted[1]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[1]?.points||0}</div></div>
-            <div class="rank-item"><div class="gold-circle">${sorted[0]?.avatar||'👤'}</div><div class="rank-name">${sorted[0]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[0]?.points||0}</div></div>
-            <div class="rank-item"><div class="bronze-circle">${sorted[2]?.avatar||'👤'}</div><div class="rank-name">${sorted[2]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[2]?.points||0}</div></div>
-        `;
+        document.getElementById('rankingList').innerHTML = `<div class="rank-item"><div class="silver-circle">${sorted[1]?.avatar||'👤'}</div><div class="rank-name">${sorted[1]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[1]?.points||0}</div></div><div class="rank-item"><div class="gold-circle">${sorted[0]?.avatar||'👤'}</div><div class="rank-name">${sorted[0]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[0]?.points||0}</div></div><div class="rank-item"><div class="bronze-circle">${sorted[2]?.avatar||'👤'}</div><div class="rank-name">${sorted[2]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[2]?.points||0}</div></div>`;
     }
     
-    function closeGameModal() {
-        document.getElementById('gameModal').classList.add('hidden');
-        document.getElementById('gameIframe').src = '';
-    }
+    function closeGameModal() { document.getElementById('gameModal').style.display = 'none'; document.getElementById('gameIframe').src = ''; }
     
-    // Global Variables
+    // ==================== CHAT SYSTEM (FIXED) ====================
     let currentUser = null;
     let currentOpenRoom = null;
     let allRooms = {};
@@ -2492,268 +2066,74 @@
     let securityPassword = "";
     let sessionTimer = null;
     let typingTimeout = null;
+    let messageRefreshInterval = null;
     
-    // Currency selector setup
-    document.querySelectorAll('.currency-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            selectCurrency(btn.dataset.currency, btn.dataset.symbol, parseFloat(btn.dataset.rate));
-        });
-    });
+    function encryptMessage(text) { try { return btoa(unescape(encodeURIComponent(text))); } catch(e) { return text; } }
+    function decryptMessage(encrypted) { try { return decodeURIComponent(escape(atob(encrypted))); } catch(e) { return "⚠️ Encrypted message"; } }
+    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m) { if(m === '&') return '&amp;'; if(m === '<') return '&lt;'; if(m === '>') return '&gt;'; return m; }); }
     
-    document.getElementById('payNowBtn').addEventListener('click', processPayment);
-    document.getElementById('closePaymentBtn').addEventListener('click', closePaymentModal);
-    document.getElementById('paymentModal').addEventListener('click', (e) => {
-        if (e.target === document.getElementById('paymentModal')) {
-            closePaymentModal();
-        }
-    });
+    function saveRooms() { localStorage.setItem('didogame_rooms_secure', JSON.stringify(allRooms)); }
+    function loadRooms() { const data = localStorage.getItem('didogame_rooms_secure'); if(data) allRooms = JSON.parse(data); else allRooms = {}; }
     
-    document.getElementById('musicToggleBtn').addEventListener('click', toggleMusic);
+    function startSessionTimer() { if(sessionTimer) clearTimeout(sessionTimer); sessionTimer = setTimeout(() => { alert(translations[currentLang].sessionTimeout); logout(); }, 5 * 60 * 1000); }
+    function resetSessionTimer() { if(currentUser) startSessionTimer(); }
     
-    document.getElementById('walletBtn').addEventListener('click', openWalletModal);
-    document.getElementById('closeWalletBtn').addEventListener('click', closeWalletModal);
-    document.getElementById('walletModal').addEventListener('click', (e) => {
-        if (e.target === document.getElementById('walletModal')) {
-            closeWalletModal();
-        }
-    });
+    function logout() { if(sessionTimer) clearTimeout(sessionTimer); currentUser = null; currentOpenRoom = null; if(audioStream) audioStream.getTracks().forEach(track => track.stop()); if(videoStream) videoStream.getTracks().forEach(track => track.stop()); audioStream = null; videoStream = null; document.getElementById('chatPage').style.display = 'none'; document.getElementById('securityUsername').value = ''; document.getElementById('securityRoomPassword').value = ''; document.getElementById('securityRoomName').value = 'Main Room'; if(messageRefreshInterval) clearInterval(messageRefreshInterval); }
     
-    document.getElementById('settingsBtn').addEventListener('click', openSettingsModal);
-    document.getElementById('closeSettingsBtn').addEventListener('click', closeSettingsModal);
-    document.getElementById('saveSettingsBtn').addEventListener('click', saveSettings);
-    document.getElementById('settingsModal').addEventListener('click', (e) => {
-        if (e.target === document.getElementById('settingsModal')) {
-            closeSettingsModal();
-        }
-    });
+    function validatePassword(pass) { if(pass && pass.length < 3) { alert(translations[currentLang].passwordTooShort); return false; } return true; }
     
-    document.getElementById('favoritesBtn').addEventListener('click', openFavoritesModal);
-    document.getElementById('closeFavoritesBtn').addEventListener('click', closeFavoritesModal);
-    document.getElementById('favoritesModal').addEventListener('click', (e) => {
-        if (e.target === document.getElementById('favoritesModal')) {
-            closeFavoritesModal();
-        }
-    });
-    
-    document.querySelectorAll('.avatar-option').forEach(opt => {
-        opt.addEventListener('click', () => selectAvatarOption(opt));
-    });
-    
-    document.getElementById('registerBtn').addEventListener('click', openPaymentModal);
-    
-    document.querySelector('.currency-btn[data-currency="USD"]').classList.add('active');
-    
-    document.body.addEventListener('touchstart', function firstTouch() {
-        initMusic();
-        startMusicOnFirstTouch();
-        document.body.removeEventListener('touchstart', firstTouch);
-    });
-    document.body.addEventListener('click', function firstClick() {
-        initMusic();
-        startMusicOnFirstTouch();
-        document.body.removeEventListener('click', firstClick);
-    });
-    
-    const savedMusicState = localStorage.getItem('didogame_music');
-    if (savedMusicState === 'on') {
-        isMusicPlaying = true;
-    } else if (savedMusicState === 'off') {
-        isMusicPlaying = false;
-    }
-    
-    // Security Helpers
-    function encryptMessage(text) {
-        return btoa(unescape(encodeURIComponent(text)));
-    }
-    
-    function decryptMessage(encrypted) {
-        try {
-            return decodeURIComponent(escape(atob(encrypted)));
-        } catch(e) {
-            return "⚠️ Encrypted message";
-        }
-    }
-    
-    function startSessionTimer() {
-        if(sessionTimer) clearTimeout(sessionTimer);
-        sessionTimer = setTimeout(() => {
-            alert(translations[currentLang].sessionTimeout);
-            logout();
-        }, 5 * 60 * 1000);
-    }
-    
-    function resetSessionTimer() {
-        if(currentUser) startSessionTimer();
-    }
-    
-    function logout() {
-        if(sessionTimer) clearTimeout(sessionTimer);
-        currentUser = null;
-        currentOpenRoom = null;
-        if(audioStream) audioStream.getTracks().forEach(track => track.stop());
-        if(videoStream) videoStream.getTracks().forEach(track => track.stop());
-        audioStream = null;
-        videoStream = null;
-        document.getElementById('chatPage').classList.add('hidden');
-        document.getElementById('securityUsername').value = '';
-        document.getElementById('securityRoomPassword').value = '';
-        document.getElementById('securityRoomName').value = 'Main Room';
-    }
-    
-    function validatePassword(pass) {
-        if(pass && pass.length < 3) {
-            alert(translations[currentLang].passwordTooShort);
-            return false;
-        }
-        return true;
-    }
-    
-    // Chat Functions
-    function saveRooms() {
-        localStorage.setItem('didogame_rooms_secure', JSON.stringify(allRooms));
-    }
-    
-    function loadRooms() {
-        const data = localStorage.getItem('didogame_rooms_secure');
-        if(data) allRooms = JSON.parse(data);
-        else allRooms = {};
-    }
-    
-    function escapeHtml(str) {
-        if(!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if(m === '&') return '&amp;';
-            if(m === '<') return '&lt;';
-            if(m === '>') return '&gt;';
-            return m;
-        });
-    }
-    
-    function getLastMessage(room) {
-        if(!room.messages || room.messages.length === 0) return translations[currentLang].noChats.split('\n')[0];
-        const lastMsg = room.messages[room.messages.length - 1];
-        let text = lastMsg.text;
-        if(lastMsg.encrypted) text = decryptMessage(lastMsg.text);
-        if(text.length > 30) text = text.substring(0, 30) + "...";
-        if(lastMsg.type === 'private') text = "🔒 Private message";
-        return text;
-    }
+    function getLastMessage(room) { if(!room.messages || room.messages.length === 0) return translations[currentLang].noChats.split('\n')[0]; const lastMsg = room.messages[room.messages.length - 1]; let text = lastMsg.text; if(lastMsg.encrypted) text = decryptMessage(lastMsg.text); if(text.length > 30) text = text.substring(0, 30) + "..."; if(lastMsg.type === 'private') text = "🔒 Private message"; return text; }
     
     function renderChatsList() {
-        const container = document.getElementById('chatsListContainer');
-        const rooms = Object.keys(allRooms);
-        if(rooms.length === 0) {
-            container.innerHTML = `<div style="color:#888; text-align:center; padding:40px;">${translations[currentLang].noChats.replace('\n', '<br>')}</div>`;
-            return;
-        }
-        container.innerHTML = rooms.map(room => {
-            const roomData = allRooms[room];
-            const lastMsg = getLastMessage(roomData);
-            return `
-                <div class="chat-item" onclick="openRoomChat('${room.replace(/'/g, "\\'")}')">
-                    <div class="chat-avatar">💬</div>
-                    <div class="chat-info">
-                        <div class="chat-name">
-                            ${escapeHtml(room)}
-                            ${roomData.password ? '<span class="chat-lock">🔒</span>' : ''}
-                        </div>
-                        <div class="chat-last-msg">${escapeHtml(lastMsg)}</div>
-                    </div>
-                    <div class="chat-time">Now</div>
-                </div>
-            `;
-        }).join('');
+        const container = document.getElementById('chatsListContainer'); const rooms = Object.keys(allRooms);
+        if(rooms.length === 0) { container.innerHTML = `<div style="color:#888; text-align:center; padding:40px;">${translations[currentLang].noChats.replace('\n', '<br>')}</div>`; return; }
+        container.innerHTML = rooms.map(room => { const roomData = allRooms[room]; const lastMsg = getLastMessage(roomData); return `<div class="chat-item" onclick="openRoomChat('${room.replace(/'/g, "\\'")}')"><div class="chat-avatar">💬</div><div class="chat-info"><div class="chat-name">${escapeHtml(room)}${roomData.password ? '<span class="chat-lock">🔒</span>' : ''}</div><div class="chat-last-msg">${escapeHtml(lastMsg)}</div></div><div class="chat-time">Now</div></div>`; }).join('');
     }
     
     function openRoomChat(roomName) {
         const room = allRooms[roomName];
         if(!room) return;
-        if(room.password && room.password !== securityPassword) {
-            alert(translations[currentLang].roomPasswordError);
-            return;
-        }
-        if(!room.users.includes(currentUser)) {
-            room.users.push(currentUser);
-            saveRooms();
-        }
+        if(room.password && room.password !== securityPassword) { alert(translations[currentLang].roomPasswordError); return; }
+        if(!room.users.includes(currentUser)) { room.users.push(currentUser); saveRooms(); }
         currentOpenRoom = roomName;
         privateTarget = null;
-        
         document.getElementById('inboxView').style.display = 'none';
         document.getElementById('openChatView').style.display = 'flex';
         document.getElementById('openChatRoomName').innerHTML = escapeHtml(currentOpenRoom);
         document.getElementById('openChatStatus').innerHTML = translations[currentLang].online;
         document.getElementById('openMessageInput').placeholder = translations[currentLang].typeMessage;
-        
         const videoBtn = document.getElementById('videoCallBtn');
-        if(isVIP) {
-            videoBtn.style.display = 'inline-block';
-            videoBtn.onclick = () => startVideoCall();
-        } else {
-            videoBtn.style.display = 'none';
-        }
-        
+        if(isVIP) { videoBtn.style.display = 'inline-block'; videoBtn.onclick = () => startVideoCall(); } else { videoBtn.style.display = 'none'; }
         displayMessagesInOpenChat();
         resetSessionTimer();
-        
         const indicator = document.getElementById('typingIndicator');
         indicator.style.display = 'block';
         if(typingTimeout) clearTimeout(typingTimeout);
-        typingTimeout = setTimeout(() => {
-            indicator.style.display = 'none';
-        }, 3000);
+        typingTimeout = setTimeout(() => { indicator.style.display = 'none'; }, 3000);
     }
     
     function displayMessagesInOpenChat() {
         const container = document.getElementById('openChatMessages');
-        if(!currentOpenRoom || !allRooms[currentOpenRoom]) {
-            container.innerHTML = `<div style="color:#888; text-align:center; padding:20px;">${translations[currentLang].noMessages.split('\n')[0]}</div>`;
-            return;
-        }
+        if(!currentOpenRoom || !allRooms[currentOpenRoom]) { container.innerHTML = `<div style="color:#888; text-align:center; padding:20px;">${translations[currentLang].noMessages.split('\n')[0]}</div>`; return; }
         const messages = allRooms[currentOpenRoom].messages.slice(-50);
-        if(messages.length === 0) {
-            container.innerHTML = `<div style="color:#888; text-align:center; padding:20px;">${translations[currentLang].noMessages.replace('\n', '<br>')}</div>`;
-            return;
-        }
+        if(messages.length === 0) { container.innerHTML = `<div style="color:#888; text-align:center; padding:20px;">${translations[currentLang].noMessages.replace('\n', '<br>')}</div>`; return; }
         container.innerHTML = '';
         messages.forEach(msg => {
             if(msg.type === 'private' && msg.sender !== currentUser && msg.target !== currentUser) return;
-            
             const isOutgoing = msg.sender === currentUser;
             const isPrivate = msg.type === 'private';
-            
             const messageDiv = document.createElement('div');
             messageDiv.className = `message-row ${isOutgoing ? 'outgoing' : 'incoming'}`;
-            
             let bubbleClass = `message-bubble ${isOutgoing ? 'outgoing' : 'incoming'}`;
             if(isPrivate) bubbleClass += ' private';
-            
             let senderHtml = '';
-            if(!isOutgoing && msg.type !== 'private') {
-                senderHtml = `<div class="message-sender-name">${escapeHtml(msg.sender)}</div>`;
-            }
-            
+            if(!isOutgoing && msg.type !== 'private') senderHtml = `<div class="message-sender-name">${escapeHtml(msg.sender)}</div>`;
             let privateHtml = '';
-            if(isPrivate && msg.target) {
-                privateHtml = `<span class="private-tag">🔒 to ${escapeHtml(msg.target)}</span>`;
-            }
-            
+            if(isPrivate && msg.target) privateHtml = `<span class="private-tag">🔒 to ${escapeHtml(msg.target)}</span>`;
             let messageText = msg.text;
-            if(msg.encrypted) {
-                messageText = decryptMessage(msg.text);
-            } else {
-                messageText = escapeHtml(msg.text);
-            }
-            
-            messageDiv.innerHTML = `
-                <div class="${bubbleClass}">
-                    ${senderHtml}
-                    <div>${messageText}</div>
-                    ${privateHtml}
-                    <div class="message-time">${new Date(msg.time).toLocaleTimeString()}</div>
-                </div>
-            `;
-            
+            if(msg.encrypted) messageText = decryptMessage(msg.text);
+            else messageText = escapeHtml(msg.text);
+            messageDiv.innerHTML = `<div class="${bubbleClass}">${senderHtml}<div>${messageText}</div>${privateHtml}<div class="message-time">${new Date(msg.time).toLocaleTimeString()}</div></div>`;
             container.appendChild(messageDiv);
         });
         container.scrollTop = container.scrollHeight;
@@ -2763,28 +2143,11 @@
         const input = document.getElementById('openMessageInput');
         const text = input.value.trim();
         if(!text || !currentOpenRoom || !currentUser) return;
-        
         const encryptedText = encryptMessage(text);
-        
         let msg;
-        if(privateTarget) {
-            msg = {
-                type: 'private',
-                sender: currentUser,
-                target: privateTarget,
-                text: encryptedText,
-                encrypted: true,
-                time: Date.now()
-            };
-        } else {
-            msg = {
-                type: 'public',
-                sender: currentUser,
-                text: encryptedText,
-                encrypted: true,
-                time: Date.now()
-            };
-        }
+        if(privateTarget) { msg = { type: 'private', sender: currentUser, target: privateTarget, text: encryptedText, encrypted: true, time: Date.now() }; }
+        else { msg = { type: 'public', sender: currentUser, text: encryptedText, encrypted: true, time: Date.now() }; }
+        if(!allRooms[currentOpenRoom].messages) allRooms[currentOpenRoom].messages = [];
         allRooms[currentOpenRoom].messages.push(msg);
         saveRooms();
         displayMessagesInOpenChat();
@@ -2794,229 +2157,117 @@
     }
     
     function showNewChatModal() {
+        if(!currentUser) { alert("Please enter chat first"); return; }
         const roomName = prompt(translations[currentLang].enterRoomName, translations[currentLang].newRoom);
         if(!roomName) return;
         if(allRooms[roomName]) { alert(translations[currentLang].roomExists); return; }
-        
         const usePassword = confirm(translations[currentLang].protectWithPassword);
         let password = null;
-        if(usePassword) {
-            password = prompt(translations[currentLang].enterPassword, "");
-            if(password && password.length < 3) { alert(translations[currentLang].passwordTooShort); return; }
-        }
-        
-        allRooms[roomName] = {
-            password: password,
-            users: [currentUser],
-            messages: []
-        };
+        if(usePassword) { password = prompt(translations[currentLang].enterPassword, ""); if(password && password.length < 3) { alert(translations[currentLang].passwordTooShort); return; } }
+        allRooms[roomName] = { password: password, users: [currentUser], messages: [] };
         saveRooms();
         renderChatsList();
         alert(translations[currentLang].roomCreated);
     }
     
-    function backToInbox() {
-        document.getElementById('openChatView').style.display = 'none';
-        document.getElementById('inboxView').style.display = 'flex';
-        currentOpenRoom = null;
-        privateTarget = null;
-        renderChatsList();
-    }
+    function backToInbox() { document.getElementById('openChatView').style.display = 'none'; document.getElementById('inboxView').style.display = 'flex'; currentOpenRoom = null; privateTarget = null; renderChatsList(); }
     
     // Video Call
-    async function startVideoCall() {
-        if(!isVIP) {
-            alert(translations[currentLang].videoCallVIPOnly);
-            return;
-        }
-        try {
-            videoStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-            const localVideo = document.getElementById('localVideo');
-            localVideo.srcObject = videoStream;
-            const remoteVideo = document.getElementById('remoteVideo');
-            remoteVideo.srcObject = videoStream;
-            document.getElementById('videoCallModal').classList.remove('hidden');
-        } catch(err) {
-            alert(translations[currentLang].cannotAccessCamera + err.message);
-        }
-    }
-    
-    function toggleMute() {
-        if(videoStream) {
-            const audioTrack = videoStream.getAudioTracks()[0];
-            if(audioTrack) {
-                audioTrack.enabled = !audioTrack.enabled;
-                const muteBtn = document.getElementById('muteBtn');
-                muteBtn.innerHTML = audioTrack.enabled ? "🔊" : "🔇";
-            }
-        }
-    }
-    
-    function toggleVideo() {
-        if(videoStream) {
-            const videoTrack = videoStream.getVideoTracks()[0];
-            if(videoTrack) {
-                videoTrack.enabled = !videoTrack.enabled;
-                const videoBtn = document.getElementById('videoToggleBtn');
-                videoBtn.innerHTML = videoTrack.enabled ? "📷" : "🚫📷";
-            }
-        }
-    }
-    
-    function endVideoCall() {
-        if(videoStream) {
-            videoStream.getTracks().forEach(track => track.stop());
-            videoStream = null;
-        }
-        document.getElementById('videoCallModal').classList.add('hidden');
-    }
+    async function startVideoCall() { if(!isVIP) { alert(translations[currentLang].videoCallVIPOnly); return; } try { videoStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true }); document.getElementById('localVideo').srcObject = videoStream; document.getElementById('remoteVideo').srcObject = videoStream; document.getElementById('videoCallModal').style.display = 'flex'; } catch(err) { alert(translations[currentLang].cannotAccessCamera + err.message); } }
+    function toggleMute() { if(videoStream) { const audioTrack = videoStream.getAudioTracks()[0]; if(audioTrack) { audioTrack.enabled = !audioTrack.enabled; const muteBtn = document.getElementById('muteBtn'); muteBtn.innerHTML = audioTrack.enabled ? "🔊" : "🔇"; } } }
+    function toggleVideo() { if(videoStream) { const videoTrack = videoStream.getVideoTracks()[0]; if(videoTrack) { videoTrack.enabled = !videoTrack.enabled; const videoBtn = document.getElementById('videoToggleBtn'); videoBtn.innerHTML = videoTrack.enabled ? "📷" : "🚫📷"; } } }
+    function endVideoCall() { if(videoStream) { videoStream.getTracks().forEach(track => track.stop()); videoStream = null; } document.getElementById('videoCallModal').style.display = 'none'; }
     
     // Audio
-    async function startMicrophone() {
-        try {
-            if(!audioStream) {
-                audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                alert(translations[currentLang].micActive);
-            }
-        } catch(e) { console.log("Mic error"); }
-    }
-    
-    function toggleMicrophoneOpen() {
-        if(!currentOpenRoom) { alert(translations[currentLang].openChatFirst); return; }
-        if(!audioStream) { startMicrophone(); return; }
-        const audioTrack = audioStream.getAudioTracks()[0];
-        if(audioTrack) {
-            audioTrack.enabled = !audioTrack.enabled;
-            alert(audioTrack.enabled ? translations[currentLang].micActive : translations[currentLang].micInactive);
-        }
-    }
+    async function startMicrophone() { try { if(!audioStream) { audioStream = await navigator.mediaDevices.getUserMedia({ audio: true }); alert(translations[currentLang].micActive); } } catch(e) { console.log("Mic error"); } }
+    function toggleMicrophoneOpen() { if(!currentOpenRoom) { alert(translations[currentLang].openChatFirst); return; } if(!audioStream) { startMicrophone(); return; } const audioTrack = audioStream.getAudioTracks()[0]; if(audioTrack) { audioTrack.enabled = !audioTrack.enabled; alert(audioTrack.enabled ? translations[currentLang].micActive : translations[currentLang].micInactive); } }
     
     // Security & Entry
     function submitSecurityAndEnter() {
         const username = document.getElementById('securityUsername').value.trim();
         const roomPassword = document.getElementById('securityRoomPassword').value;
         const roomName = document.getElementById('securityRoomName').value.trim();
-        
         if(!username) { alert(translations[currentLang].enterUser); return; }
         if(!roomName) { alert(translations[currentLang].enterRoom); return; }
         if(roomPassword && !validatePassword(roomPassword)) return;
-        
         currentUser = username;
         securityPassword = roomPassword;
-        
         localStorage.setItem('didogame_username', currentUser);
-        
         document.getElementById('securityPanel').style.display = 'none';
-        document.getElementById('chatPage').classList.remove('hidden');
-        
+        document.getElementById('chatPage').style.display = 'flex';
         loadRooms();
-        
         if(allRooms[roomName]) {
-            if(allRooms[roomName].password && allRooms[roomName].password !== roomPassword) {
-                alert(translations[currentLang].wrongPasswordCreate);
-                createNewRoomWithName(roomName);
-            } else {
-                if(!allRooms[roomName].users.includes(currentUser)) {
-                    allRooms[roomName].users.push(currentUser);
-                    saveRooms();
-                }
-            }
-        } else {
-            createNewRoomWithName(roomName);
-        }
-        
+            if(allRooms[roomName].password && allRooms[roomName].password !== roomPassword) { alert(translations[currentLang].wrongPasswordCreate); createNewRoomWithName(roomName); }
+            else { if(!allRooms[roomName].users.includes(currentUser)) { allRooms[roomName].users.push(currentUser); saveRooms(); } }
+        } else { createNewRoomWithName(roomName); }
         renderChatsList();
         startSessionTimer();
-        
         document.getElementById('inboxView').style.display = 'flex';
         document.getElementById('openChatView').style.display = 'none';
-    }
-    
-    function createNewRoomWithName(roomName) {
-        if(!currentUser) return;
-        if(securityPassword && !validatePassword(securityPassword)) return;
         
-        allRooms[roomName] = {
-            password: securityPassword || null,
-            users: [currentUser],
-            messages: []
-        };
-        saveRooms();
+        // Auto refresh messages
+        if(messageRefreshInterval) clearInterval(messageRefreshInterval);
+        messageRefreshInterval = setInterval(() => {
+            if(currentOpenRoom && allRooms[currentOpenRoom] && document.getElementById('openChatView').style.display === 'flex') { displayMessagesInOpenChat(); }
+            if(currentUser && document.getElementById('inboxView').style.display === 'flex') { renderChatsList(); }
+        }, 2000);
     }
     
-    // UI Events
-    document.getElementById('closeChatFromInbox').addEventListener('click', () => {
-        document.getElementById('chatPage').classList.add('hidden');
-    });
+    function createNewRoomWithName(roomName) { if(!currentUser) return; if(securityPassword && !validatePassword(securityPassword)) return; allRooms[roomName] = { password: securityPassword || null, users: [currentUser], messages: [] }; saveRooms(); }
     
+    // ==================== INITIALIZATION ====================
+    document.getElementById('moreCategoriesBtn').addEventListener('click', () => { document.getElementById('moreModal').style.display = 'flex'; });
+    document.getElementById('closeMoreModal').addEventListener('click', () => { document.getElementById('moreModal').style.display = 'none'; });
+    document.getElementById('moreModal').addEventListener('click', (e) => { if (e.target === document.getElementById('moreModal')) document.getElementById('moreModal').style.display = 'none'; });
+    document.getElementById('closeChatFromInbox').addEventListener('click', () => { document.getElementById('chatPage').style.display = 'none'; });
     document.getElementById('backToInboxBtn').addEventListener('click', backToInbox);
     document.getElementById('newChatBtn').addEventListener('click', showNewChatModal);
+    document.getElementById('openChatBtn').addEventListener('click', () => { const savedUser = localStorage.getItem('didogame_username'); if(currentUser) { document.getElementById('chatPage').style.display = 'flex'; document.getElementById('inboxView').style.display = 'flex'; document.getElementById('openChatView').style.display = 'none'; renderChatsList(); startSessionTimer(); } else { document.getElementById('securityPanel').style.display = 'flex'; if(savedUser) document.getElementById('securityUsername').value = savedUser; } });
+    document.querySelectorAll('.cat-badge').forEach(b => { if (b.classList.contains('more-btn')) return; b.addEventListener('click', () => showCategoryGames(b.dataset.cat)); });
+    document.getElementById('backToHomeBtn').addEventListener('click', () => { document.getElementById('homePage').classList.remove('page-hidden'); document.getElementById('categoryPage').classList.add('page-hidden'); });
+    document.querySelectorAll('.currency-btn').forEach(btn => { btn.addEventListener('click', () => { selectCurrency(btn.dataset.currency, btn.dataset.symbol, parseFloat(btn.dataset.rate)); }); });
+    document.getElementById('payNowBtn').addEventListener('click', processPayment);
+    document.getElementById('closePaymentBtn').addEventListener('click', closePaymentModal);
+    document.getElementById('paymentModal').addEventListener('click', (e) => { if (e.target === document.getElementById('paymentModal')) closePaymentModal(); });
+    document.getElementById('musicToggleBtn').addEventListener('click', toggleMusic);
+    document.getElementById('walletBtn').addEventListener('click', openWalletModal);
+    document.getElementById('closeWalletBtn').addEventListener('click', closeWalletModal);
+    document.getElementById('walletModal').addEventListener('click', (e) => { if (e.target === document.getElementById('walletModal')) closeWalletModal(); });
+    document.getElementById('settingsBtn').addEventListener('click', openSettingsModal);
+    document.getElementById('closeSettingsBtn').addEventListener('click', closeSettingsModal);
+    document.getElementById('saveSettingsBtn').addEventListener('click', saveSettings);
+    document.getElementById('settingsModal').addEventListener('click', (e) => { if (e.target === document.getElementById('settingsModal')) closeSettingsModal(); });
+    document.getElementById('favoritesBtn').addEventListener('click', openFavoritesModal);
+    document.getElementById('closeFavoritesBtn').addEventListener('click', closeFavoritesModal);
+    document.getElementById('favoritesModal').addEventListener('click', (e) => { if (e.target === document.getElementById('favoritesModal')) closeFavoritesModal(); });
+    document.querySelectorAll('.avatar-option').forEach(opt => { opt.addEventListener('click', () => selectAvatarOption(opt)); });
+    document.getElementById('registerBtn').addEventListener('click', openPaymentModal);
+    document.querySelector('.currency-btn[data-currency="USD"]').classList.add('active');
+    document.body.addEventListener('touchstart', function firstTouch() { initMusic(); startMusicOnFirstTouch(); document.body.removeEventListener('touchstart', firstTouch); });
+    document.body.addEventListener('click', function firstClick() { initMusic(); startMusicOnFirstTouch(); document.body.removeEventListener('click', firstClick); });
+    document.getElementById('securityBtn').addEventListener('click', submitSecurityAndEnter);
     
-    document.getElementById('openChatBtn').addEventListener('click', () => {
-        const savedUser = localStorage.getItem('didogame_username');
-        if(currentUser) {
-            document.getElementById('chatPage').classList.remove('hidden');
-            document.getElementById('inboxView').style.display = 'flex';
-            document.getElementById('openChatView').style.display = 'none';
-            renderChatsList();
-            startSessionTimer();
-        } else {
-            document.getElementById('securityPanel').style.display = 'flex';
-            if(savedUser) {
-                document.getElementById('securityUsername').value = savedUser;
-            }
-        }
-    });
-    
-    setInterval(() => {
-        if(currentOpenRoom && allRooms[currentOpenRoom] && document.getElementById('openChatView').style.display === 'flex') {
-            displayMessagesInOpenChat();
-        }
-        if(currentUser && document.getElementById('inboxView').style.display === 'flex') {
-            renderChatsList();
-        }
-    }, 2000);
-    
+    // Ads rotation
     const ads = ["📺 Sponsored Ad - Subscribe Now! 🎮", "🎮 Game of the Week - Play Free! 🔥", "💰 50% OFF on VIP ⭐"];
     let adIdx = 0;
-    setInterval(() => {
-        adIdx = (adIdx + 1) % ads.length;
-        document.getElementById('permanentAd').innerHTML = ads[adIdx];
-    }, 10000);
+    setInterval(() => { adIdx = (adIdx + 1) % ads.length; document.getElementById('permanentAd').innerHTML = ads[adIdx]; }, 10000);
     
+    // Initialize
     loadRooms();
     updateRanking();
     renderAllGames();
     
     const savedVIP = localStorage.getItem('didogame_vip');
-    if(savedVIP === 'true') {
-        isVIP = true;
-        document.getElementById('registerBtn').classList.add('active');
-    }
-    
+    if(savedVIP === 'true') { isVIP = true; document.getElementById('registerBtn').classList.add('active'); }
     const savedUser = localStorage.getItem('didogame_username');
-    if(savedUser) {
-        document.getElementById('securityUsername').value = savedUser;
-    }
-    
+    if(savedUser) document.getElementById('securityUsername').value = savedUser;
     const savedLang = localStorage.getItem('didogame_lang');
-    if(savedLang && translations[savedLang]) {
-        setLanguage(savedLang);
-    } else {
-        setLanguage('en');
-    }
-    
+    if(savedLang && translations[savedLang]) setLanguage(savedLang); else setLanguage('en');
     const savedAvatar = localStorage.getItem('didogame_avatar');
-    if(savedAvatar) {
-        currentAvatar = savedAvatar;
-        const mainAvatarDiv = document.getElementById('mainAvatarImg');
-        mainAvatarDiv.style.background = 'linear-gradient(135deg, #ff44ff, #00ffff)';
-        mainAvatarDiv.style.display = 'flex';
-        mainAvatarDiv.style.alignItems = 'center';
-        mainAvatarDiv.style.justifyContent = 'center';
-        mainAvatarDiv.style.fontSize = '3rem';
-        mainAvatarDiv.innerHTML = `<div class="controller-on-hand">🎮</div>${currentAvatar}`;
-    }
+    if(savedAvatar) { currentAvatar = savedAvatar; const mainAvatarDiv = document.getElementById('mainAvatarImg'); mainAvatarDiv.style.background = 'linear-gradient(135deg, #ff44ff, #00ffff)'; mainAvatarDiv.style.display = 'flex'; mainAvatarDiv.style.alignItems = 'center'; mainAvatarDiv.style.justifyContent = 'center'; mainAvatarDiv.style.fontSize = '3rem'; mainAvatarDiv.innerHTML = `<div class="controller-on-hand">🎮</div>${currentAvatar}`; }
+    const savedMusicState = localStorage.getItem('didogame_music');
+    if (savedMusicState === 'on') isMusicPlaying = true;
+    else if (savedMusicState === 'off') isMusicPlaying = false;
     
     // Expose functions globally
     window.upgradeToVIP = upgradeToVIP;
