@@ -58,7 +58,7 @@
             height: 98vh;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 50px #ff00ff, 0 0 20px #00ffff;
+            box-shadow: 0 0 50px rgba(255,0,255,0.3), 0 0 20px rgba(0,255,255,0.3);
             border: 1px solid rgba(255,68,255,0.3);
             position: relative;
         }
@@ -89,7 +89,7 @@
 
         /* Hero Section */
         .anime-hero {
-            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
+            background: linear-gradient(135deg, rgba(255,68,255,0.2), rgba(0,255,255,0.2));
             border-radius: 20px;
             padding: 15px;
             margin-bottom: 0px;
@@ -248,7 +248,7 @@
         }
         
         .cat-badge {
-            background: #ff44ff30;
+            background: rgba(255,68,255,0.3);
             border: 1px solid #ff44ff;
             padding: 5px 14px;
             border-radius: 22px;
@@ -261,7 +261,7 @@
         }
         
         .cat-badge:hover {
-            background: #ff44ff60;
+            background: rgba(255,68,255,0.6);
             transform: scale(1.02);
         }
         
@@ -326,7 +326,7 @@
         }
         
         .more-cat-badge {
-            background: #ff44ff30;
+            background: rgba(255,68,255,0.3);
             border: 1px solid #ff44ff;
             padding: 8px 16px;
             border-radius: 25px;
@@ -337,7 +337,7 @@
         }
         
         .more-cat-badge:hover {
-            background: #ff44ff60;
+            background: rgba(255,68,255,0.6);
             transform: scale(1.02);
         }
         
@@ -352,7 +352,7 @@
             margin-top: 10px;
         }
 
-        /* Settings Modal - now includes Music Control */
+        /* Settings Modal */
         .settings-modal {
             position: fixed;
             top: 0;
@@ -441,7 +441,7 @@
         
         .avatar-option.selected {
             border-color: #00ffff;
-            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
+            background: linear-gradient(135deg, rgba(255,68,255,0.2), rgba(0,255,255,0.2));
             box-shadow: 0 0 15px #00ffff;
         }
         
@@ -467,7 +467,6 @@
             cursor: pointer;
         }
         
-        /* Music Control in Settings */
         .music-control {
             margin-bottom: 20px;
             padding: 10px;
@@ -532,7 +531,7 @@
             margin-top: 15px;
         }
 
-        /* Favorites Modal - NEW */
+        /* Favorites Modal */
         .favorites-modal {
             position: fixed;
             top: 0;
@@ -796,7 +795,7 @@
         }
         
         .currency-btn {
-            background: #ff44ff30;
+            background: rgba(255,68,255,0.3);
             border: 1px solid #ff44ff;
             padding: 6px 12px;
             border-radius: 20px;
@@ -812,7 +811,7 @@
         }
         
         .price-display {
-            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
+            background: linear-gradient(135deg, rgba(255,68,255,0.2), rgba(0,255,255,0.2));
             border-radius: 15px;
             padding: 12px;
             margin: 15px 0;
@@ -860,7 +859,7 @@
 
         /* Ad */
         .fixed-permanent-ad {
-            background: linear-gradient(135deg, #ff44ff30, #00ffff30);
+            background: linear-gradient(135deg, rgba(255,68,255,0.3), rgba(0,255,255,0.3));
             border: 2px solid #ff44ff;
             border-radius: 20px;
             padding: 22px 12px;
@@ -974,38 +973,40 @@
             text-overflow: ellipsis;
         }
 
-        /* ========== BOTTOM BAR - REDESIGNED ========== */
+        /* ========== BOTTOM BAR - BEAUTIFULLY REORGANIZED ========== */
         .bottom-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
-            background: rgba(10,10,26,0.9);
+            padding: 12px 20px;
+            background: rgba(10, 10, 26, 0.95);
             backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(255,68,255,0.3);
+            border-top: 1px solid rgba(255, 68, 255, 0.4);
             position: relative;
+            border-radius: 0 0 20px 20px;
         }
         
-        /* Left section */
+        /* Left section - 3 buttons in a row */
         .bottom-left {
             display: flex;
-            gap: 12px;
+            gap: 16px;
             align-items: center;
+            justify-content: flex-start;
         }
         
-        /* Center section - Chat button */
+        /* Center section - Chat button floating */
         .bottom-center {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            bottom: 15px;
+            bottom: 20px;
         }
         
-        /* Right section */
+        /* Right section - VIP button */
         .bottom-right {
             display: flex;
-            gap: 12px;
             align-items: center;
+            justify-content: flex-end;
         }
         
         /* Base button style */
@@ -1018,48 +1019,82 @@
             background: transparent;
             border: none;
             cursor: pointer;
-            transition: all 0.2s ease;
-            padding: 4px 8px;
-            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            padding: 6px 12px;
+            border-radius: 30px;
+            position: relative;
+        }
+        
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, #ff44ff, #00ffff);
+            border-radius: 2px;
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-btn:hover::before {
+            transform: translateX(-50%) scaleX(1);
         }
         
         .nav-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
         
         .nav-btn .icon {
-            font-size: 1.2rem;
-            transition: all 0.2s ease;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
         }
         
         .nav-btn .label {
-            font-size: 0.45rem;
+            font-size: 0.5rem;
             color: #aaa;
-            font-weight: 500;
-            transition: all 0.2s ease;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
         }
         
         .nav-btn:hover .icon {
-            transform: scale(1.1);
+            transform: scale(1.15);
+            text-shadow: 0 0 8px currentColor;
         }
         
         .nav-btn:hover .label {
             color: #ff44ff;
         }
         
+        /* Individual button colors */
+        .wallet-btn .icon { color: #ffd700; }
+        .settings-btn .icon { color: #00ffff; }
+        .favs-btn .icon { color: #ffcc00; }
+        
         /* VIP button special style */
         .vip-btn {
-            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
+            background: linear-gradient(135deg, rgba(255,68,255,0.2), rgba(0,255,255,0.2));
             border: 1px solid rgba(255,68,255,0.5);
+            border-radius: 40px;
+            padding: 6px 16px;
         }
         
         .vip-btn .icon {
             color: #ff44ff;
+            font-size: 1.2rem;
+        }
+        
+        .vip-btn .label {
+            font-size: 0.55rem;
+            font-weight: bold;
         }
         
         .vip-btn.active {
-            background: linear-gradient(135deg, #ff44ff40, #00ffff40);
+            background: linear-gradient(135deg, rgba(255,68,255,0.4), rgba(0,255,255,0.4));
             border-color: #ff44ff;
+            box-shadow: 0 0 15px rgba(255,68,255,0.3);
         }
         
         .vip-btn.active .icon {
@@ -1067,42 +1102,44 @@
             text-shadow: 0 0 5px #00ffff;
         }
         
-        /* Favorites button */
-        .favs-btn {
-            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
-            border: 1px solid rgba(255,68,255,0.5);
-        }
-        
-        .favs-btn .icon {
-            color: #ffcc00;
-        }
-        
-        /* Chat button special (bigger) */
+        /* Chat button special (bigger, floating) */
         .chat-btn {
             background: linear-gradient(135deg, #ff44ff, #ff00aa, #00ffff);
-            width: 55px;
-            height: 55px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 20px #ff44ff;
-            animation: circlePulse 1.5s ease-in-out infinite;
+            box-shadow: 0 0 25px rgba(255,68,255,0.6), 0 5px 15px rgba(0,0,0,0.3);
+            animation: circlePulse 2s ease-in-out infinite;
             padding: 0;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .chat-btn::before {
+            display: none;
         }
         
         .chat-btn .icon {
-            font-size: 1.8rem;
+            font-size: 2rem;
+            color: white;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
         
         .chat-btn .label {
             display: none;
         }
         
+        .chat-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 35px rgba(255,68,255,0.8), 0 0 20px rgba(0,255,255,0.5);
+        }
+        
         @keyframes circlePulse {
-            0% { box-shadow: 0 0 10px #ff44ff; transform: scale(1); }
-            50% { box-shadow: 0 0 30px #ff44ff, 0 0 20px #00ffff; transform: scale(1.05); }
-            100% { box-shadow: 0 0 10px #ff44ff; transform: scale(1); }
+            0% { box-shadow: 0 0 15px rgba(255,68,255,0.5), 0 5px 15px rgba(0,0,0,0.3); transform: scale(1); }
+            50% { box-shadow: 0 0 35px rgba(255,68,255,0.9), 0 0 25px rgba(0,255,255,0.6), 0 5px 20px rgba(0,0,0,0.4); transform: scale(1.03); }
+            100% { box-shadow: 0 0 15px rgba(255,68,255,0.5), 0 5px 15px rgba(0,0,0,0.3); transform: scale(1); }
         }
 
         /* ========== SECURITY PANEL ========== */
@@ -1174,7 +1211,7 @@
             margin-top: 15px;
         }
 
-        /* ========== MESSENGER 100% STYLE ========== */
+        /* ========== MESSENGER STYLE ========== */
         .chat-page {
             position: fixed;
             top: 0;
@@ -1624,7 +1661,7 @@
                 </div>
             </div>
             
-            <!-- Settings Modal (includes Music Control) -->
+            <!-- Settings Modal -->
             <div id="settingsModal" class="settings-modal">
                 <div class="settings-card">
                     <h3>⚙️ Settings</h3>
@@ -1659,7 +1696,6 @@
                             <option value="ko">🇰🇷 한국어</option>
                         </select>
                     </div>
-                    <!-- Music Control inside Settings -->
                     <div class="music-control">
                         <label>🎵 Music Control</label>
                         <button class="music-toggle-btn" id="musicToggleBtn">🎵 Play Music</button>
@@ -1669,7 +1705,7 @@
                 </div>
             </div>
             
-            <!-- Favorites Modal - NEW -->
+            <!-- Favorites Modal -->
             <div id="favoritesModal" class="favorites-modal">
                 <div class="favorites-card">
                     <h3>⭐ My Favorites</h3>
@@ -1755,7 +1791,7 @@
         </div>
     </div>
     
-    <!-- Redesigned Bottom Bar -->
+    <!-- BEAUTIFULLY REORGANIZED BOTTOM BAR -->
     <div class="bottom-bar">
         <div class="bottom-left">
             <button class="nav-btn wallet-btn" id="walletBtn">
@@ -1766,7 +1802,6 @@
                 <span class="icon">⚙️</span>
                 <span class="label" id="settingsLabel">Settings</span>
             </button>
-            <!-- NEW Favorites Button -->
             <button class="nav-btn favs-btn" id="favoritesBtn">
                 <span class="icon">⭐</span>
                 <span class="label" id="favoritesLabel">Favorites</span>
@@ -1862,7 +1897,7 @@
 </div>
 
 <script>
-    // ==================== Language Translations (11 Languages) ====================
+    // Language Translations
     const translations = {
         en: {
             heroTagline: "😤 Neon Challenge Look!",
@@ -2624,7 +2659,7 @@
     let isMusicPlaying = false;
     let musicStarted = false;
     
-    // ==================== Favorites System ====================
+    // Favorites System
     let favorites = JSON.parse(localStorage.getItem('didogame_favorites') || '[]');
     
     function saveFavorites() {
@@ -2639,7 +2674,7 @@
             favorites.splice(index, 1);
         }
         saveFavorites();
-        renderAllGames(); // Re-render to update star icons
+        renderAllGames();
         renderFavoritesList();
     }
     
@@ -2686,7 +2721,7 @@
         }
     }
     
-    // ==================== Music Functions ====================
+    // Music Functions
     function initMusic() {
         if (!bgMusic) {
             bgMusic = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
@@ -2697,7 +2732,7 @@
     
     function startMusicOnFirstTouch() {
         if (!musicStarted && bgMusic) {
-            bgMusic.play().catch(e => console.log("Auto-play prevented, waiting for user interaction"));
+            bgMusic.play().catch(e => console.log("Auto-play prevented"));
             musicStarted = true;
             isMusicPlaying = true;
             updateMusicButtonText();
@@ -2726,7 +2761,7 @@
         }
     }
     
-    // ==================== Settings Functions ====================
+    // Settings Functions
     function openSettingsModal() {
         document.getElementById('avatarPreview').innerHTML = currentAvatar;
         document.getElementById('settingsLangSelect').value = currentLang;
@@ -2774,7 +2809,7 @@
         document.getElementById('avatarPreview').innerHTML = element.dataset.avatar;
     }
     
-    // ==================== Wallet Functions ====================
+    // Wallet Functions
     function openWalletModal() {
         document.getElementById('walletModal').style.display = 'flex';
     }
@@ -2783,7 +2818,7 @@
         document.getElementById('walletModal').style.display = 'none';
     }
     
-    // ==================== Language Functions ====================
+    // Language Functions
     function setLanguage(lang) {
         currentLang = lang;
         localStorage.setItem('didogame_lang', currentLang);
@@ -2797,7 +2832,6 @@
         document.getElementById('payNowBtn').innerHTML = t.payNow;
         document.getElementById('closePaymentBtn').innerHTML = t.cancel;
         
-        // Update bottom bar labels
         document.getElementById('walletLabel').innerText = t.walletLabel;
         document.getElementById('settingsLabel').innerText = t.settingsLabel;
         document.getElementById('favoritesLabel').innerText = t.favoritesLabel;
@@ -2875,7 +2909,7 @@
         }
     }
     
-    // ==================== Payment System ====================
+    // Payment System
     function openPaymentModal() {
         if(isVIP) {
             alert(translations[currentLang].alreadyVIP);
@@ -2928,7 +2962,7 @@
         }
     }
     
-    // ==================== Games Data ====================
+    // Games Data
     const gamesData = [
         { id:1, name:"Sonic", img:"https://images6.alphacoders.com/118/1185678.jpg", url:"https://www.crazygames.com/embed/sonic-the-hedgehog", cat:"action", points:150, avatar:"🦔", playerName:"Shadow" },
         { id:2, name:"Subway Surfers", img:"https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action", points:200, avatar:"🏃", playerName:"Speed" },
@@ -3067,7 +3101,7 @@
         document.getElementById('gameIframe').src = '';
     }
     
-    // ==================== Global Variables ====================
+    // Global Variables
     let currentUser = null;
     let currentOpenRoom = null;
     let allRooms = {};
@@ -3093,10 +3127,8 @@
         }
     });
     
-    // Music toggle in settings
     document.getElementById('musicToggleBtn').addEventListener('click', toggleMusic);
     
-    // Wallet button and modal
     document.getElementById('walletBtn').addEventListener('click', openWalletModal);
     document.getElementById('closeWalletBtn').addEventListener('click', closeWalletModal);
     document.getElementById('walletModal').addEventListener('click', (e) => {
@@ -3105,7 +3137,6 @@
         }
     });
     
-    // Settings button and modal
     document.getElementById('settingsBtn').addEventListener('click', openSettingsModal);
     document.getElementById('closeSettingsBtn').addEventListener('click', closeSettingsModal);
     document.getElementById('saveSettingsBtn').addEventListener('click', saveSettings);
@@ -3115,7 +3146,6 @@
         }
     });
     
-    // Favorites button and modal
     document.getElementById('favoritesBtn').addEventListener('click', openFavoritesModal);
     document.getElementById('closeFavoritesBtn').addEventListener('click', closeFavoritesModal);
     document.getElementById('favoritesModal').addEventListener('click', (e) => {
@@ -3124,18 +3154,14 @@
         }
     });
     
-    // Avatar selection
     document.querySelectorAll('.avatar-option').forEach(opt => {
         opt.addEventListener('click', () => selectAvatarOption(opt));
     });
     
-    // Register button (VIP)
     document.getElementById('registerBtn').addEventListener('click', openPaymentModal);
     
-    // Set default selected currency
     document.querySelector('.currency-btn[data-currency="USD"]').classList.add('active');
     
-    // Initialize music on first touch anywhere on page
     document.body.addEventListener('touchstart', function firstTouch() {
         initMusic();
         startMusicOnFirstTouch();
@@ -3147,7 +3173,6 @@
         document.body.removeEventListener('click', firstClick);
     });
     
-    // Load saved music state
     const savedMusicState = localStorage.getItem('didogame_music');
     if (savedMusicState === 'on') {
         isMusicPlaying = true;
@@ -3155,7 +3180,7 @@
         isMusicPlaying = false;
     }
     
-    // ==================== Security Helpers ====================
+    // Security Helpers
     function encryptMessage(text) {
         return btoa(unescape(encodeURIComponent(text)));
     }
@@ -3202,7 +3227,7 @@
         return true;
     }
     
-    // ==================== Chat Functions ====================
+    // Chat Functions
     function saveRooms() {
         localStorage.setItem('didogame_rooms_secure', JSON.stringify(allRooms));
     }
@@ -3417,7 +3442,7 @@
         renderChatsList();
     }
     
-    // ==================== Video Call (VIP only) ====================
+    // Video Call
     async function startVideoCall() {
         if(!isVIP) {
             alert(translations[currentLang].videoCallVIPOnly);
@@ -3465,7 +3490,7 @@
         document.getElementById('videoCallModal').classList.add('hidden');
     }
     
-    // ==================== Audio ====================
+    // Audio
     async function startMicrophone() {
         try {
             if(!audioStream) {
@@ -3485,7 +3510,7 @@
         }
     }
     
-    // ==================== Security & Entry ====================
+    // Security & Entry
     function submitSecurityAndEnter() {
         const username = document.getElementById('securityUsername').value.trim();
         const roomPassword = document.getElementById('securityRoomPassword').value;
@@ -3538,7 +3563,7 @@
         saveRooms();
     }
     
-    // ==================== UI Events ====================
+    // UI Events
     document.getElementById('closeChatFromInbox').addEventListener('click', () => {
         document.getElementById('chatPage').classList.add('hidden');
     });
@@ -3562,7 +3587,6 @@
         }
     });
     
-    // Auto refresh messages
     setInterval(() => {
         if(currentOpenRoom && allRooms[currentOpenRoom] && document.getElementById('openChatView').style.display === 'flex') {
             displayMessagesInOpenChat();
@@ -3572,7 +3596,6 @@
         }
     }, 2000);
     
-    // Ads rotation
     const ads = ["📺 Sponsored Ad - Subscribe Now! 🎮", "🎮 Game of the Week - Play Free! 🔥", "💰 50% OFF on VIP ⭐"];
     let adIdx = 0;
     setInterval(() => {
@@ -3580,7 +3603,6 @@
         document.getElementById('permanentAd').innerHTML = ads[adIdx];
     }, 10000);
     
-    // Initialize
     loadRooms();
     updateRanking();
     renderAllGames();
