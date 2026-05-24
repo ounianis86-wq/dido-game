@@ -352,7 +352,7 @@
             margin-top: 10px;
         }
 
-        /* Settings Modal - Now includes Music Control */
+        /* Settings Modal - now includes Music Control */
         .settings-modal {
             position: fixed;
             top: 0;
@@ -530,6 +530,129 @@
             font-size: 0.8rem;
             cursor: pointer;
             margin-top: 15px;
+        }
+
+        /* Favorites Modal - NEW */
+        .favorites-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(15px);
+            z-index: 1900;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .favorites-card {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 30px;
+            padding: 25px;
+            width: 90%;
+            max-width: 380px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 50px #ff44ff;
+            text-align: center;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .favorites-card h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .favorites-card p {
+            color: #aaa;
+            font-size: 0.7rem;
+            margin-bottom: 15px;
+        }
+        
+        .favorites-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .favorite-item {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #ff44ff;
+            border-radius: 15px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .favorite-item:hover {
+            transform: translateX(5px);
+            border-color: #00ffff;
+            box-shadow: 0 0 10px #00ffff;
+        }
+        
+        .favorite-img {
+            width: 50px;
+            height: 50px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+        
+        .favorite-info {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .favorite-name {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .favorite-cat {
+            color: #ff44ff;
+            font-size: 0.65rem;
+        }
+        
+        .remove-fav {
+            background: none;
+            border: none;
+            color: #ff3366;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .remove-fav:hover {
+            transform: scale(1.1);
+        }
+        
+        .empty-favorites {
+            color: #888;
+            text-align: center;
+            padding: 40px;
+            font-size: 0.85rem;
+        }
+        
+        .close-favorites {
+            background: #ff3366;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 10px;
         }
 
         /* Wallet Modal */
@@ -803,12 +926,34 @@
             cursor: pointer;
             transition: all 0.2s ease;
             scroll-snap-align: start;
+            position: relative;
         }
         
         .game-card:hover {
             transform: translateY(-3px);
             border-color: #00ffff;
             box-shadow: 0 0 15px #00ffff;
+        }
+        
+        .fav-star {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(0,0,0,0.6);
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .fav-star.active {
+            color: #ffcc00;
+            text-shadow: 0 0 5px #ffcc00;
         }
         
         .game-img {
@@ -920,6 +1065,16 @@
         .vip-btn.active .icon {
             color: #00ffff;
             text-shadow: 0 0 5px #00ffff;
+        }
+        
+        /* Favorites button */
+        .favs-btn {
+            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
+            border: 1px solid rgba(255,68,255,0.5);
+        }
+        
+        .favs-btn .icon {
+            color: #ffcc00;
         }
         
         /* Chat button special (bigger) */
@@ -1514,6 +1669,18 @@
                 </div>
             </div>
             
+            <!-- Favorites Modal - NEW -->
+            <div id="favoritesModal" class="favorites-modal">
+                <div class="favorites-card">
+                    <h3>⭐ My Favorites</h3>
+                    <p>Your favorite games</p>
+                    <div class="favorites-list" id="favoritesList">
+                        <div class="empty-favorites">No favorite games yet<br>⭐ Click the star on any game to add it!</div>
+                    </div>
+                    <button class="close-favorites" id="closeFavoritesBtn">Close</button>
+                </div>
+            </div>
+            
             <!-- Wallet Modal -->
             <div id="walletModal" class="wallet-modal">
                 <div class="wallet-card">
@@ -1588,7 +1755,7 @@
         </div>
     </div>
     
-    <!-- Redesigned Bottom Bar (no music button) -->
+    <!-- Redesigned Bottom Bar -->
     <div class="bottom-bar">
         <div class="bottom-left">
             <button class="nav-btn wallet-btn" id="walletBtn">
@@ -1598,6 +1765,11 @@
             <button class="nav-btn settings-btn" id="settingsBtn">
                 <span class="icon">⚙️</span>
                 <span class="label" id="settingsLabel">Settings</span>
+            </button>
+            <!-- NEW Favorites Button -->
+            <button class="nav-btn favs-btn" id="favoritesBtn">
+                <span class="icon">⭐</span>
+                <span class="label" id="favoritesLabel">Favorites</span>
             </button>
         </div>
         
@@ -1754,6 +1926,7 @@
             paymentError: "❌ Payment failed. Please try again.",
             walletLabel: "Wallet",
             settingsLabel: "Settings",
+            favoritesLabel: "Favorites",
             vipLabel: "VIP",
             chatLabel: "Chat",
             musicOn: "🎵 Music ON",
@@ -1821,6 +1994,7 @@
             paymentError: "❌ فشل الدفع. الرجاء المحاولة مرة أخرى",
             walletLabel: "المحفظة",
             settingsLabel: "الإعدادات",
+            favoritesLabel: "المفضلة",
             vipLabel: "VIP",
             chatLabel: "الدردشة",
             musicOn: "🎵 الموسيقى قيد التشغيل",
@@ -1888,6 +2062,7 @@
             paymentError: "❌ Échec du paiement. Veuillez réessayer.",
             walletLabel: "Portefeuille",
             settingsLabel: "Paramètres",
+            favoritesLabel: "Favoris",
             vipLabel: "VIP",
             chatLabel: "Discussion",
             musicOn: "🎵 Musique ON",
@@ -1955,6 +2130,7 @@
             paymentError: "❌ Error en el pago. Por favor, intente de nuevo.",
             walletLabel: "Billetera",
             settingsLabel: "Ajustes",
+            favoritesLabel: "Favoritos",
             vipLabel: "VIP",
             chatLabel: "Chat",
             musicOn: "🎵 Música ON",
@@ -2022,6 +2198,7 @@
             paymentError: "❌ Zahlung fehlgeschlagen. Bitte versuchen Sie es erneut.",
             walletLabel: "Geldbörse",
             settingsLabel: "Einstellungen",
+            favoritesLabel: "Favoriten",
             vipLabel: "VIP",
             chatLabel: "Chat",
             musicOn: "🎵 Musik ON",
@@ -2089,6 +2266,7 @@
             paymentError: "❌ Pagamento fallito. Riprova.",
             walletLabel: "Portafoglio",
             settingsLabel: "Impostazioni",
+            favoritesLabel: "Preferiti",
             vipLabel: "VIP",
             chatLabel: "Chat",
             musicOn: "🎵 Musica ON",
@@ -2156,6 +2334,7 @@
             paymentError: "❌ Falha no pagamento. Tente novamente.",
             walletLabel: "Carteira",
             settingsLabel: "Configurações",
+            favoritesLabel: "Favoritos",
             vipLabel: "VIP",
             chatLabel: "Bate-papo",
             musicOn: "🎵 Música ON",
@@ -2223,6 +2402,7 @@
             paymentError: "❌ Ошибка оплаты. Пожалуйста, попробуйте снова.",
             walletLabel: "Кошелек",
             settingsLabel: "Настройки",
+            favoritesLabel: "Избранное",
             vipLabel: "VIP",
             chatLabel: "Чат",
             musicOn: "🎵 Музыка ВКЛ",
@@ -2290,6 +2470,7 @@
             paymentError: "❌ 支付失败。请重试。",
             walletLabel: "钱包",
             settingsLabel: "设置",
+            favoritesLabel: "收藏",
             vipLabel: "VIP",
             chatLabel: "聊天",
             musicOn: "🎵 音乐开",
@@ -2357,6 +2538,7 @@
             paymentError: "❌ 支払いに失敗しました。もう一度お試しください。",
             walletLabel: "ウォレット",
             settingsLabel: "設定",
+            favoritesLabel: "お気に入り",
             vipLabel: "VIP",
             chatLabel: "チャット",
             musicOn: "🎵 音楽ON",
@@ -2424,6 +2606,7 @@
             paymentError: "❌ 결제 실패. 다시 시도해주세요.",
             walletLabel: "지갑",
             settingsLabel: "설정",
+            favoritesLabel: "즐겨찾기",
             vipLabel: "VIP",
             chatLabel: "채팅",
             musicOn: "🎵 음악 ON",
@@ -2440,6 +2623,68 @@
     let bgMusic = null;
     let isMusicPlaying = false;
     let musicStarted = false;
+    
+    // ==================== Favorites System ====================
+    let favorites = JSON.parse(localStorage.getItem('didogame_favorites') || '[]');
+    
+    function saveFavorites() {
+        localStorage.setItem('didogame_favorites', JSON.stringify(favorites));
+    }
+    
+    function toggleFavorite(gameId) {
+        const index = favorites.indexOf(gameId);
+        if (index === -1) {
+            favorites.push(gameId);
+        } else {
+            favorites.splice(index, 1);
+        }
+        saveFavorites();
+        renderAllGames(); // Re-render to update star icons
+        renderFavoritesList();
+    }
+    
+    function isFavorite(gameId) {
+        return favorites.includes(gameId);
+    }
+    
+    function openFavoritesModal() {
+        renderFavoritesList();
+        document.getElementById('favoritesModal').style.display = 'flex';
+    }
+    
+    function closeFavoritesModal() {
+        document.getElementById('favoritesModal').style.display = 'none';
+    }
+    
+    function renderFavoritesList() {
+        const container = document.getElementById('favoritesList');
+        const favGames = gamesData.filter(game => favorites.includes(game.id));
+        
+        if (favGames.length === 0) {
+            container.innerHTML = `<div class="empty-favorites">No favorite games yet<br>⭐ Click the star on any game to add it!</div>`;
+            return;
+        }
+        
+        container.innerHTML = favGames.map(game => `
+            <div class="favorite-item" onclick="playGameFromFav(${game.id})">
+                <div class="favorite-img" style="background-image: url('${game.img}')"></div>
+                <div class="favorite-info">
+                    <div class="favorite-name">${game.name}</div>
+                    <div class="favorite-cat">${game.cat}</div>
+                </div>
+                <button class="remove-fav" onclick="event.stopPropagation(); toggleFavorite(${game.id})">🗑️</button>
+            </div>
+        `).join('');
+    }
+    
+    function playGameFromFav(gameId) {
+        const game = gamesData.find(g => g.id === gameId);
+        if (game) {
+            document.getElementById('gameIframe').src = game.url;
+            document.getElementById('gameModal').classList.remove('hidden');
+            closeFavoritesModal();
+        }
+    }
     
     // ==================== Music Functions ====================
     function initMusic() {
@@ -2555,6 +2800,7 @@
         // Update bottom bar labels
         document.getElementById('walletLabel').innerText = t.walletLabel;
         document.getElementById('settingsLabel').innerText = t.settingsLabel;
+        document.getElementById('favoritesLabel').innerText = t.favoritesLabel;
         document.getElementById('vipLabel').innerText = t.vipLabel;
         document.getElementById('chatLabel').innerText = t.chatLabel;
         
@@ -2714,6 +2960,7 @@
             <div class="game-row">
                 ${row1Games.map(game => `
                     <div class="game-card" data-id="${game.id}" data-url="${game.url}">
+                        <div class="fav-star ${isFavorite(game.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${game.id})">${isFavorite(game.id) ? '⭐' : '☆'}</div>
                         <div class="game-img" style="background-image:url('${game.img}')"></div>
                         <div class="game-title">${game.name}</div>
                     </div>
@@ -2722,6 +2969,7 @@
             <div class="game-row">
                 ${row2Games.map(game => `
                     <div class="game-card" data-id="${game.id}" data-url="${game.url}">
+                        <div class="fav-star ${isFavorite(game.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${game.id})">${isFavorite(game.id) ? '⭐' : '☆'}</div>
                         <div class="game-img" style="background-image:url('${game.img}')"></div>
                         <div class="game-title">${game.name}</div>
                     </div>
@@ -2730,7 +2978,8 @@
         `;
         
         document.querySelectorAll('.game-card').forEach(card => {
-            card.addEventListener('click', () => {
+            card.addEventListener('click', (e) => {
+                if(e.target.classList.contains('fav-star')) return;
                 const id = parseInt(card.dataset.id);
                 const game = gamesData.find(g => g.id === id);
                 if (game) { 
@@ -2752,7 +3001,8 @@
         document.getElementById('categoryGamesContainer').innerHTML = `
             <div class="game-row">
                 ${row1Games.map(game => `
-                    <div class="game-card" data-url="${game.url}">
+                    <div class="game-card" data-url="${game.url}" data-id="${game.id}">
+                        <div class="fav-star ${isFavorite(game.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${game.id})">${isFavorite(game.id) ? '⭐' : '☆'}</div>
                         <div class="game-img" style="background-image:url('${game.img}')"></div>
                         <div class="game-title">${game.name}</div>
                     </div>
@@ -2760,7 +3010,8 @@
             </div>
             <div class="game-row">
                 ${row2Games.map(game => `
-                    <div class="game-card" data-url="${game.url}">
+                    <div class="game-card" data-url="${game.url}" data-id="${game.id}">
+                        <div class="fav-star ${isFavorite(game.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${game.id})">${isFavorite(game.id) ? '⭐' : '☆'}</div>
                         <div class="game-img" style="background-image:url('${game.img}')"></div>
                         <div class="game-title">${game.name}</div>
                     </div>
@@ -2769,7 +3020,8 @@
         `;
         
         document.querySelectorAll('#categoryGamesContainer .game-card').forEach(c => {
-            c.addEventListener('click', () => {
+            c.addEventListener('click', (e) => {
+                if(e.target.classList.contains('fav-star')) return;
                 document.getElementById('gameIframe').src = c.dataset.url;
                 document.getElementById('gameModal').classList.remove('hidden');
             });
@@ -2860,6 +3112,15 @@
     document.getElementById('settingsModal').addEventListener('click', (e) => {
         if (e.target === document.getElementById('settingsModal')) {
             closeSettingsModal();
+        }
+    });
+    
+    // Favorites button and modal
+    document.getElementById('favoritesBtn').addEventListener('click', openFavoritesModal);
+    document.getElementById('closeFavoritesBtn').addEventListener('click', closeFavoritesModal);
+    document.getElementById('favoritesModal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('favoritesModal')) {
+            closeFavoritesModal();
         }
     });
     
@@ -3369,6 +3630,8 @@
     window.setLanguage = setLanguage;
     window.openPaymentModal = openPaymentModal;
     window.toggleMusic = toggleMusic;
+    window.toggleFavorite = toggleFavorite;
+    window.playGameFromFav = playGameFromFav;
 </script>
 </body>
 </html>
