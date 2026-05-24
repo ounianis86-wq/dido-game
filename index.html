@@ -374,7 +374,7 @@
             100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
         }
 
-        /* Games - moved up 15px */
+        /* Games */
         .games-wrapper {
             display: flex;
             flex-direction: column;
@@ -382,7 +382,11 @@
             padding-bottom: 8px;
             margin-top: auto;
             margin-bottom: 0;
-            transform: translateY(-15px);
+        }
+        
+        /* First game row - moved up by 8px */
+        .game-row:first-child {
+            transform: translateY(-8px);
         }
         
         .game-row {
@@ -1103,7 +1107,7 @@
             <!-- ENLARGED AD AREA -->
             <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
             
-            <!-- Games Section - moved up 15px -->
+            <!-- Games Section - first row moved up 8px -->
             <div class="games-wrapper" id="gamesWrapper">
                 <!-- Dynamic game rows will be inserted here -->
             </div>
