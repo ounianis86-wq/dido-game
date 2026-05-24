@@ -353,7 +353,7 @@
             margin-top: 10px;
         }
 
-        /* Ad - ENLARGED AREA with equal spacing above and below */
+        /* Ad - ENLARGED AREA with equal spacing */
         .fixed-permanent-ad {
             background: linear-gradient(135deg, #ff44ff30, #00ffff30);
             border: 2px solid #ff44ff;
@@ -374,14 +374,14 @@
             100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
         }
 
-        /* Games */
+        /* Games - moved up to make spacing equal between ad and games = games and bottom bar */
         .games-wrapper {
             display: flex;
             flex-direction: column;
             gap: 12px;
             padding-bottom: 8px;
-            margin-top: auto;
-            margin-bottom: 0;
+            margin-top: 0;
+            margin-bottom: 6px;
         }
         
         .game-row {
@@ -1099,10 +1099,10 @@
                 </div>
             </div>
             
-            <!-- ENLARGED AD AREA with equal spacing (8px above, 8px below) -->
+            <!-- ENLARGED AD AREA -->
             <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
             
-            <!-- Games Section -->
+            <!-- Games Section - moved up to balance spacing -->
             <div class="games-wrapper" id="gamesWrapper">
                 <!-- Dynamic game rows will be inserted here -->
             </div>
