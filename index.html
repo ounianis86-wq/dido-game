@@ -87,7 +87,7 @@
             display: none;
         }
 
-        /* Hero Section - ENLARGED ANIME IMAGE */
+        /* Hero Section */
         .anime-hero {
             background: linear-gradient(135deg, #ff44ff20, #00ffff20);
             border-radius: 20px;
@@ -217,7 +217,7 @@
             font-size: 0.45rem;
         }
 
-        /* Categories Section - All buttons in ONE LINE */
+        /* Categories Section */
         .categories-section {
             margin-bottom: 12px;
         }
@@ -353,7 +353,156 @@
             margin-top: 10px;
         }
 
-        /* Ad - ENLARGED AREA with equal spacing */
+        /* Payment Modal */
+        .payment-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(15px);
+            z-index: 1600;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .payment-card {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 30px;
+            padding: 20px;
+            width: 90%;
+            max-width: 380px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 50px #ff44ff;
+            text-align: center;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .payment-card h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .payment-card p {
+            color: #aaa;
+            font-size: 0.7rem;
+            margin-bottom: 15px;
+        }
+        
+        .currency-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .currency-btn {
+            background: #ff44ff30;
+            border: 1px solid #ff44ff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .currency-btn.active {
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border-color: #00ffff;
+        }
+        
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .payment-method {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #ff44ff;
+            border-radius: 15px;
+            padding: 10px;
+            width: calc(33% - 8px);
+            min-width: 85px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        
+        .payment-method:hover {
+            transform: translateY(-2px);
+            border-color: #00ffff;
+            box-shadow: 0 0 15px #00ffff;
+        }
+        
+        .payment-method .emoji {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .payment-method .name {
+            color: white;
+            font-size: 0.55rem;
+        }
+        
+        .price-display {
+            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
+            border-radius: 15px;
+            padding: 12px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .price-display .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff44ff;
+        }
+        
+        .price-display .currency-symbol {
+            font-size: 1rem;
+        }
+        
+        .pay-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .pay-btn:hover {
+            transform: scale(1.02);
+        }
+        
+        .close-payment {
+            background: #ff3366;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        /* Ad */
         .fixed-permanent-ad {
             background: linear-gradient(135deg, #ff44ff30, #00ffff30);
             border: 2px solid #ff44ff;
@@ -374,7 +523,7 @@
             100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
         }
 
-        /* Games - moved up to balance spacing */
+        /* Games */
         .games-wrapper {
             display: flex;
             flex-direction: column;
@@ -578,11 +727,6 @@
             align-items: center;
             justify-content: center;
             animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
         
         .security-card {
@@ -1056,7 +1200,6 @@
 <div class="app">
     <div class="content">
         <div id="homePage" class="page">
-            <!-- Hero Section -->
             <div class="anime-hero">
                 <div class="character-img">
                     <div class="controller-on-hand">🎮</div>
@@ -1067,12 +1210,10 @@
                 </div>
             </div>
             
-            <!-- Ranking Section -->
             <div class="ranking-section">
                 <div class="ranking-circles" id="rankingList"></div>
             </div>
             
-            <!-- Categories Section -->
             <div class="categories-section">
                 <div class="categories" id="categoriesList">
                     <div class="more-btn" id="moreCategoriesBtn">➕ More</div>
@@ -1083,24 +1224,143 @@
                 </div>
             </div>
             
-            <!-- More Categories Modal -->
             <div id="moreModal" class="more-modal">
                 <div class="more-modal-content">
                     <h3 id="moreModalTitle">🎮 More Game Categories</h3>
-                    <div class="more-categories-list" id="moreCategoriesList">
-                        <!-- Dynamic translated categories will be inserted here -->
-                    </div>
+                    <div class="more-categories-list" id="moreCategoriesList"></div>
                     <button class="close-more-modal" id="closeMoreModal">Close</button>
                 </div>
             </div>
             
-            <!-- ENLARGED AD AREA -->
+            <!-- Payment Modal for VIP Upgrade -->
+            <div id="paymentModal" class="payment-modal">
+                <div class="payment-card">
+                    <h3 id="paymentTitle">💎 VIP Membership</h3>
+                    <p id="paymentDesc">Choose your payment method and currency</p>
+                    
+                    <div class="currency-selector" id="currencySelector">
+                        <div class="currency-btn" data-currency="USD" data-symbol="$" data-rate="1">🇺🇸 USD $</div>
+                        <div class="currency-btn" data-currency="EUR" data-symbol="€" data-rate="0.92">🇪🇺 EUR €</div>
+                        <div class="currency-btn" data-currency="GBP" data-symbol="£" data-rate="0.79">🇬🇧 GBP £</div>
+                        <div class="currency-btn" data-currency="SAR" data-symbol="﷼" data-rate="3.75">🇸🇦 SAR ﷼</div>
+                        <div class="currency-btn" data-currency="AED" data-symbol="د.إ" data-rate="3.67">🇦🇪 AED د.إ</div>
+                        <div class="currency-btn" data-currency="KWD" data-symbol="د.ك" data-rate="0.31">🇰🇼 KWD د.ك</div>
+                        <div class="currency-btn" data-currency="EGP" data-symbol="E£" data-rate="48.5">🇪🇬 EGP E£</div>
+                        <div class="currency-btn" data-currency="TRY" data-symbol="₺" data-rate="32.5">🇹🇷 TRY ₺</div>
+                        <div class="currency-btn" data-currency="RUB" data-symbol="₽" data-rate="92">🇷🇺 RUB ₽</div>
+                        <div class="currency-btn" data-currency="CNY" data-symbol="¥" data-rate="7.25">🇨🇳 CNY ¥</div>
+                        <div class="currency-btn" data-currency="JPY" data-symbol="¥" data-rate="155">🇯🇵 JPY ¥</div>
+                        <div class="currency-btn" data-currency="KRW" data-symbol="₩" data-rate="1380">🇰🇷 KRW ₩</div>
+                        <div class="currency-btn" data-currency="TND" data-symbol="د.ت" data-rate="3.10">🇹🇳 TND د.ت</div>
+                    </div>
+                    
+                    <div class="payment-methods" id="paymentMethods">
+                        <!-- International -->
+                        <div class="payment-method" data-method="visa">
+                            <span class="emoji">💳</span>
+                            <span class="name">Visa/MasterCard</span>
+                        </div>
+                        <div class="payment-method" data-method="paypal">
+                            <span class="emoji">🅿️</span>
+                            <span class="name">PayPal</span>
+                        </div>
+                        <div class="payment-method" data-method="applepay">
+                            <span class="emoji">🍎</span>
+                            <span class="name">Apple Pay</span>
+                        </div>
+                        <div class="payment-method" data-method="googlepay">
+                            <span class="emoji">🤖</span>
+                            <span class="name">Google Pay</span>
+                        </div>
+                        <div class="payment-method" data-method="crypto">
+                            <span class="emoji">₿</span>
+                            <span class="name">Bitcoin</span>
+                        </div>
+                        <div class="payment-method" data-method="eth">
+                            <span class="emoji">⟠</span>
+                            <span class="name">Ethereum</span>
+                        </div>
+                        <div class="payment-method" data-method="usdt">
+                            <span class="emoji">💎</span>
+                            <span class="name">USDT</span>
+                        </div>
+                        <div class="payment-method" data-method="binance">
+                            <span class="emoji">🟡</span>
+                            <span class="name">Binance Pay</span>
+                        </div>
+                        <div class="payment-method" data-method="mada">
+                            <span class="emoji">💳</span>
+                            <span class="name">Mada</span>
+                        </div>
+                        <div class="payment-method" data-method="stcpay">
+                            <span class="emoji">📱</span>
+                            <span class="name">STC Pay</span>
+                        </div>
+                        <div class="payment-method" data-method="urpay">
+                            <span class="emoji">🏦</span>
+                            <span class="name">UR Pay</span>
+                        </div>
+                        <div class="payment-method" data-method="vodafone">
+                            <span class="emoji">📞</span>
+                            <span class="name">Vodafone Cash</span>
+                        </div>
+                        <!-- Tunisian Wallets & Payment Methods -->
+                        <div class="payment-method" data-method="dtwallet">
+                            <span class="emoji">📱</span>
+                            <span class="name">DT Wallet</span>
+                        </div>
+                        <div class="payment-method" data-method="flouci">
+                            <span class="emoji">💙</span>
+                            <span class="name">flouci</span>
+                        </div>
+                        <div class="payment-method" data-method="mydinar">
+                            <span class="emoji">📞</span>
+                            <span class="name">My Dinar</span>
+                        </div>
+                        <div class="payment-method" data-method="tunisietelecom">
+                            <span class="emoji">📱</span>
+                            <span class="name">Tunisie Telecom Cash</span>
+                        </div>
+                        <div class="payment-method" data-method="zitouna">
+                            <span class="emoji">🏦</span>
+                            <span class="name">Banque Zitouna</span>
+                        </div>
+                        <div class="payment-method" data-method="attijari">
+                            <span class="emoji">🏦</span>
+                            <span class="name">Attijari Mobile</span>
+                        </div>
+                        <div class="payment-method" data-method="biat">
+                            <span class="emoji">🏦</span>
+                            <span class="name">BIAT e-Payment</span>
+                        </div>
+                        <div class="payment-method" data-method="stb">
+                            <span class="emoji">🏦</span>
+                            <span class="name">STB Payment</span>
+                        </div>
+                        <div class="payment-method" data-method="ubci">
+                            <span class="emoji">🏦</span>
+                            <span class="name">UBCI e-Transaction</span>
+                        </div>
+                        <div class="payment-method" data-method="bhbank">
+                            <span class="emoji">🏦</span>
+                            <span class="name">BH Bank Payment</span>
+                        </div>
+                    </div>
+                    
+                    <div class="price-display">
+                        <span class="price" id="priceAmount">9.99</span>
+                        <span class="currency-symbol" id="priceCurrency">$</span>
+                        <span class="price-period">/ month</span>
+                    </div>
+                    
+                    <button class="pay-btn" id="payNowBtn">💎 Pay Now & Upgrade VIP</button>
+                    <button class="close-payment" id="closePaymentBtn">Cancel</button>
+                </div>
+            </div>
+            
             <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
             
-            <!-- Games Section -->
-            <div class="games-wrapper" id="gamesWrapper">
-                <!-- Dynamic game rows will be inserted here -->
-            </div>
+            <div class="games-wrapper" id="gamesWrapper"></div>
         </div>
         
         <div id="categoryPage" class="page page-hidden">
@@ -1110,7 +1370,7 @@
     </div>
     
     <div class="bottom-bar">
-        <div class="register-btn" id="registerBtn" onclick="upgradeToVIP()">👑 Upgrade VIP</div>
+        <div class="register-btn" id="registerBtn" onclick="openPaymentModal()">👑 Upgrade VIP</div>
         <div class="chat-circle-btn" id="openChatBtn">
             <span>💬</span>
         </div>
@@ -1136,7 +1396,6 @@
     </div>
 </div>
 
-<!-- Security Panel -->
 <div id="securityPanel" class="security-panel">
     <div class="security-card">
         <h2 id="securityTitle">🔐 Security Settings</h2>
@@ -1149,7 +1408,6 @@
     </div>
 </div>
 
-<!-- Chat Page -->
 <div id="chatPage" class="chat-page hidden">
     <div class="messenger-full">
         <div id="inboxView" style="display: flex; flex-direction: column; height: 100%;">
@@ -1193,7 +1451,6 @@
     </div>
 </div>
 
-<!-- Video Call Modal -->
 <div id="videoCallModal" class="video-call-modal hidden">
     <div class="video-container">
         <video id="localVideo" autoplay muted playsinline></video>
@@ -1212,7 +1469,7 @@
 </div>
 
 <script>
-    // ==================== Language Translations (11 Languages) ====================
+    // ==================== Language Translations ====================
     const translations = {
         en: {
             heroTagline: "😤 Neon Challenge Look!",
@@ -1223,7 +1480,6 @@
             moreBtn: "➕ More",
             moreTitle: "🎮 More Game Categories",
             closeBtn: "Close",
-            // More Categories translations
             catBattle: "🔫 Battle Royale",
             catSports: "⚽ Sports",
             catStrategy: "🧠 Strategy",
@@ -1268,7 +1524,13 @@
             enterRoom: "❌ Enter room name",
             wrongPasswordCreate: "⚠️ Incorrect password! A new room will be created.",
             back: "🔙 Back",
-            langLabel: "🌐 EN"
+            langLabel: "🌐 EN",
+            paymentTitle: "💎 VIP Membership",
+            paymentDesc: "Choose your payment method and currency",
+            payNow: "💎 Pay Now & Upgrade VIP",
+            cancel: "Cancel",
+            paymentSuccess: "🎉 Payment successful! You are now a VIP member!",
+            paymentError: "❌ Payment failed. Please try again."
         },
         ar: {
             heroTagline: "😤 نظرة التحدي النيونية!",
@@ -1323,7 +1585,13 @@
             enterRoom: "❌ أدخل اسم الغرفة",
             wrongPasswordCreate: "⚠️ كلمة المرور غير صحيحة! سيتم إنشاء غرفة جديدة.",
             back: "🔙 العودة",
-            langLabel: "🌐 AR"
+            langLabel: "🌐 AR",
+            paymentTitle: "💎 عضوية VIP",
+            paymentDesc: "اختر طريقة الدفع والعملة",
+            payNow: "💎 ادفع الآن وفعّل VIP",
+            cancel: "إلغاء",
+            paymentSuccess: "🎉 تم الدفع بنجاح! أصبحت عضواً مميزاً",
+            paymentError: "❌ فشل الدفع. الرجاء المحاولة مرة أخرى"
         },
         fr: {
             heroTagline: "😤 Look Challenge Néon!",
@@ -1378,7 +1646,13 @@
             enterRoom: "❌ Entrez un nom de salle",
             wrongPasswordCreate: "⚠️ Mot de passe incorrect! Une nouvelle salle sera créée.",
             back: "🔙 Retour",
-            langLabel: "🇫🇷 FR"
+            langLabel: "🇫🇷 FR",
+            paymentTitle: "💎 Abonnement VIP",
+            paymentDesc: "Choisissez votre méthode de paiement et devise",
+            payNow: "💎 Payer et devenir VIP",
+            cancel: "Annuler",
+            paymentSuccess: "🎉 Paiement réussi! Vous êtes maintenant membre VIP!",
+            paymentError: "❌ Échec du paiement. Veuillez réessayer."
         },
         es: {
             heroTagline: "😤 ¡Look Desafío Neón!",
@@ -1433,7 +1707,13 @@
             enterRoom: "❌ Ingrese nombre de sala",
             wrongPasswordCreate: "⚠️ ¡Contraseña incorrecta! Se creará una nueva sala.",
             back: "🔙 Volver",
-            langLabel: "🇪🇸 ES"
+            langLabel: "🇪🇸 ES",
+            paymentTitle: "💎 Membresía VIP",
+            paymentDesc: "Elija su método de pago y moneda",
+            payNow: "💎 Pagar y ser VIP",
+            cancel: "Cancelar",
+            paymentSuccess: "🎉 ¡Pago exitoso! ¡Ahora eres miembro VIP!",
+            paymentError: "❌ Error en el pago. Por favor, intente de nuevo."
         },
         de: {
             heroTagline: "😤 Neon Challenge Look!",
@@ -1488,7 +1768,13 @@
             enterRoom: "❌ Raumname eingeben",
             wrongPasswordCreate: "⚠️ Falsches Passwort! Ein neuer Raum wird erstellt.",
             back: "🔙 Zurück",
-            langLabel: "🇩🇪 DE"
+            langLabel: "🇩🇪 DE",
+            paymentTitle: "💎 VIP-Mitgliedschaft",
+            paymentDesc: "Wählen Sie Ihre Zahlungsmethode und Währung",
+            payNow: "💎 Jetzt bezahlen und VIP werden",
+            cancel: "Abbrechen",
+            paymentSuccess: "🎉 Zahlung erfolgreich! Sie sind jetzt VIP-Mitglied!",
+            paymentError: "❌ Zahlung fehlgeschlagen. Bitte versuchen Sie es erneut."
         },
         it: {
             heroTagline: "😤 Look Sfida Neon!",
@@ -1543,7 +1829,13 @@
             enterRoom: "❌ Inserisci nome stanza",
             wrongPasswordCreate: "⚠️ Password errata! Verrà creata una nuova stanza.",
             back: "🔙 Indietro",
-            langLabel: "🇮🇹 IT"
+            langLabel: "🇮🇹 IT",
+            paymentTitle: "💎 Abbonamento VIP",
+            paymentDesc: "Scegli il metodo di pagamento e la valuta",
+            payNow: "💎 Paga ora e diventa VIP",
+            cancel: "Annulla",
+            paymentSuccess: "🎉 Pagamento riuscito! Ora sei un membro VIP!",
+            paymentError: "❌ Pagamento fallito. Riprova."
         },
         pt: {
             heroTagline: "😤 Visual Desafio Neon!",
@@ -1598,7 +1890,13 @@
             enterRoom: "❌ Digite o nome da sala",
             wrongPasswordCreate: "⚠️ Senha incorreta! Uma nova sala será criada.",
             back: "🔙 Voltar",
-            langLabel: "🇵🇹 PT"
+            langLabel: "🇵🇹 PT",
+            paymentTitle: "💎 Assinatura VIP",
+            paymentDesc: "Escolha seu método de pagamento e moeda",
+            payNow: "💎 Pagar agora e ser VIP",
+            cancel: "Cancelar",
+            paymentSuccess: "🎉 Pagamento bem-sucedido! Agora você é membro VIP!",
+            paymentError: "❌ Falha no pagamento. Tente novamente."
         },
         ru: {
             heroTagline: "😤 Неоновый вызов!",
@@ -1653,7 +1951,13 @@
             enterRoom: "❌ Введите название комнаты",
             wrongPasswordCreate: "⚠️ Неверный пароль! Будет создана новая комната.",
             back: "🔙 Назад",
-            langLabel: "🇷🇺 RU"
+            langLabel: "🇷🇺 RU",
+            paymentTitle: "💎 VIP-подписка",
+            paymentDesc: "Выберите способ оплаты и валюту",
+            payNow: "💎 Оплатить и стать VIP",
+            cancel: "Отмена",
+            paymentSuccess: "🎉 Оплата прошла успешно! Теперь вы VIP-участник!",
+            paymentError: "❌ Ошибка оплаты. Пожалуйста, попробуйте снова."
         },
         zh: {
             heroTagline: "😤 霓虹挑战造型！",
@@ -1708,7 +2012,13 @@
             enterRoom: "❌ 输入房间名称",
             wrongPasswordCreate: "⚠️ 密码错误！将创建新房间。",
             back: "🔙 返回",
-            langLabel: "🇨🇳 中文"
+            langLabel: "🇨🇳 中文",
+            paymentTitle: "💎 VIP会员",
+            paymentDesc: "选择支付方式和货币",
+            payNow: "💎 立即支付并升级VIP",
+            cancel: "取消",
+            paymentSuccess: "🎉 支付成功！您现在已经是VIP会员！",
+            paymentError: "❌ 支付失败。请重试。"
         },
         ja: {
             heroTagline: "😤 ネオンチャレンジルック！",
@@ -1763,7 +2073,13 @@
             enterRoom: "❌ ルーム名を入力してください",
             wrongPasswordCreate: "⚠️ パスワードが間違っています！新しいルームが作成されます。",
             back: "🔙 戻る",
-            langLabel: "🇯🇵 日本語"
+            langLabel: "🇯🇵 日本語",
+            paymentTitle: "💎 VIPメンバーシップ",
+            paymentDesc: "支払い方法と通貨を選択してください",
+            payNow: "💎 今すぐ支払ってVIPにアップグレード",
+            cancel: "キャンセル",
+            paymentSuccess: "🎉 支払い成功！VIPメンバーになりました！",
+            paymentError: "❌ 支払いに失敗しました。もう一度お試しください。"
         },
         ko: {
             heroTagline: "😤 네온 챌린지 룩!",
@@ -1818,11 +2134,20 @@
             enterRoom: "❌ 방 이름을 입력하세요",
             wrongPasswordCreate: "⚠️ 비밀번호가 잘못되었습니다! 새 방이 생성됩니다.",
             back: "🔙 뒤로",
-            langLabel: "🇰🇷 한국어"
+            langLabel: "🇰🇷 한국어",
+            paymentTitle: "💎 VIP 멤버십",
+            paymentDesc: "결제 방법과 통화를 선택하세요",
+            payNow: "💎 지금 결제하고 VIP 업그레이드",
+            cancel: "취소",
+            paymentSuccess: "🎉 결제 성공! 이제 VIP 회원이 되셨습니다!",
+            paymentError: "❌ 결제 실패. 다시 시도해주세요."
         }
     };
     
     let currentLang = 'en';
+    let selectedCurrency = 'USD';
+    let selectedCurrencySymbol = '$';
+    let currencyRate = 1;
     
     function setLanguage(lang) {
         currentLang = lang;
@@ -1832,8 +2157,18 @@
         document.getElementById('moreCategoriesBtn').innerHTML = t.moreBtn;
         document.getElementById('moreModalTitle').innerHTML = t.moreTitle;
         document.getElementById('closeMoreModal').innerHTML = t.closeBtn;
+        document.getElementById('paymentTitle').innerHTML = t.paymentTitle;
+        document.getElementById('paymentDesc').innerHTML = t.paymentDesc;
+        document.getElementById('payNowBtn').innerHTML = t.payNow;
+        document.getElementById('closePaymentBtn').innerHTML = t.cancel;
         
-        // Update more categories list dynamically
+        const registerBtn = document.getElementById('registerBtn');
+        if(isVIP) {
+            registerBtn.innerHTML = t.vipActive;
+        } else {
+            registerBtn.innerHTML = t.upgradeVIP;
+        }
+        
         const moreCategoriesList = document.getElementById('moreCategoriesList');
         if (moreCategoriesList) {
             moreCategoriesList.innerHTML = `
@@ -1844,7 +2179,6 @@
                 <div class="more-cat-badge" data-cat="rpg">${t.catRpg}</div>
                 <div class="more-cat-badge" data-cat="simulation">${t.catSimulation}</div>
             `;
-            // Re-attach event listeners
             document.querySelectorAll('.more-cat-badge').forEach(badge => {
                 badge.addEventListener('click', () => {
                     const category = badge.dataset.cat;
@@ -1875,13 +2209,6 @@
         document.getElementById('catFighting').innerHTML = t.catFighting;
         document.getElementById('catPuzzle').innerHTML = t.catPuzzle;
         
-        const registerBtn = document.getElementById('registerBtn');
-        if(isVIP) {
-            registerBtn.innerHTML = t.vipActive;
-        } else {
-            registerBtn.innerHTML = t.upgradeVIP;
-        }
-        
         if(isMusicPlaying) {
             document.getElementById('musicBtn').innerHTML = t.stopMusic;
         } else {
@@ -1907,6 +2234,80 @@
         renderChatsList();
         if(currentOpenRoom && document.getElementById('openChatView').style.display === 'flex') {
             displayMessagesInOpenChat();
+        }
+    }
+    
+    // ==================== Payment System ====================
+    function openPaymentModal() {
+        if(isVIP) {
+            alert(translations[currentLang].alreadyVIP);
+            return;
+        }
+        document.getElementById('paymentModal').style.display = 'flex';
+        updatePriceDisplay();
+    }
+    
+    function closePaymentModal() {
+        document.getElementById('paymentModal').style.display = 'none';
+    }
+    
+    function selectCurrency(currency, symbol, rate) {
+        selectedCurrency = currency;
+        selectedCurrencySymbol = symbol;
+        currencyRate = rate;
+        document.querySelectorAll('.currency-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if(btn.dataset.currency === currency) {
+                btn.classList.add('active');
+            }
+        });
+        updatePriceDisplay();
+    }
+    
+    function updatePriceDisplay() {
+        const basePrice = 9.99;
+        const convertedPrice = (basePrice * currencyRate).toFixed(2);
+        document.getElementById('priceAmount').innerHTML = convertedPrice;
+        document.getElementById('priceCurrency').innerHTML = selectedCurrencySymbol;
+    }
+    
+    function processPayment() {
+        const selectedMethod = document.querySelector('.payment-method.selected');
+        if(!selectedMethod) {
+            alert("Please select a payment method");
+            return;
+        }
+        
+        const method = selectedMethod.dataset.method;
+        const t = translations[currentLang];
+        
+        // Simulate payment processing
+        setTimeout(() => {
+            alert(t.paymentSuccess);
+            closePaymentModal();
+            upgradeToVIP();
+        }, 1500);
+    }
+    
+    function selectPaymentMethod(element) {
+        document.querySelectorAll('.payment-method').forEach(m => {
+            m.classList.remove('selected');
+            m.style.borderColor = '#ff44ff';
+        });
+        element.classList.add('selected');
+        element.style.borderColor = '#00ffff';
+        element.style.boxShadow = '0 0 15px #00ffff';
+    }
+    
+    function upgradeToVIP() {
+        if(isVIP) return;
+        isVIP = true;
+        localStorage.setItem('didogame_vip', 'true');
+        const t = translations[currentLang];
+        document.getElementById('registerBtn').innerHTML = t.vipActive;
+        document.getElementById('registerBtn').classList.add('vip-active');
+        if(document.getElementById('openChatView').style.display === 'flex') {
+            document.getElementById('videoCallBtn').style.display = 'inline-block';
         }
     }
     
@@ -2006,7 +2407,6 @@
         document.getElementById('categoryPage').classList.remove('page-hidden');
     }
     
-    // More categories modal functionality
     document.getElementById('moreCategoriesBtn').addEventListener('click', () => {
         document.getElementById('moreModal').style.display = 'flex';
     });
@@ -2015,20 +2415,10 @@
         document.getElementById('moreModal').style.display = 'none';
     });
     
-    // Close modal when clicking outside
     document.getElementById('moreModal').addEventListener('click', (e) => {
         if (e.target === document.getElementById('moreModal')) {
             document.getElementById('moreModal').style.display = 'none';
         }
-    });
-    
-    // Initial more categories click handlers (will be overridden by setLanguage)
-    document.querySelectorAll('.more-cat-badge').forEach(badge => {
-        badge.addEventListener('click', () => {
-            const category = badge.dataset.cat;
-            document.getElementById('moreModal').style.display = 'none';
-            showCategoryGames(category);
-        });
     });
     
     document.querySelectorAll('.cat-badge').forEach(b => {
@@ -2054,20 +2444,6 @@
         document.getElementById('gameIframe').src = '';
     }
     
-    function upgradeToVIP() {
-        if(isVIP) { alert(translations[currentLang].alreadyVIP); return; }
-        if(confirm(translations[currentLang].upgradeConfirm)) {
-            isVIP = true;
-            localStorage.setItem('didogame_vip', 'true');
-            document.getElementById('registerBtn').innerHTML = translations[currentLang].vipActive;
-            document.getElementById('registerBtn').classList.add('vip-active');
-            alert(translations[currentLang].upgradeSuccess);
-            if(document.getElementById('openChatView').style.display === 'flex') {
-                document.getElementById('videoCallBtn').style.display = 'inline-block';
-            }
-        }
-    }
-    
     // ==================== Global Variables ====================
     let currentUser = null;
     let currentOpenRoom = null;
@@ -2081,7 +2457,30 @@
     let securityPassword = "";
     let sessionTimer = null;
     let typingTimeout = null;
-
+    
+    // Currency selector setup
+    document.querySelectorAll('.currency-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            selectCurrency(btn.dataset.currency, btn.dataset.symbol, parseFloat(btn.dataset.rate));
+        });
+    });
+    
+    // Payment method selection
+    document.querySelectorAll('.payment-method').forEach(method => {
+        method.addEventListener('click', () => selectPaymentMethod(method));
+    });
+    
+    document.getElementById('payNowBtn').addEventListener('click', processPayment);
+    document.getElementById('closePaymentBtn').addEventListener('click', closePaymentModal);
+    document.getElementById('paymentModal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('paymentModal')) {
+            closePaymentModal();
+        }
+    });
+    
+    // Set default selected currency
+    document.querySelector('.currency-btn[data-currency="USD"]').classList.add('active');
+    
     // ==================== Security Helpers ====================
     function encryptMessage(text) {
         return btoa(unescape(encodeURIComponent(text)));
@@ -2094,7 +2493,7 @@
             return "⚠️ Encrypted message";
         }
     }
-
+    
     function startSessionTimer() {
         if(sessionTimer) clearTimeout(sessionTimer);
         sessionTimer = setTimeout(() => {
@@ -2102,11 +2501,11 @@
             logout();
         }, 5 * 60 * 1000);
     }
-
+    
     function resetSessionTimer() {
         if(currentUser) startSessionTimer();
     }
-
+    
     function logout() {
         if(sessionTimer) clearTimeout(sessionTimer);
         currentUser = null;
@@ -2120,7 +2519,7 @@
         document.getElementById('securityRoomPassword').value = '';
         document.getElementById('securityRoomName').value = 'Main Room';
     }
-
+    
     function validatePassword(pass) {
         if(pass && pass.length < 3) {
             alert(translations[currentLang].passwordTooShort);
@@ -2561,6 +2960,7 @@
     window.toggleVideo = toggleVideo;
     window.endVideoCall = endVideoCall;
     window.setLanguage = setLanguage;
+    window.openPaymentModal = openPaymentModal;
 </script>
 </body>
 </html>
