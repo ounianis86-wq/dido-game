@@ -353,7 +353,7 @@
             margin-top: 10px;
         }
 
-        /* Payment Modal */
+        /* Unified Payment Modal */
         .payment-modal {
             position: fixed;
             top: 0;
@@ -424,6 +424,8 @@
             gap: 12px;
             justify-content: center;
             margin-bottom: 20px;
+            max-height: 350px;
+            overflow-y: auto;
         }
         
         .payment-method {
@@ -441,6 +443,12 @@
         .payment-method:hover {
             transform: translateY(-2px);
             border-color: #00ffff;
+            box-shadow: 0 0 15px #00ffff;
+        }
+        
+        .payment-method.selected {
+            border-color: #00ffff;
+            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
             box-shadow: 0 0 15px #00ffff;
         }
         
@@ -1232,11 +1240,11 @@
                 </div>
             </div>
             
-            <!-- Payment Modal for VIP Upgrade -->
+            <!-- Unified Payment Modal -->
             <div id="paymentModal" class="payment-modal">
                 <div class="payment-card">
                     <h3 id="paymentTitle">💎 VIP Membership</h3>
-                    <p id="paymentDesc">Choose your payment method and currency</p>
+                    <p id="paymentDesc">Choose your currency and payment method</p>
                     
                     <div class="currency-selector" id="currencySelector">
                         <div class="currency-btn" data-currency="USD" data-symbol="$" data-rate="1">🇺🇸 USD $</div>
@@ -1526,7 +1534,7 @@
             back: "🔙 Back",
             langLabel: "🌐 EN",
             paymentTitle: "💎 VIP Membership",
-            paymentDesc: "Choose your payment method and currency",
+            paymentDesc: "Choose your currency and payment method",
             payNow: "💎 Pay Now & Upgrade VIP",
             cancel: "Cancel",
             paymentSuccess: "🎉 Payment successful! You are now a VIP member!",
@@ -1587,7 +1595,7 @@
             back: "🔙 العودة",
             langLabel: "🌐 AR",
             paymentTitle: "💎 عضوية VIP",
-            paymentDesc: "اختر طريقة الدفع والعملة",
+            paymentDesc: "اختر العملة وطريقة الدفع",
             payNow: "💎 ادفع الآن وفعّل VIP",
             cancel: "إلغاء",
             paymentSuccess: "🎉 تم الدفع بنجاح! أصبحت عضواً مميزاً",
@@ -1648,7 +1656,7 @@
             back: "🔙 Retour",
             langLabel: "🇫🇷 FR",
             paymentTitle: "💎 Abonnement VIP",
-            paymentDesc: "Choisissez votre méthode de paiement et devise",
+            paymentDesc: "Choisissez votre devise et méthode de paiement",
             payNow: "💎 Payer et devenir VIP",
             cancel: "Annuler",
             paymentSuccess: "🎉 Paiement réussi! Vous êtes maintenant membre VIP!",
@@ -1709,7 +1717,7 @@
             back: "🔙 Volver",
             langLabel: "🇪🇸 ES",
             paymentTitle: "💎 Membresía VIP",
-            paymentDesc: "Elija su método de pago y moneda",
+            paymentDesc: "Elija su moneda y método de pago",
             payNow: "💎 Pagar y ser VIP",
             cancel: "Cancelar",
             paymentSuccess: "🎉 ¡Pago exitoso! ¡Ahora eres miembro VIP!",
@@ -1770,7 +1778,7 @@
             back: "🔙 Zurück",
             langLabel: "🇩🇪 DE",
             paymentTitle: "💎 VIP-Mitgliedschaft",
-            paymentDesc: "Wählen Sie Ihre Zahlungsmethode und Währung",
+            paymentDesc: "Wählen Sie Ihre Währung und Zahlungsmethode",
             payNow: "💎 Jetzt bezahlen und VIP werden",
             cancel: "Abbrechen",
             paymentSuccess: "🎉 Zahlung erfolgreich! Sie sind jetzt VIP-Mitglied!",
@@ -1831,7 +1839,7 @@
             back: "🔙 Indietro",
             langLabel: "🇮🇹 IT",
             paymentTitle: "💎 Abbonamento VIP",
-            paymentDesc: "Scegli il metodo di pagamento e la valuta",
+            paymentDesc: "Scegli la tua valuta e metodo di pagamento",
             payNow: "💎 Paga ora e diventa VIP",
             cancel: "Annulla",
             paymentSuccess: "🎉 Pagamento riuscito! Ora sei un membro VIP!",
@@ -1892,7 +1900,7 @@
             back: "🔙 Voltar",
             langLabel: "🇵🇹 PT",
             paymentTitle: "💎 Assinatura VIP",
-            paymentDesc: "Escolha seu método de pagamento e moeda",
+            paymentDesc: "Escolha sua moeda e método de pagamento",
             payNow: "💎 Pagar agora e ser VIP",
             cancel: "Cancelar",
             paymentSuccess: "🎉 Pagamento bem-sucedido! Agora você é membro VIP!",
@@ -1953,7 +1961,7 @@
             back: "🔙 Назад",
             langLabel: "🇷🇺 RU",
             paymentTitle: "💎 VIP-подписка",
-            paymentDesc: "Выберите способ оплаты и валюту",
+            paymentDesc: "Выберите валюту и способ оплаты",
             payNow: "💎 Оплатить и стать VIP",
             cancel: "Отмена",
             paymentSuccess: "🎉 Оплата прошла успешно! Теперь вы VIP-участник!",
@@ -2014,7 +2022,7 @@
             back: "🔙 返回",
             langLabel: "🇨🇳 中文",
             paymentTitle: "💎 VIP会员",
-            paymentDesc: "选择支付方式和货币",
+            paymentDesc: "选择您的货币和支付方式",
             payNow: "💎 立即支付并升级VIP",
             cancel: "取消",
             paymentSuccess: "🎉 支付成功！您现在已经是VIP会员！",
@@ -2075,7 +2083,7 @@
             back: "🔙 戻る",
             langLabel: "🇯🇵 日本語",
             paymentTitle: "💎 VIPメンバーシップ",
-            paymentDesc: "支払い方法と通貨を選択してください",
+            paymentDesc: "通貨と支払い方法を選択してください",
             payNow: "💎 今すぐ支払ってVIPにアップグレード",
             cancel: "キャンセル",
             paymentSuccess: "🎉 支払い成功！VIPメンバーになりました！",
@@ -2136,7 +2144,7 @@
             back: "🔙 뒤로",
             langLabel: "🇰🇷 한국어",
             paymentTitle: "💎 VIP 멤버십",
-            paymentDesc: "결제 방법과 통화를 선택하세요",
+            paymentDesc: "통화와 결제 방법을 선택하세요",
             payNow: "💎 지금 결제하고 VIP 업그레이드",
             cancel: "취소",
             paymentSuccess: "🎉 결제 성공! 이제 VIP 회원이 되셨습니다!",
@@ -2292,11 +2300,8 @@
     function selectPaymentMethod(element) {
         document.querySelectorAll('.payment-method').forEach(m => {
             m.classList.remove('selected');
-            m.style.borderColor = '#ff44ff';
         });
         element.classList.add('selected');
-        element.style.borderColor = '#00ffff';
-        element.style.boxShadow = '0 0 15px #00ffff';
     }
     
     function upgradeToVIP() {
