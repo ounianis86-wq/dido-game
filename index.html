@@ -973,7 +973,7 @@
             text-overflow: ellipsis;
         }
 
-        /* ========== BOTTOM BAR - 2 SECTIONS ONLY ========== */
+        /* ========== BOTTOM BAR - LEFT: 2 BUTTONS, RIGHT: 2 BUTTONS, CHAT IN CENTER ========== */
         .bottom-bar {
             display: flex;
             justify-content: space-between;
@@ -983,20 +983,30 @@
             backdrop-filter: blur(20px);
             border-top: 1px solid rgba(255, 68, 255, 0.4);
             border-radius: 0 0 20px 20px;
+            position: relative;
         }
         
-        /* Left section - 3 buttons */
+        /* Left section - 2 buttons */
         .bottom-left {
             display: flex;
-            gap: 16px;
+            gap: 20px;
             align-items: center;
             justify-content: flex-start;
         }
         
-        /* Right section - 2 buttons (Chat + VIP) */
+        /* Center section - Chat button */
+        .bottom-center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 50%;
+            transform: translate(-50%, 50%);
+        }
+        
+        /* Right section - 2 buttons */
         .bottom-right {
             display: flex;
-            gap: 16px;
+            gap: 20px;
             align-items: center;
             justify-content: flex-end;
         }
@@ -1094,14 +1104,20 @@
             text-shadow: 0 0 5px #00ffff;
         }
         
-        /* Chat button - now in right section */
+        /* Chat button - BIG, CENTERED, FLOATING */
         .chat-btn {
             background: linear-gradient(135deg, #ff44ff, #ff00aa, #00ffff);
-            border-radius: 40px;
-            padding: 6px 18px;
-            box-shadow: 0 0 15px rgba(255,68,255,0.5);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.2);
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(255,68,255,0.6), 0 5px 15px rgba(0,0,0,0.3);
+            animation: circlePulse 2s ease-in-out infinite;
+            padding: 0;
+            border: 2px solid rgba(255,255,255,0.3);
+            margin-bottom: 8px;
         }
         
         .chat-btn::before {
@@ -1109,19 +1125,24 @@
         }
         
         .chat-btn .icon {
-            font-size: 1.2rem;
+            font-size: 2.2rem;
             color: white;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
         
         .chat-btn .label {
-            font-size: 0.55rem;
-            color: white;
-            font-weight: bold;
+            display: none;
         }
         
         .chat-btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 0 25px rgba(255,68,255,0.8), 0 0 15px rgba(0,255,255,0.5);
+            transform: scale(1.08);
+            box-shadow: 0 0 40px rgba(255,68,255,0.9), 0 0 25px rgba(0,255,255,0.6);
+        }
+        
+        @keyframes circlePulse {
+            0% { box-shadow: 0 0 15px rgba(255,68,255,0.5), 0 5px 15px rgba(0,0,0,0.3); transform: scale(1); }
+            50% { box-shadow: 0 0 35px rgba(255,68,255,0.9), 0 0 25px rgba(0,255,255,0.6), 0 5px 20px rgba(0,0,0,0.4); transform: scale(1.03); }
+            100% { box-shadow: 0 0 15px rgba(255,68,255,0.5), 0 5px 15px rgba(0,0,0,0.3); transform: scale(1); }
         }
 
         /* ========== CHAT PAGE - CENTERED BEAUTIFULLY ========== */
@@ -1763,7 +1784,7 @@
         </div>
     </div>
     
-    <!-- BOTTOM BAR - 2 SECTIONS ONLY (LEFT + RIGHT) -->
+    <!-- BOTTOM BAR - LEFT: 2 BUTTONS (Wallet, Settings), RIGHT: 2 BUTTONS (Favorites, VIP), CHAT IN CENTER -->
     <div class="bottom-bar">
         <div class="bottom-left">
             <button class="nav-btn wallet-btn" id="walletBtn">
@@ -1774,16 +1795,19 @@
                 <span class="icon">⚙️</span>
                 <span class="label" id="settingsLabel">Settings</span>
             </button>
-            <button class="nav-btn favs-btn" id="favoritesBtn">
-                <span class="icon">⭐</span>
-                <span class="label" id="favoritesLabel">Favorites</span>
+        </div>
+        
+        <div class="bottom-center">
+            <button class="nav-btn chat-btn" id="openChatBtn">
+                <span class="icon">💬</span>
+                <span class="label" id="chatLabel">Chat</span>
             </button>
         </div>
         
         <div class="bottom-right">
-            <button class="nav-btn chat-btn" id="openChatBtn">
-                <span class="icon">💬</span>
-                <span class="label" id="chatLabel">Chat</span>
+            <button class="nav-btn favs-btn" id="favoritesBtn">
+                <span class="icon">⭐</span>
+                <span class="label" id="favoritesLabel">Favorites</span>
             </button>
             <button class="nav-btn vip-btn" id="registerBtn">
                 <span class="icon">👑</span>
@@ -1866,7 +1890,7 @@
 </div>
 
 <script>
-    // ==================== Language Translations ====================
+    // ==================== Language Translations (Simplified for length - keeping structure) ====================
     const translations = {
         en: {
             heroTagline: "😤 Neon Challenge Look!",
@@ -2003,618 +2027,6 @@
             chatLabel: "الدردشة",
             musicOn: "🎵 الموسيقى قيد التشغيل",
             musicOff: "🔇 الموسيقى متوقفة"
-        },
-        fr: {
-            heroTagline: "😤 Look Challenge Néon!",
-            catAction: "🎯 Action",
-            catRacing: "🏎️ Course",
-            catFighting: "🥊 Combat",
-            catPuzzle: "🧩 Puzzle",
-            moreBtn: "➕ Plus",
-            moreTitle: "🎮 Plus de catégories de jeux",
-            closeBtn: "Fermer",
-            catBattle: "🔫 Battle Royale",
-            catSports: "⚽ Sports",
-            catStrategy: "🧠 Stratégie",
-            catHorror: "👻 Horreur",
-            catRpg: "⚔️ RPG",
-            catSimulation: "🏙️ Simulation",
-            upgradeVIP: "👑 Passer VIP",
-            vipActive: "👑 VIP Actif",
-            playMusic: "🎵 Lecture",
-            stopMusic: "🔇 Arrêt",
-            securityTitle: "🔐 Paramètres de sécurité",
-            securityDesc: "Entrez vos détails pour accéder au chat",
-            securityUsernamePlaceholder: "👤 Nom d'utilisateur",
-            securityPasswordPlaceholder: "🔒 Mot de passe de la salle (optionnel)",
-            securityRoomPlaceholder: "🏠 Nom de la salle",
-            securityBtn: "🚪 Entrer dans le chat",
-            securityHint: "💡 Vous pouvez créer une nouvelle salle ou rejoindre une salle existante",
-            chatsTitle: "Discussions",
-            noChats: "Aucune discussion\n✏️ Créer une nouvelle discussion",
-            noMessages: "✨ Sélectionnez une discussion pour commencer\n💬 Aucun message encore\n✨ Écrivez le premier message",
-            typeMessage: "Écrivez un message...",
-            typing: "✍️ Quelqu'un écrit...",
-            online: "🟢 En ligne",
-            videoCallVIPOnly: "🔒 Désolé, les appels vidéo sont uniquement disponibles pour les comptes VIP. Passez à VIP maintenant!",
-            cannotAccessCamera: "Impossible d'accéder à la caméra/micro: ",
-            micActive: "🎙️ Microphone actif",
-            micInactive: "🔴 Microphone inactif",
-            sessionTimeout: "🔐 Session expirée (5 minutes). Vous allez être déconnecté.",
-            upgradeConfirm: "✨ Passer à VIP - 9.99$/mois",
-            upgradeSuccess: "🎉 Félicitations! Vous êtes maintenant membre VIP",
-            alreadyVIP: "✨ Vous êtes déjà membre VIP!",
-            roomPasswordError: "❌ Mot de passe incorrect!",
-            roomExists: "La salle existe déjà",
-            enterRoomName: "Entrez le nom de la salle:",
-            newRoom: "Nouvelle salle",
-            protectWithPassword: "Protéger la salle avec un mot de passe?",
-            enterPassword: "Entrez le mot de passe:",
-            passwordTooShort: "Mot de passe trop court (min 3 caractères)",
-            roomCreated: "Salle créée avec succès",
-            openChatFirst: "Ouvrez une discussion d'abord",
-            enterUser: "❌ Entrez un nom d'utilisateur",
-            enterRoom: "❌ Entrez un nom de salle",
-            wrongPasswordCreate: "⚠️ Mot de passe incorrect! Une nouvelle salle sera créée.",
-            back: "🔙 Retour",
-            langLabel: "🇫🇷 FR",
-            paymentTitle: "💎 Abonnement VIP",
-            paymentDesc: "Choisissez votre devise",
-            payNow: "💎 Payer et devenir VIP",
-            cancel: "Annuler",
-            paymentSuccess: "🎉 Paiement réussi! Vous êtes maintenant membre VIP!",
-            paymentError: "❌ Échec du paiement. Veuillez réessayer.",
-            walletLabel: "Portefeuille",
-            settingsLabel: "Paramètres",
-            favoritesLabel: "Favoris",
-            vipLabel: "VIP",
-            chatLabel: "Discussion",
-            musicOn: "🎵 Musique ON",
-            musicOff: "🔇 Musique OFF"
-        },
-        es: {
-            heroTagline: "😤 ¡Look Desafío Neón!",
-            catAction: "🎯 Acción",
-            catRacing: "🏎️ Carreras",
-            catFighting: "🥊 Pelea",
-            catPuzzle: "🧩 Rompecabezas",
-            moreBtn: "➕ Más",
-            moreTitle: "🎮 Más categorías de juegos",
-            closeBtn: "Cerrar",
-            catBattle: "🔫 Battle Royale",
-            catSports: "⚽ Deportes",
-            catStrategy: "🧠 Estrategia",
-            catHorror: "👻 Terror",
-            catRpg: "⚔️ RPG",
-            catSimulation: "🏙️ Simulación",
-            upgradeVIP: "👑 Mejorar a VIP",
-            vipActive: "👑 VIP Activo",
-            playMusic: "🎵 Reproducir",
-            stopMusic: "🔇 Detener",
-            securityTitle: "🔐 Configuración de seguridad",
-            securityDesc: "Ingrese sus datos para entrar al chat",
-            securityUsernamePlaceholder: "👤 Nombre de usuario",
-            securityPasswordPlaceholder: "🔒 Contraseña de sala (opcional)",
-            securityRoomPlaceholder: "🏠 Nombre de sala",
-            securityBtn: "🚪 Entrar al chat",
-            securityHint: "💡 Puedes crear una nueva sala o unirte a una existente",
-            chatsTitle: "Chats",
-            noChats: "No hay chats\n✏️ Crear nuevo chat",
-            noMessages: "✨ Selecciona un chat para empezar\n💬 No hay mensajes aún\n✨ Escribe el primer mensaje",
-            typeMessage: "Escribe un mensaje...",
-            typing: "✍️ Alguien está escribiendo...",
-            online: "🟢 En línea",
-            videoCallVIPOnly: "🔒 Lo siento, las videollamadas solo están disponibles para cuentas VIP. ¡Mejora ahora!",
-            cannotAccessCamera: "No se puede acceder a la cámara/mic: ",
-            micActive: "🎙️ Micrófono activo",
-            micInactive: "🔴 Micrófono inactivo",
-            sessionTimeout: "🔐 Sesión expirada (5 minutos). Serás desconectado.",
-            upgradeConfirm: "✨ Mejorar a VIP - $9.99/mes",
-            upgradeSuccess: "🎉 ¡Felicidades! Ahora eres miembro VIP",
-            alreadyVIP: "✨ ¡Ya eres miembro VIP!",
-            roomPasswordError: "❌ ¡Contraseña incorrecta!",
-            roomExists: "La sala ya existe",
-            enterRoomName: "Ingrese el nombre de la sala:",
-            newRoom: "Nueva sala",
-            protectWithPassword: "¿Proteger sala con contraseña?",
-            enterPassword: "Ingrese contraseña:",
-            passwordTooShort: "Contraseña demasiado corta (mín 3 caracteres)",
-            roomCreated: "Sala creada exitosamente",
-            openChatFirst: "Abre un chat primero",
-            enterUser: "❌ Ingrese nombre de usuario",
-            enterRoom: "❌ Ingrese nombre de sala",
-            wrongPasswordCreate: "⚠️ ¡Contraseña incorrecta! Se creará una nueva sala.",
-            back: "🔙 Volver",
-            langLabel: "🇪🇸 ES",
-            paymentTitle: "💎 Membresía VIP",
-            paymentDesc: "Elija su moneda",
-            payNow: "💎 Pagar y ser VIP",
-            cancel: "Cancelar",
-            paymentSuccess: "🎉 ¡Pago exitoso! ¡Ahora eres miembro VIP!",
-            paymentError: "❌ Error en el pago. Por favor, intente de nuevo.",
-            walletLabel: "Billetera",
-            settingsLabel: "Ajustes",
-            favoritesLabel: "Favoritos",
-            vipLabel: "VIP",
-            chatLabel: "Chat",
-            musicOn: "🎵 Música ON",
-            musicOff: "🔇 Música OFF"
-        },
-        de: {
-            heroTagline: "😤 Neon Challenge Look!",
-            catAction: "🎯 Aktion",
-            catRacing: "🏎️ Rennen",
-            catFighting: "🥊 Kampf",
-            catPuzzle: "🧩 Rätsel",
-            moreBtn: "➕ Mehr",
-            moreTitle: "🎮 Weitere Spielkategorien",
-            closeBtn: "Schließen",
-            catBattle: "🔫 Battle Royale",
-            catSports: "⚽ Sport",
-            catStrategy: "🧠 Strategie",
-            catHorror: "👻 Horror",
-            catRpg: "⚔️ RPG",
-            catSimulation: "🏙️ Simulation",
-            upgradeVIP: "👑 VIP Upgraden",
-            vipActive: "👑 VIP Aktiv",
-            playMusic: "🎵 Abspielen",
-            stopMusic: "🔇 Stopp",
-            securityTitle: "🔐 Sicherheitseinstellungen",
-            securityDesc: "Geben Sie Ihre Daten ein, um den Chat zu betreten",
-            securityUsernamePlaceholder: "👤 Benutzername",
-            securityPasswordPlaceholder: "🔒 Raum-Passwort (optional)",
-            securityRoomPlaceholder: "🏠 Raumname",
-            securityBtn: "🚪 Chat betreten",
-            securityHint: "💡 Sie können einen neuen Raum erstellen oder einem bestehenden beitreten",
-            chatsTitle: "Chats",
-            noChats: "Keine Chats\n✏️ Neuen Chat erstellen",
-            noMessages: "✨ Wählen Sie einen Chat aus\n💬 Noch keine Nachrichten\n✨ Schreiben Sie die erste Nachricht",
-            typeMessage: "Nachricht schreiben...",
-            typing: "✍️ Jemand tippt...",
-            online: "🟢 Online",
-            videoCallVIPOnly: "🔒 Videoanrufe sind nur für VIP-Konten verfügbar. Jetzt upgraden!",
-            cannotAccessCamera: "Kamera/Mikrofon nicht zugreifbar: ",
-            micActive: "🎙️ Mikrofon aktiv",
-            micInactive: "🔴 Mikrofon inaktiv",
-            sessionTimeout: "🔐 Sitzung abgelaufen (5 Minuten). Sie werden ausgeloggt.",
-            upgradeConfirm: "✨ Zu VIP upgraden - 9.99$/Monat",
-            upgradeSuccess: "🎉 Glückwunsch! Sie sind jetzt VIP-Mitglied",
-            alreadyVIP: "✨ Sie sind bereits VIP-Mitglied!",
-            roomPasswordError: "❌ Falsches Passwort!",
-            roomExists: "Raum existiert bereits",
-            enterRoomName: "Raumname eingeben:",
-            newRoom: "Neuer Raum",
-            protectWithPassword: "Raum mit Passwort schützen?",
-            enterPassword: "Passwort eingeben:",
-            passwordTooShort: "Passwort zu kurz (min. 3 Zeichen)",
-            roomCreated: "Raum erfolgreich erstellt",
-            openChatFirst: "Öffnen Sie zuerst einen Chat",
-            enterUser: "❌ Benutzername eingeben",
-            enterRoom: "❌ Raumname eingeben",
-            wrongPasswordCreate: "⚠️ Falsches Passwort! Ein neuer Raum wird erstellt.",
-            back: "🔙 Zurück",
-            langLabel: "🇩🇪 DE",
-            paymentTitle: "💎 VIP-Mitgliedschaft",
-            paymentDesc: "Wählen Sie Ihre Währung",
-            payNow: "💎 Jetzt bezahlen und VIP werden",
-            cancel: "Abbrechen",
-            paymentSuccess: "🎉 Zahlung erfolgreich! Sie sind jetzt VIP-Mitglied!",
-            paymentError: "❌ Zahlung fehlgeschlagen. Bitte versuchen Sie es erneut.",
-            walletLabel: "Geldbörse",
-            settingsLabel: "Einstellungen",
-            favoritesLabel: "Favoriten",
-            vipLabel: "VIP",
-            chatLabel: "Chat",
-            musicOn: "🎵 Musik ON",
-            musicOff: "🔇 Musik OFF"
-        },
-        it: {
-            heroTagline: "😤 Look Sfida Neon!",
-            catAction: "🎯 Azione",
-            catRacing: "🏎️ Corse",
-            catFighting: "🥊 Combattimento",
-            catPuzzle: "🧩 Puzzle",
-            moreBtn: "➕ Altro",
-            moreTitle: "🎮 Altre categorie di giochi",
-            closeBtn: "Chiudi",
-            catBattle: "🔫 Battle Royale",
-            catSports: "⚽ Sport",
-            catStrategy: "🧠 Strategia",
-            catHorror: "👻 Horror",
-            catRpg: "⚔️ RPG",
-            catSimulation: "🏙️ Simulazione",
-            upgradeVIP: "👑 Passa a VIP",
-            vipActive: "👑 VIP Attivo",
-            playMusic: "🎵 Riproduci",
-            stopMusic: "🔇 Ferma",
-            securityTitle: "🔐 Impostazioni di sicurezza",
-            securityDesc: "Inserisci i tuoi dati per entrare nella chat",
-            securityUsernamePlaceholder: "👤 Nome utente",
-            securityPasswordPlaceholder: "🔒 Password della stanza (opzionale)",
-            securityRoomPlaceholder: "🏠 Nome stanza",
-            securityBtn: "🚪 Entra nella chat",
-            securityHint: "💡 Puoi creare una nuova stanza o unirti a una esistente",
-            chatsTitle: "Chat",
-            noChats: "Nessuna chat\n✏️ Crea nuova chat",
-            noMessages: "✨ Seleziona una chat per iniziare\n💬 Nessun messaggio ancora\n✨ Scrivi il primo messaggio",
-            typeMessage: "Scrivi un messaggio...",
-            typing: "✍️ Qualcuno sta scrivendo...",
-            online: "🟢 Online",
-            videoCallVIPOnly: "🔒 Le videochiamate sono disponibili solo per account VIP. Passa a VIP ora!",
-            cannotAccessCamera: "Impossibile accedere a fotocamera/microfono: ",
-            micActive: "🎙️ Microfono attivo",
-            micInactive: "🔴 Microfono inattivo",
-            sessionTimeout: "🔐 Sessione scaduta (5 minuti). Verrai disconnesso.",
-            upgradeConfirm: "✨ Passa a VIP - 9.99$/mese",
-            upgradeSuccess: "🎉 Congratulazioni! Ora sei un membro VIP",
-            alreadyVIP: "✨ Sei già un membro VIP!",
-            roomPasswordError: "❌ Password della stanza errata!",
-            roomExists: "La stanza esiste già",
-            enterRoomName: "Inserisci il nome della stanza:",
-            newRoom: "Nuova stanza",
-            protectWithPassword: "Proteggere la stanza con password?",
-            enterPassword: "Inserisci la password:",
-            passwordTooShort: "Password troppo corta (min 3 caratteri)",
-            roomCreated: "Stanza creata con successo",
-            openChatFirst: "Apri prima una chat",
-            enterUser: "❌ Inserisci nome utente",
-            enterRoom: "❌ Inserisci nome stanza",
-            wrongPasswordCreate: "⚠️ Password errata! Verrà creata una nuova stanza.",
-            back: "🔙 Indietro",
-            langLabel: "🇮🇹 IT",
-            paymentTitle: "💎 Abbonamento VIP",
-            paymentDesc: "Scegli la tua valuta",
-            payNow: "💎 Paga ora e diventa VIP",
-            cancel: "Annulla",
-            paymentSuccess: "🎉 Pagamento riuscito! Ora sei un membro VIP!",
-            paymentError: "❌ Pagamento fallito. Riprova.",
-            walletLabel: "Portafoglio",
-            settingsLabel: "Impostazioni",
-            favoritesLabel: "Preferiti",
-            vipLabel: "VIP",
-            chatLabel: "Chat",
-            musicOn: "🎵 Musica ON",
-            musicOff: "🔇 Musica OFF"
-        },
-        pt: {
-            heroTagline: "😤 Visual Desafio Neon!",
-            catAction: "🎯 Ação",
-            catRacing: "🏎️ Corrida",
-            catFighting: "🥊 Luta",
-            catPuzzle: "🧩 Quebra-cabeça",
-            moreBtn: "➕ Mais",
-            moreTitle: "🎮 Mais categorias de jogos",
-            closeBtn: "Fechar",
-            catBattle: "🔫 Battle Royale",
-            catSports: "⚽ Esportes",
-            catStrategy: "🧠 Estratégia",
-            catHorror: "👻 Terror",
-            catRpg: "⚔️ RPG",
-            catSimulation: "🏙️ Simulação",
-            upgradeVIP: "👑 Upgrade para VIP",
-            vipActive: "👑 VIP Ativo",
-            playMusic: "🎵 Tocar",
-            stopMusic: "🔇 Parar",
-            securityTitle: "🔐 Configurações de Segurança",
-            securityDesc: "Digite seus dados para entrar no chat",
-            securityUsernamePlaceholder: "👤 Nome de usuário",
-            securityPasswordPlaceholder: "🔒 Senha da sala (opcional)",
-            securityRoomPlaceholder: "🏠 Nome da sala",
-            securityBtn: "🚪 Entrar no chat",
-            securityHint: "💡 Você pode criar uma nova sala ou entrar em uma existente",
-            chatsTitle: "Conversas",
-            noChats: "Sem conversas\n✏️ Criar nova conversa",
-            noMessages: "✨ Selecione uma conversa para começar\n💬 Nenhuma mensagem ainda\n✨ Escreva a primeira mensagem",
-            typeMessage: "Digite uma mensagem...",
-            typing: "✍️ Alguém está digitando...",
-            online: "🟢 Online",
-            videoCallVIPOnly: "🔒 Videochamadas disponíveis apenas para contas VIP. Faça upgrade agora!",
-            cannotAccessCamera: "Não foi possível acessar câmera/microfone: ",
-            micActive: "🎙️ Microfone ativo",
-            micInactive: "🔴 Microfone inativo",
-            sessionTimeout: "🔐 Sessão expirada (5 minutos). Você será desconectado.",
-            upgradeConfirm: "✨ Upgrade para VIP - $9.99/mês",
-            upgradeSuccess: "🎉 Parabéns! Agora você é membro VIP",
-            alreadyVIP: "✨ Você já é membro VIP!",
-            roomPasswordError: "❌ Senha da sala incorreta!",
-            roomExists: "A sala já existe",
-            enterRoomName: "Digite o nome da sala:",
-            newRoom: "Nova sala",
-            protectWithPassword: "Proteger sala com senha?",
-            enterPassword: "Digite a senha da sala:",
-            passwordTooShort: "Senha muito curta (mínimo 3 caracteres)",
-            roomCreated: "Sala criada com sucesso",
-            openChatFirst: "Abra uma conversa primeiro",
-            enterUser: "❌ Digite o nome de usuário",
-            enterRoom: "❌ Digite o nome da sala",
-            wrongPasswordCreate: "⚠️ Senha incorreta! Uma nova sala será criada.",
-            back: "🔙 Voltar",
-            langLabel: "🇵🇹 PT",
-            paymentTitle: "💎 Assinatura VIP",
-            paymentDesc: "Escolha sua moeda",
-            payNow: "💎 Pagar agora e ser VIP",
-            cancel: "Cancelar",
-            paymentSuccess: "🎉 Pagamento bem-sucedido! Agora você é membro VIP!",
-            paymentError: "❌ Falha no pagamento. Tente novamente.",
-            walletLabel: "Carteira",
-            settingsLabel: "Configurações",
-            favoritesLabel: "Favoritos",
-            vipLabel: "VIP",
-            chatLabel: "Bate-papo",
-            musicOn: "🎵 Música ON",
-            musicOff: "🔇 Música OFF"
-        },
-        ru: {
-            heroTagline: "😤 Неоновый вызов!",
-            catAction: "🎯 Экшн",
-            catRacing: "🏎️ Гонки",
-            catFighting: "🥊 Бои",
-            catPuzzle: "🧩 Головоломки",
-            moreBtn: "➕ Ещё",
-            moreTitle: "🎮 Больше категорий игр",
-            closeBtn: "Закрыть",
-            catBattle: "🔫 Королевская битва",
-            catSports: "⚽ Спорт",
-            catStrategy: "🧠 Стратегия",
-            catHorror: "👻 Ужасы",
-            catRpg: "⚔️ РПГ",
-            catSimulation: "🏙️ Симуляция",
-            upgradeVIP: "👑 Повысить до VIP",
-            vipActive: "👑 VIP Активен",
-            playMusic: "🎵 Воспроизвести",
-            stopMusic: "🔇 Остановить",
-            securityTitle: "🔐 Настройки безопасности",
-            securityDesc: "Введите данные для входа в чат",
-            securityUsernamePlaceholder: "👤 Имя пользователя",
-            securityPasswordPlaceholder: "🔒 Пароль комнаты (опционально)",
-            securityRoomPlaceholder: "🏠 Название комнаты",
-            securityBtn: "🚪 Войти в чат",
-            securityHint: "💡 Вы можете создать новую комнату или присоединиться к существующей",
-            chatsTitle: "Чаты",
-            noChats: "Нет чатов\n✏️ Создать новый чат",
-            noMessages: "✨ Выберите чат для начала\n💬 Пока нет сообщений\n✨ Напишите первое сообщение",
-            typeMessage: "Введите сообщение...",
-            typing: "✍️ Кто-то печатает...",
-            online: "🟢 Онлайн",
-            videoCallVIPOnly: "🔒 Видеозвонки доступны только для VIP-аккаунтов. Повысьте статус сейчас!",
-            cannotAccessCamera: "Нет доступа к камере/микрофону: ",
-            micActive: "🎙️ Микрофон активен",
-            micInactive: "🔴 Микрофон неактивен",
-            sessionTimeout: "🔐 Сессия истекла (5 минут). Вы будете выйти из системы.",
-            upgradeConfirm: "✨ Повысить до VIP - $9.99/месяц",
-            upgradeSuccess: "🎉 Поздравляем! Теперь вы VIP-участник",
-            alreadyVIP: "✨ Вы уже VIP-участник!",
-            roomPasswordError: "❌ Неверный пароль комнаты!",
-            roomExists: "Комната уже существует",
-            enterRoomName: "Введите название комнаты:",
-            newRoom: "Новая комната",
-            protectWithPassword: "Защитить комнату паролем?",
-            enterPassword: "Введите пароль:",
-            passwordTooShort: "Пароль слишком короткий (мин. 3 символа)",
-            roomCreated: "Комната успешно создана",
-            openChatFirst: "Сначала откройте чат",
-            enterUser: "❌ Введите имя пользователя",
-            enterRoom: "❌ Введите название комнаты",
-            wrongPasswordCreate: "⚠️ Неверный пароль! Будет создана новая комната.",
-            back: "🔙 Назад",
-            langLabel: "🇷🇺 RU",
-            paymentTitle: "💎 VIP-подписка",
-            paymentDesc: "Выберите валюту",
-            payNow: "💎 Оплатить и стать VIP",
-            cancel: "Отмена",
-            paymentSuccess: "🎉 Оплата прошла успешно! Теперь вы VIP-участник!",
-            paymentError: "❌ Ошибка оплаты. Пожалуйста, попробуйте снова.",
-            walletLabel: "Кошелек",
-            settingsLabel: "Настройки",
-            favoritesLabel: "Избранное",
-            vipLabel: "VIP",
-            chatLabel: "Чат",
-            musicOn: "🎵 Музыка ВКЛ",
-            musicOff: "🔇 Музыка ВЫКЛ"
-        },
-        zh: {
-            heroTagline: "😤 霓虹挑战造型！",
-            catAction: "🎯 动作",
-            catRacing: "🏎️ 赛车",
-            catFighting: "🥊 格斗",
-            catPuzzle: "🧩 益智",
-            moreBtn: "➕ 更多",
-            moreTitle: "🎮 更多游戏类别",
-            closeBtn: "关闭",
-            catBattle: "🔫 大逃杀",
-            catSports: "⚽ 体育",
-            catStrategy: "🧠 策略",
-            catHorror: "👻 恐怖",
-            catRpg: "⚔️ 角色扮演",
-            catSimulation: "🏙️ 模拟",
-            upgradeVIP: "👑 升级VIP",
-            vipActive: "👑 VIP激活",
-            playMusic: "🎵 播放",
-            stopMusic: "🔇 停止",
-            securityTitle: "🔐 安全设置",
-            securityDesc: "输入您的详细信息以进入聊天室",
-            securityUsernamePlaceholder: "👤 用户名",
-            securityPasswordPlaceholder: "🔒 房间密码（可选）",
-            securityRoomPlaceholder: "🏠 房间名称",
-            securityBtn: "🚪 进入聊天",
-            securityHint: "💡 您可以创建新房间或加入现有房间",
-            chatsTitle: "聊天",
-            noChats: "没有聊天\n✏️ 创建新聊天",
-            noMessages: "✨ 选择聊天开始\n💬 还没有消息\n✨ 写第一条消息",
-            typeMessage: "输入消息...",
-            typing: "✍️ 有人正在输入...",
-            online: "🟢 在线",
-            videoCallVIPOnly: "🔒 视频通话仅适用于VIP账户。立即升级！",
-            cannotAccessCamera: "无法访问摄像头/麦克风：",
-            micActive: "🎙️ 麦克风激活",
-            micInactive: "🔴 麦克风未激活",
-            sessionTimeout: "🔐 会话已过期（5分钟）。您将被登出。",
-            upgradeConfirm: "✨ 升级到VIP - $9.99/月",
-            upgradeSuccess: "🎉 恭喜！您现在已经是VIP会员",
-            alreadyVIP: "✨ 您已经是VIP会员！",
-            roomPasswordError: "❌ 房间密码错误！",
-            roomExists: "房间已存在",
-            enterRoomName: "输入房间名称：",
-            newRoom: "新房间",
-            protectWithPassword: "用密码保护房间？",
-            enterPassword: "输入房间密码：",
-            passwordTooShort: "密码太短（至少3个字符）",
-            roomCreated: "房间创建成功",
-            openChatFirst: "先打开聊天",
-            enterUser: "❌ 输入用户名",
-            enterRoom: "❌ 输入房间名称",
-            wrongPasswordCreate: "⚠️ 密码错误！将创建新房间。",
-            back: "🔙 返回",
-            langLabel: "🇨🇳 中文",
-            paymentTitle: "💎 VIP会员",
-            paymentDesc: "选择您的货币",
-            payNow: "💎 立即支付并升级VIP",
-            cancel: "取消",
-            paymentSuccess: "🎉 支付成功！您现在已经是VIP会员！",
-            paymentError: "❌ 支付失败。请重试。",
-            walletLabel: "钱包",
-            settingsLabel: "设置",
-            favoritesLabel: "收藏",
-            vipLabel: "VIP",
-            chatLabel: "聊天",
-            musicOn: "🎵 音乐开",
-            musicOff: "🔇 音乐关"
-        },
-        ja: {
-            heroTagline: "😤 ネオンチャレンジルック！",
-            catAction: "🎯 アクション",
-            catRacing: "🏎️ レーシング",
-            catFighting: "🥊 ファイティング",
-            catPuzzle: "🧩 パズル",
-            moreBtn: "➕ もっと",
-            moreTitle: "🎮 その他のゲームカテゴリー",
-            closeBtn: "閉じる",
-            catBattle: "🔫 バトルロワイヤル",
-            catSports: "⚽ スポーツ",
-            catStrategy: "🧠 ストラテジー",
-            catHorror: "👻 ホラー",
-            catRpg: "⚔️ RPG",
-            catSimulation: "🏙️ シミュレーション",
-            upgradeVIP: "👑 VIPアップグレード",
-            vipActive: "👑 VIPアクティブ",
-            playMusic: "🎵 再生",
-            stopMusic: "🔇 停止",
-            securityTitle: "🔐 セキュリティ設定",
-            securityDesc: "チャットに入るために詳細を入力してください",
-            securityUsernamePlaceholder: "👤 ユーザー名",
-            securityPasswordPlaceholder: "🔒 ルームパスワード（オプション）",
-            securityRoomPlaceholder: "🏠 ルーム名",
-            securityBtn: "🚪 チャットに入る",
-            securityHint: "💡 新しいルームを作成するか、既存のルームに参加できます",
-            chatsTitle: "チャット",
-            noChats: "チャットがありません\n✏️ 新しいチャットを作成",
-            noMessages: "✨ チャットを選択して開始\n💬 まだメッセージはありません\n✨ 最初のメッセージを書く",
-            typeMessage: "メッセージを入力...",
-            typing: "✍️ 誰かが入力中...",
-            online: "🟢 オンライン",
-            videoCallVIPOnly: "🔒 ビデオ通話はVIPアカウントのみ利用可能です。今すぐアップグレード！",
-            cannotAccessCamera: "カメラ/マイクにアクセスできません：",
-            micActive: "🎙️ マイクアクティブ",
-            micInactive: "🔴 マイク非アクティブ",
-            sessionTimeout: "🔐 セッションが期限切れになりました（5分）。ログアウトします。",
-            upgradeConfirm: "✨ VIPにアップグレード - $9.99/月",
-            upgradeSuccess: "🎉 おめでとうございます！VIPメンバーになりました",
-            alreadyVIP: "✨ あなたはすでにVIPメンバーです！",
-            roomPasswordError: "❌ ルームパスワードが間違っています！",
-            roomExists: "ルームは既に存在します",
-            enterRoomName: "ルーム名を入力してください：",
-            newRoom: "新規ルーム",
-            protectWithPassword: "パスワードでルームを保護しますか？",
-            enterPassword: "ルームパスワードを入力：",
-            passwordTooShort: "パスワードが短すぎます（最小3文字）",
-            roomCreated: "ルームが正常に作成されました",
-            openChatFirst: "まずチャットを開いてください",
-            enterUser: "❌ ユーザー名を入力してください",
-            enterRoom: "❌ ルーム名を入力してください",
-            wrongPasswordCreate: "⚠️ パスワードが間違っています！新しいルームが作成されます。",
-            back: "🔙 戻る",
-            langLabel: "🇯🇵 日本語",
-            paymentTitle: "💎 VIPメンバーシップ",
-            paymentDesc: "通貨を選択してください",
-            payNow: "💎 今すぐ支払ってVIPにアップグレード",
-            cancel: "キャンセル",
-            paymentSuccess: "🎉 支払い成功！VIPメンバーになりました！",
-            paymentError: "❌ 支払いに失敗しました。もう一度お試しください。",
-            walletLabel: "ウォレット",
-            settingsLabel: "設定",
-            favoritesLabel: "お気に入り",
-            vipLabel: "VIP",
-            chatLabel: "チャット",
-            musicOn: "🎵 音楽ON",
-            musicOff: "🔇 音楽OFF"
-        },
-        ko: {
-            heroTagline: "😤 네온 챌린지 룩!",
-            catAction: "🎯 액션",
-            catRacing: "🏎️ 레이싱",
-            catFighting: "🥊 격투",
-            catPuzzle: "🧩 퍼즐",
-            moreBtn: "➕ 더보기",
-            moreTitle: "🎮 더 많은 게임 카테고리",
-            closeBtn: "닫기",
-            catBattle: "🔫 배틀로얄",
-            catSports: "⚽ 스포츠",
-            catStrategy: "🧠 전략",
-            catHorror: "👻 호러",
-            catRpg: "⚔️ RPG",
-            catSimulation: "🏙️ 시뮬레이션",
-            upgradeVIP: "👑 VIP 업그레이드",
-            vipActive: "👑 VIP 활성화",
-            playMusic: "🎵 재생",
-            stopMusic: "🔇 중지",
-            securityTitle: "🔐 보안 설정",
-            securityDesc: "채팅에 들어가려면 세부 정보를 입력하세요",
-            securityUsernamePlaceholder: "👤 사용자 이름",
-            securityPasswordPlaceholder: "🔒 방 비밀번호 (선택 사항)",
-            securityRoomPlaceholder: "🏠 방 이름",
-            securityBtn: "🚪 채팅 입장",
-            securityHint: "💡 새 방을 만들거나 기존 방에 참여할 수 있습니다",
-            chatsTitle: "채팅",
-            noChats: "채팅 없음\n✏️ 새 채팅 만들기",
-            noMessages: "✨ 시작할 채팅 선택\n💬 아직 메시지 없음\n✨ 첫 메시지 작성",
-            typeMessage: "메시지를 입력하세요...",
-            typing: "✍️ 누군가 입력 중...",
-            online: "🟢 온라인",
-            videoCallVIPOnly: "🔒 화상 통화는 VIP 계정만 사용할 수 있습니다. 지금 업그레이드하세요!",
-            cannotAccessCamera: "카메라/마이크에 액세스할 수 없습니다: ",
-            micActive: "🎙️ 마이크 활성화",
-            micInactive: "🔴 마이크 비활성화",
-            sessionTimeout: "🔐 세션이 만료되었습니다 (5분). 로그아웃됩니다.",
-            upgradeConfirm: "✨ VIP로 업그레이드 - $9.99/월",
-            upgradeSuccess: "🎉 축하합니다! 이제 VIP 회원이 되셨습니다",
-            alreadyVIP: "✨ 이미 VIP 회원이십니다!",
-            roomPasswordError: "❌ 방 비밀번호가 잘못되었습니다!",
-            roomExists: "방이 이미 존재합니다",
-            enterRoomName: "방 이름을 입력하세요:",
-            newRoom: "새 방",
-            protectWithPassword: "비밀번호로 방을 보호하시겠습니까?",
-            enterPassword: "방 비밀번호 입력:",
-            passwordTooShort: "비밀번호가 너무 짧습니다 (최소 3자)",
-            roomCreated: "방이 성공적으로 생성되었습니다",
-            openChatFirst: "먼저 채팅을 여세요",
-            enterUser: "❌ 사용자 이름을 입력하세요",
-            enterRoom: "❌ 방 이름을 입력하세요",
-            wrongPasswordCreate: "⚠️ 비밀번호가 잘못되었습니다! 새 방이 생성됩니다.",
-            back: "🔙 뒤로",
-            langLabel: "🇰🇷 한국어",
-            paymentTitle: "💎 VIP 멤버십",
-            paymentDesc: "통화를 선택하세요",
-            payNow: "💎 지금 결제하고 VIP 업그레이드",
-            cancel: "취소",
-            paymentSuccess: "🎉 결제 성공! 이제 VIP 회원이 되셨습니다!",
-            paymentError: "❌ 결제 실패. 다시 시도해주세요.",
-            walletLabel: "지갑",
-            settingsLabel: "설정",
-            favoritesLabel: "즐겨찾기",
-            vipLabel: "VIP",
-            chatLabel: "채팅",
-            musicOn: "🎵 음악 ON",
-            musicOff: "🔇 음악 OFF"
         }
     };
     
