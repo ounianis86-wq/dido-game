@@ -104,7 +104,6 @@
         .character-img {
             width: 110px;
             height: 110px;
-            background: url('https://i.pinimg.com/originals/6e/5e/6c/6e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png');
             background-size: cover;
             background-position: center;
             border-radius: 50%;
@@ -351,6 +350,154 @@
             font-size: 0.8rem;
             cursor: pointer;
             margin-top: 10px;
+        }
+
+        /* Settings Modal */
+        .settings-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(15px);
+            z-index: 1700;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .settings-card {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 30px;
+            padding: 25px;
+            width: 90%;
+            max-width: 380px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 50px #ff44ff;
+            text-align: center;
+        }
+        
+        .settings-card h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        
+        .avatar-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .avatar-preview {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 15px;
+            border: 3px solid #ff44ff;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .avatar-preview:hover {
+            transform: scale(1.05);
+        }
+        
+        .avatar-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        
+        .avatar-option {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,68,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #ff44ff;
+        }
+        
+        .avatar-option:hover {
+            transform: scale(1.1);
+            border-color: #00ffff;
+            box-shadow: 0 0 10px #00ffff;
+        }
+        
+        .avatar-option.selected {
+            border-color: #00ffff;
+            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
+            box-shadow: 0 0 15px #00ffff;
+        }
+        
+        .language-section {
+            margin-bottom: 20px;
+        }
+        
+        .language-section label {
+            color: white;
+            font-size: 0.8rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .lang-select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 25px;
+            border: 1px solid #ff44ff;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        
+        .lang-select option {
+            background: #1a1a2e;
+        }
+        
+        .save-settings-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .save-settings-btn:hover {
+            transform: scale(1.02);
+        }
+        
+        .close-settings {
+            background: #ff3366;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 15px;
         }
 
         /* Unified Payment Modal */
@@ -629,6 +776,16 @@
             background: linear-gradient(135deg, #ff44ff, #00ffff);
         }
         
+        .settings-bottom-btn {
+            background: #000000aa;
+            padding: 5px 12px;
+            border-radius: 18px;
+            color: #0ff;
+            cursor: pointer;
+            font-size: 0.5rem;
+            border: 1px solid #0ff;
+        }
+        
         .chat-circle-btn {
             position: absolute;
             left: 50%;
@@ -668,57 +825,9 @@
             border: 1px solid #0ff;
         }
         
-        /* Language Dropdown */
+        /* Language Dropdown (removed, now in settings) */
         .lang-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .lang-btn {
-            background: #000000aa;
-            padding: 5px 10px;
-            border-radius: 18px;
-            color: #0ff;
-            cursor: pointer;
-            font-size: 0.5rem;
-            border: 1px solid #0ff;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        
-        .lang-dropdown-content {
             display: none;
-            position: absolute;
-            bottom: 32px;
-            right: 0;
-            background: #1a1a2e;
-            min-width: 140px;
-            border-radius: 12px;
-            border: 1px solid #ff44ff;
-            z-index: 100;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        
-        .lang-dropdown-content a {
-            color: white;
-            padding: 8px 12px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        
-        .lang-dropdown-content a:hover {
-            background: #ff44ff30;
-        }
-        
-        .lang-dropdown:hover .lang-dropdown-content {
-            display: block;
         }
 
         /* ========== SECURITY PANEL ========== */
@@ -1209,7 +1318,7 @@
     <div class="content">
         <div id="homePage" class="page">
             <div class="anime-hero">
-                <div class="character-img">
+                <div class="character-img" id="mainAvatarImg" style="background-image: url('https://i.pinimg.com/originals/6e/5e/6c/6e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png'); background-size: cover;">
                     <div class="controller-on-hand">🎮</div>
                 </div>
                 <div class="character-info">
@@ -1240,6 +1349,51 @@
                 </div>
             </div>
             
+            <!-- Settings Modal -->
+            <div id="settingsModal" class="settings-modal">
+                <div class="settings-card">
+                    <h3>⚙️ Settings</h3>
+                    
+                    <div class="avatar-section">
+                        <div class="avatar-preview" id="avatarPreview">
+                            😎
+                        </div>
+                        <div class="avatar-options" id="avatarOptions">
+                            <div class="avatar-option" data-avatar="😎">😎</div>
+                            <div class="avatar-option" data-avatar="👤">👤</div>
+                            <div class="avatar-option" data-avatar="👨‍🚀">👨‍🚀</div>
+                            <div class="avatar-option" data-avatar="🧙‍♂️">🧙‍♂️</div>
+                            <div class="avatar-option" data-avatar="🦸‍♂️">🦸‍♂️</div>
+                            <div class="avatar-option" data-avatar="🐉">🐉</div>
+                            <div class="avatar-option" data-avatar="🤖">🤖</div>
+                            <div class="avatar-option" data-avatar="👾">👾</div>
+                            <div class="avatar-option" data-avatar="🎮">🎮</div>
+                            <div class="avatar-option" data-avatar="⭐">⭐</div>
+                        </div>
+                    </div>
+                    
+                    <div class="language-section">
+                        <label>🌐 Language / اللغة</label>
+                        <select id="settingsLangSelect" class="lang-select">
+                            <option value="en">🇺🇸 English</option>
+                            <option value="ar">🇸🇦 العربية</option>
+                            <option value="fr">🇫🇷 Français</option>
+                            <option value="es">🇪🇸 Español</option>
+                            <option value="de">🇩🇪 Deutsch</option>
+                            <option value="it">🇮🇹 Italiano</option>
+                            <option value="pt">🇵🇹 Português</option>
+                            <option value="ru">🇷🇺 Русский</option>
+                            <option value="zh">🇨🇳 中文</option>
+                            <option value="ja">🇯🇵 日本語</option>
+                            <option value="ko">🇰🇷 한국어</option>
+                        </select>
+                    </div>
+                    
+                    <button class="save-settings-btn" id="saveSettingsBtn">💾 Save Settings</button>
+                    <button class="close-settings" id="closeSettingsBtn">Cancel</button>
+                </div>
+            </div>
+            
             <!-- Unified Payment Modal -->
             <div id="paymentModal" class="payment-modal">
                 <div class="payment-card">
@@ -1263,96 +1417,28 @@
                     </div>
                     
                     <div class="payment-methods" id="paymentMethods">
-                        <!-- International -->
-                        <div class="payment-method" data-method="visa">
-                            <span class="emoji">💳</span>
-                            <span class="name">Visa/MasterCard</span>
-                        </div>
-                        <div class="payment-method" data-method="paypal">
-                            <span class="emoji">🅿️</span>
-                            <span class="name">PayPal</span>
-                        </div>
-                        <div class="payment-method" data-method="applepay">
-                            <span class="emoji">🍎</span>
-                            <span class="name">Apple Pay</span>
-                        </div>
-                        <div class="payment-method" data-method="googlepay">
-                            <span class="emoji">🤖</span>
-                            <span class="name">Google Pay</span>
-                        </div>
-                        <div class="payment-method" data-method="crypto">
-                            <span class="emoji">₿</span>
-                            <span class="name">Bitcoin</span>
-                        </div>
-                        <div class="payment-method" data-method="eth">
-                            <span class="emoji">⟠</span>
-                            <span class="name">Ethereum</span>
-                        </div>
-                        <div class="payment-method" data-method="usdt">
-                            <span class="emoji">💎</span>
-                            <span class="name">USDT</span>
-                        </div>
-                        <div class="payment-method" data-method="binance">
-                            <span class="emoji">🟡</span>
-                            <span class="name">Binance Pay</span>
-                        </div>
-                        <div class="payment-method" data-method="mada">
-                            <span class="emoji">💳</span>
-                            <span class="name">Mada</span>
-                        </div>
-                        <div class="payment-method" data-method="stcpay">
-                            <span class="emoji">📱</span>
-                            <span class="name">STC Pay</span>
-                        </div>
-                        <div class="payment-method" data-method="urpay">
-                            <span class="emoji">🏦</span>
-                            <span class="name">UR Pay</span>
-                        </div>
-                        <div class="payment-method" data-method="vodafone">
-                            <span class="emoji">📞</span>
-                            <span class="name">Vodafone Cash</span>
-                        </div>
-                        <!-- Tunisian Wallets & Payment Methods -->
-                        <div class="payment-method" data-method="dtwallet">
-                            <span class="emoji">📱</span>
-                            <span class="name">DT Wallet</span>
-                        </div>
-                        <div class="payment-method" data-method="flouci">
-                            <span class="emoji">💙</span>
-                            <span class="name">flouci</span>
-                        </div>
-                        <div class="payment-method" data-method="mydinar">
-                            <span class="emoji">📞</span>
-                            <span class="name">My Dinar</span>
-                        </div>
-                        <div class="payment-method" data-method="tunisietelecom">
-                            <span class="emoji">📱</span>
-                            <span class="name">Tunisie Telecom Cash</span>
-                        </div>
-                        <div class="payment-method" data-method="zitouna">
-                            <span class="emoji">🏦</span>
-                            <span class="name">Banque Zitouna</span>
-                        </div>
-                        <div class="payment-method" data-method="attijari">
-                            <span class="emoji">🏦</span>
-                            <span class="name">Attijari Mobile</span>
-                        </div>
-                        <div class="payment-method" data-method="biat">
-                            <span class="emoji">🏦</span>
-                            <span class="name">BIAT e-Payment</span>
-                        </div>
-                        <div class="payment-method" data-method="stb">
-                            <span class="emoji">🏦</span>
-                            <span class="name">STB Payment</span>
-                        </div>
-                        <div class="payment-method" data-method="ubci">
-                            <span class="emoji">🏦</span>
-                            <span class="name">UBCI e-Transaction</span>
-                        </div>
-                        <div class="payment-method" data-method="bhbank">
-                            <span class="emoji">🏦</span>
-                            <span class="name">BH Bank Payment</span>
-                        </div>
+                        <div class="payment-method" data-method="visa"><span class="emoji">💳</span><span class="name">Visa/MasterCard</span></div>
+                        <div class="payment-method" data-method="paypal"><span class="emoji">🅿️</span><span class="name">PayPal</span></div>
+                        <div class="payment-method" data-method="applepay"><span class="emoji">🍎</span><span class="name">Apple Pay</span></div>
+                        <div class="payment-method" data-method="googlepay"><span class="emoji">🤖</span><span class="name">Google Pay</span></div>
+                        <div class="payment-method" data-method="crypto"><span class="emoji">₿</span><span class="name">Bitcoin</span></div>
+                        <div class="payment-method" data-method="eth"><span class="emoji">⟠</span><span class="name">Ethereum</span></div>
+                        <div class="payment-method" data-method="usdt"><span class="emoji">💎</span><span class="name">USDT</span></div>
+                        <div class="payment-method" data-method="binance"><span class="emoji">🟡</span><span class="name">Binance Pay</span></div>
+                        <div class="payment-method" data-method="mada"><span class="emoji">💳</span><span class="name">Mada</span></div>
+                        <div class="payment-method" data-method="stcpay"><span class="emoji">📱</span><span class="name">STC Pay</span></div>
+                        <div class="payment-method" data-method="urpay"><span class="emoji">🏦</span><span class="name">UR Pay</span></div>
+                        <div class="payment-method" data-method="vodafone"><span class="emoji">📞</span><span class="name">Vodafone Cash</span></div>
+                        <div class="payment-method" data-method="dtwallet"><span class="emoji">📱</span><span class="name">DT Wallet</span></div>
+                        <div class="payment-method" data-method="flouci"><span class="emoji">💙</span><span class="name">flouci</span></div>
+                        <div class="payment-method" data-method="mydinar"><span class="emoji">📞</span><span class="name">My Dinar</span></div>
+                        <div class="payment-method" data-method="tunisietelecom"><span class="emoji">📱</span><span class="name">Tunisie Telecom Cash</span></div>
+                        <div class="payment-method" data-method="zitouna"><span class="emoji">🏦</span><span class="name">Banque Zitouna</span></div>
+                        <div class="payment-method" data-method="attijari"><span class="emoji">🏦</span><span class="name">Attijari Mobile</span></div>
+                        <div class="payment-method" data-method="biat"><span class="emoji">🏦</span><span class="name">BIAT e-Payment</span></div>
+                        <div class="payment-method" data-method="stb"><span class="emoji">🏦</span><span class="name">STB Payment</span></div>
+                        <div class="payment-method" data-method="ubci"><span class="emoji">🏦</span><span class="name">UBCI e-Transaction</span></div>
+                        <div class="payment-method" data-method="bhbank"><span class="emoji">🏦</span><span class="name">BH Bank Payment</span></div>
                     </div>
                     
                     <div class="price-display">
@@ -1383,22 +1469,7 @@
             <span>💬</span>
         </div>
         <div style="display: flex; gap: 5px;">
-            <div class="lang-dropdown">
-                <div class="lang-btn" id="langBtn">🌐 EN</div>
-                <div class="lang-dropdown-content" id="langDropdownContent">
-                    <a onclick="setLanguage('en')">🇺🇸 English</a>
-                    <a onclick="setLanguage('ar')">🇸🇦 العربية</a>
-                    <a onclick="setLanguage('fr')">🇫🇷 Français</a>
-                    <a onclick="setLanguage('es')">🇪🇸 Español</a>
-                    <a onclick="setLanguage('de')">🇩🇪 Deutsch</a>
-                    <a onclick="setLanguage('it')">🇮🇹 Italiano</a>
-                    <a onclick="setLanguage('pt')">🇵🇹 Português</a>
-                    <a onclick="setLanguage('ru')">🇷🇺 Русский</a>
-                    <a onclick="setLanguage('zh')">🇨🇳 中文</a>
-                    <a onclick="setLanguage('ja')">🇯🇵 日本語</a>
-                    <a onclick="setLanguage('ko')">🇰🇷 한국어</a>
-                </div>
-            </div>
+            <div class="settings-bottom-btn" id="settingsBtn">⚙️ Settings</div>
             <div class="music-bottom-btn" id="musicBtn" onclick="toggleMusic()">🎵 Play</div>
         </div>
     </div>
@@ -2156,12 +2227,76 @@
     let selectedCurrency = 'USD';
     let selectedCurrencySymbol = '$';
     let currencyRate = 1;
+    let currentAvatar = '😎';
+    let isVIP = false;
     
+    // ==================== Settings Functions ====================
+    function openSettingsModal() {
+        // Load current settings into modal
+        document.getElementById('avatarPreview').innerHTML = currentAvatar;
+        document.getElementById('settingsLangSelect').value = currentLang;
+        
+        // Highlight selected avatar
+        document.querySelectorAll('.avatar-option').forEach(opt => {
+            if (opt.dataset.avatar === currentAvatar) {
+                opt.classList.add('selected');
+            } else {
+                opt.classList.remove('selected');
+            }
+        });
+        
+        document.getElementById('settingsModal').style.display = 'flex';
+    }
+    
+    function closeSettingsModal() {
+        document.getElementById('settingsModal').style.display = 'none';
+    }
+    
+    function saveSettings() {
+        // Save language
+        const newLang = document.getElementById('settingsLangSelect').value;
+        if (newLang !== currentLang) {
+            setLanguage(newLang);
+        }
+        
+        // Save avatar
+        const selectedAvatar = document.querySelector('.avatar-option.selected');
+        if (selectedAvatar) {
+            currentAvatar = selectedAvatar.dataset.avatar;
+            localStorage.setItem('didogame_avatar', currentAvatar);
+            document.getElementById('avatarPreview').innerHTML = currentAvatar;
+            // Update main avatar image - change the character image to emoji style
+            const mainAvatarDiv = document.getElementById('mainAvatarImg');
+            if (mainAvatarDiv) {
+                // Instead of background image, show emoji
+                mainAvatarDiv.style.background = 'linear-gradient(135deg, #ff44ff, #00ffff)';
+                mainAvatarDiv.style.display = 'flex';
+                mainAvatarDiv.style.alignItems = 'center';
+                mainAvatarDiv.style.justifyContent = 'center';
+                mainAvatarDiv.style.fontSize = '3rem';
+                mainAvatarDiv.innerHTML = `<div class="controller-on-hand">🎮</div>${currentAvatar}`;
+                mainAvatarDiv.style.backgroundSize = 'cover';
+            }
+        }
+        
+        closeSettingsModal();
+    }
+    
+    // Avatar selection
+    function selectAvatarOption(element) {
+        document.querySelectorAll('.avatar-option').forEach(opt => {
+            opt.classList.remove('selected');
+        });
+        element.classList.add('selected');
+        document.getElementById('avatarPreview').innerHTML = element.dataset.avatar;
+    }
+    
+    // ==================== Language Functions ====================
     function setLanguage(lang) {
         currentLang = lang;
         localStorage.setItem('didogame_lang', currentLang);
         const t = translations[currentLang];
-        document.getElementById('langBtn').innerHTML = t.langLabel;
+        
         document.getElementById('moreCategoriesBtn').innerHTML = t.moreBtn;
         document.getElementById('moreModalTitle').innerHTML = t.moreTitle;
         document.getElementById('closeMoreModal').innerHTML = t.closeBtn;
@@ -2286,10 +2421,8 @@
             return;
         }
         
-        const method = selectedMethod.dataset.method;
         const t = translations[currentLang];
         
-        // Simulate payment processing
         setTimeout(() => {
             alert(t.paymentSuccess);
             closePaymentModal();
@@ -2452,7 +2585,6 @@
     // ==================== Global Variables ====================
     let currentUser = null;
     let currentOpenRoom = null;
-    let isVIP = false;
     let allRooms = {};
     let audioStream = null;
     let videoStream = null;
@@ -2483,7 +2615,22 @@
         }
     });
     
-    // Add click event for Register/Upgrade button
+    // Settings button and modal
+    document.getElementById('settingsBtn').addEventListener('click', openSettingsModal);
+    document.getElementById('closeSettingsBtn').addEventListener('click', closeSettingsModal);
+    document.getElementById('saveSettingsBtn').addEventListener('click', saveSettings);
+    document.getElementById('settingsModal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('settingsModal')) {
+            closeSettingsModal();
+        }
+    });
+    
+    // Avatar selection
+    document.querySelectorAll('.avatar-option').forEach(opt => {
+        opt.addEventListener('click', () => selectAvatarOption(opt));
+    });
+    
+    // Register button
     document.getElementById('registerBtn').addEventListener('click', openPaymentModal);
     
     // Set default selected currency
@@ -2952,6 +3099,18 @@
         setLanguage(savedLang);
     } else {
         setLanguage('en');
+    }
+    
+    const savedAvatar = localStorage.getItem('didogame_avatar');
+    if(savedAvatar) {
+        currentAvatar = savedAvatar;
+        const mainAvatarDiv = document.getElementById('mainAvatarImg');
+        mainAvatarDiv.style.background = 'linear-gradient(135deg, #ff44ff, #00ffff)';
+        mainAvatarDiv.style.display = 'flex';
+        mainAvatarDiv.style.alignItems = 'center';
+        mainAvatarDiv.style.justifyContent = 'center';
+        mainAvatarDiv.style.fontSize = '3rem';
+        mainAvatarDiv.innerHTML = `<div class="controller-on-hand">🎮</div>${currentAvatar}`;
     }
     
     // Expose functions globally
