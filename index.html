@@ -500,7 +500,98 @@
             margin-top: 15px;
         }
 
-        /* Unified Payment Modal */
+        /* Wallet Modal - All payment methods collected */
+        .wallet-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(15px);
+            z-index: 1800;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .wallet-card {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 30px;
+            padding: 20px;
+            width: 90%;
+            max-width: 380px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 50px #ff44ff;
+            text-align: center;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .wallet-card h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .wallet-card p {
+            color: #aaa;
+            font-size: 0.7rem;
+            margin-bottom: 15px;
+        }
+        
+        .wallet-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .wallet-method {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #ff44ff;
+            border-radius: 15px;
+            padding: 12px 8px;
+            width: calc(33% - 8px);
+            min-width: 90px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        
+        .wallet-method:hover {
+            transform: translateY(-2px);
+            border-color: #00ffff;
+            box-shadow: 0 0 15px #00ffff;
+        }
+        
+        .wallet-method .emoji {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .wallet-method .name {
+            color: white;
+            font-size: 0.6rem;
+        }
+        
+        .close-wallet {
+            background: #ff3366;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* VIP Payment Modal */
         .payment-modal {
             position: fixed;
             top: 0;
@@ -563,51 +654,6 @@
         .currency-btn.active {
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             border-color: #00ffff;
-        }
-        
-        .payment-methods {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-            margin-bottom: 20px;
-            max-height: 350px;
-            overflow-y: auto;
-        }
-        
-        .payment-method {
-            background: rgba(0,0,0,0.5);
-            border: 1px solid #ff44ff;
-            border-radius: 15px;
-            padding: 10px;
-            width: calc(33% - 8px);
-            min-width: 85px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-        }
-        
-        .payment-method:hover {
-            transform: translateY(-2px);
-            border-color: #00ffff;
-            box-shadow: 0 0 15px #00ffff;
-        }
-        
-        .payment-method.selected {
-            border-color: #00ffff;
-            background: linear-gradient(135deg, #ff44ff20, #00ffff20);
-            box-shadow: 0 0 15px #00ffff;
-        }
-        
-        .payment-method .emoji {
-            font-size: 1.5rem;
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .payment-method .name {
-            color: white;
-            font-size: 0.55rem;
         }
         
         .price-display {
@@ -776,6 +822,16 @@
             background: linear-gradient(135deg, #ff44ff, #00ffff);
         }
         
+        .wallet-bottom-btn {
+            background: #000000aa;
+            padding: 5px 12px;
+            border-radius: 18px;
+            color: #0ff;
+            cursor: pointer;
+            font-size: 0.5rem;
+            border: 1px solid #0ff;
+        }
+        
         .settings-bottom-btn {
             background: #000000aa;
             padding: 5px 12px;
@@ -823,11 +879,6 @@
             cursor: pointer;
             font-size: 0.5rem;
             border: 1px solid #0ff;
-        }
-        
-        /* Language Dropdown (removed, now in settings) */
-        .lang-dropdown {
-            display: none;
         }
 
         /* ========== SECURITY PANEL ========== */
@@ -1353,11 +1404,8 @@
             <div id="settingsModal" class="settings-modal">
                 <div class="settings-card">
                     <h3>⚙️ Settings</h3>
-                    
                     <div class="avatar-section">
-                        <div class="avatar-preview" id="avatarPreview">
-                            😎
-                        </div>
+                        <div class="avatar-preview" id="avatarPreview">😎</div>
                         <div class="avatar-options" id="avatarOptions">
                             <div class="avatar-option" data-avatar="😎">😎</div>
                             <div class="avatar-option" data-avatar="👤">👤</div>
@@ -1371,7 +1419,6 @@
                             <div class="avatar-option" data-avatar="⭐">⭐</div>
                         </div>
                     </div>
-                    
                     <div class="language-section">
                         <label>🌐 Language / اللغة</label>
                         <select id="settingsLangSelect" class="lang-select">
@@ -1388,18 +1435,115 @@
                             <option value="ko">🇰🇷 한국어</option>
                         </select>
                     </div>
-                    
                     <button class="save-settings-btn" id="saveSettingsBtn">💾 Save Settings</button>
                     <button class="close-settings" id="closeSettingsBtn">Cancel</button>
                 </div>
             </div>
             
-            <!-- Unified Payment Modal -->
+            <!-- Wallet Modal - All payment methods collected -->
+            <div id="walletModal" class="wallet-modal">
+                <div class="wallet-card">
+                    <h3>💳 Wallet</h3>
+                    <p>Choose your payment method</p>
+                    <div class="wallet-methods" id="walletMethods">
+                        <div class="wallet-method" data-method="visa">
+                            <span class="emoji">💳</span>
+                            <span class="name">Visa/MasterCard</span>
+                        </div>
+                        <div class="wallet-method" data-method="paypal">
+                            <span class="emoji">🅿️</span>
+                            <span class="name">PayPal</span>
+                        </div>
+                        <div class="wallet-method" data-method="applepay">
+                            <span class="emoji">🍎</span>
+                            <span class="name">Apple Pay</span>
+                        </div>
+                        <div class="wallet-method" data-method="googlepay">
+                            <span class="emoji">🤖</span>
+                            <span class="name">Google Pay</span>
+                        </div>
+                        <div class="wallet-method" data-method="crypto">
+                            <span class="emoji">₿</span>
+                            <span class="name">Bitcoin</span>
+                        </div>
+                        <div class="wallet-method" data-method="eth">
+                            <span class="emoji">⟠</span>
+                            <span class="name">Ethereum</span>
+                        </div>
+                        <div class="wallet-method" data-method="usdt">
+                            <span class="emoji">💎</span>
+                            <span class="name">USDT</span>
+                        </div>
+                        <div class="wallet-method" data-method="binance">
+                            <span class="emoji">🟡</span>
+                            <span class="name">Binance Pay</span>
+                        </div>
+                        <div class="wallet-method" data-method="mada">
+                            <span class="emoji">💳</span>
+                            <span class="name">Mada</span>
+                        </div>
+                        <div class="wallet-method" data-method="stcpay">
+                            <span class="emoji">📱</span>
+                            <span class="name">STC Pay</span>
+                        </div>
+                        <div class="wallet-method" data-method="urpay">
+                            <span class="emoji">🏦</span>
+                            <span class="name">UR Pay</span>
+                        </div>
+                        <div class="wallet-method" data-method="vodafone">
+                            <span class="emoji">📞</span>
+                            <span class="name">Vodafone Cash</span>
+                        </div>
+                        <div class="wallet-method" data-method="dtwallet">
+                            <span class="emoji">📱</span>
+                            <span class="name">DT Wallet</span>
+                        </div>
+                        <div class="wallet-method" data-method="flouci">
+                            <span class="emoji">💙</span>
+                            <span class="name">flouci</span>
+                        </div>
+                        <div class="wallet-method" data-method="mydinar">
+                            <span class="emoji">📞</span>
+                            <span class="name">My Dinar</span>
+                        </div>
+                        <div class="wallet-method" data-method="tunisietelecom">
+                            <span class="emoji">📱</span>
+                            <span class="name">Tunisie Telecom Cash</span>
+                        </div>
+                        <div class="wallet-method" data-method="zitouna">
+                            <span class="emoji">🏦</span>
+                            <span class="name">Banque Zitouna</span>
+                        </div>
+                        <div class="wallet-method" data-method="attijari">
+                            <span class="emoji">🏦</span>
+                            <span class="name">Attijari Mobile</span>
+                        </div>
+                        <div class="wallet-method" data-method="biat">
+                            <span class="emoji">🏦</span>
+                            <span class="name">BIAT e-Payment</span>
+                        </div>
+                        <div class="wallet-method" data-method="stb">
+                            <span class="emoji">🏦</span>
+                            <span class="name">STB Payment</span>
+                        </div>
+                        <div class="wallet-method" data-method="ubci">
+                            <span class="emoji">🏦</span>
+                            <span class="name">UBCI e-Transaction</span>
+                        </div>
+                        <div class="wallet-method" data-method="bhbank">
+                            <span class="emoji">🏦</span>
+                            <span class="name">BH Bank Payment</span>
+                        </div>
+                    </div>
+                    <button class="close-wallet" id="closeWalletBtn">Close</button>
+                </div>
+            </div>
+            
+            <!-- VIP Payment Modal -->
             <div id="paymentModal" class="payment-modal">
                 <div class="payment-card">
                     <h3 id="paymentTitle">💎 VIP Membership</h3>
-                    <p id="paymentDesc">Choose your currency and payment method</p>
-                    
+                    <p id="paymentDesc">Choose your currency</p>
                     <div class="currency-selector" id="currencySelector">
                         <div class="currency-btn" data-currency="USD" data-symbol="$" data-rate="1">🇺🇸 USD $</div>
                         <div class="currency-btn" data-currency="EUR" data-symbol="€" data-rate="0.92">🇪🇺 EUR €</div>
@@ -1415,38 +1559,11 @@
                         <div class="currency-btn" data-currency="KRW" data-symbol="₩" data-rate="1380">🇰🇷 KRW ₩</div>
                         <div class="currency-btn" data-currency="TND" data-symbol="د.ت" data-rate="3.10">🇹🇳 TND د.ت</div>
                     </div>
-                    
-                    <div class="payment-methods" id="paymentMethods">
-                        <div class="payment-method" data-method="visa"><span class="emoji">💳</span><span class="name">Visa/MasterCard</span></div>
-                        <div class="payment-method" data-method="paypal"><span class="emoji">🅿️</span><span class="name">PayPal</span></div>
-                        <div class="payment-method" data-method="applepay"><span class="emoji">🍎</span><span class="name">Apple Pay</span></div>
-                        <div class="payment-method" data-method="googlepay"><span class="emoji">🤖</span><span class="name">Google Pay</span></div>
-                        <div class="payment-method" data-method="crypto"><span class="emoji">₿</span><span class="name">Bitcoin</span></div>
-                        <div class="payment-method" data-method="eth"><span class="emoji">⟠</span><span class="name">Ethereum</span></div>
-                        <div class="payment-method" data-method="usdt"><span class="emoji">💎</span><span class="name">USDT</span></div>
-                        <div class="payment-method" data-method="binance"><span class="emoji">🟡</span><span class="name">Binance Pay</span></div>
-                        <div class="payment-method" data-method="mada"><span class="emoji">💳</span><span class="name">Mada</span></div>
-                        <div class="payment-method" data-method="stcpay"><span class="emoji">📱</span><span class="name">STC Pay</span></div>
-                        <div class="payment-method" data-method="urpay"><span class="emoji">🏦</span><span class="name">UR Pay</span></div>
-                        <div class="payment-method" data-method="vodafone"><span class="emoji">📞</span><span class="name">Vodafone Cash</span></div>
-                        <div class="payment-method" data-method="dtwallet"><span class="emoji">📱</span><span class="name">DT Wallet</span></div>
-                        <div class="payment-method" data-method="flouci"><span class="emoji">💙</span><span class="name">flouci</span></div>
-                        <div class="payment-method" data-method="mydinar"><span class="emoji">📞</span><span class="name">My Dinar</span></div>
-                        <div class="payment-method" data-method="tunisietelecom"><span class="emoji">📱</span><span class="name">Tunisie Telecom Cash</span></div>
-                        <div class="payment-method" data-method="zitouna"><span class="emoji">🏦</span><span class="name">Banque Zitouna</span></div>
-                        <div class="payment-method" data-method="attijari"><span class="emoji">🏦</span><span class="name">Attijari Mobile</span></div>
-                        <div class="payment-method" data-method="biat"><span class="emoji">🏦</span><span class="name">BIAT e-Payment</span></div>
-                        <div class="payment-method" data-method="stb"><span class="emoji">🏦</span><span class="name">STB Payment</span></div>
-                        <div class="payment-method" data-method="ubci"><span class="emoji">🏦</span><span class="name">UBCI e-Transaction</span></div>
-                        <div class="payment-method" data-method="bhbank"><span class="emoji">🏦</span><span class="name">BH Bank Payment</span></div>
-                    </div>
-                    
                     <div class="price-display">
                         <span class="price" id="priceAmount">9.99</span>
                         <span class="currency-symbol" id="priceCurrency">$</span>
                         <span class="price-period">/ month</span>
                     </div>
-                    
                     <button class="pay-btn" id="payNowBtn">💎 Pay Now & Upgrade VIP</button>
                     <button class="close-payment" id="closePaymentBtn">Cancel</button>
                 </div>
@@ -1469,6 +1586,7 @@
             <span>💬</span>
         </div>
         <div style="display: flex; gap: 5px;">
+            <div class="wallet-bottom-btn" id="walletBtn">💳 Wallet</div>
             <div class="settings-bottom-btn" id="settingsBtn">⚙️ Settings</div>
             <div class="music-bottom-btn" id="musicBtn" onclick="toggleMusic()">🎵 Play</div>
         </div>
@@ -1605,7 +1723,7 @@
             back: "🔙 Back",
             langLabel: "🌐 EN",
             paymentTitle: "💎 VIP Membership",
-            paymentDesc: "Choose your currency and payment method",
+            paymentDesc: "Choose your currency",
             payNow: "💎 Pay Now & Upgrade VIP",
             cancel: "Cancel",
             paymentSuccess: "🎉 Payment successful! You are now a VIP member!",
@@ -1666,7 +1784,7 @@
             back: "🔙 العودة",
             langLabel: "🌐 AR",
             paymentTitle: "💎 عضوية VIP",
-            paymentDesc: "اختر العملة وطريقة الدفع",
+            paymentDesc: "اختر العملة",
             payNow: "💎 ادفع الآن وفعّل VIP",
             cancel: "إلغاء",
             paymentSuccess: "🎉 تم الدفع بنجاح! أصبحت عضواً مميزاً",
@@ -1727,7 +1845,7 @@
             back: "🔙 Retour",
             langLabel: "🇫🇷 FR",
             paymentTitle: "💎 Abonnement VIP",
-            paymentDesc: "Choisissez votre devise et méthode de paiement",
+            paymentDesc: "Choisissez votre devise",
             payNow: "💎 Payer et devenir VIP",
             cancel: "Annuler",
             paymentSuccess: "🎉 Paiement réussi! Vous êtes maintenant membre VIP!",
@@ -1788,7 +1906,7 @@
             back: "🔙 Volver",
             langLabel: "🇪🇸 ES",
             paymentTitle: "💎 Membresía VIP",
-            paymentDesc: "Elija su moneda y método de pago",
+            paymentDesc: "Elija su moneda",
             payNow: "💎 Pagar y ser VIP",
             cancel: "Cancelar",
             paymentSuccess: "🎉 ¡Pago exitoso! ¡Ahora eres miembro VIP!",
@@ -1849,7 +1967,7 @@
             back: "🔙 Zurück",
             langLabel: "🇩🇪 DE",
             paymentTitle: "💎 VIP-Mitgliedschaft",
-            paymentDesc: "Wählen Sie Ihre Währung und Zahlungsmethode",
+            paymentDesc: "Wählen Sie Ihre Währung",
             payNow: "💎 Jetzt bezahlen und VIP werden",
             cancel: "Abbrechen",
             paymentSuccess: "🎉 Zahlung erfolgreich! Sie sind jetzt VIP-Mitglied!",
@@ -1910,7 +2028,7 @@
             back: "🔙 Indietro",
             langLabel: "🇮🇹 IT",
             paymentTitle: "💎 Abbonamento VIP",
-            paymentDesc: "Scegli la tua valuta e metodo di pagamento",
+            paymentDesc: "Scegli la tua valuta",
             payNow: "💎 Paga ora e diventa VIP",
             cancel: "Annulla",
             paymentSuccess: "🎉 Pagamento riuscito! Ora sei un membro VIP!",
@@ -1971,7 +2089,7 @@
             back: "🔙 Voltar",
             langLabel: "🇵🇹 PT",
             paymentTitle: "💎 Assinatura VIP",
-            paymentDesc: "Escolha sua moeda e método de pagamento",
+            paymentDesc: "Escolha sua moeda",
             payNow: "💎 Pagar agora e ser VIP",
             cancel: "Cancelar",
             paymentSuccess: "🎉 Pagamento bem-sucedido! Agora você é membro VIP!",
@@ -2032,7 +2150,7 @@
             back: "🔙 Назад",
             langLabel: "🇷🇺 RU",
             paymentTitle: "💎 VIP-подписка",
-            paymentDesc: "Выберите валюту и способ оплаты",
+            paymentDesc: "Выберите валюту",
             payNow: "💎 Оплатить и стать VIP",
             cancel: "Отмена",
             paymentSuccess: "🎉 Оплата прошла успешно! Теперь вы VIP-участник!",
@@ -2093,7 +2211,7 @@
             back: "🔙 返回",
             langLabel: "🇨🇳 中文",
             paymentTitle: "💎 VIP会员",
-            paymentDesc: "选择您的货币和支付方式",
+            paymentDesc: "选择您的货币",
             payNow: "💎 立即支付并升级VIP",
             cancel: "取消",
             paymentSuccess: "🎉 支付成功！您现在已经是VIP会员！",
@@ -2154,7 +2272,7 @@
             back: "🔙 戻る",
             langLabel: "🇯🇵 日本語",
             paymentTitle: "💎 VIPメンバーシップ",
-            paymentDesc: "通貨と支払い方法を選択してください",
+            paymentDesc: "通貨を選択してください",
             payNow: "💎 今すぐ支払ってVIPにアップグレード",
             cancel: "キャンセル",
             paymentSuccess: "🎉 支払い成功！VIPメンバーになりました！",
@@ -2215,7 +2333,7 @@
             back: "🔙 뒤로",
             langLabel: "🇰🇷 한국어",
             paymentTitle: "💎 VIP 멤버십",
-            paymentDesc: "통화와 결제 방법을 선택하세요",
+            paymentDesc: "통화를 선택하세요",
             payNow: "💎 지금 결제하고 VIP 업그레이드",
             cancel: "취소",
             paymentSuccess: "🎉 결제 성공! 이제 VIP 회원이 되셨습니다!",
@@ -2232,11 +2350,8 @@
     
     // ==================== Settings Functions ====================
     function openSettingsModal() {
-        // Load current settings into modal
         document.getElementById('avatarPreview').innerHTML = currentAvatar;
         document.getElementById('settingsLangSelect').value = currentLang;
-        
-        // Highlight selected avatar
         document.querySelectorAll('.avatar-option').forEach(opt => {
             if (opt.dataset.avatar === currentAvatar) {
                 opt.classList.add('selected');
@@ -2244,7 +2359,6 @@
                 opt.classList.remove('selected');
             }
         });
-        
         document.getElementById('settingsModal').style.display = 'flex';
     }
     
@@ -2253,42 +2367,41 @@
     }
     
     function saveSettings() {
-        // Save language
         const newLang = document.getElementById('settingsLangSelect').value;
         if (newLang !== currentLang) {
             setLanguage(newLang);
         }
-        
-        // Save avatar
         const selectedAvatar = document.querySelector('.avatar-option.selected');
         if (selectedAvatar) {
             currentAvatar = selectedAvatar.dataset.avatar;
             localStorage.setItem('didogame_avatar', currentAvatar);
             document.getElementById('avatarPreview').innerHTML = currentAvatar;
-            // Update main avatar image - change the character image to emoji style
             const mainAvatarDiv = document.getElementById('mainAvatarImg');
-            if (mainAvatarDiv) {
-                // Instead of background image, show emoji
-                mainAvatarDiv.style.background = 'linear-gradient(135deg, #ff44ff, #00ffff)';
-                mainAvatarDiv.style.display = 'flex';
-                mainAvatarDiv.style.alignItems = 'center';
-                mainAvatarDiv.style.justifyContent = 'center';
-                mainAvatarDiv.style.fontSize = '3rem';
-                mainAvatarDiv.innerHTML = `<div class="controller-on-hand">🎮</div>${currentAvatar}`;
-                mainAvatarDiv.style.backgroundSize = 'cover';
-            }
+            mainAvatarDiv.style.background = 'linear-gradient(135deg, #ff44ff, #00ffff)';
+            mainAvatarDiv.style.display = 'flex';
+            mainAvatarDiv.style.alignItems = 'center';
+            mainAvatarDiv.style.justifyContent = 'center';
+            mainAvatarDiv.style.fontSize = '3rem';
+            mainAvatarDiv.innerHTML = `<div class="controller-on-hand">🎮</div>${currentAvatar}`;
         }
-        
         closeSettingsModal();
     }
     
-    // Avatar selection
     function selectAvatarOption(element) {
         document.querySelectorAll('.avatar-option').forEach(opt => {
             opt.classList.remove('selected');
         });
         element.classList.add('selected');
         document.getElementById('avatarPreview').innerHTML = element.dataset.avatar;
+    }
+    
+    // ==================== Wallet Functions ====================
+    function openWalletModal() {
+        document.getElementById('walletModal').style.display = 'flex';
+    }
+    
+    function closeWalletModal() {
+        document.getElementById('walletModal').style.display = 'none';
     }
     
     // ==================== Language Functions ====================
@@ -2415,26 +2528,12 @@
     }
     
     function processPayment() {
-        const selectedMethod = document.querySelector('.payment-method.selected');
-        if(!selectedMethod) {
-            alert("Please select a payment method");
-            return;
-        }
-        
         const t = translations[currentLang];
-        
         setTimeout(() => {
             alert(t.paymentSuccess);
             closePaymentModal();
             upgradeToVIP();
         }, 1500);
-    }
-    
-    function selectPaymentMethod(element) {
-        document.querySelectorAll('.payment-method').forEach(m => {
-            m.classList.remove('selected');
-        });
-        element.classList.add('selected');
     }
     
     function upgradeToVIP() {
@@ -2602,16 +2701,20 @@
         });
     });
     
-    // Payment method selection
-    document.querySelectorAll('.payment-method').forEach(method => {
-        method.addEventListener('click', () => selectPaymentMethod(method));
-    });
-    
     document.getElementById('payNowBtn').addEventListener('click', processPayment);
     document.getElementById('closePaymentBtn').addEventListener('click', closePaymentModal);
     document.getElementById('paymentModal').addEventListener('click', (e) => {
         if (e.target === document.getElementById('paymentModal')) {
             closePaymentModal();
+        }
+    });
+    
+    // Wallet button and modal
+    document.getElementById('walletBtn').addEventListener('click', openWalletModal);
+    document.getElementById('closeWalletBtn').addEventListener('click', closeWalletModal);
+    document.getElementById('walletModal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('walletModal')) {
+            closeWalletModal();
         }
     });
     
