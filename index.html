@@ -359,7 +359,7 @@
             border: 2px solid #ff44ff;
             border-radius: 20px;
             padding: 22px 12px;
-            margin: 8px 0 8px 0;
+            margin: 8px 0 6px 0;
             text-align: center;
             color: white;
             font-size: 1rem;
@@ -374,14 +374,14 @@
             100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
         }
 
-        /* Games - moved up to make spacing equal between ad and games = games and bottom bar */
+        /* Games - moved up to balance spacing */
         .games-wrapper {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            padding-bottom: 8px;
+            padding-bottom: 6px;
             margin-top: 0;
-            margin-bottom: 6px;
+            margin-bottom: 0;
         }
         
         .game-row {
@@ -1086,14 +1086,9 @@
             <!-- More Categories Modal -->
             <div id="moreModal" class="more-modal">
                 <div class="more-modal-content">
-                    <h3>🎮 More Game Categories</h3>
-                    <div class="more-categories-list">
-                        <div class="more-cat-badge" data-cat="battle">🔫 Battle Royale</div>
-                        <div class="more-cat-badge" data-cat="sports">⚽ Sports</div>
-                        <div class="more-cat-badge" data-cat="strategy">🧠 Strategy</div>
-                        <div class="more-cat-badge" data-cat="horror">👻 Horror</div>
-                        <div class="more-cat-badge" data-cat="rpg">⚔️ RPG</div>
-                        <div class="more-cat-badge" data-cat="simulation">🏙️ Simulation</div>
+                    <h3 id="moreModalTitle">🎮 More Game Categories</h3>
+                    <div class="more-categories-list" id="moreCategoriesList">
+                        <!-- Dynamic translated categories will be inserted here -->
                     </div>
                     <button class="close-more-modal" id="closeMoreModal">Close</button>
                 </div>
@@ -1102,7 +1097,7 @@
             <!-- ENLARGED AD AREA -->
             <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
             
-            <!-- Games Section - moved up to balance spacing -->
+            <!-- Games Section -->
             <div class="games-wrapper" id="gamesWrapper">
                 <!-- Dynamic game rows will be inserted here -->
             </div>
@@ -1217,7 +1212,7 @@
 </div>
 
 <script>
-    // ==================== Language Translations ====================
+    // ==================== Language Translations (11 Languages) ====================
     const translations = {
         en: {
             heroTagline: "😤 Neon Challenge Look!",
@@ -1228,6 +1223,13 @@
             moreBtn: "➕ More",
             moreTitle: "🎮 More Game Categories",
             closeBtn: "Close",
+            // More Categories translations
+            catBattle: "🔫 Battle Royale",
+            catSports: "⚽ Sports",
+            catStrategy: "🧠 Strategy",
+            catHorror: "👻 Horror",
+            catRpg: "⚔️ RPG",
+            catSimulation: "🏙️ Simulation",
             upgradeVIP: "👑 Upgrade VIP",
             vipActive: "👑 VIP Active",
             playMusic: "🎵 Play",
@@ -1277,6 +1279,12 @@
             moreBtn: "➕ المزيد",
             moreTitle: "🎮 المزيد من أنواع الألعاب",
             closeBtn: "إغلاق",
+            catBattle: "🔫 معركة رويال",
+            catSports: "⚽ رياضات",
+            catStrategy: "🧠 استراتيجية",
+            catHorror: "👻 رعب",
+            catRpg: "⚔️ آر بي جي",
+            catSimulation: "🏙️ محاكاة",
             upgradeVIP: "👑 ترقية VIP",
             vipActive: "👑 VIP مفعل",
             playMusic: "🎵 تشغيل",
@@ -1326,6 +1334,12 @@
             moreBtn: "➕ Plus",
             moreTitle: "🎮 Plus de catégories de jeux",
             closeBtn: "Fermer",
+            catBattle: "🔫 Battle Royale",
+            catSports: "⚽ Sports",
+            catStrategy: "🧠 Stratégie",
+            catHorror: "👻 Horreur",
+            catRpg: "⚔️ RPG",
+            catSimulation: "🏙️ Simulation",
             upgradeVIP: "👑 Passer VIP",
             vipActive: "👑 VIP Actif",
             playMusic: "🎵 Lecture",
@@ -1375,6 +1389,12 @@
             moreBtn: "➕ Más",
             moreTitle: "🎮 Más categorías de juegos",
             closeBtn: "Cerrar",
+            catBattle: "🔫 Battle Royale",
+            catSports: "⚽ Deportes",
+            catStrategy: "🧠 Estrategia",
+            catHorror: "👻 Terror",
+            catRpg: "⚔️ RPG",
+            catSimulation: "🏙️ Simulación",
             upgradeVIP: "👑 Mejorar a VIP",
             vipActive: "👑 VIP Activo",
             playMusic: "🎵 Reproducir",
@@ -1424,6 +1444,12 @@
             moreBtn: "➕ Mehr",
             moreTitle: "🎮 Weitere Spielkategorien",
             closeBtn: "Schließen",
+            catBattle: "🔫 Battle Royale",
+            catSports: "⚽ Sport",
+            catStrategy: "🧠 Strategie",
+            catHorror: "👻 Horror",
+            catRpg: "⚔️ RPG",
+            catSimulation: "🏙️ Simulation",
             upgradeVIP: "👑 VIP Upgraden",
             vipActive: "👑 VIP Aktiv",
             playMusic: "🎵 Abspielen",
@@ -1473,6 +1499,12 @@
             moreBtn: "➕ Altro",
             moreTitle: "🎮 Altre categorie di giochi",
             closeBtn: "Chiudi",
+            catBattle: "🔫 Battle Royale",
+            catSports: "⚽ Sport",
+            catStrategy: "🧠 Strategia",
+            catHorror: "👻 Horror",
+            catRpg: "⚔️ RPG",
+            catSimulation: "🏙️ Simulazione",
             upgradeVIP: "👑 Passa a VIP",
             vipActive: "👑 VIP Attivo",
             playMusic: "🎵 Riproduci",
@@ -1522,6 +1554,12 @@
             moreBtn: "➕ Mais",
             moreTitle: "🎮 Mais categorias de jogos",
             closeBtn: "Fechar",
+            catBattle: "🔫 Battle Royale",
+            catSports: "⚽ Esportes",
+            catStrategy: "🧠 Estratégia",
+            catHorror: "👻 Terror",
+            catRpg: "⚔️ RPG",
+            catSimulation: "🏙️ Simulação",
             upgradeVIP: "👑 Upgrade para VIP",
             vipActive: "👑 VIP Ativo",
             playMusic: "🎵 Tocar",
@@ -1571,6 +1609,12 @@
             moreBtn: "➕ Ещё",
             moreTitle: "🎮 Больше категорий игр",
             closeBtn: "Закрыть",
+            catBattle: "🔫 Королевская битва",
+            catSports: "⚽ Спорт",
+            catStrategy: "🧠 Стратегия",
+            catHorror: "👻 Ужасы",
+            catRpg: "⚔️ РПГ",
+            catSimulation: "🏙️ Симуляция",
             upgradeVIP: "👑 Повысить до VIP",
             vipActive: "👑 VIP Активен",
             playMusic: "🎵 Воспроизвести",
@@ -1620,6 +1664,12 @@
             moreBtn: "➕ 更多",
             moreTitle: "🎮 更多游戏类别",
             closeBtn: "关闭",
+            catBattle: "🔫 大逃杀",
+            catSports: "⚽ 体育",
+            catStrategy: "🧠 策略",
+            catHorror: "👻 恐怖",
+            catRpg: "⚔️ 角色扮演",
+            catSimulation: "🏙️ 模拟",
             upgradeVIP: "👑 升级VIP",
             vipActive: "👑 VIP激活",
             playMusic: "🎵 播放",
@@ -1669,6 +1719,12 @@
             moreBtn: "➕ もっと",
             moreTitle: "🎮 その他のゲームカテゴリー",
             closeBtn: "閉じる",
+            catBattle: "🔫 バトルロワイヤル",
+            catSports: "⚽ スポーツ",
+            catStrategy: "🧠 ストラテジー",
+            catHorror: "👻 ホラー",
+            catRpg: "⚔️ RPG",
+            catSimulation: "🏙️ シミュレーション",
             upgradeVIP: "👑 VIPアップグレード",
             vipActive: "👑 VIPアクティブ",
             playMusic: "🎵 再生",
@@ -1718,6 +1774,12 @@
             moreBtn: "➕ 더보기",
             moreTitle: "🎮 더 많은 게임 카테고리",
             closeBtn: "닫기",
+            catBattle: "🔫 배틀로얄",
+            catSports: "⚽ 스포츠",
+            catStrategy: "🧠 전략",
+            catHorror: "👻 호러",
+            catRpg: "⚔️ RPG",
+            catSimulation: "🏙️ 시뮬레이션",
             upgradeVIP: "👑 VIP 업그레이드",
             vipActive: "👑 VIP 활성화",
             playMusic: "🎵 재생",
@@ -1768,8 +1830,30 @@
         const t = translations[currentLang];
         document.getElementById('langBtn').innerHTML = t.langLabel;
         document.getElementById('moreCategoriesBtn').innerHTML = t.moreBtn;
-        document.querySelector('#moreModal h3').innerHTML = t.moreTitle;
+        document.getElementById('moreModalTitle').innerHTML = t.moreTitle;
         document.getElementById('closeMoreModal').innerHTML = t.closeBtn;
+        
+        // Update more categories list dynamically
+        const moreCategoriesList = document.getElementById('moreCategoriesList');
+        if (moreCategoriesList) {
+            moreCategoriesList.innerHTML = `
+                <div class="more-cat-badge" data-cat="battle">${t.catBattle}</div>
+                <div class="more-cat-badge" data-cat="sports">${t.catSports}</div>
+                <div class="more-cat-badge" data-cat="strategy">${t.catStrategy}</div>
+                <div class="more-cat-badge" data-cat="horror">${t.catHorror}</div>
+                <div class="more-cat-badge" data-cat="rpg">${t.catRpg}</div>
+                <div class="more-cat-badge" data-cat="simulation">${t.catSimulation}</div>
+            `;
+            // Re-attach event listeners
+            document.querySelectorAll('.more-cat-badge').forEach(badge => {
+                badge.addEventListener('click', () => {
+                    const category = badge.dataset.cat;
+                    document.getElementById('moreModal').style.display = 'none';
+                    showCategoryGames(category);
+                });
+            });
+        }
+        
         document.documentElement.lang = currentLang;
         
         if(currentLang === 'ar') {
@@ -1938,7 +2022,7 @@
         }
     });
     
-    // Add click handlers for more category badges
+    // Initial more categories click handlers (will be overridden by setLanguage)
     document.querySelectorAll('.more-cat-badge').forEach(badge => {
         badge.addEventListener('click', () => {
             const category = badge.dataset.cat;
