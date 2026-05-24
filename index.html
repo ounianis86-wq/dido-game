@@ -973,10 +973,7 @@
             text-overflow: ellipsis;
         }
 
-        /* ========== BOTTOM BAR - NEW ORGANIZATION ========== */
-        /* LEFT: 2 buttons (Settings + Favorites) */
-        /* CENTER: 1 button (Chat) */
-        /* RIGHT: 2 buttons (Wallet + VIP) */
+        /* BOTTOM BAR - NEW ORGANIZATION WITH NEON COLORS */
         .bottom-bar {
             display: flex;
             justify-content: space-between;
@@ -1060,9 +1057,30 @@
             color: #ff44ff;
         }
         
-        .settings-btn .icon { color: #00ffff; }
-        .favs-btn .icon { color: #ffcc00; }
-        .wallet-btn .icon { color: #ffd700; }
+        /* NEON COLORS FOR EACH BUTTON */
+        .settings-btn .icon { 
+            color: #00ffff; 
+            text-shadow: 0 0 5px #00ffff;
+        }
+        .settings-btn:hover .icon {
+            text-shadow: 0 0 15px #00ffff, 0 0 5px #00ffff;
+        }
+        
+        .favs-btn .icon { 
+            color: #ffcc00; 
+            text-shadow: 0 0 5px #ffcc00;
+        }
+        .favs-btn:hover .icon {
+            text-shadow: 0 0 15px #ffcc00, 0 0 5px #ffcc00;
+        }
+        
+        .wallet-btn .icon { 
+            color: #ffd700; 
+            text-shadow: 0 0 5px #ffd700;
+        }
+        .wallet-btn:hover .icon {
+            text-shadow: 0 0 15px #ffd700, 0 0 5px #ffd700;
+        }
         
         .vip-btn {
             background: linear-gradient(135deg, rgba(255,68,255,0.2), rgba(0,255,255,0.2));
@@ -1074,6 +1092,13 @@
         .vip-btn .icon {
             color: #ff44ff;
             font-size: 1.2rem;
+            text-shadow: 0 0 5px #ff44ff;
+            animation: vipGlow 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes vipGlow {
+            0%, 100% { text-shadow: 0 0 5px #ff44ff; }
+            50% { text-shadow: 0 0 15px #ff44ff, 0 0 5px #ff00aa; }
         }
         
         .vip-btn .label {
@@ -1090,6 +1115,7 @@
         .vip-btn.active .icon {
             color: #00ffff;
             text-shadow: 0 0 5px #00ffff;
+            animation: none;
         }
         
         .chat-center-btn {
@@ -1099,6 +1125,12 @@
             box-shadow: 0 0 15px rgba(255,68,255,0.5);
             transition: all 0.3s ease;
             border: 1px solid rgba(255,255,255,0.2);
+            animation: chatPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes chatPulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(255,68,255,0.5); }
+            50% { box-shadow: 0 0 25px rgba(255,68,255,0.8), 0 0 10px rgba(0,255,255,0.5); }
         }
         
         .chat-center-btn::before {
@@ -1108,6 +1140,7 @@
         .chat-center-btn .icon {
             font-size: 1.2rem;
             color: white;
+            text-shadow: 0 0 5px white;
         }
         
         .chat-center-btn .label {
@@ -1121,36 +1154,78 @@
             box-shadow: 0 0 25px rgba(255,68,255,0.8), 0 0 15px rgba(0,255,255,0.5);
         }
 
-        /* ========== CHAT PAGE - CENTERED BEAUTIFULLY ========== */
-        .chat-page {
+        /* CHAT POPUP MODAL */
+        .chat-popup-overlay {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(15px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInPopup 0.3s ease;
+        }
+        
+        @keyframes fadeInPopup {
+            from { opacity: 0; backdrop-filter: blur(0); }
+            to { opacity: 1; backdrop-filter: blur(15px); }
+        }
+        
+        .chat-popup-container {
+            position: relative;
             width: 95%;
-            max-width: 500px;
-            height: 90%;
+            max-width: 520px;
+            height: 85%;
             max-height: 700px;
+            animation: zoomInPopup 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+        }
+        
+        @keyframes zoomInPopup {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .close-chat-popup {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff3366, #ff44ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: 2px solid white;
+            z-index: 2010;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 15px rgba(255,51,102,0.5);
+        }
+        
+        .close-chat-popup:hover {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #ff5555, #ff66ff);
+            box-shadow: 0 0 25px rgba(255,51,102,0.8);
+        }
+        
+        /* Chat Page Styles (unchanged, just wrapped in popup) */
+        .chat-page {
+            width: 100%;
+            height: 100%;
             background: linear-gradient(145deg, #0a0a1a, #0f0f2a);
-            z-index: 1000;
             display: flex;
             flex-direction: column;
             border-radius: 30px;
             border: 2px solid #ff44ff;
             box-shadow: 0 0 50px rgba(255,68,255,0.5), 0 20px 40px rgba(0,0,0,0.5);
-            animation: zoomIn 0.3s ease;
             overflow: hidden;
-        }
-        
-        @keyframes zoomIn {
-            from {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
         }
         
         .messenger-full {
@@ -1483,7 +1558,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.95);
-            z-index: 1200;
+            z-index: 2100;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1560,7 +1635,7 @@
             width: 100%;
             height: 100%;
             background: #000000ee;
-            z-index: 2000;
+            z-index: 2200;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1590,6 +1665,80 @@
         
         .hidden {
             display: none;
+        }
+        
+        .security-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(145deg, #1a1a2e, #0f0f1a);
+            border-radius: 35px;
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 60px rgba(255,68,255,0.4);
+            z-index: 2300;
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            animation: modalPop 0.3s ease;
+        }
+        
+        @keyframes modalPop {
+            from { transform: translate(-50%, -50%) scale(0.9); opacity: 0; }
+            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+        
+        .security-input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,68,255,0.5);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .security-input:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0,255,255,0.3);
+        }
+        
+        .security-btn {
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            padding: 14px;
+            border-radius: 30px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .security-btn:hover {
+            transform: scale(1.02);
+        }
+        
+        .create-btn {
+            background: rgba(255,68,255,0.2);
+            border: 1px solid #ff44ff;
+            padding: 8px 16px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+            width: fit-content;
+        }
+        
+        .create-btn:hover {
+            background: rgba(255,68,255,0.4);
+            transform: translateX(-3px);
         }
     </style>
 </head>
@@ -1755,15 +1904,12 @@
         </div>
         
         <div id="categoryPage" class="page page-hidden">
-            <button class="create-btn" id="backToHomeBtn" style="margin-bottom:10px;">🔙 Back</button>
+            <button class="create-btn" id="backToHomeBtn">🔙 Back</button>
             <div class="games-wrapper" id="categoryGamesContainer"></div>
         </div>
     </div>
     
-    <!-- BOTTOM BAR - NEW ORGANIZATION -->
-    <!-- LEFT: Settings + Favorites (2 buttons) -->
-    <!-- CENTER: Chat (1 button) -->
-    <!-- RIGHT: Wallet + VIP (2 buttons) -->
+    <!-- BOTTOM BAR WITH NEON COLORS -->
     <div class="bottom-bar">
         <div class="bottom-left">
             <button class="nav-btn settings-btn" id="settingsBtn">
@@ -1794,6 +1940,55 @@
     </div>
 </div>
 
+<!-- CHAT POPUP MODAL -->
+<div id="chatPopupOverlay" class="chat-popup-overlay">
+    <div class="chat-popup-container">
+        <div class="close-chat-popup" id="closeChatPopupBtn">✕</div>
+        <div id="chatPage" class="chat-page">
+            <div class="messenger-full">
+                <div id="inboxView" style="display: flex; flex-direction: column; height: 100%;">
+                    <div class="messenger-header">
+                        <div class="header-left">
+                            <button class="back-btn" id="closeChatFromInbox">✕</button>
+                            <h2 id="chatsTitle">Chats</h2>
+                        </div>
+                        <div class="header-actions">
+                            <span id="newChatBtn" style="cursor: pointer;">✏️</span>
+                            <span>☰</span>
+                        </div>
+                    </div>
+                    <div class="chats-list" id="chatsListContainer"></div>
+                </div>
+                
+                <div id="openChatView" style="display: none; flex-direction: column; height: 100%;">
+                    <div class="chat-header">
+                        <button class="back-btn" id="backToInboxBtn">←</button>
+                        <div class="chat-header-info">
+                            <div class="chat-header-name" id="openChatRoomName">Room</div>
+                            <div class="chat-header-status" id="openChatStatus">🟢 Online</div>
+                        </div>
+                        <div class="chat-header-actions">
+                            <span id="videoCallBtn" style="cursor: pointer; display: none;">🎥</span>
+                            <span>⋮</span>
+                        </div>
+                    </div>
+                    <div class="messages-area" id="openChatMessages"></div>
+                    <div class="typing-indicator" id="typingIndicator" style="display: none;">✍️ Someone is typing...</div>
+                    <div class="message-input-area">
+                        <div class="input-wrapper">
+                            <input type="text" id="openMessageInput" class="message-input" placeholder="Type a message...">
+                            <div class="input-actions">
+                                <button class="mic-btn" id="micBtnOpen" onclick="toggleMicrophoneOpen()">🎙️</button>
+                                <button class="send-btn" id="sendMsgOpen" onclick="sendMessageOpen()">📤</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="securityPanel" class="security-panel">
     <div class="security-card">
         <h2 id="securityTitle">🔐 Security Settings</h2>
@@ -1803,49 +1998,6 @@
         <input type="text" id="securityRoomName" class="security-input" placeholder="🏠 Room Name" value="Main Room">
         <button class="security-btn" id="securityBtn" onclick="submitSecurityAndEnter()">🚪 Enter Chat</button>
         <div class="security-hint" id="securityHint">💡 You can create a new room or join an existing one</div>
-    </div>
-</div>
-
-<div id="chatPage" class="chat-page hidden">
-    <div class="messenger-full">
-        <div id="inboxView" style="display: flex; flex-direction: column; height: 100%;">
-            <div class="messenger-header">
-                <div class="header-left">
-                    <button class="back-btn" id="closeChatFromInbox">✕</button>
-                    <h2 id="chatsTitle">Chats</h2>
-                </div>
-                <div class="header-actions">
-                    <span id="newChatBtn" style="cursor: pointer;">✏️</span>
-                    <span>☰</span>
-                </div>
-            </div>
-            <div class="chats-list" id="chatsListContainer"></div>
-        </div>
-        
-        <div id="openChatView" style="display: none; flex-direction: column; height: 100%;">
-            <div class="chat-header">
-                <button class="back-btn" id="backToInboxBtn">←</button>
-                <div class="chat-header-info">
-                    <div class="chat-header-name" id="openChatRoomName">Room</div>
-                    <div class="chat-header-status" id="openChatStatus">🟢 Online</div>
-                </div>
-                <div class="chat-header-actions">
-                    <span id="videoCallBtn" style="cursor: pointer; display: none;">🎥</span>
-                    <span>⋮</span>
-                </div>
-            </div>
-            <div class="messages-area" id="openChatMessages"></div>
-            <div class="typing-indicator" id="typingIndicator" style="display: none;">✍️ Someone is typing...</div>
-            <div class="message-input-area">
-                <div class="input-wrapper">
-                    <input type="text" id="openMessageInput" class="message-input" placeholder="Type a message...">
-                    <div class="input-actions">
-                        <button class="mic-btn" id="micBtnOpen" onclick="toggleMicrophoneOpen()">🎙️</button>
-                        <button class="send-btn" id="sendMsgOpen" onclick="sendMessageOpen()">📤</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -3183,7 +3335,7 @@
         if(videoStream) videoStream.getTracks().forEach(track => track.stop());
         audioStream = null;
         videoStream = null;
-        document.getElementById('chatPage').classList.add('hidden');
+        document.getElementById('chatPopupOverlay').style.display = 'none';
         document.getElementById('securityUsername').value = '';
         document.getElementById('securityRoomPassword').value = '';
         document.getElementById('securityRoomName').value = 'Main Room';
@@ -3496,7 +3648,7 @@
         localStorage.setItem('didogame_username', currentUser);
         
         document.getElementById('securityPanel').style.display = 'none';
-        document.getElementById('chatPage').classList.remove('hidden');
+        document.getElementById('chatPopupOverlay').style.display = 'flex';
         
         loadRooms();
         
@@ -3534,8 +3686,12 @@
     }
     
     // UI Events
+    document.getElementById('closeChatPopupBtn').addEventListener('click', () => {
+        document.getElementById('chatPopupOverlay').style.display = 'none';
+    });
+    
     document.getElementById('closeChatFromInbox').addEventListener('click', () => {
-        document.getElementById('chatPage').classList.add('hidden');
+        document.getElementById('chatPopupOverlay').style.display = 'none';
     });
     
     document.getElementById('backToInboxBtn').addEventListener('click', backToInbox);
@@ -3544,7 +3700,7 @@
     document.getElementById('openChatBtn').addEventListener('click', () => {
         const savedUser = localStorage.getItem('didogame_username');
         if(currentUser) {
-            document.getElementById('chatPage').classList.remove('hidden');
+            document.getElementById('chatPopupOverlay').style.display = 'flex';
             document.getElementById('inboxView').style.display = 'flex';
             document.getElementById('openChatView').style.display = 'none';
             renderChatsList();
@@ -3554,6 +3710,12 @@
             if(savedUser) {
                 document.getElementById('securityUsername').value = savedUser;
             }
+        }
+    });
+    
+    document.getElementById('chatPopupOverlay').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('chatPopupOverlay')) {
+            document.getElementById('chatPopupOverlay').style.display = 'none';
         }
     });
     
