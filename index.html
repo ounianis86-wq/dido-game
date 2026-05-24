@@ -352,7 +352,7 @@
             margin-top: 10px;
         }
 
-        /* Settings Modal */
+        /* Settings Modal - Now includes Music Control */
         .settings-modal {
             position: fixed;
             top: 0;
@@ -389,19 +389,19 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
         .avatar-preview {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            margin-bottom: 15px;
+            font-size: 2.5rem;
+            margin-bottom: 12px;
             border: 3px solid #ff44ff;
             cursor: pointer;
             transition: transform 0.2s;
@@ -414,20 +414,20 @@
         .avatar-options {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
             justify-content: center;
-            margin-top: 10px;
+            margin-top: 8px;
         }
         
         .avatar-option {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             background: rgba(255,68,255,0.3);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
             transition: all 0.2s;
             border: 1px solid #ff44ff;
@@ -453,22 +453,54 @@
             color: white;
             font-size: 0.8rem;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         
         .lang-select {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             border-radius: 25px;
             border: 1px solid #ff44ff;
             background: rgba(0,0,0,0.5);
             color: white;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
         }
         
-        .lang-select option {
-            background: #1a1a2e;
+        /* Music Control in Settings */
+        .music-control {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(255,68,255,0.1);
+            border-radius: 20px;
+        }
+        
+        .music-control label {
+            color: white;
+            font-size: 0.8rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .music-toggle-btn {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .music-toggle-btn:hover {
+            transform: scale(1.02);
         }
         
         .save-settings-btn {
@@ -1437,7 +1469,7 @@
                 </div>
             </div>
             
-            <!-- Settings Modal -->
+            <!-- Settings Modal (includes Music Control) -->
             <div id="settingsModal" class="settings-modal">
                 <div class="settings-card">
                     <h3>⚙️ Settings</h3>
@@ -1471,6 +1503,11 @@
                             <option value="ja">🇯🇵 日本語</option>
                             <option value="ko">🇰🇷 한국어</option>
                         </select>
+                    </div>
+                    <!-- Music Control inside Settings -->
+                    <div class="music-control">
+                        <label>🎵 Music Control</label>
+                        <button class="music-toggle-btn" id="musicToggleBtn">🎵 Play Music</button>
                     </div>
                     <button class="save-settings-btn" id="saveSettingsBtn">💾 Save Settings</button>
                     <button class="close-settings" id="closeSettingsBtn">Cancel</button>
@@ -1551,7 +1588,7 @@
         </div>
     </div>
     
-    <!-- Redesigned Bottom Bar with translated labels -->
+    <!-- Redesigned Bottom Bar (no music button) -->
     <div class="bottom-bar">
         <div class="bottom-left">
             <button class="nav-btn wallet-btn" id="walletBtn">
@@ -1575,10 +1612,6 @@
             <button class="nav-btn vip-btn" id="registerBtn">
                 <span class="icon">👑</span>
                 <span class="label" id="vipLabel">VIP</span>
-            </button>
-            <button class="nav-btn music-btn" id="musicBtn">
-                <span class="icon">🎵</span>
-                <span class="label" id="musicLabel">Music</span>
             </button>
         </div>
     </div>
@@ -1719,12 +1752,12 @@
             cancel: "Cancel",
             paymentSuccess: "🎉 Payment successful! You are now a VIP member!",
             paymentError: "❌ Payment failed. Please try again.",
-            // Bottom bar labels
             walletLabel: "Wallet",
             settingsLabel: "Settings",
             vipLabel: "VIP",
-            musicLabel: "Music",
-            chatLabel: "Chat"
+            chatLabel: "Chat",
+            musicOn: "🎵 Music ON",
+            musicOff: "🔇 Music OFF"
         },
         ar: {
             heroTagline: "😤 نظرة التحدي النيونية!",
@@ -1789,8 +1822,9 @@
             walletLabel: "المحفظة",
             settingsLabel: "الإعدادات",
             vipLabel: "VIP",
-            musicLabel: "الموسيقى",
-            chatLabel: "الدردشة"
+            chatLabel: "الدردشة",
+            musicOn: "🎵 الموسيقى قيد التشغيل",
+            musicOff: "🔇 الموسيقى متوقفة"
         },
         fr: {
             heroTagline: "😤 Look Challenge Néon!",
@@ -1855,8 +1889,9 @@
             walletLabel: "Portefeuille",
             settingsLabel: "Paramètres",
             vipLabel: "VIP",
-            musicLabel: "Musique",
-            chatLabel: "Discussion"
+            chatLabel: "Discussion",
+            musicOn: "🎵 Musique ON",
+            musicOff: "🔇 Musique OFF"
         },
         es: {
             heroTagline: "😤 ¡Look Desafío Neón!",
@@ -1921,8 +1956,9 @@
             walletLabel: "Billetera",
             settingsLabel: "Ajustes",
             vipLabel: "VIP",
-            musicLabel: "Música",
-            chatLabel: "Chat"
+            chatLabel: "Chat",
+            musicOn: "🎵 Música ON",
+            musicOff: "🔇 Música OFF"
         },
         de: {
             heroTagline: "😤 Neon Challenge Look!",
@@ -1987,8 +2023,9 @@
             walletLabel: "Geldbörse",
             settingsLabel: "Einstellungen",
             vipLabel: "VIP",
-            musicLabel: "Musik",
-            chatLabel: "Chat"
+            chatLabel: "Chat",
+            musicOn: "🎵 Musik ON",
+            musicOff: "🔇 Musik OFF"
         },
         it: {
             heroTagline: "😤 Look Sfida Neon!",
@@ -2053,8 +2090,9 @@
             walletLabel: "Portafoglio",
             settingsLabel: "Impostazioni",
             vipLabel: "VIP",
-            musicLabel: "Musica",
-            chatLabel: "Chat"
+            chatLabel: "Chat",
+            musicOn: "🎵 Musica ON",
+            musicOff: "🔇 Musica OFF"
         },
         pt: {
             heroTagline: "😤 Visual Desafio Neon!",
@@ -2119,8 +2157,9 @@
             walletLabel: "Carteira",
             settingsLabel: "Configurações",
             vipLabel: "VIP",
-            musicLabel: "Música",
-            chatLabel: "Bate-papo"
+            chatLabel: "Bate-papo",
+            musicOn: "🎵 Música ON",
+            musicOff: "🔇 Música OFF"
         },
         ru: {
             heroTagline: "😤 Неоновый вызов!",
@@ -2185,8 +2224,9 @@
             walletLabel: "Кошелек",
             settingsLabel: "Настройки",
             vipLabel: "VIP",
-            musicLabel: "Музыка",
-            chatLabel: "Чат"
+            chatLabel: "Чат",
+            musicOn: "🎵 Музыка ВКЛ",
+            musicOff: "🔇 Музыка ВЫКЛ"
         },
         zh: {
             heroTagline: "😤 霓虹挑战造型！",
@@ -2251,8 +2291,9 @@
             walletLabel: "钱包",
             settingsLabel: "设置",
             vipLabel: "VIP",
-            musicLabel: "音乐",
-            chatLabel: "聊天"
+            chatLabel: "聊天",
+            musicOn: "🎵 音乐开",
+            musicOff: "🔇 音乐关"
         },
         ja: {
             heroTagline: "😤 ネオンチャレンジルック！",
@@ -2317,8 +2358,9 @@
             walletLabel: "ウォレット",
             settingsLabel: "設定",
             vipLabel: "VIP",
-            musicLabel: "音楽",
-            chatLabel: "チャット"
+            chatLabel: "チャット",
+            musicOn: "🎵 音楽ON",
+            musicOff: "🔇 音楽OFF"
         },
         ko: {
             heroTagline: "😤 네온 챌린지 룩!",
@@ -2383,8 +2425,9 @@
             walletLabel: "지갑",
             settingsLabel: "설정",
             vipLabel: "VIP",
-            musicLabel: "음악",
-            chatLabel: "채팅"
+            chatLabel: "채팅",
+            musicOn: "🎵 음악 ON",
+            musicOff: "🔇 음악 OFF"
         }
     };
     
@@ -2396,11 +2439,53 @@
     let isVIP = false;
     let bgMusic = null;
     let isMusicPlaying = false;
+    let musicStarted = false;
+    
+    // ==================== Music Functions ====================
+    function initMusic() {
+        if (!bgMusic) {
+            bgMusic = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+            bgMusic.loop = true;
+            bgMusic.volume = 0.5;
+        }
+    }
+    
+    function startMusicOnFirstTouch() {
+        if (!musicStarted && bgMusic) {
+            bgMusic.play().catch(e => console.log("Auto-play prevented, waiting for user interaction"));
+            musicStarted = true;
+            isMusicPlaying = true;
+            updateMusicButtonText();
+        }
+    }
+    
+    function toggleMusic() {
+        initMusic();
+        if (isMusicPlaying) {
+            bgMusic.pause();
+            isMusicPlaying = false;
+        } else {
+            bgMusic.play().catch(e => console.log("Playback failed"));
+            isMusicPlaying = true;
+            musicStarted = true;
+        }
+        updateMusicButtonText();
+        localStorage.setItem('didogame_music', isMusicPlaying ? 'on' : 'off');
+    }
+    
+    function updateMusicButtonText() {
+        const musicBtn = document.getElementById('musicToggleBtn');
+        if (musicBtn) {
+            const t = translations[currentLang];
+            musicBtn.innerHTML = isMusicPlaying ? t.musicOn : t.musicOff;
+        }
+    }
     
     // ==================== Settings Functions ====================
     function openSettingsModal() {
         document.getElementById('avatarPreview').innerHTML = currentAvatar;
         document.getElementById('settingsLangSelect').value = currentLang;
+        updateMusicButtonText();
         document.querySelectorAll('.avatar-option').forEach(opt => {
             if (opt.dataset.avatar === currentAvatar) {
                 opt.classList.add('selected');
@@ -2471,8 +2556,9 @@
         document.getElementById('walletLabel').innerText = t.walletLabel;
         document.getElementById('settingsLabel').innerText = t.settingsLabel;
         document.getElementById('vipLabel').innerText = t.vipLabel;
-        document.getElementById('musicLabel').innerText = isMusicPlaying ? t.stopMusic : t.playMusic;
         document.getElementById('chatLabel').innerText = t.chatLabel;
+        
+        updateMusicButtonText();
         
         const registerBtn = document.getElementById('registerBtn');
         if(isVIP) {
@@ -2541,23 +2627,6 @@
         if(currentOpenRoom && document.getElementById('openChatView').style.display === 'flex') {
             displayMessagesInOpenChat();
         }
-    }
-    
-    // ==================== Music ====================
-    function toggleMusic() {
-        if(!bgMusic) {
-            bgMusic = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-            bgMusic.loop = true;
-            bgMusic.volume = 1.0;
-        }
-        if(isMusicPlaying) {
-            bgMusic.pause();
-            document.getElementById('musicLabel').innerText = translations[currentLang].playMusic;
-        } else {
-            bgMusic.play().catch(e => console.log("Auto-play prevented"));
-            document.getElementById('musicLabel').innerText = translations[currentLang].stopMusic;
-        }
-        isMusicPlaying = !isMusicPlaying;
     }
     
     // ==================== Payment System ====================
@@ -2772,6 +2841,9 @@
         }
     });
     
+    // Music toggle in settings
+    document.getElementById('musicToggleBtn').addEventListener('click', toggleMusic);
+    
     // Wallet button and modal
     document.getElementById('walletBtn').addEventListener('click', openWalletModal);
     document.getElementById('closeWalletBtn').addEventListener('click', closeWalletModal);
@@ -2799,11 +2871,28 @@
     // Register button (VIP)
     document.getElementById('registerBtn').addEventListener('click', openPaymentModal);
     
-    // Music button
-    document.getElementById('musicBtn').addEventListener('click', toggleMusic);
-    
     // Set default selected currency
     document.querySelector('.currency-btn[data-currency="USD"]').classList.add('active');
+    
+    // Initialize music on first touch anywhere on page
+    document.body.addEventListener('touchstart', function firstTouch() {
+        initMusic();
+        startMusicOnFirstTouch();
+        document.body.removeEventListener('touchstart', firstTouch);
+    });
+    document.body.addEventListener('click', function firstClick() {
+        initMusic();
+        startMusicOnFirstTouch();
+        document.body.removeEventListener('click', firstClick);
+    });
+    
+    // Load saved music state
+    const savedMusicState = localStorage.getItem('didogame_music');
+    if (savedMusicState === 'on') {
+        isMusicPlaying = true;
+    } else if (savedMusicState === 'off') {
+        isMusicPlaying = false;
+    }
     
     // ==================== Security Helpers ====================
     function encryptMessage(text) {
