@@ -1,122 +1,79 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <meta name="theme-color" content="#0a0a2a">
-    <meta name="description" content="DidoGame - منصة ألعاب احترافية مع محادثة ومكالمات فيديو">
-    <title>DidoGame | منصة الألعاب المتكاملة</title>
+    <title>DidoGame - 3D Anime City | Messenger Style Chat</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Cairo', 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Cairo', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #0a0a1a 0%, #0f0f2a 50%, #0a0a1a 100%);
+            background: #05050f;
             min-height: 100vh;
-            padding: 12px;
-            position: relative;
+            padding: 6px;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('https://i.pinimg.com/originals/6e/5e/6c/6e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.08;
-            z-index: -2;
-            animation: slowDrift 30s ease-in-out infinite alternate;
-        }
-
-        @keyframes slowDrift {
-            0% { transform: scale(1) translate(0, 0); }
-            100% { transform: scale(1.05) translate(-2%, -1%); }
-        }
-
-        .particles {
+        .anime-city-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            pointer-events: none;
+            background-image: url('https://images7.alphacoders.com/132/1322910.jpeg');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            animation: slowZoom 20s ease-in-out infinite alternate;
         }
-
-        .particle {
-            position: absolute;
-            background: radial-gradient(circle, rgba(255,68,255,0.6), rgba(0,255,255,0.2));
-            border-radius: 50%;
-            animation: floatParticle linear infinite;
+        
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
         }
-
-        @keyframes floatParticle {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
-        }
-
-        .app {
-            max-width: 550px;
-            width: 100%;
-            margin: 0 auto;
-            background: linear-gradient(145deg, rgba(10,10,30,0.92), rgba(15,15,40,0.88));
-            backdrop-filter: blur(20px);
-            border-radius: 35px;
-            overflow: hidden;
-            height: 96vh;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,68,255,0.2), 0 0 30px rgba(255,68,255,0.3);
-            position: relative;
-            border: 1px solid rgba(255,68,255,0.4);
-        }
-
-        .glow-header {
+        
+        .anime-city-bg::after {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #ff44ff, #00ffff, #ff44ff, transparent);
-            animation: headerGlow 3s ease-in-out infinite;
-            z-index: 10;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: -1;
         }
 
-        @keyframes headerGlow {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+        .app {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            background: rgba(5,5,20,0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            overflow: hidden;
+            height: 98vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 50px rgba(255,0,255,0.3), 0 0 20px rgba(0,255,255,0.3);
+            border: 1px solid rgba(255,68,255,0.3);
+            position: relative;
         }
 
         .content {
-            padding: 12px 12px 0px 12px;
+            padding: 8px 8px 0px 8px;
             flex: 1;
             overflow-y: auto;
-            scrollbar-width: thin;
-            scrollbar-color: #ff44ff #1a1a2e;
+            scrollbar-width: none;
+            display: flex;
+            flex-direction: column;
         }
-
+        
         .content::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .content::-webkit-scrollbar-track {
-            background: #1a1a2e;
-            border-radius: 10px;
-        }
-
-        .content::-webkit-scrollbar-thumb {
-            background: #ff44ff;
-            border-radius: 10px;
+            display: none;
         }
 
         .page {
@@ -124,56 +81,36 @@
             flex-direction: column;
             height: 100%;
             flex: 1;
-            animation: fadeInPage 0.4s ease;
         }
-
-        @keyframes fadeInPage {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        
         .page-hidden {
             display: none;
         }
 
+        /* Hero Section */
         .anime-hero {
-            background: linear-gradient(135deg, rgba(255,68,255,0.15), rgba(0,255,255,0.1));
-            border-radius: 25px;
-            padding: 18px;
-            margin-bottom: 15px;
+            background: linear-gradient(135deg, rgba(255,68,255,0.2), rgba(0,255,255,0.2));
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 0px;
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 15px;
             justify-content: center;
-            border: 1px solid rgba(255,68,255,0.4);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
+            border: 1px solid #ff44ff;
+            box-shadow: 0 0 15px #ff44ff;
         }
-
-        .anime-hero:hover {
-            transform: translateY(-2px);
-            border-color: #ff44ff;
-            box-shadow: 0 0 25px rgba(255,68,255,0.3);
-        }
-
+        
         .character-img {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            width: 110px;
+            height: 110px;
+            background-size: cover;
+            background-position: center;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
+            border: 3px solid #ff44ff;
             position: relative;
-            box-shadow: 0 0 20px rgba(255,68,255,0.5);
-            transition: transform 0.3s ease;
         }
-
-        .character-img:hover {
-            transform: scale(1.05);
-        }
-
+        
         .controller-on-hand {
             position: absolute;
             bottom: -5px;
@@ -187,782 +124,2524 @@
             justify-content: center;
             font-size: 1rem;
             border: 2px solid white;
-            animation: bounce 1s ease-in-out infinite;
         }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
-        }
-
+        
         .tshirt-text {
             background: linear-gradient(135deg, #ff3366, #ff44ff, #00ffff);
-            padding: 6px 16px;
-            border-radius: 30px;
+            padding: 5px 14px;
+            border-radius: 22px;
             color: white;
             font-size: 0.7rem;
             font-weight: bold;
             display: inline-block;
-            letter-spacing: 1px;
         }
-
+        
         .character-info h2 {
             background: linear-gradient(135deg, #ffff00, #ff44ff, #00ffff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            font-size: 0.9rem;
-            margin-top: 8px;
-            font-weight: bold;
+            font-size: 0.8rem;
         }
 
+        /* Ranking Section */
         .ranking-section {
-            margin-top: 10px;
-            margin-bottom: 15px;
+            margin-top: 20px;
+            margin-bottom: 12px;
             text-align: center;
-            background: rgba(0,0,0,0.3);
-            border-radius: 30px;
-            padding: 12px;
         }
-
-        .ranking-title {
-            color: #ffcc00;
-            font-size: 0.7rem;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-        }
-
+        
         .ranking-circles {
             display: flex;
             justify-content: center;
-            align-items: flex-end;
-            gap: 25px;
+            align-items: center;
+            gap: 15px;
             flex-wrap: wrap;
         }
-
+        
         .rank-item {
             text-align: center;
-            transition: transform 0.3s ease;
         }
-
-        .rank-item:hover {
-            transform: translateY(-5px);
-        }
-
+        
         .gold-circle {
-            width: 65px;
-            height: 65px;
+            width: 50px;
+            height: 50px;
             background: linear-gradient(145deg, #ffd700, #ffaa00);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 8px;
+            font-size: 1.5rem;
+            margin-bottom: 3px;
             border: 2px solid #ffd700;
-            box-shadow: 0 0 25px #ffd700;
-            animation: goldPulse 2s ease-in-out infinite;
+            box-shadow: 0 0 20px #ffd700;
         }
-
-        @keyframes goldPulse {
-            0%, 100% { box-shadow: 0 0 15px #ffd700; }
-            50% { box-shadow: 0 0 35px #ffd700, 0 0 10px #ffaa00; }
-        }
-
+        
         .silver-circle {
-            width: 55px;
-            height: 55px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
-            margin-bottom: 6px;
-            border: 2px solid #c0c0c0;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+            border: 1.5px solid #c0c0c0;
             box-shadow: 0 0 15px #c0c0c0;
         }
-
+        
         .bronze-circle {
-            width: 55px;
-            height: 55px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(145deg, #cd7f32, #b8651a);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
-            margin-bottom: 6px;
-            border: 2px solid #cd7f32;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+            border: 1.5px solid #cd7f32;
             box-shadow: 0 0 15px #cd7f32;
         }
-
+        
         .rank-name {
             color: white;
-            font-size: 0.6rem;
+            font-size: 0.5rem;
             font-weight: bold;
         }
-
+        
         .rank-points {
             color: #ffcc00;
-            font-size: 0.5rem;
+            font-size: 0.45rem;
         }
 
+        /* Categories Section */
         .categories-section {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
-
+        
         .categories {
             display: flex;
             flex-wrap: nowrap;
-            gap: 8px;
-            justify-content: flex-start;
+            gap: 6px;
+            justify-content: center;
+            align-items: center;
             overflow-x: auto;
-            padding: 6px 2px 10px 2px;
+            padding: 4px 2px;
             scrollbar-width: thin;
             -webkit-overflow-scrolling: touch;
         }
-
+        
         .categories::-webkit-scrollbar {
             height: 3px;
         }
-
+        
+        .categories::-webkit-scrollbar-track {
+            background: #1a1a2e;
+            border-radius: 10px;
+        }
+        
+        .categories::-webkit-scrollbar-thumb {
+            background: #ff44ff;
+            border-radius: 10px;
+        }
+        
         .cat-badge {
-            background: linear-gradient(135deg, rgba(255,68,255,0.2), rgba(0,255,255,0.1));
-            border: 1px solid rgba(255,68,255,0.5);
-            padding: 6px 16px;
-            border-radius: 30px;
+            background: rgba(255,68,255,0.3);
+            border: 1px solid #ff44ff;
+            padding: 5px 14px;
+            border-radius: 22px;
             color: white;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             white-space: nowrap;
             flex-shrink: 0;
-            font-weight: 500;
         }
-
+        
         .cat-badge:hover {
-            background: linear-gradient(135deg, rgba(255,68,255,0.5), rgba(0,255,255,0.3));
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255,68,255,0.3);
+            background: rgba(255,68,255,0.6);
+            transform: scale(1.02);
         }
-
+        
         .more-btn {
             background: linear-gradient(135deg, #ff44ff, #00ffff);
             border: none;
-            padding: 6px 16px;
-            border-radius: 30px;
+            padding: 5px 14px;
+            border-radius: 22px;
             color: white;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             font-weight: bold;
             white-space: nowrap;
             flex-shrink: 0;
         }
-
+        
         .more-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px #ff44ff;
+            transform: scale(1.02);
+            box-shadow: 0 0 10px #ff44ff;
         }
 
-        .modal-overlay {
+        /* More Categories Modal */
+        .more-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(15px);
             z-index: 1500;
             display: none;
             align-items: center;
             justify-content: center;
-            animation: fadeInModal 0.3s ease;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .more-modal-content {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 30px;
+            padding: 25px;
+            width: 85%;
+            max-width: 350px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 50px #ff44ff;
+            text-align: center;
+        }
+        
+        .more-modal-content h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .more-categories-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .more-cat-badge {
+            background: rgba(255,68,255,0.3);
+            border: 1px solid #ff44ff;
+            padding: 8px 16px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .more-cat-badge:hover {
+            background: rgba(255,68,255,0.6);
+            transform: scale(1.02);
+        }
+        
+        .close-more-modal {
+            background: #ff3366;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 10px;
         }
 
-        @keyframes fadeInModal {
-            from { opacity: 0; backdrop-filter: blur(0); }
-            to { opacity: 1; backdrop-filter: blur(20px); }
+        /* Settings Modal */
+        .settings-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(15px);
+            z-index: 1700;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
         }
-
-        .modal-card {
-            background: linear-gradient(145deg, #1a1a2e, #0f0f1a);
-            border-radius: 35px;
+        
+        .settings-card {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 30px;
             padding: 25px;
             width: 90%;
             max-width: 380px;
             border: 2px solid #ff44ff;
-            box-shadow: 0 0 60px rgba(255,68,255,0.4);
+            box-shadow: 0 0 50px #ff44ff;
             text-align: center;
-            animation: modalPop 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+        }
+        
+        .settings-card h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        
+        .avatar-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .avatar-preview {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            border: 3px solid #ff44ff;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .avatar-preview:hover {
+            transform: scale(1.05);
+        }
+        
+        .avatar-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 8px;
+        }
+        
+        .avatar-option {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,68,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #ff44ff;
+        }
+        
+        .avatar-option:hover {
+            transform: scale(1.1);
+            border-color: #00ffff;
+            box-shadow: 0 0 10px #00ffff;
+        }
+        
+        .avatar-option.selected {
+            border-color: #00ffff;
+            background: linear-gradient(135deg, rgba(255,68,255,0.2), rgba(0,255,255,0.2));
+            box-shadow: 0 0 15px #00ffff;
+        }
+        
+        .language-section {
+            margin-bottom: 20px;
+        }
+        
+        .language-section label {
+            color: white;
+            font-size: 0.8rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .lang-select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 25px;
+            border: 1px solid #ff44ff;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        
+        .music-control {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(255,68,255,0.1);
+            border-radius: 20px;
+        }
+        
+        .music-control label {
+            color: white;
+            font-size: 0.8rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .music-toggle-btn {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .music-toggle-btn:hover {
+            transform: scale(1.02);
+        }
+        
+        .save-settings-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .save-settings-btn:hover {
+            transform: scale(1.02);
+        }
+        
+        .close-settings {
+            background: #ff3366;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 15px;
         }
 
-        @keyframes modalPop {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+        /* Favorites Modal */
+        .favorites-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(15px);
+            z-index: 1900;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .favorites-card {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 30px;
+            padding: 25px;
+            width: 90%;
+            max-width: 380px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 50px #ff44ff;
+            text-align: center;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .favorites-card h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .favorites-card p {
+            color: #aaa;
+            font-size: 0.7rem;
+            margin-bottom: 15px;
+        }
+        
+        .favorites-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .favorite-item {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #ff44ff;
+            border-radius: 15px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .favorite-item:hover {
+            transform: translateX(5px);
+            border-color: #00ffff;
+            box-shadow: 0 0 10px #00ffff;
+        }
+        
+        .favorite-img {
+            width: 50px;
+            height: 50px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+        
+        .favorite-info {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .favorite-name {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .favorite-cat {
+            color: #ff44ff;
+            font-size: 0.65rem;
+        }
+        
+        .remove-fav {
+            background: none;
+            border: none;
+            color: #ff3366;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .remove-fav:hover {
+            transform: scale(1.1);
+        }
+        
+        .empty-favorites {
+            color: #888;
+            text-align: center;
+            padding: 40px;
+            font-size: 0.85rem;
+        }
+        
+        .close-favorites {
+            background: #ff3366;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 10px;
         }
 
+        /* Wallet Modal */
+        .wallet-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(15px);
+            z-index: 1800;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .wallet-card {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 30px;
+            padding: 20px;
+            width: 90%;
+            max-width: 380px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 50px #ff44ff;
+            text-align: center;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .wallet-card h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .wallet-card p {
+            color: #aaa;
+            font-size: 0.7rem;
+            margin-bottom: 15px;
+        }
+        
+        .wallet-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .wallet-method {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #ff44ff;
+            border-radius: 15px;
+            padding: 12px 8px;
+            width: calc(33% - 8px);
+            min-width: 90px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        
+        .wallet-method:hover {
+            transform: translateY(-2px);
+            border-color: #00ffff;
+            box-shadow: 0 0 15px #00ffff;
+        }
+        
+        .wallet-method .emoji {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .wallet-method .name {
+            color: white;
+            font-size: 0.6rem;
+        }
+        
+        .close-wallet {
+            background: #ff3366;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* VIP Payment Modal */
+        .payment-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(15px);
+            z-index: 1600;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .payment-card {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 30px;
+            padding: 20px;
+            width: 90%;
+            max-width: 380px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 50px #ff44ff;
+            text-align: center;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .payment-card h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .payment-card p {
+            color: #aaa;
+            font-size: 0.7rem;
+            margin-bottom: 15px;
+        }
+        
+        .currency-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .currency-btn {
+            background: rgba(255,68,255,0.3);
+            border: 1px solid #ff44ff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .currency-btn.active {
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border-color: #00ffff;
+        }
+        
+        .price-display {
+            background: linear-gradient(135deg, rgba(255,68,255,0.2), rgba(0,255,255,0.2));
+            border-radius: 15px;
+            padding: 12px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .price-display .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff44ff;
+        }
+        
+        .price-display .currency-symbol {
+            font-size: 1rem;
+        }
+        
+        .pay-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .pay-btn:hover {
+            transform: scale(1.02);
+        }
+        
+        .close-payment {
+            background: #ff3366;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        /* Ad */
+        .fixed-permanent-ad {
+            background: linear-gradient(135deg, rgba(255,68,255,0.3), rgba(0,255,255,0.3));
+            border: 2px solid #ff44ff;
+            border-radius: 20px;
+            padding: 22px 12px;
+            margin: 8px 0 6px 0;
+            text-align: center;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 0 20px #ff44ff;
+            animation: adPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes adPulse {
+            0% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
+            50% { box-shadow: 0 0 25px #ff44ff, 0 0 15px #00ffff; border-color: #00ffff; }
+            100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
+        }
+
+        /* Games */
         .games-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            padding-bottom: 10px;
+            gap: 12px;
+            padding-bottom: 6px;
+            margin-top: 0;
+            margin-bottom: 0;
         }
-
+        
         .game-row {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            padding: 5px 2px 12px 2px;
+            padding: 4px 2px 8px 2px;
             scrollbar-width: thin;
             scrollbar-color: #ff44ff #1a1a2e;
             -webkit-overflow-scrolling: touch;
         }
-
+        
+        .game-row::-webkit-scrollbar {
+            height: 4px;
+        }
+        
+        .game-row::-webkit-scrollbar-track {
+            background: #1a1a2e;
+            border-radius: 10px;
+        }
+        
+        .game-row::-webkit-scrollbar-thumb {
+            background: #ff44ff;
+            border-radius: 10px;
+        }
+        
         .game-card {
-            min-width: calc(25% - 9px);
-            width: calc(25% - 9px);
-            max-width: calc(25% - 9px);
+            min-width: calc(25% - 7.5px);
+            width: calc(25% - 7.5px);
+            max-width: calc(25% - 7.5px);
             background: linear-gradient(145deg, #0f0f2a, #0a0a1a);
-            border-radius: 18px;
-            padding: 10px 8px;
+            border-radius: 14px;
+            padding: 8px 6px;
             text-align: center;
-            border: 1px solid rgba(255,68,255,0.3);
+            border: 1px solid #ff44ff;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: all 0.2s ease;
             scroll-snap-align: start;
             position: relative;
         }
-
+        
         .game-card:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-3px);
             border-color: #00ffff;
-            box-shadow: 0 15px 30px rgba(0,255,255,0.2);
+            box-shadow: 0 0 15px #00ffff;
         }
-
+        
         .fav-star {
             position: absolute;
-            top: 8px;
-            right: 8px;
-            background: rgba(0,0,0,0.7);
+            top: 5px;
+            right: 5px;
+            background: rgba(0,0,0,0.6);
             border-radius: 50%;
-            width: 26px;
-            height: 26px;
+            width: 22px;
+            height: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             cursor: pointer;
             z-index: 10;
-            transition: all 0.2s ease;
-            backdrop-filter: blur(5px);
         }
-
-        .fav-star:hover {
-            transform: scale(1.1);
-        }
-
+        
         .fav-star.active {
             color: #ffcc00;
-            text-shadow: 0 0 8px #ffcc00;
+            text-shadow: 0 0 5px #ffcc00;
         }
-
+        
         .game-img {
             width: 100%;
             aspect-ratio: 1 / 0.9;
             background-size: cover;
             background-position: center;
-            border-radius: 14px;
-            margin-bottom: 8px;
-            transition: transform 0.3s ease;
+            border-radius: 10px;
+            margin-bottom: 6px;
         }
-
-        .game-card:hover .game-img {
-            transform: scale(1.02);
-        }
-
+        
         .game-title {
             color: white;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: bold;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-        /* ========== الشريط السفلي - توزيع جديد ========== */
-        /* يمين: محفظة + VIP | يسار: إعدادات + مفضلة | وسط: دردشة */
+        /* ========== BOTTOM BAR - 2 SECTIONS ONLY ========== */
         .bottom-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 18px;
-            background: rgba(8, 8, 20, 0.98);
+            padding: 12px 20px;
+            background: rgba(10, 10, 26, 0.95);
             backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(255, 68, 255, 0.3);
-            border-radius: 0 0 30px 30px;
-            position: relative;
+            border-top: 1px solid rgba(255, 68, 255, 0.4);
+            border-radius: 0 0 20px 20px;
         }
-
-        .bottom-bar::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: 10%;
-            right: 10%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ff44ff, #00ffff, #ff44ff, transparent);
-            border-radius: 2px;
-        }
-
-        .bottom-right {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
+        
+        /* Left section - 3 buttons */
         .bottom-left {
             display: flex;
-            gap: 12px;
+            gap: 16px;
             align-items: center;
+            justify-content: flex-start;
         }
-
+        
+        /* Right section - 2 buttons (Chat + VIP) */
+        .bottom-right {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        /* Base button style */
         .nav-btn {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 3px;
+            gap: 4px;
             background: transparent;
             border: none;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             padding: 6px 12px;
-            border-radius: 25px;
+            border-radius: 30px;
             position: relative;
         }
-
+        
         .nav-btn::before {
             content: '';
             position: absolute;
             bottom: -2px;
             left: 50%;
             transform: translateX(-50%) scaleX(0);
-            width: 25px;
+            width: 30px;
             height: 2px;
             background: linear-gradient(90deg, #ff44ff, #00ffff);
             border-radius: 2px;
             transition: transform 0.3s ease;
         }
-
+        
         .nav-btn:hover::before {
             transform: translateX(-50%) scaleX(1);
         }
-
+        
         .nav-btn:hover {
             transform: translateY(-3px);
         }
-
+        
         .nav-btn .icon {
             font-size: 1.3rem;
             transition: all 0.3s ease;
         }
-
+        
         .nav-btn .label {
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             color: #aaa;
             font-weight: 600;
             transition: all 0.3s ease;
+            letter-spacing: 0.5px;
         }
-
+        
         .nav-btn:hover .icon {
             transform: scale(1.15);
+            text-shadow: 0 0 8px currentColor;
         }
-
+        
         .nav-btn:hover .label {
             color: #ff44ff;
         }
-
-        /* ألوان الأزرار الجانبية */
+        
+        /* Individual button colors */
         .wallet-btn .icon { color: #ffd700; }
-        .vip-btn .icon { color: #ff44ff; }
         .settings-btn .icon { color: #00ffff; }
         .favs-btn .icon { color: #ffcc00; }
-
-        /* زر الدردشة في المنتصف - مميز */
-        .chat-center-btn {
-            background: linear-gradient(135deg, #ff44ff, #ff00aa);
+        
+        /* VIP button style */
+        .vip-btn {
+            background: linear-gradient(135deg, rgba(255,68,255,0.2), rgba(0,255,255,0.2));
+            border: 1px solid rgba(255,68,255,0.5);
             border-radius: 40px;
-            padding: 6px 20px;
-            box-shadow: 0 0 20px rgba(255,68,255,0.4);
+            padding: 6px 16px;
         }
-
-        .chat-center-btn .icon, .chat-center-btn .label {
-            color: white;
+        
+        .vip-btn .icon {
+            color: #ff44ff;
+            font-size: 1.2rem;
         }
-
+        
+        .vip-btn .label {
+            font-size: 0.55rem;
+            font-weight: bold;
+        }
+        
         .vip-btn.active {
             background: linear-gradient(135deg, rgba(255,68,255,0.4), rgba(0,255,255,0.4));
-            border: 1px solid #ff44ff;
+            border-color: #ff44ff;
+            box-shadow: 0 0 15px rgba(255,68,255,0.3);
+        }
+        
+        .vip-btn.active .icon {
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff;
+        }
+        
+        /* Chat button - now in right section */
+        .chat-btn {
+            background: linear-gradient(135deg, #ff44ff, #ff00aa, #00ffff);
             border-radius: 40px;
+            padding: 6px 18px;
             box-shadow: 0 0 15px rgba(255,68,255,0.5);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .chat-btn::before {
+            display: none;
+        }
+        
+        .chat-btn .icon {
+            font-size: 1.2rem;
+            color: white;
+        }
+        
+        .chat-btn .label {
+            font-size: 0.55rem;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .chat-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 0 25px rgba(255,68,255,0.8), 0 0 15px rgba(0,255,255,0.5);
         }
 
-        /* Chat محسّن */
+        /* ========== CHAT PAGE - CENTERED BEAUTIFULLY ========== */
         .chat-page {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 96%;
-            max-width: 520px;
-            height: 92%;
-            max-height: 750px;
+            width: 95%;
+            max-width: 500px;
+            height: 90%;
+            max-height: 700px;
             background: linear-gradient(145deg, #0a0a1a, #0f0f2a);
             z-index: 1000;
             display: flex;
             flex-direction: column;
-            border-radius: 35px;
+            border-radius: 30px;
             border: 2px solid #ff44ff;
-            box-shadow: 0 0 70px rgba(255,68,255,0.5);
-            animation: zoomIn 0.35s cubic-bezier(0.34, 1.2, 0.64, 1);
+            box-shadow: 0 0 50px rgba(255,68,255,0.5), 0 20px 40px rgba(0,0,0,0.5);
+            animation: zoomIn 0.3s ease;
             overflow: hidden;
         }
-
+        
         @keyframes zoomIn {
-            from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
-            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
         }
-
-        .security-panel {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(145deg, #1a1a2e, #0f0f1a);
-            border-radius: 35px;
-            padding: 30px;
-            width: 90%;
-            max-width: 400px;
-            border: 2px solid #ff44ff;
-            box-shadow: 0 0 60px rgba(255,68,255,0.4);
-            z-index: 1100;
-            display: none;
+        
+        .messenger-full {
+            display: flex;
             flex-direction: column;
-            gap: 15px;
-            animation: modalPop 0.3s ease;
+            height: 100%;
+            background: #0a0a1a;
         }
-
-        .security-input {
-            width: 100%;
-            padding: 14px;
-            border-radius: 30px;
-            border: 1px solid rgba(255,68,255,0.5);
-            background: rgba(0,0,0,0.5);
+        
+        .messenger-header {
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #0f0f2a, #0a0a1a);
+            border-bottom: 1px solid rgba(255,68,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 30px 30px 0 0;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .back-btn {
+            background: rgba(255,68,255,0.2);
+            border: none;
+            color: #ff44ff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255,68,255,0.4);
+            transform: scale(1.05);
+        }
+        
+        .messenger-header h2 {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .header-actions span {
+            color: #ff44ff;
+            font-size: 1.1rem;
+            cursor: pointer;
+            background: rgba(255,68,255,0.2);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .header-actions span:hover {
+            background: rgba(255,68,255,0.4);
+            transform: scale(1.05);
+        }
+        
+        .chats-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+        
+        .chat-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-bottom: 1px solid #1f1f2e;
+        }
+        
+        .chat-item:hover {
+            background: #1f1f2e;
+        }
+        
+        .chat-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        
+        .chat-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .chat-name {
             color: white;
             font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-
-        .security-input:focus {
-            outline: none;
-            border-color: #00ffff;
-            box-shadow: 0 0 15px rgba(0,255,255,0.3);
+        
+        .chat-lock {
+            font-size: 0.65rem;
+            color: #ffaa88;
         }
-
-        .security-btn {
-            background: linear-gradient(135deg, #ff44ff, #00ffff);
-            border: none;
-            padding: 14px;
-            border-radius: 30px;
+        
+        .chat-last-msg {
+            color: #8e8e9e;
+            font-size: 0.7rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .chat-time {
+            color: #8e8e9e;
+            font-size: 0.6rem;
+            flex-shrink: 0;
+        }
+        
+        .open-chat-view {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background: #0a0a1a;
+        }
+        
+        .chat-header {
+            padding: 12px 16px;
+            background: #0a0a1a;
+            border-bottom: 1px solid #2c2c3a;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .chat-header .back-btn {
+            font-size: 1.1rem;
+        }
+        
+        .chat-header-info {
+            flex: 1;
+        }
+        
+        .chat-header-name {
             color: white;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        
+        .chat-header-status {
+            color: #00ff88;
+            font-size: 0.6rem;
+        }
+        
+        .chat-header-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .chat-header-actions span {
+            color: #ff44ff;
             font-size: 1rem;
-            font-weight: bold;
+            cursor: pointer;
+            background: rgba(255,68,255,0.2);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .messages-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .message-row {
+            display: flex;
+            width: 100%;
+        }
+        
+        .message-row.outgoing {
+            justify-content: flex-end;
+        }
+        
+        .message-row.incoming {
+            justify-content: flex-start;
+        }
+        
+        .message-bubble {
+            max-width: 75%;
+            padding: 8px 12px;
+            border-radius: 18px;
+            font-size: 0.8rem;
+            word-break: break-word;
+        }
+        
+        .message-bubble.outgoing {
+            background: #0084ff;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .message-bubble.incoming {
+            background: #1f1f2e;
+            color: white;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .message-bubble.private {
+            background: #2a2a3e;
+            border: 1px solid #00ff88;
+        }
+        
+        .message-sender-name {
+            font-size: 0.55rem;
+            color: #ffaa88;
+            margin-bottom: 3px;
+        }
+        
+        .message-time {
+            font-size: 0.4rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 3px;
+            text-align: right;
+        }
+        
+        .private-tag {
+            font-size: 0.45rem;
+            color: #00ff88;
+            margin-left: 5px;
+        }
+        
+        .typing-indicator {
+            padding: 8px 16px;
+            color: #8e8e9e;
+            font-size: 0.65rem;
+            font-style: italic;
+        }
+        
+        .message-input-area {
+            padding: 12px;
+            background: #0a0a1a;
+            border-top: 1px solid #2c2c3a;
+        }
+        
+        .input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .message-input {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 25px;
+            border: none;
+            background: #1f1f2e;
+            color: white;
+            font-size: 0.85rem;
+        }
+        
+        .message-input:focus {
+            outline: none;
+            background: #2a2a3e;
+        }
+        
+        .input-actions {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        
+        .mic-btn, .send-btn {
+            background: rgba(255,68,255,0.2);
+            border: none;
+            color: #ff44ff;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 8px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .mic-btn:hover, .send-btn:hover {
+            background: rgba(255,68,255,0.4);
+            transform: scale(1.05);
+        }
+        
+        .video-call-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1200;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-container {
+            width: 100%;
+            height: 70%;
+            background: #000;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #localVideo {
+            width: 120px;
+            height: 160px;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            border-radius: 12px;
+            border: 2px solid #ff44ff;
+            object-fit: cover;
+            background: #1a1a2e;
+            z-index: 10;
+        }
+        
+        #remoteVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #0a0a1a;
+        }
+        
+        .call-controls {
+            display: flex;
+            gap: 30px;
+            padding: 20px;
+            background: #1a1a2e;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .call-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.5rem;
             cursor: pointer;
             transition: transform 0.2s;
         }
-
-        .security-btn:hover {
-            transform: scale(1.02);
+        
+        .call-btn:hover {
+            transform: scale(1.05);
         }
-
+        
+        .call-end {
+            background: #ff4444;
+            color: white;
+        }
+        
+        .call-mute, .call-video {
+            background: #2c2c3a;
+            color: white;
+        }
+        
         .game-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000000dd;
-            backdrop-filter: blur(10px);
+            background: #000000ee;
             z-index: 2000;
-            display: none;
+            display: flex;
             align-items: center;
             justify-content: center;
         }
-
+        
         .game-modal iframe {
             width: 95%;
-            height: 85%;
-            border-radius: 20px;
+            height: 80%;
+            border-radius: 15px;
             border: 3px solid #ff44ff;
-            box-shadow: 0 0 50px rgba(255,68,255,0.5);
         }
-
+        
         .close-modal {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             background: #ff3366;
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.2s;
         }
-
-        .close-modal:hover {
-            transform: scale(1.1);
-            background: #ff5555;
-        }
-
+        
         .hidden {
-            display: none !important;
-        }
-
-        .fixed-permanent-ad {
-            background: linear-gradient(135deg, rgba(255,68,255,0.2), rgba(0,255,255,0.2));
-            border: 1px solid #ff44ff;
-            border-radius: 20px;
-            padding: 12px;
-            margin: 10px 0;
-            text-align: center;
-            color: white;
-            font-size: 0.8rem;
-            font-weight: bold;
-            animation: adPulse 2s ease-in-out infinite;
-            cursor: pointer;
-        }
-
-        @keyframes adPulse {
-            0%, 100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
-            50% { box-shadow: 0 0 20px #ff44ff, 0 0 10px #00ffff; border-color: #00ffff; }
-        }
-
-        .back-btn-custom {
-            background: rgba(255,68,255,0.2);
-            border: 1px solid #ff44ff;
-            padding: 8px 16px;
-            border-radius: 25px;
-            color: white;
-            font-size: 0.8rem;
-            cursor: pointer;
-            margin-bottom: 12px;
-            transition: all 0.2s;
-            width: fit-content;
-        }
-
-        .back-btn-custom:hover {
-            background: rgba(255,68,255,0.4);
-            transform: translateX(-3px);
-        }
-
-        .chats-list {
-            flex: 1;
-            overflow-y: auto;
-            padding: 10px;
-        }
-
-        .chat-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px;
-            cursor: pointer;
-            border-bottom: 1px solid #1f1f2e;
-            transition: background 0.2s;
-        }
-
-        .chat-item:hover {
-            background: rgba(255,68,255,0.1);
-        }
-
-        .messages-area {
-            flex: 1;
-            overflow-y: auto;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            display: none;
         }
     </style>
 </head>
 <body>
-<div class="particles" id="particles"></div>
+<div class="anime-city-bg"></div>
 <div class="app">
-    <div class="glow-header"></div>
     <div class="content">
         <div id="homePage" class="page">
             <div class="anime-hero">
-                <div class="character-img" id="mainAvatarImg">
-                    <div class="controller-on-hand">🎮</div>😎
+                <div class="character-img" id="mainAvatarImg" style="background-image: url('https://i.pinimg.com/originals/6e/5e/6c/6e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png'); background-size: cover;">
+                    <div class="controller-on-hand">🎮</div>
                 </div>
                 <div class="character-info">
                     <div class="tshirt-text">⚡ DIDO-GAME ⚡</div>
-                    <h2 id="heroTagline">😤 تحدّي النيون!</h2>
+                    <h2 id="heroTagline">😤 Neon Challenge Look!</h2>
                 </div>
             </div>
             
             <div class="ranking-section">
-                <div class="ranking-title">🏆 أفضل اللاعبين 🏆</div>
                 <div class="ranking-circles" id="rankingList"></div>
             </div>
             
             <div class="categories-section">
                 <div class="categories" id="categoriesList">
-                    <div class="more-btn" id="moreCategoriesBtn">➕ المزيد</div>
-                    <div class="cat-badge" data-cat="action">🎯 أكشن</div>
-                    <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
-                    <div class="cat-badge" data-cat="fighting">🥊 قتال</div>
-                    <div class="cat-badge" data-cat="puzzle">🧩 ألغاز</div>
+                    <div class="more-btn" id="moreCategoriesBtn">➕ More</div>
+                    <div class="cat-badge" data-cat="action" id="catAction">🎯 Action</div>
+                    <div class="cat-badge" data-cat="racing" id="catRacing">🏎️ Racing</div>
+                    <div class="cat-badge" data-cat="fighting" id="catFighting">🥊 Fighting</div>
+                    <div class="cat-badge" data-cat="puzzle" id="catPuzzle">🧩 Puzzle</div>
                 </div>
             </div>
             
-            <div class="fixed-permanent-ad" id="permanentAd">🎮 عرض خاص: اشترك في VIP واحصل على 50% خصم! 🎮</div>
+            <div id="moreModal" class="more-modal">
+                <div class="more-modal-content">
+                    <h3 id="moreModalTitle">🎮 More Game Categories</h3>
+                    <div class="more-categories-list" id="moreCategoriesList"></div>
+                    <button class="close-more-modal" id="closeMoreModal">Close</button>
+                </div>
+            </div>
+            
+            <!-- Settings Modal -->
+            <div id="settingsModal" class="settings-modal">
+                <div class="settings-card">
+                    <h3>⚙️ Settings</h3>
+                    <div class="avatar-section">
+                        <div class="avatar-preview" id="avatarPreview">😎</div>
+                        <div class="avatar-options" id="avatarOptions">
+                            <div class="avatar-option" data-avatar="😎">😎</div>
+                            <div class="avatar-option" data-avatar="👤">👤</div>
+                            <div class="avatar-option" data-avatar="👨‍🚀">👨‍🚀</div>
+                            <div class="avatar-option" data-avatar="🧙‍♂️">🧙‍♂️</div>
+                            <div class="avatar-option" data-avatar="🦸‍♂️">🦸‍♂️</div>
+                            <div class="avatar-option" data-avatar="🐉">🐉</div>
+                            <div class="avatar-option" data-avatar="🤖">🤖</div>
+                            <div class="avatar-option" data-avatar="👾">👾</div>
+                            <div class="avatar-option" data-avatar="🎮">🎮</div>
+                            <div class="avatar-option" data-avatar="⭐">⭐</div>
+                        </div>
+                    </div>
+                    <div class="language-section">
+                        <label>🌐 Language / اللغة</label>
+                        <select id="settingsLangSelect" class="lang-select">
+                            <option value="en">🇺🇸 English</option>
+                            <option value="ar">🇸🇦 العربية</option>
+                            <option value="fr">🇫🇷 Français</option>
+                            <option value="es">🇪🇸 Español</option>
+                            <option value="de">🇩🇪 Deutsch</option>
+                            <option value="it">🇮🇹 Italiano</option>
+                            <option value="pt">🇵🇹 Português</option>
+                            <option value="ru">🇷🇺 Русский</option>
+                            <option value="zh">🇨🇳 中文</option>
+                            <option value="ja">🇯🇵 日本語</option>
+                            <option value="ko">🇰🇷 한국어</option>
+                        </select>
+                    </div>
+                    <div class="music-control">
+                        <label>🎵 Music Control</label>
+                        <button class="music-toggle-btn" id="musicToggleBtn">🎵 Play Music</button>
+                    </div>
+                    <button class="save-settings-btn" id="saveSettingsBtn">💾 Save Settings</button>
+                    <button class="close-settings" id="closeSettingsBtn">Cancel</button>
+                </div>
+            </div>
+            
+            <!-- Favorites Modal -->
+            <div id="favoritesModal" class="favorites-modal">
+                <div class="favorites-card">
+                    <h3>⭐ My Favorites</h3>
+                    <p>Your favorite games</p>
+                    <div class="favorites-list" id="favoritesList">
+                        <div class="empty-favorites">No favorite games yet<br>⭐ Click the star on any game to add it!</div>
+                    </div>
+                    <button class="close-favorites" id="closeFavoritesBtn">Close</button>
+                </div>
+            </div>
+            
+            <!-- Wallet Modal -->
+            <div id="walletModal" class="wallet-modal">
+                <div class="wallet-card">
+                    <h3>💳 Wallet</h3>
+                    <p>Choose your payment method</p>
+                    <div class="wallet-methods" id="walletMethods">
+                        <div class="wallet-method" data-method="visa"><span class="emoji">💳</span><span class="name">Visa/MasterCard</span></div>
+                        <div class="wallet-method" data-method="paypal"><span class="emoji">🅿️</span><span class="name">PayPal</span></div>
+                        <div class="wallet-method" data-method="applepay"><span class="emoji">🍎</span><span class="name">Apple Pay</span></div>
+                        <div class="wallet-method" data-method="googlepay"><span class="emoji">🤖</span><span class="name">Google Pay</span></div>
+                        <div class="wallet-method" data-method="crypto"><span class="emoji">₿</span><span class="name">Bitcoin</span></div>
+                        <div class="wallet-method" data-method="eth"><span class="emoji">⟠</span><span class="name">Ethereum</span></div>
+                        <div class="wallet-method" data-method="usdt"><span class="emoji">💎</span><span class="name">USDT</span></div>
+                        <div class="wallet-method" data-method="binance"><span class="emoji">🟡</span><span class="name">Binance Pay</span></div>
+                        <div class="wallet-method" data-method="mada"><span class="emoji">💳</span><span class="name">Mada</span></div>
+                        <div class="wallet-method" data-method="stcpay"><span class="emoji">📱</span><span class="name">STC Pay</span></div>
+                        <div class="wallet-method" data-method="urpay"><span class="emoji">🏦</span><span class="name">UR Pay</span></div>
+                        <div class="wallet-method" data-method="vodafone"><span class="emoji">📞</span><span class="name">Vodafone Cash</span></div>
+                        <div class="wallet-method" data-method="dtwallet"><span class="emoji">📱</span><span class="name">DT Wallet</span></div>
+                        <div class="wallet-method" data-method="flouci"><span class="emoji">💙</span><span class="name">flouci</span></div>
+                        <div class="wallet-method" data-method="mydinar"><span class="emoji">📞</span><span class="name">My Dinar</span></div>
+                        <div class="wallet-method" data-method="tunisietelecom"><span class="emoji">📱</span><span class="name">Tunisie Telecom Cash</span></div>
+                        <div class="wallet-method" data-method="zitouna"><span class="emoji">🏦</span><span class="name">Banque Zitouna</span></div>
+                        <div class="wallet-method" data-method="attijari"><span class="emoji">🏦</span><span class="name">Attijari Mobile</span></div>
+                        <div class="wallet-method" data-method="biat"><span class="emoji">🏦</span><span class="name">BIAT e-Payment</span></div>
+                        <div class="wallet-method" data-method="stb"><span class="emoji">🏦</span><span class="name">STB Payment</span></div>
+                        <div class="wallet-method" data-method="ubci"><span class="emoji">🏦</span><span class="name">UBCI e-Transaction</span></div>
+                        <div class="wallet-method" data-method="bhbank"><span class="emoji">🏦</span><span class="name">BH Bank Payment</span></div>
+                    </div>
+                    <button class="close-wallet" id="closeWalletBtn">Close</button>
+                </div>
+            </div>
+            
+            <!-- VIP Payment Modal -->
+            <div id="paymentModal" class="payment-modal">
+                <div class="payment-card">
+                    <h3 id="paymentTitle">💎 VIP Membership</h3>
+                    <p id="paymentDesc">Choose your currency</p>
+                    <div class="currency-selector" id="currencySelector">
+                        <div class="currency-btn" data-currency="USD" data-symbol="$" data-rate="1">🇺🇸 USD $</div>
+                        <div class="currency-btn" data-currency="EUR" data-symbol="€" data-rate="0.92">🇪🇺 EUR €</div>
+                        <div class="currency-btn" data-currency="GBP" data-symbol="£" data-rate="0.79">🇬🇧 GBP £</div>
+                        <div class="currency-btn" data-currency="SAR" data-symbol="﷼" data-rate="3.75">🇸🇦 SAR ﷼</div>
+                        <div class="currency-btn" data-currency="AED" data-symbol="د.إ" data-rate="3.67">🇦🇪 AED د.إ</div>
+                        <div class="currency-btn" data-currency="KWD" data-symbol="د.ك" data-rate="0.31">🇰🇼 KWD د.ك</div>
+                        <div class="currency-btn" data-currency="EGP" data-symbol="E£" data-rate="48.5">🇪🇬 EGP E£</div>
+                        <div class="currency-btn" data-currency="TRY" data-symbol="₺" data-rate="32.5">🇹🇷 TRY ₺</div>
+                        <div class="currency-btn" data-currency="RUB" data-symbol="₽" data-rate="92">🇷🇺 RUB ₽</div>
+                        <div class="currency-btn" data-currency="CNY" data-symbol="¥" data-rate="7.25">🇨🇳 CNY ¥</div>
+                        <div class="currency-btn" data-currency="JPY" data-symbol="¥" data-rate="155">🇯🇵 JPY ¥</div>
+                        <div class="currency-btn" data-currency="KRW" data-symbol="₩" data-rate="1380">🇰🇷 KRW ₩</div>
+                        <div class="currency-btn" data-currency="TND" data-symbol="د.ت" data-rate="3.10">🇹🇳 TND د.ت</div>
+                    </div>
+                    <div class="price-display">
+                        <span class="price" id="priceAmount">9.99</span>
+                        <span class="currency-symbol" id="priceCurrency">$</span>
+                        <span class="price-period">/ month</span>
+                    </div>
+                    <button class="pay-btn" id="payNowBtn">💎 Pay Now & Upgrade VIP</button>
+                    <button class="close-payment" id="closePaymentBtn">Cancel</button>
+                </div>
+            </div>
+            
+            <div class="fixed-permanent-ad" id="permanentAd">📺 Sponsored Ad - Subscribe Now! 🎮</div>
             
             <div class="games-wrapper" id="gamesWrapper"></div>
         </div>
         
         <div id="categoryPage" class="page page-hidden">
-            <div class="back-btn-custom" id="backToHomeBtn">🔙 رجوع</div>
+            <button class="create-btn" id="backToHomeBtn" style="margin-bottom:10px;">🔙 Back</button>
             <div class="games-wrapper" id="categoryGamesContainer"></div>
         </div>
     </div>
     
-    <!-- الشريط السفلي - التوزيع الجديد -->
-    <!-- اليمين: محفظة + VIP | اليسار: إعدادات + مفضلة | الوسط: دردشة -->
+    <!-- BOTTOM BAR - 2 SECTIONS ONLY (LEFT + RIGHT) -->
     <div class="bottom-bar">
-        <div class="bottom-right">
+        <div class="bottom-left">
             <button class="nav-btn wallet-btn" id="walletBtn">
                 <span class="icon">💳</span>
-                <span class="label">المحفظة</span>
+                <span class="label" id="walletLabel">Wallet</span>
             </button>
-            <button class="nav-btn vip-btn" id="registerBtn">
-                <span class="icon">👑</span>
-                <span class="label">VIP</span>
-            </button>
-        </div>
-        
-        <button class="nav-btn chat-center-btn" id="openChatBtn">
-            <span class="icon">💬</span>
-            <span class="label">الدردشة</span>
-        </button>
-        
-        <div class="bottom-left">
             <button class="nav-btn settings-btn" id="settingsBtn">
                 <span class="icon">⚙️</span>
-                <span class="label">الإعدادات</span>
+                <span class="label" id="settingsLabel">Settings</span>
             </button>
             <button class="nav-btn favs-btn" id="favoritesBtn">
                 <span class="icon">⭐</span>
-                <span class="label">المفضلة</span>
+                <span class="label" id="favoritesLabel">Favorites</span>
+            </button>
+        </div>
+        
+        <div class="bottom-right">
+            <button class="nav-btn chat-btn" id="openChatBtn">
+                <span class="icon">💬</span>
+                <span class="label" id="chatLabel">Chat</span>
+            </button>
+            <button class="nav-btn vip-btn" id="registerBtn">
+                <span class="icon">👑</span>
+                <span class="label" id="vipLabel">VIP</span>
             </button>
         </div>
     </div>
 </div>
 
-<!-- Security Panel -->
 <div id="securityPanel" class="security-panel">
-    <h2 style="color:white; text-align:center;">🔐 الأمان والدخول</h2>
-    <p style="color:#aaa; text-align:center; font-size:0.7rem;">أدخل بياناتك للدخول إلى الدردشة</p>
-    <input type="text" id="securityUsername" class="security-input" placeholder="👤 اسم المستخدم" value="Ahmed">
-    <input type="password" id="securityRoomPassword" class="security-input" placeholder="🔒 كلمة مرور الغرفة (اختياري)">
-    <input type="text" id="securityRoomName" class="security-input" placeholder="🏠 اسم الغرفة" value="الغرفة الرئيسية">
-    <button class="security-btn" id="securityBtn">🚪 دخول إلى الدردشة</button>
-    <div class="security-hint" style="color:#888; font-size:0.6rem; text-align:center;">💡 يمكنك إنشاء غرفة جديدة أو الانضمام إلى غرفة موجودة</div>
+    <div class="security-card">
+        <h2 id="securityTitle">🔐 Security Settings</h2>
+        <p id="securityDesc">Enter your details to enter the chat</p>
+        <input type="text" id="securityUsername" class="security-input" placeholder="👤 Username" value="Ahmed">
+        <input type="password" id="securityRoomPassword" class="security-input" placeholder="🔒 Room Password (optional)">
+        <input type="text" id="securityRoomName" class="security-input" placeholder="🏠 Room Name" value="Main Room">
+        <button class="security-btn" id="securityBtn" onclick="submitSecurityAndEnter()">🚪 Enter Chat</button>
+        <div class="security-hint" id="securityHint">💡 You can create a new room or join an existing one</div>
+    </div>
 </div>
 
-<!-- Chat Page -->
 <div id="chatPage" class="chat-page hidden">
-    <div style="display: flex; flex-direction: column; height: 100%;">
+    <div class="messenger-full">
         <div id="inboxView" style="display: flex; flex-direction: column; height: 100%;">
-            <div style="padding: 15px; background: linear-gradient(135deg, #0f0f2a, #0a0a1a); border-bottom: 1px solid rgba(255,68,255,0.3); display: flex; justify-content: space-between; align-items: center;">
-                <button class="back-btn-custom" id="closeChatFromInbox" style="margin:0;">✕ إغلاق</button>
-                <h2 style="color:white; font-size:1rem;">💬 المحادثات</h2>
-                <button class="back-btn-custom" id="newChatBtn" style="margin:0;">➕ جديد</button>
+            <div class="messenger-header">
+                <div class="header-left">
+                    <button class="back-btn" id="closeChatFromInbox">✕</button>
+                    <h2 id="chatsTitle">Chats</h2>
+                </div>
+                <div class="header-actions">
+                    <span id="newChatBtn" style="cursor: pointer;">✏️</span>
+                    <span>☰</span>
+                </div>
             </div>
             <div class="chats-list" id="chatsListContainer"></div>
         </div>
         
         <div id="openChatView" style="display: none; flex-direction: column; height: 100%;">
-            <div style="padding: 12px; background: #0f0f2a; border-bottom: 1px solid rgba(255,68,255,0.3); display: flex; align-items: center; gap: 12px;">
-                <button class="back-btn-custom" id="backToInboxBtn" style="margin:0;">← رجوع</button>
-                <div style="flex:1;">
-                    <div style="color:white; font-weight:bold;" id="openChatRoomName">الغرفة</div>
-                    <div style="color:#00ff88; font-size:0.6rem;" id="openChatStatus">🟢 متصل</div>
+            <div class="chat-header">
+                <button class="back-btn" id="backToInboxBtn">←</button>
+                <div class="chat-header-info">
+                    <div class="chat-header-name" id="openChatRoomName">Room</div>
+                    <div class="chat-header-status" id="openChatStatus">🟢 Online</div>
                 </div>
-                <button class="back-btn-custom" id="videoCallBtn" style="margin:0; display:none;">🎥 فيديو</button>
+                <div class="chat-header-actions">
+                    <span id="videoCallBtn" style="cursor: pointer; display: none;">🎥</span>
+                    <span>⋮</span>
+                </div>
             </div>
             <div class="messages-area" id="openChatMessages"></div>
-            <div class="typing-indicator" id="typingIndicator" style="display:none; padding:5px 15px; color:#888; font-size:0.6rem;">✍️ شخص ما يكتب...</div>
-            <div style="padding:12px; background:#0a0a1a; border-top:1px solid #1f1f2e;">
-                <div style="display:flex; gap:10px; align-items:center;">
-                    <input type="text" id="openMessageInput" class="security-input" placeholder="اكتب رسالة..." style="flex:1;">
-                    <button class="back-btn-custom" id="micBtnOpen" style="margin:0; width:40px; height:40px; border-radius:50%;">🎙️</button>
-                    <button class="back-btn-custom" id="sendMsgOpen" style="margin:0; width:40px; height:40px; border-radius:50%;">📤</button>
+            <div class="typing-indicator" id="typingIndicator" style="display: none;">✍️ Someone is typing...</div>
+            <div class="message-input-area">
+                <div class="input-wrapper">
+                    <input type="text" id="openMessageInput" class="message-input" placeholder="Type a message...">
+                    <div class="input-actions">
+                        <button class="mic-btn" id="micBtnOpen" onclick="toggleMicrophoneOpen()">🎙️</button>
+                        <button class="send-btn" id="sendMsgOpen" onclick="sendMessageOpen()">📤</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Game Modal -->
-<div id="gameModal" class="game-modal">
+<div id="videoCallModal" class="video-call-modal hidden">
+    <div class="video-container">
+        <video id="localVideo" autoplay muted playsinline></video>
+        <video id="remoteVideo" autoplay playsinline></video>
+    </div>
+    <div class="call-controls">
+        <button class="call-btn call-mute" id="muteBtn" onclick="toggleMute()">🔊</button>
+        <button class="call-btn call-end" onclick="endVideoCall()">🔴</button>
+        <button class="call-btn call-video" id="videoToggleBtn" onclick="toggleVideo()">📷</button>
+    </div>
+</div>
+
+<div id="gameModal" class="game-modal hidden">
     <div class="close-modal" onclick="closeGameModal()">✕</div>
-    <iframe id="gameIframe" src="" allow="fullscreen; autoplay"></iframe>
+    <iframe id="gameIframe" src="" allow="microphone; autoplay; camera"></iframe>
 </div>
 
 <script>
-    // ==================== البيانات الأساسية ====================
-    let currentLang = 'ar';
+    // ==================== Language Translations ====================
+    const translations = {
+        en: {
+            heroTagline: "😤 Neon Challenge Look!",
+            catAction: "🎯 Action",
+            catRacing: "🏎️ Racing",
+            catFighting: "🥊 Fighting",
+            catPuzzle: "🧩 Puzzle",
+            moreBtn: "➕ More",
+            moreTitle: "🎮 More Game Categories",
+            closeBtn: "Close",
+            catBattle: "🔫 Battle Royale",
+            catSports: "⚽ Sports",
+            catStrategy: "🧠 Strategy",
+            catHorror: "👻 Horror",
+            catRpg: "⚔️ RPG",
+            catSimulation: "🏙️ Simulation",
+            upgradeVIP: "👑 Upgrade VIP",
+            vipActive: "👑 VIP Active",
+            playMusic: "🎵 Play",
+            stopMusic: "🔇 Stop",
+            securityTitle: "🔐 Security Settings",
+            securityDesc: "Enter your details to enter the chat",
+            securityUsernamePlaceholder: "👤 Username",
+            securityPasswordPlaceholder: "🔒 Room Password (optional)",
+            securityRoomPlaceholder: "🏠 Room Name",
+            securityBtn: "🚪 Enter Chat",
+            securityHint: "💡 You can create a new room or join an existing one",
+            chatsTitle: "Chats",
+            noChats: "No chats\n✏️ Create a new chat",
+            noMessages: "✨ Select a chat to start messaging\n💬 No messages yet\n✨ Write the first message",
+            typeMessage: "Type a message...",
+            typing: "✍️ Someone is typing...",
+            online: "🟢 Online",
+            videoCallVIPOnly: "🔒 Sorry, video calls are only available for VIP accounts. Upgrade now!",
+            cannotAccessCamera: "Cannot access camera/microphone: ",
+            micActive: "🎙️ Microphone active",
+            micInactive: "🔴 Microphone inactive",
+            sessionTimeout: "🔐 Session expired due to inactivity (5 minutes). You will be logged out.",
+            upgradeConfirm: "✨ Upgrade to VIP - $9.99/month",
+            upgradeSuccess: "🎉 Congratulations! You are now a VIP member",
+            alreadyVIP: "✨ You are already a VIP member!",
+            roomPasswordError: "❌ Incorrect room password!",
+            roomExists: "Room already exists",
+            enterRoomName: "Enter room name:",
+            newRoom: "New Room",
+            protectWithPassword: "Protect room with password?",
+            enterPassword: "Enter room password:",
+            passwordTooShort: "Password too short (min 3 characters)",
+            roomCreated: "Room created successfully",
+            openChatFirst: "Open a chat first",
+            enterUser: "❌ Enter username",
+            enterRoom: "❌ Enter room name",
+            wrongPasswordCreate: "⚠️ Incorrect password! A new room will be created.",
+            back: "🔙 Back",
+            langLabel: "🌐 EN",
+            paymentTitle: "💎 VIP Membership",
+            paymentDesc: "Choose your currency",
+            payNow: "💎 Pay Now & Upgrade VIP",
+            cancel: "Cancel",
+            paymentSuccess: "🎉 Payment successful! You are now a VIP member!",
+            paymentError: "❌ Payment failed. Please try again.",
+            walletLabel: "Wallet",
+            settingsLabel: "Settings",
+            favoritesLabel: "Favorites",
+            vipLabel: "VIP",
+            chatLabel: "Chat",
+            musicOn: "🎵 Music ON",
+            musicOff: "🔇 Music OFF"
+        },
+        ar: {
+            heroTagline: "😤 نظرة التحدي النيونية!",
+            catAction: "🎯 أكشن",
+            catRacing: "🏎️ سباقات",
+            catFighting: "🥊 قتال",
+            catPuzzle: "🧩 ألغاز",
+            moreBtn: "➕ المزيد",
+            moreTitle: "🎮 المزيد من أنواع الألعاب",
+            closeBtn: "إغلاق",
+            catBattle: "🔫 معركة رويال",
+            catSports: "⚽ رياضات",
+            catStrategy: "🧠 استراتيجية",
+            catHorror: "👻 رعب",
+            catRpg: "⚔️ آر بي جي",
+            catSimulation: "🏙️ محاكاة",
+            upgradeVIP: "👑 ترقية VIP",
+            vipActive: "👑 VIP مفعل",
+            playMusic: "🎵 تشغيل",
+            stopMusic: "🔇 إيقاف",
+            securityTitle: "🔐 إعدادات الأمان",
+            securityDesc: "أدخل بياناتك للدخول إلى الدردشة",
+            securityUsernamePlaceholder: "👤 اسم المستخدم",
+            securityPasswordPlaceholder: "🔒 كلمة مرور الغرفة (اختياري)",
+            securityRoomPlaceholder: "🏠 اسم الغرفة",
+            securityBtn: "🚪 دخول إلى الدردشة",
+            securityHint: "💡 يمكنك إنشاء غرفة جديدة أو الانضمام إلى غرفة موجودة",
+            chatsTitle: "المحادثات",
+            noChats: "لا توجد محادثات\n✏️ أنشئ محادثة جديدة",
+            noMessages: "✨ اختر محادثة لبدء المراسلة\n💬 لا توجد رسائل بعد\n✨ اكتب أول رسالة",
+            typeMessage: "اكتب رسالة...",
+            typing: "✍️ شخص ما يكتب...",
+            online: "🟢 متصل",
+            videoCallVIPOnly: "🔒 عذراً، خاصية مكالمات الفيديو متاحة فقط للحسابات المميزة (VIP). قم بترقية حسابك الآن!",
+            cannotAccessCamera: "لا يمكن الوصول إلى الكاميرا/الميكروفون: ",
+            micActive: "🎙️ الميكروفون نشط",
+            micInactive: "🔴 الميكروفون غير نشط",
+            sessionTimeout: "🔐 انتهت الجلسة بسبب عدم النشاط (5 دقائق). سيتم تسجيل الخروج.",
+            upgradeConfirm: "✨ ترقية إلى VIP - 9.99$ شهرياً",
+            upgradeSuccess: "🎉 تهانينا! أصبحت عضواً مميزاً",
+            alreadyVIP: "✨ أنت بالفعل عضو VIP!",
+            roomPasswordError: "❌ كلمة مرور الغرفة غير صحيحة!",
+            roomExists: "الغرفة موجودة",
+            enterRoomName: "أدخل اسم الغرفة الجديدة:",
+            newRoom: "غرفة جديدة",
+            protectWithPassword: "هل تريد حماية الغرفة بكلمة مرور؟",
+            enterPassword: "أدخل كلمة مرور الغرفة:",
+            passwordTooShort: "كلمة المرور قصيرة جداً (3 أحرف على الأقل)",
+            roomCreated: "تم إنشاء الغرفة بنجاح",
+            openChatFirst: "افتح محادثة أولاً",
+            enterUser: "❌ أدخل اسم المستخدم",
+            enterRoom: "❌ أدخل اسم الغرفة",
+            wrongPasswordCreate: "⚠️ كلمة المرور غير صحيحة! سيتم إنشاء غرفة جديدة.",
+            back: "🔙 العودة",
+            langLabel: "🌐 AR",
+            paymentTitle: "💎 عضوية VIP",
+            paymentDesc: "اختر العملة",
+            payNow: "💎 ادفع الآن وفعّل VIP",
+            cancel: "إلغاء",
+            paymentSuccess: "🎉 تم الدفع بنجاح! أصبحت عضواً مميزاً",
+            paymentError: "❌ فشل الدفع. الرجاء المحاولة مرة أخرى",
+            walletLabel: "المحفظة",
+            settingsLabel: "الإعدادات",
+            favoritesLabel: "المفضلة",
+            vipLabel: "VIP",
+            chatLabel: "الدردشة",
+            musicOn: "🎵 الموسيقى قيد التشغيل",
+            musicOff: "🔇 الموسيقى متوقفة"
+        },
+        fr: {
+            heroTagline: "😤 Look Challenge Néon!",
+            catAction: "🎯 Action",
+            catRacing: "🏎️ Course",
+            catFighting: "🥊 Combat",
+            catPuzzle: "🧩 Puzzle",
+            moreBtn: "➕ Plus",
+            moreTitle: "🎮 Plus de catégories de jeux",
+            closeBtn: "Fermer",
+            catBattle: "🔫 Battle Royale",
+            catSports: "⚽ Sports",
+            catStrategy: "🧠 Stratégie",
+            catHorror: "👻 Horreur",
+            catRpg: "⚔️ RPG",
+            catSimulation: "🏙️ Simulation",
+            upgradeVIP: "👑 Passer VIP",
+            vipActive: "👑 VIP Actif",
+            playMusic: "🎵 Lecture",
+            stopMusic: "🔇 Arrêt",
+            securityTitle: "🔐 Paramètres de sécurité",
+            securityDesc: "Entrez vos détails pour accéder au chat",
+            securityUsernamePlaceholder: "👤 Nom d'utilisateur",
+            securityPasswordPlaceholder: "🔒 Mot de passe de la salle (optionnel)",
+            securityRoomPlaceholder: "🏠 Nom de la salle",
+            securityBtn: "🚪 Entrer dans le chat",
+            securityHint: "💡 Vous pouvez créer une nouvelle salle ou rejoindre une salle existante",
+            chatsTitle: "Discussions",
+            noChats: "Aucune discussion\n✏️ Créer une nouvelle discussion",
+            noMessages: "✨ Sélectionnez une discussion pour commencer\n💬 Aucun message encore\n✨ Écrivez le premier message",
+            typeMessage: "Écrivez un message...",
+            typing: "✍️ Quelqu'un écrit...",
+            online: "🟢 En ligne",
+            videoCallVIPOnly: "🔒 Désolé, les appels vidéo sont uniquement disponibles pour les comptes VIP. Passez à VIP maintenant!",
+            cannotAccessCamera: "Impossible d'accéder à la caméra/micro: ",
+            micActive: "🎙️ Microphone actif",
+            micInactive: "🔴 Microphone inactif",
+            sessionTimeout: "🔐 Session expirée (5 minutes). Vous allez être déconnecté.",
+            upgradeConfirm: "✨ Passer à VIP - 9.99$/mois",
+            upgradeSuccess: "🎉 Félicitations! Vous êtes maintenant membre VIP",
+            alreadyVIP: "✨ Vous êtes déjà membre VIP!",
+            roomPasswordError: "❌ Mot de passe incorrect!",
+            roomExists: "La salle existe déjà",
+            enterRoomName: "Entrez le nom de la salle:",
+            newRoom: "Nouvelle salle",
+            protectWithPassword: "Protéger la salle avec un mot de passe?",
+            enterPassword: "Entrez le mot de passe:",
+            passwordTooShort: "Mot de passe trop court (min 3 caractères)",
+            roomCreated: "Salle créée avec succès",
+            openChatFirst: "Ouvrez une discussion d'abord",
+            enterUser: "❌ Entrez un nom d'utilisateur",
+            enterRoom: "❌ Entrez un nom de salle",
+            wrongPasswordCreate: "⚠️ Mot de passe incorrect! Une nouvelle salle sera créée.",
+            back: "🔙 Retour",
+            langLabel: "🇫🇷 FR",
+            paymentTitle: "💎 Abonnement VIP",
+            paymentDesc: "Choisissez votre devise",
+            payNow: "💎 Payer et devenir VIP",
+            cancel: "Annuler",
+            paymentSuccess: "🎉 Paiement réussi! Vous êtes maintenant membre VIP!",
+            paymentError: "❌ Échec du paiement. Veuillez réessayer.",
+            walletLabel: "Portefeuille",
+            settingsLabel: "Paramètres",
+            favoritesLabel: "Favoris",
+            vipLabel: "VIP",
+            chatLabel: "Discussion",
+            musicOn: "🎵 Musique ON",
+            musicOff: "🔇 Musique OFF"
+        },
+        es: {
+            heroTagline: "😤 ¡Look Desafío Neón!",
+            catAction: "🎯 Acción",
+            catRacing: "🏎️ Carreras",
+            catFighting: "🥊 Pelea",
+            catPuzzle: "🧩 Rompecabezas",
+            moreBtn: "➕ Más",
+            moreTitle: "🎮 Más categorías de juegos",
+            closeBtn: "Cerrar",
+            catBattle: "🔫 Battle Royale",
+            catSports: "⚽ Deportes",
+            catStrategy: "🧠 Estrategia",
+            catHorror: "👻 Terror",
+            catRpg: "⚔️ RPG",
+            catSimulation: "🏙️ Simulación",
+            upgradeVIP: "👑 Mejorar a VIP",
+            vipActive: "👑 VIP Activo",
+            playMusic: "🎵 Reproducir",
+            stopMusic: "🔇 Detener",
+            securityTitle: "🔐 Configuración de seguridad",
+            securityDesc: "Ingrese sus datos para entrar al chat",
+            securityUsernamePlaceholder: "👤 Nombre de usuario",
+            securityPasswordPlaceholder: "🔒 Contraseña de sala (opcional)",
+            securityRoomPlaceholder: "🏠 Nombre de sala",
+            securityBtn: "🚪 Entrar al chat",
+            securityHint: "💡 Puedes crear una nueva sala o unirte a una existente",
+            chatsTitle: "Chats",
+            noChats: "No hay chats\n✏️ Crear nuevo chat",
+            noMessages: "✨ Selecciona un chat para empezar\n💬 No hay mensajes aún\n✨ Escribe el primer mensaje",
+            typeMessage: "Escribe un mensaje...",
+            typing: "✍️ Alguien está escribiendo...",
+            online: "🟢 En línea",
+            videoCallVIPOnly: "🔒 Lo siento, las videollamadas solo están disponibles para cuentas VIP. ¡Mejora ahora!",
+            cannotAccessCamera: "No se puede acceder a la cámara/mic: ",
+            micActive: "🎙️ Micrófono activo",
+            micInactive: "🔴 Micrófono inactivo",
+            sessionTimeout: "🔐 Sesión expirada (5 minutos). Serás desconectado.",
+            upgradeConfirm: "✨ Mejorar a VIP - $9.99/mes",
+            upgradeSuccess: "🎉 ¡Felicidades! Ahora eres miembro VIP",
+            alreadyVIP: "✨ ¡Ya eres miembro VIP!",
+            roomPasswordError: "❌ ¡Contraseña incorrecta!",
+            roomExists: "La sala ya existe",
+            enterRoomName: "Ingrese el nombre de la sala:",
+            newRoom: "Nueva sala",
+            protectWithPassword: "¿Proteger sala con contraseña?",
+            enterPassword: "Ingrese contraseña:",
+            passwordTooShort: "Contraseña demasiado corta (mín 3 caracteres)",
+            roomCreated: "Sala creada exitosamente",
+            openChatFirst: "Abre un chat primero",
+            enterUser: "❌ Ingrese nombre de usuario",
+            enterRoom: "❌ Ingrese nombre de sala",
+            wrongPasswordCreate: "⚠️ ¡Contraseña incorrecta! Se creará una nueva sala.",
+            back: "🔙 Volver",
+            langLabel: "🇪🇸 ES",
+            paymentTitle: "💎 Membresía VIP",
+            paymentDesc: "Elija su moneda",
+            payNow: "💎 Pagar y ser VIP",
+            cancel: "Cancelar",
+            paymentSuccess: "🎉 ¡Pago exitoso! ¡Ahora eres miembro VIP!",
+            paymentError: "❌ Error en el pago. Por favor, intente de nuevo.",
+            walletLabel: "Billetera",
+            settingsLabel: "Ajustes",
+            favoritesLabel: "Favoritos",
+            vipLabel: "VIP",
+            chatLabel: "Chat",
+            musicOn: "🎵 Música ON",
+            musicOff: "🔇 Música OFF"
+        },
+        de: {
+            heroTagline: "😤 Neon Challenge Look!",
+            catAction: "🎯 Aktion",
+            catRacing: "🏎️ Rennen",
+            catFighting: "🥊 Kampf",
+            catPuzzle: "🧩 Rätsel",
+            moreBtn: "➕ Mehr",
+            moreTitle: "🎮 Weitere Spielkategorien",
+            closeBtn: "Schließen",
+            catBattle: "🔫 Battle Royale",
+            catSports: "⚽ Sport",
+            catStrategy: "🧠 Strategie",
+            catHorror: "👻 Horror",
+            catRpg: "⚔️ RPG",
+            catSimulation: "🏙️ Simulation",
+            upgradeVIP: "👑 VIP Upgraden",
+            vipActive: "👑 VIP Aktiv",
+            playMusic: "🎵 Abspielen",
+            stopMusic: "🔇 Stopp",
+            securityTitle: "🔐 Sicherheitseinstellungen",
+            securityDesc: "Geben Sie Ihre Daten ein, um den Chat zu betreten",
+            securityUsernamePlaceholder: "👤 Benutzername",
+            securityPasswordPlaceholder: "🔒 Raum-Passwort (optional)",
+            securityRoomPlaceholder: "🏠 Raumname",
+            securityBtn: "🚪 Chat betreten",
+            securityHint: "💡 Sie können einen neuen Raum erstellen oder einem bestehenden beitreten",
+            chatsTitle: "Chats",
+            noChats: "Keine Chats\n✏️ Neuen Chat erstellen",
+            noMessages: "✨ Wählen Sie einen Chat aus\n💬 Noch keine Nachrichten\n✨ Schreiben Sie die erste Nachricht",
+            typeMessage: "Nachricht schreiben...",
+            typing: "✍️ Jemand tippt...",
+            online: "🟢 Online",
+            videoCallVIPOnly: "🔒 Videoanrufe sind nur für VIP-Konten verfügbar. Jetzt upgraden!",
+            cannotAccessCamera: "Kamera/Mikrofon nicht zugreifbar: ",
+            micActive: "🎙️ Mikrofon aktiv",
+            micInactive: "🔴 Mikrofon inaktiv",
+            sessionTimeout: "🔐 Sitzung abgelaufen (5 Minuten). Sie werden ausgeloggt.",
+            upgradeConfirm: "✨ Zu VIP upgraden - 9.99$/Monat",
+            upgradeSuccess: "🎉 Glückwunsch! Sie sind jetzt VIP-Mitglied",
+            alreadyVIP: "✨ Sie sind bereits VIP-Mitglied!",
+            roomPasswordError: "❌ Falsches Passwort!",
+            roomExists: "Raum existiert bereits",
+            enterRoomName: "Raumname eingeben:",
+            newRoom: "Neuer Raum",
+            protectWithPassword: "Raum mit Passwort schützen?",
+            enterPassword: "Passwort eingeben:",
+            passwordTooShort: "Passwort zu kurz (min. 3 Zeichen)",
+            roomCreated: "Raum erfolgreich erstellt",
+            openChatFirst: "Öffnen Sie zuerst einen Chat",
+            enterUser: "❌ Benutzername eingeben",
+            enterRoom: "❌ Raumname eingeben",
+            wrongPasswordCreate: "⚠️ Falsches Passwort! Ein neuer Raum wird erstellt.",
+            back: "🔙 Zurück",
+            langLabel: "🇩🇪 DE",
+            paymentTitle: "💎 VIP-Mitgliedschaft",
+            paymentDesc: "Wählen Sie Ihre Währung",
+            payNow: "💎 Jetzt bezahlen und VIP werden",
+            cancel: "Abbrechen",
+            paymentSuccess: "🎉 Zahlung erfolgreich! Sie sind jetzt VIP-Mitglied!",
+            paymentError: "❌ Zahlung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+            walletLabel: "Geldbörse",
+            settingsLabel: "Einstellungen",
+            favoritesLabel: "Favoriten",
+            vipLabel: "VIP",
+            chatLabel: "Chat",
+            musicOn: "🎵 Musik ON",
+            musicOff: "🔇 Musik OFF"
+        },
+        it: {
+            heroTagline: "😤 Look Sfida Neon!",
+            catAction: "🎯 Azione",
+            catRacing: "🏎️ Corse",
+            catFighting: "🥊 Combattimento",
+            catPuzzle: "🧩 Puzzle",
+            moreBtn: "➕ Altro",
+            moreTitle: "🎮 Altre categorie di giochi",
+            closeBtn: "Chiudi",
+            catBattle: "🔫 Battle Royale",
+            catSports: "⚽ Sport",
+            catStrategy: "🧠 Strategia",
+            catHorror: "👻 Horror",
+            catRpg: "⚔️ RPG",
+            catSimulation: "🏙️ Simulazione",
+            upgradeVIP: "👑 Passa a VIP",
+            vipActive: "👑 VIP Attivo",
+            playMusic: "🎵 Riproduci",
+            stopMusic: "🔇 Ferma",
+            securityTitle: "🔐 Impostazioni di sicurezza",
+            securityDesc: "Inserisci i tuoi dati per entrare nella chat",
+            securityUsernamePlaceholder: "👤 Nome utente",
+            securityPasswordPlaceholder: "🔒 Password della stanza (opzionale)",
+            securityRoomPlaceholder: "🏠 Nome stanza",
+            securityBtn: "🚪 Entra nella chat",
+            securityHint: "💡 Puoi creare una nuova stanza o unirti a una esistente",
+            chatsTitle: "Chat",
+            noChats: "Nessuna chat\n✏️ Crea nuova chat",
+            noMessages: "✨ Seleziona una chat per iniziare\n💬 Nessun messaggio ancora\n✨ Scrivi il primo messaggio",
+            typeMessage: "Scrivi un messaggio...",
+            typing: "✍️ Qualcuno sta scrivendo...",
+            online: "🟢 Online",
+            videoCallVIPOnly: "🔒 Le videochiamate sono disponibili solo per account VIP. Passa a VIP ora!",
+            cannotAccessCamera: "Impossibile accedere a fotocamera/microfono: ",
+            micActive: "🎙️ Microfono attivo",
+            micInactive: "🔴 Microfono inattivo",
+            sessionTimeout: "🔐 Sessione scaduta (5 minuti). Verrai disconnesso.",
+            upgradeConfirm: "✨ Passa a VIP - 9.99$/mese",
+            upgradeSuccess: "🎉 Congratulazioni! Ora sei un membro VIP",
+            alreadyVIP: "✨ Sei già un membro VIP!",
+            roomPasswordError: "❌ Password della stanza errata!",
+            roomExists: "La stanza esiste già",
+            enterRoomName: "Inserisci il nome della stanza:",
+            newRoom: "Nuova stanza",
+            protectWithPassword: "Proteggere la stanza con password?",
+            enterPassword: "Inserisci la password:",
+            passwordTooShort: "Password troppo corta (min 3 caratteri)",
+            roomCreated: "Stanza creata con successo",
+            openChatFirst: "Apri prima una chat",
+            enterUser: "❌ Inserisci nome utente",
+            enterRoom: "❌ Inserisci nome stanza",
+            wrongPasswordCreate: "⚠️ Password errata! Verrà creata una nuova stanza.",
+            back: "🔙 Indietro",
+            langLabel: "🇮🇹 IT",
+            paymentTitle: "💎 Abbonamento VIP",
+            paymentDesc: "Scegli la tua valuta",
+            payNow: "💎 Paga ora e diventa VIP",
+            cancel: "Annulla",
+            paymentSuccess: "🎉 Pagamento riuscito! Ora sei un membro VIP!",
+            paymentError: "❌ Pagamento fallito. Riprova.",
+            walletLabel: "Portafoglio",
+            settingsLabel: "Impostazioni",
+            favoritesLabel: "Preferiti",
+            vipLabel: "VIP",
+            chatLabel: "Chat",
+            musicOn: "🎵 Musica ON",
+            musicOff: "🔇 Musica OFF"
+        },
+        pt: {
+            heroTagline: "😤 Visual Desafio Neon!",
+            catAction: "🎯 Ação",
+            catRacing: "🏎️ Corrida",
+            catFighting: "🥊 Luta",
+            catPuzzle: "🧩 Quebra-cabeça",
+            moreBtn: "➕ Mais",
+            moreTitle: "🎮 Mais categorias de jogos",
+            closeBtn: "Fechar",
+            catBattle: "🔫 Battle Royale",
+            catSports: "⚽ Esportes",
+            catStrategy: "🧠 Estratégia",
+            catHorror: "👻 Terror",
+            catRpg: "⚔️ RPG",
+            catSimulation: "🏙️ Simulação",
+            upgradeVIP: "👑 Upgrade para VIP",
+            vipActive: "👑 VIP Ativo",
+            playMusic: "🎵 Tocar",
+            stopMusic: "🔇 Parar",
+            securityTitle: "🔐 Configurações de Segurança",
+            securityDesc: "Digite seus dados para entrar no chat",
+            securityUsernamePlaceholder: "👤 Nome de usuário",
+            securityPasswordPlaceholder: "🔒 Senha da sala (opcional)",
+            securityRoomPlaceholder: "🏠 Nome da sala",
+            securityBtn: "🚪 Entrar no chat",
+            securityHint: "💡 Você pode criar uma nova sala ou entrar em uma existente",
+            chatsTitle: "Conversas",
+            noChats: "Sem conversas\n✏️ Criar nova conversa",
+            noMessages: "✨ Selecione uma conversa para começar\n💬 Nenhuma mensagem ainda\n✨ Escreva a primeira mensagem",
+            typeMessage: "Digite uma mensagem...",
+            typing: "✍️ Alguém está digitando...",
+            online: "🟢 Online",
+            videoCallVIPOnly: "🔒 Videochamadas disponíveis apenas para contas VIP. Faça upgrade agora!",
+            cannotAccessCamera: "Não foi possível acessar câmera/microfone: ",
+            micActive: "🎙️ Microfone ativo",
+            micInactive: "🔴 Microfone inativo",
+            sessionTimeout: "🔐 Sessão expirada (5 minutos). Você será desconectado.",
+            upgradeConfirm: "✨ Upgrade para VIP - $9.99/mês",
+            upgradeSuccess: "🎉 Parabéns! Agora você é membro VIP",
+            alreadyVIP: "✨ Você já é membro VIP!",
+            roomPasswordError: "❌ Senha da sala incorreta!",
+            roomExists: "A sala já existe",
+            enterRoomName: "Digite o nome da sala:",
+            newRoom: "Nova sala",
+            protectWithPassword: "Proteger sala com senha?",
+            enterPassword: "Digite a senha da sala:",
+            passwordTooShort: "Senha muito curta (mínimo 3 caracteres)",
+            roomCreated: "Sala criada com sucesso",
+            openChatFirst: "Abra uma conversa primeiro",
+            enterUser: "❌ Digite o nome de usuário",
+            enterRoom: "❌ Digite o nome da sala",
+            wrongPasswordCreate: "⚠️ Senha incorreta! Uma nova sala será criada.",
+            back: "🔙 Voltar",
+            langLabel: "🇵🇹 PT",
+            paymentTitle: "💎 Assinatura VIP",
+            paymentDesc: "Escolha sua moeda",
+            payNow: "💎 Pagar agora e ser VIP",
+            cancel: "Cancelar",
+            paymentSuccess: "🎉 Pagamento bem-sucedido! Agora você é membro VIP!",
+            paymentError: "❌ Falha no pagamento. Tente novamente.",
+            walletLabel: "Carteira",
+            settingsLabel: "Configurações",
+            favoritesLabel: "Favoritos",
+            vipLabel: "VIP",
+            chatLabel: "Bate-papo",
+            musicOn: "🎵 Música ON",
+            musicOff: "🔇 Música OFF"
+        },
+        ru: {
+            heroTagline: "😤 Неоновый вызов!",
+            catAction: "🎯 Экшн",
+            catRacing: "🏎️ Гонки",
+            catFighting: "🥊 Бои",
+            catPuzzle: "🧩 Головоломки",
+            moreBtn: "➕ Ещё",
+            moreTitle: "🎮 Больше категорий игр",
+            closeBtn: "Закрыть",
+            catBattle: "🔫 Королевская битва",
+            catSports: "⚽ Спорт",
+            catStrategy: "🧠 Стратегия",
+            catHorror: "👻 Ужасы",
+            catRpg: "⚔️ РПГ",
+            catSimulation: "🏙️ Симуляция",
+            upgradeVIP: "👑 Повысить до VIP",
+            vipActive: "👑 VIP Активен",
+            playMusic: "🎵 Воспроизвести",
+            stopMusic: "🔇 Остановить",
+            securityTitle: "🔐 Настройки безопасности",
+            securityDesc: "Введите данные для входа в чат",
+            securityUsernamePlaceholder: "👤 Имя пользователя",
+            securityPasswordPlaceholder: "🔒 Пароль комнаты (опционально)",
+            securityRoomPlaceholder: "🏠 Название комнаты",
+            securityBtn: "🚪 Войти в чат",
+            securityHint: "💡 Вы можете создать новую комнату или присоединиться к существующей",
+            chatsTitle: "Чаты",
+            noChats: "Нет чатов\n✏️ Создать новый чат",
+            noMessages: "✨ Выберите чат для начала\n💬 Пока нет сообщений\n✨ Напишите первое сообщение",
+            typeMessage: "Введите сообщение...",
+            typing: "✍️ Кто-то печатает...",
+            online: "🟢 Онлайн",
+            videoCallVIPOnly: "🔒 Видеозвонки доступны только для VIP-аккаунтов. Повысьте статус сейчас!",
+            cannotAccessCamera: "Нет доступа к камере/микрофону: ",
+            micActive: "🎙️ Микрофон активен",
+            micInactive: "🔴 Микрофон неактивен",
+            sessionTimeout: "🔐 Сессия истекла (5 минут). Вы будете выйти из системы.",
+            upgradeConfirm: "✨ Повысить до VIP - $9.99/месяц",
+            upgradeSuccess: "🎉 Поздравляем! Теперь вы VIP-участник",
+            alreadyVIP: "✨ Вы уже VIP-участник!",
+            roomPasswordError: "❌ Неверный пароль комнаты!",
+            roomExists: "Комната уже существует",
+            enterRoomName: "Введите название комнаты:",
+            newRoom: "Новая комната",
+            protectWithPassword: "Защитить комнату паролем?",
+            enterPassword: "Введите пароль:",
+            passwordTooShort: "Пароль слишком короткий (мин. 3 символа)",
+            roomCreated: "Комната успешно создана",
+            openChatFirst: "Сначала откройте чат",
+            enterUser: "❌ Введите имя пользователя",
+            enterRoom: "❌ Введите название комнаты",
+            wrongPasswordCreate: "⚠️ Неверный пароль! Будет создана новая комната.",
+            back: "🔙 Назад",
+            langLabel: "🇷🇺 RU",
+            paymentTitle: "💎 VIP-подписка",
+            paymentDesc: "Выберите валюту",
+            payNow: "💎 Оплатить и стать VIP",
+            cancel: "Отмена",
+            paymentSuccess: "🎉 Оплата прошла успешно! Теперь вы VIP-участник!",
+            paymentError: "❌ Ошибка оплаты. Пожалуйста, попробуйте снова.",
+            walletLabel: "Кошелек",
+            settingsLabel: "Настройки",
+            favoritesLabel: "Избранное",
+            vipLabel: "VIP",
+            chatLabel: "Чат",
+            musicOn: "🎵 Музыка ВКЛ",
+            musicOff: "🔇 Музыка ВЫКЛ"
+        },
+        zh: {
+            heroTagline: "😤 霓虹挑战造型！",
+            catAction: "🎯 动作",
+            catRacing: "🏎️ 赛车",
+            catFighting: "🥊 格斗",
+            catPuzzle: "🧩 益智",
+            moreBtn: "➕ 更多",
+            moreTitle: "🎮 更多游戏类别",
+            closeBtn: "关闭",
+            catBattle: "🔫 大逃杀",
+            catSports: "⚽ 体育",
+            catStrategy: "🧠 策略",
+            catHorror: "👻 恐怖",
+            catRpg: "⚔️ 角色扮演",
+            catSimulation: "🏙️ 模拟",
+            upgradeVIP: "👑 升级VIP",
+            vipActive: "👑 VIP激活",
+            playMusic: "🎵 播放",
+            stopMusic: "🔇 停止",
+            securityTitle: "🔐 安全设置",
+            securityDesc: "输入您的详细信息以进入聊天室",
+            securityUsernamePlaceholder: "👤 用户名",
+            securityPasswordPlaceholder: "🔒 房间密码（可选）",
+            securityRoomPlaceholder: "🏠 房间名称",
+            securityBtn: "🚪 进入聊天",
+            securityHint: "💡 您可以创建新房间或加入现有房间",
+            chatsTitle: "聊天",
+            noChats: "没有聊天\n✏️ 创建新聊天",
+            noMessages: "✨ 选择聊天开始\n💬 还没有消息\n✨ 写第一条消息",
+            typeMessage: "输入消息...",
+            typing: "✍️ 有人正在输入...",
+            online: "🟢 在线",
+            videoCallVIPOnly: "🔒 视频通话仅适用于VIP账户。立即升级！",
+            cannotAccessCamera: "无法访问摄像头/麦克风：",
+            micActive: "🎙️ 麦克风激活",
+            micInactive: "🔴 麦克风未激活",
+            sessionTimeout: "🔐 会话已过期（5分钟）。您将被登出。",
+            upgradeConfirm: "✨ 升级到VIP - $9.99/月",
+            upgradeSuccess: "🎉 恭喜！您现在已经是VIP会员",
+            alreadyVIP: "✨ 您已经是VIP会员！",
+            roomPasswordError: "❌ 房间密码错误！",
+            roomExists: "房间已存在",
+            enterRoomName: "输入房间名称：",
+            newRoom: "新房间",
+            protectWithPassword: "用密码保护房间？",
+            enterPassword: "输入房间密码：",
+            passwordTooShort: "密码太短（至少3个字符）",
+            roomCreated: "房间创建成功",
+            openChatFirst: "先打开聊天",
+            enterUser: "❌ 输入用户名",
+            enterRoom: "❌ 输入房间名称",
+            wrongPasswordCreate: "⚠️ 密码错误！将创建新房间。",
+            back: "🔙 返回",
+            langLabel: "🇨🇳 中文",
+            paymentTitle: "💎 VIP会员",
+            paymentDesc: "选择您的货币",
+            payNow: "💎 立即支付并升级VIP",
+            cancel: "取消",
+            paymentSuccess: "🎉 支付成功！您现在已经是VIP会员！",
+            paymentError: "❌ 支付失败。请重试。",
+            walletLabel: "钱包",
+            settingsLabel: "设置",
+            favoritesLabel: "收藏",
+            vipLabel: "VIP",
+            chatLabel: "聊天",
+            musicOn: "🎵 音乐开",
+            musicOff: "🔇 音乐关"
+        },
+        ja: {
+            heroTagline: "😤 ネオンチャレンジルック！",
+            catAction: "🎯 アクション",
+            catRacing: "🏎️ レーシング",
+            catFighting: "🥊 ファイティング",
+            catPuzzle: "🧩 パズル",
+            moreBtn: "➕ もっと",
+            moreTitle: "🎮 その他のゲームカテゴリー",
+            closeBtn: "閉じる",
+            catBattle: "🔫 バトルロワイヤル",
+            catSports: "⚽ スポーツ",
+            catStrategy: "🧠 ストラテジー",
+            catHorror: "👻 ホラー",
+            catRpg: "⚔️ RPG",
+            catSimulation: "🏙️ シミュレーション",
+            upgradeVIP: "👑 VIPアップグレード",
+            vipActive: "👑 VIPアクティブ",
+            playMusic: "🎵 再生",
+            stopMusic: "🔇 停止",
+            securityTitle: "🔐 セキュリティ設定",
+            securityDesc: "チャットに入るために詳細を入力してください",
+            securityUsernamePlaceholder: "👤 ユーザー名",
+            securityPasswordPlaceholder: "🔒 ルームパスワード（オプション）",
+            securityRoomPlaceholder: "🏠 ルーム名",
+            securityBtn: "🚪 チャットに入る",
+            securityHint: "💡 新しいルームを作成するか、既存のルームに参加できます",
+            chatsTitle: "チャット",
+            noChats: "チャットがありません\n✏️ 新しいチャットを作成",
+            noMessages: "✨ チャットを選択して開始\n💬 まだメッセージはありません\n✨ 最初のメッセージを書く",
+            typeMessage: "メッセージを入力...",
+            typing: "✍️ 誰かが入力中...",
+            online: "🟢 オンライン",
+            videoCallVIPOnly: "🔒 ビデオ通話はVIPアカウントのみ利用可能です。今すぐアップグレード！",
+            cannotAccessCamera: "カメラ/マイクにアクセスできません：",
+            micActive: "🎙️ マイクアクティブ",
+            micInactive: "🔴 マイク非アクティブ",
+            sessionTimeout: "🔐 セッションが期限切れになりました（5分）。ログアウトします。",
+            upgradeConfirm: "✨ VIPにアップグレード - $9.99/月",
+            upgradeSuccess: "🎉 おめでとうございます！VIPメンバーになりました",
+            alreadyVIP: "✨ あなたはすでにVIPメンバーです！",
+            roomPasswordError: "❌ ルームパスワードが間違っています！",
+            roomExists: "ルームは既に存在します",
+            enterRoomName: "ルーム名を入力してください：",
+            newRoom: "新規ルーム",
+            protectWithPassword: "パスワードでルームを保護しますか？",
+            enterPassword: "ルームパスワードを入力：",
+            passwordTooShort: "パスワードが短すぎます（最小3文字）",
+            roomCreated: "ルームが正常に作成されました",
+            openChatFirst: "まずチャットを開いてください",
+            enterUser: "❌ ユーザー名を入力してください",
+            enterRoom: "❌ ルーム名を入力してください",
+            wrongPasswordCreate: "⚠️ パスワードが間違っています！新しいルームが作成されます。",
+            back: "🔙 戻る",
+            langLabel: "🇯🇵 日本語",
+            paymentTitle: "💎 VIPメンバーシップ",
+            paymentDesc: "通貨を選択してください",
+            payNow: "💎 今すぐ支払ってVIPにアップグレード",
+            cancel: "キャンセル",
+            paymentSuccess: "🎉 支払い成功！VIPメンバーになりました！",
+            paymentError: "❌ 支払いに失敗しました。もう一度お試しください。",
+            walletLabel: "ウォレット",
+            settingsLabel: "設定",
+            favoritesLabel: "お気に入り",
+            vipLabel: "VIP",
+            chatLabel: "チャット",
+            musicOn: "🎵 音楽ON",
+            musicOff: "🔇 音楽OFF"
+        },
+        ko: {
+            heroTagline: "😤 네온 챌린지 룩!",
+            catAction: "🎯 액션",
+            catRacing: "🏎️ 레이싱",
+            catFighting: "🥊 격투",
+            catPuzzle: "🧩 퍼즐",
+            moreBtn: "➕ 더보기",
+            moreTitle: "🎮 더 많은 게임 카테고리",
+            closeBtn: "닫기",
+            catBattle: "🔫 배틀로얄",
+            catSports: "⚽ 스포츠",
+            catStrategy: "🧠 전략",
+            catHorror: "👻 호러",
+            catRpg: "⚔️ RPG",
+            catSimulation: "🏙️ 시뮬레이션",
+            upgradeVIP: "👑 VIP 업그레이드",
+            vipActive: "👑 VIP 활성화",
+            playMusic: "🎵 재생",
+            stopMusic: "🔇 중지",
+            securityTitle: "🔐 보안 설정",
+            securityDesc: "채팅에 들어가려면 세부 정보를 입력하세요",
+            securityUsernamePlaceholder: "👤 사용자 이름",
+            securityPasswordPlaceholder: "🔒 방 비밀번호 (선택 사항)",
+            securityRoomPlaceholder: "🏠 방 이름",
+            securityBtn: "🚪 채팅 입장",
+            securityHint: "💡 새 방을 만들거나 기존 방에 참여할 수 있습니다",
+            chatsTitle: "채팅",
+            noChats: "채팅 없음\n✏️ 새 채팅 만들기",
+            noMessages: "✨ 시작할 채팅 선택\n💬 아직 메시지 없음\n✨ 첫 메시지 작성",
+            typeMessage: "메시지를 입력하세요...",
+            typing: "✍️ 누군가 입력 중...",
+            online: "🟢 온라인",
+            videoCallVIPOnly: "🔒 화상 통화는 VIP 계정만 사용할 수 있습니다. 지금 업그레이드하세요!",
+            cannotAccessCamera: "카메라/마이크에 액세스할 수 없습니다: ",
+            micActive: "🎙️ 마이크 활성화",
+            micInactive: "🔴 마이크 비활성화",
+            sessionTimeout: "🔐 세션이 만료되었습니다 (5분). 로그아웃됩니다.",
+            upgradeConfirm: "✨ VIP로 업그레이드 - $9.99/월",
+            upgradeSuccess: "🎉 축하합니다! 이제 VIP 회원이 되셨습니다",
+            alreadyVIP: "✨ 이미 VIP 회원이십니다!",
+            roomPasswordError: "❌ 방 비밀번호가 잘못되었습니다!",
+            roomExists: "방이 이미 존재합니다",
+            enterRoomName: "방 이름을 입력하세요:",
+            newRoom: "새 방",
+            protectWithPassword: "비밀번호로 방을 보호하시겠습니까?",
+            enterPassword: "방 비밀번호 입력:",
+            passwordTooShort: "비밀번호가 너무 짧습니다 (최소 3자)",
+            roomCreated: "방이 성공적으로 생성되었습니다",
+            openChatFirst: "먼저 채팅을 여세요",
+            enterUser: "❌ 사용자 이름을 입력하세요",
+            enterRoom: "❌ 방 이름을 입력하세요",
+            wrongPasswordCreate: "⚠️ 비밀번호가 잘못되었습니다! 새 방이 생성됩니다.",
+            back: "🔙 뒤로",
+            langLabel: "🇰🇷 한국어",
+            paymentTitle: "💎 VIP 멤버십",
+            paymentDesc: "통화를 선택하세요",
+            payNow: "💎 지금 결제하고 VIP 업그레이드",
+            cancel: "취소",
+            paymentSuccess: "🎉 결제 성공! 이제 VIP 회원이 되셨습니다!",
+            paymentError: "❌ 결제 실패. 다시 시도해주세요.",
+            walletLabel: "지갑",
+            settingsLabel: "설정",
+            favoritesLabel: "즐겨찾기",
+            vipLabel: "VIP",
+            chatLabel: "채팅",
+            musicOn: "🎵 음악 ON",
+            musicOff: "🔇 음악 OFF"
+        }
+    };
+    
+    let currentLang = 'en';
+    let selectedCurrency = 'USD';
+    let selectedCurrencySymbol = '$';
+    let currencyRate = 1;
+    let currentAvatar = '😎';
     let isVIP = false;
-    let currentUser = null;
-    let currentOpenRoom = null;
-    let allRooms = {};
-    let securityPassword = "";
+    let bgMusic = null;
+    let isMusicPlaying = false;
+    let musicStarted = false;
+    
+    // Favorites System
     let favorites = JSON.parse(localStorage.getItem('didogame_favorites') || '[]');
-    let audioStream = null;
-    let sessionTimer = null;
-    let privateTarget = null;
     
-    // الألعاب
-    const gamesData = [
-        { id:1, name:"سونيك", img:"https://images6.alphacoders.com/118/1185678.jpg", url:"https://www.crazygames.com/embed/sonic-the-hedgehog", cat:"action", points:150, playerName:"شادو" },
-        { id:2, name:"متسابق المترو", img:"https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action", points:200, playerName:"سبيد" },
-        { id:3, name:"الهروب من المعبد", img:"https://images.hdqwalls.com/wallpapers/pubg-mobile-squad-4k-8q.jpg", url:"https://www.crazygames.com/embed/temple-run-2", cat:"action", points:180, playerName:"الملك" },
-        { id:4, name:"تسلق التلال", img:"https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg", url:"https://www.crazygames.com/embed/hill-climb-racing", cat:"racing", points:120, playerName:"متسلق" },
-        { id:5, name:"المقاتل الشارعي", img:"https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg", url:"https://www.crazygames.com/embed/street-fighter", cat:"fighting", points:300, playerName:"المقاتل" },
-        { id:6, name:"بيننا", img:"https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg", url:"https://www.crazygames.com/embed/among-us-online", cat:"puzzle", points:90, playerName:"دجال" },
-        { id:7, name:"كول أوف ديوتي", img:"https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-2020-8k-2020-32.jpg", url:"https://www.crazygames.com/embed/call-of-duty-mobile", cat:"action", points:250, playerName:"جندي" },
-        { id:8, name:"ماينكرافت", img:"https://images.hdqwalls.com/wallpapers/minecraft-2020-4k-6p.jpg", url:"https://www.crazygames.com/embed/minecraft-classic", cat:"puzzle", points:200, playerName:"باني" },
-        { id:9, name:"فال جاي", img:"https://images.hdqwalls.com/wallpapers/fall-guys-ultimate-knockout-2020-58.jpg", url:"https://www.crazygames.com/embed/fall-guys", cat:"racing", points:180, playerName:"فول" },
-        { id:10, name:"روبلكس", img:"https://images.hdqwalls.com/wallpapers/roblox-2020-artwork-4k-5k.jpg", url:"https://www.crazygames.com/embed/roblox", cat:"action", points:220, playerName:"نوب" }
-    ];
-    
-    // ==================== دوال مساعدة ====================
     function saveFavorites() {
         localStorage.setItem('didogame_favorites', JSON.stringify(favorites));
     }
     
     function toggleFavorite(gameId) {
         const index = favorites.indexOf(gameId);
-        if (index === -1) favorites.push(gameId);
-        else favorites.splice(index, 1);
+        if (index === -1) {
+            favorites.push(gameId);
+        } else {
+            favorites.splice(index, 1);
+        }
         saveFavorites();
         renderAllGames();
         renderFavoritesList();
@@ -972,143 +2651,521 @@
         return favorites.includes(gameId);
     }
     
+    function openFavoritesModal() {
+        renderFavoritesList();
+        document.getElementById('favoritesModal').style.display = 'flex';
+    }
+    
+    function closeFavoritesModal() {
+        document.getElementById('favoritesModal').style.display = 'none';
+    }
+    
+    function renderFavoritesList() {
+        const container = document.getElementById('favoritesList');
+        const favGames = gamesData.filter(game => favorites.includes(game.id));
+        
+        if (favGames.length === 0) {
+            container.innerHTML = `<div class="empty-favorites">No favorite games yet<br>⭐ Click the star on any game to add it!</div>`;
+            return;
+        }
+        
+        container.innerHTML = favGames.map(game => `
+            <div class="favorite-item" onclick="playGameFromFav(${game.id})">
+                <div class="favorite-img" style="background-image: url('${game.img}')"></div>
+                <div class="favorite-info">
+                    <div class="favorite-name">${game.name}</div>
+                    <div class="favorite-cat">${game.cat}</div>
+                </div>
+                <button class="remove-fav" onclick="event.stopPropagation(); toggleFavorite(${game.id})">🗑️</button>
+            </div>
+        `).join('');
+    }
+    
+    function playGameFromFav(gameId) {
+        const game = gamesData.find(g => g.id === gameId);
+        if (game) {
+            document.getElementById('gameIframe').src = game.url;
+            document.getElementById('gameModal').classList.remove('hidden');
+            closeFavoritesModal();
+        }
+    }
+    
+    // Music Functions
+    function initMusic() {
+        if (!bgMusic) {
+            bgMusic = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+            bgMusic.loop = true;
+            bgMusic.volume = 0.5;
+        }
+    }
+    
+    function startMusicOnFirstTouch() {
+        if (!musicStarted && bgMusic) {
+            bgMusic.play().catch(e => console.log("Auto-play prevented"));
+            musicStarted = true;
+            isMusicPlaying = true;
+            updateMusicButtonText();
+        }
+    }
+    
+    function toggleMusic() {
+        initMusic();
+        if (isMusicPlaying) {
+            bgMusic.pause();
+            isMusicPlaying = false;
+        } else {
+            bgMusic.play().catch(e => console.log("Playback failed"));
+            isMusicPlaying = true;
+            musicStarted = true;
+        }
+        updateMusicButtonText();
+        localStorage.setItem('didogame_music', isMusicPlaying ? 'on' : 'off');
+    }
+    
+    function updateMusicButtonText() {
+        const musicBtn = document.getElementById('musicToggleBtn');
+        if (musicBtn) {
+            const t = translations[currentLang];
+            musicBtn.innerHTML = isMusicPlaying ? t.musicOn : t.musicOff;
+        }
+    }
+    
+    // Settings Functions
+    function openSettingsModal() {
+        document.getElementById('avatarPreview').innerHTML = currentAvatar;
+        document.getElementById('settingsLangSelect').value = currentLang;
+        updateMusicButtonText();
+        document.querySelectorAll('.avatar-option').forEach(opt => {
+            if (opt.dataset.avatar === currentAvatar) {
+                opt.classList.add('selected');
+            } else {
+                opt.classList.remove('selected');
+            }
+        });
+        document.getElementById('settingsModal').style.display = 'flex';
+    }
+    
+    function closeSettingsModal() {
+        document.getElementById('settingsModal').style.display = 'none';
+    }
+    
+    function saveSettings() {
+        const newLang = document.getElementById('settingsLangSelect').value;
+        if (newLang !== currentLang) {
+            setLanguage(newLang);
+        }
+        const selectedAvatar = document.querySelector('.avatar-option.selected');
+        if (selectedAvatar) {
+            currentAvatar = selectedAvatar.dataset.avatar;
+            localStorage.setItem('didogame_avatar', currentAvatar);
+            document.getElementById('avatarPreview').innerHTML = currentAvatar;
+            const mainAvatarDiv = document.getElementById('mainAvatarImg');
+            mainAvatarDiv.style.background = 'linear-gradient(135deg, #ff44ff, #00ffff)';
+            mainAvatarDiv.style.display = 'flex';
+            mainAvatarDiv.style.alignItems = 'center';
+            mainAvatarDiv.style.justifyContent = 'center';
+            mainAvatarDiv.style.fontSize = '3rem';
+            mainAvatarDiv.innerHTML = `<div class="controller-on-hand">🎮</div>${currentAvatar}`;
+        }
+        closeSettingsModal();
+    }
+    
+    function selectAvatarOption(element) {
+        document.querySelectorAll('.avatar-option').forEach(opt => {
+            opt.classList.remove('selected');
+        });
+        element.classList.add('selected');
+        document.getElementById('avatarPreview').innerHTML = element.dataset.avatar;
+    }
+    
+    // Wallet Functions
+    function openWalletModal() {
+        document.getElementById('walletModal').style.display = 'flex';
+    }
+    
+    function closeWalletModal() {
+        document.getElementById('walletModal').style.display = 'none';
+    }
+    
+    // Language Functions
+    function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('didogame_lang', currentLang);
+        const t = translations[currentLang];
+        
+        document.getElementById('moreCategoriesBtn').innerHTML = t.moreBtn;
+        document.getElementById('moreModalTitle').innerHTML = t.moreTitle;
+        document.getElementById('closeMoreModal').innerHTML = t.closeBtn;
+        document.getElementById('paymentTitle').innerHTML = t.paymentTitle;
+        document.getElementById('paymentDesc').innerHTML = t.paymentDesc;
+        document.getElementById('payNowBtn').innerHTML = t.payNow;
+        document.getElementById('closePaymentBtn').innerHTML = t.cancel;
+        
+        document.getElementById('walletLabel').innerText = t.walletLabel;
+        document.getElementById('settingsLabel').innerText = t.settingsLabel;
+        document.getElementById('favoritesLabel').innerText = t.favoritesLabel;
+        document.getElementById('vipLabel').innerText = t.vipLabel;
+        document.getElementById('chatLabel').innerText = t.chatLabel;
+        
+        updateMusicButtonText();
+        
+        const registerBtn = document.getElementById('registerBtn');
+        if(isVIP) {
+            registerBtn.classList.add('active');
+        } else {
+            registerBtn.classList.remove('active');
+        }
+        
+        const moreCategoriesList = document.getElementById('moreCategoriesList');
+        if (moreCategoriesList) {
+            moreCategoriesList.innerHTML = `
+                <div class="more-cat-badge" data-cat="battle">${t.catBattle}</div>
+                <div class="more-cat-badge" data-cat="sports">${t.catSports}</div>
+                <div class="more-cat-badge" data-cat="strategy">${t.catStrategy}</div>
+                <div class="more-cat-badge" data-cat="horror">${t.catHorror}</div>
+                <div class="more-cat-badge" data-cat="rpg">${t.catRpg}</div>
+                <div class="more-cat-badge" data-cat="simulation">${t.catSimulation}</div>
+            `;
+            document.querySelectorAll('.more-cat-badge').forEach(badge => {
+                badge.addEventListener('click', () => {
+                    const category = badge.dataset.cat;
+                    document.getElementById('moreModal').style.display = 'none';
+                    showCategoryGames(category);
+                });
+            });
+        }
+        
+        document.documentElement.lang = currentLang;
+        
+        if(currentLang === 'ar') {
+            document.body.style.direction = 'rtl';
+            document.querySelector('.app').style.direction = 'rtl';
+        } else {
+            document.body.style.direction = 'ltr';
+            document.querySelector('.app').style.direction = 'ltr';
+        }
+        
+        updateAllTexts();
+    }
+    
+    function updateAllTexts() {
+        const t = translations[currentLang];
+        document.getElementById('heroTagline').innerText = t.heroTagline;
+        document.getElementById('catAction').innerHTML = t.catAction;
+        document.getElementById('catRacing').innerHTML = t.catRacing;
+        document.getElementById('catFighting').innerHTML = t.catFighting;
+        document.getElementById('catPuzzle').innerHTML = t.catPuzzle;
+        
+        document.getElementById('securityTitle').innerText = t.securityTitle;
+        document.getElementById('securityDesc').innerText = t.securityDesc;
+        document.getElementById('securityUsername').placeholder = t.securityUsernamePlaceholder;
+        document.getElementById('securityRoomPassword').placeholder = t.securityPasswordPlaceholder;
+        document.getElementById('securityRoomName').placeholder = t.securityRoomPlaceholder;
+        document.getElementById('securityBtn').innerText = t.securityBtn;
+        document.getElementById('securityHint').innerText = t.securityHint;
+        
+        document.getElementById('chatsTitle').innerText = t.chatsTitle;
+        document.getElementById('backToHomeBtn').innerHTML = t.back;
+        
+        if(document.getElementById('openChatView').style.display === 'flex') {
+            document.getElementById('openMessageInput').placeholder = t.typeMessage;
+            document.getElementById('openChatStatus').innerHTML = t.online;
+        }
+        
+        renderChatsList();
+        if(currentOpenRoom && document.getElementById('openChatView').style.display === 'flex') {
+            displayMessagesInOpenChat();
+        }
+    }
+    
+    // Payment System
+    function openPaymentModal() {
+        if(isVIP) {
+            alert(translations[currentLang].alreadyVIP);
+            return;
+        }
+        document.getElementById('paymentModal').style.display = 'flex';
+        updatePriceDisplay();
+    }
+    
+    function closePaymentModal() {
+        document.getElementById('paymentModal').style.display = 'none';
+    }
+    
+    function selectCurrency(currency, symbol, rate) {
+        selectedCurrency = currency;
+        selectedCurrencySymbol = symbol;
+        currencyRate = rate;
+        document.querySelectorAll('.currency-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if(btn.dataset.currency === currency) {
+                btn.classList.add('active');
+            }
+        });
+        updatePriceDisplay();
+    }
+    
+    function updatePriceDisplay() {
+        const basePrice = 9.99;
+        const convertedPrice = (basePrice * currencyRate).toFixed(2);
+        document.getElementById('priceAmount').innerHTML = convertedPrice;
+        document.getElementById('priceCurrency').innerHTML = selectedCurrencySymbol;
+    }
+    
+    function processPayment() {
+        const t = translations[currentLang];
+        setTimeout(() => {
+            alert(t.paymentSuccess);
+            closePaymentModal();
+            upgradeToVIP();
+        }, 1500);
+    }
+    
+    function upgradeToVIP() {
+        if(isVIP) return;
+        isVIP = true;
+        localStorage.setItem('didogame_vip', 'true');
+        document.getElementById('registerBtn').classList.add('active');
+        if(document.getElementById('openChatView').style.display === 'flex') {
+            document.getElementById('videoCallBtn').style.display = 'inline-block';
+        }
+    }
+    
+    // Games Data
+    const gamesData = [
+        { id:1, name:"Sonic", img:"https://images6.alphacoders.com/118/1185678.jpg", url:"https://www.crazygames.com/embed/sonic-the-hedgehog", cat:"action", points:150, avatar:"🦔", playerName:"Shadow" },
+        { id:2, name:"Subway Surfers", img:"https://images.pexels.com/photos/27518665/pexels-photo-27518665.jpeg", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action", points:200, avatar:"🏃", playerName:"Speed" },
+        { id:3, name:"Temple Run 2", img:"https://images.hdqwalls.com/wallpapers/pubg-mobile-squad-4k-8q.jpg", url:"https://www.crazygames.com/embed/temple-run-2", cat:"action", points:180, avatar:"🏛️", playerName:"RunKing" },
+        { id:4, name:"Hill Climb", img:"https://images.hdqwalls.com/wallpapers/hill-climb-racing-2020-52.jpg", url:"https://www.crazygames.com/embed/hill-climb-racing", cat:"racing", points:120, avatar:"🚗", playerName:"Climber" },
+        { id:5, name:"Street Fighter", img:"https://images.hdqwalls.com/wallpapers/street-fighter-4k-artwork-2021-9z.jpg", url:"https://www.crazygames.com/embed/street-fighter", cat:"fighting", points:300, avatar:"👊", playerName:"Fighter" },
+        { id:6, name:"Among Us", img:"https://images.hdqwalls.com/wallpapers/among-us-2020-character-artwork-4k-5s.jpg", url:"https://www.crazygames.com/embed/among-us-online", cat:"puzzle", points:90, avatar:"👽", playerName:"Impostor" },
+        { id:7, name:"Call of Duty", img:"https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-2020-8k-2020-32.jpg", url:"https://www.crazygames.com/embed/call-of-duty-mobile", cat:"action", points:250, avatar:"🔫", playerName:"Soldier" },
+        { id:8, name:"Minecraft", img:"https://images.hdqwalls.com/wallpapers/minecraft-2020-4k-6p.jpg", url:"https://www.crazygames.com/embed/minecraft-classic", cat:"puzzle", points:200, avatar:"⛏️", playerName:"Builder" },
+        { id:9, name:"Fall Guys", img:"https://images.hdqwalls.com/wallpapers/fall-guys-ultimate-knockout-2020-58.jpg", url:"https://www.crazygames.com/embed/fall-guys", cat:"racing", points:180, avatar:"🫘", playerName:"Bean" },
+        { id:10, name:"Roblox", img:"https://images.hdqwalls.com/wallpapers/roblox-2020-artwork-4k-5k.jpg", url:"https://www.crazygames.com/embed/roblox", cat:"action", points:220, avatar:"🧱", playerName:"Noob" },
+        { id:11, name:"Fortnite", img:"https://images.hdqwalls.com/wallpapers/fortnite-chapter-2-season-3-2020-4k-6m.jpg", url:"https://www.crazygames.com/embed/fortnite", cat:"action", points:350, avatar:"🎯", playerName:"Jonesy" },
+        { id:12, name:"GTA V", img:"https://images.hdqwalls.com/wallpapers/grand-theft-auto-v-2020-4k-5z.jpg", url:"https://www.crazygames.com/embed/grand-theft-auto-v", cat:"action", points:400, avatar:"🚗", playerName:"Franklin" },
+        { id:13, name:"PUBG", img:"https://images.hdqwalls.com/wallpapers/pubg-mobile-2020-4k-8z.jpg", url:"https://www.crazygames.com/embed/pubg", cat:"battle", points:380, avatar:"🎯", playerName:"Player" },
+        { id:14, name:"FIFA", img:"https://images.hdqwalls.com/wallpapers/fifa-2020-4k-7k.jpg", url:"https://www.crazygames.com/embed/fifa", cat:"sports", points:250, avatar:"⚽", playerName:"Messi" },
+        { id:15, name:"Chess", img:"https://images.hdqwalls.com/wallpapers/chess-4k-2020-5j.jpg", url:"https://www.crazygames.com/embed/chess", cat:"strategy", points:180, avatar:"♜", playerName:"Grandmaster" },
+        { id:16, name:"Resident Evil", img:"https://images.hdqwalls.com/wallpapers/resident-evil-2020-4k-6p.jpg", url:"https://www.crazygames.com/embed/resident-evil", cat:"horror", points:300, avatar:"🧟", playerName:"Leon" },
+        { id:17, name:"Final Fantasy", img:"https://images.hdqwalls.com/wallpapers/final-fantasy-2020-4k-5z.jpg", url:"https://www.crazygames.com/embed/final-fantasy", cat:"rpg", points:280, avatar:"🗡️", playerName:"Cloud" },
+        { id:18, name:"The Sims", img:"https://images.hdqwalls.com/wallpapers/the-sims-4-2020-4k-6n.jpg", url:"https://www.crazygames.com/embed/the-sims", cat:"simulation", points:150, avatar:"🏠", playerName:"Simmer" }
+    ];
+    
+    function renderAllGames() {
+        const midPoint = Math.ceil(gamesData.length / 2);
+        const row1Games = gamesData.slice(0, midPoint);
+        const row2Games = gamesData.slice(midPoint);
+        
+        const gamesWrapper = document.getElementById('gamesWrapper');
+        gamesWrapper.innerHTML = `
+            <div class="game-row">
+                ${row1Games.map(game => `
+                    <div class="game-card" data-id="${game.id}" data-url="${game.url}">
+                        <div class="fav-star ${isFavorite(game.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${game.id})">${isFavorite(game.id) ? '⭐' : '☆'}</div>
+                        <div class="game-img" style="background-image:url('${game.img}')"></div>
+                        <div class="game-title">${game.name}</div>
+                    </div>
+                `).join('')}
+            </div>
+            <div class="game-row">
+                ${row2Games.map(game => `
+                    <div class="game-card" data-id="${game.id}" data-url="${game.url}">
+                        <div class="fav-star ${isFavorite(game.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${game.id})">${isFavorite(game.id) ? '⭐' : '☆'}</div>
+                        <div class="game-img" style="background-image:url('${game.img}')"></div>
+                        <div class="game-title">${game.name}</div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                if(e.target.classList.contains('fav-star')) return;
+                const id = parseInt(card.dataset.id);
+                const game = gamesData.find(g => g.id === id);
+                if (game) { 
+                    game.points += 5; 
+                    updateRanking(); 
+                }
+                document.getElementById('gameIframe').src = card.dataset.url;
+                document.getElementById('gameModal').classList.remove('hidden');
+            });
+        });
+    }
+    
+    function showCategoryGames(category) {
+        const filtered = gamesData.filter(g => g.cat === category);
+        const midPoint = Math.ceil(filtered.length / 2);
+        const row1Games = filtered.slice(0, midPoint);
+        const row2Games = filtered.slice(midPoint);
+        
+        document.getElementById('categoryGamesContainer').innerHTML = `
+            <div class="game-row">
+                ${row1Games.map(game => `
+                    <div class="game-card" data-url="${game.url}" data-id="${game.id}">
+                        <div class="fav-star ${isFavorite(game.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${game.id})">${isFavorite(game.id) ? '⭐' : '☆'}</div>
+                        <div class="game-img" style="background-image:url('${game.img}')"></div>
+                        <div class="game-title">${game.name}</div>
+                    </div>
+                `).join('')}
+            </div>
+            <div class="game-row">
+                ${row2Games.map(game => `
+                    <div class="game-card" data-url="${game.url}" data-id="${game.id}">
+                        <div class="fav-star ${isFavorite(game.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${game.id})">${isFavorite(game.id) ? '⭐' : '☆'}</div>
+                        <div class="game-img" style="background-image:url('${game.img}')"></div>
+                        <div class="game-title">${game.name}</div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        
+        document.querySelectorAll('#categoryGamesContainer .game-card').forEach(c => {
+            c.addEventListener('click', (e) => {
+                if(e.target.classList.contains('fav-star')) return;
+                document.getElementById('gameIframe').src = c.dataset.url;
+                document.getElementById('gameModal').classList.remove('hidden');
+            });
+        });
+        document.getElementById('homePage').classList.add('page-hidden');
+        document.getElementById('categoryPage').classList.remove('page-hidden');
+    }
+    
+    document.getElementById('moreCategoriesBtn').addEventListener('click', () => {
+        document.getElementById('moreModal').style.display = 'flex';
+    });
+    
+    document.getElementById('closeMoreModal').addEventListener('click', () => {
+        document.getElementById('moreModal').style.display = 'none';
+    });
+    
+    document.getElementById('moreModal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('moreModal')) {
+            document.getElementById('moreModal').style.display = 'none';
+        }
+    });
+    
+    document.querySelectorAll('.cat-badge').forEach(b => {
+        if (b.classList.contains('more-btn')) return;
+        b.addEventListener('click', () => showCategoryGames(b.dataset.cat));
+    });
+    document.getElementById('backToHomeBtn').addEventListener('click', () => {
+        document.getElementById('homePage').classList.remove('page-hidden');
+        document.getElementById('categoryPage').classList.add('page-hidden');
+    });
+    
     function updateRanking() {
         const sorted = [...gamesData].sort((a,b)=>b.points - a.points);
         document.getElementById('rankingList').innerHTML = `
-            <div class="rank-item"><div class="silver-circle">${sorted[1]?.playerName?.charAt(0) || '👤'}</div><div class="rank-name">${sorted[1]?.playerName || '---'}</div><div class="rank-points">⭐${sorted[1]?.points || 0}</div></div>
-            <div class="rank-item"><div class="gold-circle">${sorted[0]?.playerName?.charAt(0) || '👑'}</div><div class="rank-name">${sorted[0]?.playerName || '---'}</div><div class="rank-points">⭐${sorted[0]?.points || 0}</div></div>
-            <div class="rank-item"><div class="bronze-circle">${sorted[2]?.playerName?.charAt(0) || '👤'}</div><div class="rank-name">${sorted[2]?.playerName || '---'}</div><div class="rank-points">⭐${sorted[2]?.points || 0}</div></div>
+            <div class="rank-item"><div class="silver-circle">${sorted[1]?.avatar||'👤'}</div><div class="rank-name">${sorted[1]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[1]?.points||0}</div></div>
+            <div class="rank-item"><div class="gold-circle">${sorted[0]?.avatar||'👤'}</div><div class="rank-name">${sorted[0]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[0]?.points||0}</div></div>
+            <div class="rank-item"><div class="bronze-circle">${sorted[2]?.avatar||'👤'}</div><div class="rank-name">${sorted[2]?.playerName||'---'}</div><div class="rank-points">⭐${sorted[2]?.points||0}</div></div>
         `;
     }
     
+    function closeGameModal() {
+        document.getElementById('gameModal').classList.add('hidden');
+        document.getElementById('gameIframe').src = '';
+    }
+    
+    // Global Variables
+    let currentUser = null;
+    let currentOpenRoom = null;
+    let allRooms = {};
+    let audioStream = null;
+    let videoStream = null;
+    let privateTarget = null;
+    let securityPassword = "";
+    let sessionTimer = null;
+    let typingTimeout = null;
+    
+    // Currency selector setup
+    document.querySelectorAll('.currency-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            selectCurrency(btn.dataset.currency, btn.dataset.symbol, parseFloat(btn.dataset.rate));
+        });
+    });
+    
+    document.getElementById('payNowBtn').addEventListener('click', processPayment);
+    document.getElementById('closePaymentBtn').addEventListener('click', closePaymentModal);
+    document.getElementById('paymentModal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('paymentModal')) {
+            closePaymentModal();
+        }
+    });
+    
+    document.getElementById('musicToggleBtn').addEventListener('click', toggleMusic);
+    
+    document.getElementById('walletBtn').addEventListener('click', openWalletModal);
+    document.getElementById('closeWalletBtn').addEventListener('click', closeWalletModal);
+    document.getElementById('walletModal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('walletModal')) {
+            closeWalletModal();
+        }
+    });
+    
+    document.getElementById('settingsBtn').addEventListener('click', openSettingsModal);
+    document.getElementById('closeSettingsBtn').addEventListener('click', closeSettingsModal);
+    document.getElementById('saveSettingsBtn').addEventListener('click', saveSettings);
+    document.getElementById('settingsModal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('settingsModal')) {
+            closeSettingsModal();
+        }
+    });
+    
+    document.getElementById('favoritesBtn').addEventListener('click', openFavoritesModal);
+    document.getElementById('closeFavoritesBtn').addEventListener('click', closeFavoritesModal);
+    document.getElementById('favoritesModal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('favoritesModal')) {
+            closeFavoritesModal();
+        }
+    });
+    
+    document.querySelectorAll('.avatar-option').forEach(opt => {
+        opt.addEventListener('click', () => selectAvatarOption(opt));
+    });
+    
+    document.getElementById('registerBtn').addEventListener('click', openPaymentModal);
+    
+    document.querySelector('.currency-btn[data-currency="USD"]').classList.add('active');
+    
+    document.body.addEventListener('touchstart', function firstTouch() {
+        initMusic();
+        startMusicOnFirstTouch();
+        document.body.removeEventListener('touchstart', firstTouch);
+    });
+    document.body.addEventListener('click', function firstClick() {
+        initMusic();
+        startMusicOnFirstTouch();
+        document.body.removeEventListener('click', firstClick);
+    });
+    
+    const savedMusicState = localStorage.getItem('didogame_music');
+    if (savedMusicState === 'on') {
+        isMusicPlaying = true;
+    } else if (savedMusicState === 'off') {
+        isMusicPlaying = false;
+    }
+    
+    // Security Helpers
     function encryptMessage(text) {
         return btoa(unescape(encodeURIComponent(text)));
     }
     
     function decryptMessage(encrypted) {
-        try { return decodeURIComponent(escape(atob(encrypted))); }
-        catch(e) { return "رسالة مشفرة"; }
-    }
-    
-    function saveRooms() {
-        localStorage.setItem('didogame_rooms', JSON.stringify(allRooms));
-    }
-    
-    function loadRooms() {
-        const data = localStorage.getItem('didogame_rooms');
-        if(data) allRooms = JSON.parse(data);
-        else allRooms = {};
-    }
-    
-    function renderChatsList() {
-        const container = document.getElementById('chatsListContainer');
-        const rooms = Object.keys(allRooms);
-        if(rooms.length === 0) {
-            container.innerHTML = `<div style="color:#888; text-align:center; padding:40px;">📭 لا توجد محادثات<br>➕ أنشئ محادثة جديدة</div>`;
-            return;
+        try {
+            return decodeURIComponent(escape(atob(encrypted)));
+        } catch(e) {
+            return "⚠️ Encrypted message";
         }
-        container.innerHTML = rooms.map(room => `
-            <div class="chat-item" onclick="openRoomChat('${room.replace(/'/g, "\\'")}')">
-                <div style="width:45px; height:45px; background:linear-gradient(135deg,#ff44ff,#00ffff); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.2rem;">💬</div>
-                <div style="flex:1;">
-                    <div style="color:white; font-weight:bold;">${escapeHtml(room)}${allRooms[room].password ? ' 🔒' : ''}</div>
-                    <div style="color:#888; font-size:0.65rem;">${allRooms[room].messages?.length || 0} رسائل</div>
-                </div>
-            </div>
-        `).join('');
-    }
-    
-    function escapeHtml(str) {
-        if(!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if(m === '&') return '&amp;';
-            if(m === '<') return '&lt;';
-            if(m === '>') return '&gt;';
-            return m;
-        });
-    }
-    
-    function displayMessagesInOpenChat() {
-        const container = document.getElementById('openChatMessages');
-        if(!currentOpenRoom || !allRooms[currentOpenRoom]) {
-            container.innerHTML = `<div style="color:#888; text-align:center; padding:20px;">✨ اختر محادثة لبدء المراسلة</div>`;
-            return;
-        }
-        const messages = allRooms[currentOpenRoom].messages || [];
-        if(messages.length === 0) {
-            container.innerHTML = `<div style="color:#888; text-align:center; padding:20px;">💬 لا توجد رسائل بعد<br>✨ اكتب أول رسالة</div>`;
-            return;
-        }
-        container.innerHTML = '';
-        messages.slice(-50).forEach(msg => {
-            if(msg.type === 'private' && msg.sender !== currentUser && msg.target !== currentUser) return;
-            const isOutgoing = msg.sender === currentUser;
-            const div = document.createElement('div');
-            div.style.display = 'flex';
-            div.style.justifyContent = isOutgoing ? 'flex-end' : 'flex-start';
-            div.style.marginBottom = '8px';
-            let text = msg.encrypted ? decryptMessage(msg.text) : msg.text;
-            div.innerHTML = `
-                <div style="max-width:75%; background:${isOutgoing ? '#ff44ff' : '#1f1f2e'}; padding:8px 14px; border-radius:20px; ${isOutgoing ? 'border-bottom-right-radius:4px' : 'border-bottom-left-radius:4px'};">
-                    ${!isOutgoing && msg.type !== 'private' ? `<div style="font-size:0.55rem; color:#ffaa88;">${escapeHtml(msg.sender)}</div>` : ''}
-                    <div style="color:white; font-size:0.8rem; word-break:break-word;">${escapeHtml(text)}</div>
-                    ${msg.type === 'private' ? `<div style="font-size:0.45rem; color:#00ff88;">🔒 خاص</div>` : ''}
-                    <div style="font-size:0.4rem; color:#aaa; margin-top:4px;">${new Date(msg.time).toLocaleTimeString()}</div>
-                </div>
-            `;
-            container.appendChild(div);
-        });
-        container.scrollTop = container.scrollHeight;
-    }
-    
-    function sendMessage() {
-        const input = document.getElementById('openMessageInput');
-        const text = input.value.trim();
-        if(!text || !currentOpenRoom || !currentUser) return;
-        const encryptedText = encryptMessage(text);
-        const msg = privateTarget ? {
-            type: 'private', sender: currentUser, target: privateTarget,
-            text: encryptedText, encrypted: true, time: Date.now()
-        } : {
-            type: 'public', sender: currentUser,
-            text: encryptedText, encrypted: true, time: Date.now()
-        };
-        if(!allRooms[currentOpenRoom].messages) allRooms[currentOpenRoom].messages = [];
-        allRooms[currentOpenRoom].messages.push(msg);
-        saveRooms();
-        displayMessagesInOpenChat();
-        input.value = '';
-        renderChatsList();
-        resetSessionTimer();
-    }
-    
-    function openRoomChat(roomName) {
-        if(allRooms[roomName]?.password && allRooms[roomName].password !== securityPassword) {
-            alert("❌ كلمة مرور الغرفة غير صحيحة!");
-            return;
-        }
-        currentOpenRoom = roomName;
-        privateTarget = null;
-        document.getElementById('inboxView').style.display = 'none';
-        document.getElementById('openChatView').style.display = 'flex';
-        document.getElementById('openChatRoomName').innerHTML = escapeHtml(currentOpenRoom);
-        document.getElementById('videoCallBtn').style.display = isVIP ? 'inline-block' : 'none';
-        displayMessagesInOpenChat();
-        resetSessionTimer();
-    }
-    
-    function backToInbox() {
-        document.getElementById('openChatView').style.display = 'none';
-        document.getElementById('inboxView').style.display = 'flex';
-        currentOpenRoom = null;
-        privateTarget = null;
-        renderChatsList();
     }
     
     function startSessionTimer() {
         if(sessionTimer) clearTimeout(sessionTimer);
         sessionTimer = setTimeout(() => {
-            alert("🔐 انتهت الجلسة بسبب عدم النشاط (5 دقائق)");
+            alert(translations[currentLang].sessionTimeout);
             logout();
         }, 5 * 60 * 1000);
     }
@@ -1121,244 +3178,451 @@
         if(sessionTimer) clearTimeout(sessionTimer);
         currentUser = null;
         currentOpenRoom = null;
-        if(audioStream) audioStream.getTracks().forEach(t => t.stop());
+        if(audioStream) audioStream.getTracks().forEach(track => track.stop());
+        if(videoStream) videoStream.getTracks().forEach(track => track.stop());
+        audioStream = null;
+        videoStream = null;
         document.getElementById('chatPage').classList.add('hidden');
+        document.getElementById('securityUsername').value = '';
+        document.getElementById('securityRoomPassword').value = '';
+        document.getElementById('securityRoomName').value = 'Main Room';
     }
     
-    function submitSecurityAndEnter() {
-        const username = document.getElementById('securityUsername').value.trim();
-        const roomPassword = document.getElementById('securityRoomPassword').value;
-        const roomName = document.getElementById('securityRoomName').value.trim();
-        if(!username) { alert("❌ أدخل اسم المستخدم"); return; }
-        if(!roomName) { alert("❌ أدخل اسم الغرفة"); return; }
-        currentUser = username;
-        securityPassword = roomPassword;
-        localStorage.setItem('didogame_username', currentUser);
-        document.getElementById('securityPanel').style.display = 'none';
-        document.getElementById('chatPage').classList.remove('hidden');
-        loadRooms();
-        if(!allRooms[roomName]) {
-            allRooms[roomName] = { password: roomPassword || null, users: [currentUser], messages: [] };
-            saveRooms();
-        } else if(allRooms[roomName].password && allRooms[roomName].password !== roomPassword) {
-            alert("⚠️ كلمة المرور غير صحيحة! سيتم إنشاء غرفة جديدة.");
-            const newName = roomName + "_" + Date.now();
-            allRooms[newName] = { password: roomPassword || null, users: [currentUser], messages: [] };
+    function validatePassword(pass) {
+        if(pass && pass.length < 3) {
+            alert(translations[currentLang].passwordTooShort);
+            return false;
+        }
+        return true;
+    }
+    
+    // Chat Functions
+    function saveRooms() {
+        localStorage.setItem('didogame_rooms_secure', JSON.stringify(allRooms));
+    }
+    
+    function loadRooms() {
+        const data = localStorage.getItem('didogame_rooms_secure');
+        if(data) allRooms = JSON.parse(data);
+        else allRooms = {};
+    }
+    
+    function escapeHtml(str) {
+        if(!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if(m === '&') return '&amp;';
+            if(m === '<') return '&lt;';
+            if(m === '>') return '&gt;';
+            return m;
+        });
+    }
+    
+    function getLastMessage(room) {
+        if(!room.messages || room.messages.length === 0) return translations[currentLang].noChats.split('\n')[0];
+        const lastMsg = room.messages[room.messages.length - 1];
+        let text = lastMsg.text;
+        if(lastMsg.encrypted) text = decryptMessage(lastMsg.text);
+        if(text.length > 30) text = text.substring(0, 30) + "...";
+        if(lastMsg.type === 'private') text = "🔒 Private message";
+        return text;
+    }
+    
+    function renderChatsList() {
+        const container = document.getElementById('chatsListContainer');
+        const rooms = Object.keys(allRooms);
+        if(rooms.length === 0) {
+            container.innerHTML = `<div style="color:#888; text-align:center; padding:40px;">${translations[currentLang].noChats.replace('\n', '<br>')}</div>`;
+            return;
+        }
+        container.innerHTML = rooms.map(room => {
+            const roomData = allRooms[room];
+            const lastMsg = getLastMessage(roomData);
+            return `
+                <div class="chat-item" onclick="openRoomChat('${room.replace(/'/g, "\\'")}')">
+                    <div class="chat-avatar">💬</div>
+                    <div class="chat-info">
+                        <div class="chat-name">
+                            ${escapeHtml(room)}
+                            ${roomData.password ? '<span class="chat-lock">🔒</span>' : ''}
+                        </div>
+                        <div class="chat-last-msg">${escapeHtml(lastMsg)}</div>
+                    </div>
+                    <div class="chat-time">Now</div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    function openRoomChat(roomName) {
+        const room = allRooms[roomName];
+        if(!room) return;
+        if(room.password && room.password !== securityPassword) {
+            alert(translations[currentLang].roomPasswordError);
+            return;
+        }
+        if(!room.users.includes(currentUser)) {
+            room.users.push(currentUser);
             saveRooms();
         }
+        currentOpenRoom = roomName;
+        privateTarget = null;
+        
+        document.getElementById('inboxView').style.display = 'none';
+        document.getElementById('openChatView').style.display = 'flex';
+        document.getElementById('openChatRoomName').innerHTML = escapeHtml(currentOpenRoom);
+        document.getElementById('openChatStatus').innerHTML = translations[currentLang].online;
+        document.getElementById('openMessageInput').placeholder = translations[currentLang].typeMessage;
+        
+        const videoBtn = document.getElementById('videoCallBtn');
+        if(isVIP) {
+            videoBtn.style.display = 'inline-block';
+            videoBtn.onclick = () => startVideoCall();
+        } else {
+            videoBtn.style.display = 'none';
+        }
+        
+        displayMessagesInOpenChat();
+        resetSessionTimer();
+        
+        const indicator = document.getElementById('typingIndicator');
+        indicator.style.display = 'block';
+        if(typingTimeout) clearTimeout(typingTimeout);
+        typingTimeout = setTimeout(() => {
+            indicator.style.display = 'none';
+        }, 3000);
+    }
+    
+    function displayMessagesInOpenChat() {
+        const container = document.getElementById('openChatMessages');
+        if(!currentOpenRoom || !allRooms[currentOpenRoom]) {
+            container.innerHTML = `<div style="color:#888; text-align:center; padding:20px;">${translations[currentLang].noMessages.split('\n')[0]}</div>`;
+            return;
+        }
+        const messages = allRooms[currentOpenRoom].messages.slice(-50);
+        if(messages.length === 0) {
+            container.innerHTML = `<div style="color:#888; text-align:center; padding:20px;">${translations[currentLang].noMessages.replace('\n', '<br>')}</div>`;
+            return;
+        }
+        container.innerHTML = '';
+        messages.forEach(msg => {
+            if(msg.type === 'private' && msg.sender !== currentUser && msg.target !== currentUser) return;
+            
+            const isOutgoing = msg.sender === currentUser;
+            const isPrivate = msg.type === 'private';
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message-row ${isOutgoing ? 'outgoing' : 'incoming'}`;
+            
+            let bubbleClass = `message-bubble ${isOutgoing ? 'outgoing' : 'incoming'}`;
+            if(isPrivate) bubbleClass += ' private';
+            
+            let senderHtml = '';
+            if(!isOutgoing && msg.type !== 'private') {
+                senderHtml = `<div class="message-sender-name">${escapeHtml(msg.sender)}</div>`;
+            }
+            
+            let privateHtml = '';
+            if(isPrivate && msg.target) {
+                privateHtml = `<span class="private-tag">🔒 to ${escapeHtml(msg.target)}</span>`;
+            }
+            
+            let messageText = msg.text;
+            if(msg.encrypted) {
+                messageText = decryptMessage(msg.text);
+            } else {
+                messageText = escapeHtml(msg.text);
+            }
+            
+            messageDiv.innerHTML = `
+                <div class="${bubbleClass}">
+                    ${senderHtml}
+                    <div>${messageText}</div>
+                    ${privateHtml}
+                    <div class="message-time">${new Date(msg.time).toLocaleTimeString()}</div>
+                </div>
+            `;
+            
+            container.appendChild(messageDiv);
+        });
+        container.scrollTop = container.scrollHeight;
+    }
+    
+    function sendMessageOpen() {
+        const input = document.getElementById('openMessageInput');
+        const text = input.value.trim();
+        if(!text || !currentOpenRoom || !currentUser) return;
+        
+        const encryptedText = encryptMessage(text);
+        
+        let msg;
+        if(privateTarget) {
+            msg = {
+                type: 'private',
+                sender: currentUser,
+                target: privateTarget,
+                text: encryptedText,
+                encrypted: true,
+                time: Date.now()
+            };
+        } else {
+            msg = {
+                type: 'public',
+                sender: currentUser,
+                text: encryptedText,
+                encrypted: true,
+                time: Date.now()
+            };
+        }
+        allRooms[currentOpenRoom].messages.push(msg);
+        saveRooms();
+        displayMessagesInOpenChat();
+        input.value = '';
+        resetSessionTimer();
         renderChatsList();
-        startSessionTimer();
-        document.getElementById('inboxView').style.display = 'flex';
+    }
+    
+    function showNewChatModal() {
+        const roomName = prompt(translations[currentLang].enterRoomName, translations[currentLang].newRoom);
+        if(!roomName) return;
+        if(allRooms[roomName]) { alert(translations[currentLang].roomExists); return; }
+        
+        const usePassword = confirm(translations[currentLang].protectWithPassword);
+        let password = null;
+        if(usePassword) {
+            password = prompt(translations[currentLang].enterPassword, "");
+            if(password && password.length < 3) { alert(translations[currentLang].passwordTooShort); return; }
+        }
+        
+        allRooms[roomName] = {
+            password: password,
+            users: [currentUser],
+            messages: []
+        };
+        saveRooms();
+        renderChatsList();
+        alert(translations[currentLang].roomCreated);
+    }
+    
+    function backToInbox() {
         document.getElementById('openChatView').style.display = 'none';
+        document.getElementById('inboxView').style.display = 'flex';
+        currentOpenRoom = null;
+        privateTarget = null;
+        renderChatsList();
     }
     
-    function upgradeToVIP() {
-        if(isVIP) { alert("✨ أنت بالفعل عضو VIP!"); return; }
-        isVIP = true;
-        localStorage.setItem('didogame_vip', 'true');
-        document.getElementById('registerBtn').classList.add('active');
-        alert("🎉 تهانينا! أصبحت عضواً مميزاً (VIP)");
+    // Video Call
+    async function startVideoCall() {
+        if(!isVIP) {
+            alert(translations[currentLang].videoCallVIPOnly);
+            return;
+        }
+        try {
+            videoStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            const localVideo = document.getElementById('localVideo');
+            localVideo.srcObject = videoStream;
+            const remoteVideo = document.getElementById('remoteVideo');
+            remoteVideo.srcObject = videoStream;
+            document.getElementById('videoCallModal').classList.remove('hidden');
+        } catch(err) {
+            alert(translations[currentLang].cannotAccessCamera + err.message);
+        }
     }
     
-    function startVideoCall() {
-        if(!isVIP) { alert("🔒 مكالمات الفيديو متاحة فقط للمستخدمين المميزين (VIP)"); return; }
-        alert("🎥 سيتم بدء مكالمة الفيديو قريباً... (قيد التطوير)");
+    function toggleMute() {
+        if(videoStream) {
+            const audioTrack = videoStream.getAudioTracks()[0];
+            if(audioTrack) {
+                audioTrack.enabled = !audioTrack.enabled;
+                const muteBtn = document.getElementById('muteBtn');
+                muteBtn.innerHTML = audioTrack.enabled ? "🔊" : "🔇";
+            }
+        }
     }
     
+    function toggleVideo() {
+        if(videoStream) {
+            const videoTrack = videoStream.getVideoTracks()[0];
+            if(videoTrack) {
+                videoTrack.enabled = !videoTrack.enabled;
+                const videoBtn = document.getElementById('videoToggleBtn');
+                videoBtn.innerHTML = videoTrack.enabled ? "📷" : "🚫📷";
+            }
+        }
+    }
+    
+    function endVideoCall() {
+        if(videoStream) {
+            videoStream.getTracks().forEach(track => track.stop());
+            videoStream = null;
+        }
+        document.getElementById('videoCallModal').classList.add('hidden');
+    }
+    
+    // Audio
     async function startMicrophone() {
         try {
             if(!audioStream) {
                 audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                alert("🎙️ الميكروفون نشط");
+                alert(translations[currentLang].micActive);
             }
-        } catch(e) { console.log("خطأ في الميكروفون"); }
+        } catch(e) { console.log("Mic error"); }
     }
     
-    function toggleMicrophone() {
-        if(!currentOpenRoom) { alert("افتح محادثة أولاً"); return; }
+    function toggleMicrophoneOpen() {
+        if(!currentOpenRoom) { alert(translations[currentLang].openChatFirst); return; }
         if(!audioStream) { startMicrophone(); return; }
         const audioTrack = audioStream.getAudioTracks()[0];
         if(audioTrack) {
             audioTrack.enabled = !audioTrack.enabled;
-            alert(audioTrack.enabled ? "🎙️ الميكروفون نشط" : "🔴 الميكروفون غير نشط");
+            alert(audioTrack.enabled ? translations[currentLang].micActive : translations[currentLang].micInactive);
         }
     }
     
-    function renderAllGames() {
-        const mid = Math.ceil(gamesData.length / 2);
-        const row1 = gamesData.slice(0, mid);
-        const row2 = gamesData.slice(mid);
-        document.getElementById('gamesWrapper').innerHTML = `
-            <div class="game-row">${row1.map(g => `
-                <div class="game-card" onclick="playGame(${g.id})">
-                    <div class="fav-star ${isFavorite(g.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${g.id})">${isFavorite(g.id) ? '⭐' : '☆'}</div>
-                    <div class="game-img" style="background-image:url('${g.img}')"></div>
-                    <div class="game-title">${g.name}</div>
-                </div>
-            `).join('')}</div>
-            <div class="game-row">${row2.map(g => `
-                <div class="game-card" onclick="playGame(${g.id})">
-                    <div class="fav-star ${isFavorite(g.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${g.id})">${isFavorite(g.id) ? '⭐' : '☆'}</div>
-                    <div class="game-img" style="background-image:url('${g.img}')"></div>
-                    <div class="game-title">${g.name}</div>
-                </div>
-            `).join('')}</div>
-        `;
-    }
-    
-    function playGame(gameId) {
-        const game = gamesData.find(g => g.id === gameId);
-        if(game) {
-            game.points += 5;
-            updateRanking();
-            document.getElementById('gameIframe').src = game.url;
-            document.getElementById('gameModal').style.display = 'flex';
+    // Security & Entry
+    function submitSecurityAndEnter() {
+        const username = document.getElementById('securityUsername').value.trim();
+        const roomPassword = document.getElementById('securityRoomPassword').value;
+        const roomName = document.getElementById('securityRoomName').value.trim();
+        
+        if(!username) { alert(translations[currentLang].enterUser); return; }
+        if(!roomName) { alert(translations[currentLang].enterRoom); return; }
+        if(roomPassword && !validatePassword(roomPassword)) return;
+        
+        currentUser = username;
+        securityPassword = roomPassword;
+        
+        localStorage.setItem('didogame_username', currentUser);
+        
+        document.getElementById('securityPanel').style.display = 'none';
+        document.getElementById('chatPage').classList.remove('hidden');
+        
+        loadRooms();
+        
+        if(allRooms[roomName]) {
+            if(allRooms[roomName].password && allRooms[roomName].password !== roomPassword) {
+                alert(translations[currentLang].wrongPasswordCreate);
+                createNewRoomWithName(roomName);
+            } else {
+                if(!allRooms[roomName].users.includes(currentUser)) {
+                    allRooms[roomName].users.push(currentUser);
+                    saveRooms();
+                }
+            }
+        } else {
+            createNewRoomWithName(roomName);
         }
+        
+        renderChatsList();
+        startSessionTimer();
+        
+        document.getElementById('inboxView').style.display = 'flex';
+        document.getElementById('openChatView').style.display = 'none';
     }
     
-    function showCategoryGames(category) {
-        const filtered = gamesData.filter(g => g.cat === category);
-        const mid = Math.ceil(filtered.length / 2);
-        const row1 = filtered.slice(0, mid);
-        const row2 = filtered.slice(mid);
-        document.getElementById('categoryGamesContainer').innerHTML = `
-            <div class="game-row">${row1.map(g => `
-                <div class="game-card" onclick="playGame(${g.id})">
-                    <div class="fav-star ${isFavorite(g.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${g.id})">${isFavorite(g.id) ? '⭐' : '☆'}</div>
-                    <div class="game-img" style="background-image:url('${g.img}')"></div>
-                    <div class="game-title">${g.name}</div>
-                </div>
-            `).join('')}</div>
-            <div class="game-row">${row2.map(g => `
-                <div class="game-card" onclick="playGame(${g.id})">
-                    <div class="fav-star ${isFavorite(g.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${g.id})">${isFavorite(g.id) ? '⭐' : '☆'}</div>
-                    <div class="game-img" style="background-image:url('${g.img}')"></div>
-                    <div class="game-title">${g.name}</div>
-                </div>
-            `).join('')}</div>
-        `;
-        document.getElementById('homePage').classList.add('page-hidden');
-        document.getElementById('categoryPage').classList.remove('page-hidden');
+    function createNewRoomWithName(roomName) {
+        if(!currentUser) return;
+        if(securityPassword && !validatePassword(securityPassword)) return;
+        
+        allRooms[roomName] = {
+            password: securityPassword || null,
+            users: [currentUser],
+            messages: []
+        };
+        saveRooms();
     }
     
-    function renderFavoritesList() {
-        const favGames = gamesData.filter(g => favorites.includes(g.id));
-        const container = document.getElementById('favoritesList');
-        if(!container) return;
-        if(favGames.length === 0) {
-            container.innerHTML = `<div style="color:#888; text-align:center; padding:40px;">⭐ لا توجد ألعاب مفضلة بعد<br>⭐ اضغط على النجمة في أي لعبة لإضافتها</div>`;
-            return;
+    // UI Events
+    document.getElementById('closeChatFromInbox').addEventListener('click', () => {
+        document.getElementById('chatPage').classList.add('hidden');
+    });
+    
+    document.getElementById('backToInboxBtn').addEventListener('click', backToInbox);
+    document.getElementById('newChatBtn').addEventListener('click', showNewChatModal);
+    
+    document.getElementById('openChatBtn').addEventListener('click', () => {
+        const savedUser = localStorage.getItem('didogame_username');
+        if(currentUser) {
+            document.getElementById('chatPage').classList.remove('hidden');
+            document.getElementById('inboxView').style.display = 'flex';
+            document.getElementById('openChatView').style.display = 'none';
+            renderChatsList();
+            startSessionTimer();
+        } else {
+            document.getElementById('securityPanel').style.display = 'flex';
+            if(savedUser) {
+                document.getElementById('securityUsername').value = savedUser;
+            }
         }
-        container.innerHTML = favGames.map(g => `
-            <div class="favorite-item" onclick="playGame(${g.id})" style="display:flex; align-items:center; gap:12px; padding:10px; background:rgba(0,0,0,0.5); border-radius:15px; margin-bottom:8px; cursor:pointer;">
-                <div style="width:50px; height:50px; background-image:url('${g.img}'); background-size:cover; border-radius:10px;"></div>
-                <div style="flex:1;"><div style="color:white;">${g.name}</div><div style="color:#ff44ff; font-size:0.6rem;">${g.cat}</div></div>
-                <button class="remove-fav" onclick="event.stopPropagation(); toggleFavorite(${g.id})" style="background:none; border:none; color:#ff3366; font-size:1.2rem; cursor:pointer;">🗑️</button>
-            </div>
-        `).join('');
-    }
-    
-    function openFavoritesModal() { renderFavoritesList(); document.getElementById('favoritesModal').style.display = 'flex'; }
-    function closeFavoritesModal() { document.getElementById('favoritesModal').style.display = 'none'; }
-    function openWalletModal() { document.getElementById('walletModal').style.display = 'flex'; }
-    function closeWalletModal() { document.getElementById('walletModal').style.display = 'none'; }
-    function openPaymentModal() { if(isVIP) alert("✨ أنت بالفعل VIP!"); else { alert("💎 سيتم فتح بوابة الدفع قريباً"); upgradeToVIP(); } }
-    function closeGameModal() { document.getElementById('gameModal').style.display = 'none'; document.getElementById('gameIframe').src = ''; }
-    
-    // جزيئات متحركة
-    function createParticles() {
-        const container = document.getElementById('particles');
-        for(let i = 0; i < 50; i++) {
-            const p = document.createElement('div');
-            p.className = 'particle';
-            p.style.width = Math.random() * 4 + 2 + 'px';
-            p.style.height = p.style.width;
-            p.style.left = Math.random() * 100 + '%';
-            p.style.animationDuration = Math.random() * 10 + 5 + 's';
-            p.style.animationDelay = Math.random() * 10 + 's';
-            container.appendChild(p);
-        }
-    }
-    
-    // الإعلانات المتغيرة
-    const ads = ["🎮 عرض VIP: خصم 50% لمدة محدودة! 🎮", "🔥 العب الآن واربح جوائز يومية! 🔥", "💰 اشترك في المحفظة واحصل على 10$ هدية! 💰", "⭐ أضف ألعابك المفضلة وشارك أصدقاءك! ⭐"];
-    let adIdx = 0;
-    setInterval(() => { adIdx = (adIdx + 1) % ads.length; document.getElementById('permanentAd').innerHTML = ads[adIdx]; }, 8000);
-    
-    // ==================== تهيئة الأحداث ====================
-    document.getElementById('moreCategoriesBtn')?.addEventListener('click', () => {
-        const cats = ['battle', 'sports', 'strategy', 'horror', 'rpg', 'simulation'];
-        const catNames = ['🔫 معركة رويال', '⚽ رياضات', '🧠 استراتيجية', '👻 رعب', '⚔️ RPG', '🏙️ محاكاة'];
-        let html = '<div class="modal-card" style="max-width:300px;"><h3 style="color:white;">🎮 تصنيفات إضافية</h3><div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:20px 0;">';
-        cats.forEach((c, i) => { html += `<div class="cat-badge" data-cat="${c}" style="cursor:pointer;" onclick="showCategoryGames('${c}'); document.getElementById('moreModal').style.display='none';">${catNames[i]}</div>`; });
-        html += '</div><button class="security-btn" onclick="document.getElementById(\'moreModal\').style.display=\'none\'" style="padding:8px 20px;">إغلاق</button></div>';
-        let modal = document.getElementById('moreModal');
-        if(!modal) { modal = document.createElement('div'); modal.id = 'moreModal'; modal.className = 'modal-overlay'; document.body.appendChild(modal); }
-        modal.innerHTML = html;
-        modal.style.display = 'flex';
-        modal.onclick = (e) => { if(e.target === modal) modal.style.display = 'none'; };
     });
-    
-    document.querySelectorAll('.cat-badge').forEach(b => {
-        if(!b.classList.contains('more-btn')) b.addEventListener('click', () => showCategoryGames(b.dataset.cat));
-    });
-    document.getElementById('backToHomeBtn')?.addEventListener('click', () => {
-        document.getElementById('homePage').classList.remove('page-hidden');
-        document.getElementById('categoryPage').classList.add('page-hidden');
-    });
-    document.getElementById('openChatBtn')?.addEventListener('click', () => {
-        const saved = localStorage.getItem('didogame_username');
-        if(currentUser) { document.getElementById('chatPage').classList.remove('hidden'); renderChatsList(); }
-        else { document.getElementById('securityPanel').style.display = 'flex'; if(saved) document.getElementById('securityUsername').value = saved; }
-    });
-    document.getElementById('closeChatFromInbox')?.addEventListener('click', () => document.getElementById('chatPage').classList.add('hidden'));
-    document.getElementById('backToInboxBtn')?.addEventListener('click', backToInbox);
-    document.getElementById('newChatBtn')?.addEventListener('click', () => {
-        const name = prompt("اسم الغرفة الجديدة:", "غرفة جديدة");
-        if(name && !allRooms[name]) { allRooms[name] = { password: null, users: [currentUser], messages: [] }; saveRooms(); renderChatsList(); }
-        else if(name && allRooms[name]) alert("الغرفة موجودة مسبقاً");
-    });
-    document.getElementById('sendMsgOpen')?.addEventListener('click', sendMessage);
-    document.getElementById('micBtnOpen')?.addEventListener('click', toggleMicrophone);
-    document.getElementById('videoCallBtn')?.addEventListener('click', startVideoCall);
-    document.getElementById('securityBtn')?.addEventListener('click', submitSecurityAndEnter);
-    document.getElementById('walletBtn')?.addEventListener('click', openWalletModal);
-    document.getElementById('favoritesBtn')?.addEventListener('click', openFavoritesModal);
-    document.getElementById('registerBtn')?.addEventListener('click', openPaymentModal);
-    document.getElementById('settingsBtn')?.addEventListener('click', () => { alert("⚙️ سيتم فتح الإعدادات قريباً"); });
-    
-    // إنشاء نماذج إضافية
-    const favModal = document.createElement('div'); favModal.id = 'favoritesModal'; favModal.className = 'modal-overlay';
-    favModal.innerHTML = `<div class="modal-card"><h3 style="color:white;">⭐ ألعابي المفضلة</h3><div id="favoritesList" style="max-height:400px; overflow-y:auto; margin:15px 0;"></div><button class="security-btn" onclick="closeFavoritesModal()" style="padding:8px 20px;">إغلاق</button></div>`;
-    document.body.appendChild(favModal);
-    const walletModal = document.createElement('div'); walletModal.id = 'walletModal'; walletModal.className = 'modal-overlay';
-    walletModal.innerHTML = `<div class="modal-card"><h3 style="color:white;">💳 المحفظة الإلكترونية</h3><p style="color:#aaa; font-size:0.7rem;">اختر طريقة الدفع</p><div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:20px 0;"><div class="cat-badge">💳 فيزا</div><div class="cat-badge">🅿️ باي بال</div><div class="cat-badge">₿ بيتكوين</div><div class="cat-badge">📱 STC Pay</div><div class="cat-badge">💙 فلوسي</div></div><button class="security-btn" onclick="closeWalletModal()" style="padding:8px 20px;">إغلاق</button></div>`;
-    document.body.appendChild(walletModal);
-    
-    window.toggleFavorite = toggleFavorite;
-    window.playGame = playGame;
-    window.showCategoryGames = showCategoryGames;
-    window.closeGameModal = closeGameModal;
-    window.openRoomChat = openRoomChat;
-    window.closeFavoritesModal = closeFavoritesModal;
-    window.closeWalletModal = closeWalletModal;
-    
-    // التهيئة النهائية
-    createParticles();
-    updateRanking();
-    renderAllGames();
-    const savedVIP = localStorage.getItem('didogame_vip');
-    if(savedVIP === 'true') { isVIP = true; document.getElementById('registerBtn').classList.add('active'); }
-    const savedUser = localStorage.getItem('didogame_username');
-    if(savedUser) document.getElementById('securityUsername').value = savedUser;
-    loadRooms();
     
     setInterval(() => {
-        if(currentOpenRoom && allRooms[currentOpenRoom] && document.getElementById('openChatView').style.display === 'flex')
+        if(currentOpenRoom && allRooms[currentOpenRoom] && document.getElementById('openChatView').style.display === 'flex') {
             displayMessagesInOpenChat();
-        if(currentUser && document.getElementById('inboxView').style.display === 'flex')
+        }
+        if(currentUser && document.getElementById('inboxView').style.display === 'flex') {
             renderChatsList();
+        }
     }, 2000);
+    
+    const ads = ["📺 Sponsored Ad - Subscribe Now! 🎮", "🎮 Game of the Week - Play Free! 🔥", "💰 50% OFF on VIP ⭐"];
+    let adIdx = 0;
+    setInterval(() => {
+        adIdx = (adIdx + 1) % ads.length;
+        document.getElementById('permanentAd').innerHTML = ads[adIdx];
+    }, 10000);
+    
+    loadRooms();
+    updateRanking();
+    renderAllGames();
+    
+    const savedVIP = localStorage.getItem('didogame_vip');
+    if(savedVIP === 'true') {
+        isVIP = true;
+        document.getElementById('registerBtn').classList.add('active');
+    }
+    
+    const savedUser = localStorage.getItem('didogame_username');
+    if(savedUser) {
+        document.getElementById('securityUsername').value = savedUser;
+    }
+    
+    const savedLang = localStorage.getItem('didogame_lang');
+    if(savedLang && translations[savedLang]) {
+        setLanguage(savedLang);
+    } else {
+        setLanguage('en');
+    }
+    
+    const savedAvatar = localStorage.getItem('didogame_avatar');
+    if(savedAvatar) {
+        currentAvatar = savedAvatar;
+        const mainAvatarDiv = document.getElementById('mainAvatarImg');
+        mainAvatarDiv.style.background = 'linear-gradient(135deg, #ff44ff, #00ffff)';
+        mainAvatarDiv.style.display = 'flex';
+        mainAvatarDiv.style.alignItems = 'center';
+        mainAvatarDiv.style.justifyContent = 'center';
+        mainAvatarDiv.style.fontSize = '3rem';
+        mainAvatarDiv.innerHTML = `<div class="controller-on-hand">🎮</div>${currentAvatar}`;
+    }
+    
+    // Expose functions globally
+    window.upgradeToVIP = upgradeToVIP;
+    window.closeGameModal = closeGameModal;
+    window.submitSecurityAndEnter = submitSecurityAndEnter;
+    window.openRoomChat = openRoomChat;
+    window.sendMessageOpen = sendMessageOpen;
+    window.toggleMicrophoneOpen = toggleMicrophoneOpen;
+    window.backToInbox = backToInbox;
+    window.startVideoCall = startVideoCall;
+    window.toggleMute = toggleMute;
+    window.toggleVideo = toggleVideo;
+    window.endVideoCall = endVideoCall;
+    window.setLanguage = setLanguage;
+    window.openPaymentModal = openPaymentModal;
+    window.toggleMusic = toggleMusic;
+    window.toggleFavorite = toggleFavorite;
+    window.playGameFromFav = playGameFromFav;
 </script>
 </body>
 </html>
