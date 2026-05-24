@@ -717,12 +717,6 @@
             text-align: center;
         }
         
-        .wallet-method:hover {
-            transform: translateY(-2px);
-            border-color: #00ffff;
-            box-shadow: 0 0 15px #00ffff;
-        }
-        
         .wallet-method .emoji {
             font-size: 1.8rem;
             display: block;
@@ -973,7 +967,7 @@
             text-overflow: ellipsis;
         }
 
-        /* ========== BOTTOM BAR WITH NEON GLOW ON ALL BUTTONS ========== */
+        /* ========== BOTTOM BAR WITH UNIFIED VIP-STYLE NEON GLOW ========== */
         .bottom-bar {
             display: flex;
             justify-content: space-between;
@@ -1057,77 +1051,109 @@
             color: #ff44ff;
         }
         
-        /* ========== NEON GLOW STYLES FOR EACH BUTTON ========== */
-        
-        /* Settings Button - Neon Cyan */
+        /* ========== UNIFIED VIP-STYLE NEON GLOW FOR ALL BUTTONS ========== */
+        /* Settings Button - VIP Style with Cyan Neon */
         .settings-btn {
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            box-shadow: 0 0 8px rgba(0, 255, 255, 0.3), inset 0 0 4px rgba(0, 255, 255, 0.1);
+            background: linear-gradient(135deg, rgba(0,255,255,0.15), rgba(0,255,255,0.05));
+            border-radius: 40px;
+            padding: 6px 16px;
+            border: 1px solid rgba(0, 255, 255, 0.5);
+            box-shadow: 0 0 12px rgba(0, 255, 255, 0.4), inset 0 0 6px rgba(0, 255, 255, 0.1);
             transition: all 0.3s ease;
+            animation: neonPulseCyan 1.5s ease-in-out infinite;
         }
+        
+        @keyframes neonPulseCyan {
+            0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.4), inset 0 0 4px rgba(0, 255, 255, 0.1); border-color: rgba(0, 255, 255, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(0, 255, 255, 0.8), 0 0 10px rgba(0, 200, 255, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.2); border-color: #00ffff; }
+        }
+        
         .settings-btn .icon { 
             color: #00ffff; 
             text-shadow: 0 0 5px #00ffff;
         }
         .settings-btn:hover {
-            border-color: #00ffff;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6), inset 0 0 10px rgba(0, 255, 255, 0.2);
             transform: translateY(-3px);
+            animation: none;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.9), inset 0 0 15px rgba(0, 255, 255, 0.3);
+            border-color: #00ffff;
         }
         .settings-btn:hover .icon {
             text-shadow: 0 0 15px #00ffff;
         }
         
-        /* Favorites Button - Neon Gold */
+        /* Favorites Button - VIP Style with Gold Neon */
         .favs-btn {
-            border: 1px solid rgba(255, 204, 0, 0.3);
-            box-shadow: 0 0 8px rgba(255, 204, 0, 0.3), inset 0 0 4px rgba(255, 204, 0, 0.1);
+            background: linear-gradient(135deg, rgba(255, 204, 0, 0.15), rgba(255, 204, 0, 0.05));
+            border-radius: 40px;
+            padding: 6px 16px;
+            border: 1px solid rgba(255, 204, 0, 0.5);
+            box-shadow: 0 0 12px rgba(255, 204, 0, 0.4), inset 0 0 6px rgba(255, 204, 0, 0.1);
             transition: all 0.3s ease;
+            animation: neonPulseGold 1.5s ease-in-out infinite;
         }
+        
+        @keyframes neonPulseGold {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 204, 0, 0.4), inset 0 0 4px rgba(255, 204, 0, 0.1); border-color: rgba(255, 204, 0, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(255, 204, 0, 0.8), 0 0 10px rgba(255, 200, 0, 0.3), inset 0 0 10px rgba(255, 204, 0, 0.2); border-color: #ffcc00; }
+        }
+        
         .favs-btn .icon { 
             color: #ffcc00; 
             text-shadow: 0 0 5px #ffcc00;
         }
         .favs-btn:hover {
-            border-color: #ffcc00;
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.6), inset 0 0 10px rgba(255, 204, 0, 0.2);
             transform: translateY(-3px);
+            animation: none;
+            box-shadow: 0 0 30px rgba(255, 204, 0, 0.9), inset 0 0 15px rgba(255, 204, 0, 0.3);
+            border-color: #ffcc00;
         }
         .favs-btn:hover .icon {
             text-shadow: 0 0 15px #ffcc00;
         }
         
-        /* Wallet Button - Neon Gold */
+        /* Wallet Button - VIP Style with Gold Neon */
         .wallet-btn {
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.3), inset 0 0 4px rgba(255, 215, 0, 0.1);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+            border-radius: 40px;
+            padding: 6px 16px;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.4), inset 0 0 6px rgba(255, 215, 0, 0.1);
             transition: all 0.3s ease;
+            animation: neonPulseWallet 1.5s ease-in-out infinite;
         }
+        
+        @keyframes neonPulseWallet {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4), inset 0 0 4px rgba(255, 215, 0, 0.1); border-color: rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 200, 0, 0.3), inset 0 0 10px rgba(255, 215, 0, 0.2); border-color: #ffd700; }
+        }
+        
         .wallet-btn .icon { 
             color: #ffd700; 
             text-shadow: 0 0 5px #ffd700;
         }
         .wallet-btn:hover {
-            border-color: #ffd700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), inset 0 0 10px rgba(255, 215, 0, 0.2);
             transform: translateY(-3px);
+            animation: none;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.9), inset 0 0 15px rgba(255, 215, 0, 0.3);
+            border-color: #ffd700;
         }
         .wallet-btn:hover .icon {
             text-shadow: 0 0 15px #ffd700;
         }
         
-        /* VIP Button - Neon Pink with Pulsing Glow */
+        /* VIP Button - Original VIP Style */
         .vip-btn {
-            background: linear-gradient(135deg, rgba(255,68,255,0.15), rgba(0,255,255,0.1));
-            border: 1px solid rgba(255,68,255,0.5);
+            background: linear-gradient(135deg, rgba(255,68,255,0.15), rgba(0,255,255,0.05));
             border-radius: 40px;
             padding: 6px 16px;
+            border: 1px solid rgba(255,68,255,0.5);
             box-shadow: 0 0 12px rgba(255,68,255,0.4), inset 0 0 6px rgba(255,68,255,0.1);
             transition: all 0.3s ease;
-            animation: vipNeonPulse 1.5s ease-in-out infinite;
+            animation: neonPulseVIP 1.5s ease-in-out infinite;
         }
         
-        @keyframes vipNeonPulse {
+        @keyframes neonPulseVIP {
             0%, 100% { box-shadow: 0 0 10px rgba(255,68,255,0.4), inset 0 0 4px rgba(255,68,255,0.1); border-color: rgba(255,68,255,0.5); }
             50% { box-shadow: 0 0 25px rgba(255,68,255,0.8), 0 0 10px rgba(0,255,255,0.3), inset 0 0 10px rgba(255,68,255,0.2); border-color: #ff44ff; }
         }
@@ -1135,7 +1161,7 @@
         .vip-btn .icon {
             color: #ff44ff;
             font-size: 1.2rem;
-            text-shadow: 0 0 8px #ff44ff;
+            text-shadow: 0 0 5px #ff44ff;
         }
         
         .vip-btn:hover {
@@ -1146,7 +1172,7 @@
         }
         
         .vip-btn.active {
-            background: linear-gradient(135deg, rgba(255,68,255,0.4), rgba(0,255,255,0.4));
+            background: linear-gradient(135deg, rgba(255,68,255,0.4), rgba(0,255,255,0.3));
             box-shadow: 0 0 20px rgba(255,68,255,0.6), inset 0 0 10px rgba(0,255,255,0.2);
         }
         
@@ -1155,7 +1181,7 @@
             text-shadow: 0 0 10px #00ffff;
         }
         
-        /* Chat Center Button - Neon Gradient with Strong Pulse */
+        /* Chat Center Button - Special Gradient (unchanged) */
         .chat-center-btn {
             background: linear-gradient(135deg, #ff44ff, #ff00aa);
             border-radius: 40px;
@@ -1955,7 +1981,7 @@
         </div>
     </div>
     
-    <!-- BOTTOM BAR WITH NEON GLOW ON ALL BUTTONS -->
+    <!-- BOTTOM BAR WITH UNIFIED VIP-STYLE NEON GLOW ON ALL BUTTONS -->
     <div class="bottom-bar">
         <div class="bottom-left">
             <button class="nav-btn settings-btn" id="settingsBtn">
