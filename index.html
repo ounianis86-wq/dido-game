@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DidoGame | أحدث الألعاب - الأكثر لعباً (ملء الشاشة)</title>
+    <title>DidoGame | أحدث الألعاب - الأكثر لعباً</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo','Segoe UI',sans-serif}
         body{background:#05050f;min-height:100vh;padding:0;margin:0}
         .anime-city-bg{position:fixed;top:0;left:0;width:100%;height:100%;background-image:url('https://images7.alphacoders.com/132/1322910.jpeg');background-size:cover;background-position:center;z-index:-2;animation:slowZoom 20s infinite alternate}
         @keyframes slowZoom{0%{transform:scale(1)}100%{transform:scale(1.05)}}
         .anime-city-bg::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:-1}
-        .app{max-width:100%;width:100%;margin:0 auto;background:rgba(5,5,20,0.8);backdrop-filter:blur(10px);border-radius:0;overflow:hidden;height:100vh;display:flex;flex-direction:column;box-shadow:0 0 50px rgba(255,0,255,0.3),0 0 20px rgba(0,255,255,0.3);border:none;position:relative}
+        .app{width:100%;height:100vh;margin:0;background:rgba(5,5,20,0.8);backdrop-filter:blur(10px);display:flex;flex-direction:column;box-shadow:0 0 50px rgba(255,0,255,0.3),0 0 20px rgba(0,255,255,0.3);position:relative;overflow:hidden}
         .content{padding:8px;flex:1;overflow-y:auto;scrollbar-width:none}
         .content::-webkit-scrollbar{display:none}
         .page{display:flex;flex-direction:column;height:100%}
@@ -77,7 +77,7 @@
         .game-img{width:100%;aspect-ratio:1/0.9;background-size:cover;background-position:center;border-radius:10px;margin-bottom:6px}
         .game-title{color:#FFFFFF;font-size:.55rem;font-weight:bold;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 0 2px rgba(0,0,0,0.5);}
         .row-title{color:#FFD700;font-size:.7rem;font-weight:bold;margin:5px 0 0 5px;display:inline-block;border-right:2px solid #ff44ff;padding-right:8px}
-        .bottom-bar{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:rgba(10,10,26,0.95);backdrop-filter:blur(20px);border-top:1px solid rgba(255,68,255,0.4);border-radius:0}
+        .bottom-bar{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:rgba(10,10,26,0.95);backdrop-filter:blur(20px);border-top:1px solid rgba(255,68,255,0.4)}
         .bottom-left,.bottom-right{display:flex;gap:16px;align-items:center}
         .nav-btn{display:flex;flex-direction:column;align-items:center;gap:4px;background:transparent;border:none;cursor:pointer;padding:6px 12px;border-radius:30px;position:relative}
         .nav-btn .icon{font-size:1.3rem}
@@ -141,7 +141,7 @@
 <div class="app">
     <div class="content">
         <div id="homePage" class="page">
-            <div class="anime-hero"><div class="character-img" id="mainAvatarImg" style="background-image:url('https://i.pinimg.com/originals/6e/5e/6c/6e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png');background-size:cover"><div class="controller-on-hand">🎮</div></div><div class="character-info"><div class="tshirt-text">⚡ DIDO-GAME ⚡</div><h2 id="heroTagline">😤 أحدث الألعاب - الأكثر لعباً (ملء الشاشة)</h2></div></div>
+            <div class="anime-hero"><div class="character-img" id="mainAvatarImg" style="background-image:url('https://i.pinimg.com/originals/6e/5e/6c/6e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png');background-size:cover"><div class="controller-on-hand">🎮</div></div><div class="character-info"><div class="tshirt-text">⚡ DIDO-GAME ⚡</div><h2 id="heroTagline">😤 أحدث الألعاب - الأكثر لعباً</h2></div></div>
             <div class="ranking-section"><div class="ranking-circles" id="rankingList"></div></div>
             <div class="categories-section"><div class="categories" id="categoriesList"><div class="more-btn" id="moreCategoriesBtn">➕ المزيد</div><div class="cat-badge" data-cat="action">🎯 أكشن</div><div class="cat-badge" data-cat="racing">🏎️ سباقات</div><div class="cat-badge" data-cat="fighting">🥊 قتال</div><div class="cat-badge" data-cat="puzzle">🧩 ألغاز</div></div></div>
             <div id="moreModal" class="more-modal"><div class="more-modal-content"><h3>🎮 تصنيفات إضافية</h3><div class="more-categories-list" id="moreCategoriesList"></div><button class="close-more-modal" id="closeMoreModal">إغلاق</button></div></div>
@@ -149,7 +149,7 @@
             <div id="favoritesModal" class="favorites-modal"><div class="favorites-card"><h3>⭐ المفضلة</h3><div class="favorites-list" id="favoritesList"><div class="empty-favorites" style="color:#FFFFFF;">لا توجد ألعاب مفضلة بعد</div></div><button class="close-favorites" id="closeFavoritesBtn">إغلاق</button></div></div>
             <div id="walletModal" class="wallet-modal"><div class="wallet-card"><h3 style="color:#FFFFFF;">💳 المحفظة</h3><div class="wallet-methods"><div class="wallet-method"><span>💳</span><div>فيزا</div></div><div class="wallet-method"><span>🅿️</span><div>باي بال</div></div><div class="wallet-method"><span>₿</span><div>بيتكوين</div></div></div><button class="close-wallet" id="closeWalletBtn">إغلاق</button></div></div>
             <div id="paymentModal" class="payment-modal"><div class="payment-card"><h3 style="color:#FFFFFF;">💎 VIP</h3><div class="currency-selector" id="currencySelector"><div class="currency-btn" data-currency="USD" data-symbol="$">🇺🇸 دولار</div><div class="currency-btn" data-currency="EUR" data-symbol="€">🇪🇺 يورو</div><div class="currency-btn" data-currency="SAR" data-symbol="﷼">🇸🇦 ريال</div></div><div class="price-display"><span class="price" id="priceAmount">9.99</span><span class="currency-symbol" id="priceCurrency" style="color:#FFFFFF;">$</span></div><button class="pay-btn" id="payNowBtn">💎 اشترك الآن</button><button class="close-payment" id="closePaymentBtn">إلغاء</button></div></div>
-            <div class="fixed-permanent-ad" id="permanentAd">🎮 صفان أفقيان: أحدث الألعاب - الأكثر لعباً (ملء الشاشة) 🎮</div>
+            <div class="fixed-permanent-ad" id="permanentAd">🎮 صفان: أحدث الألعاب - الأكثر لعباً (ملء الشاشة) 🎮</div>
             
             <!-- الصف الأول: أحدث الألعاب -->
             <div class="row-title">🔥 أحدث الألعاب</div>
@@ -308,7 +308,7 @@ document.getElementById('closeSettingsBtn').onclick=()=>document.getElementById(
 document.getElementById('saveSettingsBtn').onclick=()=>{let sel=document.querySelector('.avatar-option.selected');if(sel){currentAvatar=sel.dataset.avatar;localStorage.setItem('didogame_avatar',currentAvatar);document.getElementById('avatarPreview').innerHTML=currentAvatar;document.getElementById('mainAvatarImg').innerHTML=`<div class="controller-on-hand">🎮</div>${currentAvatar}`;}document.getElementById('settingsModal').style.display='none';alert("تم حفظ الإعدادات");};
 document.querySelectorAll('.avatar-option').forEach(opt=>{opt.onclick=()=>{document.querySelectorAll('.avatar-option').forEach(o=>o.classList.remove('selected'));opt.classList.add('selected');document.getElementById('avatarPreview').innerHTML=opt.dataset.avatar;};});
 document.getElementById('musicToggleBtn').onclick=toggleMusic;
-let ads=["🎮 صفان أفقيان: أحدث الألعاب - الأكثر لعباً (ملء الشاشة) 🎮","🔥 العب واربح نقاطاً وتصدر الترتيب!","💰 اشترك في VIP واحصل على مكالمات فيديو!","⭐ أضف ألعابك المفضلة بالضغط على النجمة!"];
+let ads=["🎮 أحدث الألعاب - الأكثر لعباً (ملء الشاشة) 🎮","🔥 العب واربح نقاطاً وتصدر الترتيب!","💰 اشترك في VIP واحصل على مكالمات فيديو!","⭐ أضف ألعابك المفضلة بالضغط على النجمة!"];
 let adIdx=0;setInterval(()=>{adIdx=(adIdx+1)%ads.length;document.getElementById('permanentAd').innerHTML=ads[adIdx];},5000);
 let savedGames=localStorage.getItem('gamesData');if(savedGames)JSON.parse(savedGames).forEach(sg=>{let g=gamesData.find(gg=>gg.id===sg.id);if(g)g.points=sg.points;});
 updateRanking();renderNewestGames();renderMostPlayedGames();
