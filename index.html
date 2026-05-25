@@ -1132,17 +1132,25 @@
             <div id="paymentModal" class="payment-modal"><div class="payment-card"><h3 style="color:#FFFFFF;">💎 VIP</h3><div class="currency-selector" id="currencySelector"><div class="currency-btn" data-currency="USD" data-symbol="$">🇺🇸 دولار</div><div class="currency-btn" data-currency="EUR" data-symbol="€">🇪🇺 يورو</div><div class="currency-btn" data-currency="SAR" data-symbol="﷼">🇸🇦 ريال</div></div><div class="price-display"><span class="price" id="priceAmount">9.99</span><span class="currency-symbol" id="priceCurrency" style="color:#FFFFFF;">$</span></div><button class="pay-btn" id="payNowBtn">💎 اشترك الآن</button><button class="close-payment" id="closePaymentBtn">إلغاء</button></div></div>
             <div class="fixed-permanent-ad" id="permanentAd">🎮 أحدث الألعاب - الأكثر لعباً</div>
 
-            <!-- الصف الأول: أحدث الألعاب -->
             <div class="row-title">🔥 أحدث الألعاب</div>
             <div class="games-wrapper"><div class="game-row" id="newestGamesRow"></div></div>
 
-            <!-- الصف الثاني: الأكثر لعباً -->
             <div class="row-title">🏆 الأكثر لعباً</div>
             <div class="games-wrapper"><div class="game-row" id="mostPlayedGamesRow"></div></div>
         </div>
         <div id="categoryPage" class="page page-hidden"><button class="create-btn" id="backToHomeBtn">🔙 رجوع</button><div class="games-wrapper" id="categoryGamesContainer"></div></div>
     </div>
-    <div class="bottom-bar"><div class="bottom-left"><button class="nav-btn settings-btn" id="settingsBtn"><span class="icon">⚙️</span><span class="label">الإعدادات</span></button><button class="nav-btn favs-btn" id="favoritesBtn"><span class="icon">⭐</span><span class="label">المفضلة</span></button></div><button class="nav-btn chat-center-btn" id="openChatBtn"><span class="icon">💬</span><span class="label">الدردشة</span></button><div class="bottom-right"><button class="nav-btn wallet-btn" id="walletBtn"><span class="icon">💳</span><span class="label">المحفظة</span></button><button class="nav-btn vip-btn" id="registerBtn"><span class="icon">👑</span><span class="label">VIP</span></button></div></div>
+    <div class="bottom-bar">
+        <div class="bottom-left">
+            <button class="nav-btn settings-btn" id="settingsBtn"><span class="icon">⚙️</span><span class="label">الإعدادات</span></button>
+            <button class="nav-btn favs-btn" id="favoritesBtn"><span class="icon">⭐</span><span class="label">المفضلة</span></button>
+        </div>
+        <button class="nav-btn chat-center-btn" id="openChatBtn"><span class="icon">💬</span><span class="label">الدردشة</span></button>
+        <div class="bottom-right">
+            <button class="nav-btn wallet-btn" id="walletBtn"><span class="icon">💳</span><span class="label">المحفظة</span></button>
+            <button class="nav-btn vip-btn" id="registerBtn"><span class="icon">👑</span><span class="label">VIP</span></button>
+        </div>
+    </div>
 </div>
 <div id="chatPopupOverlay" class="chat-popup-overlay"><div class="chat-popup-container"><div class="close-chat-popup" id="closeChatPopupBtn">✕</div><div id="chatPage" class="chat-page"><div class="messenger-full"><div id="inboxView" style="display:flex;flex-direction:column;height:100%"><div class="messenger-header"><div><button class="back-btn" id="closeChatFromInbox">✕</button><h2 style="color:#FFFFFF;">المحادثات</h2></div><span id="newChatBtn" style="cursor:pointer;color:#FFFFFF;">✏️</span></div><div class="chats-list" id="chatsListContainer"></div></div><div id="openChatView" style="display:none;flex-direction:column;height:100%"><div style="padding:10px;display:flex;gap:10px"><button class="back-btn" id="backToInboxBtn">←</button><div><div id="openChatRoomName" style="color:#FFFFFF;">الغرفة</div><div id="openChatStatus" style="color:#00ff88;">🟢 متصل</div></div><span id="videoCallBtn" style="display:none;color:#FFFFFF;">🎥</span></div><div class="messages-area" id="openChatMessages"></div><div class="message-input-area"><div class="input-wrapper"><input type="text" id="openMessageInput" placeholder="اكتب رسالة..." style="color:#FFFFFF;"><button class="mic-btn" id="micBtnOpen">🎙️</button><button class="send-btn" id="sendMsgOpen">📤</button></div></div></div></div></div></div></div>
 <div id="securityPanel" class="security-panel"><h2 style="color:#FFFFFF;text-align:center">🔐 الأمان</h2><input type="text" id="securityUsername" class="security-input" placeholder="اسم المستخدم" value="Ahmed"><input type="password" id="securityRoomPassword" class="security-input" placeholder="كلمة الغرفة (اختياري)"><input type="text" id="securityRoomName" class="security-input" placeholder="اسم الغرفة" value="الرئيسية"><button class="security-btn" id="securityBtn">🚪 دخول</button></div>
