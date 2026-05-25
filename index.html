@@ -868,23 +868,24 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 20px;
+            padding: 10px 16px;
             background: rgba(10, 10, 26, 0.95);
             backdrop-filter: blur(20px);
             border-top: 1px solid rgba(255, 68, 255, 0.4);
             border-radius: 0 0 20px 20px;
+            min-height: 70px;
         }
         
         .bottom-left {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             align-items: center;
             justify-content: flex-start;
         }
         
         .bottom-right {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             align-items: center;
             justify-content: flex-end;
         }
@@ -894,14 +895,15 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 4px;
+            gap: 3px;
             background: transparent;
             border: none;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            padding: 6px 12px;
+            padding: 5px 10px;
             border-radius: 30px;
             position: relative;
+            min-width: 55px;
         }
         
         .nav-btn::before {
@@ -910,7 +912,7 @@
             bottom: -2px;
             left: 50%;
             transform: translateX(-50%) scaleX(0);
-            width: 30px;
+            width: 25px;
             height: 2px;
             background: linear-gradient(90deg, #ff44ff, #00ffff);
             border-radius: 2px;
@@ -926,12 +928,12 @@
         }
         
         .nav-btn .icon {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             transition: all 0.3s ease;
         }
         
         .nav-btn .label {
-            font-size: 0.5rem;
+            font-size: 0.45rem;
             color: #aaa;
             font-weight: 600;
             transition: all 0.3s ease;
@@ -947,47 +949,50 @@
             color: #ff44ff;
         }
         
-        .settings-btn .icon { color: #00ffff; text-shadow: 0 0 5px #00ffff; }
-        .favs-btn .icon { color: #ffcc00; text-shadow: 0 0 5px #ffcc00; }
-        .wallet-btn .icon { color: #ffd700; text-shadow: 0 0 5px #ffd700; }
+        .settings-btn .icon { color: #00ffff; text-shadow: 0 0 3px #00ffff; }
+        .favs-btn .icon { color: #ffcc00; text-shadow: 0 0 3px #ffcc00; }
+        .wallet-btn .icon { color: #ffd700; text-shadow: 0 0 3px #ffd700; }
         
         .vip-btn {
             background: linear-gradient(135deg, rgba(255,68,255,0.2), rgba(0,255,255,0.2));
             border: 1px solid rgba(255,68,255,0.5);
             border-radius: 40px;
-            padding: 6px 16px;
+            padding: 5px 12px;
+            min-width: 55px;
         }
         
-        .vip-btn .icon { color: #ff44ff; font-size: 1.2rem; text-shadow: 0 0 5px #ff44ff; animation: vipGlow 1.5s ease-in-out infinite; }
-        @keyframes vipGlow { 0%,100% { text-shadow: 0 0 5px #ff44ff; } 50% { text-shadow: 0 0 15px #ff44ff, 0 0 5px #ff00aa; } }
-        .vip-btn.active { background: linear-gradient(135deg, rgba(255,68,255,0.4), rgba(0,255,255,0.4)); border-color: #ff44ff; box-shadow: 0 0 15px rgba(255,68,255,0.3); }
-        .vip-btn.active .icon { color: #00ffff; text-shadow: 0 0 5px #00ffff; animation: none; }
+        .vip-btn .icon { color: #ff44ff; font-size: 1.1rem; text-shadow: 0 0 3px #ff44ff; animation: vipGlow 1.5s ease-in-out infinite; }
+        @keyframes vipGlow { 0%,100% { text-shadow: 0 0 3px #ff44ff; } 50% { text-shadow: 0 0 10px #ff44ff, 0 0 3px #ff00aa; } }
+        .vip-btn.active { background: linear-gradient(135deg, rgba(255,68,255,0.4), rgba(0,255,255,0.4)); border-color: #ff44ff; box-shadow: 0 0 10px rgba(255,68,255,0.3); }
+        .vip-btn.active .icon { color: #00ffff; text-shadow: 0 0 3px #00ffff; animation: none; }
         
         .chat-center-btn {
             background: linear-gradient(135deg, #ff44ff, #ff00aa, #00ffff);
             border-radius: 40px;
-            padding: 6px 18px;
-            box-shadow: 0 0 15px rgba(255,68,255,0.5);
+            padding: 5px 16px;
+            box-shadow: 0 0 12px rgba(255,68,255,0.5);
             transition: all 0.3s ease;
             border: 1px solid rgba(255,255,255,0.2);
             animation: chatPulse 2s ease-in-out infinite;
+            min-width: 70px;
         }
-        @keyframes chatPulse { 0%,100% { box-shadow: 0 0 15px rgba(255,68,255,0.5); } 50% { box-shadow: 0 0 25px rgba(255,68,255,0.8), 0 0 10px rgba(0,255,255,0.5); } }
+        @keyframes chatPulse { 0%,100% { box-shadow: 0 0 10px rgba(255,68,255,0.5); } 50% { box-shadow: 0 0 20px rgba(255,68,255,0.8), 0 0 8px rgba(0,255,255,0.5); } }
         .chat-center-btn::before { display: none; }
-        .chat-center-btn .icon { font-size: 1.2rem; color: white; text-shadow: 0 0 5px white; }
-        .chat-center-btn .label { font-size: 0.55rem; color: white; font-weight: bold; }
-        .chat-center-btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 25px rgba(255,68,255,0.8), 0 0 15px rgba(0,255,255,0.5); }
+        .chat-center-btn .icon { font-size: 1.1rem; color: white; text-shadow: 0 0 3px white; }
+        .chat-center-btn .label { font-size: 0.45rem; color: white; font-weight: bold; }
+        .chat-center-btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 20px rgba(255,68,255,0.8), 0 0 10px rgba(0,255,255,0.5); }
 
         .settings-btn, .favs-btn, .wallet-btn {
             background: linear-gradient(135deg, rgba(255,68,255,0.15), rgba(0,255,255,0.05));
             border-radius: 40px;
-            padding: 6px 16px;
+            padding: 5px 12px;
             border: 1px solid rgba(255,68,255,0.5);
-            box-shadow: 0 0 12px rgba(255,68,255,0.4);
+            box-shadow: 0 0 8px rgba(255,68,255,0.4);
             transition: all 0.3s ease;
             animation: neonPulse 1.5s ease-in-out infinite;
+            min-width: 55px;
         }
-        @keyframes neonPulse { 0%,100% { box-shadow: 0 0 10px rgba(255,68,255,0.4); border-color: rgba(255,68,255,0.5); } 50% { box-shadow: 0 0 25px rgba(255,68,255,0.8); border-color: #ff44ff; } }
+        @keyframes neonPulse { 0%,100% { box-shadow: 0 0 6px rgba(255,68,255,0.4); border-color: rgba(255,68,255,0.5); } 50% { box-shadow: 0 0 18px rgba(255,68,255,0.8); border-color: #ff44ff; } }
 
         .chat-popup-overlay {
             position: fixed;
