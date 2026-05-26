@@ -1617,7 +1617,7 @@
             
             <div id="settingsModal" class="settings-modal">
                 <div class="settings-card">
-                    <h3>⚙️ الإعدادات</h3>
+                    <h3 id="settingsTitle">⚙️ الإعدادات</h3>
                     <div class="avatar-section">
                         <div class="avatar-preview" id="avatarPreview">😎</div>
                         <div class="avatar-options" id="avatarOptions">
@@ -1634,7 +1634,7 @@
                         </div>
                     </div>
                     <div class="language-section">
-                        <label>🌐 اللغة</label>
+                        <label id="langLabel">🌐 اللغة</label>
                         <select id="settingsLangSelect" class="lang-select">
                             <option value="ar">العربية</option>
                             <option value="en">English</option>
@@ -1642,7 +1642,7 @@
                         </select>
                     </div>
                     <div class="music-control">
-                        <label>🎵 الموسيقى</label>
+                        <label id="musicLabel">🎵 الموسيقى</label>
                         <button class="music-toggle-btn" id="musicToggleBtn">🎵 تشغيل</button>
                     </div>
                     <button class="save-settings-btn" id="saveSettingsBtn">💾 حفظ</button>
@@ -1652,7 +1652,7 @@
             
             <div id="favoritesModal" class="favorites-modal">
                 <div class="favorites-card">
-                    <h3>⭐ المفضلة</h3>
+                    <h3 id="favoritesTitle">⭐ المفضلة</h3>
                     <div class="favorites-list" id="favoritesList"></div>
                     <button class="close-favorites" id="closeFavoritesBtn">إغلاق</button>
                 </div>
@@ -1660,7 +1660,7 @@
             
             <div id="walletModal" class="wallet-modal">
                 <div class="wallet-card">
-                    <h3>💳 المحفظة</h3>
+                    <h3 id="walletTitle">💳 المحفظة</h3>
                     <div class="wallet-methods" id="walletMethods"></div>
                     <button class="close-wallet" id="closeWalletBtn">إغلاق</button>
                 </div>
@@ -1694,27 +1694,27 @@
         <div class="bottom-left">
             <button class="nav-btn settings-btn" id="settingsBtn">
                 <span class="icon">⚙️</span>
-                <span class="label">الإعدادات</span>
+                <span class="label" id="settingsLabel">الإعدادات</span>
             </button>
             <button class="nav-btn favs-btn" id="favoritesBtn">
                 <span class="icon">⭐</span>
-                <span class="label">المفضلة</span>
+                <span class="label" id="favoritesLabel">المفضلة</span>
             </button>
         </div>
         
         <button class="nav-btn chat-center-btn" id="openChatBtn">
             <span class="icon">💬</span>
-            <span class="label">الدردشة</span>
+            <span class="label" id="chatLabel">الدردشة</span>
         </button>
         
         <div class="bottom-right">
             <button class="nav-btn wallet-btn" id="walletBtn">
                 <span class="icon">💳</span>
-                <span class="label">المحفظة</span>
+                <span class="label" id="walletLabel">المحفظة</span>
             </button>
             <button class="nav-btn vip-btn" id="registerBtn">
                 <span class="icon">👑</span>
-                <span class="label">VIP</span>
+                <span class="label" id="vipLabel">VIP</span>
             </button>
         </div>
     </div>
@@ -1729,7 +1729,7 @@
                     <div class="messenger-header">
                         <div class="header-left">
                             <button class="back-btn" id="closeChatFromInbox">✕</button>
-                            <h2>المحادثات</h2>
+                            <h2 id="chatsHeaderTitle">المحادثات</h2>
                         </div>
                         <div class="header-actions">
                             <span id="newChatBtn">✏️</span>
@@ -1766,7 +1766,7 @@
 </div>
 
 <div id="securityPanel" class="security-panel">
-    <h2>🔐 الأمان</h2>
+    <h2 id="securityTitle">🔐 الأمان</h2>
     <input type="text" id="securityUsername" class="security-input" placeholder="اسم المستخدم" value="Ahmed">
     <input type="password" id="securityRoomPassword" class="security-input" placeholder="كلمة الغرفة (اختياري)">
     <input type="text" id="securityRoomName" class="security-input" placeholder="اسم الغرفة" value="الرئيسية">
@@ -1862,18 +1862,205 @@ let currentUser = null, currentOpenRoom = null, allRooms = {}, securityPassword 
 let audioStream = null, videoStream = null, sessionTimer = null;
 let currentAvatar = localStorage.getItem('didogame_avatar') || '😎';
 let bgMusic = null, isMusicPlaying = false;
+let currentLanguage = localStorage.getItem('didogame_language') || 'ar';
+
+// ==================== الترجمة الكاملة (العربية - الإنجليزية - الفرنسية) ====================
+const translations = {
+    ar: {
+        settings: "⚙️ الإعدادات",
+        favorites: "⭐ المفضلة",
+        chat: "💬 الدردشة",
+        wallet: "💳 المحفظة",
+        vip: "👑 VIP",
+        language: "🌐 اللغة",
+        music: "🎵 الموسيقى",
+        save: "💾 حفظ",
+        cancel: "إلغاء",
+        playMusic: "🎵 تشغيل",
+        stopMusic: "🔇 إيقاف",
+        close: "إغلاق",
+        back: "🔙 رجوع",
+        enter: "🚪 دخول",
+        noFavorites: "⭐ لا توجد ألعاب مفضلة بعد",
+        noChats: "📭 لا توجد محادثات<br>➕ أنشئ محادثة جديدة",
+        noMessages: "💬 لا توجد رسائل بعد<br>✨ اكتب أول رسالة",
+        selectChat: "✨ اختر محادثة لبدء المراسلة",
+        usernamePlaceholder: "اسم المستخدم",
+        roomPasswordPlaceholder: "كلمة الغرفة (اختياري)",
+        roomNamePlaceholder: "اسم الغرفة",
+        securityTitle: "🔐 الأمان",
+        chatsTitle: "المحادثات",
+        online: "🟢 متصل",
+        messagePlaceholder: "اكتب رسالة...",
+        vipOnly: "🔒 مكالمات الفيديو متاحة فقط لـ VIP",
+        cameraError: "خطأ في الوصول للكاميرا",
+        micActive: "🎙️ الميكروفون نشط",
+        micInactive: "🔴 الميكروفون غير نشط",
+        sessionEnded: "🔐 انتهت الجلسة (5 دقائق)",
+        wrongPassword: "❌ كلمة المرور غير صحيحة",
+        enterUsername: "❌ أدخل اسم المستخدم",
+        enterRoomName: "❌ أدخل اسم الغرفة",
+        alreadyVIP: "✨ أنت بالفعل VIP!",
+        paymentSoon: "💎 سيتم تفعيل الدفع قريباً",
+        settingsSaved: "تم حفظ الإعدادات",
+        roomExists: "الغرفة موجودة مسبقاً",
+        newRoom: "اسم الغرفة الجديدة:",
+        defaultRoom: "غرفة جديدة",
+        tunisiaWallet: "🇹🇳 محافظ تونسية",
+        d17: "💳 D17",
+        flouci: "💰 Flouci",
+        tunisianBank: "🏦 بنك تونسي"
+    },
+    en: {
+        settings: "⚙️ Settings",
+        favorites: "⭐ Favorites",
+        chat: "💬 Chat",
+        wallet: "💳 Wallet",
+        vip: "👑 VIP",
+        language: "🌐 Language",
+        music: "🎵 Music",
+        save: "💾 Save",
+        cancel: "Cancel",
+        playMusic: "🎵 Play",
+        stopMusic: "🔇 Stop",
+        close: "Close",
+        back: "🔙 Back",
+        enter: "🚪 Enter",
+        noFavorites: "⭐ No favorite games yet",
+        noChats: "📭 No chats<br>➕ Create a new chat",
+        noMessages: "💬 No messages yet<br>✨ Write the first message",
+        selectChat: "✨ Select a chat to start messaging",
+        usernamePlaceholder: "Username",
+        roomPasswordPlaceholder: "Room password (optional)",
+        roomNamePlaceholder: "Room name",
+        securityTitle: "🔐 Security",
+        chatsTitle: "Chats",
+        online: "🟢 Online",
+        messagePlaceholder: "Type a message...",
+        vipOnly: "🔒 Video calls are only available for VIP",
+        cameraError: "Camera access error",
+        micActive: "🎙️ Microphone is active",
+        micInactive: "🔴 Microphone is inactive",
+        sessionEnded: "🔐 Session ended (5 minutes)",
+        wrongPassword: "❌ Incorrect password",
+        enterUsername: "❌ Enter username",
+        enterRoomName: "❌ Enter room name",
+        alreadyVIP: "✨ You are already VIP!",
+        paymentSoon: "💎 Payment will be activated soon",
+        settingsSaved: "Settings saved",
+        roomExists: "Room already exists",
+        newRoom: "New room name:",
+        defaultRoom: "New room",
+        tunisiaWallet: "🇹🇳 Tunisian Wallets",
+        d17: "💳 D17",
+        flouci: "💰 Flouci",
+        tunisianBank: "🏦 Tunisian Bank"
+    },
+    fr: {
+        settings: "⚙️ Paramètres",
+        favorites: "⭐ Favoris",
+        chat: "💬 Discussion",
+        wallet: "💳 Portefeuille",
+        vip: "👑 VIP",
+        language: "🌐 Langue",
+        music: "🎵 Musique",
+        save: "💾 Enregistrer",
+        cancel: "Annuler",
+        playMusic: "🎵 Lire",
+        stopMusic: "🔇 Arrêter",
+        close: "Fermer",
+        back: "🔙 Retour",
+        enter: "🚪 Entrer",
+        noFavorites: "⭐ Pas encore de jeux favoris",
+        noChats: "📭 Pas de discussions<br>➕ Créer une nouvelle discussion",
+        noMessages: "💬 Pas encore de messages<br>✨ Écrire le premier message",
+        selectChat: "✨ Sélectionner une discussion",
+        usernamePlaceholder: "Nom d'utilisateur",
+        roomPasswordPlaceholder: "Mot de passe de la salle (optionnel)",
+        roomNamePlaceholder: "Nom de la salle",
+        securityTitle: "🔐 Sécurité",
+        chatsTitle: "Discussions",
+        online: "🟢 En ligne",
+        messagePlaceholder: "Écrire un message...",
+        vipOnly: "🔒 Les appels vidéo sont réservés aux VIP",
+        cameraError: "Erreur d'accès à la caméra",
+        micActive: "🎙️ Microphone actif",
+        micInactive: "🔴 Microphone inactif",
+        sessionEnded: "🔐 Session terminée (5 minutes)",
+        wrongPassword: "❌ Mot de passe incorrect",
+        enterUsername: "❌ Entrez le nom d'utilisateur",
+        enterRoomName: "❌ Entrez le nom de la salle",
+        alreadyVIP: "✨ Vous êtes déjà VIP !",
+        paymentSoon: "💎 Le paiement sera activé bientôt",
+        settingsSaved: "Paramètres enregistrés",
+        roomExists: "La salle existe déjà",
+        newRoom: "Nom de la nouvelle salle :",
+        defaultRoom: "Nouvelle salle",
+        tunisiaWallet: "🇹🇳 Portefeuilles Tunisiens",
+        d17: "💳 D17",
+        flouci: "💰 Flouci",
+        tunisianBank: "🏦 Banque Tunisienne"
+    }
+};
+
+function updateLanguage(lang) {
+    currentLanguage = lang;
+    localStorage.setItem('didogame_language', lang);
+    const t = translations[lang];
+    
+    document.getElementById('settingsTitle') && (document.getElementById('settingsTitle').innerHTML = t.settings);
+    document.getElementById('settingsLabel') && (document.getElementById('settingsLabel').innerHTML = t.settings);
+    document.getElementById('favoritesLabel') && (document.getElementById('favoritesLabel').innerHTML = t.favorites);
+    document.getElementById('chatLabel') && (document.getElementById('chatLabel').innerHTML = t.chat);
+    document.getElementById('walletLabel') && (document.getElementById('walletLabel').innerHTML = t.wallet);
+    document.getElementById('vipLabel') && (document.getElementById('vipLabel').innerHTML = t.vip);
+    document.getElementById('langLabel') && (document.getElementById('langLabel').innerHTML = t.language);
+    document.getElementById('musicLabel') && (document.getElementById('musicLabel').innerHTML = t.music);
+    document.getElementById('saveSettingsBtn') && (document.getElementById('saveSettingsBtn').innerHTML = t.save);
+    document.getElementById('closeSettingsBtn') && (document.getElementById('closeSettingsBtn').innerHTML = t.cancel);
+    document.getElementById('closeFavoritesBtn') && (document.getElementById('closeFavoritesBtn').innerHTML = t.close);
+    document.getElementById('closeWalletBtn') && (document.getElementById('closeWalletBtn').innerHTML = t.close);
+    document.getElementById('closePaymentBtn') && (document.getElementById('closePaymentBtn').innerHTML = t.cancel);
+    document.getElementById('backToHomeBtn') && (document.getElementById('backToHomeBtn').innerHTML = t.back);
+    document.getElementById('securityBtn') && (document.getElementById('securityBtn').innerHTML = t.enter);
+    document.getElementById('securityTitle') && (document.getElementById('securityTitle').innerHTML = t.securityTitle);
+    document.getElementById('chatsHeaderTitle') && (document.getElementById('chatsHeaderTitle').innerHTML = t.chatsTitle);
+    document.getElementById('openChatStatus') && (document.getElementById('openChatStatus').innerHTML = t.online);
+    document.getElementById('openMessageInput') && (document.getElementById('openMessageInput').setAttribute('placeholder', t.messagePlaceholder));
+    document.getElementById('securityUsername') && (document.getElementById('securityUsername').setAttribute('placeholder', t.usernamePlaceholder));
+    document.getElementById('securityRoomPassword') && (document.getElementById('securityRoomPassword').setAttribute('placeholder', t.roomPasswordPlaceholder));
+    document.getElementById('securityRoomName') && (document.getElementById('securityRoomName').setAttribute('placeholder', t.roomNamePlaceholder));
+    
+    const musicBtn = document.getElementById('musicToggleBtn');
+    if (musicBtn) {
+        musicBtn.innerHTML = isMusicPlaying ? t.stopMusic : t.playMusic;
+    }
+}
 
 function saveFavorites(){localStorage.setItem('didogame_favorites',JSON.stringify(favorites));}
 function toggleFavorite(id){let idx=favorites.indexOf(id);idx===-1?favorites.push(id):favorites.splice(idx,1);saveFavorites();renderAllGames();renderFavoritesList();}
 function isFavorite(id){return favorites.includes(id);}
 
-function renderFavoritesList(){let c=document.getElementById('favoritesList'),fg=gamesData.filter(g=>favorites.includes(g.id));if(fg.length===0){c.innerHTML='<div class="empty-favorites">⭐ لا توجد ألعاب مفضلة بعد</div>';return;}c.innerHTML=fg.map(g=>`<div class="favorite-item" onclick="playGame(${g.id});closeFavoritesModal();"><div class="favorite-img" style="background-image:url('${g.img}')"></div><div><div class="favorite-name">${g.name}</div><div class="favorite-cat">${g.cat}</div></div><button onclick="event.stopPropagation();toggleFavorite(${g.id})" style="background:#ff3366;border:none;padding:5px 10px;border-radius:10px;color:#fff;cursor:pointer">✕</button></div>`).join('');}
+function renderFavoritesList(){let c=document.getElementById('favoritesList'),fg=gamesData.filter(g=>favorites.includes(g.id));if(fg.length===0){c.innerHTML=`<div class="empty-favorites">${translations[currentLanguage].noFavorites}</div>`;return;}c.innerHTML=fg.map(g=>`<div class="favorite-item" onclick="playGame(${g.id});closeFavoritesModal();"><div class="favorite-img" style="background-image:url('${g.img}')"></div><div><div class="favorite-name">${g.name}</div><div class="favorite-cat">${g.cat}</div></div><button onclick="event.stopPropagation();toggleFavorite(${g.id})" style="background:#ff3366;border:none;padding:5px 10px;border-radius:10px;color:#fff;cursor:pointer">✕</button></div>`).join('');}
 function openFavoritesModal(){renderFavoritesList();document.getElementById('favoritesModal').style.display='flex';}
 function closeFavoritesModal(){document.getElementById('favoritesModal').style.display='none';}
 function openWalletModal(){document.getElementById('walletModal').style.display='flex';renderWalletMethods();}
 function closeWalletModal(){document.getElementById('walletModal').style.display='none';}
-function renderWalletMethods(){let m=document.getElementById('walletMethods');m.innerHTML=`<div class="wallet-method" onclick="alert('شحن عبر فودافون كاش قريباً')"><span class="emoji">📱</span><span class="name">فودافون كاش</span></div><div class="wallet-method" onclick="alert('شحن عبر أورانج كاش قريباً')"><span class="emoji">🍊</span><span class="name">أورانج كاش</span></div><div class="wallet-method" onclick="alert('شحن عبر باي بال قريباً')"><span class="emoji">💳</span><span class="name">PayPal</span></div><div class="wallet-method" onclick="alert('شحن عبر بطاقة ائتمان قريباً')"><span class="emoji">💎</span><span class="name">بطاقة ائتمان</span></div><div class="wallet-method" onclick="alert('شحن عبر كريبتو قريباً')"><span class="emoji">₿</span><span class="name">كريبتو</span></div>`;}
-function openPaymentModal(){if(isVIP){alert("✨ أنت بالفعل VIP!");return;}alert("💎 سيتم تفعيل الدفع قريباً");isVIP=true;localStorage.setItem('didogame_vip','true');document.getElementById('registerBtn').classList.add('active');}
+
+// ==================== طرق الدفع الجديدة مع المحافظ التونسية ====================
+function renderWalletMethods(){let m=document.getElementById('walletMethods');m.innerHTML=`
+    <div class="wallet-method" onclick="alert('شحن عبر فودافون كاش قريباً')"><span class="emoji">📱</span><span class="name">فودافون كاش</span></div>
+    <div class="wallet-method" onclick="alert('شحن عبر أورانج كاش قريباً')"><span class="emoji">🍊</span><span class="name">أورانج كاش</span></div>
+    <div class="wallet-method" onclick="alert('شحن عبر اتصالات كاش قريباً')"><span class="emoji">📞</span><span class="name">اتصالات كاش</span></div>
+    <div class="wallet-method" onclick="alert('شحن عبر D17 قريباً')"><span class="emoji">💳</span><span class="name">${translations[currentLanguage].d17}</span></div>
+    <div class="wallet-method" onclick="alert('شحن عبر Flouci قريباً')"><span class="emoji">💰</span><span class="name">${translations[currentLanguage].flouci}</span></div>
+    <div class="wallet-method" onclick="alert('شحن عبر البنك التونسي قريباً')"><span class="emoji">🏦</span><span class="name">${translations[currentLanguage].tunisianBank}</span></div>
+    <div class="wallet-method" onclick="alert('شحن عبر باي بال قريباً')"><span class="emoji">💳</span><span class="name">PayPal</span></div>
+    <div class="wallet-method" onclick="alert('شحن عبر بطاقة ائتمان قريباً')"><span class="emoji">💎</span><span class="name">بطاقة ائتمان</span></div>
+    <div class="wallet-method" onclick="alert('شحن عبر كريبتو قريباً')"><span class="emoji">₿</span><span class="name">كريبتو</span></div>`;
+}
+
+function openPaymentModal(){if(isVIP){alert(translations[currentLanguage].alreadyVIP);return;}alert(translations[currentLanguage].paymentSoon);isVIP=true;localStorage.setItem('didogame_vip','true');document.getElementById('registerBtn').classList.add('active');}
 function closePaymentModal(){document.getElementById('paymentModal').style.display='none';}
 
 function updateRanking(){let s=[...gamesData].sort((a,b)=>b.points-a.points);document.getElementById('rankingList').innerHTML=`<div class="rank-item"><div class="silver-circle">${s[1]?.avatar||'👤'}</div><div class="rank-name">${s[1]?.playerName||'---'}</div><div class="rank-points">⭐${s[1]?.points||0}</div></div><div class="rank-item"><div class="gold-circle">${s[0]?.avatar||'👑'}</div><div class="rank-name">${s[0]?.playerName||'---'}</div><div class="rank-points">⭐${s[0]?.points||0}</div></div><div class="rank-item"><div class="bronze-circle">${s[2]?.avatar||'👤'}</div><div class="rank-name">${s[2]?.playerName||'---'}</div><div class="rank-points">⭐${s[2]?.points||0}</div></div>`;}
@@ -1895,23 +2082,23 @@ function decryptMessage(e){try{return decodeURIComponent(escape(atob(e)));}catch
 function saveRooms(){localStorage.setItem('didogame_rooms',JSON.stringify(allRooms));}
 function loadRooms(){let d=localStorage.getItem('didogame_rooms');if(d)allRooms=JSON.parse(d);else allRooms={};}
 function escapeHtml(s){if(!s)return '';return s.replace(/[&<>]/g,function(m){if(m==='&')return '&amp;';if(m==='<')return '&lt;';if(m==='>')return '&gt;';return m;});}
-function renderChatsList(){let c=document.getElementById('chatsListContainer'),r=Object.keys(allRooms);if(r.length===0){c.innerHTML='<div style="color:#888;text-align:center;padding:40px;">📭 لا توجد محادثات<br>➕ أنشئ محادثة جديدة</div>';return;}c.innerHTML=r.map(room=>`<div class="chat-item" onclick="openRoomChat('${room.replace(/'/g,"\\'")}')"><div class="chat-avatar">💬</div><div><div class="chat-name">${escapeHtml(room)}${allRooms[room].password?' 🔒':''}</div></div></div>`).join('');}
-function openRoomChat(roomName){if(allRooms[roomName]?.password&&allRooms[roomName].password!==securityPassword){alert("❌ كلمة المرور غير صحيحة");return;}currentOpenRoom=roomName;document.getElementById('inboxView').style.display='none';document.getElementById('openChatView').style.display='flex';document.getElementById('openChatRoomName').innerHTML=escapeHtml(currentOpenRoom);let videoBtn=document.getElementById('videoCallBtn');if(isVIP){videoBtn.style.display='inline-block';}else{videoBtn.style.display='none';}displayMessages();}
-function displayMessages(){let c=document.getElementById('openChatMessages');if(!currentOpenRoom||!allRooms[currentOpenRoom]){c.innerHTML='<div style="text-align:center;padding:20px;">✨ اختر محادثة لبدء المراسلة</div>';return;}let m=allRooms[currentOpenRoom].messages||[];if(m.length===0){c.innerHTML='<div style="text-align:center;padding:20px;">💬 لا توجد رسائل بعد<br>✨ اكتب أول رسالة</div>';return;}c.innerHTML='';m.slice(-50).forEach(msg=>{let isOut=msg.sender===currentUser,txt=msg.encrypted?decryptMessage(msg.text):msg.text;c.innerHTML+=`<div style="display:flex;justify-content:${isOut?'flex-end':'flex-start'};margin-bottom:8px;"><div style="max-width:75%;background:${isOut?'#ff44ff':'#1f1f2e'};padding:8px 14px;border-radius:20px;"><div>${escapeHtml(txt)}</div><div style="font-size:0.4rem;color:#aaa;margin-top:4px;">${new Date(msg.time).toLocaleTimeString()}</div></div></div>`;});c.scrollTop=c.scrollHeight;}
+function renderChatsList(){let c=document.getElementById('chatsListContainer'),r=Object.keys(allRooms);if(r.length===0){c.innerHTML=`<div style="color:#888;text-align:center;padding:40px;">${translations[currentLanguage].noChats}</div>`;return;}c.innerHTML=r.map(room=>`<div class="chat-item" onclick="openRoomChat('${room.replace(/'/g,"\\'")}')"><div class="chat-avatar">💬</div><div><div class="chat-name">${escapeHtml(room)}${allRooms[room].password?' 🔒':''}</div></div></div>`).join('');}
+function openRoomChat(roomName){if(allRooms[roomName]?.password&&allRooms[roomName].password!==securityPassword){alert(translations[currentLanguage].wrongPassword);return;}currentOpenRoom=roomName;document.getElementById('inboxView').style.display='none';document.getElementById('openChatView').style.display='flex';document.getElementById('openChatRoomName').innerHTML=escapeHtml(currentOpenRoom);let videoBtn=document.getElementById('videoCallBtn');if(isVIP){videoBtn.style.display='inline-block';}else{videoBtn.style.display='none';}displayMessages();}
+function displayMessages(){let c=document.getElementById('openChatMessages');if(!currentOpenRoom||!allRooms[currentOpenRoom]){c.innerHTML=`<div style="text-align:center;padding:20px;">${translations[currentLanguage].selectChat}</div>`;return;}let m=allRooms[currentOpenRoom].messages||[];if(m.length===0){c.innerHTML=`<div style="text-align:center;padding:20px;">${translations[currentLanguage].noMessages}</div>`;return;}c.innerHTML='';m.slice(-50).forEach(msg=>{let isOut=msg.sender===currentUser,txt=msg.encrypted?decryptMessage(msg.text):msg.text;c.innerHTML+=`<div style="display:flex;justify-content:${isOut?'flex-end':'flex-start'};margin-bottom:8px;"><div style="max-width:75%;background:${isOut?'#ff44ff':'#1f1f2e'};padding:8px 14px;border-radius:20px;"><div>${escapeHtml(txt)}</div><div style="font-size:0.4rem;color:#aaa;margin-top:4px;">${new Date(msg.time).toLocaleTimeString()}</div></div></div>`;});c.scrollTop=c.scrollHeight;}
 function sendMessage(){let i=document.getElementById('openMessageInput'),t=i.value.trim();if(!t||!currentOpenRoom||!currentUser)return;let msg={type:'public',sender:currentUser,text:encryptMessage(t),encrypted:true,time:Date.now()};if(!allRooms[currentOpenRoom].messages)allRooms[currentOpenRoom].messages=[];allRooms[currentOpenRoom].messages.push(msg);saveRooms();displayMessages();i.value='';renderChatsList();}
 function backToInbox(){document.getElementById('openChatView').style.display='none';document.getElementById('inboxView').style.display='flex';currentOpenRoom=null;renderChatsList();}
-function showNewChatModal(){let n=prompt("اسم الغرفة الجديدة:","غرفة جديدة");if(n&&!allRooms[n]){allRooms[n]={password:null,users:[currentUser],messages:[]};saveRooms();renderChatsList();}else if(n&&allRooms[n])alert("الغرفة موجودة مسبقاً");}
-function startSessionTimer(){if(sessionTimer)clearTimeout(sessionTimer);sessionTimer=setTimeout(()=>{alert("🔐 انتهت الجلسة (5 دقائق)");logout();},5*60*1000);}
+function showNewChatModal(){let n=prompt(translations[currentLanguage].newRoom,translations[currentLanguage].defaultRoom);if(n&&!allRooms[n]){allRooms[n]={password:null,users:[currentUser],messages:[]};saveRooms();renderChatsList();}else if(n&&allRooms[n])alert(translations[currentLanguage].roomExists);}
+function startSessionTimer(){if(sessionTimer)clearTimeout(sessionTimer);sessionTimer=setTimeout(()=>{alert(translations[currentLanguage].sessionEnded);logout();},5*60*1000);}
 function logout(){if(sessionTimer)clearTimeout(sessionTimer);currentUser=null;currentOpenRoom=null;if(audioStream)audioStream.getTracks().forEach(t=>t.stop());document.getElementById('chatPopupOverlay').style.display='none';}
-function submitSecurityAndEnter(){let u=document.getElementById('securityUsername').value.trim(),p=document.getElementById('securityRoomPassword').value,r=document.getElementById('securityRoomName').value.trim();if(!u){alert("❌ أدخل اسم المستخدم");return;}if(!r){alert("❌ أدخل اسم الغرفة");return;}currentUser=u;securityPassword=p;localStorage.setItem('didogame_username',u);document.getElementById('securityPanel').style.display='none';document.getElementById('chatPopupOverlay').style.display='flex';loadRooms();if(!allRooms[r]){allRooms[r]={password:p||null,users:[currentUser],messages:[]};saveRooms();}renderChatsList();startSessionTimer();document.getElementById('inboxView').style.display='flex';document.getElementById('openChatView').style.display='none';}
+function submitSecurityAndEnter(){let u=document.getElementById('securityUsername').value.trim(),p=document.getElementById('securityRoomPassword').value,r=document.getElementById('securityRoomName').value.trim();if(!u){alert(translations[currentLanguage].enterUsername);return;}if(!r){alert(translations[currentLanguage].enterRoomName);return;}currentUser=u;securityPassword=p;localStorage.setItem('didogame_username',u);document.getElementById('securityPanel').style.display='none';document.getElementById('chatPopupOverlay').style.display='flex';loadRooms();if(!allRooms[r]){allRooms[r]={password:p||null,users:[currentUser],messages:[]};saveRooms();}renderChatsList();startSessionTimer();document.getElementById('inboxView').style.display='flex';document.getElementById('openChatView').style.display='none';}
 function initMusic(){if(!bgMusic){bgMusic=new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');bgMusic.loop=true;bgMusic.volume=0.5;}}
-function toggleMusic(){initMusic();if(isMusicPlaying){bgMusic.pause();isMusicPlaying=false;}else{bgMusic.play().catch(e=>console.log("Auto-play prevented"));isMusicPlaying=true;}let btn=document.getElementById('musicToggleBtn');if(btn)btn.innerHTML=isMusicPlaying?"🔇 إيقاف":"🎵 تشغيل";}
-async function startVideoCall(){if(!isVIP){alert("🔒 مكالمات الفيديو متاحة فقط لـ VIP");return;}try{videoStream=await navigator.mediaDevices.getUserMedia({video:true,audio:true});document.getElementById('localVideo').srcObject=videoStream;document.getElementById('remoteVideo').srcObject=videoStream;document.getElementById('videoCallModal').style.display='flex';}catch(e){alert("خطأ في الوصول للكاميرا");}}
+function toggleMusic(){initMusic();if(isMusicPlaying){bgMusic.pause();isMusicPlaying=false;}else{bgMusic.play().catch(e=>console.log("Auto-play prevented"));isMusicPlaying=true;}let btn=document.getElementById('musicToggleBtn');if(btn)btn.innerHTML=isMusicPlaying?translations[currentLanguage].stopMusic:translations[currentLanguage].playMusic;}
+async function startVideoCall(){if(!isVIP){alert(translations[currentLanguage].vipOnly);return;}try{videoStream=await navigator.mediaDevices.getUserMedia({video:true,audio:true});document.getElementById('localVideo').srcObject=videoStream;document.getElementById('remoteVideo').srcObject=videoStream;document.getElementById('videoCallModal').style.display='flex';}catch(e){alert(translations[currentLanguage].cameraError);}}
 function endVideoCall(){if(videoStream){videoStream.getTracks().forEach(t=>t.stop());videoStream=null;}document.getElementById('videoCallModal').style.display='none';}
 function toggleMute(){if(videoStream){let t=videoStream.getAudioTracks()[0];if(t){t.enabled=!t.enabled;document.getElementById('muteBtn').innerHTML=t.enabled?"🔊":"🔇";}}}
 function toggleVideoBtn(){if(videoStream){let t=videoStream.getVideoTracks()[0];if(t){t.enabled=!t.enabled;document.getElementById('videoToggleBtn').innerHTML=t.enabled?"📷":"🚫📷";}}}
-async function startMicrophone(){try{if(!audioStream){audioStream=await navigator.mediaDevices.getUserMedia({audio:true});alert("🎙️ الميكروفون نشط");}}catch(e){}}
-function toggleMicrophone(){if(!currentOpenRoom){alert("افتح محادثة أولاً");return;}if(!audioStream){startMicrophone();return;}let t=audioStream.getAudioTracks()[0];if(t){t.enabled=!t.enabled;alert(t.enabled?"🎙️ الميكروفون نشط":"🔴 الميكروفون غير نشط");}}
+async function startMicrophone(){try{if(!audioStream){audioStream=await navigator.mediaDevices.getUserMedia({audio:true});alert(translations[currentLanguage].micActive);}}catch(e){}}
+function toggleMicrophone(){if(!currentOpenRoom){alert(translations[currentLanguage].selectChat);return;}if(!audioStream){startMicrophone();return;}let t=audioStream.getAudioTracks()[0];if(t){t.enabled=!t.enabled;alert(t.enabled?translations[currentLanguage].micActive:translations[currentLanguage].micInactive);}}
 
 document.getElementById('closeChatPopupBtn').onclick=()=>document.getElementById('chatPopupOverlay').style.display='none';
 document.getElementById('closeChatFromInbox').onclick=()=>document.getElementById('chatPopupOverlay').style.display='none';
@@ -1933,9 +2120,10 @@ document.getElementById('registerBtn').onclick=openPaymentModal;
 document.getElementById('closePaymentBtn').onclick=closePaymentModal;
 document.getElementById('settingsBtn').onclick=()=>{document.getElementById('avatarPreview').innerHTML=currentAvatar;document.getElementById('settingsModal').style.display='flex';};
 document.getElementById('closeSettingsBtn').onclick=()=>document.getElementById('settingsModal').style.display='none';
-document.getElementById('saveSettingsBtn').onclick=()=>{let sel=document.querySelector('.avatar-option.selected');if(sel){currentAvatar=sel.dataset.avatar;localStorage.setItem('didogame_avatar',currentAvatar);document.getElementById('avatarPreview').innerHTML=currentAvatar;document.getElementById('mainAvatarImg').innerHTML=currentAvatar+`<div class="controller-on-hand">🎮</div>`;}document.getElementById('settingsModal').style.display='none';alert("تم حفظ الإعدادات");};
+document.getElementById('saveSettingsBtn').onclick=()=>{let sel=document.querySelector('.avatar-option.selected');if(sel){currentAvatar=sel.dataset.avatar;localStorage.setItem('didogame_avatar',currentAvatar);document.getElementById('avatarPreview').innerHTML=currentAvatar;document.getElementById('mainAvatarImg').innerHTML=currentAvatar+`<div class="controller-on-hand">🎮</div>`;}let langSelect=document.getElementById('settingsLangSelect');if(langSelect){updateLanguage(langSelect.value);}document.getElementById('settingsModal').style.display='none';alert(translations[currentLanguage].settingsSaved);};
 document.querySelectorAll('.avatar-option').forEach(opt=>{opt.onclick=()=>{document.querySelectorAll('.avatar-option').forEach(o=>o.classList.remove('selected'));opt.classList.add('selected');document.getElementById('avatarPreview').innerHTML=opt.dataset.avatar;};});
 document.getElementById('musicToggleBtn').onclick=toggleMusic;
+document.getElementById('settingsLangSelect').onchange=function(){updateLanguage(this.value);};
 
 let ads=["🎮 60 لعبة جاهزة! اضغط وابلع!","🔥 العب واربح نقاطاً وتصدر الترتيب!","💰 اشترك في VIP واحصل على مكالمات فيديو!","⭐ أضف ألعابك المفضلة بالضغط على النجمة!"];
 let adIdx=0;setInterval(()=>{adIdx=(adIdx+1)%ads.length;document.getElementById('permanentAd').innerHTML=ads[adIdx];},5000);
@@ -1946,6 +2134,7 @@ if(isVIP)document.getElementById('registerBtn').classList.add('active');
 let su=localStorage.getItem('didogame_username');if(su)document.getElementById('securityUsername').value=su;
 if(currentAvatar){document.getElementById('avatarPreview').innerHTML=currentAvatar;document.getElementById('mainAvatarImg').innerHTML=currentAvatar+`<div class="controller-on-hand">🎮</div>`;}
 loadRooms();
+updateLanguage(currentLanguage);
 
 window.playGame=playGame;window.closeGameModal=closeGameModal;window.showCategoryGames=showCategoryGames;window.toggleFavorite=toggleFavorite;window.openRoomChat=openRoomChat;
 window.closeFavoritesModal=closeFavoritesModal;
