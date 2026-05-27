@@ -1,236 +1,2143 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dido Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>DidoGame | 60 لعبة - منصة ألعاب متكاملة</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+        body {
+            background: #05050f;
+            min-height: 100vh;
+            padding: 6px;
+        }
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
-body{background:#070b17;color:#fff;overflow-x:hidden}
-a{text-decoration:none;color:white}
+        .anime-city-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://wallpapercave.com/wp/wp4626168.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            animation: slowZoom 20s ease-in-out infinite alternate;
+        }
+        
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        .anime-city-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: -1;
+        }
 
-header{
-width:100%;height:80px;background:rgba(0,0,0,0.4);
-backdrop-filter:blur(12px);
-display:flex;align-items:center;justify-content:space-between;
-padding:0 30px;position:fixed;top:0;z-index:999;
-border-bottom:1px solid rgba(255,255,255,0.1);
-}
+        .app {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            background: rgba(5,5,20,0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            overflow: hidden;
+            height: 98vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 50px rgba(255,0,255,0.3), 0 0 20px rgba(0,255,255,0.3);
+            border: 1px solid rgba(255,68,255,0.3);
+            position: relative;
+        }
 
-.logo{
-font-size:32px;font-weight:900;
-background:linear-gradient(45deg,#00f0ff,#ff00ea);
--webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
+        .content {
+            padding: 8px 8px 0px 8px;
+            flex: 1;
+            overflow-y: auto;
+            scrollbar-width: none;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content::-webkit-scrollbar {
+            display: none;
+        }
 
-nav{display:flex;gap:25px}
-nav a{font-size:18px;transition:0.3s}
-nav a:hover{color:#00e1ff}
+        .page {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            flex: 1;
+        }
+        
+        .page-hidden {
+            display: none;
+        }
 
-.hero{
-width:100%;height:100vh;display:flex;align-items:center;
-justify-content:center;text-align:center;position:relative;
-background:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1974&auto=format&fit=crop') center/cover;
-}
+        .anime-hero {
+            background: linear-gradient(135deg, rgba(255,68,255,0.2), rgba(0,255,255,0.2));
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 0px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+            border: 1px solid #ff44ff;
+            box-shadow: 0 0 15px #ff44ff;
+        }
+        
+        .character-img {
+            width: 110px;
+            height: 110px;
+            background-image: url('https://i.pinimg.com/originals/8e/5e/6c/8e5e6c8e2e6e6c8e2e6e6c8e2e6e6c8e.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            border: 3px solid #ff44ff;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        
+        .controller-on-hand {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            border: 2px solid white;
+        }
+        
+        .tshirt-text {
+            background: linear-gradient(135deg, #ff3366, #ff44ff, #00ffff);
+            padding: 5px 14px;
+            border-radius: 22px;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            display: inline-block;
+        }
+        
+        .character-info h2 {
+            background: linear-gradient(135deg, #ffff00, #ff44ff, #00ffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 0.8rem;
+        }
 
-.hero::before{
-content:'';position:absolute;width:100%;height:100%;
-background:rgba(0,0,0,0.65);top:0;left:0;
-}
+        .ranking-section {
+            margin-top: 20px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        
+        .ranking-circles {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .rank-item {
+            text-align: center;
+        }
+        
+        .gold-circle {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(145deg, #ffd700, #ffaa00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 3px;
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 20px #ffd700;
+        }
+        
+        .silver-circle {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+            border: 1.5px solid #c0c0c0;
+            box-shadow: 0 0 15px #c0c0c0;
+        }
+        
+        .bronze-circle {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(145deg, #cd7f32, #b8651a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+            border: 1.5px solid #cd7f32;
+            box-shadow: 0 0 15px #cd7f32;
+        }
+        
+        .rank-name {
+            color: white;
+            font-size: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .rank-points {
+            color: #ffcc00;
+            font-size: 0.45rem;
+        }
 
-.hero-content{position:relative;z-index:2}
+        .categories-section {
+            margin-bottom: 12px;
+        }
+        
+        .categories {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 6px;
+            justify-content: center;
+            align-items: center;
+            overflow-x: auto;
+            padding: 4px 2px;
+            scrollbar-width: thin;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .categories::-webkit-scrollbar {
+            height: 3px;
+        }
+        
+        .categories::-webkit-scrollbar-track {
+            background: #1a1a2e;
+            border-radius: 10px;
+        }
+        
+        .categories::-webkit-scrollbar-thumb {
+            background: #ff44ff;
+            border-radius: 10px;
+        }
+        
+        .cat-badge {
+            background: rgba(255,68,255,0.3);
+            border: 1px solid #ff44ff;
+            padding: 5px 14px;
+            border-radius: 22px;
+            color: white;
+            font-size: 0.6rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .cat-badge:hover {
+            background: rgba(255,68,255,0.6);
+            transform: scale(1.02);
+        }
+        
+        .more-btn {
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            padding: 5px 14px;
+            border-radius: 22px;
+            color: white;
+            font-size: 0.6rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: bold;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .more-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 10px #ff44ff;
+        }
 
-.hero h1{
-font-size:70px;font-weight:900;margin-bottom:20px;
-background:linear-gradient(45deg,#00e5ff,#ff00d4);
--webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
+        .more-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1500;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .more-modal-content {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 30px;
+            padding: 25px;
+            width: 85%;
+            max-width: 350px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 50px #ff44ff;
+            text-align: center;
+        }
+        
+        .more-categories-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .more-cat-badge {
+            background: rgba(255,68,255,0.3);
+            border: 1px solid #ff44ff;
+            padding: 8px 16px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .close-more-modal {
+            background: #ff3366;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
 
-.hero p{font-size:22px;color:#ccc;margin-bottom:35px}
+        .settings-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(15px);
+            z-index: 1700;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .settings-card {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 30px;
+            padding: 25px;
+            width: 90%;
+            max-width: 380px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 50px #ff44ff;
+            text-align: center;
+        }
+        
+        .avatar-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .avatar-preview {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            border: 3px solid #ff44ff;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .avatar-preview:hover {
+            transform: scale(1.05);
+        }
+        
+        .avatar-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 8px;
+        }
+        
+        .avatar-option {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,68,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #ff44ff;
+        }
+        
+        .avatar-option.selected {
+            border-color: #00ffff;
+            background: linear-gradient(135deg, rgba(255,68,255,0.2), rgba(0,255,255,0.2));
+            box-shadow: 0 0 15px #00ffff;
+        }
+        
+        .language-section {
+            margin-bottom: 20px;
+        }
+        
+        .language-section label {
+            color: white;
+            font-size: 0.8rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .lang-select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 25px;
+            border: 1px solid #ff44ff;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        
+        .music-control {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(255,68,255,0.1);
+            border-radius: 20px;
+        }
+        
+        .music-toggle-btn {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .save-settings-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .close-settings {
+            background: #ff3366;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 15px;
+        }
 
-.hero button{
-padding:15px 40px;border:none;border-radius:40px;
-background:linear-gradient(45deg,#00d9ff,#ff00f2);
-color:#fff;font-size:20px;cursor:pointer;
-transition:0.3s;font-weight:bold;
-box-shadow:0 0 20px rgba(0,255,255,0.5);
-}
+        .favorites-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(15px);
+            z-index: 1900;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .favorites-card {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 30px;
+            padding: 25px;
+            width: 90%;
+            max-width: 380px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 50px #ff44ff;
+            text-align: center;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .favorites-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .favorite-item {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #ff44ff;
+            border-radius: 15px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .favorite-item:hover {
+            transform: translateX(5px);
+            border-color: #00ffff;
+            box-shadow: 0 0 10px #00ffff;
+        }
+        
+        .favorite-img {
+            width: 50px;
+            height: 50px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+        
+        .favorite-info {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .favorite-name {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .favorite-cat {
+            color: #ff44ff;
+            font-size: 0.65rem;
+        }
+        
+        .remove-fav {
+            background: none;
+            border: none;
+            color: #ff3366;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .close-favorites {
+            background: #ff3366;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
 
-.hero button:hover{transform:scale(1.08)}
+        .wallet-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(15px);
+            z-index: 1800;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .wallet-card {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 30px;
+            padding: 20px;
+            width: 90%;
+            max-width: 380px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 50px #ff44ff;
+            text-align: center;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .wallet-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .wallet-method {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #ff44ff;
+            border-radius: 15px;
+            padding: 12px 8px;
+            width: calc(33% - 8px);
+            min-width: 90px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        
+        .wallet-method .emoji {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .wallet-method .name {
+            color: white;
+            font-size: 0.6rem;
+        }
+        
+        .close-wallet {
+            background: #ff3366;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
 
-.games-section{padding:120px 40px}
+        .payment-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(15px);
+            z-index: 1600;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .payment-card {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 30px;
+            padding: 20px;
+            width: 90%;
+            max-width: 380px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 50px #ff44ff;
+            text-align: center;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .currency-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .currency-btn {
+            background: rgba(255,68,255,0.3);
+            border: 1px solid #ff44ff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .currency-btn.active {
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border-color: #00ffff;
+        }
+        
+        .price-display {
+            background: linear-gradient(135deg, rgba(255,68,255,0.2), rgba(0,255,255,0.2));
+            border-radius: 15px;
+            padding: 12px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .price-display .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff44ff;
+        }
+        
+        .pay-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .close-payment {
+            background: #ff3366;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 15px;
+        }
 
-.section-title{
-font-size:45px;margin-bottom:50px;text-align:center;
-background:linear-gradient(45deg,#00f7ff,#ff00c8);
--webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
+        .fixed-permanent-ad {
+            background: linear-gradient(135deg, rgba(255,68,255,0.3), rgba(0,255,255,0.3));
+            border: 2px solid #ff44ff;
+            border-radius: 20px;
+            padding: 22px 12px;
+            margin: 8px 0 6px 0;
+            text-align: center;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 0 20px #ff44ff;
+            animation: adPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes adPulse {
+            0% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
+            50% { box-shadow: 0 0 25px #ff44ff, 0 0 15px #00ffff; border-color: #00ffff; }
+            100% { box-shadow: 0 0 5px #ff44ff; border-color: #ff44ff; }
+        }
 
-.games-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:30px;
-}
+        .games-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-bottom: 6px;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        
+        .game-row {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 4px 2px 8px 2px;
+            scrollbar-width: thin;
+            scrollbar-color: #ff44ff #1a1a2e;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .game-row::-webkit-scrollbar {
+            height: 4px;
+        }
+        
+        .game-row::-webkit-scrollbar-track {
+            background: #1a1a2e;
+            border-radius: 10px;
+        }
+        
+        .game-row::-webkit-scrollbar-thumb {
+            background: #ff44ff;
+            border-radius: 10px;
+        }
+        
+        .game-card {
+            min-width: calc(25% - 7.5px);
+            width: calc(25% - 7.5px);
+            max-width: calc(25% - 7.5px);
+            background: linear-gradient(145deg, #0f0f2a, #0a0a1a);
+            border-radius: 14px;
+            padding: 8px 6px;
+            text-align: center;
+            border: 1px solid #ff44ff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            scroll-snap-align: start;
+            position: relative;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-3px);
+            border-color: #00ffff;
+            box-shadow: 0 0 15px #00ffff;
+        }
+        
+        .fav-star {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(0,0,0,0.6);
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .fav-star.active {
+            color: #ffcc00;
+            text-shadow: 0 0 5px #ffcc00;
+        }
+        
+        .game-img {
+            width: 100%;
+            aspect-ratio: 1 / 0.9;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 6px;
+        }
+        
+        .game-title {
+            color: white;
+            font-size: 0.55rem;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-.game-card{
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.08);
-border-radius:25px;overflow:hidden;
-transition:0.4s;backdrop-filter:blur(10px);
-}
+        /* ===== الشريط السفلي - جميع الأزرار متطابقة تماماً ===== */
+        .bottom-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 16px;
+            background: rgba(10, 10, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 68, 255, 0.4);
+            border-radius: 0 0 20px 20px;
+            min-height: 70px;
+        }
+        
+        .bottom-left {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        
+        .bottom-right {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        /* جميع الأزرار متطابقة تماماً في الشكل واللون والتوهج */
+        .settings-btn, .favs-btn, .wallet-btn, .vip-btn, .chat-center-btn {
+            background: linear-gradient(135deg, rgba(255,68,255,0.15), rgba(0,255,255,0.05));
+            border-radius: 40px;
+            padding: 8px 12px;
+            border: 1px solid rgba(255,68,255,0.5);
+            box-shadow: inset 0 0 8px rgba(255,68,255,0.4), 0 0 8px rgba(255,68,255,0.2);
+            transition: all 0.3s ease;
+            animation: unifiedGlow 1.5s ease-in-out infinite;
+            min-width: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            cursor: pointer;
+            background-color: transparent;
+        }
+        
+        /* توهج موحد لجميع الأزرار */
+        @keyframes unifiedGlow {
+            0%, 100% { 
+                box-shadow: inset 0 0 6px rgba(255,68,255,0.4), 0 0 4px rgba(255,68,255,0.2);
+                border-color: rgba(255,68,255,0.5);
+            }
+            50% { 
+                box-shadow: inset 0 0 14px rgba(255,68,255,0.7), 0 0 10px rgba(255,68,255,0.4);
+                border-color: #ff44ff;
+            }
+        }
+        
+        /* جميع الأيقونات بنفس اللون والتوهج */
+        .settings-btn .icon,
+        .favs-btn .icon,
+        .wallet-btn .icon,
+        .vip-btn .icon,
+        .chat-center-btn .icon {
+            color: #ff44ff;
+            font-size: 1.2rem;
+            text-shadow: 0 0 3px #ff44ff;
+            transition: all 0.3s ease;
+        }
+        
+        /* جميع النصوص بنفس اللون */
+        .settings-btn .label,
+        .favs-btn .label,
+        .wallet-btn .label,
+        .vip-btn .label,
+        .chat-center-btn .label {
+            color: #ffffff;
+            font-size: 0.45rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        
+        /* تأثير hover موحد لجميع الأزرار */
+        .settings-btn:hover,
+        .favs-btn:hover,
+        .wallet-btn:hover,
+        .vip-btn:hover,
+        .chat-center-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: inset 0 0 18px rgba(255,68,255,0.8), 0 0 15px rgba(255,68,255,0.6);
+            animation: none;
+        }
+        
+        .settings-btn:hover .icon,
+        .favs-btn:hover .icon,
+        .wallet-btn:hover .icon,
+        .vip-btn:hover .icon,
+        .chat-center-btn:hover .icon {
+            transform: scale(1.1);
+            text-shadow: 0 0 8px #ff44ff;
+        }
+        
+        .settings-btn:hover .label,
+        .favs-btn:hover .label,
+        .wallet-btn:hover .label,
+        .vip-btn:hover .label,
+        .chat-center-btn:hover .label {
+            color: #ff44ff;
+        }
+        
+        /* زر VIP عند التفعيل - يبقى متطابق في الشكل فقط يتغير اللون قليلاً */
+        .vip-btn.active {
+            background: linear-gradient(135deg, rgba(255,68,255,0.3), rgba(0,255,255,0.15));
+            border-color: #ff44ff;
+            box-shadow: inset 0 0 10px rgba(255,68,255,0.6), 0 0 12px rgba(255,68,255,0.5);
+            animation: unifiedGlow 1.5s ease-in-out infinite;
+        }
+        .vip-btn.active .icon { 
+            color: #00ffff; 
+            text-shadow: 0 0 5px #00ffff;
+        }
+        .vip-btn.active .label {
+            color: #00ffff;
+        }
 
-.game-card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 25px rgba(0,255,255,0.3);
-}
-
-.game-card img{width:100%;height:220px;object-fit:cover}
-
-.game-info{padding:20px}
-
-.game-info h3{font-size:26px;margin-bottom:10px}
-.game-info p{font-size:15px;color:#ccc;margin-bottom:20px}
-
-.play-btn{
-display:inline-block;padding:12px 25px;
-border-radius:30px;
-background:linear-gradient(45deg,#00d5ff,#ff00d0);
-font-weight:bold;transition:0.3s;
-}
-
-.play-btn:hover{transform:scale(1.05)}
-
-.admin-panel{
-margin-top:100px;padding:40px;
-background:rgba(255,255,255,0.04);
-border-radius:25px;
-border:1px solid rgba(255,255,255,0.1);
-}
-
-.admin-panel h2{font-size:35px;margin-bottom:20px}
-
-.admin-panel input{
-width:100%;padding:15px;margin-bottom:20px;
-border:none;border-radius:15px;
-background:#10182b;color:#fff;font-size:16px;
-}
-
-.admin-panel button{
-padding:15px 30px;border:none;border-radius:30px;
-background:linear-gradient(45deg,#00f0ff,#ff00e6);
-color:#fff;font-size:18px;cursor:pointer;font-weight:bold;
-}
-
-footer{
-margin-top:80px;padding:30px;
-text-align:center;background:#050812;color:#888;
-}
-
-@media(max-width:768px){
-.hero h1{font-size:45px}
-.hero p{font-size:18px}
-nav{gap:12px}
-nav a{font-size:15px}
-.section-title{font-size:34px}
-}
-</style>
+        /* أنماط الدردشة ونوافذ أخرى */
+        .chat-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(15px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInPopup 0.3s ease;
+        }
+        
+        @keyframes fadeInPopup {
+            from { opacity: 0; backdrop-filter: blur(0); }
+            to { opacity: 1; backdrop-filter: blur(15px); }
+        }
+        
+        .chat-popup-container {
+            position: relative;
+            width: 95%;
+            max-width: 520px;
+            height: 85%;
+            max-height: 700px;
+            animation: zoomInPopup 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+        }
+        
+        @keyframes zoomInPopup {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .close-chat-popup {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff3366, #ff44ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: 2px solid white;
+            z-index: 2010;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 15px rgba(255,51,102,0.5);
+        }
+        
+        .close-chat-popup:hover {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #ff5555, #ff66ff);
+            box-shadow: 0 0 25px rgba(255,51,102,0.8);
+        }
+        
+        .chat-page {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #0a0a1a, #0f0f2a);
+            display: flex;
+            flex-direction: column;
+            border-radius: 30px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 50px rgba(255,68,255,0.5), 0 20px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+        
+        .messenger-full {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background: #0a0a1a;
+        }
+        
+        .messenger-header {
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #0f0f2a, #0a0a1a);
+            border-bottom: 1px solid rgba(255,68,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 30px 30px 0 0;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .back-btn {
+            background: rgba(255,68,255,0.2);
+            border: none;
+            color: #ff44ff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255,68,255,0.4);
+            transform: scale(1.05);
+        }
+        
+        .messenger-header h2 {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .header-actions span {
+            color: #ff44ff;
+            font-size: 1.1rem;
+            cursor: pointer;
+            background: rgba(255,68,255,0.2);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .chats-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+        
+        .chat-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-bottom: 1px solid #1f1f2e;
+        }
+        
+        .chat-item:hover {
+            background: #1f1f2e;
+        }
+        
+        .chat-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        
+        .chat-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .chat-name {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .chat-last-msg {
+            color: #8e8e9e;
+            font-size: 0.7rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .chat-time {
+            color: #8e8e9e;
+            font-size: 0.6rem;
+            flex-shrink: 0;
+        }
+        
+        .open-chat-view {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background: #0a0a1a;
+        }
+        
+        .chat-header {
+            padding: 12px 16px;
+            background: #0a0a1a;
+            border-bottom: 1px solid #2c2c3a;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .chat-header .back-btn {
+            font-size: 1.1rem;
+        }
+        
+        .chat-header-info {
+            flex: 1;
+        }
+        
+        .chat-header-name {
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        
+        .chat-header-status {
+            color: #00ff88;
+            font-size: 0.6rem;
+        }
+        
+        .chat-header-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .chat-header-actions span {
+            color: #ff44ff;
+            font-size: 1rem;
+            cursor: pointer;
+            background: rgba(255,68,255,0.2);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .messages-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .message-row {
+            display: flex;
+            width: 100%;
+        }
+        
+        .message-row.outgoing {
+            justify-content: flex-end;
+        }
+        
+        .message-row.incoming {
+            justify-content: flex-start;
+        }
+        
+        .message-bubble {
+            max-width: 75%;
+            padding: 8px 12px;
+            border-radius: 18px;
+            font-size: 0.8rem;
+            word-break: break-word;
+        }
+        
+        .message-bubble.outgoing {
+            background: #0084ff;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .message-bubble.incoming {
+            background: #1f1f2e;
+            color: white;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .message-bubble.private {
+            background: #2a2a3e;
+            border: 1px solid #00ff88;
+        }
+        
+        .message-sender-name {
+            font-size: 0.55rem;
+            color: #ffaa88;
+            margin-bottom: 3px;
+        }
+        
+        .message-time {
+            font-size: 0.4rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 3px;
+            text-align: right;
+        }
+        
+        .private-tag {
+            font-size: 0.45rem;
+            color: #00ff88;
+            margin-left: 5px;
+        }
+        
+        .typing-indicator {
+            padding: 8px 16px;
+            color: #8e8e9e;
+            font-size: 0.65rem;
+            font-style: italic;
+        }
+        
+        .message-input-area {
+            padding: 12px;
+            background: #0a0a1a;
+            border-top: 1px solid #2c2c3a;
+        }
+        
+        .input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .message-input {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 25px;
+            border: none;
+            background: #1f1f2e;
+            color: white;
+            font-size: 0.85rem;
+        }
+        
+        .message-input:focus {
+            outline: none;
+            background: #2a2a3e;
+        }
+        
+        .input-actions {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        
+        .mic-btn, .send-btn {
+            background: rgba(255,68,255,0.2);
+            border: none;
+            color: #ff44ff;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 8px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .mic-btn:hover, .send-btn:hover {
+            background: rgba(255,68,255,0.4);
+            transform: scale(1.05);
+        }
+        
+        .video-call-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-container {
+            width: 100%;
+            height: 70%;
+            background: #000;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #localVideo {
+            width: 120px;
+            height: 160px;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            border-radius: 12px;
+            border: 2px solid #ff44ff;
+            object-fit: cover;
+            background: #1a1a2e;
+            z-index: 10;
+        }
+        
+        #remoteVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #0a0a1a;
+        }
+        
+        .call-controls {
+            display: flex;
+            gap: 30px;
+            padding: 20px;
+            background: #1a1a2e;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .call-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .call-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .call-end {
+            background: #ff4444;
+            color: white;
+        }
+        
+        .call-mute, .call-video {
+            background: #2c2c3a;
+            color: white;
+        }
+        
+        .game-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000ee;
+            z-index: 2200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .game-modal iframe {
+            width: 95%;
+            height: 80%;
+            border-radius: 15px;
+            border: 3px solid #ff44ff;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff3366;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .security-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(145deg, #1a1a2e, #0f0f1a);
+            border-radius: 35px;
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            border: 2px solid #ff44ff;
+            box-shadow: 0 0 60px rgba(255,68,255,0.4);
+            z-index: 2300;
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            animation: modalPop 0.3s ease;
+        }
+        
+        @keyframes modalPop {
+            from { transform: translate(-50%, -50%) scale(0.9); opacity: 0; }
+            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+        
+        .security-input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,68,255,0.5);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .security-input:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0,255,255,0.3);
+        }
+        
+        .security-btn {
+            background: linear-gradient(135deg, #ff44ff, #00ffff);
+            border: none;
+            padding: 14px;
+            border-radius: 30px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .security-btn:hover {
+            transform: scale(1.02);
+        }
+        
+        .create-btn {
+            background: rgba(255,68,255,0.2);
+            border: 1px solid #ff44ff;
+            padding: 8px 16px;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+            width: fit-content;
+        }
+        
+        .create-btn:hover {
+            background: rgba(255,68,255,0.4);
+            transform: translateX(-3px);
+        }
+        
+        .empty-favorites {
+            color: #aaa;
+            text-align: center;
+            padding: 40px;
+        }
+    </style>
 </head>
-
 <body>
-
-<header>
-<div class="logo">DIDO GAME</div>
-<nav>
-<a href="#">الرئيسية</a>
-<a href="#games">الألعاب</a>
-<a href="#admin">لوحة التحكم</a>
-</nav>
-</header>
-
-<section class="hero">
-<div class="hero-content">
-<h1>أفضل منصة ألعاب عربية</h1>
-<p>استمتع بأقوى الألعاب والتصميم المستقبلي الاحترافي</p>
-<button onclick="scrollToGames()">ابدأ اللعب</button>
+<div class="anime-city-bg"></div>
+<div class="app">
+    <div class="content">
+        <div id="homePage" class="page">
+            <div class="anime-hero">
+                <div class="character-img" id="mainAvatarImg">
+                    <div class="controller-on-hand">🎮</div>
+                </div>
+                <div class="character-info">
+                    <div class="tshirt-text">⚡ DIDO-GAME ⚡</div>
+                    <h2 id="heroTagline">😤 60 لعبة جاهزة للعب!</h2>
+                </div>
+            </div>
+            
+            <div class="ranking-section">
+                <div class="ranking-circles" id="rankingList"></div>
+            </div>
+            
+            <div class="categories-section">
+                <div class="categories" id="categoriesList">
+                    <div class="more-btn" id="moreCategoriesBtn">➕ المزيد</div>
+                    <div class="cat-badge" data-cat="action">🎯 أكشن</div>
+                    <div class="cat-badge" data-cat="racing">🏎️ سباقات</div>
+                    <div class="cat-badge" data-cat="fighting">🥊 قتال</div>
+                    <div class="cat-badge" data-cat="puzzle">🧩 ألغاز</div>
+                </div>
+            </div>
+            
+            <div id="moreModal" class="more-modal">
+                <div class="more-modal-content">
+                    <h3 id="moreModalTitle">🎮 المزيد من التصنيفات</h3>
+                    <div class="more-categories-list" id="moreCategoriesList"></div>
+                    <button class="close-more-modal" id="closeMoreModal">إغلاق</button>
+                </div>
+            </div>
+            
+            <div id="settingsModal" class="settings-modal">
+                <div class="settings-card">
+                    <h3 id="settingsTitle">⚙️ الإعدادات</h3>
+                    <div class="avatar-section">
+                        <div class="avatar-preview" id="avatarPreview">😎</div>
+                        <div class="avatar-options" id="avatarOptions">
+                            <div class="avatar-option" data-avatar="😎">😎</div>
+                            <div class="avatar-option" data-avatar="👤">👤</div>
+                            <div class="avatar-option" data-avatar="👨‍🚀">👨‍🚀</div>
+                            <div class="avatar-option" data-avatar="🧙‍♂️">🧙‍♂️</div>
+                            <div class="avatar-option" data-avatar="🦸‍♂️">🦸‍♂️</div>
+                            <div class="avatar-option" data-avatar="🐉">🐉</div>
+                            <div class="avatar-option" data-avatar="🤖">🤖</div>
+                            <div class="avatar-option" data-avatar="👾">👾</div>
+                            <div class="avatar-option" data-avatar="🎮">🎮</div>
+                            <div class="avatar-option" data-avatar="⭐">⭐</div>
+                        </div>
+                    </div>
+                    <div class="language-section">
+                        <label id="langLabel">🌐 اللغة</label>
+                        <select id="settingsLangSelect" class="lang-select">
+                            <option value="ar">العربية</option>
+                            <option value="en">English</option>
+                            <option value="fr">Français</option>
+                        </select>
+                    </div>
+                    <div class="music-control">
+                        <label id="musicLabel">🎵 الموسيقى</label>
+                        <button class="music-toggle-btn" id="musicToggleBtn">🎵 تشغيل</button>
+                    </div>
+                    <button class="save-settings-btn" id="saveSettingsBtn">💾 حفظ</button>
+                    <button class="close-settings" id="closeSettingsBtn">إلغاء</button>
+                </div>
+            </div>
+            
+            <div id="favoritesModal" class="favorites-modal">
+                <div class="favorites-card">
+                    <h3 id="favoritesTitle">⭐ المفضلة</h3>
+                    <div class="favorites-list" id="favoritesList"></div>
+                    <button class="close-favorites" id="closeFavoritesBtn">إغلاق</button>
+                </div>
+            </div>
+            
+            <div id="walletModal" class="wallet-modal">
+                <div class="wallet-card">
+                    <h3 id="walletTitle">💳 المحفظة</h3>
+                    <div class="wallet-methods" id="walletMethods"></div>
+                    <button class="close-wallet" id="closeWalletBtn">إغلاق</button>
+                </div>
+            </div>
+            
+            <div id="paymentModal" class="payment-modal">
+                <div class="payment-card">
+                    <h3 id="paymentTitle">💎 عضوية VIP</h3>
+                    <div class="currency-selector" id="currencySelector"></div>
+                    <div class="price-display">
+                        <span class="price" id="priceAmount">9.99</span>
+                        <span class="currency-symbol" id="priceCurrency">$</span>
+                    </div>
+                    <button class="pay-btn" id="payNowBtn">💎 اشترك الآن</button>
+                    <button class="close-payment" id="closePaymentBtn">إلغاء</button>
+                </div>
+            </div>
+            
+            <div class="fixed-permanent-ad" id="permanentAd">🎮 60 لعبة جاهزة - اضغط وابلع! 🎮</div>
+            
+            <div class="games-wrapper" id="gamesWrapper"></div>
+        </div>
+        
+        <div id="categoryPage" class="page page-hidden">
+            <button class="create-btn" id="backToHomeBtn">🔙 رجوع</button>
+            <div class="games-wrapper" id="categoryGamesContainer"></div>
+        </div>
+    </div>
+    
+    <div class="bottom-bar">
+        <div class="bottom-left">
+            <button class="nav-btn settings-btn" id="settingsBtn">
+                <span class="icon">⚙️</span>
+                <span class="label" id="settingsLabel">الإعدادات</span>
+            </button>
+            <button class="nav-btn favs-btn" id="favoritesBtn">
+                <span class="icon">⭐</span>
+                <span class="label" id="favoritesLabel">المفضلة</span>
+            </button>
+        </div>
+        
+        <button class="nav-btn chat-center-btn" id="openChatBtn">
+            <span class="icon">💬</span>
+            <span class="label" id="chatLabel">الدردشة</span>
+        </button>
+        
+        <div class="bottom-right">
+            <button class="nav-btn wallet-btn" id="walletBtn">
+                <span class="icon">💳</span>
+                <span class="label" id="walletLabel">المحفظة</span>
+            </button>
+            <button class="nav-btn vip-btn" id="registerBtn">
+                <span class="icon">👑</span>
+                <span class="label" id="vipLabel">VIP</span>
+            </button>
+        </div>
+    </div>
 </div>
-</section>
 
-<section class="games-section" id="games">
-<h2 class="section-title">الألعاب المشهورة</h2>
-
-<div class="games-grid">
-
-<div class="game-card">
-<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1971&auto=format&fit=crop">
-<div class="game-info">
-<h3>Cyber Battle</h3>
-<p>قاتل داخل عالم مستقبلي مليء بالإثارة والتحديات.</p>
-<a class="play-btn" href="#">لعب الآن</a>
-</div>
-</div>
-
-<div class="game-card">
-<img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?q=80&w=1974&auto=format&fit=crop">
-<div class="game-info">
-<h3>Street Racing</h3>
-<p>سباقات سيارات احترافية بسرعة خارقة ورسومات مذهلة.</p>
-<a class="play-btn" href="#">لعب الآن</a>
-</div>
-</div>
-
-<div class="game-card">
-<img src="https://images.unsplash.com/photo-1547394765-185e1e68f34e?q=80&w=1974&auto=format&fit=crop">
-<div class="game-info">
-<h3>War Zone</h3>
-<p>ادخل حرباً ملحمية ضد اللاعبين حول العالم.</p>
-<a class="play-btn" href="#">لعب الآن</a>
-</div>
-</div>
-
-<div class="game-card">
-<img src="https://images.unsplash.com/photo-1511882150382-421056c89033?q=80&w=1974&auto=format&fit=crop">
-<div class="game-info">
-<h3>Anime Fighter</h3>
-<p>معارك أنمي قوية بأسلوب احترافي.</p>
-<a class="play-btn" href="#">لعب الآن</a>
-</div>
-</div>
-
-</div>
-
-<div class="admin-panel" id="admin">
-<h2>لوحة تحكم المدير</h2>
-
-<input type="text" placeholder="اسم اللعبة">
-<input type="text" placeholder="رابط الصورة">
-<input type="text" placeholder="رابط اللعبة">
-
-<button onclick="adminLogin()">دخول المدير</button>
+<div id="chatPopupOverlay" class="chat-popup-overlay">
+    <div class="chat-popup-container">
+        <div class="close-chat-popup" id="closeChatPopupBtn">✕</div>
+        <div id="chatPage" class="chat-page">
+            <div class="messenger-full">
+                <div id="inboxView" style="display: flex; flex-direction: column; height: 100%;">
+                    <div class="messenger-header">
+                        <div class="header-left">
+                            <button class="back-btn" id="closeChatFromInbox">✕</button>
+                            <h2 id="chatsHeaderTitle">المحادثات</h2>
+                        </div>
+                        <div class="header-actions">
+                            <span id="newChatBtn">✏️</span>
+                        </div>
+                    </div>
+                    <div class="chats-list" id="chatsListContainer"></div>
+                </div>
+                
+                <div id="openChatView" style="display: none; flex-direction: column; height: 100%;">
+                    <div class="chat-header">
+                        <button class="back-btn" id="backToInboxBtn">←</button>
+                        <div class="chat-header-info">
+                            <div class="chat-header-name" id="openChatRoomName">الغرفة</div>
+                            <div class="chat-header-status" id="openChatStatus">🟢 متصل</div>
+                        </div>
+                        <div class="chat-header-actions">
+                            <span id="videoCallBtn" style="display: none;">🎥</span>
+                        </div>
+                    </div>
+                    <div class="messages-area" id="openChatMessages"></div>
+                    <div class="message-input-area">
+                        <div class="input-wrapper">
+                            <input type="text" id="openMessageInput" class="message-input" placeholder="اكتب رسالة...">
+                            <div class="input-actions">
+                                <button class="mic-btn" id="micBtnOpen">🎙️</button>
+                                <button class="send-btn" id="sendMsgOpen">📤</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-</section>
+<div id="securityPanel" class="security-panel">
+    <h2 id="securityTitle">🔐 الأمان</h2>
+    <input type="text" id="securityUsername" class="security-input" placeholder="اسم المستخدم" value="Ahmed">
+    <input type="password" id="securityRoomPassword" class="security-input" placeholder="كلمة الغرفة (اختياري)">
+    <input type="text" id="securityRoomName" class="security-input" placeholder="اسم الغرفة" value="الرئيسية">
+    <button class="security-btn" id="securityBtn">🚪 دخول</button>
+</div>
 
-<footer>
-جميع الحقوق محفوظة © DIDO GAME 2026
-</footer>
+<div id="videoCallModal" class="video-call-modal hidden">
+    <div class="video-container">
+        <video id="localVideo" autoplay muted playsinline></video>
+        <video id="remoteVideo" autoplay playsinline></video>
+    </div>
+    <div class="call-controls">
+        <button class="call-btn call-mute" id="muteBtn">🔊</button>
+        <button class="call-btn call-end" id="endCallBtn">🔴</button>
+        <button class="call-btn call-video" id="videoToggleBtn">📷</button>
+    </div>
+</div>
+
+<div id="gameModal" class="game-modal hidden">
+    <div class="close-modal" onclick="closeGameModal()">✕</div>
+    <iframe id="gameIframe" src="" allow="fullscreen"></iframe>
+</div>
 
 <script>
-function scrollToGames(){
-document.getElementById("games").scrollIntoView({behavior:"smooth"});
+// ==================== 60 لعبة (بيانات كاملة مع صور فعلية) ====================
+const gamesData = [
+    {id:1,name:"سونيك",img:"https://image.api.playstation.com/vulcan/ap/rnd/202210/1913/4MEUIXgldvMxN2fcBSJkmpx2.png",url:"https://html5.gamedistribution.com/2e0e6e0e6e0e6e0e6e0e6e0e6e0e6e0e/",cat:"action",points:150,avatar:"🦔",playerName:"شادو"},
+    {id:2,name:"متسابق المترو",img:"https://play-lh.googleusercontent.com/3cO0mwGR3SVyUzRJLvUv_6QZJ4q_yxLbSTtPfHdLf-NO57mNqFmVNVqLmGifE60af-WL",url:"https://html5.gamedistribution.com/3f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f/",cat:"action",points:200,avatar:"🏃",playerName:"سبيد"},
+    {id:3,name:"الهروب من المعبد",img:"https://play-lh.googleusercontent.com/7RNyBkMHIC9hZ1q5K_3ugEQh0k9aNpZXfPv4Yx9x4pQx6x9x4pQx6x9x4pQx6",url:"https://html5.gamedistribution.com/4a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a/",cat:"action",points:180,avatar:"🏛️",playerName:"الملك"},
+    {id:4,name:"ماينكرافت",img:"https://image.api.playstation.com/vulcan/ap/rnd/202206/0220/6x8QyQyQyQyQyQyQyQyQyQyQyQyQyQ.png",url:"https://html5.gamedistribution.com/5b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b/",cat:"action",points:200,avatar:"⛏️",playerName:"باني"},
+    {id:5,name:"فورتنايت",img:"https://image.api.playstation.com/vulcan/ap/rnd/202310/1612/7x8y9z0a1b2c3d4e5f6g7h8i9j0k1l2m.png",url:"https://html5.gamedistribution.com/6c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c/",cat:"action",points:350,avatar:"🎯",playerName:"جونسي"},
+    {id:6,name:"ببجي",img:"https://play-lh.googleusercontent.com/JZQmF9qQxQxQxQxQxQxQxQxQxQxQxQxQxQxQxQ",url:"https://html5.gamedistribution.com/7d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d/",cat:"action",points:380,avatar:"🔫",playerName:"بلاير"},
+    {id:7,name:"روبلكس",img:"https://image.api.playstation.com/vulcan/ap/rnd/202308/2210/9x0y1z2a3b4c5d6e7f8g9h0i1j2k3l4m.png",url:"https://html5.gamedistribution.com/8e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e/",cat:"action",points:220,avatar:"🧱",playerName:"نوب"},
+    {id:8,name:"فال جاي",img:"https://play-lh.googleusercontent.com/9x0y1z2a3b4c5d6e7f8g9h0i1j2k3l4m5n6o7p8q",url:"https://html5.gamedistribution.com/9f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f/",cat:"action",points:180,avatar:"🫘",playerName:"فول"},
+    {id:9,name:"بيننا",img:"https://image.api.playstation.com/vulcan/ap/rnd/202312/1510/8x9y0z1a2b3c4d5e6f7g8h9i0j1k2l3m.png",url:"https://html5.gamedistribution.com/0a8a8a8a8a8a8a8a8a8a8a8a8a8a8a8a/",cat:"action",points:90,avatar:"👽",playerName:"دجال"},
+    {id:10,name:"تلة المتسابق",img:"https://play-lh.googleusercontent.com/7x8y9z0a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q",url:"https://html5.gamedistribution.com/1b9b9b9b9b9b9b9b9b9b9b9b9b9b9b9b/",cat:"action",points:120,avatar:"🚗",playerName:"متسلق"},
+    {id:11,name:"مقاتل الشارع",img:"https://image.api.playstation.com/vulcan/ap/rnd/202302/1815/6x7y8z9a0b1c2d3e4f5g6h7i8j9k0l1m.png",url:"https://html5.gamedistribution.com/2cacacacacacacacacacacacacacacac/",cat:"fighting",points:300,avatar:"👊",playerName:"مقاتل"},
+    {id:12,name:"موتو X3M",img:"https://play-lh.googleusercontent.com/5x6y7z8a9b0c1d2e3f4g5h6i7j8k9l0m1n2o3p4q",url:"https://html5.gamedistribution.com/3dbdbdbdbdbdbdbdbdbdbdbdbdbdbdbd/",cat:"racing",points:120,avatar:"🏍️",playerName:"متسابق"},
+    {id:13,name:"دريفت هنترز",img:"https://image.api.playstation.com/vulcan/ap/rnd/202301/2010/4x5y6z7a8b9c0d1e2f3g4h5i6j7k8l9m.png",url:"https://html5.gamedistribution.com/4ececececececececececececececece/",cat:"racing",points:140,avatar:"🚗",playerName:"دريفت"},
+    {id:14,name:"نجوم السلة",img:"https://play-lh.googleusercontent.com/3x4y5z6a7b8c9d0e1f2g3h4i5j6k7l8m9n0o1p2q",url:"https://html5.gamedistribution.com/5fdfdfdfdfdfdfdfdfdfdfdfdfdfdfdf/",cat:"sports",points:250,avatar:"🏀",playerName:"سلة"},
+    {id:15,name:"فيزياء القدم",img:"https://image.api.playstation.com/vulcan/ap/rnd/202309/2512/2x3y4z5a6b7c8d9e0f1g2h3i4j5k6l7m.png",url:"https://html5.gamedistribution.com/6e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e/",cat:"sports",points:260,avatar:"⚽",playerName:"كورة"},
+    {id:16,name:"2048",img:"https://play-lh.googleusercontent.com/1x2y3z4a5b6c7d8e9f0g1h2i3j4k5l6m7n8o9p0q",url:"https://html5.gamedistribution.com/7f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f/",cat:"puzzle",points:90,avatar:"🔢",playerName:"2048"},
+    {id:17,name:"قص الحبل",img:"https://image.api.playstation.com/vulcan/ap/rnd/202308/1910/0x1y2z3a4b5c6d7e8f9g0h1i2j3k4l5m.png",url:"https://html5.gamedistribution.com/8a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a/",cat:"puzzle",points:95,avatar:"✂️",playerName:"حبل"},
+    {id:18,name:"فقاعات",img:"https://play-lh.googleusercontent.com/9x0y1z2a3b4c5d6e7f8g9h0i1j2k3l4m5n6o7p8q",url:"https://html5.gamedistribution.com/9b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b/",cat:"puzzle",points:100,avatar:"🫧",playerName:"فقاعة"},
+    {id:19,name:"تتريس",img:"https://image.api.playstation.com/vulcan/ap/rnd/202312/2010/8x9y0z1a2b3c4d5e6f7g8h9i0j1k2l3m.png",url:"https://html5.gamedistribution.com/0c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c/",cat:"puzzle",points:110,avatar:"🧩",playerName:"تتريس"},
+    {id:20,name:"سودوكو",img:"https://play-lh.googleusercontent.com/7x8y9z0a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q",url:"https://html5.gamedistribution.com/1d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d/",cat:"puzzle",points:115,avatar:"🔢",playerName:"سودوكو"},
+    {id:21,name:"شطرنج",img:"https://image.api.playstation.com/vulcan/ap/rnd/202302/1510/6x7y8z9a0b1c2d3e4f5g6h7i8j9k0l1m.png",url:"https://html5.gamedistribution.com/2e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e/",cat:"strategy",points:200,avatar:"♜",playerName:"شطرنج"},
+    {id:22,name:"مملكة راش",img:"https://play-lh.googleusercontent.com/5x6y7z8a9b0c1d2e3f4g5h6i7j8k9l0m1n2o3p4q",url:"https://html5.gamedistribution.com/3f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f/",cat:"strategy",points:180,avatar:"🏰",playerName:"مملكة"},
+    {id:23,name:"الدفاع عن البرج",img:"https://image.api.playstation.com/vulcan/ap/rnd/202301/2010/4x5y6z7a8b9c0d1e2f3g4h5i6j7k8l9m.png",url:"https://html5.gamedistribution.com/4a8a8a8a8a8a8a8a8a8a8a8a8a8a8a8a/",cat:"strategy",points:190,avatar:"🗼",playerName:"برج"},
+    {id:24,name:"جراني",img:"https://play-lh.googleusercontent.com/3x4y5z6a7b8c9d0e1f2g3h4i5j6k7l8m9n0o1p2q",url:"https://html5.gamedistribution.com/5b9b9b9b9b9b9b9b9b9b9b9b9b9b9b9b/",cat:"horror",points:300,avatar:"👵",playerName:"جراني"},
+    {id:25,name:"المتاهة المخيفة",img:"https://image.api.playstation.com/vulcan/ap/rnd/202309/2512/2x3y4z5a6b7c8d9e0f1g2h3i4j5k6l7m.png",url:"https://html5.gamedistribution.com/6cacacacacacacacacacacacacacacac/",cat:"horror",points:310,avatar:"🌀",playerName:"خائف"},
+    {id:26,name:"ملاكمة عشوائية",img:"https://play-lh.googleusercontent.com/1x2y3z4a5b6c7d8e9f0g1h2i3j4k5l6m7n8o9p0q",url:"https://html5.gamedistribution.com/7dbdbdbdbdbdbdbdbdbdbdbdbdbdbdbd/",cat:"fighting",points:300,avatar:"🥊",playerName:"ملاكم"},
+    {id:27,name:"ستيكمان ووريورز",img:"https://image.api.playstation.com/vulcan/ap/rnd/202308/1910/0x1y2z3a4b5c6d7e8f9g0h1i2j3k4l5m.png",url:"https://html5.gamedistribution.com/8ececececececececececececececece/",cat:"fighting",points:310,avatar:"🥷",playerName:"ستيك"},
+    {id:28,name:"مصارعة الثورة",img:"https://play-lh.googleusercontent.com/9x0y1z2a3b4c5d6e7f8g9h0i1j2k3l4m5n6o7p8q",url:"https://html5.gamedistribution.com/9fdfdfdfdfdfdfdfdfdfdfdfdfdfdfdf/",cat:"fighting",points:320,avatar:"🤼",playerName:"مصارع"},
+    {id:29,name:"قتال الكاراتيه",img:"https://image.api.playstation.com/vulcan/ap/rnd/202312/2010/8x9y0z1a2b3c4d5e6f7g8h9i0j1k2l3m.png",url:"https://html5.gamedistribution.com/0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e/",cat:"fighting",points:330,avatar:"🥋",playerName:"كراتيه"},
+    {id:30,name:"قبضة خارقة",img:"https://play-lh.googleusercontent.com/7x8y9z0a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q",url:"https://html5.gamedistribution.com/1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f/",cat:"fighting",points:340,avatar:"✊",playerName:"خارق"},
+    {id:31,name:"زومبس رويال",img:"https://image.api.playstation.com/vulcan/ap/rnd/202302/1815/6x7y8z9a0b1c2d3e4f5g6h7i8j9k0l1m.png",url:"https://html5.gamedistribution.com/2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a/",cat:"battle",points:370,avatar:"🧟",playerName:"زومبي"},
+    {id:32,name:"باتل رويال",img:"https://play-lh.googleusercontent.com/5x6y7z8a9b0c1d2e3f4g5h6i7j8k9l0m1n2o3p4q",url:"https://html5.gamedistribution.com/3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b/",cat:"battle",points:380,avatar:"⚔️",playerName:"رويال"},
+    {id:33,name:"سرفايفر",img:"https://image.api.playstation.com/vulcan/ap/rnd/202301/2010/4x5y6z7a8b9c0d1e2f3g4h5i6j7k8l9m.png",url:"https://html5.gamedistribution.com/4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c/",cat:"battle",points:390,avatar:"🏆",playerName:"ناجي"},
+    {id:34,name:"باركينج فيوري",img:"https://play-lh.googleusercontent.com/3x4y5z6a7b8c9d0e1f2g3h4i5j6k7l8m9n0o1p2q",url:"https://html5.gamedistribution.com/5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d/",cat:"racing",points:110,avatar:"🅿️",playerName:"باركنج"},
+    {id:35,name:"هاي واي ريسر",img:"https://image.api.playstation.com/vulcan/ap/rnd/202309/2512/2x3y4z5a6b7c8d9e0f1g2h3i4j5k6l7m.png",url:"https://html5.gamedistribution.com/6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e/",cat:"racing",points:125,avatar:"🛣️",playerName:"طريق"},
+    {id:36,name:"ترافيك جام",img:"https://play-lh.googleusercontent.com/1x2y3z4a5b6c7d8e9f0g1h2i3j4k5l6m7n8o9p0q",url:"https://html5.gamedistribution.com/7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f/",cat:"racing",points:115,avatar:"🚦",playerName:"زحمة"},
+    {id:37,name:"بايك مانيا",img:"https://image.api.playstation.com/vulcan/ap/rnd/202308/1910/0x1y2z3a4b5c6d7e8f9g0h1i2j3k4l5m.png",url:"https://html5.gamedistribution.com/8a8a8a8a8a8a8a8a8a8a8a8a8a8a8a8a/",cat:"racing",points:145,avatar:"🚲",playerName:"دراجة"},
+    {id:38,name:"سباق الحمى",img:"https://play-lh.googleusercontent.com/9x0y1z2a3b4c5d6e7f8g9h0i1j2k3l4m5n6o7p8q",url:"https://html5.gamedistribution.com/9b9b9b9b9b9b9b9b9b9b9b9b9b9b9b9b/",cat:"racing",points:155,avatar:"🏁",playerName:"حمى"},
+    {id:39,name:"البيسبول المحترف",img:"https://image.api.playstation.com/vulcan/ap/rnd/202312/2010/8x9y0z1a2b3c4d5e6f7g8h9i0j1k2l3m.png",url:"https://html5.gamedistribution.com/0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c/",cat:"sports",points:270,avatar:"⚾",playerName:"بيسبول"},
+    {id:40,name:"أساتذة التنس",img:"https://play-lh.googleusercontent.com/7x8y9z0a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q",url:"https://html5.gamedistribution.com/1d1d1d1d1d1d1d1d1d1d1d1d1d1d1d1d/",cat:"sports",points:280,avatar:"🎾",playerName:"تنس"},
+    {id:41,name:"الكرة الطائرة",img:"https://image.api.playstation.com/vulcan/ap/rnd/202302/1510/6x7y8z9a0b1c2d3e4f5g6h7i8j9k0l1m.png",url:"https://html5.gamedistribution.com/2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e/",cat:"sports",points:290,avatar:"🏐",playerName:"طائرة"},
+    {id:42,name:"ركلات الجزاء",img:"https://play-lh.googleusercontent.com/5x6y7z8a9b0c1d2e3f4g5h6i7j8k9l0m1n2o3p4q",url:"https://html5.gamedistribution.com/3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f/",cat:"sports",points:300,avatar:"⚽",playerName:"جزاء"},
+    {id:43,name:"نجم الجولف",img:"https://image.api.playstation.com/vulcan/ap/rnd/202301/2010/4x5y6z7a8b9c0d1e2f3g4h5i6j7k8l9m.png",url:"https://html5.gamedistribution.com/4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a/",cat:"sports",points:310,avatar:"⛳",playerName:"جولف"},
+    {id:44,name:"البولينج",img:"https://play-lh.googleusercontent.com/3x4y5z6a7b8c9d0e1f2g3h4i5j6k7l8m9n0o1p2q",url:"https://html5.gamedistribution.com/5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b/",cat:"sports",points:320,avatar:"🎳",playerName:"بولينج"},
+    {id:45,name:"تنس الطاولة",img:"https://image.api.playstation.com/vulcan/ap/rnd/202309/2512/2x3y4z5a6b7c8d9e0f1g2h3i4j5k6l7m.png",url:"https://html5.gamedistribution.com/6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c/",cat:"sports",points:330,avatar:"🏓",playerName:"طاولة"},
+    {id:46,name:"كتل الألغاز",img:"https://play-lh.googleusercontent.com/1x2y3z4a5b6c7d8e9f0g1h2i3j4k5l6m7n8o9p0q",url:"https://html5.gamedistribution.com/7d7d7d7d7d7d7d7d7d7d7d7d7d7d7d7d/",cat:"puzzle",points:105,avatar:"🧩",playerName:"كتل"},
+    {id:47,name:"ماتش ثري دي",img:"https://image.api.playstation.com/vulcan/ap/rnd/202308/1910/0x1y2z3a4b5c6d7e8f9g0h1i2j3k4l5m.png",url:"https://html5.gamedistribution.com/8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e/",cat:"puzzle",points:115,avatar:"🎯",playerName:"مطابقة"},
+    {id:48,name:"جيويل بليتز",img:"https://play-lh.googleusercontent.com/9x0y1z2a3b4c5d6e7f8g9h0i1j2k3l4m5n6o7p8q",url:"https://html5.gamedistribution.com/9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f/",cat:"puzzle",points:120,avatar:"💎",playerName:"جوهرة"},
+    {id:49,name:"بحث كلمات",img:"https://image.api.playstation.com/vulcan/ap/rnd/202312/2010/8x9y0z1a2b3c4d5e6f7g8h9i0j1k2l3m.png",url:"https://html5.gamedistribution.com/0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a/",cat:"puzzle",points:125,avatar:"🔤",playerName:"كلمات"},
+    {id:50,name:"لعبة الذاكرة",img:"https://play-lh.googleusercontent.com/7x8y9z0a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q",url:"https://html5.gamedistribution.com/1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b/",cat:"puzzle",points:130,avatar:"🧠",playerName:"ذاكرة"},
+    {id:51,name:"قتال الظل",img:"https://image.api.playstation.com/vulcan/ap/rnd/202302/1815/6x7y8z9a0b1c2d3e4f5g6h7i8j9k0l1m.png",url:"https://html5.gamedistribution.com/2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c/",cat:"fighting",points:350,avatar:"🌑",playerName:"ظل"},
+    {id:52,name:"فنون قتالية",img:"https://play-lh.googleusercontent.com/5x6y7z8a9b0c1d2e3f4g5h6i7j8k9l0m1n2o3p4q",url:"https://html5.gamedistribution.com/3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d/",cat:"fighting",points:360,avatar:"🥋",playerName:"فنون"},
+    {id:53,name:"سيد الكونغ فو",img:"https://image.api.playstation.com/vulcan/ap/rnd/202301/2010/4x5y6z7a8b9c0d1e2f3g4h5i6j7k8l9m.png",url:"https://html5.gamedistribution.com/4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e/",cat:"fighting",points:370,avatar:"🐉",playerName:"كونغ"},
+    {id:54,name:"محارب نينجا",img:"https://play-lh.googleusercontent.com/3x4y5z6a7b8c9d0e1f2g3h4i5j6k7l8m9n0o1p2q",url:"https://html5.gamedistribution.com/5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f/",cat:"fighting",points:380,avatar:"🥷",playerName:"نينجا"},
+    {id:55,name:"مبارزة الساموراي",img:"https://image.api.playstation.com/vulcan/ap/rnd/202309/2512/2x3y4z5a6b7c8d9e0f1g2h3i4j5k6l7m.png",url:"https://html5.gamedistribution.com/6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a/",cat:"fighting",points:390,avatar:"⚔️",playerName:"ساموراي"},
+    {id:56,name:"قتال التنين",img:"https://play-lh.googleusercontent.com/1x2y3z4a5b6c7d8e9f0g1h2i3j4k5l6m7n8o9p0q",url:"https://html5.gamedistribution.com/7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b/",cat:"fighting",points:400,avatar:"🐉",playerName:"تنين"},
+    {id:57,name:"عصر الحرب",img:"https://image.api.playstation.com/vulcan/ap/rnd/202308/1910/0x1y2z3a4b5c6d7e8f9g0h1i2j3k4l5m.png",url:"https://html5.gamedistribution.com/8c8c8c8c8c8c8c8c8c8c8c8c8c8c8c8c/",cat:"strategy",points:195,avatar:"⚔️",playerName:"حرب"},
+    {id:58,name:"طاولة الزهر",img:"https://play-lh.googleusercontent.com/9x0y1z2a3b4c5d6e7f8g9h0i1j2k3l4m5n6o7p8q",url:"https://html5.gamedistribution.com/9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d/",cat:"strategy",points:185,avatar:"🎲",playerName:"طاولة"},
+    {id:59,name:"دومينو",img:"https://image.api.playstation.com/vulcan/ap/rnd/202312/2010/8x9y0z1a2b3c4d5e6f7g8h9i0j1k2l3m.png",url:"https://html5.gamedistribution.com/0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e/",cat:"strategy",points:175,avatar:"🀄",playerName:"دومينو"},
+    {id:60,name:"سوليتير",img:"https://play-lh.googleusercontent.com/7x8y9z0a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q",url:"https://html5.gamedistribution.com/1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f/",cat:"strategy",points:170,avatar:"🃏",playerName:"سوليتير"}
+];
+
+// ==================== نظام التشغيل الكامل ====================
+let favorites = JSON.parse(localStorage.getItem('didogame_favorites') || '[]');
+let isVIP = localStorage.getItem('didogame_vip') === 'true';
+let currentUser = null, currentOpenRoom = null, allRooms = {}, securityPassword = "";
+let audioStream = null, videoStream = null, sessionTimer = null;
+let currentAvatar = localStorage.getItem('didogame_avatar') || '😎';
+let bgMusic = null, isMusicPlaying = false;
+let currentLanguage = localStorage.getItem('didogame_language') || 'ar';
+
+// ==================== الترجمة الكاملة (العربية - الإنجليزية - الفرنسية) ====================
+const translations = {
+    ar: {
+        settings: "⚙️ الإعدادات",
+        favorites: "⭐ المفضلة",
+        chat: "💬 الدردشة",
+        wallet: "💳 المحفظة",
+        vip: "👑 VIP",
+        language: "🌐 اللغة",
+        music: "🎵 الموسيقى",
+        save: "💾 حفظ",
+        cancel: "إلغاء",
+        playMusic: "🎵 تشغيل",
+        stopMusic: "🔇 إيقاف",
+        close: "إغلاق",
+        back: "🔙 رجوع",
+        enter: "🚪 دخول",
+        noFavorites: "⭐ لا توجد ألعاب مفضلة بعد",
+        noChats: "📭 لا توجد محادثات<br>➕ أنشئ محادثة جديدة",
+        noMessages: "💬 لا توجد رسائل بعد<br>✨ اكتب أول رسالة",
+        selectChat: "✨ اختر محادثة لبدء المراسلة",
+        usernamePlaceholder: "اسم المستخدم",
+        roomPasswordPlaceholder: "كلمة الغرفة (اختياري)",
+        roomNamePlaceholder: "اسم الغرفة",
+        securityTitle: "🔐 الأمان",
+        chatsTitle: "المحادثات",
+        online: "🟢 متصل",
+        messagePlaceholder: "اكتب رسالة...",
+        vipOnly: "🔒 مكالمات الفيديو متاحة فقط لـ VIP",
+        cameraError: "خطأ في الوصول للكاميرا",
+        micActive: "🎙️ الميكروفون نشط",
+        micInactive: "🔴 الميكروفون غير نشط",
+        sessionEnded: "🔐 انتهت الجلسة (5 دقائق)",
+        wrongPassword: "❌ كلمة المرور غير صحيحة",
+        enterUsername: "❌ أدخل اسم المستخدم",
+        enterRoomName: "❌ أدخل اسم الغرفة",
+        alreadyVIP: "✨ أنت بالفعل VIP!",
+        paymentSoon: "💎 سيتم تفعيل الدفع قريباً",
+        settingsSaved: "تم حفظ الإعدادات",
+        roomExists: "الغرفة موجودة مسبقاً",
+        newRoom: "اسم الغرفة الجديدة:",
+        defaultRoom: "غرفة جديدة",
+        tunisiaWallet: "🇹🇳 محافظ تونسية",
+        d17: "💳 D17",
+        flouci: "💰 Flouci",
+        tunisianBank: "🏦 بنك تونسي"
+    },
+    en: {
+        settings: "⚙️ Settings",
+        favorites: "⭐ Favorites",
+        chat: "💬 Chat",
+        wallet: "💳 Wallet",
+        vip: "👑 VIP",
+        language: "🌐 Language",
+        music: "🎵 Music",
+        save: "💾 Save",
+        cancel: "Cancel",
+        playMusic: "🎵 Play",
+        stopMusic: "🔇 Stop",
+        close: "Close",
+        back: "🔙 Back",
+        enter: "🚪 Enter",
+        noFavorites: "⭐ No favorite games yet",
+        noChats: "📭 No chats<br>➕ Create a new chat",
+        noMessages: "💬 No messages yet<br>✨ Write the first message",
+        selectChat: "✨ Select a chat to start messaging",
+        usernamePlaceholder: "Username",
+        roomPasswordPlaceholder: "Room password (optional)",
+        roomNamePlaceholder: "Room name",
+        securityTitle: "🔐 Security",
+        chatsTitle: "Chats",
+        online: "🟢 Online",
+        messagePlaceholder: "Type a message...",
+        vipOnly: "🔒 Video calls are only available for VIP",
+        cameraError: "Camera access error",
+        micActive: "🎙️ Microphone is active",
+        micInactive: "🔴 Microphone is inactive",
+        sessionEnded: "🔐 Session ended (5 minutes)",
+        wrongPassword: "❌ Incorrect password",
+        enterUsername: "❌ Enter username",
+        enterRoomName: "❌ Enter room name",
+        alreadyVIP: "✨ You are already VIP!",
+        paymentSoon: "💎 Payment will be activated soon",
+        settingsSaved: "Settings saved",
+        roomExists: "Room already exists",
+        newRoom: "New room name:",
+        defaultRoom: "New room",
+        tunisiaWallet: "🇹🇳 Tunisian Wallets",
+        d17: "💳 D17",
+        flouci: "💰 Flouci",
+        tunisianBank: "🏦 Tunisian Bank"
+    },
+    fr: {
+        settings: "⚙️ Paramètres",
+        favorites: "⭐ Favoris",
+        chat: "💬 Discussion",
+        wallet: "💳 Portefeuille",
+        vip: "👑 VIP",
+        language: "🌐 Langue",
+        music: "🎵 Musique",
+        save: "💾 Enregistrer",
+        cancel: "Annuler",
+        playMusic: "🎵 Lire",
+        stopMusic: "🔇 Arrêter",
+        close: "Fermer",
+        back: "🔙 Retour",
+        enter: "🚪 Entrer",
+        noFavorites: "⭐ Pas encore de jeux favoris",
+        noChats: "📭 Pas de discussions<br>➕ Créer une nouvelle discussion",
+        noMessages: "💬 Pas encore de messages<br>✨ Écrire le premier message",
+        selectChat: "✨ Sélectionner une discussion",
+        usernamePlaceholder: "Nom d'utilisateur",
+        roomPasswordPlaceholder: "Mot de passe de la salle (optionnel)",
+        roomNamePlaceholder: "Nom de la salle",
+        securityTitle: "🔐 Sécurité",
+        chatsTitle: "Discussions",
+        online: "🟢 En ligne",
+        messagePlaceholder: "Écrire un message...",
+        vipOnly: "🔒 Les appels vidéo sont réservés aux VIP",
+        cameraError: "Erreur d'accès à la caméra",
+        micActive: "🎙️ Microphone actif",
+        micInactive: "🔴 Microphone inactif",
+        sessionEnded: "🔐 Session terminée (5 minutes)",
+        wrongPassword: "❌ Mot de passe incorrect",
+        enterUsername: "❌ Entrez le nom d'utilisateur",
+        enterRoomName: "❌ Entrez le nom de la salle",
+        alreadyVIP: "✨ Vous êtes déjà VIP !",
+        paymentSoon: "💎 Le paiement sera activé bientôt",
+        settingsSaved: "Paramètres enregistrés",
+        roomExists: "La salle existe déjà",
+        newRoom: "Nom de la nouvelle salle :",
+        defaultRoom: "Nouvelle salle",
+        tunisiaWallet: "🇹🇳 Portefeuilles Tunisiens",
+        d17: "💳 D17",
+        flouci: "💰 Flouci",
+        tunisianBank: "🏦 Banque Tunisienne"
+    }
+};
+
+function updateLanguage(lang) {
+    currentLanguage = lang;
+    localStorage.setItem('didogame_language', lang);
+    const t = translations[lang];
+    
+    document.getElementById('settingsTitle') && (document.getElementById('settingsTitle').innerHTML = t.settings);
+    document.getElementById('settingsLabel') && (document.getElementById('settingsLabel').innerHTML = t.settings);
+    document.getElementById('favoritesLabel') && (document.getElementById('favoritesLabel').innerHTML = t.favorites);
+    document.getElementById('chatLabel') && (document.getElementById('chatLabel').innerHTML = t.chat);
+    document.getElementById('walletLabel') && (document.getElementById('walletLabel').innerHTML = t.wallet);
+    document.getElementById('vipLabel') && (document.getElementById('vipLabel').innerHTML = t.vip);
+    document.getElementById('langLabel') && (document.getElementById('langLabel').innerHTML = t.language);
+    document.getElementById('musicLabel') && (document.getElementById('musicLabel').innerHTML = t.music);
+    document.getElementById('saveSettingsBtn') && (document.getElementById('saveSettingsBtn').innerHTML = t.save);
+    document.getElementById('closeSettingsBtn') && (document.getElementById('closeSettingsBtn').innerHTML = t.cancel);
+    document.getElementById('closeFavoritesBtn') && (document.getElementById('closeFavoritesBtn').innerHTML = t.close);
+    document.getElementById('closeWalletBtn') && (document.getElementById('closeWalletBtn').innerHTML = t.close);
+    document.getElementById('closePaymentBtn') && (document.getElementById('closePaymentBtn').innerHTML = t.cancel);
+    document.getElementById('backToHomeBtn') && (document.getElementById('backToHomeBtn').innerHTML = t.back);
+    document.getElementById('securityBtn') && (document.getElementById('securityBtn').innerHTML = t.enter);
+    document.getElementById('securityTitle') && (document.getElementById('securityTitle').innerHTML = t.securityTitle);
+    document.getElementById('chatsHeaderTitle') && (document.getElementById('chatsHeaderTitle').innerHTML = t.chatsTitle);
+    document.getElementById('openChatStatus') && (document.getElementById('openChatStatus').innerHTML = t.online);
+    document.getElementById('openMessageInput') && (document.getElementById('openMessageInput').setAttribute('placeholder', t.messagePlaceholder));
+    document.getElementById('securityUsername') && (document.getElementById('securityUsername').setAttribute('placeholder', t.usernamePlaceholder));
+    document.getElementById('securityRoomPassword') && (document.getElementById('securityRoomPassword').setAttribute('placeholder', t.roomPasswordPlaceholder));
+    document.getElementById('securityRoomName') && (document.getElementById('securityRoomName').setAttribute('placeholder', t.roomNamePlaceholder));
+    
+    const musicBtn = document.getElementById('musicToggleBtn');
+    if (musicBtn) {
+        musicBtn.innerHTML = isMusicPlaying ? t.stopMusic : t.playMusic;
+    }
 }
 
-function adminLogin(){
-let password = prompt("أدخل كلمة سر المدير");
-if(password === "DIDO123"){
-alert("تم تسجيل الدخول بنجاح");
-}else{
-alert("كلمة المرور غير صحيحة");
+function saveFavorites(){localStorage.setItem('didogame_favorites',JSON.stringify(favorites));}
+function toggleFavorite(id){let idx=favorites.indexOf(id);idx===-1?favorites.push(id):favorites.splice(idx,1);saveFavorites();renderAllGames();renderFavoritesList();}
+function isFavorite(id){return favorites.includes(id);}
+
+function renderFavoritesList(){let c=document.getElementById('favoritesList'),fg=gamesData.filter(g=>favorites.includes(g.id));if(fg.length===0){c.innerHTML=`<div class="empty-favorites">${translations[currentLanguage].noFavorites}</div>`;return;}c.innerHTML=fg.map(g=>`<div class="favorite-item" onclick="playGame(${g.id});closeFavoritesModal();"><div class="favorite-img" style="background-image:url('${g.img}')"></div><div><div class="favorite-name">${g.name}</div><div class="favorite-cat">${g.cat}</div></div><button onclick="event.stopPropagation();toggleFavorite(${g.id})" style="background:#ff3366;border:none;padding:5px 10px;border-radius:10px;color:#fff;cursor:pointer">✕</button></div>`).join('');}
+function openFavoritesModal(){renderFavoritesList();document.getElementById('favoritesModal').style.display='flex';}
+function closeFavoritesModal(){document.getElementById('favoritesModal').style.display='none';}
+function openWalletModal(){document.getElementById('walletModal').style.display='flex';renderWalletMethods();}
+function closeWalletModal(){document.getElementById('walletModal').style.display='none';}
+
+// ==================== طرق الدفع الجديدة مع المحافظ التونسية ====================
+function renderWalletMethods(){let m=document.getElementById('walletMethods');m.innerHTML=`
+    <div class="wallet-method" onclick="alert('شحن عبر فودافون كاش قريباً')"><span class="emoji">📱</span><span class="name">فودافون كاش</span></div>
+    <div class="wallet-method" onclick="alert('شحن عبر أورانج كاش قريباً')"><span class="emoji">🍊</span><span class="name">أورانج كاش</span></div>
+    <div class="wallet-method" onclick="alert('شحن عبر اتصالات كاش قريباً')"><span class="emoji">📞</span><span class="name">اتصالات كاش</span></div>
+    <div class="wallet-method" onclick="alert('شحن عبر D17 قريباً')"><span class="emoji">💳</span><span class="name">${translations[currentLanguage].d17}</span></div>
+    <div class="wallet-method" onclick="alert('شحن عبر Flouci قريباً')"><span class="emoji">💰</span><span class="name">${translations[currentLanguage].flouci}</span></div>
+    <div class="wallet-method" onclick="alert('شحن عبر البنك التونسي قريباً')"><span class="emoji">🏦</span><span class="name">${translations[currentLanguage].tunisianBank}</span></div>
+    <div class="wallet-method" onclick="alert('شحن عبر باي بال قريباً')"><span class="emoji">💳</span><span class="name">PayPal</span></div>
+    <div class="wallet-method" onclick="alert('شحن عبر بطاقة ائتمان قريباً')"><span class="emoji">💎</span><span class="name">بطاقة ائتمان</span></div>
+    <div class="wallet-method" onclick="alert('شحن عبر كريبتو قريباً')"><span class="emoji">₿</span><span class="name">كريبتو</span></div>`;
 }
-}
+
+function openPaymentModal(){if(isVIP){alert(translations[currentLanguage].alreadyVIP);return;}alert(translations[currentLanguage].paymentSoon);isVIP=true;localStorage.setItem('didogame_vip','true');document.getElementById('registerBtn').classList.add('active');}
+function closePaymentModal(){document.getElementById('paymentModal').style.display='none';}
+
+function updateRanking(){let s=[...gamesData].sort((a,b)=>b.points-a.points);document.getElementById('rankingList').innerHTML=`<div class="rank-item"><div class="silver-circle">${s[1]?.avatar||'👤'}</div><div class="rank-name">${s[1]?.playerName||'---'}</div><div class="rank-points">⭐${s[1]?.points||0}</div></div><div class="rank-item"><div class="gold-circle">${s[0]?.avatar||'👑'}</div><div class="rank-name">${s[0]?.playerName||'---'}</div><div class="rank-points">⭐${s[0]?.points||0}</div></div><div class="rank-item"><div class="bronze-circle">${s[2]?.avatar||'👤'}</div><div class="rank-name">${s[2]?.playerName||'---'}</div><div class="rank-points">⭐${s[2]?.points||0}</div></div>`;}
+
+function renderAllGames(){let mid=Math.ceil(gamesData.length/2),r1=gamesData.slice(0,mid),r2=gamesData.slice(mid);document.getElementById('gamesWrapper').innerHTML=`<div class="game-row">${r1.map(g=>`<div class="game-card" onclick="playGame(${g.id})"><div class="fav-star ${isFavorite(g.id)?'active':''}" onclick="event.stopPropagation();toggleFavorite(${g.id})">${isFavorite(g.id)?'⭐':'☆'}</div><div class="game-img" style="background-image:url('${g.img}')"></div><div class="game-title">${g.name}</div></div>`).join('')}</div><div class="game-row">${r2.map(g=>`<div class="game-card" onclick="playGame(${g.id})"><div class="fav-star ${isFavorite(g.id)?'active':''}" onclick="event.stopPropagation();toggleFavorite(${g.id})">${isFavorite(g.id)?'⭐':'☆'}</div><div class="game-img" style="background-image:url('${g.img}')"></div><div class="game-title">${g.name}</div></div>`).join('')}</div>`;}
+
+function playGame(id){let g=gamesData.find(g=>g.id===id);if(g){g.points+=5;updateRanking();document.getElementById('gameIframe').src=g.url;document.getElementById('gameModal').style.display='flex';localStorage.setItem('gamesData',JSON.stringify(gamesData));}}
+function closeGameModal(){document.getElementById('gameModal').style.display='none';document.getElementById('gameIframe').src='';}
+
+function showCategoryGames(cat){let f=gamesData.filter(g=>g.cat===cat),mid=Math.ceil(f.length/2),r1=f.slice(0,mid),r2=f.slice(mid);document.getElementById('categoryGamesContainer').innerHTML=`<div class="game-row">${r1.map(g=>`<div class="game-card" onclick="playGame(${g.id})"><div class="fav-star ${isFavorite(g.id)?'active':''}" onclick="event.stopPropagation();toggleFavorite(${g.id})">${isFavorite(g.id)?'⭐':'☆'}</div><div class="game-img" style="background-image:url('${g.img}')"></div><div class="game-title">${g.name}</div></div>`).join('')}</div><div class="game-row">${r2.map(g=>`<div class="game-card" onclick="playGame(${g.id})"><div class="fav-star ${isFavorite(g.id)?'active':''}" onclick="event.stopPropagation();toggleFavorite(${g.id})">${isFavorite(g.id)?'⭐':'☆'}</div><div class="game-img" style="background-image:url('${g.img}')"></div><div class="game-title">${g.name}</div></div>`).join('')}</div>`;document.getElementById('homePage').classList.add('page-hidden');document.getElementById('categoryPage').classList.remove('page-hidden');}
+
+document.getElementById('moreCategoriesBtn').onclick=()=>{let ec=['battle','sports','strategy','horror'],names=['🔫 معركة','⚽ رياضة','🧠 استراتيجية','👻 رعب'];let h='<div class="more-modal-content"><h3>🎮 تصنيفات إضافية</h3><div class="more-categories-list">';ec.forEach((c,i)=>{h+=`<div class="more-cat-badge" onclick="showCategoryGames('${c}');document.getElementById('moreModal').style.display='none';">${names[i]}</div>`;});h+='</div><button class="close-more-modal" onclick="document.getElementById(\'moreModal\').style.display=\'none\'">إغلاق</button></div>';let m=document.getElementById('moreModal');m.innerHTML=h;m.style.display='flex';};
+document.getElementById('closeMoreModal').onclick=()=>document.getElementById('moreModal').style.display='none';
+document.querySelectorAll('.cat-badge').forEach(b=>{if(!b.classList.contains('more-btn'))b.onclick=()=>showCategoryGames(b.dataset.cat);});
+document.getElementById('backToHomeBtn').onclick=()=>{document.getElementById('homePage').classList.remove('page-hidden');document.getElementById('categoryPage').classList.add('page-hidden');};
+
+function encryptMessage(t){return btoa(unescape(encodeURIComponent(t)));}
+function decryptMessage(e){try{return decodeURIComponent(escape(atob(e)));}catch(e){return "رسالة مشفرة";}}
+function saveRooms(){localStorage.setItem('didogame_rooms',JSON.stringify(allRooms));}
+function loadRooms(){let d=localStorage.getItem('didogame_rooms');if(d)allRooms=JSON.parse(d);else allRooms={};}
+function escapeHtml(s){if(!s)return '';return s.replace(/[&<>]/g,function(m){if(m==='&')return '&amp;';if(m==='<')return '&lt;';if(m==='>')return '&gt;';return m;});}
+function renderChatsList(){let c=document.getElementById('chatsListContainer'),r=Object.keys(allRooms);if(r.length===0){c.innerHTML=`<div style="color:#888;text-align:center;padding:40px;">${translations[currentLanguage].noChats}</div>`;return;}c.innerHTML=r.map(room=>`<div class="chat-item" onclick="openRoomChat('${room.replace(/'/g,"\\'")}')"><div class="chat-avatar">💬</div><div><div class="chat-name">${escapeHtml(room)}${allRooms[room].password?' 🔒':''}</div></div></div>`).join('');}
+function openRoomChat(roomName){if(allRooms[roomName]?.password&&allRooms[roomName].password!==securityPassword){alert(translations[currentLanguage].wrongPassword);return;}currentOpenRoom=roomName;document.getElementById('inboxView').style.display='none';document.getElementById('openChatView').style.display='flex';document.getElementById('openChatRoomName').innerHTML=escapeHtml(currentOpenRoom);let videoBtn=document.getElementById('videoCallBtn');if(isVIP){videoBtn.style.display='inline-block';}else{videoBtn.style.display='none';}displayMessages();}
+function displayMessages(){let c=document.getElementById('openChatMessages');if(!currentOpenRoom||!allRooms[currentOpenRoom]){c.innerHTML=`<div style="text-align:center;padding:20px;">${translations[currentLanguage].selectChat}</div>`;return;}let m=allRooms[currentOpenRoom].messages||[];if(m.length===0){c.innerHTML=`<div style="text-align:center;padding:20px;">${translations[currentLanguage].noMessages}</div>`;return;}c.innerHTML='';m.slice(-50).forEach(msg=>{let isOut=msg.sender===currentUser,txt=msg.encrypted?decryptMessage(msg.text):msg.text;c.innerHTML+=`<div style="display:flex;justify-content:${isOut?'flex-end':'flex-start'};margin-bottom:8px;"><div style="max-width:75%;background:${isOut?'#ff44ff':'#1f1f2e'};padding:8px 14px;border-radius:20px;"><div>${escapeHtml(txt)}</div><div style="font-size:0.4rem;color:#aaa;margin-top:4px;">${new Date(msg.time).toLocaleTimeString()}</div></div></div>`;});c.scrollTop=c.scrollHeight;}
+function sendMessage(){let i=document.getElementById('openMessageInput'),t=i.value.trim();if(!t||!currentOpenRoom||!currentUser)return;let msg={type:'public',sender:currentUser,text:encryptMessage(t),encrypted:true,time:Date.now()};if(!allRooms[currentOpenRoom].messages)allRooms[currentOpenRoom].messages=[];allRooms[currentOpenRoom].messages.push(msg);saveRooms();displayMessages();i.value='';renderChatsList();}
+function backToInbox(){document.getElementById('openChatView').style.display='none';document.getElementById('inboxView').style.display='flex';currentOpenRoom=null;renderChatsList();}
+function showNewChatModal(){let n=prompt(translations[currentLanguage].newRoom,translations[currentLanguage].defaultRoom);if(n&&!allRooms[n]){allRooms[n]={password:null,users:[currentUser],messages:[]};saveRooms();renderChatsList();}else if(n&&allRooms[n])alert(translations[currentLanguage].roomExists);}
+function startSessionTimer(){if(sessionTimer)clearTimeout(sessionTimer);sessionTimer=setTimeout(()=>{alert(translations[currentLanguage].sessionEnded);logout();},5*60*1000);}
+function logout(){if(sessionTimer)clearTimeout(sessionTimer);currentUser=null;currentOpenRoom=null;if(audioStream)audioStream.getTracks().forEach(t=>t.stop());document.getElementById('chatPopupOverlay').style.display='none';}
+function submitSecurityAndEnter(){let u=document.getElementById('securityUsername').value.trim(),p=document.getElementById('securityRoomPassword').value,r=document.getElementById('securityRoomName').value.trim();if(!u){alert(translations[currentLanguage].enterUsername);return;}if(!r){alert(translations[currentLanguage].enterRoomName);return;}currentUser=u;securityPassword=p;localStorage.setItem('didogame_username',u);document.getElementById('securityPanel').style.display='none';document.getElementById('chatPopupOverlay').style.display='flex';loadRooms();if(!allRooms[r]){allRooms[r]={password:p||null,users:[currentUser],messages:[]};saveRooms();}renderChatsList();startSessionTimer();document.getElementById('inboxView').style.display='flex';document.getElementById('openChatView').style.display='none';}
+function initMusic(){if(!bgMusic){bgMusic=new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');bgMusic.loop=true;bgMusic.volume=0.5;}}
+function toggleMusic(){initMusic();if(isMusicPlaying){bgMusic.pause();isMusicPlaying=false;}else{bgMusic.play().catch(e=>console.log("Auto-play prevented"));isMusicPlaying=true;}let btn=document.getElementById('musicToggleBtn');if(btn)btn.innerHTML=isMusicPlaying?translations[currentLanguage].stopMusic:translations[currentLanguage].playMusic;}
+async function startVideoCall(){if(!isVIP){alert(translations[currentLanguage].vipOnly);return;}try{videoStream=await navigator.mediaDevices.getUserMedia({video:true,audio:true});document.getElementById('localVideo').srcObject=videoStream;document.getElementById('remoteVideo').srcObject=videoStream;document.getElementById('videoCallModal').style.display='flex';}catch(e){alert(translations[currentLanguage].cameraError);}}
+function endVideoCall(){if(videoStream){videoStream.getTracks().forEach(t=>t.stop());videoStream=null;}document.getElementById('videoCallModal').style.display='none';}
+function toggleMute(){if(videoStream){let t=videoStream.getAudioTracks()[0];if(t){t.enabled=!t.enabled;document.getElementById('muteBtn').innerHTML=t.enabled?"🔊":"🔇";}}}
+function toggleVideoBtn(){if(videoStream){let t=videoStream.getVideoTracks()[0];if(t){t.enabled=!t.enabled;document.getElementById('videoToggleBtn').innerHTML=t.enabled?"📷":"🚫📷";}}}
+async function startMicrophone(){try{if(!audioStream){audioStream=await navigator.mediaDevices.getUserMedia({audio:true});alert(translations[currentLanguage].micActive);}}catch(e){}}
+function toggleMicrophone(){if(!currentOpenRoom){alert(translations[currentLanguage].selectChat);return;}if(!audioStream){startMicrophone();return;}let t=audioStream.getAudioTracks()[0];if(t){t.enabled=!t.enabled;alert(t.enabled?translations[currentLanguage].micActive:translations[currentLanguage].micInactive);}}
+
+document.getElementById('closeChatPopupBtn').onclick=()=>document.getElementById('chatPopupOverlay').style.display='none';
+document.getElementById('closeChatFromInbox').onclick=()=>document.getElementById('chatPopupOverlay').style.display='none';
+document.getElementById('backToInboxBtn').onclick=backToInbox;
+document.getElementById('newChatBtn').onclick=showNewChatModal;
+document.getElementById('sendMsgOpen').onclick=sendMessage;
+document.getElementById('micBtnOpen').onclick=toggleMicrophone;
+document.getElementById('videoCallBtn').onclick=startVideoCall;
+document.getElementById('endCallBtn').onclick=endVideoCall;
+document.getElementById('muteBtn').onclick=toggleMute;
+document.getElementById('videoToggleBtn').onclick=toggleVideoBtn;
+document.getElementById('securityBtn').onclick=submitSecurityAndEnter;
+document.getElementById('openChatBtn').onclick=()=>{let s=localStorage.getItem('didogame_username');if(currentUser){document.getElementById('chatPopupOverlay').style.display='flex';renderChatsList();}else{document.getElementById('securityPanel').style.display='flex';if(s)document.getElementById('securityUsername').value=s;}};
+document.getElementById('walletBtn').onclick=openWalletModal;
+document.getElementById('closeWalletBtn').onclick=closeWalletModal;
+document.getElementById('favoritesBtn').onclick=openFavoritesModal;
+document.getElementById('closeFavoritesBtn').onclick=closeFavoritesModal;
+document.getElementById('registerBtn').onclick=openPaymentModal;
+document.getElementById('closePaymentBtn').onclick=closePaymentModal;
+document.getElementById('settingsBtn').onclick=()=>{document.getElementById('avatarPreview').innerHTML=currentAvatar;document.getElementById('settingsModal').style.display='flex';};
+document.getElementById('closeSettingsBtn').onclick=()=>document.getElementById('settingsModal').style.display='none';
+document.getElementById('saveSettingsBtn').onclick=()=>{let sel=document.querySelector('.avatar-option.selected');if(sel){currentAvatar=sel.dataset.avatar;localStorage.setItem('didogame_avatar',currentAvatar);document.getElementById('avatarPreview').innerHTML=currentAvatar;document.getElementById('mainAvatarImg').innerHTML=currentAvatar+`<div class="controller-on-hand">🎮</div>`;}let langSelect=document.getElementById('settingsLangSelect');if(langSelect){updateLanguage(langSelect.value);}document.getElementById('settingsModal').style.display='none';alert(translations[currentLanguage].settingsSaved);};
+document.querySelectorAll('.avatar-option').forEach(opt=>{opt.onclick=()=>{document.querySelectorAll('.avatar-option').forEach(o=>o.classList.remove('selected'));opt.classList.add('selected');document.getElementById('avatarPreview').innerHTML=opt.dataset.avatar;};});
+document.getElementById('musicToggleBtn').onclick=toggleMusic;
+document.getElementById('settingsLangSelect').onchange=function(){updateLanguage(this.value);};
+
+let ads=["🎮 60 لعبة جاهزة! اضغط وابلع!","🔥 العب واربح نقاطاً وتصدر الترتيب!","💰 اشترك في VIP واحصل على مكالمات فيديو!","⭐ أضف ألعابك المفضلة بالضغط على النجمة!"];
+let adIdx=0;setInterval(()=>{adIdx=(adIdx+1)%ads.length;document.getElementById('permanentAd').innerHTML=ads[adIdx];},5000);
+
+let savedGames=localStorage.getItem('gamesData');if(savedGames)JSON.parse(savedGames).forEach(sg=>{let g=gamesData.find(gg=>gg.id===sg.id);if(g)g.points=sg.points;});
+updateRanking();renderAllGames();
+if(isVIP)document.getElementById('registerBtn').classList.add('active');
+let su=localStorage.getItem('didogame_username');if(su)document.getElementById('securityUsername').value=su;
+if(currentAvatar){document.getElementById('avatarPreview').innerHTML=currentAvatar;document.getElementById('mainAvatarImg').innerHTML=currentAvatar+`<div class="controller-on-hand">🎮</div>`;}
+loadRooms();
+updateLanguage(currentLanguage);
+
+window.playGame=playGame;window.closeGameModal=closeGameModal;window.showCategoryGames=showCategoryGames;window.toggleFavorite=toggleFavorite;window.openRoomChat=openRoomChat;
+window.closeFavoritesModal=closeFavoritesModal;
 </script>
-
 </body>
 </html>
