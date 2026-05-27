@@ -1,143 +1,72 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Dido Game</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Cairo',sans-serif;
-}
-
-body{
-background:#070b17;
-color:white;
-overflow-x:hidden;
-}
-
-a{
-text-decoration:none;
-color:white;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
+body{background:#070b17;color:#fff;overflow-x:hidden}
+a{text-decoration:none;color:white}
 
 header{
-width:100%;
-height:80px;
-background:rgba(0,0,0,0.4);
+width:100%;height:80px;background:rgba(0,0,0,0.4);
 backdrop-filter:blur(12px);
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 30px;
-position:fixed;
-top:0;
-z-index:999;
+display:flex;align-items:center;justify-content:space-between;
+padding:0 30px;position:fixed;top:0;z-index:999;
 border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
 .logo{
-font-size:32px;
-font-weight:900;
+font-size:32px;font-weight:900;
 background:linear-gradient(45deg,#00f0ff,#ff00ea);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
 
-nav{
-display:flex;
-gap:25px;
-}
-
-nav a{
-font-size:18px;
-transition:0.3s;
-}
-
-nav a:hover{
-color:#00e1ff;
-}
+nav{display:flex;gap:25px}
+nav a{font-size:18px;transition:0.3s}
+nav a:hover{color:#00e1ff}
 
 .hero{
-width:100%;
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-position:relative;
-overflow:hidden;
+width:100%;height:100vh;display:flex;align-items:center;
+justify-content:center;text-align:center;position:relative;
 background:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1974&auto=format&fit=crop') center/cover;
 }
 
 .hero::before{
-content:'';
-position:absolute;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.65);
-top:0;
-left:0;
+content:'';position:absolute;width:100%;height:100%;
+background:rgba(0,0,0,0.65);top:0;left:0;
 }
 
-.hero-content{
-position:relative;
-z-index:2;
-}
+.hero-content{position:relative;z-index:2}
 
 .hero h1{
-font-size:70px;
-font-weight:900;
-margin-bottom:20px;
+font-size:70px;font-weight:900;margin-bottom:20px;
 background:linear-gradient(45deg,#00e5ff,#ff00d4);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
 
-.hero p{
-font-size:22px;
-color:#ccc;
-margin-bottom:35px;
-}
+.hero p{font-size:22px;color:#ccc;margin-bottom:35px}
 
 .hero button{
-padding:15px 40px;
-border:none;
-border-radius:40px;
+padding:15px 40px;border:none;border-radius:40px;
 background:linear-gradient(45deg,#00d9ff,#ff00f2);
-color:white;
-font-size:20px;
-cursor:pointer;
-transition:0.3s;
-font-weight:bold;
+color:#fff;font-size:20px;cursor:pointer;
+transition:0.3s;font-weight:bold;
 box-shadow:0 0 20px rgba(0,255,255,0.5);
 }
 
-.hero button:hover{
-transform:scale(1.08);
-}
+.hero button:hover{transform:scale(1.08)}
 
-.games-section{
-padding:120px 40px;
-}
+.games-section{padding:120px 40px}
 
 .section-title{
-font-size:45px;
-margin-bottom:50px;
-font-weight:900;
-text-align:center;
+font-size:45px;margin-bottom:50px;text-align:center;
 background:linear-gradient(45deg,#00f7ff,#ff00c8);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
 
 .games-grid{
@@ -149,11 +78,8 @@ gap:30px;
 .game-card{
 background:rgba(255,255,255,0.05);
 border:1px solid rgba(255,255,255,0.08);
-border-radius:25px;
-overflow:hidden;
-transition:0.4s;
-backdrop-filter:blur(10px);
-position:relative;
+border-radius:25px;overflow:hidden;
+transition:0.4s;backdrop-filter:blur(10px);
 }
 
 .game-card:hover{
@@ -161,633 +87,150 @@ transform:translateY(-10px);
 box-shadow:0 0 25px rgba(0,255,255,0.3);
 }
 
-.game-card img{
-width:100%;
-height:220px;
-object-fit:cover;
-}
+.game-card img{width:100%;height:220px;object-fit:cover}
 
-.game-info{
-padding:20px;
-}
+.game-info{padding:20px}
 
-.game-info h3{
-font-size:26px;
-margin-bottom:10px;
-}
-
-.game-info p{
-font-size:15px;
-color:#ccc;
-margin-bottom:20px;
-}
+.game-info h3{font-size:26px;margin-bottom:10px}
+.game-info p{font-size:15px;color:#ccc;margin-bottom:20px}
 
 .play-btn{
-display:inline-block;
-padding:12px 25px;
+display:inline-block;padding:12px 25px;
 border-radius:30px;
 background:linear-gradient(45deg,#00d5ff,#ff00d0);
-font-weight:bold;
-transition:0.3s;
+font-weight:bold;transition:0.3s;
 }
 
-.play-btn:hover{
-transform:scale(1.05);
-}
+.play-btn:hover{transform:scale(1.05)}
 
 .admin-panel{
-margin-top:100px;
-padding:40px;
+margin-top:100px;padding:40px;
 background:rgba(255,255,255,0.04);
 border-radius:25px;
 border:1px solid rgba(255,255,255,0.1);
 }
 
-.admin-panel h2{
-font-size:35px;
-margin-bottom:20px;
-}
+.admin-panel h2{font-size:35px;margin-bottom:20px}
 
 .admin-panel input{
-width:100%;
-padding:15px;
-margin-bottom:20px;
-border:none;
-border-radius:15px;
-background:#10182b;
-color:white;
-font-size:16px;
+width:100%;padding:15px;margin-bottom:20px;
+border:none;border-radius:15px;
+background:#10182b;color:#fff;font-size:16px;
 }
 
 .admin-panel button{
-padding:15px 30px;
-border:none;
-border-radius:30px;
+padding:15px 30px;border:none;border-radius:30px;
 background:linear-gradient(45deg,#00f0ff,#ff00e6);
-color:white;
-font-size:18px;
-cursor:pointer;
-font-weight:bold;
+color:#fff;font-size:18px;cursor:pointer;font-weight:bold;
 }
 
 footer{
-margin-top:80px;
-padding:30px;
-text-align:center;
-background:#050812;
-color:#888;
+margin-top:80px;padding:30px;
+text-align:center;background:#050812;color:#888;
 }
 
 @media(max-width:768px){
-
-.hero h1{
-font-size:45px;
+.hero h1{font-size:45px}
+.hero p{font-size:18px}
+nav{gap:12px}
+nav a{font-size:15px}
+.section-title{font-size:34px}
 }
-
-.hero p{
-font-size:18px;
-}
-
-header{
-padding:0 15px;
-}
-
-nav{
-gap:12px;
-}
-
-nav a{
-font-size:15px;
-}
-
-.section-title{
-font-size:34px;
-}
-
-}
-
 </style>
 </head>
 
 <body>
 
 <header>
-
 <div class="logo">DIDO GAME</div>
-
 <nav>
 <a href="#">الرئيسية</a>
 <a href="#games">الألعاب</a>
 <a href="#admin">لوحة التحكم</a>
 </nav>
-
 </header>
 
 <section class="hero">
-
 <div class="hero-content">
-
 <h1>أفضل منصة ألعاب عربية</h1>
-
-<p>
-استمتع بأقوى الألعاب والتصميم المستقبلي الاحترافي
-</p>
-
-<button onclick="scrollToGames()">
-ابدأ اللعب
-</button>
-
+<p>استمتع بأقوى الألعاب والتصميم المستقبلي الاحترافي</p>
+<button onclick="scrollToGames()">ابدأ اللعب</button>
 </div>
-
 </section>
 
 <section class="games-section" id="games">
+<h2 class="section-title">الألعاب المشهورة</h2>
 
-<h2 class="section-title">
-الألعاب المشهورة
-</h2>
+<div class="games-grid">
 
-<div class="games-grid"><!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Dido Game</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Cairo',sans-serif;
-}
-
-body{
-background:#070b17;
-color:white;
-overflow-x:hidden;
-}
-
-a{
-text-decoration:none;
-color:white;
-}
-
-header{
-width:100%;
-height:80px;
-background:rgba(0,0,0,0.4);
-backdrop-filter:blur(12px);
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 30px;
-position:fixed;
-top:0;
-z-index:999;
-border-bottom:1px solid rgba(255,255,255,0.1);
-}
-
-.logo{
-font-size:32px;
-font-weight:900;
-background:linear-gradient(45deg,#00f0ff,#ff00ea);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-nav{
-display:flex;
-gap:25px;
-}
-
-nav a{
-font-size:18px;
-transition:0.3s;
-}
-
-nav a:hover{
-color:#00e1ff;
-}
-
-.hero{
-width:100%;
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-position:relative;
-overflow:hidden;
-background:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1974&auto=format&fit=crop') center/cover;
-}
-
-.hero::before{
-content:'';
-position:absolute;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.65);
-top:0;
-left:0;
-}
-
-.hero-content{
-position:relative;
-z-index:2;
-}
-
-.hero h1{
-font-size:70px;
-font-weight:900;
-margin-bottom:20px;
-background:linear-gradient(45deg,#00e5ff,#ff00d4);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-.hero p{
-font-size:22px;
-color:#ccc;
-margin-bottom:35px;
-}
-
-.hero button{
-padding:15px 40px;
-border:none;
-border-radius:40px;
-background:linear-gradient(45deg,#00d9ff,#ff00f2);
-color:white;
-font-size:20px;
-cursor:pointer;
-transition:0.3s;
-font-weight:bold;
-box-shadow:0 0 20px rgba(0,255,255,0.5);
-}
-
-.hero button:hover{
-transform:scale(1.08);
-}
-
-.games-section{
-padding:120px 40px;
-}
-
-.section-title{
-font-size:45px;
-margin-bottom:50px;
-font-weight:900;
-text-align:center;
-background:linear-gradient(45deg,#00f7ff,#ff00c8);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-.games-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:30px;
-}
-
-.game-card{
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.08);
-border-radius:25px;
-overflow:hidden;
-transition:0.4s;
-backdrop-filter:blur(10px);
-position:relative;
-}
-
-.game-card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 25px rgba(0,255,255,0.3);
-}
-
-.game-card img{
-width:100%;
-height:220px;
-object-fit:cover;
-}
-
-.game-info{
-padding:20px;
-}
-
-.game-info h3{
-font-size:26px;
-margin-bottom:10px;
-}
-
-.game-info p{
-font-size:15px;
-color:#ccc;
-margin-bottom:20px;
-}
-
-.play-btn{
-display:inline-block;
-padding:12px 25px;
-border-radius:30px;
-background:linear-gradient(45deg,#00d5ff,#ff00d0);
-font-weight:bold;
-transition:0.3s;
-}
-
-.play-btn:hover{
-transform:scale(1.05);
-}
-
-.admin-panel{
-margin-top:100px;
-padding:40px;
-background:rgba(255,255,255,0.04);
-border-radius:25px;
-border:1px solid rgba(255,255,255,0.1);
-}
-
-.admin-panel h2{
-font-size:35px;
-margin-bottom:20px;
-}
-
-.admin-panel input{
-width:100%;
-padding:15px;
-margin-bottom:20px;
-border:none;
-border-radius:15px;
-background:#10182b;
-color:white;
-font-size:16px;
-}
-
-.admin-panel button{
-padding:15px 30px;
-border:none;
-border-radius:30px;
-background:linear-gradient(45deg,#00f0ff,#ff00e6);
-color:white;
-font-size:18px;
-cursor:pointer;
-font-weight:bold;
-}
-
-footer{
-margin-top:80px;
-padding:30px;
-text-align:center;
-background:#050812;
-color:#888;
-}
-
-@media(max-width:768px){
-
-.hero h1{
-font-size:45px;
-}
-
-.hero p{
-font-size:18px;
-}
-
-header{
-padding:0 15px;
-}
-
-nav{
-gap:12px;
-}
-
-nav a{
-font-size:15px;
-}
-
-.section-title{
-font-size:34px;
-}
-
-}
-
-</style>
-</head>
-
-<body>
-
-<header>
-
-<div class="logo">DIDO GAME</div>
-
-<nav>
-<a href="#">الرئيسية</a>
-<a href="#games">الألعاب</a>
-<a href="#admin">لوحة التحكم</a>
-</nav>
-
-</header>
-
-<section class="hero">
-
-<div class="hero-content">
-
-<h1>أفضل منصة ألعاب عربية</h1>
-
-<p>
-استمتع بأقوى الألعاب والتصميم المستقبلي الاحترافي
-</p>
-
-<button onclick="scrollToGames()">
-ابدأ اللعب
-</button>
-
-</div>
-
-</section>
-
-<section class="games-section" id="games">
-
-<h2 class="section-title">
-الألعاب المشهورة
-</h2>
-
-<div class="games-grid"><div class="game-card">
-
+<div class="game-card">
 <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1971&auto=format&fit=crop">
-
 <div class="game-info">
-
 <h3>Cyber Battle</h3>
-
-<p>
-قاتل داخل عالم مستقبلي مليء بالإثارة والتحديات.
-</p>
-
-<a class="play-btn" href="#">
-لعب الآن
-</a>
-
+<p>قاتل داخل عالم مستقبلي مليء بالإثارة والتحديات.</p>
+<a class="play-btn" href="#">لعب الآن</a>
 </div>
-
 </div>
 
 <div class="game-card">
-
 <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?q=80&w=1974&auto=format&fit=crop">
-
 <div class="game-info">
-
 <h3>Street Racing</h3>
-
-<p>
-سباقات سيارات احترافية بسرعة خارقة ورسومات مذهلة.
-</p>
-
-<a class="play-btn" href="#">
-لعب الآن
-</a>
-
+<p>سباقات سيارات احترافية بسرعة خارقة ورسومات مذهلة.</p>
+<a class="play-btn" href="#">لعب الآن</a>
 </div>
-
 </div>
 
 <div class="game-card">
-
 <img src="https://images.unsplash.com/photo-1547394765-185e1e68f34e?q=80&w=1974&auto=format&fit=crop">
-
 <div class="game-info">
-
 <h3>War Zone</h3>
-
-<p>
-ادخل حرباً ملحمية ضد اللاعبين حول العالم.
-</p>
-
-<a class="play-btn" href="#">
-لعب الآن
-</a>
-
+<p>ادخل حرباً ملحمية ضد اللاعبين حول العالم.</p>
+<a class="play-btn" href="#">لعب الآن</a>
 </div>
-
 </div>
 
 <div class="game-card">
-
 <img src="https://images.unsplash.com/photo-1511882150382-421056c89033?q=80&w=1974&auto=format&fit=crop">
-
 <div class="game-info">
-
 <h3>Anime Fighter</h3>
-
-<p>
-شخصيات أنمي قوية ومعارك خرافية بأسلوب احترافي.
-</p>
-
-<a class="play-btn" href="#">
-لعب الآن
-</a>
-
+<p>معارك أنمي قوية بأسلوب احترافي.</p>
+<a class="play-btn" href="#">لعب الآن</a>
 </div>
-
-</div>
-
-<div class="game-card">
-
-<img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1974&auto=format&fit=crop">
-
-<div class="game-info">
-
-<h3>Galaxy Attack</h3>
-
-<p>
-حارب الكائنات الفضائية وأنقذ المجرة بالكامل.
-</p>
-
-<a class="play-btn" href="#">
-لعب الآن
-</a>
-
-</div>
-
-</div>
-
-<div class="game-card">
-
-<img src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?q=80&w=1974&auto=format&fit=crop">
-
-<div class="game-info">
-
-<h3>Sniper Elite</h3>
-
-<p>
-كن القناص الأخطر في ساحة المعركة الحديثة.
-</p>
-
-<a class="play-btn" href="#">
-لعب الآن
-</a>
-
-</div>
-
 </div>
 
 </div>
 
 <div class="admin-panel" id="admin">
-
-<h2>
-لوحة تحكم المدير
-</h2>
+<h2>لوحة تحكم المدير</h2>
 
 <input type="text" placeholder="اسم اللعبة">
-
-<input type="text" placeholder="رابط صورة اللعبة">
-
+<input type="text" placeholder="رابط الصورة">
 <input type="text" placeholder="رابط اللعبة">
 
-<button onclick="adminLogin()">
-دخول المدير
-</button>
-
+<button onclick="adminLogin()">دخول المدير</button>
 </div>
 
 </section>
 
 <footer>
-
 جميع الحقوق محفوظة © DIDO GAME 2026
-
 </footer>
 
 <script>
-
 function scrollToGames(){
-
-document.getElementById("games").scrollIntoView({
-behavior:"smooth"
-});
-
+document.getElementById("games").scrollIntoView({behavior:"smooth"});
 }
 
 function adminLogin(){
-
 let password = prompt("أدخل كلمة سر المدير");
-
 if(password === "DIDO123"){
-
 alert("تم تسجيل الدخول بنجاح");
-
 }else{
-
 alert("كلمة المرور غير صحيحة");
-
 }
-
 }
-
 </script>
+
+</body>
+</html>
